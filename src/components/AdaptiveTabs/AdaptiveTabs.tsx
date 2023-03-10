@@ -8,10 +8,10 @@ import throttle from 'lodash/throttle';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import i18n from './i18n';
+import {DEFAULT_BREAK_POINTS_CONFIG} from './constants';
 import {block} from '../utils/cn';
 
 import './AdaptiveTabs.scss';
-import {DEFAULT_BREAK_POINTS_CONFIG} from './constants';
 
 const SMALL_CONTAINER_WIDTH_NAME = 'small';
 const LARGE_CONTAINER_WIDTH_NAME = 'large';
@@ -81,7 +81,7 @@ class Tab extends React.Component<TabProps> {
     }
 }
 
-interface AdaptiveTabsProps {
+export interface AdaptiveTabsProps {
     items: {
         id: string;
         title: string;
@@ -90,7 +90,7 @@ interface AdaptiveTabsProps {
     activeTab?: string;
     breakpointsConfig: Record<string, number>;
     onSelectTab: (tabId: string, event?: React.MouseEvent) => void;
-    wrapTo: (
+    wrapTo?: (
         isActive: boolean | undefined,
         node: React.ReactNode,
         tabId: string | undefined,
@@ -121,7 +121,7 @@ interface AdaptiveTabsState {
     isSelectOpened: boolean;
 }
 
-class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState> {
+export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState> {
     static defaultProps = {
         /* default values of breakpoint configuration - object where the key is the width of the container element, the value is
          maximum width of tab as a percentage of the container width, (so, for default values, if the width of
@@ -795,17 +795,17 @@ class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState>
             ? this.overflownTabsCurrentWidth[tabIndex]
             : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
 
+        const tabNode = (
+            <Tab {...item} active={item.id === activeTabID} onClick={this.onTabClick} />
+        );
+
         return (
             <div
                 key={item.id}
                 style={{maxWidth: items.length > 1 ? maxWidth : '100%'}}
                 className={b('tab-container', {'last-tab': isLastTab, 'no-overflow': noOverflow})}
             >
-                {wrapTo(
-                    item.id === activeTabID,
-                    <Tab {...item} active={item.id === activeTabID} onClick={this.onTabClick} />,
-                    item.id,
-                )}
+                {wrapTo ? wrapTo(item.id === activeTabID, tabNode, item.id) : tabNode}
             </div>
         );
     };
@@ -862,6 +862,7 @@ class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState>
 
         return (
             <Select
+                className={b('tabs-as-select-control')}
                 onUpdate={this.handleTabsAsSelectUpdate}
                 options={itemsForSelect}
                 value={activeTabID === undefined ? [] : [activeTabID]}
@@ -906,5 +907,3 @@ class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState>
         );
     }
 }
-
-export default AdaptiveTabs;
