@@ -25,7 +25,9 @@
     "build": "tsc",
     "start": "TS_NODE_PROJECT=.storybook/tsconfig.json start-storybook"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@gravity-ui/i18n": "^1.0.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
