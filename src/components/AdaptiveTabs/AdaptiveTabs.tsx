@@ -5,11 +5,13 @@ import {Icon, Select, SelectProps} from '@gravity-ui/uikit';
 import difference from 'lodash/difference';
 import noop from 'lodash/noop';
 import throttle from 'lodash/throttle';
+import ResizeObserver from 'resize-observer-polyfill';
 
 import i18n from './i18n';
 import {block} from '../utils/cn';
 
 import './AdaptiveTabs.scss';
+import {DEFAULT_BREAK_POINTS_CONFIG} from './constants';
 
 const SMALL_CONTAINER_WIDTH_NAME = 'small';
 const LARGE_CONTAINER_WIDTH_NAME = 'large';
@@ -18,8 +20,6 @@ const OUT_OF_SCREEN_POSITION = -99999;
 
 const b = block('adaptive-tabs');
 const TAB_CLASS_NAME = b('tab');
-const defaultWrapToFunc = (_isActive: boolean, node: any) => node;
-
 const getSortObjectKeysByValuesFunc =
     (objectToSort: Record<string, any>) => (a: string, b: string) => {
         if (objectToSort[a] > objectToSort[b]) {
@@ -123,29 +123,17 @@ interface AdaptiveTabsState {
 
 class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState> {
     static defaultProps = {
-        wrapTo: defaultWrapToFunc,
         /* default values of breakpoint configuration - object where the key is the width of the container element, the value is
          maximum width of tab as a percentage of the container width, (so, for default values, if the width of
          container width from 401px to 500px the maximum tab width will be 33%, from 501px to 700px 30%, etc.)
          the width of the container is the minimum of the values defined in the object keys (the default value is 400)
          instead of tabs, select is rendered occupying the entire width of the container. */
-        breakpointsConfig: {
-            '400': 33,
-            '500': 30,
-            '700': 27,
-            '800': 26,
-            '900': 25,
-            '1000': 24,
-            '1100': 23,
-            '1200': 22,
-            '1300': 21,
-            '1400': 20,
-        },
+        breakpointsConfig: DEFAULT_BREAK_POINTS_CONFIG,
     };
 
-    private breakpoints: number[];
-    private tabMaxWidthInPercentsForScreenSize: Record<string, number>;
-    private throttledHandleResize: () => void;
+    private readonly breakpoints: number[];
+    private readonly tabMaxWidthInPercentsForScreenSize: Record<string, number>;
+    private readonly throttledHandleResize: () => void;
     private resizeObserver?: ResizeObserver;
     private tabItemPaddingRight = 0;
     private switcherWidth = 0;
@@ -885,8 +873,7 @@ class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState>
     }
 
     render() {
-        const {wrapTo, items, className} = this.props;
-        const isDefaultRender = !wrapTo || wrapTo === defaultWrapToFunc;
+        const {items, className} = this.props;
 
         return (
             <div
@@ -894,7 +881,6 @@ class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState>
                 className={b(
                     {
                         visible: this.state.dimensionsWereCollected,
-                        'is-default-render': isDefaultRender,
                     },
                     className,
                 )}

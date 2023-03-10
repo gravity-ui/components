@@ -12,19 +12,7 @@
     overflow: hidden;
     width: 100%;
 
-    &_is-default-render {
-        box-shadow: inset 0 -1px 0 0 var(--g-tabs-color-divider);
-
-        .adaptive-tabs__tab {
-            border-bottom: var(--g-tabs-border-width) solid transparent;
-            padding: var(--g-tabs-border-width) 1px 0;
-
-            &_active {
-                border-color: var(--g-tabs-color-border-active);
-                color: var(--g-tabs-color-text-active);
-            }
-        }
-    }
+    box-shadow: inset 0 -1px 0 0 var(--g-tabs-color-divider);
 
     &_visible {
         opacity: initial;
@@ -100,6 +88,9 @@
     }
 
     &__tab {
+        border-bottom: var(--g-tabs-border-width) solid transparent;
+        padding: var(--g-tabs-border-width) 1px 0;
+
         box-sizing: border-box;
         text-decoration: none;
         line-height: var(--g-tabs-height);
@@ -117,6 +108,11 @@
             pointer-events: none;
             cursor: auto;
             color: var(--g-tabs-color-text-disabled);
+        }
+
+        &_active {
+            border-color: var(--g-tabs-color-border-active);
+            color: var(--g-tabs-color-text-active);
         }
     }
 
