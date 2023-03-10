@@ -1,4 +1,8 @@
-.adaptive-tabs {
+@use '../variables';
+
+$block: '.#{variables.$ns}adaptive-tabs';
+
+#{$block} {
     --g-tabs-color-divider: var(--yc-color-line-generic);
     --g-tabs-color-border-active: var(--yc-color-text-info);
     --g-tabs-color-text-active: var(--yc-color-text-primary);
@@ -13,6 +17,10 @@
     width: 100%;
 
     box-shadow: inset 0 -1px 0 0 var(--g-tabs-color-divider);
+
+    &:has(#{$block}__tabs-as-select-control) {
+        box-shadow: none;
+    }
 
     &_visible {
         opacity: initial;
@@ -118,5 +126,11 @@
 
     &__chevron-icon {
         margin-left: 10px;
+    }
+
+    &__tabs-as-select-control {
+        #{$block}__tab {
+            border: none;
+        }
     }
 }
