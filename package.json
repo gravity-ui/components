@@ -26,6 +26,7 @@
     "start": "TS_NODE_PROJECT=.storybook/tsconfig.json start-storybook"
   },
   "dependencies": {
+    "@bem-react/classname": "1.5.12",
     "@gravity-ui/i18n": "^1.0.0"
   },
   "devDependencies": {
