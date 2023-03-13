@@ -1,4 +1,5 @@
 export const DEFAULT_BREAK_POINTS_CONFIG = {
+    '150': 40,
     '400': 33,
     '500': 30,
     '700': 27,
