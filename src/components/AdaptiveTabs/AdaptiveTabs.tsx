@@ -89,6 +89,8 @@ export type TabItem<T> = T & {
     disabled?: boolean;
 };
 
+export type TabsSize = 'm' | 'l' | 'xl';
+
 export interface AdaptiveTabsProps<T> {
     items: TabItem<T>[];
     activeTab?: string;
@@ -100,6 +102,7 @@ export interface AdaptiveTabsProps<T> {
         index: number | undefined,
     ): React.ReactNode;
     className?: string;
+    size?: TabsSize;
 }
 
 interface AdaptiveTabsState {
@@ -877,13 +880,14 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     }
 
     render() {
-        const {items, className} = this.props;
+        const {items, className, size = 'm'} = this.props;
 
         return (
             <div
                 ref={this.tabsRootNode}
                 className={b(
                     {
+                        size,
                         visible: this.state.dimensionsWereCollected,
                     },
                     className,

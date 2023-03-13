@@ -1,4 +1,5 @@
 @use '../variables';
+@use '@gravity-ui/uikit/styles/mixins';
 
 $block: '.#{variables.$ns}adaptive-tabs';
 
@@ -8,9 +9,40 @@ $block: '.#{variables.$ns}adaptive-tabs';
     --g-tabs-color-text-active: var(--yc-color-text-primary);
     --g-tabs-color-text-inactive: var(--yc-color-text-complementary);
     --g-tabs-color-text-disabled: var(--yc-color-text-secondary);
-    --g-tabs-space-between: 20px;
-    --g-tabs-border-width: 2px;
-    --g-tabs-height: 36px;
+    &_size {
+        &_m {
+            --g-tabs-height: 36px;
+            --g-tabs-space-between: 24px;
+            --g-tabs-border-width: 2px;
+
+            #{$block}__item-title,
+            #{$block}__item-counter {
+                @include mixins.text-body-1();
+            }
+        }
+
+        &_l {
+            --g-tabs-height: 40px;
+            --g-tabs-space-between: 28px;
+            --g-tabs-border-width: 2px;
+
+            #{$block}__item-title,
+            #{$block}__item-counter {
+                @include mixins.text-body-2();
+            }
+        }
+
+        &_xl {
+            --g-tabs-height: 44px;
+            --g-tabs-space-between: 32px;
+            --g-tabs-border-width: 3px;
+
+            #{$block}__item-title,
+            #{$block}__item-counter {
+                @include mixins.text-subheader-3();
+            }
+        }
+    }
 
     position: relative;
     overflow: hidden;
