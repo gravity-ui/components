@@ -4,8 +4,15 @@ import {AdaptiveTabs, AdaptiveTabsProps} from '../AdaptiveTabs/AdaptiveTabs';
 export default {
     title: 'Components/AdaptiveTabs',
     component: AdaptiveTabs,
+    argTypes: {
+        size: {
+            options: ['m', 'l', 'xl'],
+            control: {type: 'radio'},
+            defaultValue: 'm',
+        },
+    },
 } as Meta;
-const Template: Story<AdaptiveTabs<{}>> = (args) => {
+const Template: Story<{size: 'm' | 'l' | 'xl'} & AdaptiveTabs<{}>> = (args) => {
     const [activeTab, setActiveTab] = useState('active');
     const items: AdaptiveTabsProps<{}>['items'] = React.useMemo(
         () => [
