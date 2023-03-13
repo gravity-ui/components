@@ -3,7 +3,6 @@ import React from 'react';
 import {ChevronDown} from '@gravity-ui/icons';
 import {Icon, Select, SelectProps} from '@gravity-ui/uikit';
 import difference from 'lodash/difference';
-import noop from 'lodash/noop';
 import throttle from 'lodash/throttle';
 import ResizeObserver from 'resize-observer-polyfill';
 
@@ -55,16 +54,18 @@ type OpenChangeProps = Parameters<NonNullable<SelectProps['onOpenChange']>>[0];
 
 interface TabProps {
     id: string;
-    title: string | React.ReactNode;
+    title?: string | React.ReactNode;
     hint?: string;
     active?: boolean;
     disabled?: boolean;
-    onClick: (id: string, event: React.MouseEvent) => void;
+    onClick?: (id: string, event: React.MouseEvent) => void;
 }
 
 class Tab extends React.Component<TabProps> {
     onClick = (event: React.MouseEvent) => {
-        this.props.onClick(this.props.id, event);
+        if (this.props.onClick) {
+            this.props.onClick(this.props.id, event);
+        }
     };
 
     render() {
@@ -81,20 +82,23 @@ class Tab extends React.Component<TabProps> {
     }
 }
 
-export interface AdaptiveTabsProps {
-    items: {
-        id: string;
-        title: string;
-        disabled?: boolean;
-    }[];
+export type TabItem<T> = T & {
+    id: string;
+    title?: React.ReactNode;
+    hint?: string;
+    disabled?: boolean;
+};
+
+export interface AdaptiveTabsProps<T> {
+    items: TabItem<T>[];
     activeTab?: string;
     breakpointsConfig: Record<string, number>;
     onSelectTab: (tabId: string, event?: React.MouseEvent) => void;
-    wrapTo?: (
-        isActive: boolean | undefined,
+    wrapTo?(
+        item: TabItem<T> | undefined,
         node: React.ReactNode,
-        tabId: string | undefined,
-    ) => React.ReactNode;
+        index: number | undefined,
+    ): React.ReactNode;
     className?: string;
 }
 
@@ -121,7 +125,7 @@ interface AdaptiveTabsState {
     isSelectOpened: boolean;
 }
 
-export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTabsState> {
+export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, AdaptiveTabsState> {
     static defaultProps = {
         /* default values of breakpoint configuration - object where the key is the width of the container element, the value is
          maximum width of tab as a percentage of the container width, (so, for default values, if the width of
@@ -172,7 +176,7 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
         }
     }
 
-    constructor(props: AdaptiveTabsProps) {
+    constructor(props: AdaptiveTabsProps<T>) {
         super(props);
 
         this.state = {
@@ -233,7 +237,7 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
         this.resizeObserver.observe(this.tabsRootNode.current!);
     };
 
-    componentDidUpdate(prevProps: AdaptiveTabsProps) {
+    componentDidUpdate(prevProps: AdaptiveTabsProps<T>) {
         if (!this.dimensionsWereInitiallyCollected) {
             return;
         }
@@ -607,10 +611,7 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
         order and title as the previous ones. If this is not the case, the collectDimensions method will be called to
         memorize the new props and run the subsequent phases of recalculating the layout
      */
-    wasItemsListUpdated = (
-        currentItems: {title: string; id: string}[],
-        prevItems: {title: string; id: string}[],
-    ) => {
+    wasItemsListUpdated = (currentItems: TabItem<unknown>[], prevItems: TabItem<unknown>[]) => {
         if (currentItems.length !== prevItems.length) {
             return true;
         }
@@ -716,7 +717,8 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
     renderSwitcherForTabsAsSelect = (switcherProps: RenderControlProps) => {
         const {items} = this.props;
         const activeTab = items.find((item) => item.id === this.activeTab);
-        const hint = activeTab ? activeTab.title || activeTab.id : items[0].title || items[0].id;
+        const tab = activeTab ?? items[0];
+        const hint = tab.hint ?? ((typeof tab.title === 'string' && tab.title) || tab.id);
 
         return this.renderSwitcher({...switcherProps, text: hint, active: Boolean(activeTab)});
     };
@@ -740,7 +742,7 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
         );
 
         const switcherTabProps = {title, hint: text, id: 'switcher-tab'};
-        const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} onClick={noop} />;
+        const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} />;
 
         return (
             <div
@@ -779,7 +781,7 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
             );
     };
 
-    renderTabItem = (item: {id: string; title: string}, tabIndex: number) => {
+    renderTabItem = (item: TabItem<T>, tabIndex: number) => {
         const {items, wrapTo} = this.props;
         const activeTabID = this.activeTab;
         const {dimensionsWereCollected, currentContainerWidthName} = this.state;
@@ -795,17 +797,18 @@ export class AdaptiveTabs extends React.Component<AdaptiveTabsProps, AdaptiveTab
             ? this.overflownTabsCurrentWidth[tabIndex]
             : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
 
-        const tabNode = (
-            <Tab {...item} active={item.id === activeTabID} onClick={this.onTabClick} />
-        );
+        const tabNode = <Tab {...item} active={item.id === activeTabID} />;
 
         return (
             <div
                 key={item.id}
                 style={{maxWidth: items.length > 1 ? maxWidth : '100%'}}
                 className={b('tab-container', {'last-tab': isLastTab, 'no-overflow': noOverflow})}
+                onClick={(e) => {
+                    this.onTabClick(item.id, e);
+                }}
             >
-                {wrapTo ? wrapTo(item.id === activeTabID, tabNode, item.id) : tabNode}
+                {wrapTo ? wrapTo(item, tabNode, tabIndex) : tabNode}
             </div>
         );
     };
