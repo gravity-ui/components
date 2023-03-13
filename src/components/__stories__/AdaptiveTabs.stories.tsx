@@ -5,9 +5,9 @@ export default {
     title: 'Components/AdaptiveTabs',
     component: AdaptiveTabs,
 } as Meta;
-const Template: Story<AdaptiveTabs> = (args) => {
+const Template: Story<AdaptiveTabs<{}>> = (args) => {
     const [activeTab, setActiveTab] = useState('active');
-    const items: AdaptiveTabsProps['items'] = React.useMemo(
+    const items: AdaptiveTabsProps<{}>['items'] = React.useMemo(
         () => [
             {
                 id: 'first',
