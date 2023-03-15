@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Meta, Story} from '@storybook/react';
-import {AdaptiveTabs, AdaptiveTabsProps} from '../AdaptiveTabs/AdaptiveTabs';
+import {AdaptiveTabs, AdaptiveTabsProps} from '../AdaptiveTabs';
 export default {
     title: 'Components/AdaptiveTabs',
     component: AdaptiveTabs,
