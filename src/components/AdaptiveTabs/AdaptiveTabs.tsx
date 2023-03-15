@@ -734,7 +734,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         },
     ) => {
         const {wrapTo} = this.props;
-        const {onClick, active, ref, text} = switcherProps;
+        const {onClick, active, ref, text, onKeyDown} = switcherProps;
 
         const title = (
             <div className={b('switcher-tab-content')}>
@@ -750,8 +750,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
         return (
             <div
+                tabIndex={0}
                 key="switcher"
                 onClick={onClick}
+                onKeyDown={onKeyDown}
                 className={b('tab-container', {'switcher-tab': true})}
                 ref={ref as React.LegacyRef<HTMLDivElement>} // https://github.com/gravity-ui/uikit/issues/552
             >
