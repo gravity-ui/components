@@ -61,6 +61,7 @@ export interface TabProps {
     onClick?: (id: string, event: React.MouseEvent) => void;
 }
 
+// https://github.com/gravity-ui/components/issues/7
 class Tab extends React.Component<TabProps> {
     onClick = (event: React.MouseEvent) => {
         if (this.props.onClick) {
