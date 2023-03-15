@@ -4,7 +4,13 @@ import React from 'react';
 import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
 import type {DecoratorFn} from '@storybook/react';
 import {ThemeProvider, MobileProvider, Lang, configure as uiKitConfigure} from '@gravity-ui/uikit';
+import {configure} from '../src';
+import {withMobile} from './decorators/withMobile';
+import {withLang} from './decorators/withLang';
 
+configure({
+    lang: Lang.En,
+});
 uiKitConfigure({
     lang: Lang.En,
 });
@@ -21,7 +27,7 @@ const withContextProvider: DecoratorFn = (Story, context) => {
     );
 };
 
-export const decorators = [withContextProvider];
+export const decorators = [withMobile, withLang, withContextProvider];
 
 export const parameters = {
     docs: {

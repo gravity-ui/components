@@ -52,7 +52,7 @@ type OpenChangeProps = Parameters<NonNullable<SelectProps['onOpenChange']>>[0];
         2) adjusting the width of the overflowing tabs to the width of the container (hereinafter phases 1 and 2)
  */
 
-interface TabProps {
+export interface TabProps {
     id: string;
     title?: string | React.ReactNode;
     hint?: string;
