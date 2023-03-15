@@ -1,9 +1,5 @@
-import bemBlock from 'bem-cn-lite';
+import {withNaming} from '@bem-react/classname';
 
-export type CnBlock = ReturnType<typeof bemBlock>;
+export const NAMESPACE = 'gc-';
 
-export const NAMESPACE = 'g-';
-
-export function block(name: string): CnBlock {
-    return bemBlock(`${NAMESPACE}${name}`);
-}
+export const block = withNaming({n: NAMESPACE, e: '__', m: '_', v: '_'});

@@ -297,7 +297,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 .getPropertyValue('padding-right');
 
             /* save the value of the right padding (the distance between tabs, which can be different depending on
-            the value of css variable --g-tabs-space-between) */
+            the value of css variable --gc-tabs-space-between) */
             this.tabItemPaddingRight = paddingRightValue ? parseInt(paddingRightValue, 10) : 0;
         }
 
@@ -887,10 +887,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 ref={this.tabsRootNode}
                 className={b(
                     {
-                        size,
+                        size: size,
                         visible: this.state.dimensionsWereCollected,
                     },
-                    className,
+                    [className],
                 )}
             >
                 {this.state.currentContainerWidthName === SMALL_CONTAINER_WIDTH_NAME &&
