@@ -62,7 +62,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
         max-height: calc(var(--gc-tabs-height) + var(--gc-tabs-border-width) * 2);
         display: flex;
         align-items: flex-end;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         overflow: hidden;
     }
 
