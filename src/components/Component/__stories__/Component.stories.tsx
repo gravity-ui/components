@@ -8,4 +8,4 @@ export default {
 } as Meta;
 
 export const Playground: Story<ComponentProps> = (args) => <Component {...args} />;
-Playground.storyName = 'Component';
+Playground.storyName = 'Components/Component';
