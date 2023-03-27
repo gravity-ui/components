@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/gravity-ui/components/compare/v1.1.0...v1.1.1) (2023-03-27)
+
+
+### Bug Fixes
+
+* add script for building when publish ([#14](https://github.com/gravity-ui/components/issues/14)) ([545fd11](https://github.com/gravity-ui/components/commit/545fd11771fc63940d078441b048f70e31baccfa))
+
 ## [1.1.0](https://github.com/gravity-ui/components/compare/v1.0.0...v1.1.0) (2023-03-27)
 
 
