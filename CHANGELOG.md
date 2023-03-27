@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/gravity-ui/components/compare/v1.0.0...v1.1.0) (2023-03-27)
+
+
+### Features
+
+* introduce InfiniteScroll component ([#2](https://github.com/gravity-ui/components/issues/2)) ([4240714](https://github.com/gravity-ui/components/commit/4240714ff78cf74fc76a213f7d00d51194767053))
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** prevent tab move to next line on some sizes ([#9](https://github.com/gravity-ui/components/issues/9)) ([3b8cd89](https://github.com/gravity-ui/components/commit/3b8cd892b61654c6c04d6cde76865c0771bedb12))
+
 ## 1.0.0 (2023-03-15)
 
 
