@@ -23,7 +23,8 @@
     "typecheck": "tsc --noEmit",
     "clean": "gulp clean",
     "build": "gulp",
-    "start": "TS_NODE_PROJECT=.storybook/tsconfig.json start-storybook"
+    "start": "TS_NODE_PROJECT=.storybook/tsconfig.json start-storybook",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@bem-react/classname": "^1.5.12",
