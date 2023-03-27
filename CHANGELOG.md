@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/gravity-ui/components/compare/v1.1.1...v1.1.2) (2023-03-27)
+
+
+### Bug Fixes
+
+* fix publishing package ([#16](https://github.com/gravity-ui/components/issues/16)) ([4f9190d](https://github.com/gravity-ui/components/commit/4f9190d74d07dbe2e83b418fa4aa9ebc9a6a8777))
+
 ## [1.1.1](https://github.com/gravity-ui/components/compare/v1.1.0...v1.1.1) (2023-03-27)
 
 
