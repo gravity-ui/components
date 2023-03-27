@@ -3,9 +3,15 @@
   "version": "1.1.1",
   "description": "",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
+  "types": "./build/esm/index.d.ts",
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
   "files": [
-    "dist"
+    "build"
   ],
   "repository": {
     "type": "git",
