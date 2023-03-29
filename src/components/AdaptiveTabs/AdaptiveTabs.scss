@@ -71,7 +71,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
         top: 0;
         will-change: left;
 
-        .adaptive-tabs__tab-container .adaptive-tabs__tab {
+        #{$block}__tab-container #{$block}__tab {
             margin-right: 0;
         }
     }
@@ -96,12 +96,8 @@ $block: '.#{variables.$ns}adaptive-tabs';
         padding-right: var(--gc-tabs-space-between);
 
         &:not(&_switcher-tab):only-child {
-            .adaptive-tabs__tab {
+            #{$block}__tab {
                 cursor: auto;
-
-                .dl-draggable-handle-element.dashkit-plugin-widget__tabs_edit-mode & {
-                    cursor: move;
-                }
             }
         }
 
@@ -113,7 +109,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
             padding-right: 0;
             max-width: 100%;
 
-            .adaptive-tabs__tab {
+            #{$block}__tab {
                 width: auto;
                 display: inline-flex;
                 max-width: 100%;
@@ -121,7 +117,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
         }
 
         &_no-overflow {
-            .adaptive-tabs__tab {
+            #{$block}__tab {
                 overflow: initial;
             }
         }
