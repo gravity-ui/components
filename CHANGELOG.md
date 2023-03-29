@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/gravity-ui/components/compare/v1.1.2...v1.1.3) (2023-03-29)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix classnames ([#21](https://github.com/gravity-ui/components/issues/21)) ([e26f852](https://github.com/gravity-ui/components/commit/e26f85257961ad748d0757906325b17eb0570ea0))
+
 ## [1.1.2](https://github.com/gravity-ui/components/compare/v1.1.1...v1.1.2) (2023-03-27)
 
 
