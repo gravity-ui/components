@@ -20,7 +20,7 @@ export default {
     },
     argTypes: {
         children: argTypeReactNode,
-        fieldHelpPopover: argTypeReactNode,
+        labelHelpPopover: argTypeReactNode,
     },
 } as ComponentMeta<typeof FormRow>;
 
@@ -64,7 +64,7 @@ RequiredField.args = {
 
 export const WithHelpPopover = Template.bind({});
 WithHelpPopover.args = {
-    fieldHelpPopover: (
+    labelHelpPopover: (
         <HelpPopover
             content={'Your name as it used in your foreign passport.'}
             placement={['top', 'bottom']}

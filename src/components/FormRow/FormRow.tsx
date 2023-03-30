@@ -12,7 +12,7 @@ const b = block('form-row');
 const FormRowComponent: FC<FormRowProps> = ({
     className,
     label,
-    fieldHelpPopover,
+    labelHelpPopover,
     fieldId,
     fieldRequired = false,
     children,
@@ -34,8 +34,8 @@ const FormRowComponent: FC<FormRowProps> = ({
                         </sup>
                     ) : null}
 
-                    {fieldHelpPopover ? (
-                        <span className={b('help-popover')}>{fieldHelpPopover}</span>
+                    {labelHelpPopover ? (
+                        <span className={b('help-popover')}>{labelHelpPopover}</span>
                     ) : null}
                 </LabelComponent>
             </div>
