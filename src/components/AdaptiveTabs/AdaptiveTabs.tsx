@@ -93,17 +93,27 @@ export type TabItem<T> = T & {
 export type TabsSize = 'm' | 'l' | 'xl';
 
 export interface AdaptiveTabsProps<T> {
+    /** Array of tabs */
     items: TabItem<T>[];
+    /** Active tab id */
     activeTab?: string;
+    /** Breakpoints config which control the thersholds of tab size */
     breakpointsConfig: Record<string, number>;
+    /** Select tab handler */
     onSelectTab: (tabId: string, event?: React.MouseEvent) => void;
+    /** Allows to wrap TabItem into another component or render custom tab */
+    // FIXME: https://github.com/gravity-ui/components/issues/26
     wrapTo?(
         item: TabItem<T> | undefined,
         node: React.ReactNode,
         index: number | undefined,
     ): React.ReactNode;
+    /** Class name for the tabs container */
     className?: string;
+    /** Tabs size */
     size?: TabsSize;
+    /** Allows you not to specify activeTab */
+    allowNotSelected?: boolean;
 }
 
 interface AdaptiveTabsState {
@@ -171,13 +181,17 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     private tabsListNode = React.createRef<HTMLDivElement>();
 
     get activeTab() {
-        const {activeTab, items} = this.props;
+        const {activeTab, items, allowNotSelected} = this.props;
         if (activeTab) {
             return activeTab;
-        } else {
-            const [firstTab] = items;
-            return firstTab.id;
         }
+
+        if (allowNotSelected || items.length === 0) {
+            return undefined;
+        }
+
+        const [firstTab] = items;
+        return firstTab.id;
     }
 
     constructor(props: AdaptiveTabsProps<T>) {
@@ -458,7 +472,8 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
          hide it, so we write its ID into tabChosenFromSelectId and start recalculation */
         if (
             this.state.tabChosenFromSelectId !== activeTabId &&
-            activeTabIndex >= firstHiddenTabIndex
+            activeTabIndex >= firstHiddenTabIndex &&
+            activeTabId !== undefined
         ) {
             this.setState({tabChosenFromSelectId: activeTabId}, this.recalculateTabs);
             return false;
