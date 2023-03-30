@@ -93,17 +93,26 @@ export type TabItem<T> = T & {
 export type TabsSize = 'm' | 'l' | 'xl';
 
 export interface AdaptiveTabsProps<T> {
+    /** Array of tabs */
     items: TabItem<T>[];
+    /** Active tab id */
     activeTab?: string;
+    /** Breakpoints config which control the thersholds of tab size */
     breakpointsConfig: Record<string, number>;
+    /** Select tab handler */
     onSelectTab: (tabId: string, event?: React.MouseEvent) => void;
+    /** Allows to wrap TabItem into another component or render custom tab */
+    // FIXME: https://github.com/gravity-ui/components/issues/26
     wrapTo?(
         item: TabItem<T> | undefined,
         node: React.ReactNode,
         index: number | undefined,
     ): React.ReactNode;
+    /** CSS-class of element */
     className?: string;
+    /** Tabs size */
     size?: TabsSize;
+    /** Allows you not to specify activeTab */
     allowNotSelected?: boolean;
 }
 
