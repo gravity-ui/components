@@ -104,6 +104,7 @@ export interface AdaptiveTabsProps<T> {
     ): React.ReactNode;
     className?: string;
     size?: TabsSize;
+    allowNotSelected?: boolean;
 }
 
 interface AdaptiveTabsState {
@@ -171,13 +172,17 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     private tabsListNode = React.createRef<HTMLDivElement>();
 
     get activeTab() {
-        const {activeTab, items} = this.props;
+        const {activeTab, items, allowNotSelected} = this.props;
         if (activeTab) {
             return activeTab;
-        } else {
-            const [firstTab] = items;
-            return firstTab.id;
         }
+
+        if (allowNotSelected || items.length === 0) {
+            return undefined;
+        }
+
+        const [firstTab] = items;
+        return firstTab.id;
     }
 
     constructor(props: AdaptiveTabsProps<T>) {
@@ -458,7 +463,8 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
          hide it, so we write its ID into tabChosenFromSelectId and start recalculation */
         if (
             this.state.tabChosenFromSelectId !== activeTabId &&
-            activeTabIndex >= firstHiddenTabIndex
+            activeTabIndex >= firstHiddenTabIndex &&
+            activeTabId !== undefined
         ) {
             this.setState({tabChosenFromSelectId: activeTabId}, this.recalculateTabs);
             return false;

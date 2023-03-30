@@ -16,7 +16,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | Property                                | Type                                                                      | Required | Default | Description                                                        |
 | :-------------------------------------- | :------------------------------------------------------------------------ | :------: | :------ | :----------------------------------------------------------------- |
 | activeTab                               | `String`                                                                  |          |         | Active Tab ID                                                      |
-| allowNotSelected                        | `Boolean`                                                                 |          |         | Позволяет не указывать `activeTab`                                 |
+| allowNotSelected                        | `Boolean`                                                                 |          |         | Allows you not to specify `activeTab`                              |
 | items                                   | `TabItem[]`                                                               |  `true`  |         | Tabs Array                                                         |
 | onSelectTab                             | `onSelectTab?(tabId: string): void`                                       |  `true`  |         | Select tab handler                                                 |
 | wrapTo                                  | `wrapTo?(item: TabItemProps, node: React.ReactNode, index: number): void` |          |         | Allows to wrap TabItem into another component or render custom tab |
