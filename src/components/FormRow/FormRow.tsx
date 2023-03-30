@@ -14,7 +14,7 @@ const FormRowComponent: FC<FormRowProps> = ({
     label,
     labelHelpPopover,
     fieldId,
-    fieldRequired = false,
+    required = false,
     children,
 }) => {
     const LabelComponent = fieldId ? 'label' : 'span';
@@ -25,7 +25,7 @@ const FormRowComponent: FC<FormRowProps> = ({
                 <LabelComponent className={b('field-name')} htmlFor={fieldId ? fieldId : undefined}>
                     {label}
 
-                    {fieldRequired ? (
+                    {required ? (
                         <sup
                             className={b('required-mark')}
                             aria-label={i18n('label_required-field')}

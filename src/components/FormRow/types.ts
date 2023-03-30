@@ -9,7 +9,7 @@ export interface FormRowProps {
     /** Id of field to correctly associate it label */
     fieldId?: string;
     /** Display star next to required field */
-    fieldRequired?: boolean;
+    required?: boolean;
     /** Field component itself. `<FormRow.FieldDescription/>` could be used here
      * next to field component itself */
     children?: ReactNode;

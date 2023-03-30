@@ -59,7 +59,7 @@ WithFieldDescriptionAndLongLabel.args = {
 
 export const RequiredField = Template.bind({});
 RequiredField.args = {
-    fieldRequired: true,
+    required: true,
 };
 
 export const WithHelpPopover = Template.bind({});
