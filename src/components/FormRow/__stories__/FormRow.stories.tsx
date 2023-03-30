@@ -1,8 +1,7 @@
 import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {HelpPopover} from '../../HelpPopover';
+import {HelpPopover, TextInput} from '@gravity-ui/uikit';
 import {FormRow} from '../FormRow';
-import {TextInput} from '../../TextInput';
 
 const fieldId = 'form-row-input-id';
 const fieldDescriptionId = `${fieldId}-description`;
