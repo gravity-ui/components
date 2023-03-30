@@ -108,7 +108,7 @@ export interface AdaptiveTabsProps<T> {
         node: React.ReactNode,
         index: number | undefined,
     ): React.ReactNode;
-    /** CSS-class of element */
+    /** Class name for the tabs container */
     className?: string;
     /** Tabs size */
     size?: TabsSize;

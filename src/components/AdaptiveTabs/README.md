@@ -21,7 +21,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | size                                    | `m` `l` `xl`                                                              |          | `m`     | Tabs Size                                                          |
 | onSelectTab                             | `onSelectTab?(tabId: string): void`                                       |  `true`  |         | Select tab handler                                                 |
 | wrapTo                                  | `wrapTo?(item: TabItemProps, node: React.ReactNode, index: number): void` |          |         | Allows to wrap TabItem into another component or render custom tab |
-| className                               | `String`                                                                  |          |         | CSS-class of element                                               |
+| className                               | `String`                                                                  |          |         | Class name for the tabs container                                  |
 | [breakpointsConfig](#breakpointsConfig) | `Record<string, number>`                                                  |          |         | Breakpoints config which control the thersholds of tab size.       |
 
 ### breakpointsConfig
