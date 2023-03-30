@@ -1,8 +1,8 @@
 @use '../variables';
 
 .#{variables.$ns}form-row {
-    --yc-form-row-label-width: 172px;
-    --yc-form-row-field-height: 28px;
+    --gc-form-row-label-width: 172px;
+    --gc-form-row-field-height: 28px;
 
     margin-bottom: 20px;
     align-items: flex-start;
@@ -11,10 +11,10 @@
     &__left {
         display: flex;
         flex-flow: row;
-        min-height: var(--yc-form-row-field-height);
+        min-height: var(--gc-form-row-field-height);
         box-sizing: border-box;
         flex-shrink: 0;
-        width: var(--yc-form-row-label-width);
+        width: var(--gc-form-row-label-width);
         padding-right: 8px;
     }
 
