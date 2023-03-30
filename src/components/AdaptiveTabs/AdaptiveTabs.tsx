@@ -90,6 +90,8 @@ export type TabItem<T> = T & {
     disabled?: boolean;
 };
 
+type RenderTabView = 'switcher' | 'tab';
+
 export type TabsSize = 'm' | 'l' | 'xl';
 
 export interface AdaptiveTabsProps<T> {
@@ -101,6 +103,7 @@ export interface AdaptiveTabsProps<T> {
         item: TabItem<T> | undefined,
         node: React.ReactNode,
         index: number | undefined,
+        viewType: RenderTabView,
     ): React.ReactNode;
     className?: string;
     size?: TabsSize;
@@ -724,17 +727,17 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const tab = activeTab ?? items[0];
         const hint = tab.hint ?? ((typeof tab.title === 'string' && tab.title) || tab.id);
 
-        return this.renderSwitcher({...switcherProps, text: hint, active: Boolean(activeTab)});
+        return this.renderSwitcher({...switcherProps, text: hint, activeTab: tab});
     };
 
     renderSwitcher = (
         switcherProps: RenderControlProps & {
             text: string;
-            active?: boolean;
+            activeTab?: TabItem<T>;
         },
     ) => {
         const {wrapTo} = this.props;
-        const {onClick, active, ref, text, onKeyDown} = switcherProps;
+        const {onClick, activeTab, ref, text, onKeyDown} = switcherProps;
 
         const title = (
             <div className={b('switcher-tab-content')}>
@@ -746,7 +749,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         );
 
         const switcherTabProps = {title, hint: text, id: 'switcher-tab'};
-        const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} />;
+        const tabItemNode = <Tab {...switcherTabProps} active={Boolean(activeTab)} />;
 
         return (
             <div
@@ -757,7 +760,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 className={b('tab-container', {'switcher-tab': true})}
                 ref={ref as React.LegacyRef<HTMLDivElement>} // https://github.com/gravity-ui/uikit/issues/552
             >
-                {wrapTo ? wrapTo(undefined, tabItemNode, undefined) : tabItemNode}
+                {wrapTo ? wrapTo(activeTab, tabItemNode, undefined, 'switcher') : tabItemNode}
             </div>
         );
     };
@@ -814,7 +817,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                     this.onTabClick(item.id, e);
                 }}
             >
-                {wrapTo ? wrapTo(item, tabNode, tabIndex) : tabNode}
+                {wrapTo ? wrapTo(item, tabNode, tabIndex, 'tab') : tabNode}
             </div>
         );
     };
