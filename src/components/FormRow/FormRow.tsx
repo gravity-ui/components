@@ -11,7 +11,7 @@ const b = block('form-row');
 
 const FormRowComponent: FC<FormRowProps> = ({
     className,
-    fieldName,
+    label,
     fieldHelpPopover,
     fieldId,
     fieldRequired = false,
@@ -23,7 +23,7 @@ const FormRowComponent: FC<FormRowProps> = ({
         <div className={b(null, [className])}>
             <div className={b('left')}>
                 <LabelComponent className={b('field-name')} htmlFor={fieldId ? fieldId : undefined}>
-                    {fieldName}
+                    {label}
 
                     {fieldRequired ? (
                         <sup

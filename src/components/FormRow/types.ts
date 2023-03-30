@@ -3,7 +3,7 @@ import type {ReactNode, HTMLAttributes, PropsWithChildren} from 'react';
 export interface FormRowProps {
     className?: string;
     /** Field label */
-    fieldName?: ReactNode;
+    label?: ReactNode;
     /** Slot for inserting `<HelpPopover/>` next to label text */
     fieldHelpPopover?: ReactNode;
     /** Id of field to correctly associate it label */

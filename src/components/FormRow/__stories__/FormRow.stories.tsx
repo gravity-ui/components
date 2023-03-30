@@ -14,7 +14,7 @@ export default {
     title: 'Components/FormRow',
     component: FormRow,
     args: {
-        fieldName: 'Enter your name',
+        label: 'Enter your name',
         fieldId,
         children: <TextInput id={fieldId} />,
     },
@@ -30,12 +30,12 @@ export const Default = Template.bind({});
 
 export const WithLongLabel = Template.bind({});
 WithLongLabel.args = {
-    fieldName: 'Very long label for text field to test how it will wrap label text in real life',
+    label: 'Very long label for text field to test how it will wrap label text in real life',
 };
 
 export const WithLongLabelWord = Template.bind({});
 WithLongLabelWord.args = {
-    fieldName: 'Antidisestablishmentarianism',
+    label: 'Antidisestablishmentarianism',
 };
 
 export const WithFieldDescription = Template.bind({});
