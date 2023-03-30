@@ -10,7 +10,7 @@ export const FormRowFieldDescription: FC<FormRowFieldDescriptionProps> = ({
     ...elementProps
 }) => {
     return (
-        <p {...elementProps} className={b('field-description', className)}>
+        <p {...elementProps} className={b('field-description', [className])}>
             {children}
         </p>
     );
