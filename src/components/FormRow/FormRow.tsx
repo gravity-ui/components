@@ -24,6 +24,7 @@ const FormRowComponent: FC<FormRowProps> = ({
             <div className={b('left')}>
                 <LabelComponent className={b('field-name')} htmlFor={fieldId ? fieldId : undefined}>
                     {fieldName}
+
                     {fieldRequired ? (
                         <sup
                             className={b('required-mark')}
