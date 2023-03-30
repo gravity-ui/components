@@ -23,19 +23,25 @@ const FormRowComponent: FC<FormRowProps> = ({
         <div className={b(null, [className])}>
             <div className={b('left')}>
                 <LabelComponent className={b('field-name')} htmlFor={fieldId ? fieldId : undefined}>
-                    {label}
+                    <span className={b('field-name-text')}>{label}</span>
 
                     {required ? (
-                        <sup
-                            className={b('required-mark')}
-                            aria-label={i18n('label_required-field')}
-                        >
-                            *
-                        </sup>
+                        <>
+                            &nbsp;
+                            <sup
+                                className={b('required-mark')}
+                                aria-label={i18n('label_required-field')}
+                            >
+                                *
+                            </sup>
+                        </>
                     ) : null}
 
                     {labelHelpPopover ? (
-                        <span className={b('help-popover')}>{labelHelpPopover}</span>
+                        <>
+                            &nbsp;
+                            <span className={b('help-popover')}>{labelHelpPopover}</span>
+                        </>
                     ) : null}
                 </LabelComponent>
             </div>

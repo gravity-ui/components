@@ -20,18 +20,19 @@
 
     &__field-name {
         align-self: center;
+    }
+
+    &__field-name-text {
         word-break: break-word;
     }
 
     &__required-mark {
-        margin-left: 2px;
         line-height: 0;
         color: var(--yc-color-text-danger);
         font-size: inherit;
     }
 
     &__help-popover {
-        margin-left: 4px;
         display: inline-flex;
         vertical-align: middle;
         align-items: center;
