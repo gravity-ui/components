@@ -38,6 +38,13 @@ WithLongLabelWord.args = {
     label: 'Antidisestablishmentarianism',
 };
 
+/** Story with corner case of label length and required mark. Mark should not be alone at the line */
+export const WithCornerLabelLength = Template.bind({});
+WithCornerLabelLength.args = {
+    required: true,
+    label: 'Antidisestablishmentariani',
+};
+
 export const WithFieldDescription = Template.bind({});
 WithFieldDescription.args = {
     children: (
