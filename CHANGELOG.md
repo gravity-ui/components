@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://github.com/gravity-ui/components/compare/v1.1.3...v1.2.0) (2023-03-30)
+
+
+### Features
+
+* **AdaptiveTabs:** add allowNotSeelcted prop ([#25](https://github.com/gravity-ui/components/issues/25)) ([dec12c7](https://github.com/gravity-ui/components/commit/dec12c75beff8333eb0da457340ea08aca345fda))
+* **FormRow:** add component ([#23](https://github.com/gravity-ui/components/issues/23)) ([d8b5c59](https://github.com/gravity-ui/components/commit/d8b5c5990995d957c0fda52821861fb040eaa138))
+
 ## [1.1.3](https://github.com/gravity-ui/components/compare/v1.1.2...v1.1.3) (2023-03-29)
 
 
