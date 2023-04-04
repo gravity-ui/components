@@ -33,7 +33,7 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@bem-react/classname": "^1.5.12",
+    "@bem-react/classname": "^1.6.0",
     "@gravity-ui/i18n": "^1.0.0",
     "@gravity-ui/icons": "^1.1.0",
     "lodash": "^4.17.21",
