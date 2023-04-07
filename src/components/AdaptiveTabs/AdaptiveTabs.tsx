@@ -335,7 +335,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 this.tabsRealWidth[i] = width;
             }
 
-            this.tabsWidth[i] = width;
+            this.tabsWidth[i] = Math.ceil(width);
         }
 
         this.switcherWidth = this.selectSwitcherNode.current!.getBoundingClientRect().width; // ширина элемента-свитчера
@@ -432,7 +432,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
             if (firstHiddenTabIndexForSequentialCase !== null) {
                 const currentTabWidth =
-                    this.tabsWidth[i] + (i === items.length - 1 ? this.tabItemPaddingRight : 0);
+                    this.tabsWidth[i] + (i === items.length - 1 ? 0 : this.tabItemPaddingRight);
 
                 maxHiddenTabWidth = Math.max(maxHiddenTabWidth, currentTabWidth);
             }
@@ -905,7 +905,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 ref={this.tabsRootNode}
                 className={b(
                     {
-                        size: size,
+                        size,
                         visible: this.state.dimensionsWereCollected,
                     },
                     [className],
