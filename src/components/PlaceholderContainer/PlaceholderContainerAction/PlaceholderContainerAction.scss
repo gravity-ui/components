@@ -1,0 +1,14 @@
+@use '../../variables';
+@use '@gravity-ui/uikit/styles/mixins';
+
+$block: '.#{variables.$ns}placeholder-container-action';
+
+#{$block} {
+    &__button {
+        margin-right: variables.$normalOffset;
+    }
+
+    &__button:last-child {
+        margin-right: 0;
+    }
+}
