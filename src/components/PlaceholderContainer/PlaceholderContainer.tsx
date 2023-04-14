@@ -71,8 +71,8 @@ interface PlaceholderContainerGeneralProps {
 interface PlaceholderContainerDefaultProps {
     entity: string;
     size: 's' | 'm' | 'l' | 'promo';
-    direction: typeof Direction[keyof typeof Direction];
-    align: typeof Align[keyof typeof Align];
+    direction: (typeof Direction)[keyof typeof Direction];
+    align: (typeof Align)[keyof typeof Align];
 }
 
 type PlaceholderContainerInnerProps = PlaceholderContainerGeneralProps &
