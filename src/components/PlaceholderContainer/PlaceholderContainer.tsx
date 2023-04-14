@@ -1,7 +1,5 @@
 import React from 'react';
 
-import {eventBroker} from '@gravity-ui/uikit';
-
 import {block} from '../utils/cn';
 
 import {Action, PlaceholderContainerAction} from './PlaceholderContainerAction';
@@ -24,33 +22,6 @@ const Align = {
     Center: 'center',
 } as const;
 
-interface YfmProps {
-    html: string;
-}
-
-const Yfm: React.FC<YfmProps> = ({html}) => {
-    const handleClickCapture = React.useCallback((event: React.SyntheticEvent) => {
-        const target = event.target as Element | undefined;
-        if (target?.tagName === 'A') {
-            eventBroker.publish({
-                componentId: 'Yfm',
-                eventId: 'click',
-                domEvent: event,
-            });
-        }
-    }, []);
-
-    return (
-        <div
-            className={'yfm'}
-            dangerouslySetInnerHTML={{
-                __html: html,
-            }}
-            onClickCapture={handleClickCapture}
-        />
-    );
-};
-
 type PlaceholderContainerImageNodeProps = NonNullable<React.ReactNode>;
 
 type PlaceholderContainerImageSettingsProps = {
@@ -62,7 +33,7 @@ type PlaceholderContainerImageSettingsProps = {
 interface PlaceholderContainerGeneralProps {
     title?: string;
     description?: React.ReactNode;
-    html?: string | (() => Promise<string>);
+    html?: React.ReactNode;
     action?: Action | Action[];
     className?: string;
     image: PlaceholderContainerImageNodeProps | PlaceholderContainerImageSettingsProps;
@@ -82,9 +53,7 @@ export interface PlaceholderContainerProps
     extends PlaceholderContainerGeneralProps,
         Partial<PlaceholderContainerDefaultProps> {}
 
-interface PlaceholderContainerState {
-    html: string | undefined;
-}
+interface PlaceholderContainerState {}
 
 const b = block('placeholder-container');
 
@@ -101,24 +70,6 @@ export class PlaceholderContainer extends React.Component<
         direction: Direction.Row,
         align: Align.Center,
     };
-
-    state = {
-        html: undefined,
-    };
-
-    componentDidMount() {
-        const {html} = this.props;
-
-        if (html) {
-            if (typeof html === 'string') {
-                this.setState({html});
-            } else {
-                html()
-                    .then((html) => this.setState({html}))
-                    .catch(() => {});
-            }
-        }
-    }
 
     render() {
         const {direction, align, size} = this.props;
@@ -149,23 +100,19 @@ export class PlaceholderContainer extends React.Component<
     }
 
     private renderContent() {
-        const {html} = this.state;
-
-        if (html) {
-            return (
-                <div className={b('html')}>
-                    <div className={b('html-content')}>
-                        <Yfm html={html!} />
-                    </div>
-                    <div className={b('html-action')}>{this.renderAction()}</div>
-                </div>
-            );
-        }
-
-        return (
-            <div className={b('content')}>
+        const content = this.props.html ? (
+            this.props.html
+        ) : (
+            <>
                 {this.renderTitle()}
                 {this.renderDescription()}
+            </>
+        );
+
+        const contentMod = {html: Boolean(this.props.html)};
+        return (
+            <div className={b('content', contentMod)}>
+                {content}
                 {this.renderAction()}
             </div>
         );
