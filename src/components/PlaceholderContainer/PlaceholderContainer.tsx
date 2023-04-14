@@ -51,7 +51,7 @@ const Yfm: React.FC<YfmProps> = ({html}) => {
     );
 };
 
-type PlaceholderContainerImageNodeProps = NonNullable<React.ReactElement> | Element;
+type PlaceholderContainerImageNodeProps = NonNullable<React.ReactNode>;
 
 type PlaceholderContainerImageSettingsProps = {
     url: string;
@@ -132,7 +132,7 @@ export class PlaceholderContainer extends React.Component<
         );
     }
 
-    private renderImage() {
+    private renderImage(): NonNullable<React.ReactNode> {
         if (typeof this.props.image === 'object' && 'url' in this.props.image) {
             const image: PlaceholderContainerImageSettingsProps = this.props.image;
             return (
