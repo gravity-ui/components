@@ -1,0 +1,9 @@
+@use 'src/components/variables';
+
+$block: '.#{variables.$ns}remove-filter-button';
+
+#{$block} {
+    &__icon {
+        color: var(--yc-color-text-complementary);
+    }
+}

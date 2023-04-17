@@ -1,0 +1,14 @@
+@use '@gravity-ui/uikit/styles/spacing';
+
+@use 'src/components/variables';
+
+$block: '.#{variables.$ns}clear-filters-button';
+
+#{$block} {
+    margin-block-start: var(--yc-spacing-xs);
+    margin-inline-start: var(--yc-spacing-xs);
+
+    &-icon {
+        transform: scaleX(-1);
+    }
+}

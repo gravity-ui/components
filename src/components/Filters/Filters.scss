@@ -1,0 +1,18 @@
+@use '../variables';
+@use '@gravity-ui/uikit/styles/spacing';
+
+$block: '.#{variables.$ns}filters';
+
+#{$block} {
+    margin-block-start: calc(-1 * var(--yc-spacing-xs));
+    margin-inline-start: calc(-1 * var(--yc-spacing-xs));
+
+    &__label,
+    &__empty-text,
+    &__add-filter {
+        display: inline-block;
+
+        margin-block-start: var(--yc-spacing-xs);
+        margin-inline-start: var(--yc-spacing-xs);
+    }
+}

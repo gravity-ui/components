@@ -1,0 +1,86 @@
+@use '@gravity-ui/uikit/styles/spacing';
+@use '@gravity-ui/uikit/styles/mixins';
+
+@use 'src/components/variables';
+
+$block: '.#{variables.$ns}filter-list-container';
+
+#{$block} {
+    &__search {
+        padding: var(--yc-spacing-xs) var(--yc-spacing-xs) 0;
+    }
+
+    &__list {
+        max-height: 45vh;
+        overflow: auto;
+
+        &_virtualized {
+            --yc-list-height: 256px;
+            max-height: none;
+        }
+
+        &_mobile {
+            #{$block}__search {
+                flex: none;
+            }
+            .yc-list__items {
+                overflow-y: auto;
+                flex: auto;
+                min-height: 0;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex: auto;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 var(--yc-spacing-m);
+
+        width: 100%;
+        margin-inline-end: var(--yc-spacing-l);
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &_mobile {
+            @include mixins.text-body-2();
+            background: transparent;
+        }
+
+        &-description {
+            padding-inline-start: var(--yc-spacing-micro);
+        }
+    }
+
+    &__item-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        margin-right: var(--yc-spacing-xs);
+    }
+
+    &__tick {
+        margin-left: auto;
+        color: var(--yc-color-text-info);
+        padding: 2px;
+        flex: 0 0 16px;
+    }
+
+    &__actions {
+        display: grid;
+        gap: var(--yc-spacing-xs);
+        grid-auto-flow: column;
+        padding: var(--yc-spacing-xs) var(--yc-spacing-xs);
+
+        border-top: 1px solid var(--yc-color-line-generic);
+    }
+
+    &__help-content-description {
+        margin-block-start: var(--yc-spacing-s);
+    }
+}

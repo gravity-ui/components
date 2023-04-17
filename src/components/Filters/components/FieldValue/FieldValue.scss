@@ -1,0 +1,56 @@
+@use '@gravity-ui/uikit/styles/spacing';
+@use '@gravity-ui/uikit/styles/mixins';
+
+@use 'src/components/variables';
+
+$block: '.#{variables.$ns}field-value';
+
+#{$block} {
+    position: relative;
+
+    display: inline-block;
+
+    height: 24px;
+
+    border-radius: 5px;
+    background-color: var(--yc-color-base-generic);
+
+    &__content {
+        padding-inline: var(--yc-spacing-xs) var(--yc-spacing-nano);
+
+        color: var(--yc-color-text-complementary);
+
+        &_type_button {
+            @include mixins.button-reset();
+        }
+
+        &_type_button {
+            display: inline-block;
+
+            padding-inline: var(--yc-spacing-xs) var(--yc-spacing-nano);
+
+            &::before {
+                position: absolute;
+                inset: 0;
+
+                content: '';
+
+                border-radius: 5px;
+
+                transition: background-color 0.15s linear;
+            }
+
+            &:hover::before {
+                background-color: var(--yc-color-base-simple-hover);
+            }
+
+            &:focus::before {
+                box-shadow: 0 0 0 2px var(--yc-color-line-misc);
+            }
+
+            &:focus:not(:focus-visible)::before {
+                box-shadow: none;
+            }
+        }
+    }
+}

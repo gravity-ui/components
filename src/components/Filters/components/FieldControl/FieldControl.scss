@@ -1,0 +1,11 @@
+@use 'src/components/variables';
+
+$block: '.#{variables.$ns}field-control';
+
+#{$block} {
+    display: inline-block;
+
+    &__popup {
+        width: 320px;
+    }
+}

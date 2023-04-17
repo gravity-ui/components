@@ -1,0 +1,45 @@
+@use '@gravity-ui/uikit/styles/spacing';
+@use '@gravity-ui/uikit/styles/mixins';
+
+@use 'src/components/variables';
+
+$block: '.#{variables.$ns}filter-select';
+
+#{$block} {
+    &__popup {
+        width: 320px;
+    }
+
+    &__option-title {
+        display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        vertical-align: middle;
+
+        white-space: normal;
+        text-overflow: ellipsis;
+        word-break: break-all;
+
+        &_no-icon {
+            margin-inline-start: calc(var(--yc-spacing-nano) + 18px); // check icon + spacing
+        }
+    }
+
+    &__option-title-icon {
+        margin-inline-end: var(--yc-spacing-nano);
+    }
+
+    &__button-icon {
+        color: var(--yc-color-text-complementary);
+    }
+
+    &__help-content-title {
+        @include mixins.text-subheader-3();
+    }
+
+    &__help-content-description {
+        color: var(--yc-color-text-secondary);
+
+        margin-block-start: var(--yc-spacing-s);
+    }
+}

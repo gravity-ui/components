@@ -17,6 +17,13 @@
     "type": "git",
     "url": "git+https://github.com/gravity-ui/components.git"
   },
+  "exports": {
+    "./unstable_filters": {
+      "types": "./build/esm/unstable_filters.d.ts",
+      "require": "./build/cjs/unstable_filters.js",
+      "import": "./build/esm/unstable_filters.js"
+    }
+  },
   "bugs": {
     "url": "https://github.com/gravity-ui/components/issues"
   },
