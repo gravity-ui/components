@@ -11,7 +11,6 @@ $imagePromoSize: 200px;
 $block: '.#{variables.$ns}placeholder-container';
 
 #{$block} {
-    $class: &;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -36,19 +35,19 @@ $block: '.#{variables.$ns}placeholder-container';
     }
 
     &__title {
-        #{$class}_size_s & {
+        #{$block}_size_s & {
             @include mixins.text-subheader-1();
         }
 
-        #{$class}_size_m & {
+        #{$block}_size_m & {
             @include mixins.text-subheader-2();
         }
 
-        #{$class}_size_l & {
+        #{$block}_size_l & {
             @include mixins.text-subheader-3();
         }
 
-        #{$class}_size_promo & {
+        #{$block}_size_promo & {
             @include mixins.text-header-1();
         }
     }
@@ -65,7 +64,7 @@ $block: '.#{variables.$ns}placeholder-container';
 
     &_direction {
         &_row {
-            &#{$class}_align {
+            &#{$block}_align {
                 &_left {
                     justify-content: flex-start;
                 }
@@ -75,11 +74,11 @@ $block: '.#{variables.$ns}placeholder-container';
                 }
             }
 
-            &#{$class}_size {
+            &#{$block}_size {
                 &_s {
                     min-height: 130px;
 
-                    #{$class}_content_html {
+                    #{$block}_content_html {
                         width: calc(100% - #{$htmlMargin} - #{$imageSmallSize});
                     }
                 }
@@ -87,7 +86,7 @@ $block: '.#{variables.$ns}placeholder-container';
                 &_m {
                     min-height: 180px;
 
-                    #{$class}_content_html {
+                    #{$block}_content_html {
                         width: calc(100% - #{$htmlMargin} - #{$imageMediumSize});
                     }
                 }
@@ -95,19 +94,19 @@ $block: '.#{variables.$ns}placeholder-container';
                 &_l {
                     min-height: 320px;
 
-                    #{$class}_content_html {
+                    #{$block}_content_html {
                         width: calc(100% - #{$htmlMargin} - #{$imageLargeSize});
                     }
                 }
 
                 &_promo {
-                    #{$class}content_html {
+                    #{$block}content_html {
                         width: calc(100% - #{$htmlMargin} - #{$imagePromoSize});
                     }
                 }
             }
 
-            #{$class}__content {
+            #{$block}__content {
                 margin-left: 40px;
             }
         }
@@ -115,18 +114,18 @@ $block: '.#{variables.$ns}placeholder-container';
         &_column {
             flex-direction: column;
 
-            #{$class}__content {
+            #{$block}__content {
                 margin-top: 20px;
                 width: 340px;
                 align-items: center;
                 text-align: center;
             }
 
-            &#{$class}_size {
+            &#{$block}_size {
                 &_promo {
                     padding: 20px;
 
-                    #{$class}__content {
+                    #{$block}__content {
                         width: 100%;
                     }
                 }
