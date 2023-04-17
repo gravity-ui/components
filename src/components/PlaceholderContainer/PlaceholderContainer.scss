@@ -1,7 +1,7 @@
 @use '../variables';
 @use '@gravity-ui/uikit/styles/mixins';
 
-$htmlMargin: 40px;
+$contentMargin: 40px;
 
 $imageSmallSize: 100px;
 $imageMediumSize: 150px;
@@ -74,40 +74,23 @@ $block: '.#{variables.$ns}placeholder-container';
                 }
             }
 
-            &#{$block}_size {
+            #{$block}__content {
+                margin-left: 40px;
+
                 &_s {
                     min-height: 130px;
-
-                    #{$block}_content_html {
-                        width: calc(100% - #{$htmlMargin} - #{$imageSmallSize});
-                    }
+                    width: calc(100% - #{$contentMargin} - #{$imageSmallSize});
                 }
 
                 &_m {
                     min-height: 180px;
-
-                    #{$block}_content_html {
-                        width: calc(100% - #{$htmlMargin} - #{$imageMediumSize});
-                    }
+                    width: calc(100% - #{$contentMargin} - #{$imageMediumSize});
                 }
 
                 &_l {
                     min-height: 320px;
-
-                    #{$block}_content_html {
-                        width: calc(100% - #{$htmlMargin} - #{$imageLargeSize});
-                    }
+                    width: calc(100% - #{$contentMargin} - #{$imageLargeSize});
                 }
-
-                &_promo {
-                    #{$block}content_html {
-                        width: calc(100% - #{$htmlMargin} - #{$imagePromoSize});
-                    }
-                }
-            }
-
-            #{$block}__content {
-                margin-left: 40px;
             }
         }
 

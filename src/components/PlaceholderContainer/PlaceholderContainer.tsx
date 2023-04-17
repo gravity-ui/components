@@ -22,6 +22,8 @@ const Align = {
     Center: 'center',
 } as const;
 
+type Size = 's' | 'm' | 'l' | 'promo';
+
 type PlaceholderContainerImageNodeProps = NonNullable<React.ReactNode>;
 
 type PlaceholderContainerImageSettingsProps = {
@@ -36,11 +38,13 @@ interface PlaceholderContainerGeneralProps {
     html?: React.ReactNode;
     action?: Action | Action[];
     className?: string;
+    contentSize?: Size;
+    contentClassName?: string;
     image: PlaceholderContainerImageNodeProps | PlaceholderContainerImageSettingsProps;
 }
 
 interface PlaceholderContainerDefaultProps {
-    size: 's' | 'm' | 'l' | 'promo';
+    size: Size;
     direction: (typeof Direction)[keyof typeof Direction];
     align: (typeof Align)[keyof typeof Align];
 }
@@ -98,8 +102,10 @@ export class PlaceholderContainer extends React.Component<
     }
 
     private renderContent() {
-        const content = this.props.html ? (
-            this.props.html
+        const {html, contentSize, contentClassName} = this.props;
+
+        const content = html ? (
+            html
         ) : (
             <>
                 {this.renderTitle()}
@@ -107,9 +113,9 @@ export class PlaceholderContainer extends React.Component<
             </>
         );
 
-        const contentMod = {html: Boolean(this.props.html)};
+        const contentMod = {[contentSize as string]: Boolean(contentSize)};
         return (
-            <div className={b('content', contentMod)}>
+            <div className={b('content', contentMod, contentClassName)}>
                 {content}
                 {this.renderAction()}
             </div>

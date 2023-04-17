@@ -26,6 +26,18 @@ const ImageComponentTest = () => {
     );
 };
 
+const HtmlComponentTest = () => {
+    return (
+        <div>
+            <h3>There is any custom title here</h3>
+            <p>
+                You can add <strong>here</strong> any long text with custom html and use custom
+                content size for displaying very long texts.
+            </p>
+        </div>
+    );
+};
+
 WithSingleAction.args = {
     title: 'Container with one button & image component',
     direction: 'row',
@@ -35,6 +47,25 @@ WithSingleAction.args = {
         handler: () => alert('Click by main button'),
     },
     image: <ImageComponentTest />,
+};
+
+const WithSingleActionHtmlTemplate: Story<PlaceholderContainerProps> = (args) => (
+    <PlaceholderContainer {...args} />
+);
+
+export const WithSingleHtmlAction = WithSingleActionHtmlTemplate.bind({});
+WithSingleHtmlAction.args = {
+    title: 'Container with one button & image component',
+    direction: 'row',
+    action: {
+        text: 'Main button',
+        view: 'normal',
+        handler: () => alert('Click by main button'),
+    },
+    image: <ImageComponentTest />,
+    html: <HtmlComponentTest />,
+    contentSize: 'm',
+    contentClassName: 'custom-classname',
 };
 
 const WithActionArrayTemplate: Story<PlaceholderContainerProps> = (args) => (
