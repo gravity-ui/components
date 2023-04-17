@@ -13,11 +13,6 @@ function getItemIdDefault<T>(item: T) {
     return `${item}`;
 }
 
-export const itemSelectorDefaultProps = {
-    hideSelected: true,
-    selectorTitle: '',
-};
-
 export interface ItemSelectorProps<T> {
     selectorTitle?: string;
 
@@ -34,10 +29,11 @@ export interface ItemSelectorProps<T> {
     getItemId?: (item: T) => string;
 }
 
-export class ItemSelector<T> extends React.Component<
-    ItemSelectorProps<T> & typeof itemSelectorDefaultProps
-> {
-    static defaultProps = itemSelectorDefaultProps;
+export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
+    static defaultProps = {
+        hideSelected: true,
+        selectorTitle: '',
+    };
     renderItemTitle = (item: T) => {
         const {renderItemValue, getItemId = getItemIdDefault} = this.props;
         if (renderItemValue) {
