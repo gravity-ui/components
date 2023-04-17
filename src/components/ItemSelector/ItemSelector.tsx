@@ -22,20 +22,21 @@ export interface ItemSelectorProps<T> {
     hideSelectAllButton?: boolean;
 
     onUpdate: (value: string[]) => void;
+    getItemId: (item: T) => string;
 
     renderItemValue?: (item: T) => React.ReactNode;
     renderItem?: ListProps<T>['renderItem'];
     filterItem?: ListProps<T>['filterItem'];
-    getItemId?: (item: T) => string;
 }
 
 export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
     static defaultProps = {
         hideSelected: true,
         selectorTitle: '',
+        getItemId: getItemIdDefault,
     };
     renderItemTitle = (item: T) => {
-        const {renderItemValue, getItemId = getItemIdDefault} = this.props;
+        const {renderItemValue, getItemId} = this.props;
         if (renderItemValue) {
             return renderItemValue(item);
         }
@@ -55,7 +56,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         </div>
     );
     filterItem = (filter: string) => (item: T) => {
-        const {getItemId = getItemIdDefault} = this.props;
+        const {getItemId} = this.props;
         return getItemId(item).includes(filter);
     };
     renderValueItem = (item: T, active: boolean) => (
@@ -72,7 +73,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         </div>
     );
     getActualItems() {
-        const {items, value, hideSelected, getItemId = getItemIdDefault} = this.props;
+        const {items, value, hideSelected, getItemId} = this.props;
         const actualItems = [];
         const selectedItems = new Array(value.length);
         const usedItems = new Map(value.map((id, index) => [id, index]));
@@ -88,7 +89,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         return [actualItems, selectedItems];
     }
     onAddItem = (item: T) => {
-        const {getItemId = getItemIdDefault, value} = this.props;
+        const {getItemId, value} = this.props;
         const itemId = getItemId(item);
         const usedItems = new Set(value);
         const newValue = usedItems.has(itemId) ? value : [...value, itemId];
@@ -97,7 +98,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         }, 0);
     };
     onRemoveItem = (item: T) => {
-        const {value, getItemId = getItemIdDefault} = this.props;
+        const {value, getItemId} = this.props;
         const itemId = getItemId(item);
         const newValue = value.filter((id) => id !== itemId);
         setTimeout(() => {
@@ -108,7 +109,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         this.onUpdate([]);
     };
     onSelectAll = () => {
-        const {items, getItemId = getItemIdDefault} = this.props;
+        const {items, getItemId} = this.props;
         const value = items.map(getItemId);
         this.onUpdate(value);
     };
