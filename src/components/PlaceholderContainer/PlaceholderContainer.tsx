@@ -40,7 +40,6 @@ interface PlaceholderContainerGeneralProps {
 }
 
 interface PlaceholderContainerDefaultProps {
-    entity: string;
     size: 's' | 'm' | 'l' | 'promo';
     direction: (typeof Direction)[keyof typeof Direction];
     align: (typeof Align)[keyof typeof Align];
@@ -65,7 +64,6 @@ export class PlaceholderContainer extends React.Component<
     static Align = Align;
 
     static defaultProps: PlaceholderContainerDefaultProps = {
-        entity: 'generic/generic',
         size: 'l',
         direction: Direction.Row,
         align: Align.Center,
