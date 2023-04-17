@@ -1,4 +1,4 @@
-@use '@gravity-ui/uikit/styles/mixins';
+@use '~@gravity-ui/uikit/styles/mixins';
 @use '../variables';
 
 $block: '.#{variables.$ns}item-selector';
@@ -30,7 +30,7 @@ $block: '.#{variables.$ns}item-selector';
     }
 
     &__list-title {
-        @include text-accent;
+        @include mixins.text-accent;
     }
 
     &__item {
