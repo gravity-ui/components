@@ -1,11 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Meta, Story} from '@storybook/react';
-import {ItemSelector} from '../ItemSelector';
-
-export default {
-    title: 'Components/AdaptiveTabs',
-    component: ItemSelector,
-} as Meta;
+import {useArgs} from '@storybook/client-api';
+import {ItemSelector, ItemSelectorProps} from '../ItemSelector';
 
 const items = [
     {
@@ -46,14 +42,21 @@ const items = [
     },
 ];
 
-const DefaultTemplate: Story = (args) => {
-    const [value, setValue] = useState<string[]>([]);
+export default {
+    title: 'Components/ItemSelector',
+    component: ItemSelector,
+    args: {
+        items,
+        value: [],
+    },
+} as Meta;
+
+const DefaultTemplate: Story<ItemSelectorProps<{name: string; type: string}>> = (args) => {
+    const [, setStoryArgs] = useArgs();
     return (
         <ItemSelector
             {...args}
-            items={items}
-            value={value}
-            onUpdate={(val) => setValue(val)}
+            onUpdate={(value) => setStoryArgs({value})}
             getItemId={(item) => item.name}
         />
     );
