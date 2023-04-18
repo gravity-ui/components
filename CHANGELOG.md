@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/gravity-ui/components/compare/v1.3.0...v1.3.1) (2023-04-18)
+
+
+### Bug Fixes
+
+* **ItemSelector:** fix import mixins from uikit ([#35](https://github.com/gravity-ui/components/issues/35)) ([6273364](https://github.com/gravity-ui/components/commit/6273364abb75c154b86a4254ab04e5d39f10a229))
+
 ## [1.3.0](https://github.com/gravity-ui/components/compare/v1.2.0...v1.3.0) (2023-04-18)
 
 
