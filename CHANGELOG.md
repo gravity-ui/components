@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/gravity-ui/components/compare/v1.3.1...v1.3.2) (2023-04-18)
+
+
+### Bug Fixes
+
+* **ItemSelector:** fix import component ([#37](https://github.com/gravity-ui/components/issues/37)) ([63403d3](https://github.com/gravity-ui/components/commit/63403d3b03b6d33378d4e49802a8199b7383eaee))
+
 ## [1.3.1](https://github.com/gravity-ui/components/compare/v1.3.0...v1.3.1) (2023-04-18)
 
 
