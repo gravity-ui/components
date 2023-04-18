@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/gravity-ui/components/compare/v1.2.0...v1.3.0) (2023-04-18)
+
+
+### Features
+
+* add ItemSelector component ([#33](https://github.com/gravity-ui/components/issues/33)) ([55c33ce](https://github.com/gravity-ui/components/commit/55c33ceed98d277483eddf66bc04b40913bfafdf))
+
 ## [1.2.0](https://github.com/gravity-ui/components/compare/v1.1.3...v1.2.0) (2023-03-30)
 
 
