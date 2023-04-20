@@ -1,0 +1,38 @@
+@use '../../variables';
+
+.#{variables.$ns}actions-panel-collapse {
+    $minSize: 32px;
+
+    flex-shrink: 2;
+    min-width: $minSize;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 4px;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    &__button-action-wrapper {
+        margin-right: 4px;
+
+        &_invisible {
+            visibility: hidden;
+            pointer-events: none;
+        }
+    }
+
+    &__menu-placeholder {
+        flex-shrink: 0;
+        width: $minSize;
+        height: $minSize;
+    }
+
+    &__menu-wrapper {
+        position: absolute;
+    }
+}

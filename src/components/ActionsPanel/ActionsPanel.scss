@@ -1,0 +1,21 @@
+@use '../variables';
+
+.#{variables.$ns}actions-panel {
+    background-color: var(--yc-color-base-special);
+    min-width: 200px;
+    height: 52px;
+    padding: 4px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+
+    &__note-wrapper {
+        min-width: 100px;
+        margin-right: 4px;
+    }
+
+    &__button-close-wrapper {
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+}
