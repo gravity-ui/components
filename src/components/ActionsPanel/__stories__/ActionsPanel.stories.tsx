@@ -41,6 +41,9 @@ const actions: ActionsPanelProps['actions'] = [
             return kind === 'button' ? [<Icon key="icon" data={PencilToSquare} />, text] : text;
         },
         handler: () => {},
+        buttonProps: {
+            view: 'normal-contrast',
+        },
     },
     {
         id: 'id5',

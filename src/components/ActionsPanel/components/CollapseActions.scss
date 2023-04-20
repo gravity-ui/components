@@ -9,16 +9,18 @@
     position: relative;
     display: flex;
     align-items: center;
+    height: 100%;
     margin-right: 4px;
 
     &__container {
         display: flex;
         align-items: center;
         overflow: hidden;
+        height: 100%;
     }
 
     &__button-action-wrapper {
-        margin-right: 4px;
+        margin: 0 2px;
 
         &_invisible {
             visibility: hidden;

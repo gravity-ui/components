@@ -47,7 +47,12 @@ export const CollapseActions = ({actions}: Props) => {
                     const invisible = !visibilityMap[id];
                     return (
                         <div className={b('button-action-wrapper', {invisible})} {...attr} key={id}>
-                            <Button view="flat-contrast" size="m" onClick={action.handler}>
+                            <Button
+                                view="flat-contrast"
+                                size="m"
+                                onClick={action.handler}
+                                {...action.buttonProps}
+                            >
                                 {action.renderContent('button')}
                             </Button>
                         </div>
