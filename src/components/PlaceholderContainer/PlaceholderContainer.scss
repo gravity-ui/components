@@ -16,6 +16,18 @@ $block: '.#{variables.$ns}placeholder-container';
     align-items: center;
     padding: variables.$bigOffset;
 
+    &_s {
+        max-width: calc(100% - #{$contentMargin} - #{$imageSmallSize});
+    }
+
+    &_m {
+        max-width: calc(100% - #{$contentMargin} - #{$imageMediumSize});
+    }
+
+    &_l {
+        max-width: calc(100% - #{$contentMargin} - #{$imageLargeSize});
+    }
+
     &__image {
         flex-shrink: 0;
 
@@ -79,17 +91,14 @@ $block: '.#{variables.$ns}placeholder-container';
 
                 &_s {
                     min-height: 130px;
-                    width: calc(100% - #{$contentMargin} - #{$imageSmallSize});
                 }
 
                 &_m {
                     min-height: 180px;
-                    width: calc(100% - #{$contentMargin} - #{$imageMediumSize});
                 }
 
                 &_l {
                     min-height: 320px;
-                    width: calc(100% - #{$contentMargin} - #{$imageLargeSize});
                 }
             }
         }

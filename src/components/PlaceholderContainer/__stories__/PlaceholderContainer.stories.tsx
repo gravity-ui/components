@@ -26,14 +26,26 @@ const ImageComponentTest = () => {
     );
 };
 
-const HtmlComponentTest = () => {
+const ContentComponentTest = () => {
     return (
-        <div>
-            <h3>There is any custom title here</h3>
-            <p>
-                You can add <strong>here</strong> any long text with custom html and use custom
-                content size for displaying very long texts.
-            </p>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                flexShrink: 0,
+                maxWidth: '600px',
+                marginLeft: '40px',
+            }}
+        >
+            <div>
+                <h3>There is any custom title here</h3>
+                <p>
+                    You can add <strong>here</strong> any long text with custom content and use
+                    custom content size for displaying very long texts.
+                </p>
+            </div>
         </div>
     );
 };
@@ -49,12 +61,12 @@ WithSingleAction.args = {
     image: <ImageComponentTest />,
 };
 
-const WithSingleActionHtmlTemplate: Story<PlaceholderContainerProps> = (args) => (
+const WithSingleActionCustomContentTemplate: Story<PlaceholderContainerProps> = (args) => (
     <PlaceholderContainer {...args} />
 );
 
-export const WithSingleHtmlAction = WithSingleActionHtmlTemplate.bind({});
-WithSingleHtmlAction.args = {
+export const WithSingleCustomContent = WithSingleActionCustomContentTemplate.bind({});
+WithSingleCustomContent.args = {
     title: 'Container with one button & image component',
     direction: 'row',
     action: {
@@ -63,9 +75,8 @@ WithSingleHtmlAction.args = {
         handler: () => alert('Click by main button'),
     },
     image: <ImageComponentTest />,
-    html: <HtmlComponentTest />,
-    contentSize: 'm',
-    contentClassName: 'custom-classname',
+    renderContent: () => <ContentComponentTest />,
+    size: 'm',
 };
 
 const WithActionArrayTemplate: Story<PlaceholderContainerProps> = (args) => (

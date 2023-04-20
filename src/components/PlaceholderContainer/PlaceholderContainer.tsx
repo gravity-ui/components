@@ -35,11 +35,9 @@ type PlaceholderContainerImageSettingsProps = {
 interface PlaceholderContainerGeneralProps {
     title?: string;
     description?: React.ReactNode;
-    html?: React.ReactNode;
+    renderContent?: () => React.ReactNode;
     action?: Action | Action[];
     className?: string;
-    contentSize?: Size;
-    contentClassName?: string;
     image: PlaceholderContainerImageNodeProps | PlaceholderContainerImageSettingsProps;
 }
 
@@ -76,11 +74,14 @@ export class PlaceholderContainer extends React.Component<
     render() {
         const {direction, align, size} = this.props;
         const className: string = this.props.className || b();
+        const content = this.props.renderContent
+            ? this.props.renderContent()
+            : this.renderContent();
 
         return (
             <div className={b({direction, align, size}, [className])}>
                 <div className={b('image')}>{this.renderImage()}</div>
-                {this.renderContent()}
+                {content}
             </div>
         );
     }
@@ -102,21 +103,12 @@ export class PlaceholderContainer extends React.Component<
     }
 
     private renderContent() {
-        const {html, contentSize, contentClassName} = this.props;
-
-        const content = html ? (
-            html
-        ) : (
-            <>
+        const {size} = this.props;
+        const contentMod = {[size as string]: Boolean(size)};
+        return (
+            <div className={b('content', contentMod)}>
                 {this.renderTitle()}
                 {this.renderDescription()}
-            </>
-        );
-
-        const contentMod = {[contentSize as string]: Boolean(contentSize)};
-        return (
-            <div className={b('content', contentMod, contentClassName)}>
-                {content}
                 {this.renderAction()}
             </div>
         );
