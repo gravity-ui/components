@@ -2,7 +2,7 @@ import React from 'react';
 import {ActionItem} from '../types';
 
 export const OBSERVER_TARGET_ATTR = 'data-observer-id';
-const GAP = 4;
+const GAP = 8;
 
 type VisibilityMap = Record<string, boolean>;
 

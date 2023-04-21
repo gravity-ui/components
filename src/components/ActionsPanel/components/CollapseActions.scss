@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     height: 100%;
-    margin-right: 4px;
+    margin-right: 8px;
 
     &__container {
         display: flex;
@@ -20,7 +20,7 @@
     }
 
     &__button-action-wrapper {
-        margin: 0 2px;
+        margin: 0 4px;
 
         &_invisible {
             visibility: hidden;
