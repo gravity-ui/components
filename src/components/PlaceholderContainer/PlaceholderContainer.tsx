@@ -74,14 +74,11 @@ export class PlaceholderContainer extends React.Component<
     render() {
         const {direction, align, size} = this.props;
         const className: string = this.props.className || b();
-        const content = this.props.renderContent
-            ? this.props.renderContent()
-            : this.renderContent();
 
         return (
             <div className={b({direction, align, size}, [className])}>
                 <div className={b('image')}>{this.renderImage()}</div>
-                {content}
+                {this.renderBody()}
             </div>
         );
     }
@@ -102,13 +99,22 @@ export class PlaceholderContainer extends React.Component<
         return this.props.image;
     }
 
-    private renderContent() {
+    private renderBody() {
         const {size} = this.props;
         const contentMod = {[size as string]: Boolean(size)};
-        return (
-            <div className={b('content', contentMod)}>
+
+        const content = this.props.renderContent ? (
+            this.props.renderContent()
+        ) : (
+            <>
                 {this.renderTitle()}
                 {this.renderDescription()}
+            </>
+        );
+
+        return (
+            <div className={b('content', contentMod)}>
+                {content}
                 {this.renderAction()}
             </div>
         );
