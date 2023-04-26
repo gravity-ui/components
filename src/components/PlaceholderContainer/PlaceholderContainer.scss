@@ -38,7 +38,7 @@ $block: '.#{variables.$ns}placeholder-container';
     }
 }
 
-@mixin container-column-sizes($bodyWidth, $imageSize /*, $contentHeight, $contentOffset*/) {
+@mixin container-column-sizes($bodyWidth, $imageSize) {
     #{$block}__body {
         max-width: $bodyWidth;
     }
