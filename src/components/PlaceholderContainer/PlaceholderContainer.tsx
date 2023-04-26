@@ -10,7 +10,7 @@ const ImageSize = {
     s: 100,
     m: 150,
     l: 230,
-    promo: 200,
+    promo: 230,
 };
 
 const Direction = {
@@ -77,8 +77,10 @@ export class PlaceholderContainer extends React.Component<
 
         return (
             <div className={b({direction, align, size}, [className])}>
-                <div className={b('image')}>{this.renderImage()}</div>
-                {this.renderBody()}
+                <div className={b('body')}>
+                    <div className={b('image', {size})}>{this.renderImage()}</div>
+                    {this.renderContent()}
+                </div>
             </div>
         );
     }
@@ -99,10 +101,8 @@ export class PlaceholderContainer extends React.Component<
         return this.props.image;
     }
 
-    private renderBody() {
+    private renderContent() {
         const {size} = this.props;
-        const contentMod = {[size as string]: Boolean(size)};
-
         const content = this.props.renderContent ? (
             this.props.renderContent()
         ) : (
@@ -113,7 +113,7 @@ export class PlaceholderContainer extends React.Component<
         );
 
         return (
-            <div className={b('content', contentMod)}>
+            <div className={b('content', {size})}>
                 {content}
                 {this.renderAction()}
             </div>

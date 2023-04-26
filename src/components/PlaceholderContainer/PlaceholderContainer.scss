@@ -1,31 +1,100 @@
 @use '../variables';
 @use '@gravity-ui/uikit/styles/mixins';
 
-$contentMargin: 40px;
-
 $imageSmallSize: 100px;
 $imageMediumSize: 150px;
 $imageLargeSize: 230px;
-$imagePromoSize: 200px;
+
+$contentHeightSmallSize: 130px;
+$contentHeightMediumSize: 180px;
+$contentHeightLargeSize: 320px;
+
+$containerSmallRowSize: 320px;
+$containerMediumRowSize: 430px;
+$containerLargeRowSize: 600px;
+
+$containerSmallColSize: 320px;
+$containerMediumColSize: 320px;
+$containerLargeColSize: 430px;
 
 $block: '.#{variables.$ns}placeholder-container';
+
+@mixin container-row-sizes($bodyWidth, $imageSize, $contentHeight, $contentOffset) {
+    #{$block}__body {
+        max-width: $bodyWidth;
+    }
+
+    #{$block}__image {
+        width: $imageSize;
+
+        & > * {
+            max-width: $imageSize;
+        }
+    }
+
+    #{$block}__content {
+        margin-left: $contentOffset;
+        min-height: $contentHeight;
+    }
+}
+
+@mixin container-column-sizes($bodyWidth, $imageSize /*, $contentHeight, $contentOffset*/) {
+    #{$block}__body {
+        max-width: $bodyWidth;
+    }
+
+    #{$block}__image {
+        max-height: $imageSize;
+
+        & > * {
+            max-height: $imageSize;
+        }
+    }
+}
 
 #{$block} {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    padding: variables.$bigOffset;
+    padding: variables.$mediumOffset;
 
-    &_s {
-        max-width: calc(100% - #{$contentMargin} - #{$imageSmallSize});
+    &#{$block}_align {
+        &_left {
+            justify-content: flex-start;
+        }
+
+        &_center {
+            justify-content: center;
+        }
     }
 
-    &_m {
-        max-width: calc(100% - #{$contentMargin} - #{$imageMediumSize});
+    &__body {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
     }
 
-    &_l {
-        max-width: calc(100% - #{$contentMargin} - #{$imageLargeSize});
+    &_size_s {
+        padding: variables.$normalOffset;
+
+        #{$block}__description {
+            margin-top: variables.$nanoOffset;
+        }
+    }
+
+    &_size_m {
+        padding: variables.$mediumOffset;
+
+        #{$block}__description {
+            margin-top: variables.$microOffset;
+        }
+    }
+
+    &_size_promo,
+    &_size_l {
+        #{$block}__description {
+            margin-top: variables.$smallOffset;
+        }
     }
 
     &__image {
@@ -41,9 +110,7 @@ $block: '.#{variables.$ns}placeholder-container';
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        flex-shrink: 0;
-
-        width: 260px;
+        flex-grow: 1;
     }
 
     &__title {
@@ -64,63 +131,85 @@ $block: '.#{variables.$ns}placeholder-container';
         }
     }
 
-    &__description {
-        margin-top: variables.$smallOffset;
-    }
-
     &__action {
         margin-top: variables.$normalOffset;
         display: flex;
         flex-direction: row;
     }
 
-    &_direction {
-        &_row {
-            &#{$block}_align {
-                &_left {
-                    justify-content: flex-start;
-                }
-
-                &_center {
-                    justify-content: center;
-                }
-            }
-
-            #{$block}__content {
-                margin-left: variables.$bigOffset;
-
-                &_s {
-                    min-height: 130px;
-                }
-
-                &_m {
-                    min-height: 180px;
-                }
-
-                &_l {
-                    min-height: 320px;
-                }
-            }
+    &_direction_row {
+        &#{$block}_size_s {
+            @include container-row-sizes(
+                $containerSmallRowSize,
+                $imageSmallSize,
+                $contentHeightSmallSize,
+                variables.$normalOffset
+            );
         }
 
-        &_column {
+        &#{$block}_size_m {
+            @include container-row-sizes(
+                $containerMediumRowSize,
+                $imageMediumSize,
+                $contentHeightMediumSize,
+                variables.$mediumOffset
+            );
+        }
+
+        &#{$block}_size_l {
+            @include container-row-sizes(
+                $containerLargeRowSize,
+                $imageLargeSize,
+                $contentHeightLargeSize,
+                variables.$bigOffset
+            );
+        }
+
+        &#{$block}_size_promo {
+            @include container-row-sizes(
+                $containerLargeRowSize,
+                $imageLargeSize,
+                none,
+                variables.$bigOffset
+            );
+        }
+    }
+
+    &_direction_column {
+        #{$block}__body {
             flex-direction: column;
+        }
 
-            #{$block}__content {
-                margin-top: variables.$normalOffset;
-                width: 340px;
-                align-items: center;
-                text-align: center;
-            }
+        #{$block}__content {
+            margin-top: variables.$normalOffset;
+            align-items: center;
+            text-align: center;
+            flex-shrink: 0;
+        }
 
-            &#{$block}_size {
-                &_promo {
-                    padding: variables.$normalOffset;
+        #{$block}__image {
+            flex-shrink: 0;
+        }
 
-                    #{$block}__content {
-                        width: 100%;
-                    }
-                }
+        &#{$block}_size_s {
+            @include container-column-sizes($containerSmallColSize, $imageSmallSize);
+        }
+
+        &#{$block}_size_m {
+            @include container-column-sizes($containerMediumColSize, $imageMediumSize);
+        }
+
+        &#{$block}_size_l {
+            @include container-column-sizes($containerLargeColSize, $imageLargeSize);
+        }
+
+        &#{$block}_size_promo {
+            padding: variables.$normalOffset;
+
+            @include container-column-sizes($containerLargeColSize, $imageLargeSize);
+
+            #{$block}__body {
+                width: 100%;
             }
         }
     }
