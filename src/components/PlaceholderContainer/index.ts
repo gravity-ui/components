@@ -1,3 +1,6 @@
 export * from './PlaceholderContainer';
 export * from './types';
-export * from './constants';
+export {
+    Direction as PlaceholderContainerDirection,
+    Align as PlaceholderContainerAlign,
+} from './constants';
