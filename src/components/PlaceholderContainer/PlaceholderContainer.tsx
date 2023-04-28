@@ -2,52 +2,16 @@ import React from 'react';
 
 import {block} from '../utils/cn';
 
-import {Action, PlaceholderContainerAction} from './PlaceholderContainerAction';
-import {componentClassName} from './constants';
+import {PlaceholderContainerAction} from './PlaceholderContainerAction';
+import {componentClassName, Direction, Align} from './constants';
+import {
+    PlaceholderContainerDefaultProps,
+    PlaceholderContainerState,
+    PlaceholderContainerInnerProps,
+    PlaceholderContainerImageSettingsProps,
+} from './types';
 
 import './PlaceholderContainer.scss';
-
-const Direction = {
-    Row: 'row',
-    Column: 'column',
-} as const;
-const Align = {
-    Left: 'left',
-    Center: 'center',
-} as const;
-
-type Size = 's' | 'm' | 'l' | 'promo';
-
-type PlaceholderContainerImageNodeProps = NonNullable<React.ReactNode>;
-
-type PlaceholderContainerImageSettingsProps = {
-    url: string;
-    alt?: string;
-};
-
-interface PlaceholderContainerGeneralProps {
-    title?: string;
-    description?: React.ReactNode;
-    renderContent?: () => React.ReactNode;
-    action?: Action | Action[];
-    className?: string;
-    image: PlaceholderContainerImageNodeProps | PlaceholderContainerImageSettingsProps;
-}
-
-interface PlaceholderContainerDefaultProps {
-    size: Size;
-    direction: (typeof Direction)[keyof typeof Direction];
-    align: (typeof Align)[keyof typeof Align];
-}
-
-type PlaceholderContainerInnerProps = PlaceholderContainerGeneralProps &
-    PlaceholderContainerDefaultProps;
-
-export interface PlaceholderContainerProps
-    extends PlaceholderContainerGeneralProps,
-        Partial<PlaceholderContainerDefaultProps> {}
-
-interface PlaceholderContainerState {}
 
 const b = block(componentClassName);
 

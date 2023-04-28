@@ -1,6 +1,6 @@
 import React from 'react';
 import block from 'bem-cn-lite';
-import {PlaceholderContainer, PlaceholderContainerProps} from '../PlaceholderContainer';
+import {PlaceholderContainer, PlaceholderContainerProps} from '../index';
 import './PlaceholderContainerShowcase.scss';
 import {Action} from '../PlaceholderContainerAction';
 
