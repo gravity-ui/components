@@ -153,7 +153,7 @@ export class PlaceholderContainer extends React.Component<
             }
 
             return (
-                <div className={b('action')}>
+                <div className={b('actions')}>
                     {action.map((actionItem) => (
                         <PlaceholderContainerAction key={actionItem.text} action={actionItem} />
                     ))}
@@ -162,7 +162,7 @@ export class PlaceholderContainer extends React.Component<
         }
 
         return (
-            <div className={b('action')}>
+            <div className={b('actions')}>
                 <PlaceholderContainerAction action={action} />
             </div>
         );

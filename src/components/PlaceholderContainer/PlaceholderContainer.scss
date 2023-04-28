@@ -131,7 +131,7 @@ $block: '.#{variables.$ns}placeholder-container';
         }
     }
 
-    &__action {
+    &__actions {
         margin-top: variables.$normalOffset;
         display: flex;
         flex-direction: row;
