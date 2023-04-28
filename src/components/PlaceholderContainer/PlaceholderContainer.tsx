@@ -3,6 +3,7 @@ import React from 'react';
 import {block} from '../utils/cn';
 
 import {Action, PlaceholderContainerAction} from './PlaceholderContainerAction';
+import {componentClassName} from './constants';
 
 import './PlaceholderContainer.scss';
 
@@ -48,7 +49,7 @@ export interface PlaceholderContainerProps
 
 interface PlaceholderContainerState {}
 
-const b = block('placeholder-container');
+const b = block(componentClassName);
 
 export class PlaceholderContainer extends React.Component<
     PlaceholderContainerInnerProps,

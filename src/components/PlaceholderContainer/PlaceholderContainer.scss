@@ -213,4 +213,12 @@ $block: '.#{variables.$ns}placeholder-container';
             }
         }
     }
+
+    &__action {
+        margin-right: variables.$normalOffset;
+    }
+
+    &__action:last-child {
+        margin-right: 0;
+    }
 }

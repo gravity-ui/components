@@ -2,11 +2,13 @@ import React from 'react';
 
 import {Button, ButtonSize, ButtonView} from '@gravity-ui/uikit';
 
-import {block} from '../../utils/cn';
+import {block} from '../utils/cn';
 
-import './PlaceholderContainerAction.scss';
+import {componentClassName} from './constants';
 
-const b = block('placeholder-container-action');
+import './PlaceholderContainer.scss';
+
+const b = block(componentClassName);
 
 export interface Action {
     text: string;
@@ -26,7 +28,7 @@ export const PlaceholderContainerAction = ({action}: PlaceholderContainerActionP
     const {text, handler, loading, disabled, view = 'normal', size = 'm', href} = action;
 
     return (
-        <div className={b('button')}>
+        <div className={b('action')}>
             <Button
                 className={b('action-btn')}
                 view={view}
