@@ -6,13 +6,6 @@ import {Action, PlaceholderContainerAction} from './PlaceholderContainerAction';
 
 import './PlaceholderContainer.scss';
 
-const ImageSize = {
-    s: 100,
-    m: 150,
-    l: 230,
-    promo: 230,
-};
-
 const Direction = {
     Row: 'row',
     Column: 'column',
@@ -29,7 +22,6 @@ type PlaceholderContainerImageNodeProps = NonNullable<React.ReactNode>;
 type PlaceholderContainerImageSettingsProps = {
     url: string;
     alt?: string;
-    size?: number;
 };
 
 interface PlaceholderContainerGeneralProps {
@@ -88,14 +80,7 @@ export class PlaceholderContainer extends React.Component<
     private renderImage(): NonNullable<React.ReactNode> {
         if (typeof this.props.image === 'object' && 'url' in this.props.image) {
             const image: PlaceholderContainerImageSettingsProps = this.props.image;
-            return (
-                <img
-                    src={image.url}
-                    alt={image.alt || ''}
-                    width={image.size || ImageSize.l}
-                    height={image.size || ImageSize.l}
-                />
-            );
+            return <img src={image.url} alt={image.alt || ''} />;
         }
 
         return this.props.image;
