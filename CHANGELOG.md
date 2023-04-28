@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/gravity-ui/components/compare/v1.3.2...v1.4.0) (2023-04-28)
+
+
+### Features
+
+* **PlaceholderContainer:** add placeholder container component ([#31](https://github.com/gravity-ui/components/issues/31)) ([018095e](https://github.com/gravity-ui/components/commit/018095efa82fa481e1215521d4405b908da0375b))
+
 ## [1.3.2](https://github.com/gravity-ui/components/compare/v1.3.1...v1.3.2) (2023-04-18)
 
 
