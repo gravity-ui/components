@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/gravity-ui/components/compare/v1.4.0...v1.5.0) (2023-05-02)
+
+
+### Features
+
+* **PlaceholderContainer:** add custom action ([#43](https://github.com/gravity-ui/components/issues/43)) ([efb48aa](https://github.com/gravity-ui/components/commit/efb48aaba97bc8602ca7f76e75316e2e9de55550))
+
 ## [1.4.0](https://github.com/gravity-ui/components/compare/v1.3.2...v1.4.0) (2023-04-28)
 
 
