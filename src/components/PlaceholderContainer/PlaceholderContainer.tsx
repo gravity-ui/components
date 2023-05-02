@@ -91,7 +91,11 @@ export class PlaceholderContainer extends React.Component<
     }
 
     private renderAction() {
-        const {action} = this.props;
+        const {action, renderAction} = this.props;
+
+        if (renderAction) {
+            return renderAction();
+        }
 
         if (!action) {
             return null;
