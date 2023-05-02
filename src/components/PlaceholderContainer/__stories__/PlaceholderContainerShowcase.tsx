@@ -1,5 +1,7 @@
 import React from 'react';
 import block from 'bem-cn-lite';
+import {ChevronDown} from '@gravity-ui/icons';
+import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
 import {PlaceholderContainer, PlaceholderContainerProps} from '../index';
 import './PlaceholderContainerShowcase.scss';
 import {Action} from '../PlaceholderContainerAction';
@@ -26,6 +28,27 @@ const ContentComponentTest = () => {
                 You can add <strong>here</strong> any long text with custom content and use custom
                 content size for displaying very long texts.
             </p>
+        </div>
+    );
+};
+
+const ActionComponentTest = () => {
+    return (
+        <div className={b('custom-action')}>
+            <DropdownMenu
+                defaultSwitcherProps={{view: 'flat-secondary'}}
+                items={[
+                    {text: 'text 1', action: () => {}},
+                    {text: 'text 2', action: () => {}},
+                ]}
+                onSwitcherClick={(e) => e?.stopPropagation()}
+                switcher={
+                    <Button>
+                        Text
+                        <Icon data={ChevronDown} size={16} />
+                    </Button>
+                }
+            />
         </div>
     );
 };
@@ -63,6 +86,11 @@ const actionsProps = {
 const placeholderContainerCustomRenderedProps: PlaceholderContainerProps = {
     ...placeholderContainerProps,
     renderContent: () => <ContentComponentTest />,
+};
+
+const placeholderContainerCustomActionProps: PlaceholderContainerProps = {
+    ...placeholderContainerProps,
+    renderAction: () => <ActionComponentTest />,
 };
 
 const descriptionProps = {
@@ -176,6 +204,16 @@ export const PlaceholderContainerShowcase: React.FC = () => {
                         direction="row"
                         size="s"
                         title="Size s"
+                    />
+                </div>
+                <div className={b('section')}>
+                    <h3 className={b('sub-title')}>Custom action:</h3>
+                    <PlaceholderContainer
+                        {...placeholderContainerCustomActionProps}
+                        {...descriptionProps}
+                        direction="row"
+                        size="m"
+                        title="Size m"
                     />
                 </div>
             </div>

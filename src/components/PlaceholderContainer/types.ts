@@ -16,6 +16,7 @@ interface PlaceholderContainerGeneralProps {
     description?: React.ReactNode;
     renderContent?: () => React.ReactNode;
     action?: Action | Action[];
+    renderAction?: () => React.ReactNode;
     className?: string;
     image: PlaceholderContainerImageNodeProps | PlaceholderContainerImageSettingsProps;
 }
