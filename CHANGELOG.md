@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/gravity-ui/components/compare/v1.5.0...v1.5.1) (2023-05-12)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** add check for ref current before usage ([#46](https://github.com/gravity-ui/components/issues/46)) ([fc8712c](https://github.com/gravity-ui/components/commit/fc8712c41709e31a320e9c2c40139036003e0708))
+
 ## [1.5.0](https://github.com/gravity-ui/components/compare/v1.4.0...v1.5.0) (2023-05-02)
 
 
