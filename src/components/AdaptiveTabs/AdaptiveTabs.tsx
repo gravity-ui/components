@@ -234,9 +234,13 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     }
 
     componentDidMount() {
+        if (!this.tabsRootNode.current) {
+            return;
+        }
+
         this.setState({currentContainerWidthName: this.getCurrentContainerWidthName()});
 
-        if (this.tabsRootNode.current!.clientWidth > this.breakpoints[0]) {
+        if (this.tabsRootNode.current.clientWidth > this.breakpoints[0]) {
             if ((document as any).fonts) {
                 (document as any).fonts.ready.then(this.initialCollectDimensions);
             } else if ((document as any).readyState === READY_STATE_COMPLETE) {
@@ -250,9 +254,12 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     }
 
     subscribeForResize = () => {
-        this.resizeObserver = new ResizeObserver(this.throttledHandleResize);
+        if (!this.tabsRootNode.current) {
+            return;
+        }
 
-        this.resizeObserver.observe(this.tabsRootNode.current!);
+        this.resizeObserver = new ResizeObserver(this.throttledHandleResize);
+        this.resizeObserver.observe(this.tabsRootNode.current);
     };
 
     componentDidUpdate(prevProps: AdaptiveTabsProps<T>) {
@@ -299,7 +306,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
        The "taking measurements" stage. Once the width of the tabs and some associated dimensions/indentation are calculated
      */
     collectDimensions = () => {
-        const tabsListNode = this.tabsListNode.current!;
+        if (!this.tabsRootNode.current || !this.tabsListNode.current) {
+            return;
+        }
+        const tabsListNode = this.tabsListNode.current;
         const tabs = tabsListNode.children;
 
         this.tabsWidth = [];
@@ -338,7 +348,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             this.tabsWidth[i] = width;
         }
 
-        this.switcherWidth = this.selectSwitcherNode.current!.getBoundingClientRect().width; // ширина элемента-свитчера
+        this.switcherWidth = this.selectSwitcherNode.current?.getBoundingClientRect().width || 0;
 
         this.setState({dimensionsWereCollected: true});
 
@@ -351,7 +361,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             const prevBreakpointWidth = this.breakpoints[index - 1];
             const nextBreakpointWidth = this.breakpoints[index + 1];
 
-            const containerWidth = this.tabsRootNode.current!.clientWidth;
+            const containerWidth = this.tabsRootNode.current?.clientWidth || 0;
             const containerWidthLowerOrEqualThanBreakpointWidth = containerWidth <= breakpointWidth;
             const containerWidthBiggerThanBreakpointWidth = containerWidth > breakpointWidth;
             const containerWidthBiggerThanPrevBreakpointWidth = containerWidth < breakpointWidth;
@@ -375,7 +385,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         Recalculating the Layout - Phases 1 and 2
      */
     recalculateTabs = () => {
-        // фаза 1 - вычисление индекса первого скрытого таба
+        if (!this.tabsRootNode.current) {
+            return;
+        }
+        // Phases 1 - calculating index of first hidden tab
         const activeTabId = this.activeTab;
         const {
             tabChosenFromSelectId,
@@ -386,7 +399,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
          but if after the user switches (clicks) to the neighboring tab, they will be different again */
 
         const {items} = this.props;
-        const {width: tabsRootNodeWidth} = this.tabsRootNode.current!.getBoundingClientRect();
+        const {width: tabsRootNodeWidth} = this.tabsRootNode.current.getBoundingClientRect();
 
         const activeTabIndex = items.findIndex((item) => item.id === activeTabId);
         const tabChosenFromSelectIndex = items.findIndex(
