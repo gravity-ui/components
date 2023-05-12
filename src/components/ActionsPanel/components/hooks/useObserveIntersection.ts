@@ -1,12 +1,11 @@
 import React from 'react';
-import {ActionItem} from '../types';
+import {ActionItem} from '../../types';
+import {VisibilityMap} from './types';
 
 export const OBSERVER_TARGET_ATTR = 'data-observer-id';
 const GAP = 8;
 
-type VisibilityMap = Record<string, boolean>;
-
-export const useCollapseActions = (actions: ActionItem[]) => {
+export const useObserveIntersection = (actions: ActionItem[]) => {
     const parentRef = React.useRef<HTMLDivElement>(null);
     const [visibilityMap, setVisibilityMap] = React.useState<VisibilityMap>({});
     const [offset, setOffset] = React.useState(0);

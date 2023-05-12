@@ -1,42 +1,23 @@
 import React from 'react';
-import noop from 'lodash/noop';
-import {Button, DropdownMenu, DropdownMenuItem, Icon} from '@gravity-ui/uikit';
+import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
 import {Ellipsis} from '@gravity-ui/icons';
 import {block} from '../../utils/cn';
 import {ActionItem} from '../types';
-import {useCollapseActions, OBSERVER_TARGET_ATTR} from './useCollapseActions';
+import {useCollapseActions, OBSERVER_TARGET_ATTR} from './hooks';
 
 import './CollapseActions.scss';
 
 const b = block('actions-panel-collapse');
-const MAX_BUTTON_ACTIONS = 4;
 
 type Props = {
     actions: ActionItem[];
 };
 
 export const CollapseActions = ({actions}: Props) => {
-    const [buttonActions, restActions] = React.useMemo(
-        () => [actions.slice(0, MAX_BUTTON_ACTIONS), actions.slice(MAX_BUTTON_ACTIONS)],
-        [actions],
-    );
+    const {buttonActions, dropdownItems, parentRef, offset, visibilityMap} =
+        useCollapseActions(actions);
 
-    const {parentRef, visibilityMap, offset} = useCollapseActions(buttonActions);
-
-    const dropdownItems: DropdownMenuItem[] = [
-        ...buttonActions.map((action) => ({
-            action: action.handler || noop,
-            text: action.renderContent('dropdown'),
-            hidden: visibilityMap[action.id],
-        })),
-        ...restActions.map((action) => ({
-            action: action.handler || noop,
-            text: action.renderContent('dropdown'),
-            hidden: false,
-        })),
-    ];
-
-    const showDropdown = dropdownItems.some((item) => !item.hidden);
+    const showDropdown = dropdownItems.length > 0;
 
     return (
         <div className={b()}>
@@ -45,16 +26,22 @@ export const CollapseActions = ({actions}: Props) => {
                     const {id} = action;
                     const attr = {[OBSERVER_TARGET_ATTR]: id};
                     const invisible = !visibilityMap[id];
+                    const switcher = (
+                        <Button view="flat-contrast" size="m" {...action.button.props} />
+                    );
+
+                    const node = Array.isArray(action.dropdown.item.items) ? (
+                        <DropdownMenu
+                            size="s"
+                            items={action.dropdown.item.items}
+                            switcher={switcher}
+                        />
+                    ) : (
+                        switcher
+                    );
                     return (
                         <div className={b('button-action-wrapper', {invisible})} {...attr} key={id}>
-                            <Button
-                                view="flat-contrast"
-                                size="m"
-                                onClick={action.handler}
-                                {...action.buttonProps}
-                            >
-                                {action.renderContent('button')}
-                            </Button>
+                            {node}
                         </div>
                     );
                 })}

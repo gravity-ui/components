@@ -1,14 +1,19 @@
-import {ButtonProps} from '@gravity-ui/uikit';
+import {ButtonProps, DropdownMenuItem} from '@gravity-ui/uikit';
 
 export type ActionItem = {
     /** Uniq action id */
     id: string;
-    /** Render-props for the content inside Button or DropdownMenu components */
-    renderContent: (component: 'button' | 'dropdown') => React.ReactNode;
-    /** Click handler */
-    handler?: () => void;
-    /** Override props for action button */
-    buttonProps?: ButtonProps;
+    /** If true, then always inside the dropdown */
+    collapsed?: boolean;
+    /** Settings for dropdown action */
+    dropdown: {
+        item: DropdownMenuItem;
+        group?: string;
+    };
+    /** Settings for button action */
+    button: {
+        props: ButtonProps;
+    };
 };
 
 export type ActionsPanelProps = {
