@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/gravity-ui/components/compare/v1.5.1...v1.5.2) (2023-05-18)
+
+
+### Bug Fixes
+
+* **PlaceholderComponent:** fix export ([#48](https://github.com/gravity-ui/components/issues/48)) ([5ec0565](https://github.com/gravity-ui/components/commit/5ec0565aec2dd5b18f6962b775330f708ba8a3f5))
+
 ## [1.5.1](https://github.com/gravity-ui/components/compare/v1.5.0...v1.5.1) (2023-05-12)
 
 
