@@ -1,11 +1,10 @@
 import React from 'react';
-import {ActionItem} from '../../types';
 import {VisibilityMap} from './types';
 
 export const OBSERVER_TARGET_ATTR = 'data-observer-id';
 const GAP = 8;
 
-export const useObserveIntersection = (actions: ActionItem[]) => {
+export const useObserveIntersection = (updateObserveKey: string) => {
     const parentRef = React.useRef<HTMLDivElement>(null);
     const [visibilityMap, setVisibilityMap] = React.useState<VisibilityMap>({});
     const [offset, setOffset] = React.useState(0);
@@ -64,7 +63,7 @@ export const useObserveIntersection = (actions: ActionItem[]) => {
         });
 
         return () => observer.disconnect();
-    }, [actions]);
+    }, [updateObserveKey]);
 
     return {parentRef, visibilityMap, offset};
 };
