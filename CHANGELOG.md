@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/gravity-ui/components/compare/v1.5.2...v1.6.0) (2023-05-18)
+
+
+### Features
+
+* add new component ActionsPanel ([#39](https://github.com/gravity-ui/components/issues/39)) ([991a567](https://github.com/gravity-ui/components/commit/991a567cf33296814e54e97e9c3b1cfe52948b58))
+
 ## [1.5.2](https://github.com/gravity-ui/components/compare/v1.5.1...v1.5.2) (2023-05-18)
 
 
