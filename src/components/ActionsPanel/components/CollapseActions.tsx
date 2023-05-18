@@ -17,7 +17,7 @@ export const CollapseActions = ({actions}: Props) => {
     const {buttonActions, dropdownItems, parentRef, offset, visibilityMap} =
         useCollapseActions(actions);
 
-    const showDropdown = dropdownItems.length > 0;
+    const showDropdown = Object.keys(visibilityMap).length > 0 && dropdownItems.length > 0;
 
     return (
         <div className={b()}>
@@ -25,7 +25,7 @@ export const CollapseActions = ({actions}: Props) => {
                 {buttonActions.map((action) => {
                     const {id} = action;
                     const attr = {[OBSERVER_TARGET_ATTR]: id};
-                    const invisible = !visibilityMap[id];
+                    const invisible = visibilityMap[id] === false;
                     const switcher = (
                         <Button view="flat-contrast" size="m" {...action.button.props} />
                     );

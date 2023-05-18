@@ -6,6 +6,8 @@ import {useDropdownActions} from './useDropdownActions';
 const MAX_BUTTON_ACTIONS = 4;
 
 export const useCollapseActions = (actions: ActionItem[]) => {
+    const updateObserveKey = React.useMemo(() => actions.map(({id}) => id).join('/'), [actions]);
+
     const [buttonActions, restActions] = React.useMemo(() => {
         const buttonItems: ActionItem[] = [];
         const restItems: ActionItem[] = [];
@@ -21,7 +23,7 @@ export const useCollapseActions = (actions: ActionItem[]) => {
         return [buttonItems, restItems];
     }, [actions]);
 
-    const {parentRef, visibilityMap, offset} = useObserveIntersection(actions);
+    const {parentRef, visibilityMap, offset} = useObserveIntersection(updateObserveKey);
 
     const dropdownItems = useDropdownActions({buttonActions, restActions, visibilityMap});
 
