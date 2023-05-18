@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/gravity-ui/components/compare/v1.6.0...v1.6.1) (2023-05-18)
+
+
+### Bug Fixes
+
+* **ActionsPanel:** fixed blinking of elements when rerendering ([#51](https://github.com/gravity-ui/components/issues/51)) ([b73ea50](https://github.com/gravity-ui/components/commit/b73ea5025b9c65a4791f905b0242989540b4c3b9))
+
 ## [1.6.0](https://github.com/gravity-ui/components/compare/v1.5.2...v1.6.0) (2023-05-18)
 
 
