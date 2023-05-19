@@ -1,0 +1,113 @@
+@use '../variables';
+@use '@gravity-ui/uikit/styles/mixins';
+
+$block: '.#{variables.$ns}notification';
+
+$notificationSourceIconSize: 36px;
+
+#{$block} {
+    display: flex;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 4px;
+
+    &__source-icon {
+        width: $notificationSourceIconSize;
+        height: $notificationSourceIconSize;
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        overflow-x: hidden;
+    }
+
+    &__top-part {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    &__meta-and-title {
+        flex: 1;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    &__meta,
+    &__title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__meta {
+        display: flex;
+        gap: 4px;
+        color: var(--yc-color-text-secondary);
+    }
+
+    &__title {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 18px;
+
+        color: var(--yc-color-text-primary);
+    }
+
+    &__content {
+        font-size: 13px;
+        line-height: 18px;
+
+        color: var(--yc-color-text-secondary);
+    }
+
+    &:hover {
+        background: var(--yc-color-base-simple-hover);
+    }
+
+    &_unread {
+        background: var(--yc-color-base-selection);
+        &:hover {
+            background: var(--yc-color-base-selection-hover);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        &.bottom-actions {
+            margin-top: 8px;
+            gap: 8px;
+        }
+    }
+
+    &__actions.side-actions {
+        opacity: 0.1;
+    }
+    &:hover &__actions.side-actions {
+        opacity: 1;
+    }
+
+    &__action.icon {
+        color: var(--yc-color-text-secondary);
+    }
+
+    &_success {
+        border-left: 4px solid var(--yc-color-line-positive);
+    }
+    &_info {
+        border-left: 4px solid var(--yc-color-line-info);
+    }
+    &_warning {
+        border-left: 4px solid var(--yc-color-line-warning);
+    }
+    &_danger {
+        border-left: 4px solid var(--yc-color-line-danger);
+    }
+}
