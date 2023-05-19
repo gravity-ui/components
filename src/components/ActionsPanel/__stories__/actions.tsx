@@ -10,6 +10,7 @@ export const actions: ActionsPanelProps['actions'] = [
             props: {
                 children: 'Action 1',
                 onClick: () => console.log('click button action 1'),
+                view: 'normal-contrast',
             },
         },
         dropdown: {
@@ -25,7 +26,6 @@ export const actions: ActionsPanelProps['actions'] = [
             props: {
                 children: 'Action 2',
                 onClick: () => console.log('click button action 2'),
-                view: 'normal-contrast',
             },
         },
         dropdown: {
