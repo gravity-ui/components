@@ -8,7 +8,18 @@ export default {
     component: ActionsPanel,
 } as Meta;
 
-const DefaultTemplate: Story<ActionsPanelProps> = (args) => {
+const WithIconsTemplate: Story<ActionsPanelProps> = (args) => {
+    return (
+        <ActionsPanel
+            {...args}
+            actions={actionsWithIcons}
+            onClose={() => console.log('onClose called')}
+        />
+    );
+};
+export const WithIcons = WithIconsTemplate.bind({});
+
+const WithNoteTemplate: Story<ActionsPanelProps> = (args) => {
     return (
         <ActionsPanel
             {...args}
@@ -18,12 +29,7 @@ const DefaultTemplate: Story<ActionsPanelProps> = (args) => {
         />
     );
 };
-export const Default = DefaultTemplate.bind({});
-
-const WithIconsTemplate: Story<ActionsPanelProps> = (args) => {
-    return <ActionsPanel {...args} actions={actionsWithIcons} />;
-};
-export const WithIcons = WithIconsTemplate.bind({});
+export const WithNote = WithNoteTemplate.bind({});
 
 const GroupsTemplate: Story<ActionsPanelProps> = (args) => {
     return <ActionsPanel {...args} actions={actionsGroups} />;
