@@ -14,36 +14,23 @@ type Props = {
 export const NotificationsList: React.FC<Props> = memo(function NotificationsList(props) {
     return (
         <div className={b('list')}>
-            {props.notifications.reduce(
-                (acc, notification, i) => (
-                    <>
-                        {acc}
-                        {i > 0 ? renderSeparator() : null}
-                        {renderNotification(notification, props.isMobile)}
-                    </>
-                ),
-                <></>,
+            {props.notifications.map((notification) =>
+                renderNotification(notification, props.isMobile),
             )}
         </div>
     );
 });
-
-function renderSeparator(): JSX.Element {
-    return <div className={b('separator')}></div>;
-    // return <></>;
-}
 
 function renderNotification(
     notification: NotificationProps,
     isMobile: boolean | undefined,
 ): JSX.Element {
     return (
-        <div className={b('notification-wrapper')}>
-            <Notification
-                notification={notification}
-                isMobile={isMobile}
-                key={notification.id}
-            ></Notification>
+        <div
+            className={`${b('notification-wrapper')} ${notification.unread ? 'unread' : ''}`}
+            key={notification.id}
+        >
+            <Notification notification={notification} isMobile={isMobile}></Notification>
         </div>
     );
 }

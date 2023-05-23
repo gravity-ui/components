@@ -11,6 +11,10 @@ $notificationSourceIconSize: 36px;
     gap: 12px;
     border-radius: 4px;
 
+    &:hover {
+        background: var(--yc-color-base-simple-hover);
+    }
+
     &__source-icon {
         width: $notificationSourceIconSize;
         height: $notificationSourceIconSize;
@@ -65,10 +69,6 @@ $notificationSourceIconSize: 36px;
         color: var(--yc-color-text-secondary);
     }
 
-    &:hover {
-        background: var(--yc-color-base-simple-hover);
-    }
-
     &_unread {
         background: var(--yc-color-base-selection);
         &:hover {
@@ -88,9 +88,12 @@ $notificationSourceIconSize: 36px;
     }
 
     &__actions.side-actions {
-        opacity: 0.1;
+        opacity: 0;
     }
     &:hover &__actions.side-actions {
+        opacity: 1;
+    }
+    &_mobile &__actions.side-actions {
         opacity: 1;
     }
 

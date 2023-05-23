@@ -17,9 +17,10 @@ export const Notification: React.FC<Props> = memo(function Notification(props) {
 
     return (
         <div
-            className={`${b(className)}`}
+            className={`${b(className)} ${notification.className ?? ''}`}
             onMouseEnter={notification.onMouseEnter}
             onMouseLeave={notification.onMouseLeave}
+            onClick={notification.onClick}
         >
             {source ? <div className={b('left')}>{renderSourceIcon(source)}</div> : null}
             <div className={b('right')}>

@@ -71,9 +71,10 @@ export const mockNotifications: NotificationProps[] = [
         id: 'samurai',
         content: <i>A samurai has no goal, only a path</i>,
         formattedDate: '12 seconds ago',
+        unread: true,
     },
     {
-        id: 'samurai',
+        id: 'minimum',
         content: <i>Bare minimum</i>,
     },
     {

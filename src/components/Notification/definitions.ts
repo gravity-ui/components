@@ -24,12 +24,14 @@ export type NotificationProps = {
     unread?: boolean;
     source?: NotificationSourceProps;
     severity?: NotificationSeverity;
+    className?: string;
 
     sideActions?: JSX.Element;
     bottomActions?: JSX.Element;
 
-    onMouseEnter?: () => void;
-    onMouseLeave?: () => void;
+    onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
+    onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 export type NotificationActionProps = {
