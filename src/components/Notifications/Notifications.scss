@@ -9,12 +9,6 @@ $block: '.#{variables.$ns}notifications';
     color: var(--yc-color-text-primary);
     background: var(--yc-color-base-background);
 
-    border-radius: 8px;
-    border: 1px solid var(--yc-color-line-generic);
-    margin: 4px;
-    width: 350px;
-    height: 470px;
-
     &__head {
         display: flex;
         padding: 16px;

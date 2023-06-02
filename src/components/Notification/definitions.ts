@@ -15,10 +15,20 @@ export type NotificationSourceProps = {
     href?: string;
 } & Partial<SvgOrImage>;
 
+export type NotificationSwipeActionProps = {
+    content: JSX.Element;
+    onActivate: () => void;
+};
+export type NotificationSwipeActionsProps =
+    | {left: NotificationSwipeActionProps}
+    | {right: NotificationSwipeActionProps}
+    | {left: NotificationSwipeActionProps; right: NotificationSwipeActionProps};
+
 export type NotificationProps = {
     id: string;
     content: React.ReactNode;
 
+    isMobile?: boolean;
     title?: React.ReactNode;
     formattedDate?: React.ReactNode;
     unread?: boolean;
@@ -28,6 +38,7 @@ export type NotificationProps = {
 
     sideActions?: JSX.Element;
     bottomActions?: JSX.Element;
+    swipeActions?: NotificationSwipeActionsProps;
 
     onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
     onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;

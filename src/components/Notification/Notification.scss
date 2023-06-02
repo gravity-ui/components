@@ -10,6 +10,7 @@ $notificationSourceIconSize: 36px;
     padding: 12px;
     gap: 12px;
     border-radius: 4px;
+    box-sizing: border-box;
 
     &:hover {
         background: var(--yc-color-base-simple-hover);
@@ -112,5 +113,28 @@ $notificationSourceIconSize: 36px;
     }
     &_danger {
         border-left: 4px solid var(--yc-color-line-danger);
+    }
+
+    // swipe js styles (slightly modified)
+    &__swipe {
+        overflow: hidden;
+        visibility: hidden;
+        position: relative;
+    }
+    &__swipe-wrap {
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: stretch;
+    }
+    &__swipe-wrap > div {
+        width: 100%;
+        position: relative;
+    }
+
+    &__swipe-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

@@ -8,12 +8,32 @@ export default {
     component: Notifications,
 } as ComponentMeta<typeof Notifications>;
 
-const Template: ComponentStory<typeof Notifications> = (args) => <Notifications {...args} />;
+const Template: ComponentStory<typeof Notifications> = (args) => (
+    <div
+        style={{
+            borderRadius: '8px',
+            border: '1px solid var(--yc-color-line-generic)',
+            margin: '4px',
+            width: '350px',
+            height: '470px',
+            overflowY: 'auto',
+        }}
+    >
+        <Notifications {...args} />
+    </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {
     notifications: mockNotifications,
     actions: notificationsMockActions,
+};
+
+export const Mobile = Template.bind({});
+Mobile.args = {
+    notifications: mockNotifications,
+    actions: notificationsMockActions,
+    isMobile: true,
 };
 
 export const Empty = Template.bind({});

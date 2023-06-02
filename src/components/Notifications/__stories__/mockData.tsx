@@ -1,9 +1,13 @@
 /* eslint-disable no-console */
-import {Funnel, PencilToSquare, Plus, Trash} from '@gravity-ui/icons';
-import {DropdownMenu} from '@gravity-ui/uikit';
+import {Funnel, PencilToSquare, Plus, Trash, Archive} from '@gravity-ui/icons';
+import {DropdownMenu, Icon} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
-import {NotificationProps, NotificationSeverity} from '../../Notification/definitions';
+import {
+    NotificationProps,
+    NotificationSeverity,
+    NotificationSwipeActionsProps,
+} from '../../Notification/definitions';
 import {
     svgCloudStoryIcon,
     svgNirvanaStoryIcon,
@@ -30,6 +34,55 @@ export const notificationsMockActions: JSX.Element = (
         />
     </>
 );
+
+const baseSwipeActionWrapperStyles = {
+    display: 'flex',
+    gap: '8px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%',
+    background: 'var(--yc-color-base-danger)',
+    flex: '1',
+};
+
+const baseSwipeActionIconStyles = {
+    background: 'var(--yc-color-base-danger-heavy)',
+    padding: '8px',
+    borderRadius: '100%',
+    color: 'var(--yc-color-base-background)',
+};
+
+export const notificationsMockSwipeActions: NotificationSwipeActionsProps = {
+    left: {
+        content: (
+            <div style={baseSwipeActionWrapperStyles}>
+                <span style={baseSwipeActionIconStyles}>
+                    <Icon data={Trash} size={16} />
+                </span>
+                <span style={{color: 'var(--yc-color-base-danger-heavy)', fontSize: '16px'}}>
+                    Delete
+                </span>
+            </div>
+        ),
+        onActivate: () => console.log('LEFT'),
+    },
+    right: {
+        content: (
+            <div style={{...baseSwipeActionWrapperStyles, background: 'var(--yc-color-base-misc)'}}>
+                <span
+                    style={{
+                        ...baseSwipeActionIconStyles,
+                        background: 'var(--yc-color-text-misc)',
+                    }}
+                >
+                    <Icon data={Archive} size={16} />
+                </span>
+                <span style={{color: 'var(--yc-color-text-misc)', fontSize: '16px'}}>Archive</span>
+            </div>
+        ),
+        onActivate: () => console.log('RIGHT'),
+    },
+};
 
 export const notificationSideActions: JSX.Element = (
     <>
@@ -66,12 +119,14 @@ export const mockNotifications: NotificationProps[] = [
         },
         unread: true,
         sideActions: notificationSideActions,
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'samurai',
         content: <i>A samurai has no goal, only a path</i>,
         formattedDate: '12 seconds ago',
         unread: true,
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'minimum',
@@ -81,6 +136,7 @@ export const mockNotifications: NotificationProps[] = [
         id: 'ninja',
         content: <i>Reaction of a cat, speed of a mongoose</i>,
         formattedDate: '28 seconds ago',
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'yandex',
@@ -98,6 +154,7 @@ export const mockNotifications: NotificationProps[] = [
         unread: false,
         severity: NotificationSeverity.INFO,
         sideActions: notificationSideActions,
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'one',
@@ -112,6 +169,7 @@ export const mockNotifications: NotificationProps[] = [
         },
         severity: NotificationSeverity.SUCCESS,
         bottomActions: notificationBottomActions,
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'two',
@@ -127,6 +185,7 @@ export const mockNotifications: NotificationProps[] = [
         formattedDate: '3 days ago',
         sideActions: notificationSideActions,
         bottomActions: notificationBottomActions,
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'three',
@@ -139,5 +198,6 @@ export const mockNotifications: NotificationProps[] = [
         },
         formattedDate: 'ethernity ago',
         severity: NotificationSeverity.DANGER,
+        swipeActions: notificationsMockSwipeActions,
     },
 ];

@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
-import {Notification} from '../Notification/Notification';
+import {NotificationWithSwipe} from '../Notification/NotificationWithSwipe';
+import {Notification} from '../Notification';
 import {NotificationProps} from '../Notification/definitions';
 import {block} from '../utils/cn';
 import './Notifications.scss';
@@ -30,7 +31,11 @@ function renderNotification(
             className={`${b('notification-wrapper')} ${notification.unread ? 'unread' : ''}`}
             key={notification.id}
         >
-            <Notification notification={notification} isMobile={isMobile}></Notification>
+            {isMobile && notification.swipeActions ? (
+                <NotificationWithSwipe notification={notification} isMobile={isMobile} />
+            ) : (
+                <Notification notification={notification} isMobile={isMobile} />
+            )}
         </div>
     );
 }
