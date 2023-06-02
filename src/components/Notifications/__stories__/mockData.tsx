@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import {Funnel, PencilToSquare, Plus, Trash, Archive} from '@gravity-ui/icons';
+import {Archive, Funnel, PencilToSquare, Plus, Trash} from '@gravity-ui/icons';
 import {DropdownMenu, Icon} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
@@ -10,7 +10,6 @@ import {
 } from '../../Notification/definitions';
 import {
     svgCloudStoryIcon,
-    svgNirvanaStoryIcon,
     svgReactStoryIcon,
     svgTrackerStoryIcon,
     svgYandexStoryIcon,
@@ -168,22 +167,6 @@ export const mockNotifications: NotificationProps[] = [
             href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         },
         severity: NotificationSeverity.SUCCESS,
-        bottomActions: notificationBottomActions,
-        swipeActions: notificationsMockSwipeActions,
-    },
-    {
-        id: 'two',
-        title: 'Доступ к данным с истекшим TTLaiwfgafiwgiyafwgyafgyuawg',
-        content:
-            'Начиная с 16 марта, пропадет доступ к данным с истекшим TTL (пока с возможностью продлить TTL и вернуть доступ)',
-        source: {
-            title: 'Nirvana',
-            icon: svgNirvanaStoryIcon,
-            href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        },
-        severity: NotificationSeverity.WARNING,
-        formattedDate: '3 days ago',
-        sideActions: notificationSideActions,
         bottomActions: notificationBottomActions,
         swipeActions: notificationsMockSwipeActions,
     },
