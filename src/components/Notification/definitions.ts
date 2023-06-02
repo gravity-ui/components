@@ -16,7 +16,7 @@ export type NotificationSourceProps = {
 } & Partial<SvgOrImage>;
 
 export type NotificationSwipeActionProps = {
-    content: JSX.Element;
+    content: React.ReactNode;
     onActivate: () => void;
 };
 export type NotificationSwipeActionsProps =
@@ -36,8 +36,8 @@ export type NotificationProps = {
     severity?: NotificationSeverity;
     className?: string;
 
-    sideActions?: JSX.Element;
-    bottomActions?: JSX.Element;
+    sideActions?: React.ReactNode;
+    bottomActions?: React.ReactNode;
     swipeActions?: NotificationSwipeActionsProps;
 
     onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;

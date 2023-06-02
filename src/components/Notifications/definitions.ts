@@ -3,8 +3,11 @@ import {NotificationProps, NotificationActionProps} from '../Notification/defini
 export type NotificationsActionProps = NotificationActionProps;
 
 export type NotificationsProps = {
-    title?: string;
-    notifications: NotificationProps[];
+    title?: React.ReactNode;
     actions?: React.ReactNode;
+
+    notifications: NotificationProps[];
     isMobile?: boolean;
+
+    emptyMessage?: React.ReactNode;
 };

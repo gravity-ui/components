@@ -22,7 +22,7 @@ export const Notifications: React.FC<NotificationsProps> = memo(function Notific
                         isMobile={props.isMobile}
                     />
                 ) : (
-                    <NotificationsEmptyState content="You have not received any notifications in selected category" />
+                    <NotificationsEmptyState content={props.emptyMessage} />
                 )}
             </div>
         </div>

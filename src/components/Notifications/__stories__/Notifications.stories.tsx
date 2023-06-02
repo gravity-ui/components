@@ -39,4 +39,5 @@ Mobile.args = {
 export const Empty = Template.bind({});
 Empty.args = {
     notifications: [],
+    emptyMessage: 'You have not received any notifications',
 };

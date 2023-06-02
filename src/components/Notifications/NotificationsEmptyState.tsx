@@ -17,7 +17,9 @@ export const NotificationsEmptyState: React.FC<Props> = memo(function Notificati
             <Icon data={nothingFoundSvg} size={172} />
             <div className={b('empty-message')}>
                 <div className={b('empty-title')}>No notifications</div>
-                <div className={b('empty-message-content')}>{props.content}</div>
+                {props.content ? (
+                    <div className={b('empty-message-content')}>{props.content}</div>
+                ) : null}
             </div>
         </div>
     );
