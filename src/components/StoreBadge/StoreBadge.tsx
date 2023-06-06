@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn-lite';
 
-import {Link, Platform, Icon, LinkProps} from '@gravity-ui/uikit';
+import {Link, Icon, LinkProps} from '@gravity-ui/uikit';
 
 import {GooglePlayEn} from '../../icons/stores/GooglePlayEn';
 import {GooglePlayRu} from '../../icons/stores/GooglePlayRu';
@@ -13,30 +13,27 @@ import {i18n} from '../../i18n';
 
 const b = block('store-badge');
 
-export type BadgePlatform = Platform.ANDROID | Platform.IOS;
+const androidPlatform = 'android';
+const iosPlatform = 'ios';
+
+export type BadgePlatform = typeof androidPlatform | typeof iosPlatform;
 
 export interface StoreBadgeProps extends Omit<LinkProps, 'view'> {
+    /** store platform name */
     platform: BadgePlatform;
 }
 
-const badgeData: Record<BadgePlatform, Record<Lang, unknown>> = {
-    [Platform.IOS]: {
+const badgeData: Record<BadgePlatform, Record<Lang, React.FC<React.SVGProps<SVGSVGElement>>>> = {
+    [iosPlatform]: {
         ru: AppStoreRu,
         en: AppStoreEn,
     },
-    [Platform.ANDROID]: {
+    [androidPlatform]: {
         ru: GooglePlayRu,
         en: GooglePlayEn,
     },
 };
 
-/**
- * Component for rendering store badges
- *
- * @param platform - platform name
- *
- * @returns JSX
- */
 export const StoreBadge = ({
     platform,
     className,
@@ -45,7 +42,7 @@ export const StoreBadge = ({
     ...restLinkProps
 }: StoreBadgeProps) => {
     const lang = i18n.lang as Lang;
-    const iconData = badgeData?.[platform][lang] as string;
+    const iconData = badgeData?.[platform][lang];
 
     if (!iconData) {
         return null;
@@ -53,7 +50,7 @@ export const StoreBadge = ({
 
     if (!href) {
         return (
-            <div onClick={onClick}>
+            <div role="link" onClick={onClick}>
                 <Icon className={b(null, className)} data={iconData} />
             </div>
         );
