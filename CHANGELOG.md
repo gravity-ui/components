@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/gravity-ui/components/compare/v1.6.1...v1.7.0) (2023-06-06)
+
+
+### Features
+
+* create StoreBadge component ([#54](https://github.com/gravity-ui/components/issues/54)) ([e424a0d](https://github.com/gravity-ui/components/commit/e424a0d887109ebbf0d8f81e1ff4d7bdd168afcf))
+
 ## [1.6.1](https://github.com/gravity-ui/components/compare/v1.6.0...v1.6.1) (2023-05-18)
 
 
