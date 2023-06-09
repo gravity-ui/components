@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/gravity-ui/components/compare/v1.7.0...v1.7.1) (2023-06-09)
+
+
+### Bug Fixes
+
+* **ActionsPanel:** changed styles ([#59](https://github.com/gravity-ui/components/issues/59)) ([e032e94](https://github.com/gravity-ui/components/commit/e032e94656774651c613549d250595b71194944a))
+
 ## [1.7.0](https://github.com/gravity-ui/components/compare/v1.6.1...v1.7.0) (2023-06-06)
 
 
