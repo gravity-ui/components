@@ -12,7 +12,8 @@
 
     &__note-wrapper {
         min-width: 100px;
-        margin-right: 4px;
+        max-width: 320px;
+        margin-right: 40px;
     }
 
     &__button-close-wrapper {
