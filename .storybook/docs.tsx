@@ -59,10 +59,10 @@ export const Docs = () => {
 
     return (
         <>
-            <Title />
+            {/* <Title /> */}
             {sourceBadgeContent}
-            <Subtitle />
-            <Description />
+            {/* <Subtitle /> */}
+            {/* <Description /> */}
             {readmeContent}
         </>
     );
