@@ -11,9 +11,9 @@ type Props = {notification: NotificationProps};
 export const Notification = React.memo(function Notification(props: Props) {
     const [mobile] = useMobile();
     const {notification} = props;
-    const {title, content, formattedDate, source, unread, severity} = notification;
+    const {title, content, formattedDate, source, unread, theme} = notification;
 
-    const modifiers: CnMods = {unread, severity, mobile};
+    const modifiers: CnMods = {unread, theme, mobile};
 
     return (
         <div

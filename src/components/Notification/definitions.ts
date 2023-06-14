@@ -1,11 +1,6 @@
 import {ButtonProps, IconData} from '@gravity-ui/uikit';
 
-export enum NotificationSeverity {
-    SUCCESS = 'success',
-    INFO = 'info',
-    WARNING = 'warning',
-    DANGER = 'danger',
-}
+export type NotificationTheme = 'success' | 'info' | 'warning' | 'danger';
 
 type SvgOrImage = {icon: IconData} | {imageSrc: string};
 
@@ -31,7 +26,7 @@ export type NotificationProps = {
     formattedDate?: React.ReactNode;
     unread?: boolean;
     source?: NotificationSourceProps;
-    severity?: NotificationSeverity;
+    theme?: NotificationTheme;
     className?: string;
 
     sideActions?: React.ReactNode;

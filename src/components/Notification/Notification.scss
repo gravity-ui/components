@@ -97,16 +97,16 @@ $notificationSourceIconSize: 36px;
         color: var(--yc-color-text-secondary);
     }
 
-    &_severity_success {
+    &_theme_success {
         border-left: 4px solid var(--yc-color-line-positive);
     }
-    &_severity_info {
+    &_theme_info {
         border-left: 4px solid var(--yc-color-line-info);
     }
-    &_severity_warning {
+    &_theme_warning {
         border-left: 4px solid var(--yc-color-line-warning);
     }
-    &_severity_danger {
+    &_theme_danger {
         border-left: 4px solid var(--yc-color-line-danger);
     }
 

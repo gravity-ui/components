@@ -3,11 +3,7 @@ import {Archive, Funnel, PencilToSquare, Plus, Trash} from '@gravity-ui/icons';
 import {DropdownMenu, Icon} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
-import {
-    NotificationProps,
-    NotificationSeverity,
-    NotificationSwipeActionsProps,
-} from '../../Notification/definitions';
+import {NotificationProps, NotificationSwipeActionsProps} from '../../Notification/definitions';
 import {
     svgCloudStoryIcon,
     svgReactStoryIcon,
@@ -151,7 +147,7 @@ export const mockNotifications: NotificationProps[] = [
             href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         },
         unread: false,
-        severity: NotificationSeverity.INFO,
+        theme: 'info',
         sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
@@ -166,7 +162,7 @@ export const mockNotifications: NotificationProps[] = [
             icon: svgCloudStoryIcon,
             href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         },
-        severity: NotificationSeverity.SUCCESS,
+        theme: 'success',
         bottomActions: notificationBottomActions,
         swipeActions: notificationsMockSwipeActions,
     },
@@ -180,7 +176,7 @@ export const mockNotifications: NotificationProps[] = [
             href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         },
         formattedDate: 'ethernity ago',
-        severity: NotificationSeverity.DANGER,
+        theme: 'danger',
         swipeActions: notificationsMockSwipeActions,
     },
 ];

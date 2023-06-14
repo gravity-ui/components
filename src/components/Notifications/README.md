@@ -57,7 +57,7 @@ const YourComponent: React.FC = () => {
 | formattedDate | `ReactNode`                         |          |         | Notification's creation date (already formatted)      |
 | unread        | `boolean`                           |          | `false` | Is notification unread                                |
 | source        | `NotificationSourceProps`           |          |         | Notification's source (e.g. Cloud/Tracker/Console)    |
-| severity      | `NotificationSeverity`              |          |         | How serious is the notification (e.g. warning/danger) |
+| theme         | `NotificationTheme`                 |          |         | Notification's theme (e.g. warning/danger)            |
 | className     | `string`                            |          |         | Notification's `className`                            |
 | sideActions   | `ReactNode`                         |          |         | Notification's actions on the right side              |
 | bottomActions | `ReactNode`                         |          |         | Notification's bottom actions (as buttons by default) |
