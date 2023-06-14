@@ -5,7 +5,7 @@ export type NotificationTheme = 'success' | 'info' | 'warning' | 'danger';
 type SvgOrImage = {icon: IconData} | {imageSrc: string};
 
 export type NotificationSourceProps = {
-    title: string;
+    title?: string;
     href?: string;
 } & Partial<SvgOrImage>;
 
