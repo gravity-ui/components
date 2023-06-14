@@ -13,7 +13,7 @@ export const NotificationAction = React.memo(function NotificationAction({action
 
     const button = (
         <Button
-            className={b('action', action.icon ? 'icon' : 'with-text')}
+            className={b('action', {icon: Boolean(action.icon)})}
             view={action.view ?? 'flat'}
             href={action.href}
             target={action.target}

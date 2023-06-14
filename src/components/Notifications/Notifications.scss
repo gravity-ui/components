@@ -14,16 +14,16 @@ $block: '.#{variables.$ns}notifications';
         display: flex;
         padding: 16px;
         border-bottom: 1px solid var(--yc-color-line-generic);
+    }
 
-        &-title {
-            flex: 1;
+    &__head-title {
+        flex: 1;
 
-            font-weight: 500;
-            font-size: 17px;
-            line-height: 24px;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 24px;
 
-            color: var(--yc-color-text-primary);
-        }
+        color: var(--yc-color-text-primary);
     }
 
     &__body {
@@ -35,27 +35,27 @@ $block: '.#{variables.$ns}notifications';
     &__empty {
         height: 100%;
         gap: 16px;
+    }
 
-        &,
-        &-message {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
+    &__empty,
+    &__empty-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
 
-        &-title {
-            margin-bottom: 3px;
-            font-weight: 500;
-            font-size: 17px;
-            line-height: 24px;
-        }
+    &__empty-title {
+        margin-bottom: 3px;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 24px;
+    }
 
-        &-message-content {
-            font-size: 13px;
-            line-height: 18px;
-        }
+    &__empty-message-content {
+        font-size: 13px;
+        line-height: 18px;
     }
 
     &__actions {

@@ -12,7 +12,7 @@ export const Notifications = React.memo(function Notifications(props: Notificati
     return (
         <div className={b()}>
             <div className={b('head')}>
-                <div className={b('head-title')}>{props.title ?? i18n('title')}</div>
+                <div className={b('head-title')}>{props.title || i18n('title')}</div>
                 {props.actions ? <div className={b('actions')}>{props.actions}</div> : null}
             </div>
             <div className={b('body')}>
