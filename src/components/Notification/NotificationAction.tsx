@@ -1,15 +1,14 @@
 import {Button, Icon, Tooltip} from '@gravity-ui/uikit';
-import React, {memo} from 'react';
+import React from 'react';
 import {block} from '../utils/cn';
-import {NotificationActionProps} from './definitions';
-
 import './Notification.scss';
+import {NotificationActionProps} from './definitions';
 
 const b = block('notification');
 
 type Props = {action: NotificationActionProps};
 
-export const NotificationAction: React.FC<Props> = memo(function NotificationAction({action}) {
+export const NotificationAction = React.memo(function NotificationAction({action}: Props) {
     const content = renderContent(action);
 
     const button = (

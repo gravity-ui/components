@@ -1,5 +1,4 @@
-import {ButtonProps} from '@gravity-ui/uikit';
-import {SVGIconData} from '@gravity-ui/uikit/build/esm/components/Icon/types';
+import {ButtonProps, IconData} from '@gravity-ui/uikit';
 
 export enum NotificationSeverity {
     SUCCESS = 'success',
@@ -8,7 +7,7 @@ export enum NotificationSeverity {
     DANGER = 'danger',
 }
 
-type SvgOrImage = {icon: SVGIconData} | {imageSrc: string};
+type SvgOrImage = {icon: IconData} | {imageSrc: string};
 
 export type NotificationSourceProps = {
     title: string;
@@ -47,7 +46,7 @@ export type NotificationProps = {
 
 export type NotificationActionProps = {
     view?: ButtonProps['view'];
-    icon?: SVGIconData;
+    icon?: IconData;
     text: string;
     onClick?: () => void;
     href?: string;

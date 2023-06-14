@@ -1,5 +1,5 @@
 import {Icon} from '@gravity-ui/uikit';
-import React, {memo} from 'react';
+import React from 'react';
 import {block} from '../utils/cn';
 import './Notifications.scss';
 
@@ -9,9 +9,7 @@ const nothingFoundSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none"><pa
 
 type Props = {content: React.ReactNode};
 
-export const NotificationsEmptyState: React.FC<Props> = memo(function NotificationsEmptyState(
-    props,
-) {
+export const NotificationsEmptyState = React.memo(function NotificationsEmptyState(props: Props) {
     return (
         <div className={b('empty')}>
             <Icon data={nothingFoundSvg} size={172} />

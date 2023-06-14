@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useEffect, useMemo, useRef} from 'react';
+import React from 'react';
 import Swipe from 'swipejs';
 import {block} from '../utils/cn';
 import {Notification} from './Notification';
@@ -9,17 +9,17 @@ const b = block('notification');
 
 type Props = {notification: NotificationProps; isMobile?: boolean};
 
-export const NotificationWithSwipe: React.FC<Props> = memo(function NotificationWithSwipe(props) {
-    const ref = useRef<HTMLDivElement>(null);
+export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(props: Props) {
+    const ref = React.useRef<HTMLDivElement>(null);
     const notification = props.notification;
     const swipeActions = notification.swipeActions;
 
-    const startSlide = useMemo(
+    const startSlide = React.useMemo(
         () => (swipeActions && 'left' in swipeActions ? 1 : 0),
         [swipeActions],
     );
 
-    const callback = useCallback(
+    const callback = React.useCallback(
         (index: number) => {
             if (!swipeActions) return;
 
@@ -36,7 +36,7 @@ export const NotificationWithSwipe: React.FC<Props> = memo(function Notification
         [swipeActions],
     );
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!ref.current) return undefined;
 
         const swipe = new Swipe(ref.current, {

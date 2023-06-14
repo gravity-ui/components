@@ -1,6 +1,6 @@
-import React, {memo} from 'react';
-import {NotificationWithSwipe} from '../Notification/NotificationWithSwipe';
+import React from 'react';
 import {Notification} from '../Notification';
+import {NotificationWithSwipe} from '../Notification/NotificationWithSwipe';
 import {NotificationProps} from '../Notification/definitions';
 import {block} from '../utils/cn';
 import './Notifications.scss';
@@ -12,7 +12,7 @@ type Props = {
     isMobile?: boolean;
 };
 
-export const NotificationsList: React.FC<Props> = memo(function NotificationsList(props) {
+export const NotificationsList = React.memo(function NotificationsList(props: Props) {
     return (
         <div className={b('list')}>
             {props.notifications.map((notification) =>

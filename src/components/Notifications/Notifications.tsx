@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import {block} from '../utils/cn';
 import './Notifications.scss';
 import {NotificationsEmptyState} from './NotificationsEmptyState';
@@ -8,7 +8,7 @@ import i18n from './i18n';
 
 const b = block('notifications');
 
-export const Notifications: React.FC<NotificationsProps> = memo(function Notifications(props) {
+export const Notifications = React.memo(function Notifications(props: NotificationsProps) {
     return (
         <div className={b()}>
             <div className={b('head')}>

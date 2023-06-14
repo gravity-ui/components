@@ -1,5 +1,5 @@
 import {Icon, Link} from '@gravity-ui/uikit';
-import React, {memo} from 'react';
+import React from 'react';
 import {block} from '../utils/cn';
 import './Notification.scss';
 import {NotificationProps, NotificationSourceProps} from './definitions';
@@ -8,7 +8,7 @@ const b = block('notification');
 
 type Props = {notification: NotificationProps; isMobile?: boolean};
 
-export const Notification: React.FC<Props> = memo(function Notification(props) {
+export const Notification = React.memo(function Notification(props: Props) {
     const {isMobile, notification} = props;
     const {title, content, formattedDate, source, unread, severity} = notification;
 
