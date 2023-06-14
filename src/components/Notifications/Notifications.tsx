@@ -17,10 +17,7 @@ export const Notifications = React.memo(function Notifications(props: Notificati
             </div>
             <div className={b('body')}>
                 {props.notifications.length > 0 ? (
-                    <NotificationsList
-                        notifications={props.notifications}
-                        isMobile={props.isMobile}
-                    />
+                    <NotificationsList notifications={props.notifications} />
                 ) : (
                     <NotificationsEmptyState content={props.emptyMessage} />
                 )}

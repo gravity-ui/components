@@ -27,7 +27,6 @@ export type NotificationProps = {
     id: string;
     content: React.ReactNode;
 
-    isMobile?: boolean;
     title?: React.ReactNode;
     formattedDate?: React.ReactNode;
     unread?: boolean;

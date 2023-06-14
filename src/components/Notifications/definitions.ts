@@ -7,7 +7,6 @@ export type NotificationsProps = {
     actions?: React.ReactNode;
 
     notifications: NotificationProps[];
-    isMobile?: boolean;
 
     emptyMessage?: React.ReactNode;
 };

@@ -1,4 +1,4 @@
-import {Icon, Link} from '@gravity-ui/uikit';
+import {Icon, Link, useMobile} from '@gravity-ui/uikit';
 import React from 'react';
 import {CnMods, block} from '../utils/cn';
 import './Notification.scss';
@@ -6,13 +6,14 @@ import {NotificationProps, NotificationSourceProps} from './definitions';
 
 const b = block('notification');
 
-type Props = {notification: NotificationProps; isMobile?: boolean};
+type Props = {notification: NotificationProps};
 
 export const Notification = React.memo(function Notification(props: Props) {
-    const {isMobile, notification} = props;
+    const [mobile] = useMobile();
+    const {notification} = props;
     const {title, content, formattedDate, source, unread, severity} = notification;
 
-    const modifiers: CnMods = {unread, severity, mobile: isMobile};
+    const modifiers: CnMods = {unread, severity, mobile};
 
     return (
         <div

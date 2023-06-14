@@ -7,7 +7,7 @@ import {NotificationProps} from './definitions';
 
 const b = block('notification');
 
-type Props = {notification: NotificationProps; isMobile?: boolean};
+type Props = {notification: NotificationProps};
 
 export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(props: Props) {
     const ref = React.useRef<HTMLDivElement>(null);

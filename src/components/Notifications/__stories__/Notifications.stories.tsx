@@ -29,13 +29,6 @@ Default.args = {
     actions: notificationsMockActions,
 };
 
-export const Mobile = Template.bind({});
-Mobile.args = {
-    notifications: mockNotifications,
-    actions: notificationsMockActions,
-    isMobile: true,
-};
-
 export const Empty = Template.bind({});
 Empty.args = {
     notifications: [],

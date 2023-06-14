@@ -40,14 +40,12 @@ const YourComponent: React.FC = () => {
 | `title`         | `ReactNode`           |          | `"Notifications"` | Notifications' title                                       |
 | `actions`       | `ReactNode`           |          |                   | Notifications' actions (e.g. create new, mark all as read) |
 | `emptyMessage`  | `ReactNode`           |          |                   | Message for «No notifications» case                        |
-| `isMobile`      | `boolean`             |          | `false`           | Touch device (mobile) mode                                 |
 
 **Notification** — renders a notification with actions (side/bottom/swipe).
 
 | Property       | Type                | Required | Default | Description                |
 | :------------- | :------------------ | :------: | :------ | :------------------------- |
 | `notification` | `NotificationProps` |  `true`  |         | The notification to render |
-| `isMobile`     | `boolean`           |          | `false` | Touch device (mobile) mode |
 
 **NotificationProps** — notification's type:
 
@@ -55,7 +53,6 @@ const YourComponent: React.FC = () => {
 | :------------ | :---------------------------------- | :------: | :------ | :---------------------------------------------------- |
 | id            | `string`                            |  `true`  |         | Unique identifier (used in `key` for example)         |
 | content       | `ReactNode`                         |  `true`  |         | Notification's content (what it's about)              |
-| isMobile      | `boolean`                           |          | `false` | Touch device (mobile) mode                            |
 | title         | `ReactNode`                         |          |         | Notification's title (bold)                           |
 | formattedDate | `ReactNode`                         |          |         | Notification's creation date (already formatted)      |
 | unread        | `boolean`                           |          | `false` | Is notification unread                                |
