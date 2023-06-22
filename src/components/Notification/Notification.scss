@@ -1,5 +1,4 @@
 @use '../variables';
-@use '@gravity-ui/uikit/styles/mixins';
 
 $block: '.#{variables.$ns}notification';
 
@@ -11,6 +10,7 @@ $notificationSourceIconSize: 36px;
     gap: 12px;
     border-radius: 4px;
     box-sizing: border-box;
+    width: 100%;
 
     &:hover {
         background: var(--yc-color-base-simple-hover);
@@ -110,26 +110,80 @@ $notificationSourceIconSize: 36px;
         border-left: 4px solid var(--yc-color-line-danger);
     }
 
-    // swipe js styles (slightly modified)
-    &__swipe {
-        overflow: hidden;
-        visibility: hidden;
-        position: relative;
-    }
     &__swipe-wrap {
+        width: 100%;
         overflow: hidden;
-        position: relative;
+    }
+
+    &__swipe {
+        width: 200%;
         display: flex;
+        overflow-x: hidden;
         align-items: stretch;
     }
-    &__swipe-wrap > div {
-        width: 100%;
-        position: relative;
+
+    &__swipe_position_notification#{&}__swipe_has-left {
+        transform: translateX(-25%);
+    }
+
+    &__notification-wrapper {
+        width: 50%;
+        transition: opacity 0.5s;
+    }
+
+    &__swipe-action-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
     }
 
     &__swipe-action {
         display: flex;
+        gap: 8px;
         align-items: center;
         justify-content: center;
+        height: 100%;
+        flex: 1;
+    }
+
+    &__swipe-action_theme_base {
+        background: var(--yc-color-base-misc);
+    }
+    &__swipe-action_theme_base &__swipe-action-icon {
+        background: var(--yc-color-text-misc);
+    }
+    &__swipe-action_theme_base &__swipe-action-text {
+        color: var(--yc-color-text-misc);
+    }
+
+    &__swipe-action_theme_warning {
+        background: var(--yc-color-base-warning);
+    }
+    &__swipe-action_theme_warning &__swipe-action-icon {
+        background: var(--yc-color-base-warning-heavy);
+    }
+    &__swipe-action_theme_warning &__swipe-action-text {
+        color: var(--yc-color-base-warning-heavy);
+    }
+
+    &__swipe-action_theme_danger {
+        background: var(--yc-color-base-danger);
+    }
+    &__swipe-action_theme_danger &__swipe-action-icon {
+        background: var(--yc-color-base-danger-heavy);
+    }
+    &__swipe-action_theme_danger &__swipe-action-text {
+        color: var(--yc-color-base-danger-heavy);
+    }
+
+    &__swipe-action-icon {
+        padding: 8px;
+        border-radius: 100%;
+        color: var(--yc-color-base-background);
+    }
+
+    &__swipe-action-text {
+        font-size: 16px;
     }
 }

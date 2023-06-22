@@ -9,4 +9,5 @@ export type NotificationsProps = {
     notifications: NotificationProps[];
 
     emptyMessage?: React.ReactNode;
+    swipeThreshold?: number;
 };

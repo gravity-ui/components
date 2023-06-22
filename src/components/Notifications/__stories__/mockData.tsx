@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import {Archive, Funnel, PencilToSquare, Plus, Trash} from '@gravity-ui/icons';
-import {DropdownMenu, Icon} from '@gravity-ui/uikit';
+import {DropdownMenu} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
+import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
 import {NotificationProps, NotificationSwipeActionsProps} from '../../Notification/definitions';
 import {
     svgCloudStoryIcon,
@@ -30,52 +31,28 @@ export const notificationsMockActions: JSX.Element = (
     </>
 );
 
-const baseSwipeActionWrapperStyles = {
-    display: 'flex',
-    gap: '8px',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    background: 'var(--yc-color-base-danger)',
-    flex: '1',
-};
-
-const baseSwipeActionIconStyles = {
-    background: 'var(--yc-color-base-danger-heavy)',
-    padding: '8px',
-    borderRadius: '100%',
-    color: 'var(--yc-color-base-background)',
-};
-
 export const notificationsMockSwipeActions: NotificationSwipeActionsProps = {
     left: {
         content: (
-            <div style={baseSwipeActionWrapperStyles}>
-                <span style={baseSwipeActionIconStyles}>
-                    <Icon data={Trash} size={16} />
-                </span>
-                <span style={{color: 'var(--yc-color-base-danger-heavy)', fontSize: '16px'}}>
-                    Delete
-                </span>
-            </div>
+            <NotificationSwipeAction
+                icon={Trash}
+                text="Delete"
+                theme="danger"
+                action={() => console.log('DELETE')}
+            />
         ),
-        onActivate: () => console.log('LEFT'),
+        onSwipe: () => console.log('LEFT ACTION (DELETE) SHOWN'),
     },
     right: {
         content: (
-            <div style={{...baseSwipeActionWrapperStyles, background: 'var(--yc-color-base-misc)'}}>
-                <span
-                    style={{
-                        ...baseSwipeActionIconStyles,
-                        background: 'var(--yc-color-text-misc)',
-                    }}
-                >
-                    <Icon data={Archive} size={16} />
-                </span>
-                <span style={{color: 'var(--yc-color-text-misc)', fontSize: '16px'}}>Archive</span>
-            </div>
+            <NotificationSwipeAction
+                icon={Archive}
+                text="Archive"
+                theme="base"
+                action={() => console.log('ARCHIVE')}
+            />
         ),
-        onActivate: () => console.log('RIGHT'),
+        onSwipe: () => console.log('RIGHT ACTION (ARCHIVE) SHOWN'),
     },
 };
 
@@ -93,10 +70,10 @@ export const notificationSideActions: JSX.Element = (
 export const notificationBottomActions: JSX.Element = (
     <>
         <NotificationAction
-            action={{text: 'Confirm', view: 'normal', onClick: () => console.log('Confirm')}}
+            action={{text: 'Confirm', view: 'normal', onClick: () => console.log('CONFIRM')}}
         />
         <NotificationAction
-            action={{text: 'Deny', view: 'normal', onClick: () => console.log('Deny')}}
+            action={{text: 'Deny', view: 'normal', onClick: () => console.log('DENY')}}
         />
     </>
 );
@@ -164,7 +141,7 @@ export const mockNotifications: NotificationProps[] = [
         },
         theme: 'success',
         bottomActions: notificationBottomActions,
-        swipeActions: notificationsMockSwipeActions,
+        swipeActions: {...notificationsMockSwipeActions, left: undefined},
     },
     {
         id: 'three',
@@ -177,6 +154,6 @@ export const mockNotifications: NotificationProps[] = [
         },
         formattedDate: 'ethernity ago',
         theme: 'danger',
-        swipeActions: notificationsMockSwipeActions,
+        swipeActions: {...notificationsMockSwipeActions, right: undefined},
     },
 ];

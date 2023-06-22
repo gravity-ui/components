@@ -11,7 +11,7 @@ export type NotificationSourceProps = {
 
 export type NotificationSwipeActionProps = {
     content: React.ReactNode;
-    onActivate: () => void;
+    onSwipe?: () => void;
 };
 export type NotificationSwipeActionsProps =
     | {left: NotificationSwipeActionProps}

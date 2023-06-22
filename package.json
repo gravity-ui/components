@@ -38,7 +38,7 @@
     "@gravity-ui/icons": "^1.1.0",
     "lodash": "^4.17.21",
     "resize-observer-polyfill": "^1.5.1",
-    "swipejs": "^2.3.1"
+    "tinygesture": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",
