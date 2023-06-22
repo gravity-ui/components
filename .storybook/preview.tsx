@@ -1,3 +1,4 @@
+import './styles.scss';
 import '@gravity-ui/uikit/styles/styles.css';
 
 import React from 'react';
@@ -7,6 +8,7 @@ import {ThemeProvider, MobileProvider, Lang, configure as uiKitConfigure} from '
 import {configure} from '../src';
 import {withMobile} from './decorators/withMobile';
 import {withLang} from './decorators/withLang';
+import {Docs} from './docs';
 
 configure({
     lang: Lang.En,
@@ -31,7 +33,7 @@ export const decorators = [withMobile, withLang, withContextProvider];
 
 export const parameters = {
     docs: {
-        theme: 'light',
+        page: Docs,
     },
     jsx: {showFunctions: true},
     viewport: {
