@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/gravity-ui/components/compare/v1.7.1...v1.8.0) (2023-06-26)
+
+
+### Features
+
+* move components from uikit ([#63](https://github.com/gravity-ui/components/issues/63)) ([98f7936](https://github.com/gravity-ui/components/commit/98f79364fc6ac1654ff15be203ce221100d00bb6))
+* **Notifications:** static component implementation (DATAUI-1582) ([#57](https://github.com/gravity-ui/components/issues/57)) ([3016936](https://github.com/gravity-ui/components/commit/3016936c788df4d0c967908e9d38488c8281224b))
+
 ## [1.7.1](https://github.com/gravity-ui/components/compare/v1.7.0...v1.7.1) (2023-06-09)
 
 
