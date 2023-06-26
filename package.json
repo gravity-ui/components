@@ -1,6 +1,6 @@
 {
   "name": "@gravity-ui/components",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "",
   "license": "MIT",
   "main": "./build/cjs/index.js",
@@ -37,7 +37,8 @@
     "@gravity-ui/i18n": "^1.0.0",
     "@gravity-ui/icons": "^1.1.0",
     "lodash": "^4.17.21",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "tinygesture": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.0",

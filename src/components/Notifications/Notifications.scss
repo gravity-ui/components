@@ -1,0 +1,83 @@
+@use '../variables';
+
+$block: '.#{variables.$ns}notifications';
+
+#{$block} {
+    display: flex;
+    flex-direction: column;
+    color: var(--yc-color-text-primary);
+    background: var(--yc-color-base-background);
+    height: 100%;
+
+    &__head {
+        display: flex;
+        padding: 16px;
+        border-bottom: 1px solid var(--yc-color-line-generic);
+    }
+
+    &__head-title {
+        flex: 1;
+
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 24px;
+
+        color: var(--yc-color-text-primary);
+    }
+
+    &__body {
+        height: 100%;
+        padding: 4px;
+        overflow-y: auto;
+    }
+
+    &__empty {
+        height: 100%;
+        gap: 16px;
+    }
+
+    &__empty,
+    &__empty-message {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    &__empty-title {
+        margin-bottom: 3px;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 24px;
+    }
+
+    &__empty-message-content {
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+    }
+
+    &__notification-wrapper:not(:first-child)::before {
+        content: '';
+        display: block;
+        border-top: 1px solid var(--yc-color-line-generic);
+        margin: 0 12px;
+    }
+
+    // :hover
+    &__notification-wrapper:hover:not(:first-child)::before,
+    &__notification-wrapper:hover + &__notification-wrapper::before,
+    // .unread
+    &__notification-wrapper.unread:not(:first-child)::before,
+    &__notification-wrapper.unread + &__notification-wrapper::before {
+        content: '';
+        display: block;
+        border-top: 1px solid transparent;
+        margin: 0 12px;
+    }
+}

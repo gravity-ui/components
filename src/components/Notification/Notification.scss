@@ -1,0 +1,189 @@
+@use '../variables';
+
+$block: '.#{variables.$ns}notification';
+
+$notificationSourceIconSize: 36px;
+
+#{$block} {
+    display: flex;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
+
+    &:hover {
+        background: var(--yc-color-base-simple-hover);
+    }
+
+    &__right {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex: 1;
+        overflow-x: hidden;
+    }
+
+    &__right-top-part {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    &__right-meta-and-title {
+        flex: 1;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    &__right-meta,
+    &__right-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__right-meta {
+        display: flex;
+        gap: 4px;
+        color: var(--yc-color-text-secondary);
+    }
+
+    &__right-title {
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 18px;
+
+        color: var(--yc-color-text-primary);
+    }
+
+    &__right-content {
+        font-size: 13px;
+        line-height: 18px;
+
+        color: var(--yc-color-text-secondary);
+    }
+
+    &_unread {
+        background: var(--yc-color-base-selection);
+        &:hover {
+            background: var(--yc-color-base-selection-hover);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    &__actions_right-bottom-actions {
+        margin-top: 8px;
+        gap: 8px;
+    }
+
+    &__actions_right-side-actions {
+        opacity: 0;
+    }
+    &:hover &__actions_right-side-actions {
+        opacity: 1;
+    }
+    &_mobile &__actions_right-side-actions {
+        opacity: 1;
+    }
+
+    &__action_icon {
+        color: var(--yc-color-text-secondary);
+    }
+
+    &_theme_success {
+        border-left: 4px solid var(--yc-color-line-positive);
+    }
+    &_theme_info {
+        border-left: 4px solid var(--yc-color-line-info);
+    }
+    &_theme_warning {
+        border-left: 4px solid var(--yc-color-line-warning);
+    }
+    &_theme_danger {
+        border-left: 4px solid var(--yc-color-line-danger);
+    }
+
+    &__swipe-wrap {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    &__swipe {
+        width: 200%;
+        display: flex;
+        overflow-x: hidden;
+        align-items: stretch;
+    }
+
+    &__swipe_position_notification#{&}__swipe_has-left {
+        transform: translateX(-25%);
+    }
+
+    &__notification-wrapper {
+        width: 50%;
+        transition: opacity 0.5s;
+    }
+
+    &__swipe-action-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+    }
+
+    &__swipe-action {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        flex: 1;
+    }
+
+    &__swipe-action_theme_base {
+        background: var(--yc-color-base-misc);
+    }
+    &__swipe-action_theme_base &__swipe-action-icon {
+        background: var(--yc-color-text-misc);
+    }
+    &__swipe-action_theme_base &__swipe-action-text {
+        color: var(--yc-color-text-misc);
+    }
+
+    &__swipe-action_theme_warning {
+        background: var(--yc-color-base-warning);
+    }
+    &__swipe-action_theme_warning &__swipe-action-icon {
+        background: var(--yc-color-base-warning-heavy);
+    }
+    &__swipe-action_theme_warning &__swipe-action-text {
+        color: var(--yc-color-base-warning-heavy);
+    }
+
+    &__swipe-action_theme_danger {
+        background: var(--yc-color-base-danger);
+    }
+    &__swipe-action_theme_danger &__swipe-action-icon {
+        background: var(--yc-color-base-danger-heavy);
+    }
+    &__swipe-action_theme_danger &__swipe-action-text {
+        color: var(--yc-color-base-danger-heavy);
+    }
+
+    &__swipe-action-icon {
+        padding: 8px;
+        border-radius: 100%;
+        color: var(--yc-color-base-background);
+    }
+
+    &__swipe-action-text {
+        font-size: 16px;
+    }
+}
