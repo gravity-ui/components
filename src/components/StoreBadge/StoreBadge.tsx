@@ -16,14 +16,17 @@ const b = block('store-badge');
 const androidPlatform = 'android';
 const iosPlatform = 'ios';
 
-export type BadgePlatform = typeof androidPlatform | typeof iosPlatform;
+export type StoreBadgePlatform = typeof androidPlatform | typeof iosPlatform;
 
 export interface StoreBadgeProps extends Omit<LinkProps, 'view'> {
     /** store platform name */
-    platform: BadgePlatform;
+    platform: StoreBadgePlatform;
 }
 
-const badgeData: Record<BadgePlatform, Record<Lang, React.FC<React.SVGProps<SVGSVGElement>>>> = {
+const badgeData: Record<
+    StoreBadgePlatform,
+    Record<Lang, React.FC<React.SVGProps<SVGSVGElement>>>
+> = {
     [iosPlatform]: {
         ru: AppStoreRu,
         en: AppStoreEn,
