@@ -2,8 +2,11 @@ import type {StorybookConfig} from '@storybook/core-common';
 
 const {join} = require('path');
 
-
 const config: StorybookConfig = {
+    framework: {
+        name: '@storybook/react-webpack5',
+        options: {fastRefresh: true},
+    },
     stories: ['../src/**/*.stories.@(ts|tsx)'],
     addons: [
         '@storybook/preset-scss',
@@ -27,4 +30,4 @@ const config: StorybookConfig = {
     },
 };
 
-module.exports = config;
+export default config;

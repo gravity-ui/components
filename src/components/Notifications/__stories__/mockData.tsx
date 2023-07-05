@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import {Archive, Funnel, PencilToSquare, Plus, Trash} from '@gravity-ui/icons';
+import {Archive, Funnel, PencilToSquare, Plus, TrashBin} from '@gravity-ui/icons';
 import {DropdownMenu} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
@@ -35,7 +35,7 @@ export const notificationsMockSwipeActions: NotificationSwipeActionsProps = {
     left: {
         content: (
             <NotificationSwipeAction
-                icon={Trash}
+                icon={TrashBin}
                 text="Delete"
                 theme="danger"
                 action={() => console.log('DELETE')}
@@ -62,7 +62,7 @@ export const notificationSideActions: JSX.Element = (
             action={{icon: PencilToSquare, text: 'Edit', onClick: () => console.log('FILTER')}}
         />
         <NotificationAction
-            action={{icon: Trash, text: 'Delete', onClick: () => console.log('DELETE')}}
+            action={{icon: TrashBin, text: 'Delete', onClick: () => console.log('DELETE')}}
         />
     </>
 );
