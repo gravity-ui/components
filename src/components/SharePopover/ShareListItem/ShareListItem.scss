@@ -1,0 +1,47 @@
+@use '../../variables';
+
+$block: '.#{variables.$ns}share-list-item';
+
+$color-telegram: #51a4db;
+$color-facebook: #4968ad;
+$color-twitter: #4aa0eb;
+$color-vk: #436eab;
+
+#{$block} {
+    display: flex;
+    align-items: center;
+
+    &__icon_type {
+        &_telegram {
+            color: $color-telegram;
+        }
+
+        &_facebook {
+            color: $color-facebook;
+        }
+
+        &_twitter {
+            color: $color-twitter;
+        }
+
+        &_vk {
+            color: $color-vk;
+        }
+    }
+
+    &__link-container {
+        display: flex;
+    }
+
+    &__link-icon {
+        display: flex;
+        align-items: center;
+    }
+
+    &__link-title {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        margin-left: 10px;
+    }
+}

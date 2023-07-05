@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {
-    Description,
-    DocsContext,
-    Subtitle,
-    Title,
-} from '@storybook/addon-docs/';
+import {DocsContext} from '@storybook/addon-docs';
 
 const readmeCache: Record<string, {default: string}> = {};
 
@@ -59,10 +54,7 @@ export const Docs = () => {
 
     return (
         <>
-            {/* <Title /> */}
             {sourceBadgeContent}
-            {/* <Subtitle /> */}
-            {/* <Description /> */}
             {readmeContent}
         </>
     );
