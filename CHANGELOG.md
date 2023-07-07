@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.9.0](https://github.com/gravity-ui/components/compare/v1.8.0...v1.9.0) (2023-07-07)
+
+
+### Features
+
+* move components from uikit ([#67](https://github.com/gravity-ui/components/issues/67)) ([4752ac0](https://github.com/gravity-ui/components/commit/4752ac08b101eb9ac0694943b8a0472b5eeec822))
+
+
+### Bug Fixes
+
+* add 16 versions for react & react-dom peer deps ([#70](https://github.com/gravity-ui/components/issues/70)) ([aa20234](https://github.com/gravity-ui/components/commit/aa2023486b069f146c52b6f845d9ddee5d5fe30f))
+
 ## [1.8.0](https://github.com/gravity-ui/components/compare/v1.7.1...v1.8.0) (2023-06-26)
 
 
