@@ -109,10 +109,15 @@ export const StoriesLayout = (props: StoriesLayoutProps) => {
                         >
                             <Icon data={Xmark} size={18} />
                         </Button>
-                        {currentStory?.media && (
-                            <div className={b('media-block')}>
-                                <MediaRenderer media={currentStory.media} />
-                            </div>
+                        {props.items.map(({media}, i) =>
+                            media ? (
+                                <div
+                                    className={b('media-block', {visible: i === props.storyIndex})}
+                                    key={i}
+                                >
+                                    <MediaRenderer media={media} />
+                                </div>
+                            ) : null,
                         )}
                     </div>
                 </div>
