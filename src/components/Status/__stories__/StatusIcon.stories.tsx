@@ -3,7 +3,7 @@ import React from 'react';
 import {Meta, Story} from '@storybook/react';
 
 import {StatusIcon, StatusIconProps} from '../StatusIcon';
-import {Status} from '../types';
+import type {Status} from '../types';
 
 export default {
     title: 'Components/Status/StatusIcon',

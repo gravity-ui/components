@@ -4,7 +4,7 @@ import {block} from '../utils/cn';
 import {StatusIcon} from './StatusIcon';
 
 import './StatusMessage.scss';
-import {Status} from './types';
+import type {Status} from './types';
 
 const b = block('status-message');
 

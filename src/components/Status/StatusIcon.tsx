@@ -9,7 +9,7 @@ import {
     CircleExclamationFill,
 } from '@gravity-ui/icons';
 import block from 'bem-cn-lite';
-import {Status} from './types';
+import type {Status} from './types';
 
 const iconsByStatus: {
     [key in Status]: {
@@ -35,7 +35,6 @@ export interface StatusIconProps {
 const b = block('status-icon');
 
 export function StatusIcon({status, size = 16, className}: StatusIconProps) {
-    console.log(status);
     const iconSettings = iconsByStatus[status];
 
     if (!iconSettings) {
