@@ -29,7 +29,7 @@
     &__required-mark {
         line-height: 0;
         vertical-align: baseline;
-        color: var(--yc-color-text-danger);
+        color: var(--g-color-text-danger);
         font-size: inherit;
     }
 
@@ -46,7 +46,7 @@
 
     &__field-description {
         margin: 10px 0 0;
-        color: var(--yc-color-text-secondary);
+        color: var(--g-color-text-secondary);
         word-break: break-word;
     }
 }

@@ -16,7 +16,7 @@ $block: '.#{variables.$ns}item-selector';
         padding-top: 8px;
 
         &:not(:last-child) {
-            border-right: 1px solid var(--yc-color-line-generic);
+            border-right: 1px solid var(--g-color-line-generic);
         }
     }
 

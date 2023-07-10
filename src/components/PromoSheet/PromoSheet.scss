@@ -5,26 +5,26 @@ $block: '.#{variables.$ns}promo-sheet';
 #{$block} {
     &__content[class] {
         width: auto;
-        padding: var(--yc-promo-sheet-padding);
-        margin: 0 var(--yc-promo-sheet-margin) var(--yc-promo-sheet-margin);
+        padding: var(--gc-promo-sheet-padding);
+        margin: 0 var(--gc-promo-sheet-margin) var(--gc-promo-sheet-margin);
 
-        color: var(--yc-promo-sheet-foreground);
-        background: var(--yc-promo-sheet-background);
-        border-radius: var(--yc-promo-sheet-border-radius);
+        color: var(--gc-promo-sheet-foreground);
+        background: var(--gc-promo-sheet-background);
+        border-radius: var(--gc-promo-sheet-border-radius);
     }
 
     &__header {
         position: relative;
 
         padding: 0 20px 0 0;
-        margin: 0 0 var(--yc-promo-sheet-header-margin);
+        margin: 0 0 var(--gc-promo-sheet-header-margin);
     }
 
     &__title {
         margin: 0;
 
-        font-size: var(--yc-text-header-1-font-size);
-        line-height: var(--yc-text-header-1-line-height);
+        font-size: var(--g-text-header-1-font-size);
+        line-height: var(--g-text-header-1-line-height);
     }
 
     &__close-button {
@@ -34,14 +34,14 @@ $block: '.#{variables.$ns}promo-sheet';
     }
 
     &__message {
-        margin: 0 0 var(--yc-promo-sheet-message-margin);
+        margin: 0 0 var(--gc-promo-sheet-message-margin);
 
-        font-size: var(--yc-text-body-3-font-size);
-        line-height: var(--yc-text-body-3-line-height);
+        font-size: var(--g-text-body-3-font-size);
+        line-height: var(--g-text-body-3-line-height);
     }
 
     &__image-container {
-        margin-bottom: var(--yc-promo-sheet-image-margin);
+        margin-bottom: var(--gc-promo-sheet-image-margin);
     }
 
     &__image {
@@ -56,13 +56,13 @@ $block: '.#{variables.$ns}promo-sheet';
     }
 }
 
-.yc-root {
-    --yc-promo-sheet-margin: 8px;
-    --yc-promo-sheet-padding: 20px;
-    --yc-promo-sheet-border-radius: 12px;
-    --yc-promo-sheet-header-margin: 12px;
-    --yc-promo-sheet-message-margin: 16px;
-    --yc-promo-sheet-image-margin: 12px;
-    --yc-promo-sheet-foreground: var(--yc-color-text-light-primary);
-    --yc-promo-sheet-background: var(--yc-my-color-brand-normal);
+.g-root {
+    --gc-promo-sheet-margin: 8px;
+    --gc-promo-sheet-padding: 20px;
+    --gc-promo-sheet-border-radius: 12px;
+    --gc-promo-sheet-header-margin: 12px;
+    --gc-promo-sheet-message-margin: 16px;
+    --gc-promo-sheet-image-margin: 12px;
+    --gc-promo-sheet-foreground: var(--g-color-text-light-primary);
+    --gc-promo-sheet-background: var(--g-color-base-brand);
 }

@@ -5,14 +5,14 @@ $block: '.#{variables.$ns}notifications';
 #{$block} {
     display: flex;
     flex-direction: column;
-    color: var(--yc-color-text-primary);
-    background: var(--yc-color-base-background);
+    color: var(--g-color-text-primary);
+    background: var(--g-color-base-background);
     height: 100%;
 
     &__head {
         display: flex;
         padding: 16px;
-        border-bottom: 1px solid var(--yc-color-line-generic);
+        border-bottom: 1px solid var(--g-color-line-generic);
     }
 
     &__head-title {
@@ -22,7 +22,7 @@ $block: '.#{variables.$ns}notifications';
         font-size: 17px;
         line-height: 24px;
 
-        color: var(--yc-color-text-primary);
+        color: var(--g-color-text-primary);
     }
 
     &__body {
@@ -65,7 +65,7 @@ $block: '.#{variables.$ns}notifications';
     &__notification-wrapper:not(:first-child)::before {
         content: '';
         display: block;
-        border-top: 1px solid var(--yc-color-line-generic);
+        border-top: 1px solid var(--g-color-line-generic);
         margin: 0 12px;
     }
 
