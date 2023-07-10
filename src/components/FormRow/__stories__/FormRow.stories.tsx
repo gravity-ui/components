@@ -1,7 +1,8 @@
 import React from 'react';
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {HelpPopover, TextInput} from '@gravity-ui/uikit';
+import {Meta, StoryFn} from '@storybook/react';
+import {TextInput} from '@gravity-ui/uikit';
 import {FormRow} from '../FormRow';
+import {HelpPopover} from '../../HelpPopover';
 
 const fieldId = 'form-row-input-id';
 const fieldDescriptionId = `${fieldId}-description`;
@@ -22,9 +23,9 @@ export default {
         children: argTypeReactNode,
         labelHelpPopover: argTypeReactNode,
     },
-} as ComponentMeta<typeof FormRow>;
+} as Meta<typeof FormRow>;
 
-const Template: ComponentStory<typeof FormRow> = (args) => <FormRow {...args} />;
+const Template: StoryFn<typeof FormRow> = (args) => <FormRow {...args} />;
 
 export const Default = Template.bind({});
 
