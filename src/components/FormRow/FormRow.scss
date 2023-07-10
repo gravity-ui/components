@@ -28,6 +28,7 @@
 
     &__required-mark {
         line-height: 0;
+        vertical-align: baseline;
         color: var(--yc-color-text-danger);
         font-size: inherit;
     }
