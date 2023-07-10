@@ -33,7 +33,7 @@ $block: '.#{variables.$ns}stories-group-preview';
         height: 40px;
         border-radius: 8px;
 
-        background-color: var(--yc-color-base-background);
+        background-color: var(--g-color-base-background);
 
         &::after {
             content: '';
@@ -41,7 +41,7 @@ $block: '.#{variables.$ns}stories-group-preview';
             top: 0;
             left: 0;
 
-            background-color: var(--yc-color-sfx-shadow);
+            background-color: var(--g-color-sfx-shadow);
             width: 40px;
             height: 40px;
         }
@@ -54,7 +54,7 @@ $block: '.#{variables.$ns}stories-group-preview';
         }
 
         &_active {
-            border: 2px solid var(--yc-color-line-selection-active);
+            border: 2px solid var(--g-color-line-brand);
         }
     }
 

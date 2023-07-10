@@ -12,7 +12,7 @@ const nothingFoundDarkSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="172"
 type Props = {content: React.ReactNode};
 
 export const NotificationsEmptyState = React.memo(function NotificationsEmptyState(props: Props) {
-    const [theme] = useTheme();
+    const theme = useTheme();
 
     return (
         <div className={b('empty')}>

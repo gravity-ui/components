@@ -29,11 +29,11 @@ $textBlockMargin: 16px;
         max-height: $maxHeight;
         min-width: $minWidth;
         min-height: $minHeight;
-        background-color: var(--yc-color-base-selection);
+        background-color: var(--g-color-base-selection);
     }
 
     &__wrap-inner {
-        background-color: var(--yc-color-base-background);
+        background-color: var(--g-color-base-background);
         border-radius: $borderRadius;
         max-width: $maxWidth;
         max-height: $maxHeight;
@@ -45,8 +45,8 @@ $textBlockMargin: 16px;
 
     &__container {
         display: flex;
-        background-color: var(--yc-color-base-selection);
-        box-shadow: 0 8px 20px var(--yc-color-sfx-shadow);
+        background-color: var(--g-color-base-selection);
+        box-shadow: 0 8px 20px var(--g-color-sfx-shadow);
         border-radius: $borderRadius;
         position: relative;
 
@@ -60,7 +60,7 @@ $textBlockMargin: 16px;
         margin-left: $smallMargin;
         margin-top: $smallMargin;
         margin-bottom: $smallMargin;
-        background-color: var(--yc-color-base-background);
+        background-color: var(--g-color-base-background);
         border-radius: $leftPaneBorderRadius;
         padding: $leftPanePadding;
         display: flex;
@@ -78,7 +78,7 @@ $textBlockMargin: 16px;
 
     &__counter {
         @include mixins.text-body-2();
-        color: var(--yc-color-text-secondary);
+        color: var(--g-color-text-secondary);
     }
 
     &__text-block {
@@ -92,12 +92,12 @@ $textBlockMargin: 16px;
 
     &__text-header {
         @include mixins.text-display-2();
-        color: var(--yc-color-text-primary);
+        color: var(--g-color-text-primary);
     }
 
     &__text-content {
         @include mixins.text-body-2();
-        color: var(--yc-color-text-complementary);
+        color: var(--g-color-text-complementary);
 
         #{$block}__text-header + & {
             margin-top: $textBlockMargin;

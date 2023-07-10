@@ -4,11 +4,11 @@
 $block: '.#{variables.$ns}adaptive-tabs';
 
 #{$block} {
-    --gc-tabs-color-divider: var(--yc-color-line-generic);
-    --gc-tabs-color-border-active: var(--yc-color-text-info);
-    --gc-tabs-color-text-active: var(--yc-color-text-primary);
-    --gc-tabs-color-text-inactive: var(--yc-color-text-complementary);
-    --gc-tabs-color-text-disabled: var(--yc-color-text-secondary);
+    --gc-tabs-color-divider: var(--g-color-line-generic);
+    --gc-tabs-color-border-active: var(--g-color-text-info);
+    --gc-tabs-color-text-active: var(--g-color-text-primary);
+    --gc-tabs-color-text-inactive: var(--g-color-text-complementary);
+    --gc-tabs-color-text-disabled: var(--g-color-text-secondary);
     &_size {
         &_m {
             --gc-tabs-height: 36px;
