@@ -75,7 +75,7 @@ class Tab extends React.Component<TabProps> {
             <div
                 className={b('tab', {active, disabled})}
                 title={String(hint || title || '')}
-                onClick={this.onClick}
+                onClick={disabled ? undefined : this.onClick}
             >
                 {title}
             </div>
@@ -839,7 +839,9 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 style={{maxWidth: items.length > 1 ? maxWidth : '100%'}}
                 className={b('tab-container', {'last-tab': isLastTab, 'no-overflow': noOverflow})}
                 onClick={(e) => {
-                    this.onTabClick(item.id, e);
+                    if (!item.disabled) {
+                        this.onTabClick(item.id, e);
+                    }
                 }}
             >
                 {wrapTo ? wrapTo(item, tabNode, tabIndex) : tabNode}
