@@ -1,0 +1,20 @@
+@use '../variables';
+
+$height: 20px;
+
+$block: '.#{variables.$ns}status-message';
+
+#{$block} {
+    display: flex;
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        height: $height;
+        margin-right: 5px;
+    }
+
+    &__text {
+        line-height: $height;
+    }
+}
