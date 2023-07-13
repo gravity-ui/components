@@ -5,7 +5,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
 
 #{$block} {
     --gc-tabs-color-divider: var(--g-color-line-generic);
-    --gc-tabs-color-border-active: var(--g-color-text-info);
+    --gc-tabs-color-border-active: var(--g-color-line-brand);
     --gc-tabs-color-text-active: var(--g-color-text-primary);
     --gc-tabs-color-text-inactive: var(--g-color-text-complementary);
     --gc-tabs-color-text-disabled: var(--g-color-text-secondary);

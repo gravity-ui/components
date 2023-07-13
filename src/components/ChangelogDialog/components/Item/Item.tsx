@@ -44,7 +44,7 @@ export function Item({className, data, onStoryClick}: ItemProps) {
                 {data.storyId && onStoryClick ? (
                     <Button
                         className={b('story-button')}
-                        view="outlined-info"
+                        view="outlined-action"
                         onClick={() => {
                             if (data.storyId) {
                                 onStoryClick(data.storyId);
