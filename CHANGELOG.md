@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.0.0](https://github.com/gravity-ui/components/compare/v1.9.0...v2.0.0) (2023-07-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* update uikit
+
+### Features
+
+* update uikit ([9eb91e7](https://github.com/gravity-ui/components/commit/9eb91e7193c977692332bc7676e388404e04fc9e))
+* update uikit ([1324d93](https://github.com/gravity-ui/components/commit/1324d9387bd314946203315f648aff8918b650ea))
+* update uikit ([2579ec5](https://github.com/gravity-ui/components/commit/2579ec5a2aa2943db6ef0347130ce13cd81d0266))
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** disable tabs should not be clickable ([758101e](https://github.com/gravity-ui/components/commit/758101e5fb936034ccca104451e51aa34a4210ed))
+* **FormRow:** required star position ([366ff75](https://github.com/gravity-ui/components/commit/366ff75b331d1ea77914d960046d1edfd116394a))
+* **FormRow:** stories not work ([3f98275](https://github.com/gravity-ui/components/commit/3f9827593bd3f21d39c63c03de66932ed8abab3f))
+
 ## [1.9.0](https://github.com/gravity-ui/components/compare/v1.8.0...v1.9.0) (2023-07-07)
 
 
