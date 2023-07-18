@@ -7,3 +7,7 @@ A set of complex React components
 ```shell
 npm install --save-dev @gravity-ui/components
 ```
+
+## Storybook
+
+You can find find the storybook at https://preview.gravity-ui.com/components
