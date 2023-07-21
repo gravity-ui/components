@@ -31,6 +31,7 @@ export interface StoriesGroupProps {
     ) => void;
 }
 
+// eslint-disable-next-line complexity
 export const StoriesGroup = ({
     open,
     groups,
@@ -142,6 +143,7 @@ export const StoriesGroup = ({
     }
 
     const indexType =
+        (groups.length === 1 && currentItems.length === 1 && IndexType.Single) ||
         (groupIndex === 0 && itemIndex === 0 && IndexType.Start) ||
         (groupIndex === groups.length - 1 &&
             itemIndex === currentItems.length - 1 &&
