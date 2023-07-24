@@ -42,9 +42,11 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
             setIsActive(true);
             await onActivate();
 
-            if (mounted.current) {
-                setIsActive(false);
-            }
+            setTimeout(() => {
+                if (mounted.current) {
+                    setIsActive(false);
+                }
+            }, 100);
         };
 
         if (isBottomVisible && !isActive && !disabled) {
