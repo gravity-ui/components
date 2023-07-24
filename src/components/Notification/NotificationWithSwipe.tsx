@@ -1,5 +1,5 @@
 import clamp from 'lodash/clamp';
-import React, {useState} from 'react';
+import React from 'react';
 import TinyGesture from 'tinygesture';
 import {block} from '../utils/cn';
 import {Notification} from './Notification';
@@ -25,7 +25,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
     const leftAction = swipeActions && 'left' in swipeActions ? swipeActions.left : undefined;
     const rightAction = swipeActions && 'right' in swipeActions ? swipeActions.right : undefined;
 
-    const [position, setPosition] = useState<'left-action' | 'notification' | 'right-action'>(
+    const [position, setPosition] = React.useState<'left-action' | 'notification' | 'right-action'>(
         'notification',
     );
 

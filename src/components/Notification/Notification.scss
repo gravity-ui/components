@@ -110,6 +110,10 @@ $notificationSourceIconSize: 36px;
         border-left: 4px solid var(--g-color-line-danger);
     }
 
+    &_active {
+        cursor: pointer;
+    }
+
     &__swipe-wrap {
         width: 100%;
         overflow: hidden;
@@ -185,5 +189,10 @@ $notificationSourceIconSize: 36px;
 
     &__swipe-action-text {
         font-size: 16px;
+    }
+
+    img#{&}__source-icon {
+        width: 36px;
+        height: 36px;
     }
 }

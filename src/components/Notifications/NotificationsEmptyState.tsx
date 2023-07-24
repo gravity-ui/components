@@ -2,6 +2,7 @@ import {Icon, useTheme} from '@gravity-ui/uikit';
 import React from 'react';
 import {block} from '../utils/cn';
 import './Notifications.scss';
+import i18n from './i18n/index';
 
 const b = block('notifications');
 
@@ -18,7 +19,7 @@ export const NotificationsEmptyState = React.memo(function NotificationsEmptySta
         <div className={b('empty')}>
             <Icon data={theme === 'light' ? nothingFoundSvg : nothingFoundDarkSvg} size={172} />
             <div className={b('empty-message')}>
-                <div className={b('empty-title')}>No notifications</div>
+                <div className={b('empty-title')}>{i18n('no-notifications')}</div>
                 {props.content ? (
                     <div className={b('empty-message-content')}>{props.content}</div>
                 ) : null}

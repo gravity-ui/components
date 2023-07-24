@@ -7,7 +7,11 @@ export type NotificationsProps = {
     actions?: React.ReactNode;
 
     notifications: NotificationProps[];
+    areAllNotificationsLoaded?: boolean;
+    onLoadMoreNotifications?: () => Promise<void>;
 
-    emptyMessage?: React.ReactNode;
+    isLoading?: boolean;
+    errorContent?: React.ReactNode;
+    emptyContent?: React.ReactNode;
     swipeThreshold?: number;
 };

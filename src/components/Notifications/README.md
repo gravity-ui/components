@@ -12,6 +12,7 @@ const YourComponent: React.FC = () => {
       {
         id: 'minimum',
         content: <i>Bare minimum</i>,
+        formattedDate: '13 seconds ago',
       },
     ],
     [],
@@ -34,13 +35,17 @@ const YourComponent: React.FC = () => {
 
 **Notifications** — renders notifications and actions on these notifications.
 
-| Property         | Type                  | Required | Default           | Description                                                |
-| :--------------- | :-------------------- | :------: | :---------------- | :--------------------------------------------------------- |
-| `notifications`  | `NotificationProps[]` |  `true`  | `false`           | Touch device (mobile) mode                                 |
-| `title`          | `ReactNode`           |          | `"Notifications"` | Notifications' title                                       |
-| `actions`        | `ReactNode`           |          |                   | Notifications' actions (e.g. create new, mark all as read) |
-| `emptyMessage`   | `ReactNode`           |          |                   | Message for «No notifications» case                        |
-| `swipeThreshold` | `number`              |          | 0.4               | A value from 0 to 1 — the more the harder to swipe         |
+| Property                    | Type                  | Required | Default           | Description                                                                               |
+| :-------------------------- | :-------------------- | :------: | :---------------- | :---------------------------------------------------------------------------------------- |
+| `notifications`             | `NotificationProps[]` |  `true`  | `false`           | Touch device (mobile) mode                                                                |
+| `title`                     | `ReactNode`           |          | `"Notifications"` | Notifications' title                                                                      |
+| `actions`                   | `ReactNode`           |          |                   | Notifications' actions (e.g. create new, mark all as read)                                |
+| `areAllNotificationsLoaded` | `boolean`             |          | `false`           | When `true` renders a Loader instead of the notifications                                 |
+| `onLoadMoreNotifications`   | `() => Promise`       |          | `noop`            | Callback is called when the user scrolls to the end (so you can fetch more notifications) |
+| `isLoading`                 | `boolean`             |          | `false`           | When `true` renders a Loader instead of the notifications                                 |
+| `errorContent`              | `ReactNode`           |          |                   | Used for the Error state (the message under the «Error»)                                  |
+| `emptyContent`              | `ReactNode`           |          |                   | Same as `errorContent`, but for the Empty state                                           |
+| `swipeThreshold`            | `number`              |          | 0.4               | A value from 0 to 1 — the more the harder it is to swipe                                  |
 
 **Notification** — renders a notification with actions (side/bottom/swipe).
 
@@ -57,6 +62,7 @@ const YourComponent: React.FC = () => {
 | title         | `ReactNode`                         |          |         | Notification's title (bold)                           |
 | formattedDate | `ReactNode`                         |          |         | Notification's creation date (already formatted)      |
 | unread        | `boolean`                           |          | `false` | Is notification unread                                |
+| archived      | `boolean`                           |          | `false` | Is notification archived (invisible to the user)      |
 | source        | `NotificationSourceProps`           |          |         | Notification's source (e.g. Cloud/Tracker/Console)    |
 | theme         | `NotificationTheme`                 |          |         | Notification's theme (e.g. warning/danger)            |
 | className     | `string`                            |          |         | Notification's `className`                            |

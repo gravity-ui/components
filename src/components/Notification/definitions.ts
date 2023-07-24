@@ -25,6 +25,7 @@ export type NotificationProps = {
     title?: React.ReactNode;
     formattedDate?: React.ReactNode;
     unread?: boolean;
+    archived?: boolean;
     source?: NotificationSourceProps;
     theme?: NotificationTheme;
     className?: string;

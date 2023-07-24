@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import {Archive, Funnel, PencilToSquare, Plus, TrashBin} from '@gravity-ui/icons';
-import {DropdownMenu} from '@gravity-ui/uikit';
+import {Archive, CircleCheck, Funnel, Plus, TrashBin} from '@gravity-ui/icons';
+import {DropdownMenu, Link} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -10,7 +10,10 @@ import {
     svgReactStoryIcon,
     svgTrackerStoryIcon,
     svgYandexStoryIcon,
+    trackerUserIcon,
 } from './storyIcons';
+
+const LINK = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
 export const notificationsMockActions: JSX.Element = (
     <>
@@ -59,10 +62,10 @@ export const notificationsMockSwipeActions: NotificationSwipeActionsProps = {
 export const notificationSideActions: JSX.Element = (
     <>
         <NotificationAction
-            action={{icon: PencilToSquare, text: 'Edit', onClick: () => console.log('FILTER')}}
+            action={{icon: CircleCheck, text: 'Mark as read', onClick: () => console.log('READ')}}
         />
         <NotificationAction
-            action={{icon: TrashBin, text: 'Delete', onClick: () => console.log('DELETE')}}
+            action={{icon: Archive, text: 'Archive', onClick: () => console.log('ARCHIVE')}}
         />
     </>
 );
@@ -82,14 +85,32 @@ export const mockNotifications: NotificationProps[] = [
     {
         id: 'tracker',
         title: 'An unread notification',
-        content: 'No one has read this notification yet...',
+        content: (
+            <div style={{position: 'relative', paddingRight: '16px'}}>
+                Shrek desperatly wants your attention in this{' '}
+                <Link target={'_blank'} href={LINK}>
+                    ticket
+                </Link>
+                <img
+                    style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        right: 0,
+                        borderRadius: '100%',
+                        background: 'rgba(0, 0, 0, 0.1)',
+                    }}
+                    width={18}
+                    height={18}
+                    src={trackerUserIcon}
+                ></img>
+            </div>
+        ),
         formattedDate: 'just now',
         source: {
             title: 'Tracker',
             icon: svgTrackerStoryIcon,
-            href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            href: LINK,
         },
-        unread: true,
         sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
@@ -97,17 +118,19 @@ export const mockNotifications: NotificationProps[] = [
         id: 'samurai',
         content: <i>A samurai has no goal, only a path</i>,
         formattedDate: '12 seconds ago',
-        unread: true,
+        sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'minimum',
         content: <i>Bare minimum</i>,
+        formattedDate: '13 seconds ago',
     },
     {
         id: 'ninja',
         content: <i>Reaction of a cat, speed of a mongoose</i>,
         formattedDate: '28 seconds ago',
+        sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
     {
@@ -121,9 +144,8 @@ export const mockNotifications: NotificationProps[] = [
         source: {
             title: 'Yandex',
             icon: svgYandexStoryIcon,
-            href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            href: LINK,
         },
-        unread: false,
         theme: 'info',
         sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
@@ -137,7 +159,7 @@ export const mockNotifications: NotificationProps[] = [
         source: {
             title: 'Billing',
             icon: svgCloudStoryIcon,
-            href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            href: LINK,
         },
         theme: 'success',
         bottomActions: notificationBottomActions,
@@ -150,10 +172,19 @@ export const mockNotifications: NotificationProps[] = [
         source: {
             title: 'React',
             icon: svgReactStoryIcon,
-            href: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            href: LINK,
         },
         formattedDate: 'ethernity ago',
         theme: 'danger',
         swipeActions: {...notificationsMockSwipeActions, right: undefined},
     },
 ];
+
+export function generateNotification(index: number): NotificationProps {
+    return {
+        id: `notification-${index}`,
+        title: `We are number ${index}`,
+        content: `You're viewing notification #${index}`,
+        formattedDate: `${Math.round(index / 10) + 2} minutes ago`,
+    };
+}
