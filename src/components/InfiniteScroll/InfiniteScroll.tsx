@@ -42,17 +42,15 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
             setIsActive(true);
             await onActivate();
 
-            setTimeout(() => {
-                if (mounted.current) {
-                    setIsActive(false);
-                }
-            }, 100);
+            if (mounted.current) {
+                setIsActive(false);
+            }
         };
 
         if (isBottomVisible && !isActive && !disabled) {
             handleFetchData();
         }
-    }, [isBottomVisible, onActivate, isActive, disabled]);
+    }, [isBottomVisible]);
 
     const renderedLoader = loader || (
         <div className={b('loader')}>
