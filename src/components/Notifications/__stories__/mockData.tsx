@@ -87,7 +87,7 @@ export const mockNotifications: NotificationProps[] = [
         title: 'An unread notification',
         content: (
             <div style={{position: 'relative', paddingRight: '16px'}}>
-                Shrek desperatly wants your attention in this{' '}
+                Shrek desperately wants your attention in this{' '}
                 <Link target={'_blank'} href={LINK}>
                     ticket
                 </Link>
@@ -185,6 +185,6 @@ export function generateNotification(index: number): NotificationProps {
         id: `notification-${index}`,
         title: `We are number ${index}`,
         content: `You're viewing notification #${index}`,
-        formattedDate: `${Math.round(index / 10) + 2} minutes ago`,
+        formattedDate: `${Math.round(index / 2) + 2} minutes ago`,
     };
 }
