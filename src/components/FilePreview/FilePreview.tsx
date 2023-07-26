@@ -19,20 +19,9 @@ import {getFileType} from './utils';
 import {FilePreviewAction, FilePreviewActionProps} from './FilePreviewAction';
 
 import './FilePreview.scss';
+import {FileType} from './types';
 
 const cn = block('file-preview');
-
-export enum FileType {
-    Default = 'default',
-    Image = 'image',
-    Video = 'video',
-    Code = 'code',
-    Archive = 'archive',
-    Music = 'music',
-    Text = 'text',
-    Pdf = 'pdf',
-    Table = 'table',
-}
 
 const FILE_ICON: Record<FileType, IconData> = {
     [FileType.Default]: DefaultIcon,
@@ -73,19 +62,18 @@ export const FilePreview: FC<FilePreviewProps> = ({
     useEffect(() => {
         if (previewSrc) return undefined;
 
-        let createdUrl: string;
         try {
-            createdUrl = URL.createObjectURL(file);
+            const createdUrl = URL.createObjectURL(file);
 
             setImageSrc(createdUrl);
-        } catch (err) {}
 
-        return () => {
-            if (!createdUrl) return;
-
-            URL.revokeObjectURL(createdUrl);
-        };
-    }, [file]);
+            return () => {
+                URL.revokeObjectURL(createdUrl);
+            };
+        } catch (error: unknown) {
+            return undefined;
+        }
+    }, [file, previewSrc]);
 
     return (
         <div className={cn(null, className)} data-qa={qa}>
@@ -112,11 +100,15 @@ export const FilePreview: FC<FilePreviewProps> = ({
                     </Tooltip>
                 )}
             </Card>
-            <div className={cn('actions')}>
-                {actions?.map((action, index) => (
-                    <FilePreviewAction key={index} {...action} />
-                ))}
-            </div>
+            {actions?.length ? (
+                <div className={cn('actions')}>
+                    {actions.map((action, index) => (
+                        <FilePreviewAction key={index} {...action} />
+                    ))}
+                </div>
+            ) : null}
         </div>
     );
 };
+
+FilePreview.displayName = 'FilePreview';

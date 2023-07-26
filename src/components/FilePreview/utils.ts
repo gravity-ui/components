@@ -1,4 +1,4 @@
-import {FileType} from './FilePreview';
+import {FileType} from './types';
 
 const isFilePreviewFileType = (str: string): str is FileType =>
     Object.values(FileType).includes(str.toLowerCase() as FileType);

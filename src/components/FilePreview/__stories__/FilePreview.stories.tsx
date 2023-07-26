@@ -3,7 +3,8 @@ import React from 'react';
 import {CircleExclamation, Link, Xmark} from '@gravity-ui/icons';
 import type {Meta, StoryFn} from '@storybook/react';
 
-import {FilePreview, FilePreviewProps, FileType} from '../FilePreview';
+import {FilePreview, FilePreviewProps} from '../FilePreview';
+import {FileType} from '../types';
 
 export default {
     title: 'Components/FilePreview',

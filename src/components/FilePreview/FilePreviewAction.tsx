@@ -19,6 +19,7 @@ export const FilePreviewAction: FC<FilePreviewActionProps> = ({icon, title, href
             href={href}
             target="_blank"
             size="s"
+            aria-label={title || 'FilePreview action'}
         >
             <Icon data={icon} size={16} />
         </Button>
@@ -30,3 +31,5 @@ export const FilePreviewAction: FC<FilePreviewActionProps> = ({icon, title, href
 
     return <Tooltip content={<Text variant="caption-2">{title}</Text>}>{button}</Tooltip>;
 };
+
+FilePreviewAction.displayName = 'FilePreviewAction';

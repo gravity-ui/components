@@ -2,12 +2,6 @@
 
 A component for displaying the file.
 
-className,
-file,
-description,
-onClick,
-actions,
-
 ### PropTypes
 
 | Property            | Type                       | Required | Default | Description                                                                                                      |
