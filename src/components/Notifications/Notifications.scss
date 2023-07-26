@@ -6,8 +6,8 @@ $block: '.#{variables.$ns}notifications';
     display: flex;
     flex-direction: column;
     color: var(--g-color-text-primary);
-    background: var(--g-color-base-background);
     height: 100%;
+    width: 100%;
 
     &__head {
         display: flex;

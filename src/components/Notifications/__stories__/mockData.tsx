@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import {Archive, CircleCheck, Funnel, Plus, TrashBin} from '@gravity-ui/icons';
+import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
 import {DropdownMenu, Link} from '@gravity-ui/uikit';
 import React from 'react';
 import {NotificationAction} from '../../Notification/NotificationAction';
@@ -15,9 +15,11 @@ import {
 
 const LINK = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
-export const notificationsMockActions: JSX.Element = (
-    <>
-        <NotificationAction action={{icon: Plus, text: 'Add', onClick: () => console.log('ADD')}} />
+export const notificationsMockActions = {
+    unarchive: (onClick: () => void) => (
+        <NotificationAction action={{icon: Archive, text: 'Remove all from archive', onClick}} />
+    ),
+    filter: () => (
         <DropdownMenu
             switcher={
                 <NotificationAction
@@ -31,8 +33,8 @@ export const notificationsMockActions: JSX.Element = (
                 {text: 'You can put any popup here', action: () => console.log('cloud')},
             ]}
         />
-    </>
-);
+    ),
+};
 
 export const notificationsMockSwipeActions: NotificationSwipeActionsProps = {
     left: {
@@ -59,16 +61,20 @@ export const notificationsMockSwipeActions: NotificationSwipeActionsProps = {
     },
 };
 
-export const notificationSideActions: JSX.Element = (
-    <>
+export const notificationSideActions = {
+    read: (unread: boolean, onClick: () => void) => (
         <NotificationAction
-            action={{icon: CircleCheck, text: 'Mark as read', onClick: () => console.log('READ')}}
+            action={{
+                icon: unread ? CircleCheck : ArrowRotateLeft,
+                text: `Mark as ${unread ? 'read' : 'unread'}`,
+                onClick,
+            }}
         />
-        <NotificationAction
-            action={{icon: Archive, text: 'Archive', onClick: () => console.log('ARCHIVE')}}
-        />
-    </>
-);
+    ),
+    archive: (onClick: () => void) => (
+        <NotificationAction action={{icon: Archive, text: 'Archive', onClick}} />
+    ),
+};
 
 export const notificationBottomActions: JSX.Element = (
     <>
