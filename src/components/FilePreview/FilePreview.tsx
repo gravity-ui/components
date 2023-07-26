@@ -24,15 +24,15 @@ import {FileType} from './types';
 const cn = block('file-preview');
 
 const FILE_ICON: Record<FileType, IconData> = {
-    [FileType.Default]: DefaultIcon,
-    [FileType.Image]: ImageIcon,
-    [FileType.Video]: VideoIcon,
-    [FileType.Code]: CodeIcon,
-    [FileType.Archive]: ArchiveIcon,
-    [FileType.Music]: MusicIcon,
-    [FileType.Text]: TextIcon,
-    [FileType.Pdf]: PdfIcon,
-    [FileType.Table]: TableIcon,
+    default: DefaultIcon,
+    image: ImageIcon,
+    video: VideoIcon,
+    code: CodeIcon,
+    archive: ArchiveIcon,
+    music: MusicIcon,
+    text: TextIcon,
+    pdf: PdfIcon,
+    table: TableIcon,
 };
 
 export interface FilePreviewProps {

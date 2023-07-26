@@ -1,7 +1,7 @@
-import {FileType} from './types';
+import {FILE_TYPES, FileType} from './types';
 
 const isFilePreviewFileType = (str: string): str is FileType =>
-    Object.values(FileType).includes(str.toLowerCase() as FileType);
+    FILE_TYPES.includes(str.toLowerCase() as FileType);
 
 export function getFileType(fileType: File['type']): FileType;
 export function getFileType(file: File): FileType;
@@ -19,5 +19,5 @@ export function getFileType(arg: File | File['type']): FileType {
         return splittedFileType;
     }
 
-    return FileType.Default;
+    return 'default';
 }

@@ -1,11 +1,22 @@
-export enum FileType {
-    Default = 'default',
-    Image = 'image',
-    Video = 'video',
-    Code = 'code',
-    Archive = 'archive',
-    Music = 'music',
-    Text = 'text',
-    Pdf = 'pdf',
-    Table = 'table',
-}
+export type FileType =
+    | 'default'
+    | 'image'
+    | 'video'
+    | 'code'
+    | 'archive'
+    | 'music'
+    | 'text'
+    | 'pdf'
+    | 'table';
+
+export const FILE_TYPES: FileType[] = [
+    'default',
+    'image',
+    'video',
+    'code',
+    'archive',
+    'music',
+    'text',
+    'pdf',
+    'table',
+];

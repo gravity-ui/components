@@ -4,7 +4,7 @@ import {CircleExclamation, Link, Xmark} from '@gravity-ui/icons';
 import type {Meta, StoryFn} from '@storybook/react';
 
 import {FilePreview, FilePreviewProps} from '../FilePreview';
-import {FileType} from '../types';
+import {FILE_TYPES} from '../types';
 
 export default {
     title: 'Components/FilePreview',
@@ -23,7 +23,7 @@ const CollageTemplate: StoryFn<FilePreviewProps> = () => {
                 width: 500,
             }}
         >
-            {Object.values(FileType).map((fileType) => (
+            {FILE_TYPES.map((fileType) => (
                 <FilePreview
                     key={fileType}
                     file={{name: fileType, type: fileType} as File}
