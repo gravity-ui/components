@@ -117,14 +117,12 @@ export const mockNotifications: NotificationProps[] = [
             icon: svgTrackerStoryIcon,
             href: LINK,
         },
-        sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'samurai',
         content: <i>A samurai has no goal, only a path</i>,
         formattedDate: '12 seconds ago',
-        sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
     {
@@ -136,7 +134,6 @@ export const mockNotifications: NotificationProps[] = [
         id: 'ninja',
         content: <i>Reaction of a cat, speed of a mongoose</i>,
         formattedDate: '28 seconds ago',
-        sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
     {
@@ -153,7 +150,6 @@ export const mockNotifications: NotificationProps[] = [
             href: LINK,
         },
         theme: 'info',
-        sideActions: notificationSideActions,
         swipeActions: notificationsMockSwipeActions,
     },
     {
