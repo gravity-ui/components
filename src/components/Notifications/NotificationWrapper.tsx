@@ -63,7 +63,7 @@ export const NotificationWrapper = (props: {
     const style = wrapperMaxHeight === undefined ? {} : {maxHeight: `${wrapperMaxHeight}px`};
 
     if (isRemoved) {
-        return <></>;
+        return null;
     }
 
     return (
