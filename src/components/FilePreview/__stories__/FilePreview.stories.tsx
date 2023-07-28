@@ -68,6 +68,7 @@ Default.args = {
         {
             icon: Xmark,
             onClick: () => alert('Are you sure you want to delete the file?'),
+            title: 'Close',
         },
     ],
 };
