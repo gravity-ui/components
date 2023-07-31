@@ -4,5 +4,55 @@
     "env": {
         "node": true,
         "jest": true
+    },
+    "rules": {
+        "import/order": [
+            "error",
+            {
+                "alphabetize": {
+                    "order": "asc"
+                },
+                "newlines-between": "always",
+                "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+                "pathGroups": [
+                    {
+                        "pattern": "react",
+                        "group": "external",
+                        "position": "before"
+                    },
+                    {
+                        "pattern": "{@gravity-ui}/**",
+                        "group": "external",
+                        "position": "after"
+                    },
+                    {
+                        "pattern": "*.{svg,png,jpg,jpeg,json}",
+                        "patternOptions": {
+                            "dot": true,
+                            "nocomment": true,
+                            "matchBase": true
+                        },
+                        "group": "type",
+                        "position": "after"
+                    },
+                    {
+                        "pattern": "*.{css,scss}",
+                        "patternOptions": {
+                            "dot": true,
+                            "nocomment": true,
+                            "matchBase": true
+                        },
+                        "group": "type",
+                        "position": "after"
+                    }
+                ],
+                "pathGroupsExcludedImportTypes": [
+                    "*.{css,scss}",
+                    "*.{svg,png,jpg,jpeg,json}",
+                    "react"
+                ],
+                "warnOnUnassignedImports": true
+            }
+        ]
     }
 }

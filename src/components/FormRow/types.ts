@@ -1,4 +1,4 @@
-import type {ReactNode, HTMLAttributes, PropsWithChildren} from 'react';
+import type {HTMLAttributes, PropsWithChildren, ReactNode} from 'react';
 
 export interface FormRowProps {
     className?: string;

@@ -1,10 +1,13 @@
 import React from 'react';
+
 import {block} from '../utils/cn';
-import './Notifications.scss';
+
 import {NotificationsEmptyState} from './NotificationsEmptyState';
 import {NotificationsList} from './NotificationsList';
 import {NotificationsProps} from './definitions';
 import i18n from './i18n';
+
+import './Notifications.scss';
 
 const b = block('notifications');
 

@@ -1,7 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+
 import {Loader} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
+
 import {useOnIntersected} from './hooks/useOnIntersected';
 
 import './InfiniteScroll.scss';

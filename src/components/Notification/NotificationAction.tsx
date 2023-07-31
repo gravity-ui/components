@@ -1,8 +1,12 @@
-import {Button, Icon, Tooltip} from '@gravity-ui/uikit';
 import React from 'react';
+
+import {Button, Icon, Tooltip} from '@gravity-ui/uikit';
+
 import {block} from '../utils/cn';
-import './Notification.scss';
+
 import {NotificationActionProps} from './definitions';
+
+import './Notification.scss';
 
 const b = block('notification');
 

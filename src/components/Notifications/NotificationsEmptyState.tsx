@@ -1,6 +1,9 @@
-import {Icon, useTheme} from '@gravity-ui/uikit';
 import React from 'react';
+
+import {Icon, useTheme} from '@gravity-ui/uikit';
+
 import {block} from '../utils/cn';
+
 import './Notifications.scss';
 
 const b = block('notifications');

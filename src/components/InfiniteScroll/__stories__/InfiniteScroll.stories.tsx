@@ -1,7 +1,10 @@
 import React from 'react';
-import {InfiniteScroll} from '../InfiniteScroll';
-import {InfiniteScrollShowcase} from './InfiniteScrollShowcase';
+
 import type {Meta, Story} from '@storybook/react';
+
+import {InfiniteScroll} from '../InfiniteScroll';
+
+import {InfiniteScrollShowcase} from './InfiniteScrollShowcase';
 
 export default {
     title: 'Components/InfiniteScroll',

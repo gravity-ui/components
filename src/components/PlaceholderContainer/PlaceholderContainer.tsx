@@ -3,12 +3,12 @@ import React from 'react';
 import {block} from '../utils/cn';
 
 import {PlaceholderContainerAction} from './PlaceholderContainerAction';
-import {componentClassName, Direction, Align} from './constants';
+import {Align, Direction, componentClassName} from './constants';
 import {
     PlaceholderContainerDefaultProps,
-    PlaceholderContainerState,
-    PlaceholderContainerInnerProps,
     PlaceholderContainerImageSettingsProps,
+    PlaceholderContainerInnerProps,
+    PlaceholderContainerState,
 } from './types';
 
 import './PlaceholderContainer.scss';
