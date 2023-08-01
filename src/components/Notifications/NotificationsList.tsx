@@ -16,32 +16,31 @@ type Props = {
     swipeThreshold?: number;
 };
 
-export const NotificationsList = React.memo(function NotificationsList(props: Props) {
-    return (
-        <div className={b('list')}>
-            {props.notifications.map((notification) =>
-                renderNotification(notification, props.swipeThreshold),
-            )}
-        </div>
-    );
-});
-
-function renderNotification(notification: NotificationProps, swipeThreshold?: number): JSX.Element {
+export const NotificationsList = React.memo(function NotificationsList({
+    notifications,
+    swipeThreshold,
+}: Props) {
     const [mobile] = useMobile();
 
     return (
-        <div
-            className={`${b('notification-wrapper')} ${notification.unread ? 'unread' : ''}`}
-            key={notification.id}
-        >
-            {mobile && notification.swipeActions ? (
-                <NotificationWithSwipe
-                    notification={notification}
-                    swipeThreshold={swipeThreshold}
-                />
-            ) : (
-                <Notification notification={notification} />
-            )}
+        <div className={b('list')}>
+            {notifications.map((notification) => (
+                <div
+                    className={`${b('notification-wrapper')} ${
+                        notification.unread ? 'unread' : ''
+                    }`}
+                    key={notification.id}
+                >
+                    {mobile && notification.swipeActions ? (
+                        <NotificationWithSwipe
+                            notification={notification}
+                            swipeThreshold={swipeThreshold}
+                        />
+                    ) : (
+                        <Notification notification={notification} />
+                    )}
+                </div>
+            ))}
         </div>
     );
-}
+});
