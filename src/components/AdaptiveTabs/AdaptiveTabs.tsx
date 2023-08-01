@@ -6,9 +6,10 @@ import difference from 'lodash/difference';
 import throttle from 'lodash/throttle';
 import ResizeObserver from 'resize-observer-polyfill';
 
-import i18n from './i18n';
-import {DEFAULT_BREAK_POINTS_CONFIG} from './constants';
 import {block} from '../utils/cn';
+
+import {DEFAULT_BREAK_POINTS_CONFIG} from './constants';
+import i18n from './i18n';
 
 import './AdaptiveTabs.scss';
 

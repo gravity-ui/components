@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {render, screen, fireEvent} from '@testing-library/react';
-import {DelayedTextInput} from '../DelayedTextInput';
+import {fireEvent, render, screen} from '@testing-library/react';
 
 import {setupTimersMock} from '../../../../test-utils/setupTimersMock';
+import {DelayedTextInput} from '../DelayedTextInput';
 
 setupTimersMock();
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {TextInput, TextInputProps} from '@gravity-ui/uikit';
+
 import {useDelayedValue} from './hooks/useDelayedValue';
 
 type DelayedTextInputProps = Required<Pick<TextInputProps, 'onUpdate' | 'value'>> &

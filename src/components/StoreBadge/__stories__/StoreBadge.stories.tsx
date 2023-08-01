@@ -1,7 +1,7 @@
 import React from 'react';
-import {Meta, Story} from '@storybook/react';
 
 import {Platform} from '@gravity-ui/uikit';
+import {Meta, Story} from '@storybook/react';
 
 import {StoreBadge, StoreBadgeProps} from '../StoreBadge';
 

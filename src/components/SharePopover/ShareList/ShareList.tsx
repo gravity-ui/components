@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Link} from '@gravity-ui/icons';
-import {Button, Icon, CopyToClipboard, CopyToClipboardStatus} from '@gravity-ui/uikit';
+import {Button, CopyToClipboard, CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
 import type {IconData} from '@gravity-ui/uikit';
 
 import {block} from '../../utils/cn';

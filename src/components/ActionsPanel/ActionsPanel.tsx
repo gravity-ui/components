@@ -1,7 +1,10 @@
 import React from 'react';
-import {block} from '../utils/cn';
-import {Button, Icon, Text} from '@gravity-ui/uikit';
+
 import {Xmark} from '@gravity-ui/icons';
+import {Button, Icon, Text} from '@gravity-ui/uikit';
+
+import {block} from '../utils/cn';
+
 import {CollapseActions} from './components/CollapseActions';
 import {ActionsPanelProps} from './types';
 

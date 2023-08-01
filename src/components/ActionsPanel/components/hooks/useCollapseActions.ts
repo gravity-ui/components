@@ -1,7 +1,9 @@
 import React from 'react';
+
 import {ActionItem} from '../../types';
-import {useObserveIntersection} from './useObserveIntersection';
+
 import {useDropdownActions} from './useDropdownActions';
+import {useObserveIntersection} from './useObserveIntersection';
 
 const MAX_BUTTON_ACTIONS = 4;
 
