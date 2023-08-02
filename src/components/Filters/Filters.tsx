@@ -4,7 +4,7 @@ import isEqual from 'lodash/isEqual';
 import {block} from '../utils/cn';
 import {FieldControl} from './components/FilterControl';
 import {FilterSelect} from './components/FilterSelect';
-import {ClearFiltersButton} from './components/ClearFiltersButton/ClearFiltersButton';
+import {ResetFiltersButton} from './components/ClearFiltersButton/ResetFiltersButton';
 
 import i18n from './i18n';
 
@@ -25,7 +25,7 @@ export type FiltersSchema = Record<string, FilterSchema>;
 interface FiltersComponentProps {
     className?: string;
 
-    filtersSchema: FiltersSchema;
+    schema: FiltersSchema;
 
     showEmptyText?: boolean;
 
@@ -46,15 +46,15 @@ interface FiltersComponentProps {
      */
     filtersValues: FiltersValue;
 
-    onChangeFilterValue: (id: string, value: FilterValue) => void;
+    onFilterValueChange: (id: string, value: FilterValue) => void;
 
-    onRemoveFilterValue: (id: string, value: FilterValue) => void;
+    onFilterValueRemove: (id: string, value: FilterValue) => void;
 
     /**
      *
      * @param values Currently applied filters
      */
-    onClearAllFilters: (values: React.ComponentProps<typeof Filters>['filtersValues']) => void;
+    onFiltersValuesReset: (values: React.ComponentProps<typeof Filters>['filtersValues']) => void;
 }
 
 const defaultFiltersValues = {};
@@ -62,14 +62,14 @@ const defaultFiltersValues = {};
 export function Filters(props: FiltersComponentProps) {
     const {
         className,
-        filtersSchema,
+        schema,
         showEmptyText = false,
         initialOpenFilterKey,
         initialValues,
         filtersValues = defaultFiltersValues,
-        onRemoveFilterValue,
-        onChangeFilterValue,
-        onClearAllFilters,
+        onFilterValueRemove,
+        onFilterValueChange,
+        onFiltersValuesReset,
     } = props;
 
     const [openFilterKey, setOpenFilterKey] = React.useState<string | undefined>(
@@ -86,34 +86,32 @@ export function Filters(props: FiltersComponentProps) {
 
     const filtersSelectOptions = React.useMemo(
         () =>
-            Object.values(filtersSchema).map((field) => ({
+            Object.values(schema).map((field) => ({
                 label: field.displayName,
                 value: field.id,
                 description: field.description,
             })),
-        [filtersSchema],
+        [schema],
     );
 
     const handleFiltersSelectItemClick = React.useCallback(
         (id: string) => {
             if (filtersValues[id] === undefined) {
                 const initialValue =
-                    'initialValue' in filtersSchema[id]
-                        ? filtersSchema[id].initialValue
-                        : undefined;
+                    'initialValue' in schema[id] ? schema[id].initialValue : undefined;
 
-                onChangeFilterValue(id, initialValue);
+                onFilterValueChange(id, initialValue);
 
-                if (!filtersSchema[id]?.skipControlRenderer) {
+                if (!schema[id]?.skipControlRenderer) {
                     setOpenFilterKey(id);
                 }
             } else {
-                onRemoveFilterValue(id, filtersValues[id]);
+                onFilterValueRemove(id, filtersValues[id]);
 
                 setOpenFilterKey(undefined);
             }
         },
-        [filtersValues, onRemoveFilterValue, onChangeFilterValue, filtersSchema],
+        [filtersValues, onFilterValueRemove, onFilterValueChange, schema],
     );
 
     const selectedFiltersOptions = React.useMemo(() => Object.keys(filtersValues), [filtersValues]);
@@ -124,10 +122,10 @@ export function Filters(props: FiltersComponentProps) {
         selectedFiltersOptions.length < filtersSelectOptions.length;
 
     return (
-        <section className={b(null, className)}>
+        <div className={b(null, className)}>
             {selectedFiltersOptions.length > 0
                 ? selectedFiltersOptions.map((filterKey) => {
-                      const filterSchema = filtersSchema[filterKey];
+                      const filterSchema = schema[filterKey];
 
                       if (!filterSchema) {
                           return null;
@@ -147,14 +145,14 @@ export function Filters(props: FiltersComponentProps) {
                               fieldValue={filterSchema.renderValue(filterValue)}
                               emptyValueText={filterSchema.emptyValueText}
                               disableOpening={filterSchema.readOnlyAfterApply}
-                              onClear={() => onRemoveFilterValue(filterKey, filterValue)}
+                              onClear={() => onFilterValueRemove(filterKey, filterValue)}
                               defaultOpen={defaultOpen}
                           >
                               {({onClose}) =>
                                   filterSchema.filterControlRenderer?.(filterValue, {
                                       onClose,
                                       onSubmit: (id: string, values: unknown) => {
-                                          onChangeFilterValue(id, values);
+                                          onFilterValueChange(id, values);
                                           setOpenFilterKey(undefined);
                                           onClose();
                                       },
@@ -175,8 +173,8 @@ export function Filters(props: FiltersComponentProps) {
                 />
             ) : null}
             {isEmptyFilters ? null : (
-                <ClearFiltersButton onClick={() => onClearAllFilters(filtersValues)} />
+                <ResetFiltersButton onClick={() => onFiltersValuesReset(filtersValues)} />
             )}
-        </section>
+        </div>
     );
 }

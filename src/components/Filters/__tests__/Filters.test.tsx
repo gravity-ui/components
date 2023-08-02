@@ -52,11 +52,11 @@ function FiltersWithHookWrapper() {
 
     return (
         <Filters
-            filtersSchema={filtersSchema}
+            schema={filtersSchema}
             filtersValues={filtersValues}
-            onChangeFilterValue={handleChangeFilterValue}
-            onRemoveFilterValue={handleRemoveFilterValue}
-            onClearAllFilters={handleClearAllFilters}
+            onFilterValueChange={handleChangeFilterValue}
+            onFilterValueRemove={handleRemoveFilterValue}
+            onFiltersValuesReset={handleClearAllFilters}
         />
     );
 }
@@ -66,10 +66,10 @@ describe('Filters', () => {
         render(
             <Filters
                 filtersValues={{}}
-                filtersSchema={filtersSchema}
-                onChangeFilterValue={jest.fn()}
-                onRemoveFilterValue={jest.fn()}
-                onClearAllFilters={jest.fn()}
+                schema={filtersSchema}
+                onFilterValueChange={jest.fn()}
+                onFilterValueRemove={jest.fn()}
+                onFiltersValuesReset={jest.fn()}
             />,
         );
 
@@ -83,10 +83,10 @@ describe('Filters', () => {
             <Filters
                 initialValues={{direction: ['IN']}}
                 filtersValues={{direction: ['IN']}}
-                filtersSchema={filtersSchema}
-                onChangeFilterValue={jest.fn()}
-                onRemoveFilterValue={jest.fn()}
-                onClearAllFilters={jest.fn()}
+                schema={filtersSchema}
+                onFilterValueChange={jest.fn()}
+                onFilterValueRemove={jest.fn()}
+                onFiltersValuesReset={jest.fn()}
             />,
         );
 
@@ -122,10 +122,10 @@ describe('Filters', () => {
             render(
                 <Filters
                     filtersValues={{}}
-                    filtersSchema={filtersSchema}
-                    onChangeFilterValue={jest.fn()}
-                    onRemoveFilterValue={jest.fn()}
-                    onClearAllFilters={jest.fn()}
+                    schema={filtersSchema}
+                    onFilterValueChange={jest.fn()}
+                    onFilterValueRemove={jest.fn()}
+                    onFiltersValuesReset={jest.fn()}
                 />,
             );
 
@@ -139,10 +139,10 @@ describe('Filters', () => {
                 <Filters
                     initialValues={{direction: ['IN']}}
                     filtersValues={{direction: ['IN']}}
-                    filtersSchema={filtersSchema}
-                    onChangeFilterValue={jest.fn()}
-                    onRemoveFilterValue={jest.fn()}
-                    onClearAllFilters={jest.fn()}
+                    schema={filtersSchema}
+                    onFilterValueChange={jest.fn()}
+                    onFilterValueRemove={jest.fn()}
+                    onFiltersValuesReset={jest.fn()}
                 />,
             );
 
@@ -155,10 +155,10 @@ describe('Filters', () => {
             render(
                 <Filters
                     filtersValues={{direction: ['IN']}}
-                    filtersSchema={filtersSchema}
-                    onChangeFilterValue={jest.fn()}
-                    onRemoveFilterValue={jest.fn()}
-                    onClearAllFilters={jest.fn()}
+                    schema={filtersSchema}
+                    onFilterValueChange={jest.fn()}
+                    onFilterValueRemove={jest.fn()}
+                    onFiltersValuesReset={jest.fn()}
                 />,
             );
 
@@ -178,10 +178,10 @@ describe('Filters', () => {
                 return (
                     <Filters
                         filtersValues={filtersValues}
-                        filtersSchema={filtersSchema}
-                        onChangeFilterValue={jest.fn()}
-                        onRemoveFilterValue={jest.fn()}
-                        onClearAllFilters={handleResetFilters}
+                        schema={filtersSchema}
+                        onFilterValueChange={jest.fn()}
+                        onFilterValueRemove={jest.fn()}
+                        onFiltersValuesReset={handleResetFilters}
                     />
                 );
             }

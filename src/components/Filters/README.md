@@ -19,7 +19,7 @@ There are code examples below for both approaches.
 
 | Property                | Type                                       | Required | Default value | Description                                                                                                               |
 | :---------------------- | :----------------------------------------- | :------: | :------------ | :------------------------------------------------------------------------------------------------------------------------ |
-| filtersSchema           | [FilterSchema](./schemas/types.ts)         |   true   |               | Object with filterId as key and filter schema as value                                                                    |
+| schema                  | [FilterSchema](./schemas/types.ts)         |   true   |               | Object with filterId as key and filter schema as value                                                                    |
 | values                  | [FiltersValue](./Filters.tsx#17)           |   true   |               | Object with filterId as key and filter value as value, e.g. `{location: ['Moscow', 'London'], author: ['Max', 'Travis']}` |
 | handleChangeFilterValue | `(id: string, value: FilterValue) => void` |   true   |               | Called after user selects filters from FiltersSelect or applies value directly from FilterControl                         |
 | handleRemoveFilterValue | `(id: string, value: FilterValue) => void` |   true   |               | Called after user removes filter (Clicks X sign in default FilterControl implementation)                                  |
@@ -85,7 +85,7 @@ const initialFiltersValues = {
 function App() {
   const filtersApi = useFilters(initialFiltersValues);
 
-  return <Filters {...filtersApi} filtersSchemas={filtersSchemas} />;
+  return <Filters {...filtersApi} schema={filtersSchemas} />;
 }
 ```
 
@@ -163,11 +163,19 @@ function App() {
     });
   };
 
-  const handleClearAllFilters = (_values: any) => {
+  const handleResetFiltersValues = (_values: any) => {
     setFiltersValues({});
   };
 
-  return <Filters {...filtersApi} filtersSchemas={filtersSchemas} />;
+  return (
+    <Filters
+      schema={filtersSchemas}
+      filtersValues={filtersValues}
+      onFilterValueChange={handleChangeFilterValue}
+      onFilterValueRemove={onFilterValueRemove}
+      onFiltersValuesReset={handleResetFiltersValues}
+    />
+  );
 }
 ```
 

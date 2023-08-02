@@ -42,7 +42,7 @@ const directionFilter = createSimpleSingleSelectFilter('direction', 'Direction',
 
 const withProblemsFilter = createBooleanFilter('withProblems', 'With monitoring problems');
 
-const filtersSchema: React.ComponentProps<typeof Filters>['filtersSchema'] = {
+const filtersSchema: React.ComponentProps<typeof Filters>['schema'] = {
     month: monthFilter,
     direction: directionFilter,
     withProblems: withProblemsFilter,
@@ -61,11 +61,11 @@ function ImaginarySearchFiltersPlugNPlay() {
     return (
         <React.Fragment>
             <Filters
-                filtersSchema={filtersSchema}
+                schema={filtersSchema}
                 filtersValues={filtersValues}
-                onChangeFilterValue={handleChangeFilterValue}
-                onRemoveFilterValue={handleRemoveFilterValue}
-                onClearAllFilters={handleClearAllFilters}
+                onFilterValueChange={handleChangeFilterValue}
+                onFilterValueRemove={handleRemoveFilterValue}
+                onFiltersValuesReset={handleClearAllFilters}
             />
             <div>Filters stringified: {JSON.stringify(filtersValues) || 'empty'}</div>
         </React.Fragment>
@@ -96,11 +96,11 @@ function ImaginarySearchPage() {
     return (
         <React.Fragment>
             <Filters
-                filtersSchema={filtersSchema}
+                schema={filtersSchema}
                 filtersValues={filtersValues}
-                onChangeFilterValue={handleChangeFilterValue}
-                onRemoveFilterValue={handleRemoveFilterValue}
-                onClearAllFilters={handleClearAllFilters}
+                onFilterValueChange={handleChangeFilterValue}
+                onFilterValueRemove={handleRemoveFilterValue}
+                onFiltersValuesReset={handleClearAllFilters}
             />
             <div>Filters stringified: {JSON.stringify(filtersValues) || 'empty'}</div>
         </React.Fragment>

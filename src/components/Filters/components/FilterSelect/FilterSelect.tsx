@@ -85,8 +85,13 @@ export function FilterSelect(props: FilterSelectProps) {
                     {ModalContent}
                 </Sheet>
             ) : (
-                <Popup open={open} anchorRef={controlRef} onClose={handleClose}>
-                    <div className={b('popup')}>{ModalContent}</div>
+                <Popup
+                    open={open}
+                    anchorRef={controlRef}
+                    onClose={handleClose}
+                    contentClassName={b('popup')}
+                >
+                    {ModalContent}
                 </Popup>
             )}
         </span>

@@ -7,18 +7,18 @@ import {block} from '../../../utils/cn';
 
 import i18n from './i18n';
 
-import './ClearFiltersButton.scss';
+import './ResetFiltersButton.scss';
 
-const b = block('clear-filters-button');
+const b = block('reset-filters-button');
 
-interface ClearFiltersButtonProps {
+interface ResetFiltersButtonProps {
     text?: string;
     className?: string;
 
     onClick: () => void;
 }
 
-export function ClearFiltersButton(props: ClearFiltersButtonProps) {
+export function ResetFiltersButton(props: ResetFiltersButtonProps) {
     const {className, text = i18n('button.reset.text'), onClick} = props;
 
     return (
