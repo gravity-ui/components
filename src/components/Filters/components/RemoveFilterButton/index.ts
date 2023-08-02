@@ -1,0 +1,1 @@
+export {RemoveFilterButton} from './RemoveFilterButton';

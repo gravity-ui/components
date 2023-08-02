@@ -1,0 +1,45 @@
+@use '@gravity-ui/uikit/styles/mixins';
+
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}filter-select';
+
+#{$block} {
+    &__popup {
+        display: flex;
+        width: 320px;
+    }
+
+    &__option-title {
+        display: -webkit-box; // stylelint-disable-line value-no-vendor-prefix
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        vertical-align: middle;
+
+        white-space: normal;
+        text-overflow: ellipsis;
+        word-break: break-all;
+
+        &_no-icon {
+            margin-inline-start: calc(var(--g-spacing-half) + 18px); // check icon + spacing
+        }
+    }
+
+    &__option-title-icon {
+        margin-inline-end: var(--g-spacing-1);
+    }
+
+    &__button-icon {
+        color: var(--g-color-text-complementary);
+    }
+
+    &__help-content-title {
+        @include mixins.text-subheader-3();
+    }
+
+    &__help-content-description {
+        color: var(--g-color-text-secondary);
+
+        margin-block-start: var(--g-spacing-3);
+    }
+}

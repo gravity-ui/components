@@ -1,0 +1,46 @@
+@use '@gravity-ui/uikit/styles/mixins';
+
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}filter-value';
+
+#{$block} {
+    position: relative;
+
+    display: inline-block;
+
+    &__content {
+        color: var(--g-color-text-complementary);
+
+        &_type_button {
+            @include mixins.button-reset();
+        }
+
+        &_type_button {
+            display: inline-block;
+
+            &::before {
+                position: absolute;
+                inset: 0;
+
+                content: '';
+
+                border-radius: 5px;
+
+                transition: background-color 0.15s linear;
+            }
+
+            &:hover::before {
+                background-color: var(--g-color-base-simple-hover);
+            }
+
+            &:focus::before {
+                box-shadow: 0 0 0 2px var(--g-color-line-misc);
+            }
+
+            &:focus:not(:focus-visible)::before {
+                box-shadow: none;
+            }
+        }
+    }
+}

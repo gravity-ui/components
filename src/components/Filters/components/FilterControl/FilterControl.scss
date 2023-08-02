@@ -1,0 +1,11 @@
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}filter-control';
+
+#{$block} {
+    display: inline-block;
+
+    &__popup {
+        width: 320px;
+    }
+}

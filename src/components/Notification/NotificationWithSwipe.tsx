@@ -122,6 +122,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
         return () => {
             gesture.destroy();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [position]);
 
     return (

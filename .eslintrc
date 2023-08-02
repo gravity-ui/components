@@ -8,5 +8,8 @@
     "env": {
         "node": true,
         "jest": true
+    },
+    "rules": {
+        "react-hooks/exhaustive-deps": "error"
     }
 }

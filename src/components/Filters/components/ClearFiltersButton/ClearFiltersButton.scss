@@ -1,0 +1,12 @@
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}clear-filters-button';
+
+#{$block} {
+    margin-block-start: var(--g-spacing-2);
+    margin-inline-start: var(--g-spacing-2);
+
+    &__icon {
+        transform: scaleX(-1);
+    }
+}
