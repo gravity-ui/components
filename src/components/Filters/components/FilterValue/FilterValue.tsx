@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Text, Label} from '@gravity-ui/uikit';
+import {Label, Text} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 

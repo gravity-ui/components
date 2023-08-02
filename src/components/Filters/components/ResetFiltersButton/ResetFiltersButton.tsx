@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Button, Icon} from '@gravity-ui/uikit';
 import {ArrowRotateLeft} from '@gravity-ui/icons';
+import {Button, Icon} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 

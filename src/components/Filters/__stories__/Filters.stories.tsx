@@ -4,7 +4,6 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 
 import {Filters} from '../Filters';
 import {useFilters} from '../hooks/use-filters';
-
 import {
     createBooleanFilter,
     createSimpleMultipleSelectFilter,

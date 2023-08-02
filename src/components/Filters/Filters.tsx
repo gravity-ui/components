@@ -1,13 +1,13 @@
 import React from 'react';
+
 import isEqual from 'lodash/isEqual';
 
 import {block} from '../utils/cn';
-import {FieldControl} from './components/FilterControl';
+
+import {FilterControl} from './components/FilterControl';
 import {FilterSelect} from './components/FilterSelect';
-import {ResetFiltersButton} from './components/ClearFiltersButton/ResetFiltersButton';
-
+import {ResetFiltersButton} from './components/ResetFiltersButton/ResetFiltersButton';
 import i18n from './i18n';
-
 import type {FilterSchema} from './schemas/types';
 
 import './Filters.scss';
@@ -134,7 +134,7 @@ export function Filters(props: FiltersComponentProps) {
                       const filterValue = filtersValues[filterKey];
                       const defaultOpen = openFilterKey === filterKey;
 
-                      const FilterControlTag = filterSchema.filterSwitchRenderer ?? FieldControl;
+                      const FilterControlTag = filterSchema.filterSwitchRenderer ?? FilterControl;
 
                       return (
                           <FilterControlTag

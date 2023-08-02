@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+
 import {FilterValue} from '../FilterValue';
 
 export default {

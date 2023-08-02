@@ -1,1 +1,1 @@
-export {FilterControl as FieldControl} from './FilterControl';
+export {FilterControl} from './FilterControl';

@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 
-import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {FilterControl} from '../FilterControl';
 import {Checkbox} from '@gravity-ui/uikit';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+
+import {FilterControl} from '../FilterControl';
 
 export default {
-    title: 'Components/FieldControl(unstable)',
+    title: 'Components/FilterControl(unstable)',
     component: FilterControl,
 } as ComponentMeta<typeof FilterControl>;
 
-function FieldControlContent(props: {
+function FilterControlContent(props: {
     onClose: VoidFunction;
     onChange: VoidFunction;
     displayName: string;
@@ -33,7 +34,7 @@ export const Default: ComponentStory<typeof FilterControl> = () => {
             onClear={() => setValue(false)}
         >
             {({onClose}) => (
-                <FieldControlContent
+                <FilterControlContent
                     displayName="Included"
                     value={value}
                     onClose={onClose}

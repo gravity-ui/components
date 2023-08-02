@@ -1,13 +1,14 @@
 import React from 'react';
 
-import {act, render, screen, fireEvent} from '@testing-library/react';
+import {act, fireEvent, render, screen} from '@testing-library/react';
+
 import {Filters} from '../Filters';
+import {useFilters} from '../hooks/use-filters';
 import {
+    createBooleanFilter,
     createSimpleMultipleSelectFilter,
     createSimpleSingleSelectFilter,
-    createBooleanFilter,
 } from '../schemas';
-import {useFilters} from '../hooks/use-filters';
 
 const monthFilter = createSimpleMultipleSelectFilter('month', 'Month', {
     filterOptions: [

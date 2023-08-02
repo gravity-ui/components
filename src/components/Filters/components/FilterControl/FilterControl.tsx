@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
+
 import {Popup, Sheet, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
-
 import {FilterValue} from '../FilterValue';
 
 import i18n from './i18n';

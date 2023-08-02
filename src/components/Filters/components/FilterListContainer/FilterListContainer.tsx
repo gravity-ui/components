@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Button, Icon, List, Text, useMobile} from '@gravity-ui/uikit';
-import {HelpPopover} from '../../../HelpPopover';
 import {Check} from '@gravity-ui/icons';
+import {Button, Icon, List, Text, useMobile} from '@gravity-ui/uikit';
 
+import {HelpPopover} from '../../../HelpPopover';
 import {block} from '../../../utils/cn';
 
 import {DESKTOP_ITEM_HEIGHT, MOBILE_ITEM_HEIGHT} from './constants';

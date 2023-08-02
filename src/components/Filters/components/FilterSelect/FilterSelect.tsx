@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {Button, Icon, Popup, Sheet, useMobile} from '@gravity-ui/uikit';
 import {Plus} from '@gravity-ui/icons';
+import {Button, Icon, Popup, Sheet, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
-
 import {FilterListContainer} from '../FilterListContainer/FilterListContainer';
 
 import i18n from './i18n';
