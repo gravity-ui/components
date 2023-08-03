@@ -17,12 +17,14 @@ A component for displaying the file.
 
 For a file, you can prescribe actions that will be visible when you hover over it.
 
-| Property | Type       | Required | Default | Description          |
-| -------- | ---------- | -------- | ------- | -------------------- |
-| icon     | `String`   | yes      |         | Action icon          |
-| title    | `String`   |          |         | Action hint on hover |
-| onClick  | `function` |          |         | Action click handler |
-| href     | `String`   |          |         | Action button href   |
+| Property | Type       | Required | Default | Description             |
+| -------- | ---------- | -------- | ------- | ----------------------- |
+| id       | `String`   |          |         | Action id               |
+| icon     | `String`   | ✓        |         | Action icon             |
+| title    | `String`   | ✓        |         | Action hint on hover    |
+| label    | `String`   |          | `title` | Action aria-label value |
+| onClick  | `function` |          |         | Action click handler    |
+| href     | `String`   |          |         | Action button href      |
 
 ```jsx
 

@@ -1,29 +1,19 @@
 import React from 'react';
 
-import {act, render, screen} from '@testing-library/react';
+import {CircleExclamation} from '@gravity-ui/icons';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import {FilePreview} from '../FilePreview';
-import {CircleExclamation} from '@gravity-ui/icons';
 
 test('Renders base content', () => {
-    const qaId = 'file-preview';
     const fileName = 'Some file name';
     const fileType = 'image/png';
     const previewSrc =
         'https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png';
 
-    render(
-        <FilePreview
-            qa={qaId}
-            file={{name: fileName, type: fileType} as File}
-            previewSrc={previewSrc}
-        />,
-    );
+    render(<FilePreview file={{name: fileName, type: fileType} as File} previewSrc={previewSrc} />);
 
-    const filePreview = screen.getByTestId(qaId);
-
-    expect(filePreview).toBeDefined();
     expect(screen.getByText(fileName)).toBeInTheDocument();
 });
 
@@ -62,7 +52,7 @@ test('Call onClick handler', async () => {
     const filePreview = screen.getByText(fileName);
 
     const user = userEvent.setup();
-    await act(() => user.click(filePreview));
+    await user.click(filePreview);
 
     expect(clickHandler).toBeCalled();
 });
@@ -73,20 +63,25 @@ test('Renders actions', () => {
     const previewSrc =
         'https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png';
 
+    const firstActionText = 'some hint';
+    const secondActionText = 'second hint';
+
     render(
         <FilePreview
             file={{name: fileName, type: fileType} as File}
             previewSrc={previewSrc}
             actions={[
-                {icon: CircleExclamation, title: 'some hint'},
-                {icon: CircleExclamation, title: 'second hint'},
+                {icon: CircleExclamation, title: firstActionText},
+                {icon: CircleExclamation, title: secondActionText},
             ]}
         />,
     );
 
-    const actions = screen.getAllByRole('button');
-    expect(actions).toBeDefined();
-    expect(actions).toHaveLength(2);
+    const firstAction = screen.getByRole('button', {name: firstActionText});
+    expect(firstAction).toBeDefined();
+
+    const secondAction = screen.getByRole('button', {name: secondActionText});
+    expect(secondAction).toBeDefined();
 });
 
 test('Call action click handlers', async () => {
@@ -118,7 +113,7 @@ test('Call action click handlers', async () => {
 
     const user = userEvent.setup();
     for (const actionButton of actionButtons) {
-        await act(() => user.click(actionButton));
+        await user.click(actionButton);
     }
 
     expect(firstActionsClickHandler).toBeCalled();

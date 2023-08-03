@@ -4,14 +4,23 @@ import type {FC, MouseEventHandler} from 'react';
 import {Button, Icon, IconData, Text, Tooltip} from '@gravity-ui/uikit';
 
 export interface FilePreviewActionProps {
+    id?: string;
     icon: IconData;
     title: string;
+    label?: string;
     href?: string;
     onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
 }
 
-export const FilePreviewAction: FC<FilePreviewActionProps> = ({icon, title, href, onClick}) => (
-    <Tooltip content={<Text variant="caption-2">{title}</Text>}>
+export const FilePreviewAction: FC<FilePreviewActionProps> = ({
+    id,
+    icon,
+    title,
+    label,
+    href,
+    onClick,
+}) => (
+    <Tooltip id={id} content={<Text variant="caption-2">{title}</Text>}>
         {
             <Button
                 onClick={onClick}
@@ -20,7 +29,10 @@ export const FilePreviewAction: FC<FilePreviewActionProps> = ({icon, title, href
                 href={href}
                 target="_blank"
                 size="s"
-                aria-label={title}
+                extraProps={{
+                    'aria-label': label ?? title,
+                    'aria-describedby': label ? undefined : id,
+                }}
             >
                 <Icon data={icon} size={16} />
             </Button>
