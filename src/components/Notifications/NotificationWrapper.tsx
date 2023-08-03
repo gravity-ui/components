@@ -1,9 +1,12 @@
-import {useMobile} from '@gravity-ui/uikit';
 import React from 'react';
+
+import {useMobile} from '@gravity-ui/uikit';
+
 import {Notification} from '../Notification';
 import {NotificationWithSwipe} from '../Notification/NotificationWithSwipe';
 import {NotificationProps} from '../Notification/definitions';
 import {block} from '../utils/cn';
+
 import './Notifications.scss';
 
 const b = block('notifications');
