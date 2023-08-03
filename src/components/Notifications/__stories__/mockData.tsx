@@ -1,10 +1,13 @@
 /* eslint-disable no-console */
+import React from 'react';
+
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
 import {DropdownMenu, Link} from '@gravity-ui/uikit';
-import React from 'react';
+
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
 import {NotificationProps, NotificationSwipeActionsProps} from '../../Notification/definitions';
+
 import {
     svgCloudStoryIcon,
     svgReactStoryIcon,

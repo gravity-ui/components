@@ -1,10 +1,13 @@
 import React from 'react';
-import block from 'bem-cn-lite';
+
 import {ChevronDown} from '@gravity-ui/icons';
 import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
-import {PlaceholderContainer, PlaceholderContainerProps} from '../index';
-import './PlaceholderContainerShowcase.scss';
+import block from 'bem-cn-lite';
+
 import {Action} from '../PlaceholderContainerAction';
+import {PlaceholderContainer, PlaceholderContainerProps} from '../index';
+
+import './PlaceholderContainerShowcase.scss';
 
 const b = block('placeholder-container-showcase');
 

@@ -1,9 +1,12 @@
 import React from 'react';
-import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
+
 import {Ellipsis} from '@gravity-ui/icons';
+import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
+
 import {block} from '../../utils/cn';
 import {ActionItem} from '../types';
-import {useCollapseActions, OBSERVER_TARGET_ATTR} from './hooks';
+
+import {OBSERVER_TARGET_ATTR, useCollapseActions} from './hooks';
 
 import './CollapseActions.scss';
 

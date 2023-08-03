@@ -1,9 +1,11 @@
 import React from 'react';
-import {List, ListProps, Button, Icon} from '@gravity-ui/uikit';
+
 import {Xmark} from '@gravity-ui/icons';
+import {Button, Icon, List, ListProps} from '@gravity-ui/uikit';
+
+import {block} from '../utils/cn';
 
 import i18n from './i18n';
-import {block} from '../utils/cn';
 
 import './ItemSelector.scss';
 

@@ -1,13 +1,16 @@
 import React from 'react';
+
 import {InfiniteScroll} from '../InfiniteScroll';
 import {block} from '../utils/cn';
-import './Notifications.scss';
+
 import {NotificationsEmptyState} from './NotificationsEmptyState';
 import {NotificationsErrorState} from './NotificationsErrorState';
 import {NotificationsList} from './NotificationsList';
 import {NotificationsLoadingState} from './NotificationsLoadingState';
 import {NotificationsProps} from './definitions';
 import i18n from './i18n';
+
+import './Notifications.scss';
 
 const b = block('notifications');
 

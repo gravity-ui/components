@@ -1,12 +1,15 @@
 /* eslint-disable no-console */
+import React from 'react';
+
 import {Bell} from '@gravity-ui/icons';
 import {Button, Icon, Popup} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
-import React from 'react';
+
 import {delay} from '../../InfiniteScroll/__stories__/utils';
 import {NotificationProps} from '../../Notification/definitions';
 import {Notifications} from '../Notifications';
 import {NotificationsPopupWrapper} from '../NotificationsPopupWrapper';
+
 import {
     generateNotification,
     mockNotifications,
@@ -37,7 +40,7 @@ const Wrapper = (props: React.PropsWithChildren) => {
 type BooleanMap = Record<string, boolean | undefined>;
 
 export const Default: StoryFn = () => {
-    const {notifications, actions} = getNotificationsWithActions();
+    const {notifications, actions} = useNotificationsWithActions();
 
     return (
         <Wrapper>
@@ -72,7 +75,7 @@ export const LoadByScrolling: StoryFn = () => {
 };
 
 export const InsideAPopup: StoryFn = () => {
-    const {notifications, actions} = getNotificationsWithActions();
+    const {notifications, actions} = useNotificationsWithActions();
     const [isOpen, setIsOpen] = React.useState(false);
     const ref = React.useRef(null);
 
@@ -127,7 +130,7 @@ export const Empty: StoryFn = () => {
     );
 };
 
-function getNotificationsWithActions() {
+function useNotificationsWithActions() {
     const [unreadNotifications, setUnreadNotifications] = React.useState<BooleanMap>({
         tracker: true,
         samurai: true,
@@ -167,7 +170,7 @@ function getNotificationsWithActions() {
                     sideActions: getSideActions(id, unread, archived),
                 };
             }),
-        [unreadNotifications, archivedNotifications],
+        [unreadNotifications, archivedNotifications, getSideActions],
     );
 
     const actions = (

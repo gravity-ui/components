@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {VisibilityMap} from './types';
 
 export const OBSERVER_TARGET_ATTR = 'data-observer-id';

@@ -1,6 +1,7 @@
 import React from 'react';
+
 import {Xmark} from '@gravity-ui/icons';
-import {Button, Link, Icon} from '@gravity-ui/uikit';
+import {Button, Icon, Link} from '@gravity-ui/uikit';
 import type {ButtonProps} from '@gravity-ui/uikit';
 
 import {MediaRenderer} from '..';

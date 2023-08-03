@@ -1,10 +1,14 @@
-import clamp from 'lodash/clamp';
 import React from 'react';
+
+import clamp from 'lodash/clamp';
 import TinyGesture from 'tinygesture';
+
 import {block} from '../utils/cn';
+
 import {Notification} from './Notification';
-import './Notification.scss';
 import {NotificationProps, NotificationSwipeActionProps} from './definitions';
+
+import './Notification.scss';
 
 const b = block('notification');
 const notificationWrapperCls = b('notification-wrapper');
@@ -118,7 +122,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
         return () => {
             gesture.destroy();
         };
-    }, [position]);
+    }, [leftAction, position, rightAction, swipeThreshold]);
 
     return (
         <div className={b('swipe-wrap')}>

@@ -1,7 +1,10 @@
 import React from 'react';
+
 import {Meta, Story} from '@storybook/react';
+
 import {ActionsPanel, ActionsPanelProps} from '../../ActionsPanel';
-import {actions, actionsWithIcons, actionsGroups, actionsSubmenu} from './actions';
+
+import {actions, actionsGroups, actionsSubmenu, actionsWithIcons} from './actions';
 
 export default {
     title: 'Components/ActionsPanel',

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import {Dialog, Icon, Link} from '@gravity-ui/uikit';
 import type {DialogProps} from '@gravity-ui/uikit';

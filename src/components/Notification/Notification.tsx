@@ -1,8 +1,12 @@
-import {Icon, Link, useMobile} from '@gravity-ui/uikit';
 import React from 'react';
+
+import {Icon, Link, useMobile} from '@gravity-ui/uikit';
+
 import {CnMods, block} from '../utils/cn';
-import './Notification.scss';
+
 import {NotificationProps, NotificationSourceProps} from './definitions';
+
+import './Notification.scss';
 
 const b = block('notification');
 

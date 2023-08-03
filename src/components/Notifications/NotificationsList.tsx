@@ -1,7 +1,10 @@
 import React from 'react';
+
 import {NotificationProps} from '../Notification/definitions';
 import {block} from '../utils/cn';
+
 import {NotificationWrapper} from './NotificationWrapper';
+
 import './Notifications.scss';
 
 const b = block('notifications');
