@@ -59,14 +59,19 @@ $block: '.#{variables.$ns}filter-list-container';
         overflow: hidden;
         text-overflow: ellipsis;
 
-        margin-right: var(--g-spacing-2);
+        &_withTick {
+            margin-inline-start: calc(var(--g-spacing-2) + 16px);
+        }
+
+        &_selected {
+            margin-left: 0;
+        }
     }
 
     &__tick {
-        margin-left: auto;
         color: var(--g-color-text-info);
-        padding: 2px;
-        flex: 0 0 16px;
+
+        margin-inline-end: var(--g-spacing-2);
     }
 
     &__actions {

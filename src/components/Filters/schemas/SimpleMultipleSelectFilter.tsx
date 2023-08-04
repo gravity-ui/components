@@ -30,14 +30,16 @@ export function createSimpleMultipleSelectFilter(
         initialValue: [],
         emptyValueText: options.emptyValueText,
 
-        filterControlRenderer: (value, {onClose, onSubmit}) => (
+        filterControlRenderer: (value, {onClose, onSubmit}, extraProps) => (
             <FilterListContainer
                 value={value}
                 options={options.filterOptions}
+                listRef={extraProps?.listRef}
                 virtualized={options.virtualized}
                 filterable={options.filterable}
                 onClose={onClose}
                 onSubmit={(values: string[]) => onSubmit(id, values)}
+                tickIconsEnabled
             />
         ),
 

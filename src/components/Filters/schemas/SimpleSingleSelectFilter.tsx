@@ -27,16 +27,18 @@ export function createSimpleSingleSelectFilter(
         initialValue: [],
         emptyValueText: options.emptyValueText,
 
-        filterControlRenderer: (value, {onClose, onSubmit}) => (
+        filterControlRenderer: (value, {onClose, onSubmit}, extraProps) => (
             <FilterListContainer
                 value={value}
                 options={options.filterOptions}
+                listRef={extraProps?.listRef}
                 filterable={options.filterable}
                 virtualized={options.virtualized}
                 hideControls={true}
                 multiple={false}
                 onClose={onClose}
                 onSubmit={(values: string[]) => onSubmit(id, values)}
+                tickIconsEnabled
             />
         ),
 

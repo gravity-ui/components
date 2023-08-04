@@ -148,15 +148,19 @@ export function Filters(props: FiltersComponentProps) {
                               onClear={() => onFilterValueRemove(filterKey, filterValue)}
                               defaultOpen={defaultOpen}
                           >
-                              {({onClose}) =>
-                                  filterSchema.filterControlRenderer?.(filterValue, {
-                                      onClose,
-                                      onSubmit: (id: string, values: unknown) => {
-                                          onFilterValueChange(id, values);
-                                          setOpenFilterKey(undefined);
-                                          onClose();
+                              {({onClose, extraProps}) =>
+                                  filterSchema.filterControlRenderer?.(
+                                      filterValue,
+                                      {
+                                          onClose,
+                                          onSubmit: (id: string, values: unknown) => {
+                                              onFilterValueChange(id, values);
+                                              setOpenFilterKey(undefined);
+                                              onClose();
+                                          },
                                       },
-                                  })
+                                      extraProps,
+                                  )
                               }
                           </FilterControlTag>
                       );

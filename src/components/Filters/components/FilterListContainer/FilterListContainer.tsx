@@ -17,6 +17,7 @@ interface HelpContentProps {
     title: string;
     description: React.ReactNode;
 }
+
 function HelpContent({title, description}: HelpContentProps) {
     return (
         <div>
@@ -39,13 +40,18 @@ export interface FilterListContainerOption {
 function FilterListContainerOptionRenderer({
     option,
     selected,
+    tickIconEnabled,
 }: {
     option: FilterListContainerOption;
     selected: boolean;
+    tickIconEnabled?: boolean;
 }) {
     return (
         <React.Fragment>
-            <div className={b('item-text')} tabIndex={0}>
+            {selected && tickIconEnabled ? (
+                <Icon className={b('tick')} data={Check} size={16} aria-hidden="true" />
+            ) : null}
+            <div className={b('item-text', {selected, withTick: tickIconEnabled})}>
                 {option.label}
             </div>
             {option.description ? (
@@ -62,12 +68,11 @@ function FilterListContainerOptionRenderer({
                     />
                 </div>
             ) : null}
-            {selected ? (
-                <Icon className={b('tick')} data={Check} size={16} aria-hidden="true" />
-            ) : null}
         </React.Fragment>
     );
 }
+
+export type ListRef = React.RefObject<List<FilterListContainerOption>>;
 
 export interface FilterListContainerProps {
     value: string[];
@@ -75,9 +80,12 @@ export interface FilterListContainerProps {
 
     multiple?: boolean;
     hideControls?: boolean;
+    tickIconsEnabled?: boolean;
 
     onClose: () => void;
     onSubmit: (values: string[]) => void;
+
+    listRef: ListRef;
 
     filterable?: boolean;
     virtualized?: boolean;
@@ -92,11 +100,13 @@ export function FilterListContainer(props: FilterListContainerProps) {
         value,
         options,
         multiple = true,
+        listRef,
         onClose,
         onSubmit,
         hideControls,
         filterable = true,
         virtualized = true,
+        tickIconsEnabled = false,
         filterPredicate = defaultFilterPredicate,
     } = props;
 
@@ -126,7 +136,8 @@ export function FilterListContainer(props: FilterListContainerProps) {
     return (
         <React.Fragment>
             <List<FilterListContainerOption>
-                itemsClassName={b('list', {virtualized, mobile})}
+                ref={listRef}
+                itemsClassName={b('list', {virtualized, mobile, multiple})}
                 itemClassName={b('item', {mobile})}
                 filterClassName={b('search')}
                 items={options}
@@ -140,6 +151,7 @@ export function FilterListContainer(props: FilterListContainerProps) {
                 renderItem={(item) => (
                     <FilterListContainerOptionRenderer
                         option={item}
+                        tickIconEnabled={tickIconsEnabled}
                         selected={selectedItems.includes(item.value)}
                     />
                 )}

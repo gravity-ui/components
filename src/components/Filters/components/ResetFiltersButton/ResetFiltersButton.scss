@@ -1,6 +1,6 @@
 @use '../../../variables.scss';
 
-$block: '.#{variables.$ns}clear-filters-button';
+$block: '.#{variables.$ns}reset-filters-button';
 
 #{$block} {
     margin-block-start: var(--g-spacing-2);

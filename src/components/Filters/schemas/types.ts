@@ -67,6 +67,7 @@ export interface FilterSchema<Value extends any = any, Options extends any = any
     filterControlRenderer?: (
         value: Value,
         handlers: {onClose: () => void; onSubmit: (id: string, value: any) => void},
+        extraProps?: Record<string, any>,
     ) => React.ReactElement;
 
     /**

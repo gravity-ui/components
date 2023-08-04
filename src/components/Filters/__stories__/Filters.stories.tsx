@@ -27,6 +27,7 @@ const monthFilter = createSimpleMultipleSelectFilter('month', 'Month', {
     ],
     filterable: false,
     virtualized: false,
+    emptyValueText: 'Not selected',
     description: 'I would choose January :? Basically, this is a simple filter description',
 });
 

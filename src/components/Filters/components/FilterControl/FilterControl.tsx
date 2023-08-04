@@ -1,8 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 
 import {Popup, Sheet, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
+import type {ListRef} from '../FilterListContainer/FilterListContainer';
 import {FilterValue} from '../FilterValue';
 
 import i18n from './i18n';
@@ -30,7 +31,7 @@ export interface FilterControlProps {
 
     popupClassName?: string;
 
-    children: (props: {onClose: () => void}) => React.ReactNode;
+    children: (props: {onClose: () => void; extraProps: Record<string, any>}) => React.ReactNode;
 }
 
 export function FilterControl(props: FilterControlProps) {
@@ -49,8 +50,11 @@ export function FilterControl(props: FilterControlProps) {
         disableOpening,
     } = props;
 
-    const [open, setOpen] = useState<boolean>(defaultOpen);
-    const controlRef = useRef<HTMLSpanElement>(null);
+    const [open, setOpen] = React.useState<boolean>(defaultOpen);
+
+    const controlRef = React.useRef<HTMLSpanElement>(null);
+    const listRef: ListRef = React.useRef(null);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
 
     const [mobile] = useMobile();
 
@@ -72,6 +76,23 @@ export function FilterControl(props: FilterControlProps) {
         [handleClickCallback, disableOpening],
     );
 
+    const handleKeyDown = React.useCallback(
+        (event: React.KeyboardEvent<HTMLElement>) => {
+            if (event.key === 'Enter' && open) {
+                event.preventDefault();
+            }
+
+            listRef.current?.onKeyDown(event);
+        },
+        [open],
+    );
+
+    React.useEffect(() => {
+        if (buttonRef.current) {
+            buttonRef.current.focus();
+        }
+    }, []);
+
     const sheetTitle = typeof fieldName === 'string' ? fieldName : i18n('title');
 
     return (
@@ -83,15 +104,17 @@ export function FilterControl(props: FilterControlProps) {
                 fieldValue={fieldValue}
                 emptyValueText={emptyValueText}
                 hideFieldName={hideFieldName}
+                onKeyDown={handleKeyDown}
+                buttonRef={buttonRef}
             />
             {mobile ? (
                 <Sheet id={sheetId} title={sheetTitle} visible={open} onClose={handleClose}>
-                    {children({onClose: handleClose})}
+                    {children({onClose: handleClose, extraProps: {listRef}})}
                 </Sheet>
             ) : (
                 <Popup open={open} anchorRef={controlRef} onClose={handleClose}>
                     <div className={b('popup', popupClassName)}>
-                        {children({onClose: handleClose})}
+                        {children({onClose: handleClose, extraProps: {listRef}})}
                     </div>
                 </Popup>
             )}

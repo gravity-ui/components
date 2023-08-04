@@ -13,7 +13,9 @@ const b = block('filter-value');
 interface FilterValueProps {
     className?: string;
 
+    buttonRef?: React.RefObject<HTMLButtonElement>;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    onKeyDown?: React.KeyboardEventHandler<HTMLButtonElement>;
     onClear: VoidFunction;
 
     fieldName: React.ReactNode;
@@ -24,8 +26,17 @@ interface FilterValueProps {
 }
 
 export function FilterValue(props: FilterValueProps) {
-    const {onClick, onClear, fieldName, fieldValue, emptyValueText, hideFieldName, className} =
-        props;
+    const {
+        onClick,
+        onClear,
+        fieldName,
+        fieldValue,
+        emptyValueText,
+        hideFieldName,
+        className,
+        onKeyDown,
+        buttonRef,
+    } = props;
 
     const WrapperTag = typeof onClick === 'function' ? 'button' : 'span';
 
@@ -40,7 +51,12 @@ export function FilterValue(props: FilterValueProps) {
             onClose={onClear}
             closeButtonLabel={i18n('button.aria-label', {fieldName})}
         >
-            <WrapperTag className={b('content', {type: WrapperTag})} onClick={onClick}>
+            <WrapperTag
+                ref={WrapperTag === 'button' ? buttonRef : undefined}
+                className={b('content', {type: WrapperTag})}
+                onClick={onClick}
+                onKeyDown={onKeyDown}
+            >
                 {hideFieldName ? null : `${fieldName}`}
                 {renderDelimiter ? ': ' : null}
                 {fieldValue ? (

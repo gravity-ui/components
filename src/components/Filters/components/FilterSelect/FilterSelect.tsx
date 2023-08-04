@@ -4,7 +4,7 @@ import {Plus} from '@gravity-ui/icons';
 import {Button, Icon, Popup, Sheet, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
-import {FilterListContainer} from '../FilterListContainer/FilterListContainer';
+import {FilterListContainer, type ListRef} from '../FilterListContainer/FilterListContainer';
 
 import i18n from './i18n';
 
@@ -45,6 +45,7 @@ export function FilterSelect(props: FilterSelectProps) {
 
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const controlRef = React.useRef<HTMLSpanElement>(null);
+    const listRef: ListRef = React.useRef(null);
 
     const [open, setOpen] = React.useState(defaultOpen);
 
@@ -60,10 +61,22 @@ export function FilterSelect(props: FilterSelectProps) {
         [onItemClick],
     );
 
+    const handleKeyDown = React.useCallback(
+        (event: React.KeyboardEvent<HTMLElement>) => {
+            if (event.key === 'Enter' && open) {
+                event.preventDefault();
+            }
+
+            listRef.current?.onKeyDown(event);
+        },
+        [open],
+    );
+
     const ModalContent = (
         <FilterListContainer
-            options={options}
-            value={values}
+            listRef={listRef}
+            options={options.filter((option) => !values.find((value) => option.value === value))}
+            value={[]}
             onClose={() => setOpen(false)}
             onSubmit={handleSubmit}
             filterable={false}
@@ -75,7 +88,15 @@ export function FilterSelect(props: FilterSelectProps) {
 
     return (
         <span ref={controlRef} className={b(null, className)}>
-            <Button ref={buttonRef} size="s" onClick={() => setOpen((o) => !o)} qa="add-filter">
+            <Button
+                ref={buttonRef}
+                size="s"
+                onClick={!open ? () => setOpen(true) : undefined}
+                qa="add-filter"
+                extraProps={{
+                    onKeyDown: handleKeyDown,
+                }}
+            >
                 <Icon className={b('button-icon')} data={Plus} size={12} />
                 {showButtonText ? text : null}
             </Button>
