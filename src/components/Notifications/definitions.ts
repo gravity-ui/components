@@ -11,7 +11,12 @@ export type NotificationsProps = {
     onLoadMoreNotifications?: () => Promise<void>;
 
     isLoading?: boolean;
+
     errorContent?: React.ReactNode;
+    errorImage?: React.ReactNode;
+
     emptyContent?: React.ReactNode;
+    emptyImage?: React.ReactNode;
+
     swipeThreshold?: number;
 };

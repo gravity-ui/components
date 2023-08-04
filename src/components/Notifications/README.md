@@ -52,7 +52,9 @@ For more code examples go to [Notifications.stories.tsx](https://github.com/grav
 | `onLoadMoreNotifications`   | `() => Promise`       |          | `noop`            | Callback is called when the user scrolls to the end (so you can fetch more notifications) |
 | `isLoading`                 | `boolean`             |          | `false`           | When `true` renders a Loader instead of the notifications                                 |
 | `errorContent`              | `ReactNode`           |          |                   | Used for the Error state (the message under the «Error»)                                  |
+| `errorImage`                | `ReactNode`           |          |                   | Custom image for the Error state                                                          |
 | `emptyContent`              | `ReactNode`           |          |                   | Same as `errorContent`, but for the Empty state                                           |
+| `emptyImage`                | `ReactNode`           |          |                   | Custom image for the Empty state                                                          |
 | `swipeThreshold`            | `number`              |          | 0.4               | A value from 0 to 1 — the more the harder it is to swipe                                  |
 
 **Notification** — renders a notification with actions (side/bottom/swipe).
