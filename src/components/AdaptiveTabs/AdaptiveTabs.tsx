@@ -60,12 +60,10 @@ export interface TabProps {
     active?: boolean;
     disabled?: boolean;
     onClick?: (id: string, event: React.MouseEvent) => void;
-    renderTab?: AdaptiveTabsProps<any>['renderTab'];
-    isMore?: boolean;
 }
 
 // https://github.com/gravity-ui/components/issues/7
-class Tab extends React.PureComponent<TabProps> {
+class Tab extends React.Component<TabProps> {
     onClick = (event: React.MouseEvent) => {
         if (this.props.onClick) {
             this.props.onClick(this.props.id, event);
@@ -73,21 +71,7 @@ class Tab extends React.PureComponent<TabProps> {
     };
 
     render() {
-        const {active, disabled, hint, title = this.props.id, renderTab, isMore} = this.props;
-
-        if (renderTab) {
-            const tabContent = renderTab({title, isMore});
-            return (
-                <div
-                    className={b('tab', {active, disabled})}
-                    title={String(hint || title || '')}
-                    onClick={disabled ? undefined : this.onClick}
-                >
-                    {tabContent}
-                </div>
-            );
-        }
-
+        const {active, disabled, hint, title = this.props.id} = this.props;
         return (
             <div
                 className={b('tab', {active, disabled})}
@@ -120,15 +104,11 @@ export interface AdaptiveTabsProps<T> {
     onSelectTab: (tabId: string, event?: React.MouseEvent) => void;
     /** Allows to wrap TabItem into another component or render custom tab */
     // FIXME: https://github.com/gravity-ui/components/issues/26
-    /**
-     * @deprecated use renderTab instead
-     */
     wrapTo?(
         item: TabItem<T> | undefined,
         node: React.ReactNode,
         index: number | undefined,
     ): React.ReactNode;
-    renderTab?: (options: {title: string | React.ReactNode; isMore?: boolean}) => React.ReactNode;
     /** Class name for the tabs container */
     className?: string;
     /** Tabs size */
@@ -782,7 +762,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             active?: boolean;
         },
     ) => {
-        const {wrapTo, renderTab} = this.props;
+        const {wrapTo} = this.props;
         const {onClick, active, ref, text, onKeyDown} = switcherProps;
 
         const title = (
@@ -794,10 +774,8 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             </div>
         );
 
-        const switcherTabProps = {title, hint: text, id: 'switcher-tab', isMore: true};
-        const tabItemNode = (
-            <Tab {...switcherTabProps} active={Boolean(active)} renderTab={renderTab} />
-        );
+        const switcherTabProps = {title, hint: text, id: 'switcher-tab'};
+        const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} />;
 
         return (
             <div
@@ -839,7 +817,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     };
 
     renderTabItem = (item: TabItem<T>, tabIndex: number) => {
-        const {items, wrapTo, renderTab} = this.props;
+        const {items, wrapTo} = this.props;
         const activeTabID = this.activeTab;
         const {dimensionsWereCollected, currentContainerWidthName} = this.state;
 
@@ -854,7 +832,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             ? this.overflownTabsCurrentWidth[tabIndex]
             : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
 
-        const tabNode = <Tab {...item} active={item.id === activeTabID} renderTab={renderTab} />;
+        const tabNode = <Tab {...item} active={item.id === activeTabID} />;
 
         return (
             <div
