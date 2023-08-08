@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+import {SquarePlus, SquareXmark} from '@gravity-ui/icons';
+import {Button, Icon} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {AdaptiveTabs, AdaptiveTabsProps} from '../AdaptiveTabs';
@@ -192,17 +194,32 @@ const RenderTabWithOverflowTextTemplate: StoryFn<AdaptiveTabsProps<{}>> = (args)
                 items={items}
                 onSelectTab={setActiveTab}
                 activeTab={activeTab}
-                renderTab={({title}) => {
+                renderTab={({title, isMore}) => {
+                    if (isMore) {
+                        return title;
+                    }
+
                     return (
-                        <div
-                            style={{
-                                overflow: 'hidden',
-                                textOverflow: 'ellipsis',
-                                maxWidth: '100px',
-                            }}
-                        >
-                            <span>extra</span>
-                            {title}
+                        <div>
+                            <Button size="xs" view="flat">
+                                <Icon data={SquarePlus} size="xs" />
+                            </Button>
+
+                            <span
+                                style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    maxWidth: 'calc(100px - 20px - 20px)', // minus icons width
+                                    display: 'inline-block',
+                                    verticalAlign: 'top',
+                                }}
+                                title={String(title)}
+                            >
+                                {title}
+                            </span>
+                            <Button size="xs">
+                                <Icon data={SquareXmark} size="xs" />
+                            </Button>
                         </div>
                     );
                 }}
