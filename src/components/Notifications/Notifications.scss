@@ -6,8 +6,8 @@ $block: '.#{variables.$ns}notifications';
     display: flex;
     flex-direction: column;
     color: var(--g-color-text-primary);
-    background: var(--g-color-base-background);
     height: 100%;
+    width: 100%;
 
     &__head {
         display: flex;
@@ -73,11 +73,15 @@ $block: '.#{variables.$ns}notifications';
     &__notification-wrapper:hover:not(:first-child)::before,
     &__notification-wrapper:hover + &__notification-wrapper::before,
     // .unread
-    &__notification-wrapper.unread:not(:first-child)::before,
-    &__notification-wrapper.unread + &__notification-wrapper::before {
+    &__notification-wrapper_unread:not(:first-child)::before,
+    &__notification-wrapper_unread + &__notification-wrapper::before {
         content: '';
         display: block;
         border-top: 1px solid transparent;
         margin: 0 12px;
+    }
+
+    &__notification-wrapper {
+        overflow-y: hidden;
     }
 }

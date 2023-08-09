@@ -17,7 +17,7 @@ export const Notification = React.memo(function Notification(props: Props) {
     const {notification} = props;
     const {title, content, formattedDate, source, unread, theme} = notification;
 
-    const modifiers: CnMods = {unread, theme, mobile};
+    const modifiers: CnMods = {unread, theme, mobile, active: Boolean(notification.onClick)};
 
     return (
         <div

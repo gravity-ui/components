@@ -7,7 +7,16 @@ export type NotificationsProps = {
     actions?: React.ReactNode;
 
     notifications: NotificationProps[];
+    areAllNotificationsLoaded?: boolean;
+    onLoadMoreNotifications?: () => Promise<void>;
 
-    emptyMessage?: React.ReactNode;
+    isLoading?: boolean;
+
+    errorContent?: React.ReactNode;
+    errorImage?: React.ReactNode;
+
+    emptyContent?: React.ReactNode;
+    emptyImage?: React.ReactNode;
+
     swipeThreshold?: number;
 };

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import clamp from 'lodash/clamp';
 import TinyGesture from 'tinygesture';
@@ -29,7 +29,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
     const leftAction = swipeActions && 'left' in swipeActions ? swipeActions.left : undefined;
     const rightAction = swipeActions && 'right' in swipeActions ? swipeActions.right : undefined;
 
-    const [position, setPosition] = useState<'left-action' | 'notification' | 'right-action'>(
+    const [position, setPosition] = React.useState<'left-action' | 'notification' | 'right-action'>(
         'notification',
     );
 
@@ -122,7 +122,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
         return () => {
             gesture.destroy();
         };
-    }, [position]);
+    }, [leftAction, position, rightAction, swipeThreshold]);
 
     return (
         <div className={b('swipe-wrap')}>
