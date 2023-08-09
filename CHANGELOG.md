@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.0](https://github.com/gravity-ui/components/compare/v2.0.0...v2.1.0) (2023-08-09)
+
+
+### Features
+
+* **AdaptiveTabs:** add renderTab prop ([#87](https://github.com/gravity-ui/components/issues/87)) ([bd4710a](https://github.com/gravity-ui/components/commit/bd4710a84ac621d40c8d8ded8b690efe52bdcd20))
+* **DelayedTextInput:** implement component ([#77](https://github.com/gravity-ui/components/issues/77)) ([293c4a3](https://github.com/gravity-ui/components/commit/293c4a361d899eb73f5c39a4693bb0f0b2ced234))
+* **Notifications:** Added archived state, `NotificationsPopupWrapper` component and enhanced the stories for notifications ([#83](https://github.com/gravity-ui/components/issues/83)) ([877803a](https://github.com/gravity-ui/components/commit/877803a4fd63b3e9de998b345e48364fa3992769))
+* update linting plugins, jest and storybook ([#84](https://github.com/gravity-ui/components/issues/84)) ([2c285d5](https://github.com/gravity-ui/components/commit/2c285d53a2a77db2abaa49ef54ff92e3a8eebd96))
+
+
+### Bug Fixes
+
+* **InfiniteScroll:** fixed the double `onActivate` in the `InfiniteScroll` component ([#81](https://github.com/gravity-ui/components/issues/81)) ([1cc0bd6](https://github.com/gravity-ui/components/commit/1cc0bd64187a4cbc2be794165db7e06b260fa90d))
+
 ## [2.0.0](https://github.com/gravity-ui/components/compare/v1.9.0...v2.0.0) (2023-07-14)
 
 
