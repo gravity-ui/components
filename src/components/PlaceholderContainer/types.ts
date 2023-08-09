@@ -1,6 +1,7 @@
 import React from 'react';
+
 import {Action} from './PlaceholderContainerAction';
-import {Direction, Align} from './constants';
+import {Align, Direction} from './constants';
 
 type Size = 's' | 'm' | 'l' | 'promo';
 

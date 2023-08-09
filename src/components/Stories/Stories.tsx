@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {Modal} from '@gravity-ui/uikit';
 import type {ModalCloseReason} from '@gravity-ui/uikit';
 
@@ -93,6 +94,7 @@ export function Stories({
     }
 
     const indexType =
+        (items.length === 1 && IndexType.Single) ||
         (storyIndex === 0 && IndexType.Start) ||
         (storyIndex === items.length - 1 && IndexType.End) ||
         IndexType.InProccess;

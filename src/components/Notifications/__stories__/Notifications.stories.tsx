@@ -1,7 +1,10 @@
-import {ComponentMeta, ComponentStory} from '@storybook/react';
 import React from 'react';
+
+import {ComponentMeta, ComponentStory} from '@storybook/react';
+
 import {Notifications} from '../Notifications';
-import {notificationsMockActions, mockNotifications} from './mockData';
+
+import {mockNotifications, notificationsMockActions} from './mockData';
 
 export default {
     title: 'Components/Notifications',

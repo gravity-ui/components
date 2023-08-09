@@ -1,7 +1,7 @@
 import React from 'react';
 
-import type {Meta, StoryFn} from '@storybook/react';
 import {Button} from '@gravity-ui/uikit';
+import type {Meta, StoryFn} from '@storybook/react';
 
 import {Stories} from '../Stories';
 import type {StoriesProps} from '../Stories';

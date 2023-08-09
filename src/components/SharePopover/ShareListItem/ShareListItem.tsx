@@ -3,10 +3,10 @@ import React from 'react';
 import {Button, Icon} from '@gravity-ui/uikit';
 import type {IconData} from '@gravity-ui/uikit';
 
-import * as icons from '../icons';
 import {block} from '../../utils/cn';
 import {LayoutDirection, ShareOptions} from '../constants';
 import i18n from '../i18n';
+import * as icons from '../icons';
 import type {ShareOptionsData} from '../models';
 
 import './ShareListItem.scss';

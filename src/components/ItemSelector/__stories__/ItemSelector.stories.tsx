@@ -1,6 +1,8 @@
 import React from 'react';
-import {Meta, Story} from '@storybook/react';
+
 import {useArgs} from '@storybook/client-api';
+import {Meta, Story} from '@storybook/react';
+
 import {ItemSelector, ItemSelectorProps} from '../ItemSelector';
 
 const items = [

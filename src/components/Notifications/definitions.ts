@@ -1,4 +1,4 @@
-import {NotificationProps, NotificationActionProps} from '../Notification/definitions';
+import {NotificationActionProps, NotificationProps} from '../Notification/definitions';
 
 export type NotificationsActionProps = NotificationActionProps;
 

@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {InfiniteScroll} from '../InfiniteScroll';
-import {emailsList, delay} from './utils';
+
+import {delay, emailsList} from './utils';
 
 export function InfiniteScrollShowcase() {
     const [emails, setEmails] = React.useState<string[]>([]);

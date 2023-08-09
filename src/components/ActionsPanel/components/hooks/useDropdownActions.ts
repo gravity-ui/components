@@ -1,6 +1,8 @@
 import {DropdownMenuItem} from '@gravity-ui/uikit';
 import groupBy from 'lodash/groupBy';
+
 import {ActionItem} from '../../types';
+
 import {VisibilityMap} from './types';
 
 type UseDropdownActionsArg = {

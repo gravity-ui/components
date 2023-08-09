@@ -1,8 +1,10 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+
 import {Loader} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
-import {useIntersection} from './hooks/useIntersection';
+
+import {useOnIntersected} from './hooks/useOnIntersected';
 
 import './InfiniteScroll.scss';
 
@@ -27,7 +29,6 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     const [isActive, setIsActive] = useState(false);
     const [bottomRef, setBottomRef] = useState<HTMLDivElement | null>(null);
     const mounted = useRef(false);
-    const isBottomVisible = useIntersection(bottomRef);
 
     useEffect(() => {
         mounted.current = true;
@@ -37,7 +38,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
         };
     }, []);
 
-    useEffect(() => {
+    useOnIntersected(bottomRef, () => {
         const handleFetchData = async () => {
             setIsActive(true);
             await onActivate();
@@ -47,10 +48,10 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
             }
         };
 
-        if (isBottomVisible && !isActive && !disabled) {
+        if (!isActive && !disabled) {
             handleFetchData();
         }
-    }, [isBottomVisible, onActivate, isActive, disabled]);
+    });
 
     const renderedLoader = loader || (
         <div className={b('loader')}>
