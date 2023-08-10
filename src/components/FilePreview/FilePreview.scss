@@ -1,6 +1,9 @@
+@use 'sass:math';
 @use '../variables';
 
 $block: '.#{variables.$ns}file-preview';
+
+$smallRoundedButtonSize: 24px;
 
 #{$block} {
     position: relative;
@@ -16,8 +19,8 @@ $block: '.#{variables.$ns}file-preview';
 
     &__actions {
         position: absolute;
-        top: -12px;
-        right: -12px;
+        top: -1 * math.div($smallRoundedButtonSize, 2);
+        right: -1 * math.div($smallRoundedButtonSize, 2);
         z-index: 1;
 
         display: flex;
