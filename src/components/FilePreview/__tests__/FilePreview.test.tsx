@@ -77,10 +77,10 @@ test('Renders actions', () => {
         />,
     );
 
-    const firstAction = screen.getByRole('button', {name: firstActionText + 'kirill'});
+    const firstAction = screen.getByRole('button', {name: firstActionText});
     expect(firstAction).toBeDefined();
 
-    const secondAction = screen.getByRole('button', {name: secondActionText + 'kirill'});
+    const secondAction = screen.getByRole('button', {name: secondActionText});
     expect(secondAction).toBeDefined();
 });
 
