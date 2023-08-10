@@ -37,8 +37,6 @@ const FILE_ICON: Record<FileType, IconData> = {
 };
 
 export interface FilePreviewProps {
-    id?: string;
-
     className?: string;
     qa?: string;
 
@@ -51,7 +49,6 @@ export interface FilePreviewProps {
 }
 
 export const FilePreview: FC<FilePreviewProps> = ({
-    id: outerId,
     className,
     qa,
     file,
@@ -60,8 +57,7 @@ export const FilePreview: FC<FilePreviewProps> = ({
     onClick,
     actions,
 }) => {
-    const defaultId = useUniqId();
-    const id = outerId ?? defaultId;
+    const id = useUniqId();
 
     const [imageSrc, setImageSrc] = useState<string | undefined>(previewSrc);
     const type = getFileType(file);
