@@ -21,22 +21,20 @@ export const FilePreviewAction: FC<FilePreviewActionProps> = ({
     onClick,
 }) => (
     <Tooltip id={id} content={<Text variant="caption-2">{title}</Text>}>
-        {
-            <Button
-                onClick={onClick}
-                view="raised"
-                pin="circle-circle"
-                href={href}
-                target="_blank"
-                size="s"
-                extraProps={{
-                    'aria-label': label ?? title,
-                    'aria-describedby': label ? undefined : id,
-                }}
-            >
-                <Icon data={icon} size={16} />
-            </Button>
-        }
+        <Button
+            onClick={onClick}
+            view="raised"
+            pin="circle-circle"
+            href={href}
+            target="_blank"
+            size="s"
+            extraProps={{
+                'aria-label': label ?? title,
+                'aria-describedby': label ? undefined : id,
+            }}
+        >
+            <Icon data={icon} size={16} />
+        </Button>
     </Tooltip>
 );
 

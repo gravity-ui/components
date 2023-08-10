@@ -1,4 +1,4 @@
-import React, {useEffect, useId, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import type {FC, MouseEventHandler} from 'react';
 
 import {
@@ -12,7 +12,7 @@ import {
     TextAlignLeft as TextIcon,
     Filmstrip as VideoIcon,
 } from '@gravity-ui/icons';
-import {Card, Icon, IconData, Text, Tooltip} from '@gravity-ui/uikit';
+import {Card, Icon, IconData, Text, Tooltip, useUniqId} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -60,7 +60,7 @@ export const FilePreview: FC<FilePreviewProps> = ({
     onClick,
     actions,
 }) => {
-    const defaultId = useId();
+    const defaultId = useUniqId();
     const id = outerId ?? defaultId;
 
     const [imageSrc, setImageSrc] = useState<string | undefined>(previewSrc);
@@ -98,7 +98,7 @@ export const FilePreview: FC<FilePreviewProps> = ({
                         <Icon className={cn('icon-svg')} data={FILE_ICON[type]} size={20} />
                     </div>
                 )}
-                <Tooltip id={`${id}-file-name`} content={file.name}>
+                <Tooltip id={`gc-file-preview-${id}-file-name`} content={file.name}>
                     <Text className={cn('name')} color="secondary" ellipsis>
                         {file.name}
                     </Text>
@@ -115,8 +115,8 @@ export const FilePreview: FC<FilePreviewProps> = ({
                 <div className={cn('actions')}>
                     {actions.map((action, index) => (
                         <FilePreviewAction
-                            key={`${id}-file-actions-${index}`}
-                            id={`${id}-file-actions-${index}`}
+                            key={`${id}-${index}`}
+                            id={`${id}-${index}`}
                             {...action}
                         />
                     ))}
