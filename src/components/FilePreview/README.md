@@ -7,7 +7,7 @@ A component for displaying the file.
 | Property            | Type                       | Required | Default | Description                                                                                                      |
 | :------------------ | :------------------------- | :------: | :------ | :--------------------------------------------------------------------------------------------------------------- |
 | file                | `File`                     |   yes    |         | The File interface provides information about files and allows JavaScript in a web page to access their content. |
-| previewSrc          | `string`                   |          |         | source for image preview                                                                                         |
+| imageSrc            | `string`                   |          |         | source for image preview                                                                                         |
 | description         | `string`                   |          |         | Description displayed under the file name                                                                        |
 | className           | `string`                   |          |         | Class name for the file container                                                                                |
 | onClick             | `function`                 |          |         | Click handler for the file container                                                                             |
@@ -30,7 +30,7 @@ For a file, you can prescribe actions that will be visible when you hover over i
 
 <FilePreview
   file={{name: fileType, type: fileType} as File}
-  previewSrc="assets/files/first"
+  imageSrc="assets/files/first"
   actions={[
     {
       icon: linkIcon,

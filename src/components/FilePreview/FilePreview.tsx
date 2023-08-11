@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import type {FC, MouseEventHandler} from 'react';
+import type {MouseEventHandler} from 'react';
 
 import {
     FileZipper as ArchiveIcon,
@@ -12,7 +12,7 @@ import {
     TextAlignLeft as TextIcon,
     Filmstrip as VideoIcon,
 } from '@gravity-ui/icons';
-import {Card, Icon, IconData, Text, Tooltip, useUniqId} from '@gravity-ui/uikit';
+import {Card, Icon, IconData, Text, useUniqId} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -41,34 +41,34 @@ export interface FilePreviewProps {
     qa?: string;
 
     file: File;
-    previewSrc?: string;
+    imageSrc?: string;
     description?: string;
 
     onClick?: MouseEventHandler<HTMLDivElement>;
     actions?: FilePreviewActionProps[];
 }
 
-export const FilePreview: FC<FilePreviewProps> = ({
+export function FilePreview({
     className,
     qa,
     file,
-    previewSrc,
+    imageSrc,
     description,
     onClick,
     actions,
-}) => {
+}: FilePreviewProps) {
     const id = useUniqId();
 
-    const [imageSrc, setImageSrc] = useState<string | undefined>(previewSrc);
+    const [previewSrc, setPreviewSrc] = useState<string | undefined>(imageSrc);
     const type = getFileType(file);
 
     useEffect(() => {
-        if (previewSrc) return undefined;
+        if (imageSrc) return undefined;
 
         try {
             const createdUrl = URL.createObjectURL(file);
 
-            setImageSrc(createdUrl);
+            setPreviewSrc(createdUrl);
 
             return () => {
                 URL.revokeObjectURL(createdUrl);
@@ -76,16 +76,16 @@ export const FilePreview: FC<FilePreviewProps> = ({
         } catch (error: unknown) {
             return undefined;
         }
-    }, [file, previewSrc]);
+    }, [file, imageSrc]);
 
     return (
         <div className={cn(null, className)} data-qa={qa}>
-            <Card className={cn('card')} view="clear" type="selection" onClick={onClick}>
-                {typeof imageSrc === 'string' ? (
+            <Card className={cn('card')} view="clear" onClick={onClick}>
+                {typeof previewSrc === 'string' ? (
                     <div className={cn('image')}>
                         <img
                             className={cn('image-img')}
-                            src={imageSrc}
+                            src={previewSrc}
                             aria-labelledby={`${id}-file-name`}
                         />
                     </div>
@@ -94,17 +94,18 @@ export const FilePreview: FC<FilePreviewProps> = ({
                         <Icon className={cn('icon-svg')} data={FILE_ICON[type]} size={20} />
                     </div>
                 )}
-                <Tooltip id={`gc-file-preview-${id}-file-name`} content={file.name}>
-                    <Text className={cn('name')} color="secondary" ellipsis>
-                        {file.name}
-                    </Text>
-                </Tooltip>
+                <Text className={cn('name')} color="secondary" ellipsis title={file.name}>
+                    {file.name}
+                </Text>
                 {Boolean(description) && (
-                    <Tooltip content={description}>
-                        <Text className={cn('description')} color="secondary" ellipsis>
-                            {description}
-                        </Text>
-                    </Tooltip>
+                    <Text
+                        className={cn('description')}
+                        color="secondary"
+                        ellipsis
+                        title={description}
+                    >
+                        {description}
+                    </Text>
                 )}
             </Card>
             {actions?.length ? (
@@ -120,6 +121,6 @@ export const FilePreview: FC<FilePreviewProps> = ({
             ) : null}
         </div>
     );
-};
+}
 
 FilePreview.displayName = 'FilePreview';

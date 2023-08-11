@@ -44,7 +44,7 @@ const CollageTemplate: StoryFn<FilePreviewProps> = () => {
             ))}
             <FilePreview
                 file={{name: 'my-image-from-thailand.jpg', type: 'image/png'} as File}
-                previewSrc="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png"
+                imageSrc="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png"
                 actions={[{icon: CircleExclamation, title: 'some hint'}]}
             />
         </div>

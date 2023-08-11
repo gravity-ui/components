@@ -29,12 +29,18 @@ $smallRoundedButtonSize: 24px;
         opacity: 0;
     }
 
+    &:hover {
+        --gc-file-preview-color-base-background: var(--yc-color-base-simple-hover);
+    }
+
     &__card {
         display: flex;
         flex-direction: column;
         align-items: center;
 
         padding: 4px 10px;
+
+        background-color: var(--gc-file-preview-color-base-background);
     }
 
     &__icon {

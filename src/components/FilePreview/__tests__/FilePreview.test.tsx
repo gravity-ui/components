@@ -9,10 +9,10 @@ import {FilePreview} from '../FilePreview';
 test('Renders base content', () => {
     const fileName = 'Some file name';
     const fileType = 'image/png';
-    const previewSrc =
+    const imageSrc =
         'https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png';
 
-    render(<FilePreview file={{name: fileName, type: fileType} as File} previewSrc={previewSrc} />);
+    render(<FilePreview file={{name: fileName, type: fileType} as File} imageSrc={imageSrc} />);
 
     expect(screen.getByText(fileName)).toBeInTheDocument();
 });
@@ -20,14 +20,14 @@ test('Renders base content', () => {
 test('Renders preview image', () => {
     const fileName = 'Some file name';
     const fileType = 'image/png';
-    const previewSrc =
+    const imageSrc =
         'https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png';
 
-    render(<FilePreview file={{name: fileName, type: fileType} as File} previewSrc={previewSrc} />);
+    render(<FilePreview file={{name: fileName, type: fileType} as File} imageSrc={imageSrc} />);
 
     const previewImage = screen.getByRole('img');
 
-    expect(previewImage).toHaveAttribute('src', previewSrc);
+    expect(previewImage).toHaveAttribute('src', imageSrc);
 });
 
 test('Call onClick handler', async () => {
@@ -60,7 +60,7 @@ test('Call onClick handler', async () => {
 test('Renders actions', () => {
     const fileName = 'Some file name';
     const fileType = 'image/png';
-    const previewSrc =
+    const imageSrc =
         'https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png';
 
     const firstActionText = 'some hint';
@@ -69,7 +69,7 @@ test('Renders actions', () => {
     render(
         <FilePreview
             file={{name: fileName, type: fileType} as File}
-            previewSrc={previewSrc}
+            imageSrc={imageSrc}
             actions={[
                 {icon: CircleExclamation, title: firstActionText},
                 {icon: CircleExclamation, title: secondActionText},
