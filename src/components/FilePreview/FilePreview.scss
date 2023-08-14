@@ -6,6 +6,10 @@ $block: '.#{variables.$ns}file-preview';
 $smallRoundedButtonSize: 24px;
 
 #{$block} {
+    --gc-file-preview-box-shadow: none;
+    --gc-file-preview-border-radius: 4px;
+    --gc-file-preview-color-base-background: transparent;
+
     position: relative;
 
     width: 120px;
@@ -15,6 +19,11 @@ $smallRoundedButtonSize: 24px;
         #{$block}__actions {
             opacity: 1;
         }
+
+        --gc-file-preview-color-base-background: var(
+            --g-color-base-simple-hover,
+            rgba(0, 0, 0, 0.05)
+        );
     }
 
     &__actions {
@@ -38,9 +47,37 @@ $smallRoundedButtonSize: 24px;
         flex-direction: column;
         align-items: center;
 
+        cursor: pointer;
+        position: relative;
+        outline: none;
+
+        box-shadow: var(--gc-card-box-shadow);
+        background-color: var(--gc-file-preview-color-base-background);
+        border-radius: var(--gc-file-preview-border-radius);
         padding: 4px 10px;
 
-        background-color: var(--gc-file-preview-color-base-background);
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--gc-file-preview-border-radius);
+            pointer-events: none;
+        }
+
+        &:hover {
+            --gc-file-preview-box-shadow: 0px 3px 10px var(--g-color-sfx-shadow);
+        }
+
+        &:focus::after {
+            content: '';
+            box-shadow: 0 0 0 2px var(--g-color-line-misc);
+        }
+
+        &:focus:not(:focus-visible)::after {
+            box-shadow: none;
+        }
     }
 
     &__icon {

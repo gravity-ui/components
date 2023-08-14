@@ -12,7 +12,7 @@ import {
     TextAlignLeft as TextIcon,
     Filmstrip as VideoIcon,
 } from '@gravity-ui/icons';
-import {Card, Icon, IconData, Text, useUniqId} from '@gravity-ui/uikit';
+import {Icon, IconData, Text, useActionHandlers, useUniqId} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -62,6 +62,8 @@ export function FilePreview({
     const [previewSrc, setPreviewSrc] = useState<string | undefined>(imageSrc);
     const type = getFileType(file);
 
+    const {onKeyDown} = useActionHandlers(onClick);
+
     useEffect(() => {
         if (imageSrc) return undefined;
 
@@ -80,7 +82,13 @@ export function FilePreview({
 
     return (
         <div className={cn(null, className)} data-qa={qa}>
-            <Card className={cn('card')} view="clear" onClick={onClick}>
+            <div
+                className={cn('card')}
+                role="button"
+                onKeyDown={onKeyDown}
+                tabIndex={0}
+                onClick={onClick}
+            >
                 {typeof previewSrc === 'string' ? (
                     <div className={cn('image')}>
                         <img
@@ -107,7 +115,7 @@ export function FilePreview({
                         {description}
                     </Text>
                 )}
-            </Card>
+            </div>
             {actions?.length ? (
                 <div className={cn('actions')}>
                     {actions.map((action, index) => (
