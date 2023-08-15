@@ -91,11 +91,7 @@ export function FilePreview({
             >
                 {typeof previewSrc === 'string' ? (
                     <div className={cn('image')}>
-                        <img
-                            className={cn('image-img')}
-                            src={previewSrc}
-                            aria-labelledby={`${id}-file-name`}
-                        />
+                        <img className={cn('image-img')} src={previewSrc} alt={file.name} />
                     </div>
                 ) : (
                     <div className={cn('icon', {type})}>

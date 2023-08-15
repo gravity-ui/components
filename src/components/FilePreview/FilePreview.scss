@@ -6,9 +6,9 @@ $block: '.#{variables.$ns}file-preview';
 $smallRoundedButtonSize: 24px;
 
 #{$block} {
-    --gc-file-preview-box-shadow: none;
-    --gc-file-preview-border-radius: 4px;
-    --gc-file-preview-color-base-background: transparent;
+    --gc-_-box-shadow: none;
+    --gc-_-border-radius: 4px;
+    --gc-_-color-base-background: transparent;
 
     position: relative;
 
@@ -20,10 +20,7 @@ $smallRoundedButtonSize: 24px;
             opacity: 1;
         }
 
-        --gc-file-preview-color-base-background: var(
-            --g-color-base-simple-hover,
-            rgba(0, 0, 0, 0.05)
-        );
+        --gc-_-color-base-background: var(--g-color-base-simple-hover, rgba(0, 0, 0, 0.05));
     }
 
     &__actions {
@@ -39,7 +36,7 @@ $smallRoundedButtonSize: 24px;
     }
 
     &:hover {
-        --gc-file-preview-color-base-background: var(--yc-color-base-simple-hover);
+        --gc-_-color-base-background: var(--yc-color-base-simple-hover);
     }
 
     &__card {
@@ -52,8 +49,8 @@ $smallRoundedButtonSize: 24px;
         outline: none;
 
         box-shadow: var(--gc-card-box-shadow);
-        background-color: var(--gc-file-preview-color-base-background);
-        border-radius: var(--gc-file-preview-border-radius);
+        background-color: var(--gc-_-color-base-background);
+        border-radius: var(--gc-_-border-radius);
         padding: 4px 10px;
 
         &::after {
@@ -62,12 +59,12 @@ $smallRoundedButtonSize: 24px;
             left: 0;
             right: 0;
             bottom: 0;
-            border-radius: var(--gc-file-preview-border-radius);
+            border-radius: var(--gc-_-border-radius);
             pointer-events: none;
         }
 
         &:hover {
-            --gc-file-preview-box-shadow: 0px 3px 10px var(--g-color-sfx-shadow);
+            --gc-_-box-shadow: 0px 3px 10px var(--g-color-sfx-shadow);
         }
 
         &:focus::after {
