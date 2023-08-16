@@ -11,6 +11,7 @@ $block: '.#{variables.$ns}notifications';
 
     &__head {
         display: flex;
+        align-items: center;
         padding: 16px;
         border-bottom: 1px solid var(--g-color-line-generic);
     }
@@ -60,6 +61,7 @@ $block: '.#{variables.$ns}notifications';
     &__actions {
         display: flex;
         align-items: center;
+        height: 28px;
     }
 
     &__notification-wrapper:not(:first-child)::before {
