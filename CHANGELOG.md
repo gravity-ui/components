@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1](https://github.com/gravity-ui/components/compare/v2.1.0...v2.1.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* **Notifications:** fixed notification's actions changing height when they disappear ([#91](https://github.com/gravity-ui/components/issues/91)) ([fc6b4b2](https://github.com/gravity-ui/components/commit/fc6b4b2059cbbde26d4ae9d73f50955fe2540224))
+* **Stories:** prevent overflow and add ability to scroll huge text in story card ([#89](https://github.com/gravity-ui/components/issues/89)) ([8e6df75](https://github.com/gravity-ui/components/commit/8e6df758f74b46f4aab870be9d1747d30f576a87))
+
 ## [2.1.0](https://github.com/gravity-ui/components/compare/v2.0.0...v2.1.0) (2023-08-09)
 
 
