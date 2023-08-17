@@ -12,7 +12,7 @@ $notificationSourceIconSize: 36px;
     box-sizing: border-box;
     width: 100%;
 
-    &:hover {
+    &_active:hover {
         background: var(--g-color-base-simple-hover);
     }
 

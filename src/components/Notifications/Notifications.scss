@@ -72,8 +72,8 @@ $block: '.#{variables.$ns}notifications';
     }
 
     // :hover
-    &__notification-wrapper:hover:not(:first-child)::before,
-    &__notification-wrapper:hover + &__notification-wrapper::before,
+    &__notification-wrapper_active:hover:not(:first-child)::before,
+    &__notification-wrapper_active:hover + &__notification-wrapper::before,
     // .unread
     &__notification-wrapper_unread:not(:first-child)::before,
     &__notification-wrapper_unread + &__notification-wrapper::before {
