@@ -12,7 +12,7 @@ $notificationSourceIconSize: 36px;
     box-sizing: border-box;
     width: 100%;
 
-    &:hover {
+    &_active:hover {
         background: var(--g-color-base-simple-hover);
     }
 
@@ -84,6 +84,7 @@ $notificationSourceIconSize: 36px;
     }
 
     &__actions_right-side-actions {
+        height: 28px;
         opacity: 0;
     }
     &:hover &__actions_right-side-actions {

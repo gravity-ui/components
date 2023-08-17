@@ -39,11 +39,9 @@ export const Notification = React.memo(function Notification(props: Props) {
                         </div>
                         {title ? <div className={b('right-title')}>{title}</div> : null}
                     </div>
-                    {props.notification.sideActions ? (
-                        <div className={b('actions', {'right-side-actions': true})}>
-                            {props.notification.sideActions}
-                        </div>
-                    ) : null}
+                    <div className={b('actions', {'right-side-actions': true})}>
+                        {props.notification.sideActions}
+                    </div>
                 </div>
                 <div className={b('right-content')}>{content}</div>
                 {props.notification.bottomActions ? (

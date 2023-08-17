@@ -74,6 +74,7 @@ export const NotificationWrapper = (props: {
             className={b('notification-wrapper', {
                 archived: notification.archived,
                 unread: notification.unread,
+                active: Boolean(notification.onClick),
             })}
             ref={ref}
             style={style}
