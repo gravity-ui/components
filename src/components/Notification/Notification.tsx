@@ -28,7 +28,7 @@ export const Notification = React.memo(function Notification(props: Props) {
             onMouseLeave={notification.onMouseLeave}
             onClick={notification.onClick}
         >
-            {sourceIcon ? <div className={b('left')}>{renderSourceIcon(source)}</div> : null}
+            {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
             <div className={b('right')}>
                 <div className={b('right-top-part')}>
                     <div className={b('right-meta-and-title')}>
