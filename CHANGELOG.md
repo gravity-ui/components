@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/gravity-ui/components/compare/v2.1.1...v2.2.0) (2023-08-21)
+
+
+### Features
+
+* **Notifications:** remove redutant gap ([#92](https://github.com/gravity-ui/components/issues/92)) ([3b95e4a](https://github.com/gravity-ui/components/commit/3b95e4aec69f9ae9422434ce273a63a27181b1d1))
+
 ## [2.1.1](https://github.com/gravity-ui/components/compare/v2.1.0...v2.1.1) (2023-08-17)
 
 
