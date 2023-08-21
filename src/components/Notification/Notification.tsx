@@ -19,6 +19,8 @@ export const Notification = React.memo(function Notification(props: Props) {
 
     const modifiers: CnMods = {unread, theme, mobile, active: Boolean(notification.onClick)};
 
+    const sourceIcon = source && renderSourceIcon(source);
+
     return (
         <div
             className={b(modifiers, notification.className)}
@@ -26,7 +28,7 @@ export const Notification = React.memo(function Notification(props: Props) {
             onMouseLeave={notification.onMouseLeave}
             onClick={notification.onClick}
         >
-            {source ? <div className={b('left')}>{renderSourceIcon(source)}</div> : null}
+            {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
             <div className={b('right')}>
                 <div className={b('right-top-part')}>
                     <div className={b('right-meta-and-title')}>
