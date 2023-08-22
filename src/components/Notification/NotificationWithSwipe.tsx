@@ -1,10 +1,10 @@
 import React from 'react';
 
 import clamp from 'lodash/clamp';
-import TinyGesture from 'tinygesture';
 
 import {block} from '../utils/cn';
 
+import {HorizontalSwiper} from './HorizontalSwiper/HorizontalSwiper';
 import {Notification} from './Notification';
 import {NotificationProps, NotificationSwipeActionProps} from './definitions';
 
@@ -67,27 +67,23 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
         else if (position === 'notification') startX = notificationX;
         else startX = rightActionX;
 
-        const gesture = new TinyGesture(element, {
-            velocityThreshold: 10,
-            mouseSupport: true,
-            diagonalSwipes: false,
-        });
+        const swiper = new HorizontalSwiper(element);
 
         element.style.transform = `translateX(${startX}px)`;
 
-        gesture.on('panstart', () => {
+        swiper.on('panstart', () => {
             notificationWrapperElement.style.opacity = `0.5`;
             element.style.transition = 'transform 0s';
         });
 
-        gesture.on('panmove', () => {
+        swiper.on('panmove', () => {
             const x = getX();
             if (x === undefined) return;
 
             element.style.transform = `translateX(${x}px)`;
         });
 
-        gesture.on('panend', () => {
+        swiper.on('panend', () => {
             element.style.transition = 'transform 0.2s';
 
             const x = getX();
@@ -114,13 +110,13 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
         });
 
         function getX() {
-            if (!gesture.touchMoveX) return undefined;
+            if (!swiper.getTouchMoveX) return undefined;
 
-            return clamp(startX + gesture.touchMoveX, rightActionX, leftActionX);
+            return clamp(startX + swiper.getTouchMoveX, rightActionX, leftActionX);
         }
 
         return () => {
-            gesture.destroy();
+            swiper.destroy();
         };
     }, [leftAction, position, rightAction, swipeThreshold]);
 
