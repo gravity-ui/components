@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/gravity-ui/components/compare/v2.2.0...v2.3.0) (2023-08-22)
+
+
+### Features
+
+* **notifications:** remove tinygesture ([#94](https://github.com/gravity-ui/components/issues/94)) ([83c795a](https://github.com/gravity-ui/components/commit/83c795acbbc0e26b5985e63751f46fdef9fa55e2))
+
 ## [2.2.0](https://github.com/gravity-ui/components/compare/v2.1.1...v2.2.0) (2023-08-21)
 
 
