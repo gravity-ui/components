@@ -1,5 +1,6 @@
 export * from './AdaptiveTabs';
 export * from './ChangelogDialog';
+export * from './FilePreview';
 export * from './FormRow';
 export * from './HelpPopover';
 export * from './InfiniteScroll';
