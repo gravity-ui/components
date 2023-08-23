@@ -1,16 +1,16 @@
 import React from 'react';
 
 import {Icon, Link, LinkProps} from '@gravity-ui/uikit';
-import block from 'bem-cn-lite';
 
 import {i18n} from '../../i18n';
 import {AppStoreEn} from '../../icons/stores/AppStoreEn';
 import {AppStoreRu} from '../../icons/stores/AppStoreRu';
 import {GooglePlayEn} from '../../icons/stores/GooglePlayEn';
 import {GooglePlayRu} from '../../icons/stores/GooglePlayRu';
+import {cn} from '../utils/cn';
 import {Lang} from '../utils/configure';
 
-const b = block('store-badge');
+const b = cn('store-badge');
 
 const androidPlatform = 'android';
 const iosPlatform = 'ios';

@@ -2,7 +2,7 @@
 import React from 'react';
 
 import {Bell} from '@gravity-ui/icons';
-import {Button, Icon, Popup} from '@gravity-ui/uikit';
+import {Button, Checkbox, Flex, Icon, Popup} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {delay} from '../../InfiniteScroll/__stories__/utils';
@@ -40,12 +40,21 @@ const Wrapper = (props: React.PropsWithChildren) => {
 type BooleanMap = Record<string, boolean | undefined>;
 
 export const Default: StoryFn = () => {
-    const {notifications, actions} = useNotificationsWithActions();
+    const {showNotificationsActions, showNotificationActions, renderControls} =
+        useNotificationsVariationsControl();
+
+    const {notifications, actions} = useNotificationsWithActions({
+        showNotificationsActions,
+        showNotificationActions,
+    });
 
     return (
-        <Wrapper>
-            <Notifications notifications={notifications} actions={actions} />
-        </Wrapper>
+        <Flex gap={4}>
+            <Wrapper>
+                <Notifications notifications={notifications} actions={actions} />
+            </Wrapper>
+            {renderControls()}
+        </Flex>
     );
 };
 
@@ -130,7 +139,37 @@ export const Empty: StoryFn = () => {
     );
 };
 
-function useNotificationsWithActions() {
+function useNotificationsVariationsControl() {
+    const [showNotificationsActions, setShowNotificationsActions] = React.useState(true);
+    const [showNotificationActions, setShowNotificationActions] = React.useState(true);
+
+    return {
+        showNotificationsActions,
+        showNotificationActions,
+        renderControls: () => (
+            <Flex gap={2} direction="column">
+                <Checkbox
+                    title=""
+                    checked={showNotificationsActions}
+                    onUpdate={(updated) => setShowNotificationsActions(updated)}
+                >
+                    Notifications actions
+                </Checkbox>
+                <Checkbox
+                    checked={showNotificationActions}
+                    onUpdate={(updated) => setShowNotificationActions(updated)}
+                >
+                    Notification actions
+                </Checkbox>
+            </Flex>
+        ),
+    };
+}
+
+function useNotificationsWithActions({
+    showNotificationsActions = true,
+    showNotificationActions = true,
+} = {}) {
     const [unreadNotifications, setUnreadNotifications] = React.useState<BooleanMap>({
         tracker: true,
         samurai: true,
@@ -139,21 +178,18 @@ function useNotificationsWithActions() {
     const [archivedNotifications, setArchivedNotifications] = React.useState<BooleanMap>({});
 
     const getSideActions = React.useCallback(
-        (
-            id: NotificationProps['id'],
-            unread: boolean | undefined,
-            archived: boolean | undefined,
-        ) => (
-            <>
-                {notificationSideActions.read(Boolean(unread), () =>
-                    setUnreadNotifications((current) => ({...current, [id]: !unread})),
-                )}
-                {notificationSideActions.archive(() =>
-                    setArchivedNotifications((current) => ({...current, [id]: !archived})),
-                )}
-            </>
-        ),
-        [],
+        (id: NotificationProps['id'], unread: boolean | undefined, archived: boolean | undefined) =>
+            showNotificationActions ? (
+                <>
+                    {notificationSideActions.read(Boolean(unread), () =>
+                        setUnreadNotifications((current) => ({...current, [id]: !unread})),
+                    )}
+                    {notificationSideActions.archive(() =>
+                        setArchivedNotifications((current) => ({...current, [id]: !archived})),
+                    )}
+                </>
+            ) : null,
+        [showNotificationActions],
     );
 
     const notifications = React.useMemo<NotificationProps[]>(
@@ -173,12 +209,12 @@ function useNotificationsWithActions() {
         [unreadNotifications, archivedNotifications, getSideActions],
     );
 
-    const actions = (
+    const actions = showNotificationsActions ? (
         <>
             {notificationsMockActions.unarchive(() => setArchivedNotifications({}))}
             {notificationsMockActions.filter()}
         </>
-    );
+    ) : null;
 
     return {notifications, actions};
 }

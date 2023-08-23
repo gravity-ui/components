@@ -11,6 +11,7 @@ $block: '.#{variables.$ns}notifications';
 
     &__head {
         display: flex;
+        align-items: center;
         padding: 16px;
         border-bottom: 1px solid var(--g-color-line-generic);
     }
@@ -60,6 +61,7 @@ $block: '.#{variables.$ns}notifications';
     &__actions {
         display: flex;
         align-items: center;
+        height: 28px;
     }
 
     &__notification-wrapper:not(:first-child)::before {
@@ -70,8 +72,8 @@ $block: '.#{variables.$ns}notifications';
     }
 
     // :hover
-    &__notification-wrapper:hover:not(:first-child)::before,
-    &__notification-wrapper:hover + &__notification-wrapper::before,
+    &__notification-wrapper_active:hover:not(:first-child)::before,
+    &__notification-wrapper_active:hover + &__notification-wrapper::before,
     // .unread
     &__notification-wrapper_unread:not(:first-child)::before,
     &__notification-wrapper_unread + &__notification-wrapper::before {

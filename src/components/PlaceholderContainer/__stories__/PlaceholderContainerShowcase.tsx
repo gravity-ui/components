@@ -2,14 +2,14 @@ import React from 'react';
 
 import {ChevronDown} from '@gravity-ui/icons';
 import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
-import block from 'bem-cn-lite';
 
+import {cn} from '../../utils/cn';
 import {Action} from '../PlaceholderContainerAction';
 import {PlaceholderContainer, PlaceholderContainerProps} from '../index';
 
 import './PlaceholderContainerShowcase.scss';
 
-const b = block('placeholder-container-showcase');
+const b = cn('placeholder-container-showcase');
 
 const ImageComponentTest = () => {
     return (
