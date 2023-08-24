@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://github.com/gravity-ui/components/compare/v2.3.0...v2.4.0) (2023-08-24)
+
+
+### Features
+
+* add FilePreview component ([#79](https://github.com/gravity-ui/components/issues/79)) ([c910ec5](https://github.com/gravity-ui/components/commit/c910ec5b368de4dfe8bc6049cc413fa4f3ca4d13))
+
+
+### Bug Fixes
+
+* remove bem-cn-lite usage ([#96](https://github.com/gravity-ui/components/issues/96)) ([6a2f5f3](https://github.com/gravity-ui/components/commit/6a2f5f384cd36fe8fdaf172ab421afd45ec76b03))
+
 ## [2.3.0](https://github.com/gravity-ui/components/compare/v2.2.0...v2.3.0) (2023-08-22)
 
 
