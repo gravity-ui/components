@@ -72,10 +72,11 @@ class Tab extends React.Component<TabProps> {
 
     render() {
         const {active, disabled, hint, title = this.props.id} = this.props;
+        const stringTitle = (hint || typeof title === 'string' ? title : '') as string;
         return (
             <div
                 className={b('tab', {active, disabled})}
-                title={String(hint || title || '')}
+                title={stringTitle}
                 onClick={disabled ? undefined : this.onClick}
             >
                 {title}
