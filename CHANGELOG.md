@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.4.1](https://github.com/gravity-ui/components/compare/v2.4.0...v2.4.1) (2023-09-14)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** prevent object convert to string ([#101](https://github.com/gravity-ui/components/issues/101)) ([5488f58](https://github.com/gravity-ui/components/commit/5488f580055e951fb3016ce2437bc7d95eff89a9))
+* **Notifications:** Updated Notifications' illustrations ([#99](https://github.com/gravity-ui/components/issues/99)) ([5b2ce45](https://github.com/gravity-ui/components/commit/5b2ce455075f7709e07899ee3756d16ffd1adb21))
+
 ## [2.4.0](https://github.com/gravity-ui/components/compare/v2.3.0...v2.4.0) (2023-08-24)
 
 
