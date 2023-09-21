@@ -86,7 +86,7 @@ export function FilePreview({
     return (
         <div className={cn(null, className)} data-qa={qa}>
             <div
-                className={cn('card', {clickable, 'with-hover': clickable || withActions})}
+                className={cn('card', {clickable, hoverable: clickable || withActions})}
                 role={clickable ? 'button' : undefined}
                 onKeyDown={clickable ? onKeyDown : undefined}
                 tabIndex={clickable ? 0 : undefined}
