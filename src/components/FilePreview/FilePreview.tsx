@@ -83,8 +83,6 @@ export function FilePreview({
     const clickable = Boolean(onClick);
     const withActions = Boolean(actions?.length);
 
-    console.log(clickable || actions?.length);
-
     return (
         <div className={cn(null, className)} data-qa={qa}>
             <div
