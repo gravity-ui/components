@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.2](https://github.com/gravity-ui/components/compare/v2.4.1...v2.4.2) (2023-09-21)
+
+
+### Bug Fixes
+
+* **FilePreview:** Fix FilePreview a11y and styles ([#102](https://github.com/gravity-ui/components/issues/102)) ([18c8456](https://github.com/gravity-ui/components/commit/18c8456f24c7e72cd5a62b6ebd73df1d8a7a5ada))
+
 ## [2.4.1](https://github.com/gravity-ui/components/compare/v2.4.0...v2.4.1) (2023-09-14)
 
 
