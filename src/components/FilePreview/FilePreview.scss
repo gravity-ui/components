@@ -44,14 +44,20 @@ $smallRoundedButtonSize: 24px;
         flex-direction: column;
         align-items: center;
 
-        cursor: pointer;
         position: relative;
         outline: none;
 
         box-shadow: var(--gc-card-box-shadow);
-        background-color: var(--_-color-base-background);
         border-radius: var(--_-border-radius);
         padding: 4px 10px;
+
+        &_clickable {
+            cursor: pointer;
+        }
+
+        &_hoverable {
+            background-color: var(--_-color-base-background);
+        }
 
         &::after {
             position: absolute;
