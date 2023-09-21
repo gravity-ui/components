@@ -80,13 +80,18 @@ export function FilePreview({
         }
     }, [file, imageSrc]);
 
+    const clickable = Boolean(onClick);
+    const withActions = Boolean(actions?.length);
+
+    console.log(clickable || actions?.length);
+
     return (
         <div className={cn(null, className)} data-qa={qa}>
             <div
-                className={cn('card')}
-                role="button"
-                onKeyDown={onKeyDown}
-                tabIndex={0}
+                className={cn('card', {clickable, 'with-hover': clickable || withActions})}
+                role={clickable ? 'button' : undefined}
+                onKeyDown={clickable ? onKeyDown : undefined}
+                tabIndex={clickable ? 0 : undefined}
                 onClick={onClick}
             >
                 {typeof previewSrc === 'string' ? (

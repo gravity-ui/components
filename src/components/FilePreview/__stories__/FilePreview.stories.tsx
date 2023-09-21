@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {CircleExclamation, Link, Xmark} from '@gravity-ui/icons';
+import {Flex} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
 
 import {FilePreview, FilePreviewProps} from '../FilePreview';
@@ -58,7 +59,6 @@ const DefaultTemplate: StoryFn<FilePreviewProps> = (args) => {
 };
 
 export const Default = DefaultTemplate.bind({});
-
 Default.args = {
     file: {name: 'my-file.docs', type: 'text/docs'} as File,
     onClick: () => {
@@ -72,3 +72,38 @@ Default.args = {
         },
     ],
 };
+
+const NoClickableTemplate: StoryFn<Omit<FilePreviewProps, 'actions'>> = (args) => {
+    return (
+        <Flex gap={4}>
+            <FilePreview {...args} file={{name: 'No clickable', type: 'text/docs'} as File} />
+            <FilePreview
+                {...args}
+                file={{name: 'No clickable with actions', type: 'text/docs'} as File}
+                actions={[
+                    {
+                        icon: Xmark,
+                        onClick: () => alert('Are you sure you want to delete the file?'),
+                        title: 'Close',
+                    },
+                ]}
+            />
+            <FilePreview
+                {...args}
+                file={{name: 'Clickable with actions', type: 'text/docs'} as File}
+                onClick={() => {
+                    window.open('https://disk.yandex.com', '_blank');
+                }}
+                actions={[
+                    {
+                        icon: Xmark,
+                        onClick: () => alert('Are you sure you want to delete the file?'),
+                        title: 'Close',
+                    },
+                ]}
+            />
+        </Flex>
+    );
+};
+
+export const NoClickable = NoClickableTemplate.bind({});
