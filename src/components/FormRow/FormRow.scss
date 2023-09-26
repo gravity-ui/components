@@ -1,21 +1,38 @@
 @use '../variables';
 
-.#{variables.$ns}form-row {
+$block: '.#{variables.$ns}form-row';
+
+#{$block} {
     --gc-form-row-label-width: 172px;
     --gc-form-row-field-height: 28px;
 
-    margin-bottom: 20px;
-    align-items: flex-start;
     display: flex;
+    margin-bottom: 20px;
+
+    &_direction_row {
+        align-items: flex-start;
+    }
+
+    &_direction_column {
+        flex-direction: column;
+    }
 
     &__left {
         display: flex;
         flex-flow: row;
-        min-height: var(--gc-form-row-field-height);
         box-sizing: border-box;
-        flex-shrink: 0;
-        width: var(--gc-form-row-label-width);
-        padding-right: 8px;
+
+        #{$block}_direction_row & {
+            min-height: var(--gc-form-row-field-height);
+            flex-shrink: 0;
+            width: var(--gc-form-row-label-width);
+            padding-right: 8px;
+        }
+
+        #{$block}_direction_column & {
+            width: 100%;
+            margin-bottom: 10px;
+        }
     }
 
     &__field-name {

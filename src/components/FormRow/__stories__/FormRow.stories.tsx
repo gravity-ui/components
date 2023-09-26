@@ -20,6 +20,7 @@ export default {
         label: 'Enter your name',
         fieldId,
         children: <TextInput id={fieldId} />,
+        direction: 'row',
     },
     argTypes: {
         children: argTypeReactNode,
@@ -87,4 +88,9 @@ WithHelpPopoverAndLongLabel.storyName = 'With Help Popover (Long Label)';
 WithHelpPopoverAndLongLabel.args = {
     ...WithLongLabel.args,
     ...WithHelpPopover.args,
+};
+
+export const ColumnDirection = Template.bind({});
+ColumnDirection.args = {
+    direction: 'column',
 };

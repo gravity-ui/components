@@ -1,5 +1,7 @@
 import type {HTMLAttributes, PropsWithChildren, ReactNode} from 'react';
 
+export type FormRowDirection = 'row' | 'column';
+
 export interface FormRowProps {
     className?: string;
     /** Field label */
@@ -13,6 +15,8 @@ export interface FormRowProps {
     /** Field component itself. `<FormRow.FieldDescription/>` could be used here
      * next to field component itself */
     children?: ReactNode;
+    /** Direction in which the elements are placed */
+    direction?: FormRowDirection;
 }
 
 export type FormRowFieldDescriptionProps = PropsWithChildren<{}> &
