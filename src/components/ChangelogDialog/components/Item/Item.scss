@@ -2,7 +2,7 @@
 @use '../../../variables';
 
 $block: '.#{variables.$ns}changelog-dialog-item';
-$metaWidth: 124px;
+$metaWidth: 80px;
 
 #{$block} {
     display: flex;
@@ -17,17 +17,18 @@ $metaWidth: 124px;
     }
 
     &__label-new {
-        margin-top: 4px;
+        margin-top: 8px;
     }
 
     &__content {
         flex: 1;
-        margin-left: 16px;
+        margin-left: 20px;
     }
 
     &__title {
         margin: 0;
-        @include mixins.text-subheader-3();
+        @include mixins.text-subheader-2();
+        font-weight: 500;
     }
 
     &__image {
@@ -40,7 +41,11 @@ $metaWidth: 124px;
         margin-top: 12px;
     }
 
-    &__story-button {
+    &__button {
         margin-top: 16px;
+    }
+
+    &__button + &__button {
+        margin-left: 16px;
     }
 }

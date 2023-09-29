@@ -11,4 +11,5 @@ export interface ChangelogItem {
     image?: ImageData;
     description: string;
     storyId?: string;
+    link?: string;
 }

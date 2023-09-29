@@ -30,6 +30,7 @@ const items: ChangelogItem[] = [
         description:
             'At the top of the panel is the service navigation for each service. Below are common navigation elements: a component for switching between accounts and organizations, settings, help center, search, notifications, favorites.',
         storyId: 'someStoryId1',
+        link: 'https://github.com/gravity-ui/uikit',
     },
     {
         date: '23 Jun 2022',
@@ -37,6 +38,7 @@ const items: ChangelogItem[] = [
         title: 'New components',
         description:
             'At the top of the panel is the service navigation for each service. Below are common navigation elements: a component for switching between accounts and organizations, settings, help center, search, notifications, favorites.',
+        link: 'https://github.com/gravity-ui/uikit',
     },
     {
         date: '15 Jun 2022',
@@ -65,6 +67,7 @@ const items: ChangelogItem[] = [
         description:
             'At the top of the panel is the service navigation for each service. Below are common navigation elements: a component for switching between accounts and organizations, settings, help center, search, notifications, favorites.',
         storyId: 'someStoryId3',
+        link: 'https://github.com/gravity-ui/uikit',
     },
     {
         date: '10 May 2022',
@@ -108,8 +111,8 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
     open: false,
     items,
-    fullListLink: 'https://github.com/gravity-ui/uikit',
     onStoryClick: (storyId) => {
+        // eslint-disable-next-line no-console
         console.log(storyId);
     },
 };

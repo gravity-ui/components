@@ -42,9 +42,19 @@ export function Item({className, data, onStoryClick}: ItemProps) {
                 {data.description ? (
                     <div className={b('description')}>{data.description}</div>
                 ) : null}
+                {data.link ? (
+                    <Button
+                        className={b('button')}
+                        view="outlined"
+                        href={data.link}
+                        target={'_blank'}
+                    >
+                        {i18n('action_read-more')}
+                    </Button>
+                ) : null}
                 {data.storyId && onStoryClick ? (
                     <Button
-                        className={b('story-button')}
+                        className={b('button')}
                         view="outlined-action"
                         onClick={() => {
                             if (data.storyId) {
