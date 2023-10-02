@@ -7,6 +7,8 @@ import {block} from '../utils/cn';
 
 import {QuestionMarkIcon} from './QuestionMarkIcon';
 
+import './HelpPopover.scss';
+
 const b = block('help-popover');
 
 /**
@@ -14,12 +16,24 @@ const b = block('help-popover');
  */
 type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : never;
 
-export type HelpPopoverProps = DistributiveOmit<PopoverProps, 'children'> & QAProps;
+export interface AriaProps {
+    buttonAriaAttributes?: React.AriaAttributes;
+    buttonRole?: React.AriaRole;
+    buttonRef?: React.RefObject<HTMLButtonElement>;
+}
+export type HelpPopoverProps = DistributiveOmit<PopoverProps, 'children'> & QAProps & AriaProps;
 
 export function HelpPopover(props: HelpPopoverProps) {
     return (
         <Popover {...props} className={b(null, props.className)}>
-            <Icon data={QuestionMarkIcon} size={16} />
+            <button
+                ref={props.buttonRef}
+                className={b('button')}
+                {...props.buttonAriaAttributes}
+                role={props.buttonRole}
+            >
+                <Icon data={QuestionMarkIcon} size={16} />
+            </button>
         </Popover>
     );
 }
