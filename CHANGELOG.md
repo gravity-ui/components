@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.5.0](https://github.com/gravity-ui/components/compare/v2.4.2...v2.5.0) (2023-10-04)
+
+
+### Features
+
+* **FormRow:** add direction prop ([#104](https://github.com/gravity-ui/components/issues/104)) ([7b10308](https://github.com/gravity-ui/components/commit/7b10308970aea1a349427021c4c4ab38be024559))
+* **HelpPopover:** improve a11y ([#106](https://github.com/gravity-ui/components/issues/106)) ([e2a9d3c](https://github.com/gravity-ui/components/commit/e2a9d3ce44c4fb15324716b356228d328a7c7c8f))
+
 ## [2.4.2](https://github.com/gravity-ui/components/compare/v2.4.1...v2.4.2) (2023-09-21)
 
 
