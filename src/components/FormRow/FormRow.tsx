@@ -17,11 +17,12 @@ const FormRowComponent: FC<FormRowProps> = ({
     fieldId,
     required = false,
     children,
+    direction = 'row',
 }) => {
     const LabelComponent = fieldId ? 'label' : 'span';
 
     return (
-        <div className={b(null, className)}>
+        <div className={b({direction}, className)}>
             <div className={b('left')}>
                 <LabelComponent className={b('field-name')} htmlFor={fieldId ? fieldId : undefined}>
                     <span className={b('field-name-text')}>{label}</span>
