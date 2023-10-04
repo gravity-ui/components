@@ -16,22 +16,17 @@ const b = block('help-popover');
  */
 type DistributiveOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : never;
 
-export interface AriaProps {
-    buttonAriaAttributes?: React.AriaAttributes;
-    buttonRole?: React.AriaRole;
-    buttonRef?: React.RefObject<HTMLButtonElement>;
+export interface HelpPopoverInnerProps {
+    buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
-export type HelpPopoverProps = DistributiveOmit<PopoverProps, 'children'> & QAProps & AriaProps;
+export type HelpPopoverProps = DistributiveOmit<PopoverProps, 'children'> &
+    QAProps &
+    HelpPopoverInnerProps;
 
 export function HelpPopover(props: HelpPopoverProps) {
     return (
         <Popover {...props} className={b(null, props.className)}>
-            <button
-                ref={props.buttonRef}
-                className={b('button')}
-                {...props.buttonAriaAttributes}
-                role={props.buttonRole}
-            >
+            <button {...props.buttonProps} className={b('button', [props.buttonProps?.className])}>
                 <Icon data={QuestionMarkIcon} size={16} />
             </button>
         </Popover>
