@@ -18,6 +18,7 @@ Component to display popover with tips
 | tooltipButton | `Object`                                        |          |                   |                     | Render button with this value <br/> `{ text: 'Button', onClick: () => onClick() }`                                                               |
 | offset        | `Object`                                        |          |                   | `{ left: 4 }`       | Control popup toggle position offset <br/> `{ top: 0, left: 0 }`                                                                                 |
 | buttonProps   | `React.ButtonHTMLAttributes<HTMLButtonElement>` |          |                   |                     | Set attributes to the underlying button element                                                                                                  |
+| buttonRef     | `React.RefObject<HTMLButtonElement>`            |          |                   |                     | Ref to the underlying button element                                                                                                             |
 
 ### Examples
 

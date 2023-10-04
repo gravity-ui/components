@@ -25,6 +25,7 @@ export const Accessible: StoryFn = (args) => {
     const helpPopoverWithoutActionsId = 'helpPopoverWithoutActionsId';
     const helpPopoverWithActionsId = 'helpPopoverWithActionsId';
     const [openPopover, setOpenPopover] = React.useState(false);
+    const ref = React.useRef<HTMLButtonElement>(null);
     return (
         <div>
             <div className={b('container')}>
@@ -50,11 +51,13 @@ export const Accessible: StoryFn = (args) => {
                     onOpenChange={setOpenPopover}
                     focusTrap
                     autoFocus
+                    restoreFocusRef={ref}
                     buttonProps={{
                         'aria-expanded': openPopover,
                         'aria-controls': helpPopoverWithActionsId,
                         'aria-label': 'More info',
                     }}
+                    buttonRef={ref}
                 />
             </div>
         </div>
