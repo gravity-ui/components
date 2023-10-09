@@ -9,7 +9,6 @@ import {
     TextInput,
     TextInputProps,
 } from '@gravity-ui/uikit';
-import _ from 'lodash';
 
 import {block} from '../utils/cn';
 
