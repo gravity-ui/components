@@ -12,27 +12,35 @@ import {
 
 import {block} from '../utils/cn';
 
-import './Password.scss';
+import './PasswordInput.scss';
 
-const b = block('password');
+const b = block('password-input');
 
-export type PasswordProps = Required<Pick<TextInputProps, 'onUpdate' | 'value'>> &
-    Omit<TextInputProps, 'rightContent' | 'type'> & {
+export type PasswordInputProps = Required<Pick<TextInputProps, 'onUpdate' | 'value'>> &
+    Omit<TextInputProps, 'type'> & {
+        /** Show copy button */
         showCopyButton?: boolean;
+        /** Show visibility button */
+        showVisibilityButton?: boolean;
     };
 
-export const Password: React.FC<PasswordProps> = (props) => {
-    const {autoComplete, value, showCopyButton} = props;
+export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
+    const {autoComplete, value, showCopyButton, rightContent, showVisibilityButton} = props;
 
     const [hideValue, setHideValue] = React.useState(true);
 
     const additionalRightContent = React.useMemo(() => {
+        if (!showVisibilityButton && !showCopyButton) {
+            return <React.Fragment>{rightContent}</React.Fragment>;
+        }
+
         const onClick = () => {
             setHideValue((hideValue) => !hideValue);
         };
 
         return (
-            <div className={b()}>
+            <div className={b('additional-right-content')}>
+                {rightContent}
                 {value && showCopyButton ? (
                     <CopyToClipboard text={String(value)} timeout={500}>
                         {(state) => (
@@ -47,12 +55,19 @@ export const Password: React.FC<PasswordProps> = (props) => {
                         )}
                     </CopyToClipboard>
                 ) : null}
-                <Button view="flat-secondary" onClick={onClick} className={b('button')} size="s">
-                    <Icon data={hideValue ? Eye : EyeSlash} size={14} />
-                </Button>
+                {showVisibilityButton ? (
+                    <Button
+                        view="flat-secondary"
+                        onClick={onClick}
+                        className={b('button')}
+                        size="s"
+                    >
+                        <Icon data={hideValue ? Eye : EyeSlash} size={14} />
+                    </Button>
+                ) : null}
             </div>
         );
-    }, [hideValue, value, showCopyButton]);
+    }, [rightContent, value, showCopyButton, showVisibilityButton, hideValue]);
 
     return (
         <TextInput
