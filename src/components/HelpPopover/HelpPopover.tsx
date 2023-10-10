@@ -21,6 +21,7 @@ export function HelpPopover(props: HelpPopoverProps) {
         <Popover {...props} className={b(null, props.className)}>
             <button
                 ref={props.buttonRef}
+                type="button"
                 {...props.buttonProps}
                 className={b('button', props.buttonProps?.className)}
             >
