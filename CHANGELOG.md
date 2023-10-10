@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/gravity-ui/components/compare/v2.5.0...v2.5.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* **HelpPopover:** set default button type ([#109](https://github.com/gravity-ui/components/issues/109)) ([4ee6106](https://github.com/gravity-ui/components/commit/4ee6106430d65b7da48428d79503b49f52100e89))
+
 ## [2.5.0](https://github.com/gravity-ui/components/compare/v2.4.2...v2.5.0) (2023-10-04)
 
 
