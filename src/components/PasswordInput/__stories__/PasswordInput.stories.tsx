@@ -21,7 +21,7 @@ const DefaultTemplate: StoryFn<React.ComponentProps<typeof PasswordInput>> = () 
     return (
         <PasswordInput
             showCopyButton={true}
-            showVisibilityButton={true}
+            showRevealButton={true}
             onUpdate={setValue}
             value={value}
         />

@@ -1,16 +1,11 @@
 import React from 'react';
 
-import {Copy, CopyCheck, Eye, EyeSlash} from '@gravity-ui/icons';
-import {
-    Button,
-    CopyToClipboard,
-    CopyToClipboardStatus,
-    Icon,
-    TextInput,
-    TextInputProps,
-} from '@gravity-ui/uikit';
+import {Eye, EyeSlash} from '@gravity-ui/icons';
+import {Button, ClipboardButton, TextInput, TextInputProps, Tooltip} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
+
+import i18n from './i18n';
 
 import './PasswordInput.scss';
 
@@ -20,18 +15,27 @@ export type PasswordInputProps = Required<Pick<TextInputProps, 'onUpdate' | 'val
     Omit<TextInputProps, 'type'> & {
         /** Show copy button */
         showCopyButton?: boolean;
-        /** Show visibility button */
-        showVisibilityButton?: boolean;
+        /** Show reveal button */
+        showRevealButton?: boolean;
+        /** Disable tooltip. Tooltip won't be shown */
+        hasTooltip?: boolean;
     };
 
 export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
-    const {autoComplete, value, showCopyButton, rightContent, showVisibilityButton, className} =
-        props;
+    const {
+        autoComplete,
+        value,
+        showCopyButton,
+        rightContent,
+        showRevealButton,
+        size = 'm',
+        hasTooltip = true,
+    } = props;
 
     const [hideValue, setHideValue] = React.useState(true);
 
     const additionalRightContent = React.useMemo(() => {
-        if (!showVisibilityButton && !showCopyButton) {
+        if (!showRevealButton && !showCopyButton) {
             return <React.Fragment>{rightContent}</React.Fragment>;
         }
 
@@ -43,32 +47,37 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             <div className={b('additional-right-content')}>
                 {rightContent}
                 {value && showCopyButton ? (
-                    <CopyToClipboard text={String(value)} timeout={500}>
-                        {(state) => (
-                            <Button view="flat-secondary" className={b('button')} size="s">
-                                <Icon
-                                    size={14}
-                                    data={
-                                        state === CopyToClipboardStatus.Pending ? Copy : CopyCheck
-                                    }
-                                />
-                            </Button>
-                        )}
-                    </CopyToClipboard>
+                    <ClipboardButton
+                        text={value}
+                        hasTooltip={hasTooltip}
+                        size={16}
+                        className={b('copy-button')}
+                    />
                 ) : null}
-                {showVisibilityButton ? (
-                    <Button
-                        view="flat-secondary"
-                        onClick={onClick}
-                        className={b('button')}
-                        size="s"
+                {showRevealButton ? (
+                    <Tooltip
+                        disabled={!hasTooltip}
+                        content={
+                            hideValue ? i18n('label_show-password') : i18n('label_hide-password')
+                        }
                     >
-                        <Icon data={hideValue ? Eye : EyeSlash} size={14} />
-                    </Button>
+                        <Button
+                            view="flat-secondary"
+                            onClick={onClick}
+                            size={size}
+                            extraProps={{
+                                'aria-label': hideValue
+                                    ? i18n('label_show-password')
+                                    : i18n('label_hide-password'),
+                            }}
+                        >
+                            <Button.Icon>{hideValue ? <Eye /> : <EyeSlash />}</Button.Icon>
+                        </Button>
+                    </Tooltip>
                 ) : null}
             </div>
         );
-    }, [rightContent, value, showCopyButton, showVisibilityButton, hideValue]);
+    }, [showRevealButton, showCopyButton, rightContent, value, hasTooltip, hideValue, size]);
 
     return (
         <TextInput
@@ -76,7 +85,9 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             type={hideValue ? 'password' : 'text'}
             rightContent={additionalRightContent}
             autoComplete={autoComplete ? autoComplete : 'new-password'}
-            className={b('input', className)}
+            controlProps={{
+                className: b(),
+            }}
         />
     );
 };

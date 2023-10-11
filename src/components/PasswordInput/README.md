@@ -10,10 +10,11 @@ Same as [TextInput component](https://github.com/gravity-ui/uikit/blob/main/src/
 - `onUpdate` is required property;
 - `type` is omitted;
 
-| Property             | Type      | Required | Default | Description            |
-| :------------------- | :-------- | :------- | :------ | :--------------------- |
-| showCopyButton       | `boolean` |          |         | Show copy button       |
-| showVisibilityButton | `boolean` |          |         | Show visibility button |
+| Property         | Type      | Required | Default | Description                             |
+| :--------------- | :-------- | :------- | :------ | :-------------------------------------- |
+| showCopyButton   | `boolean` |          |         | Show copy button                        |
+| showRevealButton | `boolean` |          |         | Show reveal button                      |
+| hasTooltip       | `boolean` |          | `true`  | Disable tooltip. Tooltip won't be shown |
 
 #### Usage example
 
