@@ -25,7 +25,8 @@ export type PasswordInputProps = Required<Pick<TextInputProps, 'onUpdate' | 'val
     };
 
 export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
-    const {autoComplete, value, showCopyButton, rightContent, showVisibilityButton} = props;
+    const {autoComplete, value, showCopyButton, rightContent, showVisibilityButton, className} =
+        props;
 
     const [hideValue, setHideValue] = React.useState(true);
 
@@ -75,6 +76,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             type={hideValue ? 'password' : 'text'}
             rightContent={additionalRightContent}
             autoComplete={autoComplete ? autoComplete : 'new-password'}
+            className={b('input', className)}
         />
     );
 };
