@@ -28,7 +28,6 @@ $metaWidth: 80px;
     &__title {
         margin: 0;
         @include mixins.text-subheader-2();
-        font-weight: 500;
     }
 
     &__image {
