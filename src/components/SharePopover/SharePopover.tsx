@@ -5,6 +5,7 @@ import {Icon, Popover} from '@gravity-ui/uikit';
 import type {IconData, PopupPlacement} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
+import {getUniqId} from '../utils/getUniqId';
 
 import {ShareList} from './ShareList/ShareList';
 import type {ShareListDefaultProps, ShareListProps} from './ShareList/ShareList';
@@ -63,6 +64,10 @@ export interface SharePopoverProps extends ShareListProps, Partial<SharePopoverD
 type SharePopoverInnerProps = Omit<SharePopoverProps, keyof SharePopoverDefaultProps> &
     Required<Pick<SharePopoverProps, keyof SharePopoverDefaultProps>>;
 
+type SharePopoverState = {
+    isOpen: boolean;
+};
+
 export const sharePopoverDefaultProps: SharePopoverDefaultProps = {
     iconSize: 16,
     shareOptions: ShareList.defaultProps.shareOptions,
@@ -75,8 +80,20 @@ export const sharePopoverDefaultProps: SharePopoverDefaultProps = {
     direction: LayoutDirection.Row,
 };
 
-export class SharePopover extends React.PureComponent<SharePopoverInnerProps> {
+export class SharePopover extends React.PureComponent<SharePopoverInnerProps, SharePopoverState> {
     static defaultProps = sharePopoverDefaultProps;
+    state = {
+        isOpen: false,
+    };
+    tooltipId: string;
+    buttonRef: React.RefObject<HTMLButtonElement>;
+
+    constructor(props: SharePopoverInnerProps) {
+        super(props);
+
+        this.tooltipId = getUniqId();
+        this.buttonRef = React.createRef();
+    }
 
     render() {
         const {
@@ -103,6 +120,7 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps> {
             renderCopy,
             children,
         } = this.props;
+        const {isOpen} = this.state;
 
         const content = (
             <ShareList
@@ -131,18 +149,32 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps> {
                 className={b(null, className)}
                 tooltipClassName={b('tooltip', tooltipClassName)}
                 onClick={this.handleClick}
+                tooltipId={this.tooltipId}
+                focusTrap={!openByHover}
+                restoreFocusRef={this.buttonRef}
+                autoFocus={!openByHover}
+                onOpenChange={this.onOpenChange}
             >
-                <div className={b('container', switcherClassName)}>
-                    <div className={b('icon-container')}>
-                        <Icon
-                            data={customIcon ? customIcon : NodesRight}
-                            size={iconSize}
-                            className={b('icon', iconClass)}
-                        />
-                    </div>
+                {({onClick}) => (
+                    <button
+                        className={b('container', switcherClassName)}
+                        onClick={onClick}
+                        ref={this.buttonRef}
+                        aria-expanded={openByHover ? undefined : isOpen}
+                        aria-controls={this.tooltipId}
+                        aria-describedby={this.tooltipId}
+                    >
+                        <div className={b('icon-container')}>
+                            <Icon
+                                data={customIcon ? customIcon : NodesRight}
+                                size={iconSize}
+                                className={b('icon', iconClass)}
+                            />
+                        </div>
 
-                    {Boolean(buttonTitle) && <div className={b('title')}>{buttonTitle}</div>}
-                </div>
+                        {Boolean(buttonTitle) && <div className={b('title')}>{buttonTitle}</div>}
+                    </button>
+                )}
             </Popover>
         );
     }
@@ -160,5 +192,9 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps> {
             return false;
         }
         return true;
+    };
+
+    private onOpenChange = (isOpen: boolean) => {
+        this.setState({isOpen});
     };
 }

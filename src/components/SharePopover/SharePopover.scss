@@ -1,4 +1,5 @@
 @use '../variables';
+@use '../mixins';
 
 $block: '.#{variables.$ns}share-popover';
 
@@ -11,11 +12,14 @@ $block: '.#{variables.$ns}share-popover';
     }
 
     &__container {
+        @include mixins.button-reset();
+        @include mixins.focusable();
         display: flex;
         flex-wrap: nowrap;
 
         cursor: pointer;
         color: var(--g-color-text-secondary);
+        border-radius: var(--g-focus-border-radius);
 
         &:hover {
             color: var(--g-color-text-primary);
