@@ -115,4 +115,10 @@ Default.args = {
         // eslint-disable-next-line no-console
         console.log(storyId);
     },
+    service: 'storybook',
+    metrica: {
+        reachGoal: (target: string, params: Record<string, string>) => {
+            console.log('reachGoal', target, params);
+        },
+    },
 };
