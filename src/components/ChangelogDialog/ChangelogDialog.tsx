@@ -1,14 +1,12 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import type {DialogProps} from '@gravity-ui/uikit';
 import {Dialog, Icon, Link} from '@gravity-ui/uikit';
 
-import {Metrica} from '../../types';
 import {block} from '../utils/cn';
 
 import {Item} from './components/Item/Item';
-import {Goals} from './constants';
 import i18n from './i18n';
 import type {ChangelogItem} from './types';
 
@@ -23,10 +21,10 @@ export interface ChangelogDialogProps {
     items: ChangelogItem[];
     disableBodyScrollLock?: boolean;
     disableOutsideClick?: boolean;
+    onOpen: () => void;
     onClose: DialogProps['onClose'];
+    onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
-    service?: string;
-    metrica?: Metrica;
 }
 
 let nextId = 1;
@@ -42,57 +40,18 @@ export function ChangelogDialog({
     disableBodyScrollLock = true,
     disableOutsideClick,
     onClose,
+    onOpen,
     onStoryClick,
-    service,
-    metrica,
+    onLinkClick,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
     const dialogCaptionId = `changelog-dialog-title-${idRef.current}`;
-    const refActionCount = useRef(0);
 
     useEffect(() => {
-        if (!service || !metrica || !open) return () => {};
-        refActionCount.current = 0;
-
-        metrica.reachGoal(Goals.Show, {service});
-
-        let fired = false;
-        const timeoutId = window.setTimeout(() => {
-            fired = true;
-        }, 3000);
-
-        return () => {
-            clearTimeout(timeoutId);
-            if (!fired && !refActionCount.current) {
-                metrica.reachGoal(Goals.Bounce, {service});
-            }
-            metrica.reachGoal(Goals.Hide, {service});
-        };
-    }, [open, service, metrica]);
-
-    const handleStoryClick = useCallback(
-        (storyId: string) => {
-            refActionCount.current++;
-            if (service && metrica) {
-                metrica.reachGoal(Goals.Click, {service, action: storyId});
-            }
-            if (onStoryClick) {
-                onStoryClick(storyId);
-            }
-        },
-        [onStoryClick, service, metrica],
-    );
-
-    const handleLinkClick = useCallback(
-        (link: string) => {
-            refActionCount.current++;
-            if (service && metrica) {
-                metrica.reachGoal(Goals.Click, {service, action: link});
-            }
-        },
-        [service, metrica],
-    );
+        if (!open) return;
+        onOpen();
+    }, [open, onOpen]);
 
     return (
         <Dialog
@@ -121,8 +80,8 @@ export function ChangelogDialog({
                             key={index}
                             className={b('item')}
                             data={item}
-                            onStoryClick={handleStoryClick}
-                            onLinkClick={handleLinkClick}
+                            onStoryClick={onStoryClick}
+                            onLinkClick={onLinkClick}
                         />
                     ))
                 ) : (

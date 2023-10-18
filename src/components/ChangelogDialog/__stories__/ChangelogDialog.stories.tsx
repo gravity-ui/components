@@ -98,8 +98,9 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogPr
             <ChangelogDialog
                 {...props}
                 open={visible}
-                onClose={() => {
+                onClose={(event, reason) => {
                     setVisible(false);
+                    props.onClose?.(event, reason);
                 }}
             />
         </React.Fragment>
@@ -113,12 +114,18 @@ Default.args = {
     items,
     onStoryClick: (storyId) => {
         // eslint-disable-next-line no-console
-        console.log(storyId);
+        console.log('story click', storyId);
     },
-    service: 'storybook',
-    metrica: {
-        reachGoal: (target: string, params: Record<string, string>) => {
-            console.log('reachGoal', target, params);
-        },
+    onLinkClick: (link) => {
+        // eslint-disable-next-line no-console
+        console.log('link click', link);
+    },
+    onOpen: () => {
+        // eslint-disable-next-line no-console
+        console.log('open');
+    },
+    onClose: () => {
+        // eslint-disable-next-line no-console
+        console.log('close');
     },
 };
