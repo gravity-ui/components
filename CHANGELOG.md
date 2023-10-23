@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.0](https://github.com/gravity-ui/components/compare/v2.5.1...v2.6.0) (2023-10-23)
+
+
+### Features
+
+* **ChangelogDialog:** change style, add link, events ([#105](https://github.com/gravity-ui/components/issues/105)) ([3c119c7](https://github.com/gravity-ui/components/commit/3c119c7783e622ed6bc56be2e6625a13c29a4914))
+* **FilePreview:** add disabled prop for action ([#113](https://github.com/gravity-ui/components/issues/113)) ([58d10ad](https://github.com/gravity-ui/components/commit/58d10adbefe51a7447b420cafb13bfab14378abd))
+
 ## [2.5.1](https://github.com/gravity-ui/components/compare/v2.5.0...v2.5.1) (2023-10-10)
 
 
