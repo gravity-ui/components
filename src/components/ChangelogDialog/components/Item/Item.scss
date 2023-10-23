@@ -17,12 +17,12 @@ $metaWidth: 80px;
     }
 
     &__label-new {
-        margin-top: 8px;
+        margin-top: var(--g-spacing-2);
     }
 
     &__content {
         flex: 1;
-        margin-left: 20px;
+        margin-left: var(--g-spacing-5);
     }
 
     &__title {
@@ -31,20 +31,20 @@ $metaWidth: 80px;
     }
 
     &__image {
-        margin-top: 12px;
+        margin-top: var(--g-spacing-3);
         border-radius: 16px;
         overflow: hidden;
     }
 
     &__description {
-        margin-top: 12px;
+        margin-top: var(--g-spacing-3);
     }
 
     &__button {
-        margin-top: 16px;
+        margin-top: var(--g-spacing-4);
     }
 
     &__button + &__button {
-        margin-left: 16px;
+        margin-left: var(--g-spacing-4);
     }
 }
