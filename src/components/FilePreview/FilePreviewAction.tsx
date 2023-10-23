@@ -8,6 +8,7 @@ export interface FilePreviewActionProps {
     icon: IconData;
     title: string;
     href?: string;
+    disabled?: boolean;
     onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
     extraProps?: ButtonHTMLAttributes<HTMLButtonElement> | AnchorHTMLAttributes<HTMLAnchorElement>;
 }
@@ -17,6 +18,7 @@ export function FilePreviewAction({
     icon,
     title,
     href,
+    disabled,
     onClick,
     extraProps,
 }: FilePreviewActionProps) {
@@ -27,6 +29,7 @@ export function FilePreviewAction({
                 view="raised"
                 pin="circle-circle"
                 href={href}
+                disabled={disabled}
                 size="s"
                 extraProps={{'aria-label': title, 'aria-describedby': id, ...extraProps}}
             >
