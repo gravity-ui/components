@@ -120,10 +120,6 @@ Default.args = {
         // eslint-disable-next-line no-console
         console.log('link click', link);
     },
-    onOpen: () => {
-        // eslint-disable-next-line no-console
-        console.log('open');
-    },
     onClose: () => {
         // eslint-disable-next-line no-console
         console.log('close');

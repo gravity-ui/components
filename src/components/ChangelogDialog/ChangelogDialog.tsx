@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import type {DialogProps} from '@gravity-ui/uikit';
@@ -21,7 +21,6 @@ export interface ChangelogDialogProps {
     items: ChangelogItem[];
     disableBodyScrollLock?: boolean;
     disableOutsideClick?: boolean;
-    onOpen: () => void;
     onClose: DialogProps['onClose'];
     onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
@@ -40,18 +39,12 @@ export function ChangelogDialog({
     disableBodyScrollLock = true,
     disableOutsideClick,
     onClose,
-    onOpen,
     onStoryClick,
     onLinkClick,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
     const dialogCaptionId = `changelog-dialog-title-${idRef.current}`;
-
-    useEffect(() => {
-        if (!open) return;
-        onOpen();
-    }, [open, onOpen]);
 
     return (
         <Dialog
