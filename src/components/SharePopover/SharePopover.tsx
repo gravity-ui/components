@@ -86,13 +86,11 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps, Sh
         isOpen: false,
     };
     tooltipId: string;
-    buttonRef: React.RefObject<HTMLButtonElement>;
 
     constructor(props: SharePopoverInnerProps) {
         super(props);
 
         this.tooltipId = getUniqId();
-        this.buttonRef = React.createRef();
     }
 
     render() {
@@ -150,16 +148,13 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps, Sh
                 tooltipClassName={b('tooltip', tooltipClassName)}
                 onClick={this.handleClick}
                 tooltipId={this.tooltipId}
-                focusTrap={!openByHover}
-                restoreFocusRef={this.buttonRef}
-                autoFocus={!openByHover}
+                disablePortal
                 onOpenChange={this.onOpenChange}
             >
                 {({onClick}) => (
                     <button
                         className={b('container', switcherClassName)}
                         onClick={onClick}
-                        ref={this.buttonRef}
                         aria-expanded={openByHover ? undefined : isOpen}
                         aria-controls={this.tooltipId}
                         aria-describedby={this.tooltipId}
