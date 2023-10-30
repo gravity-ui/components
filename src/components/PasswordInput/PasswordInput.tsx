@@ -1,11 +1,12 @@
 import React from 'react';
 
 import {Eye, EyeSlash} from '@gravity-ui/icons';
-import {Button, ClipboardButton, TextInput, TextInputProps, Tooltip} from '@gravity-ui/uikit';
+import {Button, ClipboardButton, Icon, TextInput, TextInputProps, Tooltip} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
 import i18n from './i18n';
+import {getCopyButtonSizeAndIconButtonSize} from './utils';
 
 import './PasswordInput.scss';
 
@@ -17,8 +18,10 @@ export type PasswordInputProps = Required<Pick<TextInputProps, 'onUpdate' | 'val
         showCopyButton?: boolean;
         /** Show reveal button */
         showRevealButton?: boolean;
-        /** Disable tooltip. Tooltip won't be shown */
-        hasTooltip?: boolean;
+        /** Disable the tooltip for the copy button. The tooltip will not be displayed */
+        hasCopyTooltip?: boolean;
+        /** Disable the tooltip for the reveal button. The tooltip will not be displayed */
+        hasRevealTooltip?: boolean;
     };
 
 export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
@@ -29,7 +32,9 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
         rightContent,
         showRevealButton,
         size = 'm',
-        hasTooltip = true,
+        hasCopyTooltip = true,
+        hasRevealTooltip = true,
+        controlProps,
     } = props;
 
     const [hideValue, setHideValue] = React.useState(true);
@@ -43,20 +48,22 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             setHideValue((hideValue) => !hideValue);
         };
 
+        const {copyButtonSize, iconSize} = getCopyButtonSizeAndIconButtonSize(size);
+
         return (
             <div className={b('additional-right-content')}>
                 {rightContent}
                 {value && showCopyButton ? (
                     <ClipboardButton
                         text={value}
-                        hasTooltip={hasTooltip}
-                        size={16}
+                        hasTooltip={hasRevealTooltip}
+                        size={iconSize}
                         className={b('copy-button')}
                     />
                 ) : null}
                 {showRevealButton ? (
                     <Tooltip
-                        disabled={!hasTooltip}
+                        disabled={!hasCopyTooltip}
                         content={
                             hideValue ? i18n('label_show-password') : i18n('label_hide-password')
                         }
@@ -64,20 +71,29 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
                         <Button
                             view="flat-secondary"
                             onClick={onClick}
-                            size={size}
+                            size={copyButtonSize}
                             extraProps={{
                                 'aria-label': hideValue
                                     ? i18n('label_show-password')
                                     : i18n('label_hide-password'),
                             }}
                         >
-                            <Button.Icon>{hideValue ? <Eye /> : <EyeSlash />}</Button.Icon>
+                            <Icon data={hideValue ? Eye : EyeSlash} size={iconSize} />
                         </Button>
                     </Tooltip>
                 ) : null}
             </div>
         );
-    }, [showRevealButton, showCopyButton, rightContent, value, hasTooltip, hideValue, size]);
+    }, [
+        showRevealButton,
+        showCopyButton,
+        rightContent,
+        value,
+        hasRevealTooltip,
+        hasCopyTooltip,
+        hideValue,
+        size,
+    ]);
 
     return (
         <TextInput
@@ -86,7 +102,8 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             rightContent={additionalRightContent}
             autoComplete={autoComplete ? autoComplete : 'new-password'}
             controlProps={{
-                className: b(),
+                className: b('input-control', controlProps?.className),
+                ...controlProps,
             }}
         />
     );

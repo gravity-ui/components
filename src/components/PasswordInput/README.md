@@ -10,11 +10,12 @@ Same as [TextInput component](https://github.com/gravity-ui/uikit/blob/main/src/
 - `onUpdate` is required property;
 - `type` is omitted;
 
-| Property         | Type      | Required | Default | Description                             |
-| :--------------- | :-------- | :------- | :------ | :-------------------------------------- |
-| showCopyButton   | `boolean` |          |         | Show copy button                        |
-| showRevealButton | `boolean` |          |         | Show reveal button                      |
-| hasTooltip       | `boolean` |          | `true`  | Disable tooltip. Tooltip won't be shown |
+| Property         | Type      | Required | Default | Description                                                                  |
+| :--------------- | :-------- | :------- | :------ | :--------------------------------------------------------------------------- |
+| showCopyButton   | `boolean` |          |         | Show copy button                                                             |
+| showRevealButton | `boolean` |          |         | Show reveal button                                                           |
+| hasCopyTooltip   | `boolean` |          | `true`  | Disable the tooltip for the copy button. The tooltip will not be displayed   |
+| hasRevealTooltip | `boolean` |          | `true`  | Disable the tooltip for the reveal button. The tooltip will not be displayed |
 
 #### Usage example
 
@@ -25,7 +26,7 @@ function MyComponent() {
   return (
     <PasswordInput
       showCopyButton={true}
-      showVisibilityButton={true}
+      showRevealButton={true}
       onUpdate={setValue}
       value={value}
     />

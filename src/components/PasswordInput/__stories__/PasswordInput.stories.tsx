@@ -4,7 +4,7 @@ import {Button} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
 
 import {cn} from '../../utils/cn';
-import {PasswordInput} from '../PasswordInput';
+import {PasswordInput, PasswordInputProps} from '../PasswordInput';
 
 import './PasswordInputStories.scss';
 
@@ -13,26 +13,21 @@ const b = cn('password-input-stories');
 export default {
     title: 'Components/PasswordInput',
     component: PasswordInput,
+    args: {
+        showCopyButton: true,
+        showRevealButton: true,
+    },
 } as Meta;
 
-const DefaultTemplate: StoryFn<React.ComponentProps<typeof PasswordInput>> = () => {
+const DefaultTemplate: StoryFn<PasswordInputProps> = (args) => {
     const [value, setValue] = React.useState('');
 
-    return (
-        <PasswordInput
-            showCopyButton={true}
-            showRevealButton={true}
-            onUpdate={setValue}
-            value={value}
-        />
-    );
+    return <PasswordInput {...args} onUpdate={setValue} value={value} />;
 };
 
 export const Default = DefaultTemplate.bind({});
 
-const WithGenerateRandomValueTemplate: StoryFn<React.ComponentProps<typeof PasswordInput>> = (
-    props: React.ComponentProps<typeof PasswordInput>,
-) => {
+const WithGenerateRandomValueTemplate: StoryFn<PasswordInputProps> = (args) => {
     const [value, setValue] = React.useState('');
 
     const generateRandomValue = React.useCallback(() => {
@@ -51,7 +46,7 @@ const WithGenerateRandomValueTemplate: StoryFn<React.ComponentProps<typeof Passw
 
     return (
         <div className={b()}>
-            <PasswordInput {...props} onUpdate={setValue} value={value} />
+            <PasswordInput {...args} onUpdate={setValue} value={value} />
             <Button onClick={generateRandomValue} className={b('button-generate-random-value')}>
                 Generate random value
             </Button>
