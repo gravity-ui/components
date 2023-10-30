@@ -1,6 +1,6 @@
 import type {ButtonSize, InputControlSize} from '@gravity-ui/uikit';
 
-export const getCopyButtonSizeAndIconButtonSize = (
+export const getCopyButtonSizeAndIconSize = (
     textInputSize: InputControlSize,
 ): {copyButtonSize: ButtonSize; iconSize: number} => {
     let copyButtonSize: ButtonSize = 's';

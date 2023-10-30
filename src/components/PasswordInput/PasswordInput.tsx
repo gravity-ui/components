@@ -6,7 +6,7 @@ import {Button, ClipboardButton, Icon, TextInput, TextInputProps, Tooltip} from 
 import {block} from '../utils/cn';
 
 import i18n from './i18n';
-import {getCopyButtonSizeAndIconButtonSize} from './utils';
+import {getCopyButtonSizeAndIconSize} from './utils';
 
 import './PasswordInput.scss';
 
@@ -48,7 +48,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             setHideValue((hideValue) => !hideValue);
         };
 
-        const {copyButtonSize, iconSize} = getCopyButtonSizeAndIconButtonSize(size);
+        const {copyButtonSize, iconSize} = getCopyButtonSizeAndIconSize(size);
 
         return (
             <div className={b('additional-right-content')}>
