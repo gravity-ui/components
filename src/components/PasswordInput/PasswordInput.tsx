@@ -102,8 +102,8 @@ export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
             rightContent={additionalRightContent}
             autoComplete={autoComplete ? autoComplete : 'new-password'}
             controlProps={{
-                className: b('input-control', controlProps?.className),
                 ...controlProps,
+                className: b('input-control', controlProps?.className),
             }}
         />
     );
