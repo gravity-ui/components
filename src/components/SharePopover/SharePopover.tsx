@@ -63,10 +63,7 @@ export interface SharePopoverProps extends ShareListProps, Partial<SharePopoverD
     }) => React.ReactElement;
 }
 
-type SharePopoverInnerProps = Omit<SharePopoverProps, keyof SharePopoverDefaultProps> &
-    Required<Pick<SharePopoverProps, keyof SharePopoverDefaultProps>>;
-
-export const SharePopover = (props: SharePopoverInnerProps) => {
+export const SharePopover = (props: SharePopoverProps) => {
     const {
         url,
         title,
