@@ -17,6 +17,18 @@ const DEFAULT_ICON_SIZE = 16; // px
 const DEFAULT_CLOSE_DELAY = 300; // ms
 const DEFAULT_PLACEMENT = 'bottom-end';
 
+export const sharePopoverDefaultProps: SharePopoverDefaultProps = {
+    iconSize: DEFAULT_ICON_SIZE,
+    shareOptions: ShareList.defaultProps.shareOptions,
+    withCopyLink: true,
+    useWebShareApi: false,
+    placement: [DEFAULT_PLACEMENT],
+    openByHover: true,
+    autoclosable: true,
+    closeDelay: DEFAULT_CLOSE_DELAY,
+    direction: LayoutDirection.Row,
+};
+
 interface SharePopoverDefaultProps extends ShareListDefaultProps {
     /** Web Share API setting (share options can be specified for non supported api case) */
     useWebShareApi: boolean;
@@ -68,19 +80,19 @@ export const SharePopover = (props: SharePopoverProps) => {
         url,
         title,
         text,
-        shareOptions = ShareList.defaultProps.shareOptions,
-        withCopyLink = true,
-        useWebShareApi = false,
-        placement = [DEFAULT_PLACEMENT],
-        openByHover = true,
-        autoclosable = true,
-        closeDelay = DEFAULT_CLOSE_DELAY,
-        iconSize = DEFAULT_ICON_SIZE,
+        shareOptions = sharePopoverDefaultProps.shareOptions,
+        withCopyLink = sharePopoverDefaultProps.withCopyLink,
+        useWebShareApi = sharePopoverDefaultProps.useWebShareApi,
+        placement = sharePopoverDefaultProps.placement,
+        openByHover = sharePopoverDefaultProps.openByHover,
+        autoclosable = sharePopoverDefaultProps.autoclosable,
+        closeDelay = sharePopoverDefaultProps.closeDelay,
+        iconSize = sharePopoverDefaultProps.iconSize,
         iconClass,
         tooltipClassName,
         switcherClassName,
         className,
-        direction = LayoutDirection.Row,
+        direction = sharePopoverDefaultProps.direction,
         customIcon,
         buttonTitle,
         copyTitle,
