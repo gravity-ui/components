@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useMemo} from 'react';
 
 import {NodesRight} from '@gravity-ui/icons';
 import {Icon, Popover, useUniqId} from '@gravity-ui/uikit';
@@ -101,26 +101,40 @@ export const SharePopover = (props: SharePopoverProps) => {
         children,
         onClick,
     } = props;
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
     const tooltipId = useUniqId();
 
-    const content = (
-        <ShareList
-            url={url}
-            title={title}
-            text={text}
-            shareOptions={shareOptions}
-            withCopyLink={withCopyLink}
-            direction={direction}
-            copyTitle={copyTitle}
-            copyIcon={copyIcon}
-            renderCopy={renderCopy}
-        >
-            {children}
-        </ShareList>
+    const content = useMemo(
+        () => (
+            <ShareList
+                url={url}
+                title={title}
+                text={text}
+                shareOptions={shareOptions}
+                withCopyLink={withCopyLink}
+                direction={direction}
+                copyTitle={copyTitle}
+                copyIcon={copyIcon}
+                renderCopy={renderCopy}
+            >
+                {children}
+            </ShareList>
+        ),
+        [
+            children,
+            copyIcon,
+            copyTitle,
+            direction,
+            renderCopy,
+            shareOptions,
+            text,
+            title,
+            url,
+            withCopyLink,
+        ],
     );
 
-    const handleClick = useCallback(
+    const handleClick = React.useCallback(
         async (event: React.MouseEvent<HTMLSpanElement>) => {
             if (onClick) {
                 onClick(event);
