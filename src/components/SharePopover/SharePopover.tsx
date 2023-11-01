@@ -5,7 +5,6 @@ import {Icon, Popover} from '@gravity-ui/uikit';
 import type {IconData, PopupPlacement} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
-import {getUniqId} from '../utils/getUniqId';
 
 import {ShareList} from './ShareList/ShareList';
 import type {ShareListDefaultProps, ShareListProps} from './ShareList/ShareList';
@@ -59,6 +58,10 @@ export interface SharePopoverProps extends ShareListProps, Partial<SharePopoverD
         title: string | React.ReactNode;
         icon: IconData;
     }) => React.ReactElement;
+    /**
+     * id for popover content and aria-controls for button
+     */
+    tooltipId?: string;
 }
 
 type SharePopoverInnerProps = Omit<SharePopoverProps, keyof SharePopoverDefaultProps> &
@@ -85,13 +88,6 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps, Sh
     state = {
         isOpen: false,
     };
-    tooltipId: string;
-
-    constructor(props: SharePopoverInnerProps) {
-        super(props);
-
-        this.tooltipId = getUniqId();
-    }
 
     render() {
         const {
@@ -117,6 +113,7 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps, Sh
             copyIcon,
             renderCopy,
             children,
+            tooltipId,
         } = this.props;
         const {isOpen} = this.state;
 
@@ -147,7 +144,7 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps, Sh
                 className={b(null, className)}
                 tooltipClassName={b('tooltip', tooltipClassName)}
                 onClick={this.handleClick}
-                tooltipId={this.tooltipId}
+                tooltipId={tooltipId}
                 disablePortal
                 onOpenChange={this.onOpenChange}
             >
@@ -156,8 +153,8 @@ export class SharePopover extends React.PureComponent<SharePopoverInnerProps, Sh
                         className={b('container', switcherClassName)}
                         onClick={onClick}
                         aria-expanded={openByHover ? undefined : isOpen}
-                        aria-controls={this.tooltipId}
-                        aria-describedby={this.tooltipId}
+                        aria-controls={tooltipId}
+                        aria-describedby={tooltipId}
                     >
                         <div className={b('icon-container')}>
                             <Icon
