@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 
 import {NodesRight} from '@gravity-ui/icons';
-import {Icon, Popover} from '@gravity-ui/uikit';
+import {Icon, Popover, useUniqId} from '@gravity-ui/uikit';
 import type {IconData, PopupPlacement} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
@@ -13,6 +13,9 @@ import {LayoutDirection} from './constants';
 import './SharePopover.scss';
 
 const b = block('share-popover');
+const DEFAULT_ICON_SIZE = 16; // px
+const DEFAULT_CLOSE_DELAY = 300; // ms
+const DEFAULT_PLACEMENT = 'bottom-end';
 
 interface SharePopoverDefaultProps extends ShareListDefaultProps {
     /** Web Share API setting (share options can be specified for non supported api case) */
@@ -58,135 +61,106 @@ export interface SharePopoverProps extends ShareListProps, Partial<SharePopoverD
         title: string | React.ReactNode;
         icon: IconData;
     }) => React.ReactElement;
-    /**
-     * id for popover content and aria-controls for button
-     */
-    tooltipId?: string;
 }
 
 type SharePopoverInnerProps = Omit<SharePopoverProps, keyof SharePopoverDefaultProps> &
     Required<Pick<SharePopoverProps, keyof SharePopoverDefaultProps>>;
 
-type SharePopoverState = {
-    isOpen: boolean;
+export const SharePopover = (props: SharePopoverInnerProps) => {
+    const {
+        url,
+        title,
+        text,
+        shareOptions = ShareList.defaultProps.shareOptions,
+        withCopyLink = true,
+        useWebShareApi = false,
+        placement = [DEFAULT_PLACEMENT],
+        openByHover = true,
+        autoclosable = true,
+        closeDelay = DEFAULT_CLOSE_DELAY,
+        iconSize = DEFAULT_ICON_SIZE,
+        iconClass,
+        tooltipClassName,
+        switcherClassName,
+        className,
+        direction = LayoutDirection.Row,
+        customIcon,
+        buttonTitle,
+        copyTitle,
+        copyIcon,
+        renderCopy,
+        children,
+        onClick,
+    } = props;
+    const [isOpen, setIsOpen] = useState(false);
+    const tooltipId = useUniqId();
+
+    const content = (
+        <ShareList
+            url={url}
+            title={title}
+            text={text}
+            shareOptions={shareOptions}
+            withCopyLink={withCopyLink}
+            direction={direction}
+            copyTitle={copyTitle}
+            copyIcon={copyIcon}
+            renderCopy={renderCopy}
+        >
+            {children}
+        </ShareList>
+    );
+
+    const handleClick = useCallback(
+        async (event: React.MouseEvent<HTMLSpanElement>) => {
+            if (onClick) {
+                onClick(event);
+            }
+
+            if (useWebShareApi && navigator && typeof navigator.share === 'function') {
+                await navigator.share({url, title, text});
+                event.preventDefault();
+                return false;
+            }
+            return true;
+        },
+        [onClick, text, title, url, useWebShareApi],
+    );
+
+    return (
+        <Popover
+            placement={placement}
+            hasArrow={false}
+            openOnHover={openByHover && !useWebShareApi}
+            autoclosable={autoclosable}
+            delayClosing={closeDelay}
+            content={content}
+            className={b(null, className)}
+            tooltipClassName={b('tooltip', tooltipClassName)}
+            onClick={handleClick}
+            tooltipId={tooltipId}
+            disablePortal
+            onOpenChange={setIsOpen}
+        >
+            {({onClick: onClickInner}) => (
+                <button
+                    className={b('container', switcherClassName)}
+                    aria-expanded={openByHover ? undefined : isOpen}
+                    aria-controls={tooltipId}
+                    aria-describedby={tooltipId}
+                    onClick={onClickInner}
+                >
+                    <div className={b('icon-container')}>
+                        <Icon
+                            data={customIcon ? customIcon : NodesRight}
+                            size={iconSize}
+                            className={b('icon', iconClass)}
+                        />
+                    </div>
+
+                    {Boolean(buttonTitle) && <div className={b('title')}>{buttonTitle}</div>}
+                </button>
+            )}
+        </Popover>
+    );
 };
-
-export const sharePopoverDefaultProps: SharePopoverDefaultProps = {
-    iconSize: 16,
-    shareOptions: ShareList.defaultProps.shareOptions,
-    withCopyLink: true,
-    useWebShareApi: false,
-    placement: ['bottom-end'],
-    openByHover: true,
-    autoclosable: true,
-    closeDelay: 300,
-    direction: LayoutDirection.Row,
-};
-
-export class SharePopover extends React.PureComponent<SharePopoverInnerProps, SharePopoverState> {
-    static defaultProps = sharePopoverDefaultProps;
-    state = {
-        isOpen: false,
-    };
-
-    render() {
-        const {
-            url,
-            title,
-            text,
-            shareOptions,
-            withCopyLink,
-            useWebShareApi,
-            placement,
-            openByHover,
-            autoclosable,
-            closeDelay,
-            iconSize,
-            iconClass,
-            tooltipClassName,
-            switcherClassName,
-            className,
-            direction,
-            customIcon,
-            buttonTitle,
-            copyTitle,
-            copyIcon,
-            renderCopy,
-            children,
-            tooltipId,
-        } = this.props;
-        const {isOpen} = this.state;
-
-        const content = (
-            <ShareList
-                url={url}
-                title={title}
-                text={text}
-                shareOptions={shareOptions}
-                withCopyLink={withCopyLink}
-                direction={direction}
-                copyTitle={copyTitle}
-                copyIcon={copyIcon}
-                renderCopy={renderCopy}
-            >
-                {children}
-            </ShareList>
-        );
-
-        return (
-            <Popover
-                placement={placement}
-                hasArrow={false}
-                openOnHover={openByHover && !useWebShareApi}
-                autoclosable={autoclosable}
-                delayClosing={closeDelay}
-                content={content}
-                className={b(null, className)}
-                tooltipClassName={b('tooltip', tooltipClassName)}
-                onClick={this.handleClick}
-                tooltipId={tooltipId}
-                disablePortal
-                onOpenChange={this.onOpenChange}
-            >
-                {({onClick}) => (
-                    <button
-                        className={b('container', switcherClassName)}
-                        onClick={onClick}
-                        aria-expanded={openByHover ? undefined : isOpen}
-                        aria-controls={tooltipId}
-                        aria-describedby={tooltipId}
-                    >
-                        <div className={b('icon-container')}>
-                            <Icon
-                                data={customIcon ? customIcon : NodesRight}
-                                size={iconSize}
-                                className={b('icon', iconClass)}
-                            />
-                        </div>
-
-                        {Boolean(buttonTitle) && <div className={b('title')}>{buttonTitle}</div>}
-                    </button>
-                )}
-            </Popover>
-        );
-    }
-
-    private handleClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        const {url, title, text, useWebShareApi, onClick} = this.props;
-
-        if (onClick) {
-            onClick(event);
-        }
-
-        if (useWebShareApi && navigator && typeof navigator.share === 'function') {
-            await navigator.share({url, title, text});
-            event.preventDefault();
-            return false;
-        }
-        return true;
-    };
-
-    private onOpenChange = (isOpen: boolean) => {
-        this.setState({isOpen});
-    };
-}
