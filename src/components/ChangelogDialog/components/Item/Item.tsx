@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 
 import {CirclePlay} from '@gravity-ui/icons';
 import {Button, Icon, Label} from '@gravity-ui/uikit';
@@ -16,9 +16,22 @@ export interface ItemProps {
     className?: string;
     data: ChangelogItem;
     onStoryClick?: (storyId: string) => void;
+    onLinkClick?: (link: string) => void;
 }
 
-export function Item({className, data, onStoryClick}: ItemProps) {
+export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
+    const handleLinkClick = useCallback(() => {
+        if (onLinkClick && data.link) {
+            onLinkClick(data.link);
+        }
+    }, [data.link, onLinkClick]);
+
+    const handleStoryClick = useCallback(() => {
+        if (onStoryClick && data.storyId) {
+            onStoryClick(data.storyId);
+        }
+    }, [data.storyId, onStoryClick]);
+
     return (
         <article className={b(null, className)}>
             <div className={b('meta')}>
@@ -42,15 +55,22 @@ export function Item({className, data, onStoryClick}: ItemProps) {
                 {data.description ? (
                     <div className={b('description')}>{data.description}</div>
                 ) : null}
+                {data.link ? (
+                    <Button
+                        className={b('button')}
+                        view="outlined"
+                        href={data.link}
+                        target={'_blank'}
+                        onClick={handleLinkClick}
+                    >
+                        {i18n('action_read-more')}
+                    </Button>
+                ) : null}
                 {data.storyId && onStoryClick ? (
                     <Button
-                        className={b('story-button')}
+                        className={b('button')}
                         view="outlined-action"
-                        onClick={() => {
-                            if (data.storyId) {
-                                onStoryClick(data.storyId);
-                            }
-                        }}
+                        onClick={handleStoryClick}
                     >
                         {i18n('button_view_story')}
                         <Icon data={CirclePlay} size={14} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {CircleExclamation} from '@gravity-ui/icons';
 import {render, screen} from '@testing-library/react';
@@ -119,5 +119,53 @@ describe('FilePreview', () => {
 
         expect(firstActionsClickHandler).toBeCalled();
         expect(secondActionsClickHandler).toBeCalled();
+    });
+
+    test("Don't Call disabled action click handler", async () => {
+        const fileName = 'Some file name';
+        const fileType = 'image/png';
+
+        const mockFn = jest.fn();
+
+        const TestCase = () => {
+            const [disabled, setDisabled] = useState(false);
+            const [clicksCount, setClicksCount] = useState(0);
+
+            const actionsClickHandler = () => {
+                mockFn();
+                setClicksCount((prev) => prev + 1);
+
+                if (clicksCount === 4) {
+                    setDisabled(true);
+                }
+            };
+
+            return (
+                <FilePreview
+                    file={{name: fileName, type: fileType} as File}
+                    actions={[
+                        {
+                            disabled,
+                            icon: CircleExclamation,
+                            title: 'some hint',
+                            onClick: actionsClickHandler,
+                        },
+                    ]}
+                />
+            );
+        };
+
+        render(<TestCase />);
+
+        const actionButtons = screen.getAllByRole('button');
+
+        const user = userEvent.setup();
+        for (const actionButton of actionButtons) {
+            for (let i = 0; i < 10; i++) {
+                await user.click(actionButton);
+            }
+        }
+
+        expect(mockFn).toBeCalledTimes(5);
     });
 });

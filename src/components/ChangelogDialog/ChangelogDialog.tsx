@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
-import {Dialog, Icon, Link} from '@gravity-ui/uikit';
 import type {DialogProps} from '@gravity-ui/uikit';
+import {Dialog, Icon, Link} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -22,6 +22,7 @@ export interface ChangelogDialogProps {
     disableBodyScrollLock?: boolean;
     disableOutsideClick?: boolean;
     onClose: DialogProps['onClose'];
+    onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
 }
 
@@ -39,6 +40,7 @@ export function ChangelogDialog({
     disableOutsideClick,
     onClose,
     onStoryClick,
+    onLinkClick,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
@@ -72,6 +74,7 @@ export function ChangelogDialog({
                             className={b('item')}
                             data={item}
                             onStoryClick={onStoryClick}
+                            onLinkClick={onLinkClick}
                         />
                     ))
                 ) : (
