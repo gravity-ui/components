@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://github.com/gravity-ui/components/compare/v2.6.0...v2.7.0) (2023-11-01)
+
+
+### Features
+
+* made a new password input component ([#108](https://github.com/gravity-ui/components/issues/108)) ([5b1c15d](https://github.com/gravity-ui/components/commit/5b1c15de5fa6a681a080af601b71b0b8bb9a7207))
+
 ## [2.6.0](https://github.com/gravity-ui/components/compare/v2.5.1...v2.6.0) (2023-10-23)
 
 
