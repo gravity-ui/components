@@ -10,6 +10,7 @@ import {QuestionMarkIcon} from './QuestionMarkIcon';
 import './HelpPopover.scss';
 
 const b = block('help-popover');
+const ICON_SIZE = 16;
 
 export interface HelpPopoverProps extends Omit<PopoverProps, 'children'>, QAProps {
     buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
@@ -25,7 +26,7 @@ export function HelpPopover(props: HelpPopoverProps) {
                 {...props.buttonProps}
                 className={b('button', props.buttonProps?.className)}
             >
-                <Icon data={QuestionMarkIcon} size={16} />
+                <Icon data={QuestionMarkIcon} size={ICON_SIZE} />
             </button>
         </Popover>
     );

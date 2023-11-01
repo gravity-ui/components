@@ -2,10 +2,12 @@
 @use '@gravity-ui/uikit/styles/mixins';
 
 $block: '.#{variables.$ns}help-popover';
+$iconSize: 16px;
 
 #{$block} {
     &__button {
         @include mixins.button-reset();
+        line-height: $iconSize;
     }
 
     &__button:focus-visible {
