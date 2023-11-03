@@ -15,5 +15,6 @@ export * from './SharePopover';
 export * from './StoreBadge';
 export * from './Stories';
 export * from './StoriesGroup';
+export * from './TableHOCs';
 
 export {Lang, configure} from './utils/configure';

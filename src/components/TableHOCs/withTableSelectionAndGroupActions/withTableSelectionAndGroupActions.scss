@@ -1,0 +1,12 @@
+@use '../../variables';
+
+$block: '.#{variables.$ns}with-table-group-actions';
+
+#{$block} {
+    &__panel {
+        bottom: 0;
+        position: sticky;
+        z-index: 10;
+        margin-top: auto;
+    }
+}
