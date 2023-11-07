@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://github.com/gravity-ui/components/compare/v2.7.0...v2.8.0) (2023-11-02)
+
+
+### Features
+
+* update uikit, improve a11y for sharepopover ([#111](https://github.com/gravity-ui/components/issues/111)) ([eff2702](https://github.com/gravity-ui/components/commit/eff270239e8f1716bc2d108de5bd3e7ea74607f0))
+
 ## [2.7.0](https://github.com/gravity-ui/components/compare/v2.6.0...v2.7.0) (2023-11-01)
 
 
