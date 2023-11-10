@@ -43,7 +43,7 @@ export function ChangelogDialog({
     onClose,
     onStoryClick,
     onLinkClick,
-    loading = true,
+    loading,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
