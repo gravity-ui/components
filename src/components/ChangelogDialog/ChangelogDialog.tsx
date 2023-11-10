@@ -74,7 +74,7 @@ export function ChangelogDialog({
                 </Dialog.Body>
             ) : null}
             <Dialog.Body key="items" className={b('items-container')}>
-                {!error && loading && (
+                {loading && (
                     <div className={b('loading')}>
                         <Loader size={'m'} />
                     </div>
