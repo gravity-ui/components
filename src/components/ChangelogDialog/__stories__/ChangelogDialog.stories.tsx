@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {Button} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
@@ -79,10 +79,21 @@ const items: ChangelogItem[] = [
 
 const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogProps) => {
     const [visible, setVisible] = React.useState(props.open);
+    const [loading, setLoading] = React.useState(true);
 
     React.useEffect(() => {
         setVisible(props.open);
     }, [props.open]);
+
+    useEffect(() => {
+        if (!visible) return;
+        const timeoutId = setTimeout(() => setLoading(false), 1000);
+        // eslint-disable-next-line consistent-return
+        return () => {
+            clearTimeout(timeoutId);
+            setLoading(true);
+        };
+    }, [visible]);
 
     return (
         <React.Fragment>
@@ -98,6 +109,7 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogPr
             <ChangelogDialog
                 {...props}
                 open={visible}
+                loading={loading}
                 onClose={(event, reason) => {
                     setVisible(false);
                     props.onClose?.(event, reason);

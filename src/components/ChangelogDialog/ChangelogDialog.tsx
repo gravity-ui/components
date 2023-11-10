@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import type {DialogProps} from '@gravity-ui/uikit';
@@ -7,6 +7,7 @@ import {Dialog, Icon, Link} from '@gravity-ui/uikit';
 import {block} from '../utils/cn';
 
 import {Item} from './components/Item/Item';
+import {ItemSkeleton} from './components/ItemSkeleton/ItemSkeleton';
 import i18n from './i18n';
 import type {ChangelogItem} from './types';
 
@@ -24,6 +25,7 @@ export interface ChangelogDialogProps {
     onClose: DialogProps['onClose'];
     onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
+    loading?: boolean;
 }
 
 let nextId = 1;
@@ -41,6 +43,7 @@ export function ChangelogDialog({
     onClose,
     onStoryClick,
     onLinkClick,
+    loading = true,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
@@ -67,19 +70,26 @@ export function ChangelogDialog({
                 </Dialog.Body>
             ) : null}
             <Dialog.Body key="items" className={b('items-container')}>
-                {items.length > 0 ? (
-                    items.map((item, index) => (
-                        <Item
-                            key={index}
-                            className={b('item')}
-                            data={item}
-                            onStoryClick={onStoryClick}
-                            onLinkClick={onLinkClick}
-                        />
-                    ))
-                ) : (
-                    <div className={b('empty-placeholder')}>{i18n('label_empty')}</div>
+                {loading && (
+                    <Fragment>
+                        <ItemSkeleton className={b('item')} withImage withDescription withLink />
+                        <ItemSkeleton className={b('item')} isNew withDescription withLink />
+                    </Fragment>
                 )}
+                {!loading &&
+                    (items.length > 0 ? (
+                        items.map((item, index) => (
+                            <Item
+                                key={index}
+                                className={b('item')}
+                                data={item}
+                                onStoryClick={onStoryClick}
+                                onLinkClick={onLinkClick}
+                            />
+                        ))
+                    ) : (
+                        <div className={b('empty-placeholder')}>{i18n('label_empty')}</div>
+                    ))}
             </Dialog.Body>
         </Dialog>
     );
