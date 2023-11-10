@@ -6,6 +6,7 @@ import {Dialog, Icon, Link} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
+import ErrorContainer from './components/ErrorContainer/ErrorContainer';
 import {Item} from './components/Item/Item';
 import {ItemSkeleton} from './components/ItemSkeleton/ItemSkeleton';
 import i18n from './i18n';
@@ -25,7 +26,9 @@ export interface ChangelogDialogProps {
     onClose: DialogProps['onClose'];
     onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
+    onRetryClick?: () => void;
     loading?: boolean;
+    error?: boolean | {title: string; description: string};
 }
 
 let nextId = 1;
@@ -43,7 +46,9 @@ export function ChangelogDialog({
     onClose,
     onStoryClick,
     onLinkClick,
+    onRetryClick,
     loading,
+    error,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
@@ -70,13 +75,15 @@ export function ChangelogDialog({
                 </Dialog.Body>
             ) : null}
             <Dialog.Body key="items" className={b('items-container')}>
-                {loading && (
+                {!error && loading && (
                     <Fragment>
                         <ItemSkeleton className={b('item')} withImage withDescription withLink />
                         <ItemSkeleton className={b('item')} isNew withDescription withLink />
                     </Fragment>
                 )}
-                {!loading &&
+                {error && !loading && <ErrorContainer error={error} onRetryClick={onRetryClick} />}
+                {!error &&
+                    !loading &&
                     (items.length > 0 ? (
                         items.map((item, index) => (
                             <Item

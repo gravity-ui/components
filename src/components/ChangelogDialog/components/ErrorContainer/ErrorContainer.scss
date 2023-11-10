@@ -1,0 +1,16 @@
+@use '@gravity-ui/uikit/styles/mixins';
+@use '../../../variables';
+
+$block: '.#{variables.$ns}changelog-dialog-error-container';
+
+#{$block} {
+    &__error-image-container {
+        text-align: center;
+    }
+
+    &__error-image {
+        color: var(--g-color-base-warning-heavy);
+        width: 32px;
+        height: 32px;
+    }
+}

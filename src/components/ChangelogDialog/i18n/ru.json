@@ -4,5 +4,7 @@
   "label_new": "New",
   "button_view_story": "Посмотреть сториз",
   "label_empty": "Нет данных",
-  "action_read-more": "Читать далее"
+  "action_read-more": "Читать далее",
+  "context_error-title": "Не удалось загрузить список изменений",
+  "action_retry": "Повторить"
 }
