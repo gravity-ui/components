@@ -30,4 +30,9 @@ $maxItemsHeight: 70vh;
         color: var(--g-color-text-secondary);
         text-align: center;
     }
+
+    &__loading {
+        text-align: center;
+        margin: var(--g-spacing-8);
+    }
 }

@@ -1,14 +1,13 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import type {DialogProps} from '@gravity-ui/uikit';
-import {Dialog, Icon, Link} from '@gravity-ui/uikit';
+import {Dialog, Icon, Link, Loader} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
 import ErrorContainer from './components/ErrorContainer/ErrorContainer';
 import {Item} from './components/Item/Item';
-import {ItemSkeleton} from './components/ItemSkeleton/ItemSkeleton';
 import i18n from './i18n';
 import type {ChangelogItem} from './types';
 
@@ -76,10 +75,9 @@ export function ChangelogDialog({
             ) : null}
             <Dialog.Body key="items" className={b('items-container')}>
                 {!error && loading && (
-                    <Fragment>
-                        <ItemSkeleton className={b('item')} withImage withDescription withLink />
-                        <ItemSkeleton className={b('item')} isNew withDescription withLink />
-                    </Fragment>
+                    <div className={b('loading')}>
+                        <Loader size={'m'} />
+                    </div>
                 )}
                 {error && !loading && <ErrorContainer error={error} onRetryClick={onRetryClick} />}
                 {!error &&
