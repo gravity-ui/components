@@ -9,8 +9,6 @@ $block: '.#{variables.$ns}changelog-dialog-error-container';
     }
 
     &__error-image {
-        color: var(--g-color-base-warning-heavy);
-        width: 32px;
-        height: 32px;
+        color: var(--g-color-text-warning);
     }
 }

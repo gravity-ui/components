@@ -6,7 +6,7 @@ import {Dialog, Icon, Link, Loader} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
-import ErrorContainer from './components/ErrorContainer/ErrorContainer';
+import {ErrorContainer} from './components/ErrorContainer/ErrorContainer';
 import {Item} from './components/Item/Item';
 import i18n from './i18n';
 import type {ChangelogItem} from './types';

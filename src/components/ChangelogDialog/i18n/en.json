@@ -5,6 +5,6 @@
   "button_view_story": "View story",
   "label_empty": "No data",
   "action_read-more": "Read more",
-  "context_error-title": "Unable load changelog",
-  "action_retry": "Retry"
+  "label_error-title": "Unable load changelog",
+  "button_retry": "Retry"
 }

@@ -1,6 +1,7 @@
 import React, {FC, useMemo} from 'react';
 
 import {TriangleExclamation} from '@gravity-ui/icons';
+import {Icon} from '@gravity-ui/uikit';
 
 import {PlaceholderContainer} from '../../../PlaceholderContainer';
 import {block} from '../../../utils/cn';
@@ -15,7 +16,7 @@ interface ErrorContainerProps {
     error?: boolean | {title?: string; description?: string};
 }
 
-const ErrorContainer: FC<ErrorContainerProps> = ({onRetryClick, error}) => {
+export const ErrorContainer: FC<ErrorContainerProps> = ({onRetryClick, error}) => {
     const {title, description} = useMemo(() => {
         return error && typeof error === 'object' ? error : {};
     }, [error]);
@@ -23,21 +24,19 @@ const ErrorContainer: FC<ErrorContainerProps> = ({onRetryClick, error}) => {
     return (
         <PlaceholderContainer
             size={'s'}
-            title={title || i18n('context_error-title')}
+            title={title || i18n('label_error-title')}
             description={description}
             image={
                 <div className={b('error-image-container')}>
-                    <TriangleExclamation className={b('error-image')} />
+                    <Icon data={TriangleExclamation} className={b('error-image')} size={32} />
                 </div>
             }
             action={
                 onRetryClick && {
-                    text: i18n('action_retry'),
+                    text: i18n('button_retry'),
                     handler: onRetryClick,
                 }
             }
         />
     );
 };
-
-export default ErrorContainer;
