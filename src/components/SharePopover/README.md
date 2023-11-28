@@ -6,7 +6,7 @@ Sharing component
 
 | Property         | Type                  | Required | Default          | Description                                                                                                                                                                |
 | :--------------- | :-------------------- | :------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| url              | `String`              | ✔        |                  | share link                                                                                                                                                                 |
+| url              | `String`              | ✔       |                  | share link                                                                                                                                                                 |
 | title            | `String`              |          |                  | link title                                                                                                                                                                 |
 | text             | `String`              |          |                  | link text                                                                                                                                                                  |
 | shareOptions     | `Array<ShareOptions>` |          | `[]`             | share options list                                                                                                                                                         |

@@ -44,7 +44,7 @@ For more code examples go to [Notifications.stories.tsx](https://github.com/grav
 **Notifications** — renders notifications and actions on these notifications.
 
 | Property                    | Type                  | Required | Default           | Description                                                                                                                                            |
-|:----------------------------|:----------------------|:--------:|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :-------------------------- | :-------------------- | :------: | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `notifications`             | `NotificationProps[]` |  `true`  |                   | List of Notifications to display. [Notification' types](https://github.com/gravity-ui/components/blob/main/src/components/Notification/definitions.ts) |
 | `title`                     | `ReactNode`           |          | `"Notifications"` | Notifications' title                                                                                                                                   |
 | `actions`                   | `ReactNode`           |          |                   | Notifications' actions (e.g. create new, mark all as read)                                                                                             |

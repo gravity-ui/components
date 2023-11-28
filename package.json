@@ -27,8 +27,10 @@
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx --report-unused-disable-directives .",
-    "lint:styles": "stylelint 'src/**/*.scss'",
+    "lint:styles": "stylelint 'src/**/*.scss' --report-needless-disables",
+    "lint:prettier": "npm run prettier -- --check",
     "lint": "run-p lint:*",
+    "prettier": "prettier '**/*.{md,yaml,yml,json}'",
     "typecheck": "tsc --noEmit",
     "clean": "gulp clean",
     "build": "gulp",
@@ -109,7 +111,7 @@
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix --quiet"
     ],
-    "*.md": [
+    "*.{md,yaml,yml,json}": [
       "prettier --write"
     ]
   }
