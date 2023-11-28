@@ -1,5 +1,4 @@
 import React from 'react';
-import type {AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEventHandler} from 'react';
 
 import {Button, Icon, IconData, Text, Tooltip} from '@gravity-ui/uikit';
 
@@ -9,8 +8,10 @@ export interface FilePreviewActionProps {
     title: string;
     href?: string;
     disabled?: boolean;
-    onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
-    extraProps?: ButtonHTMLAttributes<HTMLButtonElement> | AnchorHTMLAttributes<HTMLAnchorElement>;
+    onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+    extraProps?:
+        | React.ButtonHTMLAttributes<HTMLButtonElement>
+        | React.AnchorHTMLAttributes<HTMLAnchorElement>;
 }
 
 export function FilePreviewAction({

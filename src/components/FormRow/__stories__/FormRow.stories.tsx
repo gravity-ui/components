@@ -52,12 +52,12 @@ WithCornerLabelLength.args = {
 export const WithFieldDescription = Template.bind({});
 WithFieldDescription.args = {
     children: (
-        <>
+        <React.Fragment>
             <TextInput id={fieldId} controlProps={{'aria-describedby': fieldDescriptionId}} />
             <FormRow.FieldDescription id={fieldDescriptionId}>
                 Your name as it used in your foreign passport.
             </FormRow.FieldDescription>
-        </>
+        </React.Fragment>
     ),
 };
 

@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 
 import {CirclePlay} from '@gravity-ui/icons';
 import {Button, Icon, Label} from '@gravity-ui/uikit';
@@ -20,13 +20,13 @@ export interface ItemProps {
 }
 
 export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
-    const handleLinkClick = useCallback(() => {
+    const handleLinkClick = React.useCallback(() => {
         if (onLinkClick && data.link) {
             onLinkClick(data.link);
         }
     }, [data.link, onLinkClick]);
 
-    const handleStoryClick = useCallback(() => {
+    const handleStoryClick = React.useCallback(() => {
         if (onStoryClick && data.storyId) {
             onStoryClick(data.storyId);
         }

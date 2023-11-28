@@ -1,4 +1,4 @@
-import type {StorybookConfig} from '@storybook/core-common';
+import type {StorybookConfig} from '@storybook/react-webpack5';
 
 const {join} = require('path');
 

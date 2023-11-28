@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 
 import {block} from '../utils/cn';
 
@@ -6,11 +6,11 @@ import type {FormRowFieldDescriptionProps} from './types';
 
 const b = block('form-row');
 
-export const FormRowFieldDescription: FC<FormRowFieldDescriptionProps> = ({
+export const FormRowFieldDescription = ({
     children,
     className,
     ...elementProps
-}) => {
+}: FormRowFieldDescriptionProps) => {
     return (
         <p {...elementProps} className={b('field-description', className)}>
             {children}

@@ -113,15 +113,12 @@ Default.args = {
     open: false,
     items,
     onStoryClick: (storyId) => {
-        // eslint-disable-next-line no-console
         console.log('story click', storyId);
     },
     onLinkClick: (link) => {
-        // eslint-disable-next-line no-console
         console.log('link click', link);
     },
     onClose: () => {
-        // eslint-disable-next-line no-console
         console.log('close');
     },
 };

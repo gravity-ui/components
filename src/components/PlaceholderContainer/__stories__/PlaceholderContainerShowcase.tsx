@@ -106,7 +106,7 @@ const imageProps = {
     alt: 'image alt text',
 };
 
-export const PlaceholderContainerShowcase: React.FC = () => {
+export const PlaceholderContainerShowcase = () => {
     return (
         <div className={b()}>
             <div className={b('placeholder-examples')}>

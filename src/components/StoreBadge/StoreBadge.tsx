@@ -24,7 +24,7 @@ export interface StoreBadgeProps extends Omit<LinkProps, 'view'> {
 
 const badgeData: Record<
     StoreBadgePlatform,
-    Record<Lang, React.FC<React.SVGProps<SVGSVGElement>>>
+    Record<Lang, React.FunctionComponent<React.SVGProps<SVGSVGElement>>>
 > = {
     [iosPlatform]: {
         ru: AppStoreRu,
@@ -52,6 +52,7 @@ export const StoreBadge = ({
 
     if (!href) {
         return (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
             <div role="link" onClick={onClick}>
                 <Icon className={b(null, className)} data={iconData} />
             </div>

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 
 import {Bell} from '@gravity-ui/icons';
@@ -89,7 +88,7 @@ export const InsideAPopup: StoryFn = () => {
     const ref = React.useRef(null);
 
     return (
-        <>
+        <React.Fragment>
             <Button onClick={() => setIsOpen(!isOpen)} ref={ref}>
                 <Icon data={Bell} />
             </Button>
@@ -98,7 +97,7 @@ export const InsideAPopup: StoryFn = () => {
                     <Notifications notifications={notifications} actions={actions} />
                 </NotificationsPopupWrapper>
             </Popup>
-        </>
+        </React.Fragment>
     );
 };
 
@@ -116,12 +115,12 @@ export const Error: StoryFn = () => {
             <Notifications
                 notifications={[]}
                 errorContent={
-                    <>
+                    <React.Fragment>
                         <div>Some error occurred</div>
                         <div style={{marginTop: '16px'}}>
                             <Button>Reload</Button>
                         </div>
-                    </>
+                    </React.Fragment>
                 }
             />
         </Wrapper>
@@ -178,16 +177,20 @@ function useNotificationsWithActions({
     const [archivedNotifications, setArchivedNotifications] = React.useState<BooleanMap>({});
 
     const getSideActions = React.useCallback(
-        (id: NotificationProps['id'], unread: boolean | undefined, archived: boolean | undefined) =>
+        (
+            id: NotificationProps['id'],
+            unread: boolean | undefined,
+            archived: boolean | undefined,
+        ) =>
             showNotificationActions ? (
-                <>
+                <React.Fragment>
                     {notificationSideActions.read(Boolean(unread), () =>
                         setUnreadNotifications((current) => ({...current, [id]: !unread})),
                     )}
                     {notificationSideActions.archive(() =>
                         setArchivedNotifications((current) => ({...current, [id]: !archived})),
                     )}
-                </>
+                </React.Fragment>
             ) : null,
         [showNotificationActions],
     );
@@ -210,10 +213,10 @@ function useNotificationsWithActions({
     );
 
     const actions = showNotificationsActions ? (
-        <>
+        <React.Fragment>
             {notificationsMockActions.unarchive(() => setArchivedNotifications({}))}
             {notificationsMockActions.filter()}
-        </>
+        </React.Fragment>
     ) : null;
 
     return {notifications, actions};

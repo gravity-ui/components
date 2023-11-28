@@ -56,10 +56,10 @@ export class PlaceholderContainer extends React.Component<
         const content = this.props.renderContent ? (
             this.props.renderContent()
         ) : (
-            <>
+            <React.Fragment>
                 {this.renderTitle()}
                 {this.renderDescription()}
-            </>
+            </React.Fragment>
         );
 
         return (

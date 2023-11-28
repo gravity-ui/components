@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 
 import {block} from '../utils/cn';
 
@@ -10,7 +10,7 @@ import './FormRow.scss';
 
 const b = block('form-row');
 
-const FormRowComponent: FC<FormRowProps> = ({
+const FormRowComponent = ({
     className,
     label,
     labelHelpPopover,
@@ -18,7 +18,7 @@ const FormRowComponent: FC<FormRowProps> = ({
     required = false,
     children,
     direction = 'row',
-}) => {
+}: FormRowProps) => {
     const LabelComponent = fieldId ? 'label' : 'span';
 
     return (
@@ -28,7 +28,7 @@ const FormRowComponent: FC<FormRowProps> = ({
                     <span className={b('field-name-text')}>{label}</span>
 
                     {required ? (
-                        <>
+                        <React.Fragment>
                             &nbsp;
                             <sup
                                 className={b('required-mark')}
@@ -36,14 +36,14 @@ const FormRowComponent: FC<FormRowProps> = ({
                             >
                                 *
                             </sup>
-                        </>
+                        </React.Fragment>
                     ) : null}
 
                     {labelHelpPopover ? (
-                        <>
+                        <React.Fragment>
                             &nbsp;
                             <span className={b('help-popover')}>{labelHelpPopover}</span>
-                        </>
+                        </React.Fragment>
                     ) : null}
                 </LabelComponent>
             </div>

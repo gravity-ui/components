@@ -37,7 +37,10 @@ export const Docs = () => {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <img src="https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/icons/github-badge.svg" />
+                <img
+                    alt=""
+                    src="https://storage.yandexcloud.net/cloud-www-assets/constructor/storybook/icons/github-badge.svg"
+                />
             </a>
         );
     }
@@ -53,9 +56,9 @@ export const Docs = () => {
     }
 
     return (
-        <>
+        <React.Fragment>
             {sourceBadgeContent}
             {readmeContent}
-        </>
+        </React.Fragment>
     );
 };

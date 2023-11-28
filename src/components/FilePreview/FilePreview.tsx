@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import type {MouseEventHandler} from 'react';
+import React from 'react';
 
 import {
     FileZipper as ArchiveIcon,
@@ -44,7 +43,7 @@ export interface FilePreviewProps {
     imageSrc?: string;
     description?: string;
 
-    onClick?: MouseEventHandler<HTMLDivElement>;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
     actions?: FilePreviewActionProps[];
 }
 
@@ -59,12 +58,12 @@ export function FilePreview({
 }: FilePreviewProps) {
     const id = useUniqId();
 
-    const [previewSrc, setPreviewSrc] = useState<string | undefined>(imageSrc);
+    const [previewSrc, setPreviewSrc] = React.useState<string | undefined>(imageSrc);
     const type = getFileType(file);
 
     const {onKeyDown} = useActionHandlers(onClick);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (imageSrc) return undefined;
 
         try {

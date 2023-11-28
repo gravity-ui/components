@@ -21,8 +21,9 @@ export function VideoView({media}: VideoViewProps) {
             muted
             autoPlay
             loop
-            webkit-playsinline="true"
             poster={media.posterUrl}
+            // eslint-disable-next-line react/no-unknown-property
+            webkit-playsinline="true"
         />
     ) : null;
 }

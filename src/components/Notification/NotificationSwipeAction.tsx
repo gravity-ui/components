@@ -19,6 +19,7 @@ export const NotificationSwipeAction = React.memo(function NotificationSwipeActi
     const {icon, text, theme = 'base', action} = props;
 
     return (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div className={b('swipe-action', {theme})} onClick={action}>
             <span className={b('swipe-action-icon')}>
                 <Icon data={icon} size={16} />

@@ -24,7 +24,7 @@ export type PasswordInputProps = Required<Pick<TextInputProps, 'onUpdate' | 'val
         hasRevealTooltip?: boolean;
     };
 
-export const PasswordInput: React.FC<PasswordInputProps> = (props) => {
+export const PasswordInput = (props: PasswordInputProps) => {
     const {
         autoComplete,
         value,
