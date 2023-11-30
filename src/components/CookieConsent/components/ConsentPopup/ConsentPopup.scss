@@ -1,0 +1,128 @@
+@use '@gravity-ui/uikit/styles/mixins';
+@use '../../../variables';
+
+$block: '.#{variables.$ns}consent-popup';
+
+#{$block} {
+    @include mixins.text-body-2;
+
+    padding: variables.$doubleRegularOffset;
+    border-radius: 14px;
+    max-width: calc(720px - #{variables.$doubleRegularOffset} * 2);
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__title {
+        font-weight: var(--g-text-header-font-weight);
+    }
+
+    &__body {
+        margin: variables.$doubleInlineOffset 0 48px;
+        line-height: variables.$doubleInlineOffset;
+
+        &_step_manage {
+            margin-bottom: variables.$doubleRegularOffset;
+        }
+    }
+
+    &__text {
+        & + & {
+            margin-top: variables.$regularOffset;
+        }
+    }
+
+    &__manage-cookie-button {
+        @include mixins.text-body-2;
+
+        color: var(--g-color-text-link);
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: var(--g-color-text-link-hover);
+            transform: scale(1);
+        }
+
+        &:hover::before,
+        &:active::before {
+            background: none;
+        }
+
+        .yc-button__text {
+            padding: 0;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__button + &__button {
+        margin-left: variables.$regularOffset;
+    }
+
+    &__close-button {
+        --yc-button-outline-color: var(--g-color-line-focus);
+
+        position: relative;
+        top: 1px;
+    }
+
+    &__arrow-button {
+        --yc-button-outline-color: var(--g-color-line-focus);
+
+        position: relative;
+        top: -2px;
+    }
+
+    &__cookie-list {
+        margin-top: variables.$doubleInlineOffset;
+    }
+
+    &__modal-content_mobile {
+        #{$block} {
+            max-width: initial;
+        }
+
+        #{$block}__body {
+            margin: variables.$microOffset 0 variables.$regularOffset;
+            line-height: 20px;
+        }
+
+        #{$block}__buttons {
+            justify-content: flex-start;
+        }
+
+        #{$block}__button + #{$block}__button {
+            margin-left: variables.$inlineOffset;
+        }
+
+        #{$block}__arrow-button {
+            margin-right: variables.$regularOffset;
+        }
+
+        &#{$block}__modal-content_step_manage {
+            position: fixed;
+            inset: 0;
+            margin: 0;
+            overflow-y: scroll;
+            border-radius: 0;
+
+            #{$block} {
+                padding: variables.$doubleRegularOffset variables.$doubleInlineOffset;
+            }
+
+            #{$block}__body {
+                margin: variables.$doubleRegularOffset 0;
+            }
+
+            #{$block}__text + #{$block}__text {
+                margin-top: variables.$microOffset;
+            }
+        }
+    }
+}

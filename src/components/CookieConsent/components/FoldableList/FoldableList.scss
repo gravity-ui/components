@@ -1,0 +1,128 @@
+@use '../../../mixins';
+@use '../../../variables';
+
+$block: '.#{variables.$ns}foldable-list';
+
+#{$block} {
+    $border-color: var(--g-color-private-cool-grey-100);
+
+    @include mixins.text-body-2();
+
+    &__item {
+        border-top: 1px solid $border-color;
+        padding: variables.$regularOffset variables.$microOffset;
+
+        &:last-child {
+            border-bottom: 1px solid $border-color;
+        }
+    }
+
+    &__item-title-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &__item-button {
+        @include mixins.button-reset();
+
+        .yc-button__text {
+            padding: 0;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            transform: scale(1);
+        }
+
+        &:focus::before,
+        &:hover::before,
+        &:active::before {
+            background: none;
+            border-radius: var(--g-focus-border-radius);
+        }
+    }
+
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__item-checkbox {
+        margin-right: variables.$inlineOffset;
+    }
+
+    &__title-label {
+        margin-left: variables.$microOffset;
+        padding: 1px variables.$microOffset;
+        background: var(--g-color-private-cool-grey-50);
+        color: var(--g-color-private-cool-grey-800);
+        border-radius: 5px;
+    }
+
+    &__content {
+        margin-top: 16px;
+    }
+
+    &__content-text {
+        line-height: variables.$doubleInlineOffset;
+    }
+
+    &__content-link {
+        display: flex;
+        align-items: center;
+        margin-top: variables.$regularOffset;
+    }
+
+    &__item_mobile {
+        #{$block}__item-button {
+            height: auto;
+        }
+
+        #{$block}__title {
+            display: flex;
+            align-items: center;
+        }
+
+        #{$block}__title-text {
+            font-size: variables.$normalOffset;
+            line-height: variables.$doubleInlineOffset;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        #{$block}__title-label {
+            align-self: flex-start;
+            margin-left: 0;
+            margin-bottom: variables.$microOffset;
+        }
+
+        #{$block}__item-checkbox {
+            margin-right: variables.$regularOffset;
+
+            &_multiline {
+                align-self: flex-start;
+            }
+        }
+
+        #{$block}__item-title-wrapper {
+            align-items: center;
+        }
+
+        #{$block}__title-arrow_multiline {
+            align-self: flex-start;
+        }
+
+        #{$block}__content {
+            margin-left: variables.$doubleRegularOffset;
+            margin-top: 8px;
+        }
+
+        &#{$block}__item {
+            padding: variables.$doubleRegularOffset variables.$regularOffset
+                variables.$doubleRegularOffset 0;
+        }
+    }
+}
