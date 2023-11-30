@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 
 import {NodesRight} from '@gravity-ui/icons';
 import {Icon, Popover, useUniqId} from '@gravity-ui/uikit';
@@ -104,7 +104,7 @@ export const SharePopover = (props: SharePopoverProps) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const tooltipId = useUniqId();
 
-    const content = useMemo(
+    const content = React.useMemo(
         () => (
             <ShareList
                 url={url}

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {a11yHiddenSvgProps} from '../utils';
 
-export const GooglePlayRu: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+export const GooglePlayRu = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="135"

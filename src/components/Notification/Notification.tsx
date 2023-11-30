@@ -22,6 +22,7 @@ export const Notification = React.memo(function Notification(props: Props) {
     const sourceIcon = source && renderSourceIcon(source);
 
     return (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
             className={b(modifiers, notification.className)}
             onMouseEnter={notification.onMouseEnter}
@@ -86,7 +87,7 @@ function getIconElement(source: NotificationSourceProps): JSX.Element | null {
     if ('icon' in source && source.icon) {
         return <Icon className={b('source-icon')} size={36} data={source.icon} />;
     } else if ('imageSrc' in source && source.imageSrc) {
-        return <img className={b('source-icon')} src={source.imageSrc} />;
+        return <img alt="" className={b('source-icon')} src={source.imageSrc} />;
     } else {
         return null;
     }

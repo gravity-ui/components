@@ -23,6 +23,7 @@ describe('HelpPopover', () => {
         const icon = screen.getByTestId(qaId);
         expect(icon).toBeVisible();
 
+        // eslint-disable-next-line testing-library/await-async-events
         userEvent.hover(icon);
 
         act(() => {

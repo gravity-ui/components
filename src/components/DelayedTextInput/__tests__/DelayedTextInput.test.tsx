@@ -21,6 +21,7 @@ describe('DelayedTextInput', () => {
             />,
         );
 
+        // eslint-disable-next-line testing-library/no-node-access
         const [textInput] = screen.getByTestId(qaAttribute).getElementsByTagName('input');
 
         expect(textInput).toBeVisible();
@@ -41,6 +42,7 @@ describe('DelayedTextInput', () => {
             />,
         );
 
+        // eslint-disable-next-line testing-library/no-node-access
         const [textInput] = screen.getByTestId(qaAttribute).getElementsByTagName('input');
 
         fireEvent.change(textInput, {target: {value: finalSearchTerm.slice(0, 5)}});
@@ -69,6 +71,7 @@ describe('DelayedTextInput', () => {
             />,
         );
 
+        // eslint-disable-next-line testing-library/no-node-access
         const [textInput] = screen.getByTestId(qaAttribute).getElementsByTagName('input');
         expect(textInput).toHaveValue(finalSearchTerm);
 

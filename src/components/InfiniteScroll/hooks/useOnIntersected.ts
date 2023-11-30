@@ -1,11 +1,11 @@
-import {useEffect} from 'react';
+import React from 'react';
 
 export const useOnIntersected = (
     element: Element | null,
     onIntersected: () => void,
     options?: IntersectionObserverInit,
 ) => {
-    useEffect(() => {
+    React.useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
             if (entry.isIntersecting) {
                 onIntersected();

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 
 import {Loader} from '@gravity-ui/uikit';
 
@@ -20,17 +20,12 @@ export interface InfiniteScrollProps {
 
 const b = block('infinite-scroll');
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
-    onActivate,
-    disabled,
-    children,
-    loader,
-}) => {
-    const [isActive, setIsActive] = useState(false);
-    const [bottomRef, setBottomRef] = useState<HTMLDivElement | null>(null);
-    const mounted = useRef(false);
+export const InfiniteScroll = ({onActivate, disabled, children, loader}: InfiniteScrollProps) => {
+    const [isActive, setIsActive] = React.useState(false);
+    const [bottomRef, setBottomRef] = React.useState<HTMLDivElement | null>(null);
+    const mounted = React.useRef(false);
 
-    useEffect(() => {
+    React.useEffect(() => {
         mounted.current = true;
 
         return () => {
@@ -60,12 +55,12 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     );
 
     return (
-        <>
+        <React.Fragment>
             {children}
 
             {isActive && renderedLoader}
 
             <div className={b('intersector')} ref={setBottomRef} />
-        </>
+        </React.Fragment>
     );
 };

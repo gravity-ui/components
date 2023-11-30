@@ -64,16 +64,11 @@ export interface TabProps {
 
 // https://github.com/gravity-ui/components/issues/7
 class Tab extends React.Component<TabProps> {
-    onClick = (event: React.MouseEvent) => {
-        if (this.props.onClick) {
-            this.props.onClick(this.props.id, event);
-        }
-    };
-
     render() {
         const {active, disabled, hint, title = this.props.id} = this.props;
         const stringTitle = (hint || typeof title === 'string' ? title : '') as string;
         return (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             <div
                 className={b('tab', {active, disabled})}
                 title={stringTitle}
@@ -83,6 +78,12 @@ class Tab extends React.Component<TabProps> {
             </div>
         );
     }
+
+    onClick = (event: React.MouseEvent) => {
+        if (this.props.onClick) {
+            this.props.onClick(this.props.id, event);
+        }
+    };
 }
 
 export type TabItem<T> = T & {
@@ -779,7 +780,9 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} />;
 
         return (
+            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
             <div
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                 tabIndex={0}
                 key="switcher"
                 onClick={onClick}
@@ -836,6 +839,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const tabNode = <Tab {...item} active={item.id === activeTabID} />;
 
         return (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
             <div
                 key={item.id}
                 style={{maxWidth: items.length > 1 ? maxWidth : '100%'}}

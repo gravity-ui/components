@@ -1,13 +1,18 @@
+// eslint-disable-next-line import/order
 import './styles.scss';
+// eslint-disable-next-line import/order
 import '@gravity-ui/uikit/styles/styles.css';
 
 import React from 'react';
+
+import {Lang, MobileProvider, ThemeProvider, configure as uiKitConfigure} from '@gravity-ui/uikit';
 import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
 import type {Decorator, Preview} from '@storybook/react';
-import {ThemeProvider, MobileProvider, Lang, configure as uiKitConfigure} from '@gravity-ui/uikit';
+
 import {configure} from '../src';
-import {withMobile} from './decorators/withMobile';
+
 import {withLang} from './decorators/withLang';
+import {withMobile} from './decorators/withMobile';
 import {Docs} from './docs';
 
 configure({

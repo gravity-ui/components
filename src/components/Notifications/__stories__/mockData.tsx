@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
@@ -80,14 +79,14 @@ export const notificationSideActions = {
 };
 
 export const notificationBottomActions: JSX.Element = (
-    <>
+    <React.Fragment>
         <NotificationAction
             action={{text: 'Confirm', view: 'normal', onClick: () => console.log('CONFIRM')}}
         />
         <NotificationAction
             action={{text: 'Deny', view: 'normal', onClick: () => console.log('DENY')}}
         />
-    </>
+    </React.Fragment>
 );
 
 export const mockNotifications: NotificationProps[] = [
@@ -101,6 +100,7 @@ export const mockNotifications: NotificationProps[] = [
                     ticket
                 </Link>
                 <img
+                    alt=""
                     style={{
                         position: 'absolute',
                         bottom: 0,
@@ -142,9 +142,9 @@ export const mockNotifications: NotificationProps[] = [
     {
         id: 'yandex',
         content: (
-            <>
+            <React.Fragment>
                 You can put <b>any</b> <code>ReactNode</code> <i>here</i>
-            </>
+            </React.Fragment>
         ),
         formattedDate: '30 seconds ago',
         source: {

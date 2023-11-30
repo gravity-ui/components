@@ -1,12 +1,50 @@
 {
     "extends": [
         "@gravity-ui/eslint-config",
+        "@gravity-ui/eslint-config/client",
+        "@gravity-ui/eslint-config/import-order",
         "@gravity-ui/eslint-config/prettier",
-        "@gravity-ui/eslint-config/client"
+        "@gravity-ui/eslint-config/a11y"
     ],
     "root": true,
-    "env": {
-        "node": true,
-        "jest": true
-    }
+    "rules": {
+        "react/jsx-fragments": ["error", "element"],
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "ImportDeclaration[source.value='react'] :matches(ImportNamespaceSpecifier, ImportSpecifier)",
+                "message": "Please use import React from 'react' instead."
+            },
+            {
+                "selector": "TSTypeReference>TSQualifiedName[left.name='React'][right.name='FC']",
+                "message": "Don't use React.FC"
+            }
+        ],
+        "jsx-a11y/no-autofocus": 0
+    },
+    "overrides": [
+        {
+            "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+            "env": {
+                "node": true,
+                "jest": true
+            },
+            "extends": ["plugin:testing-library/react"],
+            "rules": {
+                "jsx-a11y/no-static-element-interactions": 0
+            }
+        },
+        {
+            "files": ["**/__stories__/**/*.[jt]s?(x)"],
+            "rules": {
+                "no-console": "off"
+            }
+        },
+        {
+            "files": ["**/*.js", "!src/**/*"],
+            "env": {
+                "node": true
+            }
+        }
+    ]
 }
