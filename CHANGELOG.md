@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.0](https://github.com/gravity-ui/components/compare/v2.8.0...v2.9.0) (2023-12-06)
+
+
+### Features
+
+* **CookieConsent:** add CookieConsent component ([#123](https://github.com/gravity-ui/components/issues/123)) ([1572965](https://github.com/gravity-ui/components/commit/1572965821de02010ad3bc78fa2852efb59facd8))
+
 ## [2.8.0](https://github.com/gravity-ui/components/compare/v2.7.0...v2.8.0) (2023-11-02)
 
 
