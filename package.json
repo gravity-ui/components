@@ -42,7 +42,8 @@
     "@gravity-ui/i18n": "^1.1.0",
     "@gravity-ui/icons": "^2.4.0",
     "lodash": "^4.17.21",
-    "resize-observer-polyfill": "^1.5.1"
+    "resize-observer-polyfill": "^1.5.1",
+    "universal-cookie": "^6.1.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.6",

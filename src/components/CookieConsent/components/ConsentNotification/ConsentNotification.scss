@@ -1,0 +1,53 @@
+@use '@gravity-ui/uikit/styles/mixins';
+@use '../../../variables';
+
+$block: '.#{variables.$ns}consent-notification';
+
+#{$block} {
+    --g-color-base-generic: var(--g-color-base-float-announcement);
+
+    @include mixins.text-body-2;
+
+    position: fixed;
+    box-sizing: border-box;
+    z-index: 1000;
+
+    &__text {
+        display: block;
+
+        & + & {
+            margin-top: variables.$regularOffset;
+        }
+    }
+
+    &_type_default {
+        right: variables.$regularOffset;
+        bottom: variables.$regularOffset;
+        width: 480px;
+        border-radius: var(--g-border-radius-xl);
+        padding: variables.$doubleRegularOffset;
+        box-shadow: 0px variables.$microOffset variables.$normalOffset rgba(0, 0, 0, 0.15);
+
+        #{$block}__text {
+            line-height: variables.$doubleInlineOffset;
+        }
+
+        #{$block}__button {
+            margin-top: variables.$microOffset;
+            padding: 0 variables.$regularOffset;
+            align-self: flex-end;
+        }
+    }
+
+    &_type_mobile {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: variables.$normalOffset;
+
+        #{$block}__button {
+            width: 100%;
+            margin-top: variables.$normalOffset;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 export * from './AdaptiveTabs';
+export * from './CookieConsent';
 export * from './ChangelogDialog';
 export * from './FilePreview';
 export * from './FormRow';

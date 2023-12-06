@@ -1,0 +1,55 @@
+@use '@gravity-ui/uikit/styles/mixins';
+@use '../../../variables';
+
+$block: '.#{variables.$ns}simple-consent';
+
+#{$block} {
+    $breakpoint: 769px;
+    $indent: 24px;
+
+    @include mixins.text-body-2;
+
+    position: fixed;
+    bottom: $indent;
+    left: 0;
+    max-width: calc(1232px + variables.$bigOffset * 2);
+    padding: $indent 32px;
+    margin: 0 variables.$bigOffset;
+    box-shadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.1);
+
+    background-color: var(--g-color-base-float);
+    border-radius: var(--g-border-radius-xl);
+
+    &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__buttons {
+        display: flex;
+    }
+
+    &__button {
+        margin-left: variables.$regularOffset;
+    }
+
+    @media (max-width: $breakpoint) {
+        &__buttons {
+            margin-top: $indent;
+            width: 100%;
+        }
+
+        &__container {
+            flex-direction: column;
+        }
+
+        &__button {
+            flex: 1 1 0;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
