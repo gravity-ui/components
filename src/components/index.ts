@@ -1,6 +1,7 @@
 export * from './AdaptiveTabs';
 export * from './CookieConsent';
 export * from './ChangelogDialog';
+export * from './DelayedTextInput';
 export * from './FilePreview';
 export * from './FormRow';
 export * from './HelpPopover';
