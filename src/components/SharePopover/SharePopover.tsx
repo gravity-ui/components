@@ -160,6 +160,7 @@ export const SharePopover = (props: SharePopoverProps) => {
             content={content}
             className={b(null, className)}
             tooltipClassName={b('tooltip', tooltipClassName)}
+            tooltipContentClassName={b('tooltip-content')}
             onClick={handleClick}
             tooltipId={tooltipId}
             disablePortal
