@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.9.1](https://github.com/gravity-ui/components/compare/v2.9.0...v2.9.1) (2023-12-08)
+
+
+### Bug Fixes
+
+* add DelayedTextInput export ([#127](https://github.com/gravity-ui/components/issues/127)) ([598f1c4](https://github.com/gravity-ui/components/commit/598f1c46af3f6299867cdccf86fb2c405a3f9ff7))
+* **SharePopover:** fix style for buttons going beyond limits ([#129](https://github.com/gravity-ui/components/issues/129)) ([bdd5dac](https://github.com/gravity-ui/components/commit/bdd5dac99e6a0ff0ea9c821a6958bffe4e93de5e))
+
 ## [2.9.0](https://github.com/gravity-ui/components/compare/v2.8.0...v2.9.0) (2023-12-06)
 
 
