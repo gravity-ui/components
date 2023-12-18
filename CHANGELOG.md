@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.9.2](https://github.com/gravity-ui/components/compare/v2.9.1...v2.9.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* title for Tabs should be props.hint if provided ([#130](https://github.com/gravity-ui/components/issues/130)) ([9284c2f](https://github.com/gravity-ui/components/commit/9284c2fc4910951d343933b37c99720bfa3e8974))
+
 ## [2.9.1](https://github.com/gravity-ui/components/compare/v2.9.0...v2.9.1) (2023-12-08)
 
 
