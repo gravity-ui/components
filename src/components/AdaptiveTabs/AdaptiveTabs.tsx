@@ -66,7 +66,7 @@ export interface TabProps {
 class Tab extends React.Component<TabProps> {
     render() {
         const {active, disabled, hint, title = this.props.id} = this.props;
-        const stringTitle = (hint || typeof title === 'string' ? title : '') as string;
+        const stringTitle = hint ?? ((typeof title === 'string' && title) || '');
         return (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             <div
