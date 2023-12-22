@@ -121,7 +121,6 @@ Default.args = {
         console.log('close');
     },
     onRetryClick: () => {
-        // eslint-disable-next-line no-console
         console.log('retry');
     },
 };
