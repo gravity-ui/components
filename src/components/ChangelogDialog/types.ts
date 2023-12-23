@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface ImageData {
     src: string;
     alt?: string;
@@ -9,7 +11,7 @@ export interface ChangelogItem {
     isNew?: boolean;
     title: string;
     image?: ImageData;
-    description: string;
+    description: React.ReactNode;
     storyId?: string;
     link?: string;
 }
