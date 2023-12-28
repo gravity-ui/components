@@ -11,7 +11,8 @@ $block: '.#{variables.$ns}share-popover';
         padding: 8px;
     }
 
-    &__tooltip-content {
+    // for guaranteed popover style override
+    #{$block} &__tooltip-content {
         max-width: none;
     }
 
