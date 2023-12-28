@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://github.com/gravity-ui/components/compare/v2.9.2...v2.10.0) (2023-12-28)
+
+
+### Features
+
+* **SharePopover:** add tooltipContentClassName prop ([#133](https://github.com/gravity-ui/components/issues/133)) ([e29e3ad](https://github.com/gravity-ui/components/commit/e29e3ad68cbad9e88047cdf619582af9db7ef9ee))
+
 ## [2.9.2](https://github.com/gravity-ui/components/compare/v2.9.1...v2.9.2) (2023-12-18)
 
 
