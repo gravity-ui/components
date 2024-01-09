@@ -30,4 +30,13 @@ $maxItemsHeight: 70vh;
         color: var(--g-color-text-secondary);
         text-align: center;
     }
+
+    &__loading {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        height: 70vh;
+        width: 100%;
+    }
 }

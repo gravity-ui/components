@@ -2,10 +2,11 @@ import React from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import type {DialogProps} from '@gravity-ui/uikit';
-import {Dialog, Icon, Link} from '@gravity-ui/uikit';
+import {Dialog, Icon, Link, Loader} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
+import {ErrorContainer} from './components/ErrorContainer/ErrorContainer';
 import {Item} from './components/Item/Item';
 import i18n from './i18n';
 import type {ChangelogItem} from './types';
@@ -24,6 +25,9 @@ export interface ChangelogDialogProps {
     onClose: DialogProps['onClose'];
     onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
+    onRetryClick?: () => void;
+    loading?: boolean;
+    error?: boolean | {title: string; description: string};
 }
 
 let nextId = 1;
@@ -41,6 +45,9 @@ export function ChangelogDialog({
     onClose,
     onStoryClick,
     onLinkClick,
+    onRetryClick,
+    loading,
+    error,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
@@ -67,19 +74,27 @@ export function ChangelogDialog({
                 </Dialog.Body>
             ) : null}
             <Dialog.Body key="items" className={b('items-container')}>
-                {items.length > 0 ? (
-                    items.map((item, index) => (
-                        <Item
-                            key={index}
-                            className={b('item')}
-                            data={item}
-                            onStoryClick={onStoryClick}
-                            onLinkClick={onLinkClick}
-                        />
-                    ))
-                ) : (
-                    <div className={b('empty-placeholder')}>{i18n('label_empty')}</div>
+                {loading && (
+                    <div className={b('loading')}>
+                        <Loader size={'m'} />
+                    </div>
                 )}
+                {error && !loading && <ErrorContainer error={error} onRetryClick={onRetryClick} />}
+                {!error &&
+                    !loading &&
+                    (items.length > 0 ? (
+                        items.map((item, index) => (
+                            <Item
+                                key={index}
+                                className={b('item')}
+                                data={item}
+                                onStoryClick={onStoryClick}
+                                onLinkClick={onLinkClick}
+                            />
+                        ))
+                    ) : (
+                        <div className={b('empty-placeholder')}>{i18n('label_empty')}</div>
+                    ))}
             </Dialog.Body>
         </Dialog>
     );

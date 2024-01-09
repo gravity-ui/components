@@ -108,7 +108,6 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogPr
 };
 
 export const Default = DefaultTemplate.bind({});
-
 Default.args = {
     open: false,
     items,
@@ -121,4 +120,21 @@ Default.args = {
     onClose: () => {
         console.log('close');
     },
+    onRetryClick: () => {
+        console.log('retry');
+    },
+};
+
+export const Loading = DefaultTemplate.bind({});
+Loading.args = {
+    ...Default.args,
+    open: true,
+    loading: true,
+};
+
+export const Error = DefaultTemplate.bind({});
+Error.args = {
+    ...Default.args,
+    open: true,
+    error: true,
 };
