@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.11.0](https://github.com/gravity-ui/components/compare/v2.10.0...v2.11.0) (2024-01-09)
+
+
+### Features
+
+* **ChangelogDialog:** loading state ([#120](https://github.com/gravity-ui/components/issues/120)) ([22cc355](https://github.com/gravity-ui/components/commit/22cc355a22591f43d6c13876ecbd978588b5a415))
+
 ## [2.10.0](https://github.com/gravity-ui/components/compare/v2.9.2...v2.10.0) (2023-12-28)
 
 
