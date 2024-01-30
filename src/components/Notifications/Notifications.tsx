@@ -36,9 +36,21 @@ export const Notifications = React.memo(function Notifications(props: Notificati
             </InfiniteScroll>
         );
     } else if (props.errorContent) {
-        content = <NotificationsErrorState image={props.errorImage} content={props.errorContent} />;
+        content = (
+            <NotificationsErrorState
+                image={props.errorImage}
+                title={props.errorTitle}
+                content={props.errorContent}
+            />
+        );
     } else {
-        content = <NotificationsEmptyState image={props.emptyImage} content={props.emptyContent} />;
+        content = (
+            <NotificationsEmptyState
+                image={props.emptyImage}
+                title={props.emptyTitle}
+                content={props.emptyContent}
+            />
+        );
     }
 
     return (

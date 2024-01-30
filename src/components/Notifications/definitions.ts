@@ -12,9 +12,11 @@ export type NotificationsProps = {
 
     isLoading?: boolean;
 
+    errorTitle?: React.ReactNode;
     errorContent?: React.ReactNode;
     errorImage?: React.ReactNode;
 
+    emptyTitle?: React.ReactNode;
     emptyContent?: React.ReactNode;
     emptyImage?: React.ReactNode;
 
