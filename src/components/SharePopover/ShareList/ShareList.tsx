@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Link} from '@gravity-ui/icons';
-import {Button, CopyToClipboard, CopyToClipboardStatus, Icon} from '@gravity-ui/uikit';
+import {Button, CopyToClipboard, Icon} from '@gravity-ui/uikit';
 import type {IconData} from '@gravity-ui/uikit';
 
 import {block} from '../../utils/cn';
@@ -133,7 +133,7 @@ export class ShareList extends React.PureComponent<ShareListInnerProps, ShareLis
                                 ref={this.copyLinkRef}
                                 view="flat-secondary"
                                 size="l"
-                                disabled={status === CopyToClipboardStatus.Success}
+                                disabled={status === 'success'}
                                 width="max"
                             >
                                 <Icon data={copyIcon || Link} size={16} />

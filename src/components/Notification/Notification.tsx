@@ -13,7 +13,7 @@ const b = block('notification');
 type Props = {notification: NotificationProps};
 
 export const Notification = React.memo(function Notification(props: Props) {
-    const [mobile] = useMobile();
+    const mobile = useMobile();
     const {notification} = props;
     const {title, content, formattedDate, source, unread, theme} = notification;
 

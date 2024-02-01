@@ -17,9 +17,10 @@ const iosPlatform = 'ios';
 
 export type StoreBadgePlatform = typeof androidPlatform | typeof iosPlatform;
 
-export interface StoreBadgeProps extends Omit<LinkProps, 'view'> {
+export interface StoreBadgeProps extends Omit<LinkProps, 'view' | 'onClick'> {
     /** store platform name */
     platform: StoreBadgePlatform;
+    onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 const badgeData: Record<
@@ -53,7 +54,7 @@ export const StoreBadge = ({
     if (!href) {
         return (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
-            <div role="link" onClick={onClick}>
+            <div role="button" onClick={onClick}>
                 <Icon className={b(null, className)} data={iconData} />
             </div>
         );

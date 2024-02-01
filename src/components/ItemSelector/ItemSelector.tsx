@@ -70,7 +70,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                 className={b('value-item-remove')}
                 onClick={() => this.onRemoveItem(item)}
             >
-                <Icon data={Xmark} size={10} />
+                <Icon data={Xmark} size={16} />
             </Button>
         </div>
     );
@@ -155,6 +155,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                         renderItem={renderItem}
                         filterItem={filterItem}
                         filterPlaceholder={i18n('placeholder_search')}
+                        itemsHeight={196}
                     />
                 </div>
                 <div className={b('list')}>
@@ -178,6 +179,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                         filterPlaceholder={i18n('placeholder_search')}
                         sortable={true}
                         onSortEnd={this.onMoveItem}
+                        itemsHeight={196}
                     />
                 </div>
             </div>

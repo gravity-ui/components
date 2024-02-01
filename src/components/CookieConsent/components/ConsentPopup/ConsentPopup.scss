@@ -34,28 +34,6 @@ $block: '.#{variables.$ns}consent-popup';
         }
     }
 
-    &__manage-cookie-button {
-        @include mixins.text-body-2;
-
-        color: var(--g-color-text-link);
-
-        &:hover,
-        &:focus,
-        &:active {
-            color: var(--g-color-text-link-hover);
-            transform: scale(1);
-        }
-
-        &:hover::before,
-        &:active::before {
-            background: none;
-        }
-
-        .yc-button__text {
-            padding: 0;
-        }
-    }
-
     &__buttons {
         display: flex;
         justify-content: flex-end;
@@ -66,14 +44,14 @@ $block: '.#{variables.$ns}consent-popup';
     }
 
     &__close-button {
-        --yc-button-outline-color: var(--g-color-line-focus);
+        --g-button-focus-outline-color: var(--g-color-line-focus);
 
         position: relative;
         top: 1px;
     }
 
     &__arrow-button {
-        --yc-button-outline-color: var(--g-color-line-focus);
+        --g-button-focus-outline-color: var(--g-color-line-focus);
 
         position: relative;
         top: -2px;

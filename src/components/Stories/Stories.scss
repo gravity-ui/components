@@ -1,9 +1,13 @@
 @use '../variables';
 
 $block: '.#{variables.$ns}stories';
+$borderRadius: 20px;
 
 #{$block} {
+    --g-modal-border-radius: #{$borderRadius};
+    --g-modal-margin: 20px;
+
     &__modal-content {
-        border-radius: 20px;
+        border-radius: $borderRadius;
     }
 }
