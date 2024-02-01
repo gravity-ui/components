@@ -47,6 +47,9 @@ const items = [
 export default {
     title: 'Components/ItemSelector',
     component: ItemSelector,
+    parameters: {
+        disableStrictMode: true,
+    },
     args: {
         items,
         value: [],

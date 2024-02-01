@@ -19,7 +19,7 @@ export const ConsentNotification = ({
     text = i18n('label_text'),
     buttonOkText = i18n('button_OK'),
 }: ConsentNotificationProps) => {
-    const [mobile] = useMobile();
+    const mobile = useMobile();
     const onClick = () => {
         onAction('All');
     };

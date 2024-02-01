@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {ChevronDown, ChevronRight, ChevronUp} from '@gravity-ui/icons';
-import {Button, Checkbox, Disclosure, Icon, Link, Text} from '@gravity-ui/uikit';
+import {ChevronRight} from '@gravity-ui/icons';
+import {ArrowToggle, Checkbox, Disclosure, Icon, Label, Link, Text} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 
@@ -51,7 +51,7 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                             className={b('item', {mobile: isMobile})}
                         >
                             <Disclosure.Summary>
-                                {(props) => (
+                                {({onClick, ariaControls, expanded}) => (
                                     <div className={b('item-title-wrapper')}>
                                         <Checkbox
                                             className={b('item-checkbox', {
@@ -62,11 +62,12 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                                             onChange={onCheckItem(index)}
                                             disabled={disabled}
                                         />
-                                        <Button
-                                            view="flat"
-                                            width="max"
+                                        <button
+                                            type="button"
                                             className={b('item-button')}
-                                            {...props}
+                                            onClick={onClick}
+                                            aria-controls={ariaControls}
+                                            aria-expanded={expanded}
                                         >
                                             <div className={b('title')}>
                                                 <div className={b('title-text')}>
@@ -77,23 +78,20 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                                                         {title}
                                                     </Text>
                                                     {titleLabel ? (
-                                                        <Text
-                                                            className={b('title-label')}
-                                                            variant="body-1"
-                                                        >
+                                                        <Label className={b('title-label')}>
                                                             {titleLabel}
-                                                        </Text>
+                                                        </Label>
                                                     ) : null}
                                                 </div>
-                                                <Icon
+                                                <ArrowToggle
                                                     className={b('title-arrow', {
                                                         multiline: Boolean(titleLabel),
                                                     })}
-                                                    data={props.expanded ? ChevronUp : ChevronDown}
+                                                    direction={expanded ? 'top' : 'bottom'}
                                                     size={20}
                                                 />
                                             </div>
-                                        </Button>
+                                        </button>
                                     </div>
                                 )}
                             </Disclosure.Summary>

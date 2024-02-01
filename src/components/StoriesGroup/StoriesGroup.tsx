@@ -155,6 +155,7 @@ export const StoriesGroup = ({
             open={open}
             onClose={handleClose}
             disableOutsideClick={disableOutsideClick}
+            className={b()}
             contentClassName={b('modal-content')}
         >
             <StoriesPreview

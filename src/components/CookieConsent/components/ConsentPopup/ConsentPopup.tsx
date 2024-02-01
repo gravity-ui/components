@@ -31,11 +31,11 @@ const Header = ({currentStep, initialStep, onClose, onChangeStep, isMobile}: Hea
                 {isBackButtonVisible ? (
                     <Button
                         className={b('arrow-button')}
-                        view="normal-contrast"
+                        view="flat"
                         size="s"
                         onClick={onChangeStep(ConsentPopupStep.Main)}
                     >
-                        <Icon data={ArrowLeft} size={14} />
+                        <Icon data={ArrowLeft} size={16} />
                     </Button>
                 ) : null}
                 <Text
@@ -46,13 +46,8 @@ const Header = ({currentStep, initialStep, onClose, onChangeStep, isMobile}: Hea
                 </Text>
             </div>
             {buttonsEnabled && !isBackButtonVisible ? (
-                <Button
-                    className={b('close-button')}
-                    view="normal-contrast"
-                    size="s"
-                    onClick={onClose}
-                >
-                    <Icon data={Xmark} />
+                <Button className={b('close-button')} view="flat" size="s" onClick={onClose}>
+                    <Icon data={Xmark} size={16} />
                 </Button>
             ) : null}
         </div>
@@ -114,7 +109,7 @@ export const ConsentPopup = ({
     consentManager,
     ...buttonsParams
 }: ConsentPopupProps) => {
-    const [mobile] = useMobile();
+    const mobile = useMobile();
     const [currentConsents, setCurrentConsents] = React.useState<Consents>(
         consentManager.getConsents(),
     );
@@ -211,15 +206,12 @@ export const ConsentPopup = ({
                                 />
                             </div>
                             <div className={b('text')}>
-                                {i18n('label_manage_cookie')}{' '}
                                 <Button
-                                    className={b('manage-cookie-button')}
                                     onClick={onChangeStep(ConsentPopupStep.Manage)}
-                                    view="flat"
+                                    view="outlined-action"
                                 >
                                     {i18n('label_manage_cookie_link_text')}
                                 </Button>
-                                .
                             </div>
                         </React.Fragment>
                     )}

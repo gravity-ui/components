@@ -18,7 +18,7 @@ export const NotificationWrapper = (props: {
     const ref = React.useRef<HTMLDivElement>(null);
 
     const {notification, swipeThreshold} = props;
-    const [mobile] = useMobile();
+    const mobile = useMobile();
     const [wrapperMaxHeight, setWrapperMaxHeight] = React.useState<number | undefined>(undefined);
     const [isRemoved, setIsRemoved] = React.useState(false);
 

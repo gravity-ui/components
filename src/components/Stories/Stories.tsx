@@ -115,6 +115,7 @@ export function Stories({
             open={open}
             onClose={handleClose}
             disableOutsideClick={disableOutsideClick}
+            className={b()}
             contentClassName={b('modal-content', className)}
         >
             <StoriesLayout

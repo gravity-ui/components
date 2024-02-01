@@ -25,22 +25,13 @@ $block: '.#{variables.$ns}foldable-list';
 
     &__item-button {
         @include mixins.button-reset();
+        flex-grow: 1;
+        padding: 4px 0;
+        border-radius: var(--g-border-radius-s);
 
-        .yc-button__text {
-            padding: 0;
-        }
-
-        &:hover,
-        &:focus,
-        &:active {
-            transform: scale(1);
-        }
-
-        &:focus::before,
-        &:hover::before,
-        &:active::before {
-            background: none;
-            border-radius: var(--g-focus-border-radius);
+        &:focus-visible {
+            outline: 2px solid var(--g-color-line-focus);
+            outline-offset: 4px;
         }
     }
 
@@ -56,10 +47,6 @@ $block: '.#{variables.$ns}foldable-list';
 
     &__title-label {
         margin-left: variables.$microOffset;
-        padding: 1px variables.$microOffset;
-        background: var(--g-color-private-cool-grey-50);
-        color: var(--g-color-private-cool-grey-800);
-        border-radius: 5px;
     }
 
     &__content {

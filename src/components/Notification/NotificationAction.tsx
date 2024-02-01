@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, Icon, Tooltip} from '@gravity-ui/uikit';
+import {ActionTooltip, Button, Icon} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -27,7 +27,7 @@ export const NotificationAction = React.memo(function NotificationAction({action
         </Button>
     );
 
-    return action.icon ? <Tooltip content={action.text}>{button}</Tooltip> : button;
+    return action.icon ? <ActionTooltip title={action.text}>{button}</ActionTooltip> : button;
 });
 
 function renderContent(action: NotificationActionProps): React.ReactNode {

@@ -14,15 +14,9 @@ $smallMargin: 8px;
 $textBlockMargin: 16px;
 
 #{$block} {
-    --yc-modal-border-radius: #{$borderRadius};
-
-    &__modal {
-        --yc-modal-border-radius: #{$borderRadius};
-    }
-
     &__wrap-outer {
-        height: calc(100vh - 2 * var(--yc-modal-margin));
-        width: calc(100vw - 2 * var(--yc-modal-margin));
+        height: calc(100vh - 2 * var(--g-modal-margin));
+        width: calc(100vw - 2 * var(--g-modal-margin));
         display: flex;
         border-radius: $borderRadius;
         max-width: $maxWidth;

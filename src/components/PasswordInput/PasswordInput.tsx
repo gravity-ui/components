@@ -1,12 +1,19 @@
 import React from 'react';
 
 import {Eye, EyeSlash} from '@gravity-ui/icons';
-import {Button, ClipboardButton, Icon, TextInput, TextInputProps, Tooltip} from '@gravity-ui/uikit';
+import {
+    ActionTooltip,
+    Button,
+    ClipboardButton,
+    Icon,
+    TextInput,
+    TextInputProps,
+} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
 import i18n from './i18n';
-import {getCopyButtonSizeAndIconSize} from './utils';
+import {getActionButtonSizeAndIconSize} from './utils';
 
 import './PasswordInput.scss';
 
@@ -30,6 +37,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
         value,
         showCopyButton,
         rightContent,
+        endContent,
         showRevealButton,
         size = 'm',
         hasCopyTooltip = true,
@@ -39,39 +47,40 @@ export const PasswordInput = (props: PasswordInputProps) => {
 
     const [hideValue, setHideValue] = React.useState(true);
 
-    const additionalRightContent = React.useMemo(() => {
+    const additionalEndContent = React.useMemo(() => {
         if (!showRevealButton && !showCopyButton) {
-            return <React.Fragment>{rightContent}</React.Fragment>;
+            return <React.Fragment>{endContent || rightContent}</React.Fragment>;
         }
 
         const onClick = () => {
             setHideValue((hideValue) => !hideValue);
         };
 
-        const {copyButtonSize, iconSize} = getCopyButtonSizeAndIconSize(size);
+        const {actionButtonSize, iconSize} = getActionButtonSizeAndIconSize(size);
 
         return (
             <div className={b('additional-right-content')}>
-                {rightContent}
+                {endContent || rightContent}
                 {value && showCopyButton ? (
                     <ClipboardButton
+                        view="flat-secondary"
                         text={value}
                         hasTooltip={hasRevealTooltip}
-                        size={iconSize}
+                        size={actionButtonSize}
                         className={b('copy-button')}
                     />
                 ) : null}
                 {showRevealButton ? (
-                    <Tooltip
+                    <ActionTooltip
                         disabled={!hasCopyTooltip}
-                        content={
+                        title={
                             hideValue ? i18n('label_show-password') : i18n('label_hide-password')
                         }
                     >
                         <Button
                             view="flat-secondary"
                             onClick={onClick}
-                            size={copyButtonSize}
+                            size={actionButtonSize}
                             extraProps={{
                                 'aria-label': hideValue
                                     ? i18n('label_show-password')
@@ -80,13 +89,14 @@ export const PasswordInput = (props: PasswordInputProps) => {
                         >
                             <Icon data={hideValue ? Eye : EyeSlash} size={iconSize} />
                         </Button>
-                    </Tooltip>
+                    </ActionTooltip>
                 ) : null}
             </div>
         );
     }, [
         showRevealButton,
         showCopyButton,
+        endContent,
         rightContent,
         value,
         hasRevealTooltip,
@@ -99,7 +109,7 @@ export const PasswordInput = (props: PasswordInputProps) => {
         <TextInput
             {...props}
             type={hideValue ? 'password' : 'text'}
-            rightContent={additionalRightContent}
+            endContent={additionalEndContent}
             autoComplete={autoComplete ? autoComplete : 'new-password'}
             controlProps={{
                 ...controlProps,
