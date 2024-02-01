@@ -44,10 +44,9 @@ export const StoriesLayout = (props: StoriesLayoutProps) => {
                     <div className={b('left-pane')}>
                         {props.items.length > 1 && (
                             <div className={b('counter')}>
-                                {i18n('label_counter', {
-                                    current: props.storyIndex + 1,
-                                    total: props.items.length,
-                                })}
+                                <span dir="ltr">
+                                    {props.storyIndex + 1}&nbsp;/&nbsp;{props.items.length}
+                                </span>
                             </div>
                         )}
                         <div className={b('text-block')}>

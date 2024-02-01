@@ -700,10 +700,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     };
 
     /*
-        Calculates what value of the left property should be set to the absolutely positioned switcher at
+        Calculates what value of the inline-start property should be set to the absolutely positioned switcher at
         the current set of rendered tabs
      */
-    calcSelectSwitcherLeftPosition = () => {
+    calcSelectSwitcherInlineStartPosition = () => {
         const {tabChosenFromSelectId, firstHiddenTabIndex} = this.state;
         const {items} = this.props;
         let tabChosenFromSelectIndex = null;
@@ -943,7 +943,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                         <div
                             ref={this.selectSwitcherNode}
                             className={b('select-switcher')}
-                            style={{left: this.calcSelectSwitcherLeftPosition()}}
+                            style={{insetInlineStart: this.calcSelectSwitcherInlineStartPosition()}}
                         >
                             {this.renderSelect()}
                         </div>

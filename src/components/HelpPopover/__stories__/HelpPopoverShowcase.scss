@@ -1,9 +1,9 @@
 .help-popover-showcase {
     &__container {
         display: flex;
-        margin-bottom: 10px;
+        margin-block-end: 10px;
     }
     &__container-title {
-        margin-right: 5px;
+        margin-inline-end: 5px;
     }
 }

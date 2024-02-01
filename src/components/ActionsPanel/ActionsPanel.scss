@@ -13,11 +13,11 @@
     &__note-wrapper {
         min-width: 100px;
         max-width: 320px;
-        margin-right: 40px;
+        margin-inline-end: 40px;
     }
 
     &__button-close-wrapper {
         flex-shrink: 0;
-        margin-left: auto;
+        margin-inline-start: auto;
     }
 }

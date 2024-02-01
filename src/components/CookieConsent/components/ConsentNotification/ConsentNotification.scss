@@ -16,13 +16,13 @@ $block: '.#{variables.$ns}consent-notification';
         display: block;
 
         & + & {
-            margin-top: variables.$regularOffset;
+            margin-block-start: variables.$regularOffset;
         }
     }
 
     &_type_default {
-        right: variables.$regularOffset;
-        bottom: variables.$regularOffset;
+        inset-inline-end: variables.$regularOffset;
+        inset-block-end: variables.$regularOffset;
         width: 480px;
         border-radius: var(--g-border-radius-xl);
         padding: variables.$doubleRegularOffset;
@@ -33,21 +33,21 @@ $block: '.#{variables.$ns}consent-notification';
         }
 
         #{$block}__button {
-            margin-top: variables.$microOffset;
+            margin-block-start: variables.$microOffset;
             padding: 0 variables.$regularOffset;
             align-self: flex-end;
         }
     }
 
     &_type_mobile {
-        left: 0;
-        bottom: 0;
+        inset-inline-start: 0;
+        inset-block-end: 0;
         width: 100%;
         padding: variables.$normalOffset;
 
         #{$block}__button {
             width: 100%;
-            margin-top: variables.$normalOffset;
+            margin-block-start: variables.$normalOffset;
         }
     }
 }

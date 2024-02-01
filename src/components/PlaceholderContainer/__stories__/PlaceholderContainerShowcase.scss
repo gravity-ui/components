@@ -10,7 +10,7 @@
     }
 
     &__section + &__section {
-        border-top: 1px solid var(--g-color-text-hint);
+        border-block-start: 1px solid var(--g-color-text-hint);
     }
 
     &__examples-row {
@@ -28,6 +28,6 @@
     }
 
     &__custom-action {
-        margin-top: 20px;
+        margin-block-start: 20px;
     }
 }

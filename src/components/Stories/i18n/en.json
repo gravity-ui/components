@@ -2,6 +2,5 @@
   "label_back": "Back",
   "label_next": "Next",
   "label_close": "Close",
-  "label_more": "More",
-  "label_counter": "{{current}} of {{total}}"
+  "label_more": "More"
 }

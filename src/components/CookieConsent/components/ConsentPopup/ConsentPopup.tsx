@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {ArrowLeft, Xmark} from '@gravity-ui/icons';
-import {Button, Icon, Link, Modal, Text, useMobile} from '@gravity-ui/uikit';
+import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
+import {Button, Icon, Link, Modal, Text, useDirection, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 import {ConsentType} from '../../ConsentManager';
@@ -22,6 +22,7 @@ import './ConsentPopup.scss';
 const b = block('consent-popup');
 
 const Header = ({currentStep, initialStep, onClose, onChangeStep, isMobile}: HeaderProps) => {
+    const direction = useDirection();
     const buttonsEnabled = currentStep === ConsentPopupStep.Manage;
     const isBackButtonVisible = buttonsEnabled && initialStep === ConsentPopupStep.Main;
 
@@ -35,7 +36,7 @@ const Header = ({currentStep, initialStep, onClose, onChangeStep, isMobile}: Hea
                         size="s"
                         onClick={onChangeStep(ConsentPopupStep.Main)}
                     >
-                        <Icon data={ArrowLeft} size={16} />
+                        <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} size={16} />
                     </Button>
                 ) : null}
                 <Text

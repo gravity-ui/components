@@ -24,13 +24,13 @@ $block: '.#{variables.$ns}consent-popup';
         line-height: variables.$doubleInlineOffset;
 
         &_step_manage {
-            margin-bottom: variables.$doubleRegularOffset;
+            margin-block-end: variables.$doubleRegularOffset;
         }
     }
 
     &__text {
         & + & {
-            margin-top: variables.$regularOffset;
+            margin-block-start: variables.$regularOffset;
         }
     }
 
@@ -40,25 +40,25 @@ $block: '.#{variables.$ns}consent-popup';
     }
 
     &__button + &__button {
-        margin-left: variables.$regularOffset;
+        margin-inline-start: variables.$regularOffset;
     }
 
     &__close-button {
         --g-button-focus-outline-color: var(--g-color-line-focus);
 
         position: relative;
-        top: 1px;
+        inset-block-start: 1px;
     }
 
     &__arrow-button {
         --g-button-focus-outline-color: var(--g-color-line-focus);
 
         position: relative;
-        top: -2px;
+        inset-block-start: -2px;
     }
 
     &__cookie-list {
-        margin-top: variables.$doubleInlineOffset;
+        margin-block-start: variables.$doubleInlineOffset;
     }
 
     &__modal-content_mobile {
@@ -76,11 +76,11 @@ $block: '.#{variables.$ns}consent-popup';
         }
 
         #{$block}__button + #{$block}__button {
-            margin-left: variables.$inlineOffset;
+            margin-inline-start: variables.$inlineOffset;
         }
 
         #{$block}__arrow-button {
-            margin-right: variables.$regularOffset;
+            margin-inline-end: variables.$regularOffset;
         }
 
         &#{$block}__modal-content_step_manage {
@@ -99,7 +99,7 @@ $block: '.#{variables.$ns}consent-popup';
             }
 
             #{$block}__text + #{$block}__text {
-                margin-top: variables.$microOffset;
+                margin-block-start: variables.$microOffset;
             }
         }
     }
