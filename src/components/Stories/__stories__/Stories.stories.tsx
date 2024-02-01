@@ -3,8 +3,8 @@ import React from 'react';
 import {Button} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
 
-import {Stories} from '../Stories';
 import type {StoriesProps} from '../Stories';
+import {Stories} from '../Stories';
 import type {StoriesItem} from '../types';
 
 export default {
@@ -62,6 +62,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = (props: StoriesProps) => {
             <Stories
                 {...props}
                 open={visible}
+                syncInTabs={props.syncInTabs}
                 onClose={() => {
                     setVisible(false);
                 }}
@@ -93,4 +94,11 @@ WithCustomAction.args = {
         view: 'action',
         children: 'View examples',
     },
+};
+
+export const WithSyncInTabs = DefaultTemplate.bind({});
+WithSyncInTabs.args = {
+    open: true,
+    syncInTabs: true,
+    items: [items[0]],
 };
