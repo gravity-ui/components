@@ -52,7 +52,7 @@ export const CollapseActions = ({actions}: Props) => {
             {showDropdown && (
                 <React.Fragment>
                     <div className={b('menu-placeholder')} />
-                    <div className={b('menu-wrapper')} style={{left: offset}}>
+                    <div className={b('menu-wrapper')} style={{insetInlineStart: offset}}>
                         <DropdownMenu
                             size="s"
                             items={dropdownItems}

@@ -1,7 +1,16 @@
 import React from 'react';
 
-import {ChevronRight} from '@gravity-ui/icons';
-import {ArrowToggle, Checkbox, Disclosure, Icon, Label, Link, Text} from '@gravity-ui/uikit';
+import {ChevronLeft, ChevronRight} from '@gravity-ui/icons';
+import {
+    ArrowToggle,
+    Checkbox,
+    Disclosure,
+    Icon,
+    Label,
+    Link,
+    Text,
+    useDirection,
+} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 
@@ -12,6 +21,7 @@ import './FoldableList.scss';
 const b = block('foldable-list');
 
 export const FoldableList = ({items, className, isMobile, onChooseItem}: FoldableListProps) => {
+    const direction = useDirection();
     const [checkedItems, setChecked] = React.useState<number[]>(() =>
         items.reduce((acc: number[], item: FoldableListItem, index: number) => {
             if (item.checked) {
@@ -109,7 +119,7 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                                         {link.title}
                                         <Icon
                                             className={b('content-icon')}
-                                            data={ChevronRight}
+                                            data={direction === 'rtl' ? ChevronLeft : ChevronRight}
                                             size={16}
                                         />
                                     </Link>

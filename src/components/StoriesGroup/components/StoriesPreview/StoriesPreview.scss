@@ -4,7 +4,7 @@ $block: '.#{variables.$ns}stories-group-preview';
 
 #{$block} {
     user-select: none;
-    padding-bottom: 16px;
+    padding-block-end: 16px;
 
     display: flex;
     justify-content: center;
@@ -38,8 +38,8 @@ $block: '.#{variables.$ns}stories-group-preview';
         &::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
+            inset-block-start: 0;
+            inset-inline-start: 0;
 
             background-color: var(--g-color-sfx-shadow);
             width: 40px;

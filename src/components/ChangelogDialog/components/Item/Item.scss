@@ -17,12 +17,12 @@ $metaWidth: 80px;
     }
 
     &__label-new {
-        margin-top: var(--g-spacing-2);
+        margin-block-start: var(--g-spacing-2);
     }
 
     &__content {
         flex: 1;
-        margin-left: var(--g-spacing-5);
+        margin-inline-start: var(--g-spacing-5);
     }
 
     &__title {
@@ -31,20 +31,20 @@ $metaWidth: 80px;
     }
 
     &__image {
-        margin-top: var(--g-spacing-3);
+        margin-block-start: var(--g-spacing-3);
         border-radius: 16px;
         overflow: hidden;
     }
 
     &__description {
-        margin-top: var(--g-spacing-3);
+        margin-block-start: var(--g-spacing-3);
     }
 
     &__button {
-        margin-top: var(--g-spacing-4);
+        margin-block-start: var(--g-spacing-4);
     }
 
     &__button + &__button {
-        margin-left: var(--g-spacing-4);
+        margin-inline-start: var(--g-spacing-4);
     }
 }

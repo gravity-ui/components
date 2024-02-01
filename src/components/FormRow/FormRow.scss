@@ -7,7 +7,7 @@ $block: '.#{variables.$ns}form-row';
     --gc-form-row-field-height: 28px;
 
     display: flex;
-    margin-bottom: 20px;
+    margin-block-end: 20px;
 
     &_direction_row {
         align-items: flex-start;
@@ -26,11 +26,11 @@ $block: '.#{variables.$ns}form-row';
             min-height: var(--gc-form-row-field-height);
             flex-shrink: 0;
             width: var(--gc-form-row-label-width);
-            padding-right: var(--g-spacing-2);
+            padding-inline-end: var(--g-spacing-2);
         }
 
         #{$block}_direction_column & {
-            margin-bottom: var(--g-spacing-2);
+            margin-block-end: var(--g-spacing-2);
         }
     }
 

@@ -10,9 +10,9 @@ $block: '.#{variables.$ns}simple-consent';
     @include mixins.text-body-2;
 
     position: fixed;
-    bottom: $indent;
-    left: 0;
-    max-width: calc(1232px + variables.$bigOffset * 2);
+    inset-block-end: $indent;
+    inset-inline-start: 0;
+    max-width: calc(1232px + #{variables.$bigOffset} * 2);
     padding: $indent 32px;
     margin: 0 variables.$bigOffset;
     box-shadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.1);
@@ -31,12 +31,12 @@ $block: '.#{variables.$ns}simple-consent';
     }
 
     &__button {
-        margin-left: variables.$regularOffset;
+        margin-inline-start: variables.$regularOffset;
     }
 
     @media (max-width: $breakpoint) {
         &__buttons {
-            margin-top: $indent;
+            margin-block-start: $indent;
             width: 100%;
         }
 
@@ -48,7 +48,7 @@ $block: '.#{variables.$ns}simple-consent';
             flex: 1 1 0;
 
             &:first-child {
-                margin-left: 0;
+                margin-inline-start: 0;
             }
         }
     }

@@ -9,11 +9,11 @@ $block: '.#{variables.$ns}foldable-list';
     @include mixins.text-body-2();
 
     &__item {
-        border-top: 1px solid $border-color;
+        border-block-start: 1px solid $border-color;
         padding: variables.$regularOffset variables.$microOffset;
 
         &:last-child {
-            border-bottom: 1px solid $border-color;
+            border-block-end: 1px solid $border-color;
         }
     }
 
@@ -42,15 +42,15 @@ $block: '.#{variables.$ns}foldable-list';
     }
 
     &__item-checkbox {
-        margin-right: variables.$inlineOffset;
+        margin-inline-end: variables.$inlineOffset;
     }
 
     &__title-label {
-        margin-left: variables.$microOffset;
+        margin-inline-start: variables.$microOffset;
     }
 
     &__content {
-        margin-top: 16px;
+        margin-block-start: 16px;
     }
 
     &__content-text {
@@ -60,7 +60,7 @@ $block: '.#{variables.$ns}foldable-list';
     &__content-link {
         display: flex;
         align-items: center;
-        margin-top: variables.$regularOffset;
+        margin-block-start: variables.$regularOffset;
     }
 
     &__item_mobile {
@@ -82,12 +82,12 @@ $block: '.#{variables.$ns}foldable-list';
 
         #{$block}__title-label {
             align-self: flex-start;
-            margin-left: 0;
-            margin-bottom: variables.$microOffset;
+            margin-inline-start: 0;
+            margin-block-end: variables.$microOffset;
         }
 
         #{$block}__item-checkbox {
-            margin-right: variables.$regularOffset;
+            margin-inline-end: variables.$regularOffset;
 
             &_multiline {
                 align-self: flex-start;
@@ -103,8 +103,8 @@ $block: '.#{variables.$ns}foldable-list';
         }
 
         #{$block}__content {
-            margin-left: variables.$doubleRegularOffset;
-            margin-top: 8px;
+            margin-inline-start: variables.$doubleRegularOffset;
+            margin-block-start: 8px;
         }
 
         &#{$block}__item {

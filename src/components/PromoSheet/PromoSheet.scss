@@ -16,7 +16,8 @@ $block: '.#{variables.$ns}promo-sheet';
     &__header {
         position: relative;
 
-        padding: 0 20px 0 0;
+        padding: 0;
+        padding-inline-end: 20px;
         margin: 0 0 var(--gc-promo-sheet-header-margin);
     }
 
@@ -29,8 +30,8 @@ $block: '.#{variables.$ns}promo-sheet';
 
     &__close-button {
         position: absolute;
-        top: calc(12px * -1);
-        right: calc(12px * -1);
+        inset-block-start: -12px;
+        inset-inline-end: -12px;
     }
 
     &__message {
@@ -41,7 +42,7 @@ $block: '.#{variables.$ns}promo-sheet';
     }
 
     &__image-container {
-        margin-bottom: var(--gc-promo-sheet-image-margin);
+        margin-block-end: var(--gc-promo-sheet-image-margin);
     }
 
     &__image {

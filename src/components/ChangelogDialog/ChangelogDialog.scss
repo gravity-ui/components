@@ -8,22 +8,22 @@ $maxItemsHeight: 70vh;
     width: $width;
 
     &__full-list-link-icon {
-        margin-left: var(--g-spacing-1);
+        margin-inline-start: var(--g-spacing-1);
         vertical-align: middle;
     }
 
     &__items-container {
         max-height: $maxItemsHeight;
         overflow-y: auto;
-        margin-bottom: var(--g-spacing-5);
+        margin-block-end: var(--g-spacing-5);
 
         #{$block}__item:last-child {
-            margin-bottom: 0;
+            margin-block-end: 0;
         }
     }
 
     &__item {
-        margin-bottom: var(--g-spacing-8);
+        margin-block-end: var(--g-spacing-8);
     }
 
     &__empty-placeholder {

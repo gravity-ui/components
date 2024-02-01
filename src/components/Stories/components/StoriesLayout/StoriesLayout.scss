@@ -51,9 +51,8 @@ $textBlockMargin: 16px;
     &__left-pane {
         width: 464px;
         flex-shrink: 0;
-        margin-left: $smallMargin;
-        margin-top: $smallMargin;
-        margin-bottom: $smallMargin;
+        margin-inline-start: $smallMargin;
+        margin-block: $smallMargin;
         background-color: var(--g-color-base-background);
         border-radius: $leftPaneBorderRadius;
         padding: $leftPanePadding;
@@ -81,7 +80,7 @@ $textBlockMargin: 16px;
         align-items: flex-start;
         justify-content: center;
         flex-direction: column;
-        margin-bottom: $smallMargin;
+        margin-block-end: $smallMargin;
         overflow: hidden;
     }
 
@@ -96,12 +95,12 @@ $textBlockMargin: 16px;
         overflow-y: scroll;
 
         #{$block}__text-header + & {
-            margin-top: $textBlockMargin;
+            margin-block-start: $textBlockMargin;
         }
     }
 
     &__story-link-block {
-        margin-top: $textBlockMargin;
+        margin-block-start: $textBlockMargin;
     }
 
     &__controls-block {
@@ -122,8 +121,8 @@ $textBlockMargin: 16px;
 
     &__close-btn {
         position: absolute;
-        top: 14px;
-        right: 20px;
+        inset-block-start: 14px;
+        inset-inline-end: 20px;
         z-index: 1;
     }
 }

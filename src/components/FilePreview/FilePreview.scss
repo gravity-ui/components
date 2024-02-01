@@ -25,8 +25,8 @@ $smallRoundedButtonSize: 24px;
 
     &__actions {
         position: absolute;
-        top: -1 * math.div($smallRoundedButtonSize, 2);
-        right: -1 * math.div($smallRoundedButtonSize, 2);
+        inset-block-start: -1 * math.div($smallRoundedButtonSize, 2);
+        inset-inline-end: -1 * math.div($smallRoundedButtonSize, 2);
         z-index: 1;
 
         display: flex;
@@ -116,7 +116,7 @@ $smallRoundedButtonSize: 24px;
     }
 
     &__name {
-        margin-top: 4px;
+        margin-block-start: 4px;
     }
 
     &__name,
@@ -136,8 +136,8 @@ $smallRoundedButtonSize: 24px;
 
         &-img {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset-block-start: 0;
+            inset-inline-start: 0;
 
             object-fit: cover;
 

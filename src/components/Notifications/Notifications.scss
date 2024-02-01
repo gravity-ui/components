@@ -13,7 +13,7 @@ $block: '.#{variables.$ns}notifications';
         display: flex;
         align-items: center;
         padding: 16px;
-        border-bottom: 1px solid var(--g-color-line-generic);
+        border-block-end: 1px solid var(--g-color-line-generic);
     }
 
     &__head-title {
@@ -47,7 +47,7 @@ $block: '.#{variables.$ns}notifications';
     }
 
     &__empty-title {
-        margin-bottom: 3px;
+        margin-block-end: 3px;
         font-weight: 500;
         font-size: 17px;
         line-height: 24px;
@@ -67,7 +67,7 @@ $block: '.#{variables.$ns}notifications';
     &__notification-wrapper:not(:first-child)::before {
         content: '';
         display: block;
-        border-top: 1px solid var(--g-color-line-generic);
+        border-block-start: 1px solid var(--g-color-line-generic);
         margin: 0 12px;
     }
 
@@ -79,7 +79,7 @@ $block: '.#{variables.$ns}notifications';
     &__notification-wrapper_unread + &__notification-wrapper::before {
         content: '';
         display: block;
-        border-top: 1px solid transparent;
+        border-block-start: 1px solid transparent;
         margin: 0 12px;
     }
 

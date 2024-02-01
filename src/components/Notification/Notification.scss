@@ -79,7 +79,7 @@ $notificationSourceIconSize: 36px;
     }
 
     &__actions_right-bottom-actions {
-        margin-top: 8px;
+        margin-block-start: 8px;
         gap: 8px;
     }
 
@@ -100,16 +100,16 @@ $notificationSourceIconSize: 36px;
     }
 
     &_theme_success {
-        border-left: 4px solid var(--g-color-line-positive);
+        border-inline-start: 4px solid var(--g-color-line-positive);
     }
     &_theme_info {
-        border-left: 4px solid var(--g-color-line-info);
+        border-inline-start: 4px solid var(--g-color-line-info);
     }
     &_theme_warning {
-        border-left: 4px solid var(--g-color-line-warning);
+        border-inline-start: 4px solid var(--g-color-line-warning);
     }
     &_theme_danger {
-        border-left: 4px solid var(--g-color-line-danger);
+        border-inline-start: 4px solid var(--g-color-line-danger);
     }
 
     &_active {

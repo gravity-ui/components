@@ -68,11 +68,11 @@ $block: '.#{variables.$ns}adaptive-tabs';
 
     &__select-switcher {
         position: absolute;
-        top: 0;
+        inset-block-start: 0;
         will-change: left;
 
         #{$block}__tab-container #{$block}__tab {
-            margin-right: 0;
+            margin-inline-end: 0;
         }
     }
 
@@ -93,7 +93,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
 
     &__tab-container {
         overflow: hidden;
-        padding-right: var(--gc-tabs-space-between);
+        padding-inline-end: var(--gc-tabs-space-between);
 
         &:not(&_switcher-tab):only-child {
             #{$block}__tab {
@@ -102,11 +102,11 @@ $block: '.#{variables.$ns}adaptive-tabs';
         }
 
         &_last-tab {
-            padding-right: 0;
+            padding-inline-end: 0;
         }
 
         &_switcher-tab {
-            padding-right: 0;
+            padding-inline-end: 0;
             max-width: 100%;
 
             #{$block}__tab {
@@ -124,7 +124,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
     }
 
     &__tab {
-        border-bottom: var(--gc-tabs-border-width) solid transparent;
+        border-block-end: var(--gc-tabs-border-width) solid transparent;
         padding: var(--gc-tabs-border-width) 1px 0;
 
         box-sizing: border-box;
@@ -153,7 +153,7 @@ $block: '.#{variables.$ns}adaptive-tabs';
     }
 
     &__chevron-icon {
-        margin-left: 10px;
+        margin-inline-start: 10px;
     }
 
     &__tabs-as-select-control {
