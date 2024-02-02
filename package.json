@@ -33,7 +33,7 @@
     "typecheck": "tsc --noEmit",
     "clean": "gulp clean",
     "build": "gulp",
-    "start": "sb dev -p 7007",
+    "start": "sb dev",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
