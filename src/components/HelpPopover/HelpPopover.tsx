@@ -1,11 +1,10 @@
 import React from 'react';
 
+import {CircleQuestion} from '@gravity-ui/icons';
 import {Icon, Popover} from '@gravity-ui/uikit';
 import type {PopoverProps, QAProps} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
-
-import {QuestionMarkIcon} from './QuestionMarkIcon';
 
 import './HelpPopover.scss';
 
@@ -26,7 +25,7 @@ export function HelpPopover(props: HelpPopoverProps) {
                 {...props.buttonProps}
                 className={b('button', props.buttonProps?.className)}
             >
-                <Icon data={QuestionMarkIcon} size={ICON_SIZE} />
+                <Icon data={CircleQuestion} size={ICON_SIZE} />
             </button>
         </Popover>
     );
