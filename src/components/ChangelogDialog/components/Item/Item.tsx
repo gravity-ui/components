@@ -4,7 +4,7 @@ import {CirclePlay} from '@gravity-ui/icons';
 import {Button, Icon, Label} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
-import i18n from '../../i18n';
+import {i18n} from '../../i18n';
 import type {ChangelogItem} from '../../types';
 import {Picture} from '../Picture/Picture';
 

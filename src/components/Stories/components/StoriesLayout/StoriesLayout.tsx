@@ -6,7 +6,7 @@ import type {ButtonProps} from '@gravity-ui/uikit';
 
 import {MediaRenderer} from '..';
 import {block} from '../../../utils/cn';
-import i18n from '../../i18n';
+import {i18n} from '../../i18n';
 import type {StoriesItem} from '../../types';
 
 import './StoriesLayout.scss';

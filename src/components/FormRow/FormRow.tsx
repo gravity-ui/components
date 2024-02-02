@@ -3,7 +3,7 @@ import React from 'react';
 import {block} from '../utils/cn';
 
 import {FormRowFieldDescription} from './FormRowFieldDescription';
-import i18n from './i18n';
+import {i18n} from './i18n';
 import {FormRowProps} from './types';
 
 import './FormRow.scss';

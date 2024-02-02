@@ -4,7 +4,7 @@ import {Icon} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
-import i18n from './i18n/index';
+import {i18n} from './i18n/index';
 
 import './Notifications.scss';
 

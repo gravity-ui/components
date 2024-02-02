@@ -1,14 +1,12 @@
 import React from 'react';
 
-import {Icon, Link, LinkProps} from '@gravity-ui/uikit';
+import {Icon, Lang, Link, LinkProps} from '@gravity-ui/uikit';
 
-import {i18n} from '../../i18n';
 import {AppStoreEn} from '../../icons/stores/AppStoreEn';
 import {AppStoreRu} from '../../icons/stores/AppStoreRu';
 import {GooglePlayEn} from '../../icons/stores/GooglePlayEn';
 import {GooglePlayRu} from '../../icons/stores/GooglePlayRu';
 import {cn} from '../utils/cn';
-import {Lang} from '../utils/configure';
 
 const b = cn('store-badge');
 
@@ -20,6 +18,7 @@ export type StoreBadgePlatform = typeof androidPlatform | typeof iosPlatform;
 export interface StoreBadgeProps extends Omit<LinkProps, 'view' | 'onClick'> {
     /** store platform name */
     platform: StoreBadgePlatform;
+    lang?: `${Lang}`;
     onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
@@ -42,9 +41,10 @@ export const StoreBadge = ({
     className,
     onClick,
     href,
+    lang = Lang.En,
     ...restLinkProps
 }: StoreBadgeProps) => {
-    const lang = i18n.lang as Lang;
+    // const lang = i18n.lang as Lang;
     const iconData = badgeData?.[platform][lang];
 
     if (!iconData) {
