@@ -5,7 +5,7 @@ import type {IconData} from '@gravity-ui/uikit';
 
 import {block} from '../../utils/cn';
 import {LayoutDirection, ShareOptions} from '../constants';
-import i18n from '../i18n';
+import {i18n} from '../i18n';
 import * as icons from '../icons';
 import type {ShareOptionsData} from '../models';
 

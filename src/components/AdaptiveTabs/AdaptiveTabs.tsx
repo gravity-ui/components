@@ -9,7 +9,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import {block} from '../utils/cn';
 
 import {DEFAULT_BREAK_POINTS_CONFIG} from './constants';
-import i18n from './i18n';
+import {i18n} from './i18n';
 
 import './AdaptiveTabs.scss';
 
