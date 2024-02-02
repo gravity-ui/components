@@ -62,7 +62,6 @@ const DefaultTemplate: StoryFn<StoriesProps> = (props: StoriesProps) => {
             <Stories
                 {...props}
                 open={visible}
-                syncInTabs={props.syncInTabs}
                 onClose={() => {
                     setVisible(false);
                 }}

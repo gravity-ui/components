@@ -53,7 +53,7 @@ export function Stories({
 
     const {callback: closeWithLS} = useSyncWithLS<NonNullable<StoriesProps['onClose']>>({
         callback: (event, reason) => {
-            if (syncInTabs) onClose?.(event, reason);
+            onClose?.(event, reason);
         },
         uniqueKey: `close-story-${initialStoryIndex}`,
     });
