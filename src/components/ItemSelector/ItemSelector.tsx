@@ -5,7 +5,7 @@ import {Button, Icon, List, ListProps} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
-import i18n from './i18n';
+import {i18n} from './i18n';
 
 import './ItemSelector.scss';
 

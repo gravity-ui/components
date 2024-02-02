@@ -8,7 +8,7 @@ import {block} from '../../utils/cn';
 import {isOfType} from '../../utils/isOfType';
 import {ShareListItem} from '../ShareListItem/ShareListItem';
 import type {LayoutDirection, ShareOptions} from '../constants';
-import i18n from '../i18n';
+import {i18n} from '../i18n';
 import type {ShareOptionsData} from '../models';
 
 import './ShareList.scss';

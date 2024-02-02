@@ -6,7 +6,7 @@ import {Button, Icon, Link, Modal, Text, useDirection, useMobile} from '@gravity
 import {block} from '../../../utils/cn';
 import {ConsentType} from '../../ConsentManager';
 import type {Consents} from '../../ConsentManager';
-import i18n from '../../i18n';
+import {i18n} from '../../i18n';
 import {FoldableList} from '../FoldableList/FoldableList';
 
 import {

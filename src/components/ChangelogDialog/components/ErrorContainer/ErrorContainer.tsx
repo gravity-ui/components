@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Alert} from '@gravity-ui/uikit';
 
-import i18n from '../../i18n';
+import {i18n} from '../../i18n';
 
 interface ErrorContainerProps {
     onRetryClick?: () => void;
