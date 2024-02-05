@@ -6,6 +6,7 @@ $block: '.#{variables.$ns}help-popover';
 #{$block} {
     &__button {
         @include mixins.button-reset();
+        color: var(--g-color-text-hint);
     }
 
     &__button:focus-visible {
