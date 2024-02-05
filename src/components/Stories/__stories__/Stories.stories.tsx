@@ -98,6 +98,6 @@ WithCustomAction.args = {
 export const WithSyncInTabs = DefaultTemplate.bind({});
 WithSyncInTabs.args = {
     open: true,
-    syncInTabs: true,
+    syncInTabsKey: 'test-story',
     items: [items[0]],
 };

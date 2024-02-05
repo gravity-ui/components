@@ -27,7 +27,7 @@ export interface StoriesProps {
     disableOutsideClick?: boolean;
     className?: string;
     action?: StoriesLayoutProps['action'];
-    syncInTabs?: boolean;
+    syncInTabsKey?: string;
 }
 
 export function Stories({
@@ -40,7 +40,7 @@ export function Stories({
     disableOutsideClick = true,
     className,
     action,
-    syncInTabs,
+    syncInTabsKey,
 }: StoriesProps) {
     const [storyIndex, setStoryIndex] = React.useState(initialStoryIndex);
 
@@ -55,7 +55,7 @@ export function Stories({
         callback: (event, reason) => {
             onClose?.(event, reason);
         },
-        uniqueKey: `close-story-${initialStoryIndex}`,
+        uniqueKey: `close-story-${syncInTabsKey}`,
     });
 
     const handleButtonClose = React.useCallback<
@@ -63,9 +63,9 @@ export function Stories({
     >(
         (event) => {
             handleClose(event, 'closeButtonClick');
-            if (syncInTabs) closeWithLS(event, 'closeButtonClick');
+            if (syncInTabsKey) closeWithLS(event, 'closeButtonClick');
         },
-        [handleClose, syncInTabs, closeWithLS],
+        [handleClose, syncInTabsKey, closeWithLS],
     );
 
     const handleGotoPrevious = React.useCallback(() => {
