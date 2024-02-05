@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {Modal} from '@gravity-ui/uikit';
 import type {ModalCloseReason} from '@gravity-ui/uikit';
+import {Modal} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
-import {IndexType, StoriesLayout} from './components/StoriesLayout/StoriesLayout';
 import type {StoriesLayoutProps} from './components/StoriesLayout/StoriesLayout';
+import {IndexType, StoriesLayout} from './components/StoriesLayout/StoriesLayout';
+import {useSyncWithLS} from './hooks';
 import type {StoriesItem} from './types';
 
 import './Stories.scss';
@@ -26,6 +27,7 @@ export interface StoriesProps {
     disableOutsideClick?: boolean;
     className?: string;
     action?: StoriesLayoutProps['action'];
+    syncInTabsKey?: string;
 }
 
 export function Stories({
@@ -38,6 +40,7 @@ export function Stories({
     disableOutsideClick = true,
     className,
     action,
+    syncInTabsKey,
 }: StoriesProps) {
     const [storyIndex, setStoryIndex] = React.useState(initialStoryIndex);
 
@@ -48,13 +51,21 @@ export function Stories({
         [onClose],
     );
 
+    const {callback: closeWithLS} = useSyncWithLS<NonNullable<StoriesProps['onClose']>>({
+        callback: (event, reason) => {
+            onClose?.(event, reason);
+        },
+        uniqueKey: `close-story-${syncInTabsKey}`,
+    });
+
     const handleButtonClose = React.useCallback<
         (event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>) => void
     >(
         (event) => {
             handleClose(event, 'closeButtonClick');
+            if (syncInTabsKey) closeWithLS(event, 'closeButtonClick');
         },
-        [handleClose],
+        [handleClose, syncInTabsKey, closeWithLS],
     );
 
     const handleGotoPrevious = React.useCallback(() => {
