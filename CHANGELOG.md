@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.12.0](https://github.com/gravity-ui/components/compare/v2.11.0...v2.12.0) (2024-02-05)
+
+
+### Features
+
+* **Stories:** add hook for sync tabs ([#138](https://github.com/gravity-ui/components/issues/138)) ([a70afd5](https://github.com/gravity-ui/components/commit/a70afd59a8910307c9594b277d45746b0fc265e0))
+
+
+### Bug Fixes
+
+* **Notifications:** added `errorTitle` and `emptyTitle` props ([#136](https://github.com/gravity-ui/components/issues/136)) ([4024223](https://github.com/gravity-ui/components/commit/402422329ec70ab021a1ac2c4a1dfd81e3ba6f67))
+
 ## [2.11.0](https://github.com/gravity-ui/components/compare/v2.10.0...v2.11.0) (2024-01-09)
 
 
