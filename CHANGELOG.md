@@ -1,5 +1,23 @@
 # Changelog
 
+## [3.0.0](https://github.com/gravity-ui/components/compare/v2.12.0...v3.0.0) (2024-02-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove configure (i18n from uikit used instead) ([#142](https://github.com/gravity-ui/components/issues/142))
+
+### Features
+
+* remove configure (i18n from uikit used instead) ([#142](https://github.com/gravity-ui/components/issues/142)) ([41475bf](https://github.com/gravity-ui/components/commit/41475bff73f5b27705c7f87dc4138983e137388a))
+* support RTL ([df4aa17](https://github.com/gravity-ui/components/commit/df4aa179834d159aaa08932ea89f80003f5ec243))
+* update deps ([01fd827](https://github.com/gravity-ui/components/commit/01fd827b56c298cee87f13242cdbcafc5b4f56e0))
+
+
+### Bug Fixes
+
+* fix lint issues ([6b99075](https://github.com/gravity-ui/components/commit/6b99075bdcbfc17fad09f030cccbed26bad8d83c))
+
 ## [2.12.0](https://github.com/gravity-ui/components/compare/v2.11.0...v2.12.0) (2024-02-05)
 
 
