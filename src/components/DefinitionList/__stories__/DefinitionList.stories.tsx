@@ -74,6 +74,7 @@ const items: DefinitionListItem[] = [
     {
         name: 'String long looooooooooooooong looooooooooooooong looooooooooooooong looooooooooooooong value without multiline and with copy icon over content',
         multilineName: true,
+        note: 'This is multiline value',
         content:
             'https://example.com/long-long/like/beyond/the/farthest/lands/long/path/to/handle?and=some&list=of&query=parameters&that=is&overcomplicated=maybe&with=some&token=inside&not=really&readable=but&sometimes=useful',
         copyText:
