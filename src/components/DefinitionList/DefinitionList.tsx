@@ -110,7 +110,7 @@ export function DefinitionList({
                         <div className={b('copy-container', {'icon-inside': copyIconOver})}>
                             <span>{definitionContent}</span>
                             <ClipboardButton
-                                size={14}
+                                size="s"
                                 text={copyText}
                                 className={b('copy-button')}
                             />

@@ -66,9 +66,9 @@ $block: '.#{variables.$ns}definition-list';
         position: relative;
         display: inline-flex;
         align-items: center;
-        padding-inline-end: variables.$normalOffset;
+        padding-inline-end: var(--g-spacing-7);
 
-        margin-inline-end: -(variables.$normalOffset);
+        margin-inline-end: calc(-1 * var(--g-spacing-7));
 
         &:hover {
             #{$block}__copy-button {
