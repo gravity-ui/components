@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {Label, User} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {DefinitionList, DefinitionListItem, DefinitionListProps} from '../DefinitionList';
@@ -94,6 +95,22 @@ const items: DefinitionListItem[] = [
         name: 'String value with very very very looooooooooooooong key and tooltip',
         content: 'value',
         note: 'This is simple string value',
+    },
+    {
+        name: 'Avatar with tooltip',
+        content: (
+            <User
+                name="Charles Darwin"
+                size="xl"
+                description="Adventurer"
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+            />
+        ),
+        note: 'This is avatar',
+    },
+    {
+        name: 'Label',
+        content: <Label>label</Label>,
     },
 ];
 

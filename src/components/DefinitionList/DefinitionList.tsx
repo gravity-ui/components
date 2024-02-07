@@ -49,21 +49,21 @@ function getTitle(title?: string, content?: React.ReactNode) {
 
 function getNoteElement(note?: DefinitionListItemNote) {
     let noteElement = null;
+    const popoverClassName = b('item-note-tooltip');
     if (note) {
         if (typeof note === 'string') {
             noteElement = (
                 <HelpPopover
-                    className={b('item-note-tooltip')}
+                    className={popoverClassName}
                     tooltipContentClassName="yfm"
                     htmlContent={note}
                     placement={['bottom', 'top']}
-                    offset={{left: 4}}
                 />
             );
         }
 
         if (typeof note === 'object') {
-            noteElement = <HelpPopover offset={{left: 4}} {...note} />;
+            noteElement = <HelpPopover className={popoverClassName} {...note} />;
         }
     }
     return noteElement;
@@ -118,18 +118,26 @@ export function DefinitionList({
                     ) : (
                         definitionContent
                     );
+                    const noteElement = (
+                        <React.Fragment>
+                            &nbsp;
+                            {getNoteElement(note)}
+                        </React.Fragment>
+                    );
                     return (
                         <div key={key ?? name} className={b('item', itemClassName)} role="listitem">
-                            <div className={b('term-container')} style={keyStyle}>
-                                <dt
-                                    className={b('term', {multiline: multilineName})}
-                                    title={name}
-                                    role="term"
-                                >
-                                    {term}
-                                </dt>
-                                {getNoteElement(note)}
-                                <div className={b('dots')} />
+                            <div
+                                className={b('term-container', {multiline: multilineName})}
+                                style={keyStyle}
+                            >
+                                <div className={b('term-wrapper')}>
+                                    <dt className={b('term')} title={name} role="term">
+                                        {term}
+                                    </dt>
+                                    {multilineName && noteElement}
+                                </div>
+                                {!multilineName && noteElement}
+                                <div className={b('dots', {'with-note': Boolean(note)})} />
                             </div>
                             <dd
                                 role="definition"

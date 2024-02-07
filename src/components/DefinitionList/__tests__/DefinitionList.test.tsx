@@ -58,6 +58,6 @@ describe('components: DefinitionList', () => {
         getComponent({items});
 
         const component = screen.getByRole('term');
-        expect(component).toHaveClass(b('term', {multiline: true}));
+        expect(component).toHaveClass(b('term'));
     });
 });

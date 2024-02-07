@@ -11,15 +11,11 @@ $block: '.#{variables.$ns}definition-list';
     &__item {
         display: flex;
         align-items: baseline;
-        gap: 4px;
+        gap: var(--g-spacing-1);
 
         & + & {
             margin-block-start: var(--g-spacing-4);
         }
-    }
-
-    &__item-note-tooltip {
-        margin-inline-end: 4px;
     }
 
     &__term-container {
@@ -28,9 +24,10 @@ $block: '.#{variables.$ns}definition-list';
         align-items: baseline;
 
         overflow: hidden;
+        position: relative;
     }
 
-    &__term {
+    &__term-wrapper {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -38,9 +35,19 @@ $block: '.#{variables.$ns}definition-list';
         flex: 0 1 auto;
         color: var(--g-color-text-secondary);
 
-        &_multiline {
-            white-space: unset;
-        }
+        position: relative;
+    }
+
+    &__term-container_multiline &__term-wrapper {
+        white-space: unset;
+    }
+
+    &__term {
+        display: inline;
+    }
+
+    &__term-container_multiline &__item-note-tooltip {
+        position: absolute;
     }
 
     &__dots {
@@ -48,7 +55,12 @@ $block: '.#{variables.$ns}definition-list';
         flex: 1 0 auto;
         min-width: 40px;
         margin: 0 2px;
-        border-block-end: 1px dashed var(--g-color-text-secondary);
+        border-block-end: 1px dotted var(--g-color-line-generic-active);
+    }
+
+    &__dots_with-note {
+        margin-inline-start: 15px;
+        min-width: 25px;
     }
 
     &__definition {
