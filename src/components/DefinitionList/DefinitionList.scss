@@ -14,12 +14,12 @@ $block: '.#{variables.$ns}definition-list';
         gap: 4px;
 
         & + & {
-            margin-top: var(--g-spacing-4);
+            margin-block-start: var(--g-spacing-4);
         }
     }
 
     &__item-note-tooltip {
-        margin-right: 4px;
+        margin-inline-end: 4px;
     }
 
     &__term-container {
@@ -48,7 +48,7 @@ $block: '.#{variables.$ns}definition-list';
         flex: 1 0 auto;
         min-width: 40px;
         margin: 0 2px;
-        border-bottom: 1px dashed var(--g-color-text-secondary);
+        border-block-end: 1px dashed var(--g-color-text-secondary);
     }
 
     &__definition {
@@ -66,9 +66,9 @@ $block: '.#{variables.$ns}definition-list';
         position: relative;
         display: inline-flex;
         align-items: center;
-        padding-right: variables.$normalOffset;
+        padding-inline-end: variables.$normalOffset;
 
-        margin-right: -(variables.$normalOffset);
+        margin-inline-end: -(variables.$normalOffset);
 
         &:hover {
             #{$block}__copy-button {
@@ -78,11 +78,11 @@ $block: '.#{variables.$ns}definition-list';
     }
 
     &__copy-container_icon-inside {
-        padding-right: unset;
-        margin-right: unset;
+        padding-inline-end: unset;
+        margin-inline-end: unset;
 
         #{$block}__copy-button {
-            top: 0;
+            inset-block-start: 0;
             background-color: var(--g-color-base-background);
         }
     }
@@ -90,8 +90,8 @@ $block: '.#{variables.$ns}definition-list';
     &__copy-button {
         position: absolute;
         display: inline-block;
-        right: 0;
-        margin-left: 10px;
+        inset-inline-end: 0;
+        margin-inline-start: 10px;
         visibility: hidden;
         color: var(--g-color-text-secondary);
 
