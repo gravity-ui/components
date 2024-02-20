@@ -117,6 +117,8 @@ export interface AdaptiveTabsProps<T> {
     size?: TabsSize;
     /** Allows you not to specify activeTab */
     allowNotSelected?: boolean;
+    /** Settings to control popup with hidden tabs list */
+    moreControlProps?: Pick<SelectProps, 'virtualizationThreshold' | 'popupWidth'>;
 }
 
 interface AdaptiveTabsState {
@@ -858,7 +860,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     renderSelect() {
         const activeTabID = this.activeTab;
         const {firstHiddenTabIndex, tabChosenFromSelectId} = this.state;
-        const {items} = this.props;
+        const {items, moreControlProps} = this.props;
 
         const itemsForSelect = items
             .slice(firstHiddenTabIndex, items.length)
@@ -880,6 +882,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                 filterable={false}
                 renderControl={this.renderSwitcherForMoreSelect}
                 onOpenChange={this.handleOpenSelectChange}
+                {...moreControlProps}
             />
         );
     }

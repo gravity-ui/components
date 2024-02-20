@@ -23,6 +23,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | wrapTo                                  | `wrapTo?(item: TabItemProps, node: React.ReactNode, index: number): void` |          |         | Allows to wrap TabItem into another component or render custom tab |
 | className                               | `String`                                                                  |          |         | Class name for the tabs container                                  |
 | [breakpointsConfig](#breakpointsConfig) | `Record<string, number>`                                                  |          |         | Breakpoints config which control the thersholds of tab size.       |
+| moreControlProps                        | `{popupWidth?: 'fit' \| number; virtualizationThreshold?: number;}`       |          |         | Settings to control popup with hidden tabs list                    |
 
 ### breakpointsConfig
 
