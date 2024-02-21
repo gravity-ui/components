@@ -1,0 +1,112 @@
+@use '../../variables';
+
+$block: '.#{variables.$ns}guide';
+
+$layer-popup: 1000;
+$header-height-s: 26px;
+$space-2-xs: 4px;
+$space-xs: 8px;
+$space-m: 16px;
+$space-s: 12px;
+$space-l: 20px;
+
+#{$block} {
+    z-index: $layer-popup;
+    max-width: 280px;
+
+    background: none;
+    width: fit-content;
+
+    &__content {
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+
+        width: 280px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        box-sizing: border-box;
+        height: 62px;
+
+        background-color: var(--g-color-base-info-heavy);
+        border-radius: 20px;
+
+        transition: height 300ms ease-out;
+    }
+
+    &__content_expanded {
+        height: fit-content;
+        max-height: 684px;
+        min-height: 300px;
+    }
+
+    &__titl-text {
+        font-family: var(--typography-font-family);
+        line-height: var(--g-text-subheader-3-line-height-rel);
+        font-size: var(--g-text-subheader-2-font-size);
+        letter-spacing: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-block-end: $space-2-xs;
+
+        color: var(--g-color-text-light-primary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    &__graduationCap {
+        flex-shrink: 0;
+
+        margin-inline-start: $space-xs;
+    }
+
+    &__header {
+        padding: $space-s $space-m $space-m $space-m;
+
+        cursor: pointer;
+    }
+
+    &__lining {
+        overflow-y: scroll;
+
+        box-sizing: border-box;
+
+        flex: 1 1 auto;
+
+        padding: $space-xs 0px;
+
+        margin-inline: 1px;
+
+        margin-block-end: $space-m;
+
+        margin-inline-start: 1px;
+
+        background-color: var(--g-color-base-float);
+
+        border-radius: 20px;
+    }
+
+    &__lining::-webkit-scrollbar {
+        display: none;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: $space-xs;
+        justify-content: space-between;
+
+        max-width: 100%;
+        padding-inline: $space-l;
+        margin-block-end: $space-l;
+    }
+}

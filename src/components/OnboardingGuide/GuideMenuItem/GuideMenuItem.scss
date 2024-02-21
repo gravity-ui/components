@@ -1,0 +1,150 @@
+@use '../../variables';
+
+$block: '.#{variables.$ns}guide-menu-item';
+
+$space-2-xs: 4px;
+$space-xs: 8px;
+$space-s: 12px;
+$space-l: 20px;
+$header-height-s: 26px;
+
+#{$block} {
+    &__collapse {
+        padding: $space-s $header-height-s $space-s $header-height-s;
+    }
+
+    &__collapse-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        padding: $space-2-xs 0px;
+
+        color: var(--g-color-text-dark-primary);
+    }
+
+    &__collapse-header .yc-collapse__panel {
+        justify-content: space-between;
+
+        width: 100%;
+
+        padding-inline-end: $space-s;
+    }
+
+    &__collapse-header_isExpand {
+        color: var(--g-color-text-dark-primary);
+    }
+
+    &__collapse-title {
+        display: flex;
+        align-items: center;
+
+        min-width: 0;
+
+        font-size: var(--g-text-subheader-2-font-size);
+        line-height: var(--g-text-subheader-3-line-height);
+
+        letter-spacing: 0;
+        text-align: start;
+    }
+
+    &__collapse-text {
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+    &__icon {
+        margin-inline-end: $space-xs;
+
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        height: $space-l;
+    }
+
+    &__time-icon {
+        color: var(--g-color-text-info);
+    }
+
+    &__checkbox .g-checkbox__indicator::before {
+        border: none;
+        border-radius: 100px;
+        background-color: var(--g-color-text-hint);
+    }
+
+    &__checkbox_isChecked .g-checkbox__indicator::before {
+        background-color: var(--g-color-base-positive-heavy);
+    }
+
+    &__checkbox .g-checkbox__icon {
+        color: var(--g-color-base-background);
+    }
+
+    &__node {
+        display: flex;
+        flex-direction: column;
+        gap: $space-xs;
+
+        margin-block: $space-s;
+        margin-block-start: $space-s;
+    }
+
+    &__text {
+        margin-block-end: $space-s;
+    }
+
+    &__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $space-xs;
+
+        max-width: 100%;
+    }
+
+    &__divider {
+        border-block-start: 1px solid var(--yc-color-line-generic);
+    }
+
+    &__skeleton {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: $space-s $header-height-s $space-s $header-height-s;
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+        height: 17px;
+        width: 17px;
+
+        border-radius: 50%;
+        margin-inline-end: 8px;
+    }
+
+    &__person {
+        height: 17px;
+
+        width: 100%;
+    }
+
+    &__test {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .g-disclosure__trigger {
+        text-align: start;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &:not(&_hasArrow) .g-disclosure__trigger {
+        cursor: auto;
+    }
+
+    &:not(&_hasArrow) .yc-arrow-toggle {
+        visibility: hidden;
+    }
+}

@@ -1,0 +1,11 @@
+@use '../../../../variables.scss';
+$block: '.#{variables.$ns}guide-menu-item-image';
+
+#{$block} {
+    max-width: 242px;
+    max-height: 118px;
+
+    border: 1px solid var(--colors-line-generic, rgba(0, 0, 0, 0.1));
+
+    border-radius: 8px;
+}
