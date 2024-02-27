@@ -454,11 +454,19 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             }
         }
 
-        if (maxHiddenTabWidth) {
+        if (maxHiddenTabWidth && typeof firstHiddenTabIndexForSequentialCase === 'number') {
             let rightSpace = maxHiddenTabWidth - emptySpace;
 
-            for (let j = firstHiddenTabIndexForSequentialCase! - 1; j >= 0; j--) {
-                rightSpace = rightSpace - this.tabsWidth[j];
+            // If firstHiddenTabIndexForSequentialCase exists, then we should
+            // start firstHiddenTabIndex from firstHiddenTabIndexForSequentialCase,
+            // reducing it until everything is correct
+            firstHiddenTabIndex = firstHiddenTabIndexForSequentialCase;
+
+            for (let j = firstHiddenTabIndexForSequentialCase - 1; j >= 0; j--) {
+                // We need to use maxHiddenTabWidth instead of tabWidth[i],
+                // beacause the tab, that we are going to render at index j
+                // may be active tab, which can be wider than real tab at index j
+                rightSpace = rightSpace - maxHiddenTabWidth;
 
                 if (rightSpace < 0) {
                     firstHiddenTabIndex = j + (tabChosenFromSelectIndex > j ? 0 : 1);
