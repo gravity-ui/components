@@ -19,16 +19,16 @@ export interface DefinitionListItem {
     content?: React.ReactNode;
     title?: string;
     copyText?: string;
-    copyIconOver?: boolean;
     note?: DefinitionListItemNote;
     multilineName?: boolean;
 }
 
 export interface DefinitionListProps {
     items: DefinitionListItem[];
+    copyPosition: 'inside' | 'outside';
     responsive?: boolean;
-    keyMaxWidth?: number;
-    valueMaxWidth?: number | 'auto';
+    nameMaxWidth?: number;
+    contentMaxWidth?: number | 'auto';
     className?: string;
     itemClassName?: string;
 }
@@ -55,7 +55,6 @@ function getNoteElement(note?: DefinitionListItemNote) {
             noteElement = (
                 <HelpPopover
                     className={popoverClassName}
-                    tooltipContentClassName="yfm"
                     htmlContent={note}
                     placement={['bottom', 'top']}
                 />
@@ -72,92 +71,79 @@ function getNoteElement(note?: DefinitionListItemNote) {
 export function DefinitionList({
     items,
     responsive,
-    keyMaxWidth,
-    valueMaxWidth = 'auto',
+    nameMaxWidth,
+    contentMaxWidth = 'auto',
     className,
     itemClassName,
+    copyPosition = 'outside',
 }: DefinitionListProps) {
-    const keyStyle = keyMaxWidth
+    const keyStyle = nameMaxWidth
         ? {
-              flexBasis: keyMaxWidth,
+              flexBasis: nameMaxWidth,
           }
         : {};
 
     const valueStyle =
-        typeof valueMaxWidth === 'number'
+        typeof contentMaxWidth === 'number'
             ? {
-                  flexBasis: valueMaxWidth,
-                  maxWidth: valueMaxWidth,
+                  flexBasis: contentMaxWidth,
+                  maxWidth: contentMaxWidth,
               }
             : {};
     return (
-        <dl className={b({responsive}, className)} role="list">
-            {items.map(
-                ({
-                    name,
-                    href,
-                    content,
-                    title,
-                    copyText,
-                    note,
-                    key,
-                    copyIconOver,
-                    multilineName,
-                }) => {
-                    const term = href ? <Link href={href}>{name}</Link> : name;
-                    const definitionContent = content ?? '—';
-                    const definition = copyText ? (
-                        <div className={b('copy-container', {'icon-inside': copyIconOver})}>
-                            <span>{definitionContent}</span>
-                            <ClipboardButton
-                                size="s"
-                                text={copyText}
-                                className={b('copy-button')}
-                            />
-                        </div>
-                    ) : (
-                        definitionContent
-                    );
-                    const noteElement = (
-                        <React.Fragment>
-                            &nbsp;
-                            {getNoteElement(note)}
-                        </React.Fragment>
-                    );
-                    return (
-                        <div key={key ?? name} className={b('item', itemClassName)} role="listitem">
-                            <div
-                                className={b('term-container', {multiline: multilineName})}
-                                style={keyStyle}
-                            >
-                                <div className={b('term-wrapper')}>
-                                    <dt className={b('term')} title={name} role="term">
-                                        {term}
-                                    </dt>
-                                    {multilineName && noteElement}
-                                </div>
-                                {!multilineName && noteElement}
-                                <div className={b('dots', {'with-note': Boolean(note)})} />
+        <dl className={b({responsive}, className)}>
+            {items.map(({name, href, content, title, copyText, note, key, multilineName}) => {
+                const term = href ? <Link href={href}>{name}</Link> : name;
+                const definitionContent = content ?? '—';
+                const iconInside = copyPosition === 'inside';
+                const definition = copyText ? (
+                    <div className={b('copy-container', {'icon-inside': iconInside})}>
+                        <span>{definitionContent}</span>
+                        <ClipboardButton
+                            size="s"
+                            text={copyText}
+                            className={b('copy-button')}
+                            view={iconInside ? 'raised' : 'flat-secondary'}
+                        />
+                    </div>
+                ) : (
+                    definitionContent
+                );
+                const noteElement = (
+                    <React.Fragment>
+                        &nbsp;
+                        {getNoteElement(note)}
+                    </React.Fragment>
+                );
+                return (
+                    <div key={key ?? name} className={b('item', itemClassName)}>
+                        <dt
+                            className={b('term-container', {multiline: multilineName})}
+                            style={keyStyle}
+                        >
+                            <div className={b('term-wrapper')}>
+                                {term}
+                                {multilineName && noteElement}
                             </div>
-                            <dd
-                                role="definition"
-                                className={b('definition')}
-                                title={getTitle(title, content)}
-                                style={{
-                                    ...valueStyle,
-                                    lineBreak:
-                                        typeof content === 'string' &&
-                                        isUnbreakableOver(20)(content)
-                                            ? 'anywhere'
-                                            : undefined,
-                                }}
-                            >
-                                {definition}
-                            </dd>
-                        </div>
-                    );
-                },
-            )}
+                            {!multilineName && noteElement}
+                            <div className={b('dots', {'with-note': Boolean(note)})} />
+                        </dt>
+                        <dd
+                            className={b('definition')}
+                            title={getTitle(title, content)}
+                            style={{
+                                ...valueStyle,
+                                lineBreak:
+                                    typeof content === 'string' && isUnbreakableOver(20)(content)
+                                        ? 'anywhere'
+                                        : undefined,
+                            }}
+                        >
+                            {definition}
+                        </dd>
+                    </div>
+                );
+            })}
         </dl>
     );
 }

@@ -73,14 +73,13 @@ const items: DefinitionListItem[] = [
             'https://example.com/long-long/like/beyond/the/farthest/lands/long/path/to/handle?and=some&list=of&query=parameters&that=is&overcomplicated=maybe&with=some&token=inside&not=really&readable=but&sometimes=useful',
     },
     {
-        name: 'String long looooooooooooooong looooooooooooooong looooooooooooooong looooooooooooooong value without multiline and with copy icon over content',
+        name: 'String long looooooooooooooong looooooooooooooong looooooooooooooong looooooooooooooong value without multiline and with copy icon',
         multilineName: true,
         note: 'This is multiline value',
         content:
             'https://example.com/long-long/like/beyond/the/farthest/lands/long/path/to/handle?and=some&list=of&query=parameters&that=is&overcomplicated=maybe&with=some&token=inside&not=really&readable=but&sometimes=useful',
         copyText:
             'https://example.com/long-long/like/beyond/the/farthest/lands/long/path/to/handle?and=some&list=of&query=parameters&that=is&overcomplicated=maybe&with=some&token=inside&not=really&readable=but&sometimes=useful',
-        copyIconOver: true,
     },
     {
         name: 'String value with tooltip',
@@ -120,9 +119,16 @@ export default {
     args: {
         items,
         responsive: false,
-        valueMaxWidth: 480,
+        contentMaxWidth: 480,
     },
 } as Meta;
 
 const DefaultTemplate: StoryFn<DefinitionListProps> = (args) => <DefinitionList {...args} />;
 export const Default = DefaultTemplate.bind({});
+
+const TemplateWithIconInside: StoryFn<DefinitionListProps> = (args) => {
+    return (
+        <DefinitionList {...args} items={items.filter((e) => e.copyText)} copyPosition="inside" />
+    );
+};
+export const ListWithIconInside = TemplateWithIconInside.bind({});

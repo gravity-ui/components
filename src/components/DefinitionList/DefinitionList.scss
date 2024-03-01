@@ -42,10 +42,6 @@ $block: '.#{variables.$ns}definition-list';
         white-space: unset;
     }
 
-    &__term {
-        display: inline;
-    }
-
     &__term-container_multiline &__item-note-tooltip {
         position: absolute;
     }
@@ -77,14 +73,13 @@ $block: '.#{variables.$ns}definition-list';
     &__copy-container {
         position: relative;
         display: inline-flex;
-        align-items: center;
         padding-inline-end: var(--g-spacing-7);
 
         margin-inline-end: calc(-1 * var(--g-spacing-7));
 
         &:hover {
             #{$block}__copy-button {
-                visibility: visible;
+                opacity: 1;
             }
         }
     }
@@ -95,7 +90,6 @@ $block: '.#{variables.$ns}definition-list';
 
         #{$block}__copy-button {
             inset-block-start: 0;
-            background-color: var(--g-color-base-background);
         }
     }
 
@@ -104,11 +98,9 @@ $block: '.#{variables.$ns}definition-list';
         display: inline-block;
         inset-inline-end: 0;
         margin-inline-start: 10px;
-        visibility: hidden;
-        color: var(--g-color-text-secondary);
-
-        &:hover {
-            color: var(--g-color-text-primary);
+        opacity: 0;
+        &:focus-visible {
+            opacity: 1;
         }
     }
 }
