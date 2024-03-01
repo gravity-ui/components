@@ -840,9 +840,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             needSetMaxWidth &&
             this.overflownTabsRealWidth[tabIndex] === this.overflownTabsCurrentWidth[tabIndex];
 
-        const maxWidth = dimensionsWereCollected
-            ? this.overflownTabsCurrentWidth[tabIndex]
-            : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
+        const maxWidth =
+            dimensionsWereCollected && typeof this.overflownTabsCurrentWidth[tabIndex] === 'number'
+                ? this.overflownTabsCurrentWidth[tabIndex] - this.tabItemPaddingRight
+                : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
 
         const tabNode = <Tab {...item} active={item.id === activeTabID} />;
 
@@ -940,7 +941,8 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                     [className],
                 )}
             >
-                {this.state.currentContainerWidthName === SMALL_CONTAINER_WIDTH_NAME &&
+                {(this.state.currentContainerWidthName === SMALL_CONTAINER_WIDTH_NAME ||
+                    this.state.firstHiddenTabIndex === 0) &&
                 items.length > 1 ? (
                     this.renderTabsAsSelect()
                 ) : (
