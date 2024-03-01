@@ -25,7 +25,7 @@ export interface DefinitionListItem {
 
 export interface DefinitionListProps {
     items: DefinitionListItem[];
-    copyPosition: 'inside' | 'outside';
+    copyPosition?: 'inside' | 'outside';
     responsive?: boolean;
     nameMaxWidth?: number;
     contentMaxWidth?: number | 'auto';
@@ -91,7 +91,7 @@ export function DefinitionList({
               }
             : {};
     return (
-        <dl className={b({responsive}, className)}>
+        <dl className={b({responsive}, className)} role="list">
             {items.map(({name, href, content, title, copyText, note, key, multilineName}) => {
                 const term = href ? <Link href={href}>{name}</Link> : name;
                 const definitionContent = content ?? '—';
