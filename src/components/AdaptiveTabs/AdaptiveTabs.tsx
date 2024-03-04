@@ -341,7 +341,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
             if (tabTextNode.scrollWidth > tabTextNode.clientWidth) {
                 // when overflow and "..." exists
-                const widthCorrector = i === tabs.length - 1 ? 0 : this.tabItemPaddingRight;
+                const widthCorrector = this.tabItemPaddingRight;
                 this.overflownTabsRealWidth[i] = tabTextNode.scrollWidth + widthCorrector;
                 this.tabsRealWidth[i] = this.overflownTabsRealWidth[i];
             } else {
