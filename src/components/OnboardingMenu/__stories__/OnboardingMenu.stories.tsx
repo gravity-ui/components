@@ -1,36 +1,37 @@
 import React from 'react';
 
-import {PencilToSquare} from '@gravity-ui/icons';
+import {GraduationCap} from '@gravity-ui/icons';
 import {Button} from '@gravity-ui/uikit';
 import {actions} from '@storybook/addon-actions';
 import type {Meta, Story} from '@storybook/react';
 
-import {GuideMenuItem} from '../../GuideMenuItem/GuideMenuItem';
-import {addImage} from '../../GuideMenuItem/frequentFunctions/GuideMenuItemImage/GuideMenuItemImage';
-import {addText} from '../../GuideMenuItem/frequentFunctions/GuideMenuItemText/GuideMenuItemText';
-import type {GuideProps} from '../Guide';
-import {Guide} from '../Guide';
+import type {OnboardingMenuProps} from '../OnboardingMenu';
+import {OnboardingMenu} from '../OnboardingMenu';
+import {OnboardingMenuItem} from '../components/OnboardingMenuItem/OnboardingMenuItem';
+import {addText} from '../components/OnboardingMenuItem/frequentFunctions/OnboardingMenuItemText/OnboardingMenuItemText';
+import {addImage} from '../components/OnboardingMenuItem/frequentFunctions/OnboardingMenutemImage/OnboardingMenuItemImage';
 
 export default {
-    title: 'Components/Guide',
-    component: Guide,
+    title: 'Components/OnboardingMenu',
+    component: OnboardingMenu,
 } as Meta;
 
 const actionsButtonHandlers = () => actions('onClick').onClick('Click on the button');
 const actionsButtonComplete = () => actions('onClick').onClick('Click on the end button');
 
-const DefaultTemplate: Story<GuideProps> = (args) => {
-    const actionsGuideHandlers = () => {
+const DefaultTemplate: Story<OnboardingMenuProps> = (args) => {
+    const actionsOnboardingMenuHandlers = () => {
         actions('onHeaderClick').onHeaderClick('Click on the header');
     };
 
     return (
         <div style={{margin: '20px'}}>
-            <Guide
+            <OnboardingMenu
                 {...args}
-                icon={PencilToSquare}
-                onHeaderClick={actionsGuideHandlers}
+                icon={GraduationCap}
+                onExpand={actionsOnboardingMenuHandlers}
                 onCompleteClick={actionsButtonComplete}
+                progress={0}
             />
         </div>
     );
@@ -41,11 +42,12 @@ export const WithItems = DefaultTemplate.bind({});
 export const SomeIcons = DefaultTemplate.bind({});
 export const LongHeader = DefaultTemplate.bind({});
 export const WithLoader = DefaultTemplate.bind({});
+export const WithoutArrow = DefaultTemplate.bind({});
 export const CustomButtonText = DefaultTemplate.bind({});
 export const Custom = DefaultTemplate.bind({});
 
 Default.args = {
-    title: 'Test header',
+    title: 'Header text',
 };
 
 LongHeader.args = {
@@ -53,14 +55,13 @@ LongHeader.args = {
 };
 
 WithLoader.args = {
-    isLoading: true,
-    title: 'Test header',
-    defaultExpand: true,
+    title: 'Header text',
+    defaultExpanded: true,
     children: [
-        <GuideMenuItem
+        <OnboardingMenuItem
             key={'testItem'}
             title="Test element"
-            isLoading
+            loading
             buttons={[
                 <Button view="normal" size="m" onClick={actionsButtonHandlers} key={'button_3'}>
                     Button 3
@@ -71,12 +72,12 @@ WithLoader.args = {
             ]}
         >
             {[addText('Test text')]}
-        </GuideMenuItem>,
-        <GuideMenuItem
+        </OnboardingMenuItem>,
+        <OnboardingMenuItem
             key={'testItem'}
             title="The test element"
-            showDivider={false}
-            isLoading
+            hasDivider={false}
+            loading
             buttons={[
                 <Button view="normal" size="m" onClick={actionsButtonHandlers} key={'button_5'}>
                     Button 5
@@ -87,16 +88,16 @@ WithLoader.args = {
             ]}
         >
             {[addText('Test text')]}
-        </GuideMenuItem>,
+        </OnboardingMenuItem>,
     ],
 };
 
 WithItems.args = {
-    title: 'Test header header text',
-    progressBarCurrentValue: 30,
-    defaultExpand: true,
+    title: 'Header text',
+    progress: 30,
+    defaultExpanded: true,
     children: [
-        <GuideMenuItem
+        <OnboardingMenuItem
             key={'testItem'}
             title="Text"
             buttons={[
@@ -109,8 +110,8 @@ WithItems.args = {
             ]}
         >
             {[addText('Test text')]}
-        </GuideMenuItem>,
-        <GuideMenuItem
+        </OnboardingMenuItem>,
+        <OnboardingMenuItem
             key={'testItem'}
             title="Image"
             buttons={[
@@ -128,11 +129,11 @@ WithItems.args = {
                     'new year 2019',
                 ),
             ]}
-        </GuideMenuItem>,
-        <GuideMenuItem
+        </OnboardingMenuItem>,
+        <OnboardingMenuItem
             key={'testItem'}
             title="Image and text"
-            showDivider={false}
+            hasDivider={false}
             buttons={[
                 <Button view="normal" size="m" onClick={actionsButtonHandlers} key={'button_11'}>
                     Button 11
@@ -142,45 +143,52 @@ WithItems.args = {
                 </Button>,
             ]}
         >
-            {[addText('Test text')]}
             {[
                 addImage(
                     'https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png',
                     '2019',
                 ),
             ]}
-        </GuideMenuItem>,
+            {[addText('Test text')]}
+        </OnboardingMenuItem>,
     ],
 };
 
 SomeIcons.args = {
-    title: 'Different icons',
-    progressBarCurrentValue: 30,
-    defaultExpand: true,
+    title: 'Header text',
+    progress: 30,
+    defaultExpanded: true,
     children: [
-        <GuideMenuItem status="finished" key={'testItem'} title="finished">
+        <OnboardingMenuItem status="completed" key={'testItem'} title="finished">
             {[addText('Test text')]}
-        </GuideMenuItem>,
-        <GuideMenuItem status="inProgress" key={'testItem'} title="inProgress">
+        </OnboardingMenuItem>,
+        <OnboardingMenuItem status="pending" key={'testItem'} title="pending">
             {[addText('Test text')]}
-        </GuideMenuItem>,
-        <GuideMenuItem key={'testItem'} title="default" showDivider={false}>
+        </OnboardingMenuItem>,
+        <OnboardingMenuItem key={'testItem'} title="default" hasDivider={false}>
             {[addText('Test text')]}
-        </GuideMenuItem>,
+        </OnboardingMenuItem>,
     ],
 };
 
+WithoutArrow.args = {
+    title: 'Header text',
+    progress: 30,
+    defaultExpanded: true,
+    children: [<OnboardingMenuItem status="completed" key={'testItem'} title="finished" />],
+};
+
 CustomButtonText.args = {
-    title: 'Custom button Text',
-    defaultExpand: true,
-    rollUpbuttonText: 'left button',
-    completeButtontext: 'right button',
+    title: 'Header text',
+    defaultExpanded: true,
+    rollUpButtonText: 'left button',
+    completeButtonText: 'right button',
 };
 
 Custom.args = {
     title: 'Different icons',
-    progressBarCurrentValue: 30,
-    defaultExpand: true,
+    progress: 30,
+    defaultExpanded: true,
     children: [
         'Custom reaction node',
         <Button key={'customButton'}>Custom reaction node (button)</Button>,

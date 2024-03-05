@@ -1,0 +1,121 @@
+@use '../variables.scss';
+
+$block: '.#{variables.$ns}guide';
+
+$layer-popup: 1000;
+
+#{$block} {
+    z-index: $layer-popup;
+    max-width: 280px;
+
+    background: none;
+    width: fit-content;
+
+    &__content {
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        box-sizing: border-box;
+        width: 210px;
+
+        background-color: var(--g-color-base-brand);
+        border-radius: 16px;
+
+        &_expand {
+            width: 280px;
+            border-radius: 20px;
+            height: fit-content;
+            max-height: 684px;
+            min-height: 300px;
+        }
+    }
+
+    &__title-text {
+        color: var(--g-color-text-brand-contrast);
+
+        font-family: 'YS Text';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 20px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+
+        &_expand {
+            font-size: 17px;
+            line-height: 24px;
+        }
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-block-end: var(--g-spacing-1);
+
+        color: var(--g-color-text-light-primary);
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+
+        padding: 0;
+
+        &_expand {
+            margin-block-end: var(--g-spacing-2);
+        }
+    }
+
+    &__graduationCap {
+        flex-shrink: 0;
+        margin-inline: var(--g-spacing-2) var(--g-spacing-2);
+        color: var(--g-color-text-brand-contrast);
+    }
+
+    &__header {
+        padding: var(--g-spacing-2) var(--g-spacing-4) var(--g-spacing-3) var(--g-spacing-4);
+
+        &_expand {
+            padding: var(--g-spacing-3) var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-4);
+        }
+    }
+
+    &__lining {
+        overflow-y: scroll;
+
+        box-sizing: border-box;
+
+        flex: 1 1 auto;
+
+        padding: var(--g-spacing-2) 0px;
+
+        margin-inline: 1px;
+
+        margin-block-end: var(--g-spacing-4);
+
+        margin-inline-start: 1px;
+
+        background-color: var(--g-color-base-float);
+
+        border-radius: var(--g-border-radius-xl);
+    }
+
+    &__lining::-webkit-scrollbar {
+        display: none;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: var(--g-spacing-2);
+        justify-content: space-between;
+
+        max-width: 100%;
+        padding-inline: var(--g-spacing-5);
+        margin-block-end: var(--g-spacing-5);
+    }
+}

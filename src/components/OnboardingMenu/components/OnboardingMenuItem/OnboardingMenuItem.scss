@@ -1,0 +1,126 @@
+@use '../../../variables.scss';
+
+$block: '.#{variables.$ns}guide-menu-item';
+
+#{$block} {
+    &__collapse {
+        padding: var(--g-spacing-3) var(--g-spacing-6);
+    }
+
+    &__collapse-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__collapse-title {
+        display: flex;
+        align-items: center;
+
+        min-width: 0;
+
+        font-size: var(--g-text-subheader-2-font-size);
+        line-height: var(--g-text-subheader-3-line-height);
+
+        letter-spacing: 0;
+        text-align: start;
+    }
+
+    &__collapse-text {
+        overflow: hidden;
+
+        text-overflow: ellipsis;
+    }
+
+    &__icon {
+        margin-inline-end: var(--g-spacing-2);
+
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        height: --g-spacing-5;
+    }
+
+    &__time-icon {
+        color: var(--g-color-base-brand);
+
+        &__disable {
+            color: var(--g-color-text-hint);
+        }
+    }
+
+    &__node {
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+
+        margin-block: var(--g-spacing-3);
+        margin-block-start: var(--g-spacing-3);
+    }
+
+    &__text {
+        margin-block-end: var(--g-spacing-3);
+    }
+
+    &__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--g-spacing-2);
+
+        max-width: 100%;
+    }
+
+    &__divider {
+        border-block-start: 1px solid var(--g-color-line-generic);
+        margin-inline: var(--g-spacing-1);
+    }
+
+    &__skeleton {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: var(--g-spacing-3) var(--g-spacing-6);
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+        height: 20px;
+        width: 20px;
+
+        border-radius: 50%;
+        margin-inline-end: 8px;
+    }
+
+    &__person {
+        height: 17px;
+
+        width: 100%;
+    }
+
+    &__title-header {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    &__title-summary {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    &__title {
+        color: var(--g-color-text-complementary);
+
+        font-family: 'YS Text';
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

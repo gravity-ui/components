@@ -1,8 +1,0 @@
-@use '../../../../variables.scss';
-$block: '.#{variables.$ns}guide-menu-item-text';
-
-#{$block} {
-    font-size: var(--g-text-subheader-1-font-size);
-    letter-spacing: 0;
-    text-align: start;
-}
