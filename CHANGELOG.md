@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.1](https://github.com/gravity-ui/components/compare/v2.12.0...v2.12.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix border-case with incorrect firstHiddenTabIndex ([#155](https://github.com/gravity-ui/components/issues/155)) ([e753206](https://github.com/gravity-ui/components/commit/e75320617a653a009d072e3cd930b712d8dce2ac))
+
 ## [2.12.0](https://github.com/gravity-ui/components/compare/v2.11.0...v2.12.0) (2024-02-05)
 
 
