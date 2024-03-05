@@ -1,0 +1,9 @@
+@use '../variables';
+
+$block: '.#{variables.$ns}reactions';
+
+#{$block} {
+    &__add-button {
+        color: var(--g-color-text-secondary);
+    }
+}
