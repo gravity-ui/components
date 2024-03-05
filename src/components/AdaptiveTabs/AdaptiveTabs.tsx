@@ -838,7 +838,8 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const isLastTab = item.id === items[items.length - 1].id && tabIndex === items.length - 1;
         const noOverflow =
             needSetMaxWidth &&
-            this.overflownTabsRealWidth[tabIndex] === this.overflownTabsCurrentWidth[tabIndex];
+            this.overflownTabsRealWidth[tabIndex] ===
+                this.overflownTabsCurrentWidth[tabIndex] + this.tabItemPaddingRight;
 
         const maxWidth =
             dimensionsWereCollected && typeof this.overflownTabsCurrentWidth[tabIndex] === 'number'
