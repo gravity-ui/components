@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.1.0](https://github.com/gravity-ui/components/compare/v3.0.0...v3.1.0) (2024-03-06)
+
+
+### Features
+
+* **AdaptiveTabs:** allow to control some properties in More control ([#145](https://github.com/gravity-ui/components/issues/145)) ([e7c2a4e](https://github.com/gravity-ui/components/commit/e7c2a4e2bc7d1884771ba3888517cc832fd85530))
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix border-case with incorrect firstHiddenTabIndex ([#151](https://github.com/gravity-ui/components/issues/151)) ([2f553f4](https://github.com/gravity-ui/components/commit/2f553f4caa7674d630f7a323d8ce1afcb4cce3f5))
+
 ## [3.0.0](https://github.com/gravity-ui/components/compare/v2.12.0...v3.0.0) (2024-02-06)
 
 
