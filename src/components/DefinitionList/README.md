@@ -20,10 +20,9 @@ Configuration for list items
 
 | Property      | Type                         | Required | Default | Description                                                    |
 | ------------- | ---------------------------- | -------- | ------- | -------------------------------------------------------------- |
-| name          | `String`                     | true     |         | Term                                                           |
+| name          | `ReactNode`                  | true     |         | Term                                                           |
 | multilineName | `boolean`                    |          |         | If set, term will be multiline                                 |
-| key           | `String`                     |          |         | Item key (if not set, `name` property will be treated as key)  |
-| href          | `String`                     |          |         | If set, term will be wrapped with link                         |
+| key           | `String \| Number`           | true     |         | Item key                                                       |
 | content       | `ReactNode`                  |          |         | Definition                                                     |
 | title         | `String`                     |          |         | Title for definition. If not set, `content` value will be used |
 | copyText      | `String`                     |          |         | If set, it will be shown icon for copy this text               |

@@ -1,12 +1,24 @@
 import React from 'react';
 
-import {Label, User} from '@gravity-ui/uikit';
+import {Label, Link, User} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {DefinitionList, DefinitionListItem, DefinitionListProps} from '../DefinitionList';
 
 const items: DefinitionListItem[] = [
-    {name: 'String value', content: 'value', href: 'https://cloud.yandex.ru/docs'},
+    {name: <Link href="https://cloud.yandex.ru/docs">String value</Link>, content: 'value'},
+    {
+        name: (
+            <User
+                name="Charles Darwin"
+                size="xl"
+                description="Adventurer"
+                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+            />
+        ),
+        content: 'value',
+        note: 'This is avatar',
+    },
     {name: 'Number value', content: 2},
     {name: 'Node value', content: <strong>value</strong>},
     {name: 'Empty value'},
@@ -111,7 +123,7 @@ const items: DefinitionListItem[] = [
         name: 'Label',
         content: <Label>label</Label>,
     },
-];
+].map((el, index) => ({...el, key: index}));
 
 export default {
     title: 'Components/DefinitionList',

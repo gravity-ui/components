@@ -3,13 +3,16 @@ import React from 'react';
 import {render, screen} from '../../../../test-utils/utils';
 import {DefinitionList, b} from '../DefinitionList';
 
+const qaAttribute = 'definition-list';
+
 const getComponent = (props = {}) =>
     render(
         <DefinitionList
+            qa={qaAttribute}
             items={[
-                {name: 'test1', content: 'value1'},
-                {name: 'test2', content: 2},
-                {name: 'test3', content: <div>node value</div>},
+                {name: 'test1', content: 'value1', key: 1},
+                {name: 'test2', content: 2, key: 2},
+                {name: 'test3', content: <div>node value</div>, key: 3},
             ]}
             {...props}
         />,
@@ -18,12 +21,12 @@ const getComponent = (props = {}) =>
 describe('components: DefinitionList', () => {
     it('should render', () => {
         getComponent();
-        const component = screen.getByRole('list');
+        const component = screen.getByTestId(qaAttribute);
         expect(component).toBeVisible();
     });
     it('should render passed className', () => {
         getComponent({className: 'testClassName'});
-        const component = screen.getByRole('list');
+        const component = screen.getByTestId(qaAttribute);
         expect(component).toHaveClass('testClassName');
     });
 
@@ -50,7 +53,7 @@ describe('components: DefinitionList', () => {
         const items = [{name: 'test1', content: 'value1', copyText: 'value1'}];
         getComponent({items, responsive: true});
 
-        const component = screen.getByRole('list');
+        const component = screen.getByTestId(qaAttribute);
         expect(component).toHaveClass(b({responsive: true}));
     });
     it('should render with multiline term', () => {

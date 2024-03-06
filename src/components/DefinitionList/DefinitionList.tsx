@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ClipboardButton, Link} from '@gravity-ui/uikit';
+import {ClipboardButton, QAProps} from '@gravity-ui/uikit';
 
 import {HelpPopover} from '../HelpPopover';
 import type {HelpPopoverProps} from '../HelpPopover';
@@ -13,9 +13,8 @@ import './DefinitionList.scss';
 type DefinitionListItemNote = string | HelpPopoverProps;
 
 export interface DefinitionListItem {
-    name: string;
-    key?: string;
-    href?: string;
+    name: React.ReactNode;
+    key: string | number;
     content?: React.ReactNode;
     title?: string;
     copyText?: string;
@@ -23,7 +22,7 @@ export interface DefinitionListItem {
     multilineName?: boolean;
 }
 
-export interface DefinitionListProps {
+export interface DefinitionListProps extends QAProps {
     items: DefinitionListItem[];
     copyPosition?: 'inside' | 'outside';
     responsive?: boolean;
@@ -76,6 +75,7 @@ export function DefinitionList({
     className,
     itemClassName,
     copyPosition = 'outside',
+    qa,
 }: DefinitionListProps) {
     const keyStyle = nameMaxWidth
         ? {
@@ -91,9 +91,8 @@ export function DefinitionList({
               }
             : {};
     return (
-        <dl className={b({responsive}, className)} role="list">
-            {items.map(({name, href, content, title, copyText, note, key, multilineName}) => {
-                const term = href ? <Link href={href}>{name}</Link> : name;
+        <dl className={b({responsive}, className)} data-qa={qa}>
+            {items.map(({name, content, title, copyText, note, key, multilineName}) => {
                 const definitionContent = content ?? '—';
                 const iconInside = copyPosition === 'inside';
                 const definition = copyText ? (
@@ -116,13 +115,13 @@ export function DefinitionList({
                     </React.Fragment>
                 );
                 return (
-                    <div key={key ?? name} className={b('item', itemClassName)}>
+                    <div key={key} className={b('item', itemClassName)}>
                         <dt
                             className={b('term-container', {multiline: multilineName})}
                             style={keyStyle}
                         >
                             <div className={b('term-wrapper')}>
-                                {term}
+                                {name}
                                 {multilineName && noteElement}
                             </div>
                             {!multilineName && noteElement}
