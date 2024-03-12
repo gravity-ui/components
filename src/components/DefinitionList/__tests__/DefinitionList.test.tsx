@@ -10,9 +10,9 @@ const getComponent = (props = {}) =>
         <DefinitionList
             qa={qaAttribute}
             items={[
-                {name: 'test1', content: 'value1', key: 1},
-                {name: 'test2', content: 2, key: 2},
-                {name: 'test3', content: <div>node value</div>, key: 3},
+                {name: 'test1', content: 'value1'},
+                {name: 'test2', content: 2},
+                {name: 'test3', content: <div>node value</div>},
             ]}
             {...props}
         />,
@@ -30,11 +30,17 @@ describe('components: DefinitionList', () => {
         expect(component).toHaveClass('testClassName');
     });
 
-    it('should render passed item title', () => {
-        const items = [{name: 'test1', content: 'value1', title: 'title1'}];
+    it('should render passed content title', () => {
+        const items = [{name: 'test1', content: 'value1', contentTitle: 'contentTitle1'}];
         getComponent({items});
         const component = screen.getByText('value1');
-        expect(component).toHaveAttribute('title', 'title1');
+        expect(component).toHaveAttribute('title', 'contentTitle1');
+    });
+    it('should render passed name title', () => {
+        const items = [{name: 'test1', nameTitle: 'nameTitle1'}];
+        getComponent({items});
+        const component = screen.getByText('test1');
+        expect(component).toHaveAttribute('title', 'nameTitle1');
     });
     it('should not render clipboard button by default', () => {
         getComponent();

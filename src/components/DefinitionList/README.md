@@ -22,10 +22,10 @@ Configuration for list items
 | ------------- | ---------------------------- | -------- | ------- | -------------------------------------------------------------- |
 | name          | `ReactNode`                  | true     |         | Term                                                           |
 | multilineName | `boolean`                    |          |         | If set, term will be multiline                                 |
-| key           | `String \| Number`           | true     |         | Item key                                                       |
 | content       | `ReactNode`                  |          |         | Definition                                                     |
-| title         | `String`                     |          |         | Title for definition. If not set, `content` value will be used |
-| copyText      | `String`                     |          |         | If set, it will be shown icon for copy this text               |
+| contentTitle  | `string`                     |          |         | Title for definition. If not set, `content` value will be used |
+| nameTitle     | `string`                     |          |         | Title for term. If not set, `name` value will be used          |
+| copyText      | `string`                     |          |         | If set, it will be shown icon for copy this text               |
 | note          | `string \| HelpPopoverProps` |          |         | If set, HelpPopover will be shown next to term                 |
 
 ```jsx

@@ -26,14 +26,14 @@ const items: DefinitionListItem[] = [
     {name: 'Number value with copy', content: 2, copyText: 'two'},
     {name: 'Node value with copy', content: <strong>value</strong>, copyText: 'value'},
     {name: 'Empty value with copy', copyText: 'nothing to copy'},
-    {name: 'String value with custom title', content: 'value', title: "value's title"},
-    {name: 'Number value with custom title', content: 2, title: "value's title"},
+    {name: 'String value with custom title', content: 'value', contentTitle: "value's title"},
+    {name: 'Number value with custom title', content: 2, contentTitle: "value's title"},
     {
         name: 'Node value with custom title',
         content: <strong>value</strong>,
-        title: "value's title",
+        contentTitle: "value's title",
     },
-    {name: 'Empty value with custom title', title: "value's title"},
+    {name: 'Empty value with custom title', contentTitle: "value's title"},
     {
         name: 'String long value',
         content:
@@ -123,7 +123,7 @@ const items: DefinitionListItem[] = [
         name: 'Label',
         content: <Label>label</Label>,
     },
-].map((el, index) => ({...el, key: index}));
+];
 
 export default {
     title: 'Components/DefinitionList',
