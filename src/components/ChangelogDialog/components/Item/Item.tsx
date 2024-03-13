@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 
+import {dateTimeParse, settings} from '@gravity-ui/date-utils';
 import {CirclePlay} from '@gravity-ui/icons';
 import {Button, Icon, Label} from '@gravity-ui/uikit';
-import {dateTimeParse, settings} from '@gravity-ui/date-utils';
 
 import {block} from '../../../utils/cn';
 import {i18n} from '../../i18n';
@@ -46,8 +46,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
         }
     }, [data.storyId, onStoryClick]);
 
-export function Item({className, data, onStoryClick}: ItemProps) {
-    const formattedDate = useMemo(() => {
+    const formattedDate = React.useMemo(() => {
         let value;
         if (!data.date) return value;
 

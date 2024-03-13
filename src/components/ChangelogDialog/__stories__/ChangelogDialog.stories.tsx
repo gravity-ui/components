@@ -1,8 +1,8 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React from 'react';
 
+import {settings} from '@gravity-ui/date-utils';
 import {Button} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
-import {settings} from '@gravity-ui/date-utils';
 
 import {ChangelogDialog} from '../ChangelogDialog';
 import type {ChangelogDialogProps} from '../ChangelogDialog';
@@ -86,10 +86,10 @@ const items: ChangelogItem[] = [
 const DefaultTemplate: StoryFn<ChangelogDialogProps & {locale: string}> = (
     props: ChangelogDialogProps & {locale: string},
 ) => {
-    const [currentLocale, setCurrentLocale] = useState('');
+    const [currentLocale, setCurrentLocale] = React.useState('');
     const [visible, setVisible] = React.useState(props.open);
 
-    useEffect(() => {
+    React.useEffect(() => {
         (async () => {
             await settings.loadLocale(props.locale);
             settings.setLocale(props.locale);
