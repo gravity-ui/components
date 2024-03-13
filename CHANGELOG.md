@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/gravity-ui/components/compare/v3.1.0...v3.2.0) (2024-03-12)
+
+
+### Features
+
+* add DefinitionList ([#143](https://github.com/gravity-ui/components/issues/143)) ([3db3bbf](https://github.com/gravity-ui/components/commit/3db3bbf8f175995d4d1c052291e72ba32d58a7d2))
+
 ## [3.1.0](https://github.com/gravity-ui/components/compare/v3.0.0...v3.1.0) (2024-03-06)
 
 
