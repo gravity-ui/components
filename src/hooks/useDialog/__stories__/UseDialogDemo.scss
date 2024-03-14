@@ -1,0 +1,10 @@
+@import '../../../components/variables';
+
+$block: '.#{$ns}use-dialog-demo';
+
+#{$block} {
+    &__buttons {
+        display: flex;
+        gap: var(--g-spacing-4);
+    }
+}
