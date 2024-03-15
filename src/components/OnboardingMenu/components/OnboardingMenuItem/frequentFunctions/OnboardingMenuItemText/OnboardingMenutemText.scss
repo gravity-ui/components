@@ -1,4 +1,6 @@
 @use '../../../../../variables.scss';
+@use '@gravity-ui/uikit/styles/mixins';
+
 $block: '.#{variables.$ns}guide-menu-item-text';
 
 #{$block} {
@@ -6,9 +8,5 @@ $block: '.#{variables.$ns}guide-menu-item-text';
     color: var(--g-color-text-complementary);
     text-overflow: ellipsis;
 
-    font-family: 'YS Text';
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 18px; /* 138.462% */
+    @include mixins.text-body-1();
 }

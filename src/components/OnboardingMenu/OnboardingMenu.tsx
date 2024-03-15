@@ -18,8 +18,9 @@ export type OnboardingMenuProps = {
     defaultExpanded: boolean;
     children?: React.ReactNode;
 
-    rollUpButtonText?: string;
+    collapseButtonText?: string;
     completeButtonText?: string;
+    className?: string;
 
     onExpand?: (expanded: boolean) => void;
     onCompleteClick: () => void;
@@ -34,8 +35,9 @@ export const OnboardingMenu = ({
     onExpand,
     onRollUpClick,
     onCompleteClick,
-    rollUpButtonText,
+    collapseButtonText,
     completeButtonText,
+    className,
     children,
 }: OnboardingMenuProps) => {
     const [expand, setExpand] = React.useState(defaultExpanded);
@@ -62,7 +64,7 @@ export const OnboardingMenu = ({
     };
 
     return (
-        <div className={cnOnboardingMenu({expand: expand})}>
+        <div className={cnOnboardingMenu(null, className)}>
             <div className={cnOnboardingMenu('content', {expand: expand})}>
                 <div className={cnOnboardingMenu('header', {expand: expand})}>
                     <button
@@ -75,7 +77,7 @@ export const OnboardingMenu = ({
                                 data={icon}
                                 width={20}
                                 height={20}
-                                className={cnOnboardingMenu('graduationCap')}
+                                className={cnOnboardingMenu('title-icon')}
                             />
                         ) : null}
 
@@ -100,13 +102,7 @@ export const OnboardingMenu = ({
 
                 {expand && (
                     <React.Fragment>
-                        <div
-                            className={cnOnboardingMenu('lining', {
-                                state: expand ? 'expanded' : 'closed',
-                            })}
-                        >
-                            {children}
-                        </div>
+                        <div className={cnOnboardingMenu('lining')}>{children}</div>
                         <div className={cnOnboardingMenu('buttons')}>
                             <Button
                                 view="normal-contrast"
@@ -114,7 +110,7 @@ export const OnboardingMenu = ({
                                 onClick={onRollUpClickCallback}
                                 width="max"
                             >
-                                {rollUpButtonText ?? i18n('collapse')}
+                                {collapseButtonText ?? i18n('collapse')}
                             </Button>
                             <Button
                                 view="outlined-contrast"

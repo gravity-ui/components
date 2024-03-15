@@ -10,8 +10,6 @@ export type OnboardingMenuItemTextProps = {
     text: string;
 };
 
-const OnboardingMenuItemText = ({text}: OnboardingMenuItemTextProps) => (
+export const OnboardingMenuItemText = ({text}: OnboardingMenuItemTextProps) => (
     <span className={cnOnboardingMenuItemText()}>{text}</span>
 );
-
-export const addText = (text: string) => <OnboardingMenuItemText text={text} />;

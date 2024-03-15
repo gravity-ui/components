@@ -14,10 +14,7 @@ export type OnboardingMenuItemProps = {
     buttons?: React.ReactNode;
     hasDivider?: boolean;
     loading?: boolean;
-
-    onClick?: () => void;
 };
-const noopFunc = () => {};
 
 const ICON_SIZE = 20;
 
@@ -29,13 +26,16 @@ export const OnboardingMenuItem = ({
     children,
     buttons,
     hasDivider = true,
-    onClick = noopFunc,
     loading = false,
 }: OnboardingMenuItemProps) => {
     const icon = React.useMemo(() => {
         if (status === 'pending') {
             return (
-                <Icon size={ICON_SIZE} data={Clock} className={cnOnboardingMenuItem('time-icon')} />
+                <Icon
+                    size={ICON_SIZE}
+                    data={Clock}
+                    className={cnOnboardingMenuItem('status-icon')}
+                />
             );
         }
 
@@ -44,7 +44,7 @@ export const OnboardingMenuItem = ({
                 <Icon
                     size={ICON_SIZE}
                     data={CircleCheckFill}
-                    className={cnOnboardingMenuItem('time-icon')}
+                    className={cnOnboardingMenuItem('status-icon')}
                 />
             );
         }
@@ -53,40 +53,33 @@ export const OnboardingMenuItem = ({
             <Icon
                 size={ICON_SIZE}
                 data={CircleCheckFill}
-                className={cnOnboardingMenuItem('time-icon__disable')}
+                className={cnOnboardingMenuItem('status-icon_disabled')}
             />
         );
     }, []);
 
-    const summary = React.useMemo(() => {
-        return <span className={cnOnboardingMenuItem('title')}>{title}</span>;
-    }, []);
+    const summary = (
+        <div className={cnOnboardingMenuItem('collapse-header')}>
+            <div className={cnOnboardingMenuItem('icon')}>{icon}</div>
+            <span className={cnOnboardingMenuItem('title')}>{title}</span>
+        </div>
+    );
 
-    const header = React.useMemo(
-        () => (
-            <div className={cnOnboardingMenuItem('collapse-header')} role="button" tabIndex={0}>
-                <div className={cnOnboardingMenuItem('icon')}>{icon}</div>
-                {children ? (
-                    <Disclosure size="l" className={cnOnboardingMenuItem('title-header')}>
-                        <Disclosure.Summary>
-                            {(props) => (
-                                <div {...props} className={cnOnboardingMenuItem('title-summary')}>
-                                    {summary}
-                                    <ArrowToggle direction={props.expanded ? 'top' : 'bottom'} />
-                                </div>
-                            )}
-                        </Disclosure.Summary>
-                        <div className={cnOnboardingMenuItem('node')}>{children}</div>
-                        {buttons && (
-                            <div className={cnOnboardingMenuItem('buttons')}>{buttons}</div>
-                        )}
-                    </Disclosure>
-                ) : (
-                    summary
+    const header = children ? (
+        <Disclosure size="l" className={cnOnboardingMenuItem('title-header')}>
+            <Disclosure.Summary>
+                {(props) => (
+                    <button {...props} className={cnOnboardingMenuItem('title-summary')}>
+                        {summary}
+                        <ArrowToggle direction={props.expanded ? 'top' : 'bottom'} />
+                    </button>
                 )}
-            </div>
-        ),
-        [status, onClick, title],
+            </Disclosure.Summary>
+            <div className={cnOnboardingMenuItem('node')}>{children}</div>
+            {buttons && <div className={cnOnboardingMenuItem('buttons')}>{buttons}</div>}
+        </Disclosure>
+    ) : (
+        summary
     );
 
     if (loading) {

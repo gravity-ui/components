@@ -1,11 +1,11 @@
 @use '../variables.scss';
+@use '@gravity-ui/uikit/styles/mixins';
 
 $block: '.#{variables.$ns}guide';
 
 $layer-popup: 1000;
 
 #{$block} {
-    z-index: $layer-popup;
     max-width: 280px;
 
     background: none;
@@ -27,27 +27,20 @@ $layer-popup: 1000;
             width: 280px;
             border-radius: 20px;
             height: fit-content;
-            max-height: 684px;
             min-height: 300px;
         }
     }
 
     &__title-text {
         color: var(--g-color-text-brand-contrast);
-
-        font-family: 'YS Text';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 20px;
+        @include mixins.text-subheader-2();
 
         overflow: hidden;
         text-overflow: ellipsis;
         text-wrap: nowrap;
 
         &_expand {
-            font-size: 17px;
-            line-height: 24px;
+            @include mixins.text-subheader-3();
         }
     }
 
@@ -71,7 +64,7 @@ $layer-popup: 1000;
         }
     }
 
-    &__graduationCap {
+    &__title-icon {
         flex-shrink: 0;
         margin-inline: var(--g-spacing-2) var(--g-spacing-2);
         color: var(--g-color-text-brand-contrast);
@@ -81,12 +74,13 @@ $layer-popup: 1000;
         padding: var(--g-spacing-2) var(--g-spacing-4) var(--g-spacing-3) var(--g-spacing-4);
 
         &_expand {
-            padding: var(--g-spacing-3) var(--g-spacing-4) var(--g-spacing-4) var(--g-spacing-4);
+            padding: var(--g-spacing-3) var(--g-spacing-5) var(--g-spacing-4) var(--g-spacing-5);
         }
     }
 
     &__lining {
-        overflow-y: scroll;
+        overflow-y: auto;
+        max-height: 684px;
 
         box-sizing: border-box;
 
@@ -97,16 +91,9 @@ $layer-popup: 1000;
         margin-inline: 1px;
 
         margin-block-end: var(--g-spacing-4);
-
-        margin-inline-start: 1px;
-
         background-color: var(--g-color-base-float);
 
         border-radius: var(--g-border-radius-xl);
-    }
-
-    &__lining::-webkit-scrollbar {
-        display: none;
     }
 
     &__buttons {

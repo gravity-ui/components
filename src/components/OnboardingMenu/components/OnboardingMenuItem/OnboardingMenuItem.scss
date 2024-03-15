@@ -1,4 +1,5 @@
 @use '../../../variables.scss';
+@use '@gravity-ui/uikit/styles/mixins';
 
 $block: '.#{variables.$ns}guide-menu-item';
 
@@ -13,25 +14,6 @@ $block: '.#{variables.$ns}guide-menu-item';
         width: 100%;
     }
 
-    &__collapse-title {
-        display: flex;
-        align-items: center;
-
-        min-width: 0;
-
-        font-size: var(--g-text-subheader-2-font-size);
-        line-height: var(--g-text-subheader-3-line-height);
-
-        letter-spacing: 0;
-        text-align: start;
-    }
-
-    &__collapse-text {
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-    }
-
     &__icon {
         margin-inline-end: var(--g-spacing-2);
 
@@ -41,10 +23,10 @@ $block: '.#{variables.$ns}guide-menu-item';
         height: --g-spacing-5;
     }
 
-    &__time-icon {
+    &__status-icon {
         color: var(--g-color-base-brand);
 
-        &__disable {
+        &_disabled {
             color: var(--g-color-text-hint);
         }
     }
@@ -56,10 +38,6 @@ $block: '.#{variables.$ns}guide-menu-item';
 
         margin-block: var(--g-spacing-3);
         margin-block-start: var(--g-spacing-3);
-    }
-
-    &__text {
-        margin-block-end: var(--g-spacing-3);
     }
 
     &__buttons {
@@ -109,16 +87,14 @@ $block: '.#{variables.$ns}guide-menu-item';
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 0;
     }
 
     &__title {
+        @include mixins.text-body-2();
         color: var(--g-color-text-complementary);
-
-        font-family: 'YS Text';
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 20px;
 
         overflow: hidden;
         text-overflow: ellipsis;

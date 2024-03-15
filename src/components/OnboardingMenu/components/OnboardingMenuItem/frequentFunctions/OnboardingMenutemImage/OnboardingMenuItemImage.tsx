@@ -14,7 +14,3 @@ export type OnboardingMenuItemImageProps = {
 export const OnboardingMenuItemImage = ({src, alt}: OnboardingMenuItemImageProps) => (
     <img src={src} alt={alt} className={cnOnboardingMenuItemImage()}></img>
 );
-
-export const addImage = (src: string, alt: string) => (
-    <OnboardingMenuItemImage src={src} alt={alt} />
-);
