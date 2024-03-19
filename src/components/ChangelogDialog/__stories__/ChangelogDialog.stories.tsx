@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {settings} from '@gravity-ui/date-utils';
-import {Button, Lang, configure} from '@gravity-ui/uikit';
+import {Button} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
 
 import {ChangelogDialog} from '../ChangelogDialog';
@@ -83,20 +82,8 @@ const items: ChangelogItem[] = [
     },
 ];
 
-const DefaultTemplate: StoryFn<ChangelogDialogProps & {locale: string}> = (
-    props: ChangelogDialogProps & {locale: string},
-) => {
-    const [currentLocale, setCurrentLocale] = React.useState('');
+const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogProps) => {
     const [visible, setVisible] = React.useState(props.open);
-
-    React.useEffect(() => {
-        (async () => {
-            await settings.loadLocale(props.locale);
-            settings.setLocale(props.locale);
-            configure({lang: props.locale as Lang});
-            setCurrentLocale(settings.getLocale());
-        })();
-    }, [props.locale]);
 
     React.useEffect(() => {
         setVisible(props.open);
@@ -115,7 +102,6 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps & {locale: string}> = (
             </div>
             <ChangelogDialog
                 {...props}
-                key={currentLocale}
                 open={visible}
                 onClose={(event, reason) => {
                     setVisible(false);
@@ -128,7 +114,6 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps & {locale: string}> = (
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {
-    locale: 'en',
     open: false,
     items,
     onStoryClick: (storyId) => {
