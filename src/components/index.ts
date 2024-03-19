@@ -10,6 +10,7 @@ export * from './InfiniteScroll';
 export * from './ItemSelector';
 export * from './Notification';
 export * from './Notifications';
+export * from './OnboardingMenu';
 export * from './PasswordInput';
 export * from './PlaceholderContainer';
 export * from './PromoSheet';

@@ -83,10 +83,6 @@ const OnboardingMenuParent = ({
                                 className={cnOnboardingMenu('title-icon')}
                             />
                         ) : null}
-
-                        {/* <span>
-                            {title}
-                        </span> */}
                         {title}
                     </button>
                     <Progress
