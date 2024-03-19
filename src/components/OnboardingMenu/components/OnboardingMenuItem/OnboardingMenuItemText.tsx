@@ -2,14 +2,14 @@ import React from 'react';
 
 import {block} from '../../../utils/cn';
 
-import './OnboardingMenutemText.scss';
+import './OnboardingMenuItem.scss';
 
-const cnOnboardingMenuItemText = block('guide-menu-item-text');
+const cnOnboardingMenuItem = block('onboarding-menu-item');
 
 export type OnboardingMenuItemTextProps = {
     text: string;
 };
 
 export const OnboardingMenuItemText = ({text}: OnboardingMenuItemTextProps) => (
-    <span className={cnOnboardingMenuItemText()}>{text}</span>
+    <span className={cnOnboardingMenuItem('text')}>{text}</span>
 );

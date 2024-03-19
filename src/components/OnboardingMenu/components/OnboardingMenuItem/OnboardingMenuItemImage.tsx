@@ -2,9 +2,9 @@ import React from 'react';
 
 import {block} from '../../../utils/cn';
 
-import './OnboardingMenuItemImage.scss';
+import './OnboardingMenuItem.scss';
 
-const cnOnboardingMenuItemImage = block('guide-menu-item-image');
+const cnOnboardingMenuItem = block('onboarding-menu-item');
 
 export type OnboardingMenuItemImageProps = {
     src: string;
@@ -12,5 +12,5 @@ export type OnboardingMenuItemImageProps = {
 };
 
 export const OnboardingMenuItemImage = ({src, alt}: OnboardingMenuItemImageProps) => (
-    <img src={src} alt={alt} className={cnOnboardingMenuItemImage()}></img>
+    <img src={src} alt={alt} className={cnOnboardingMenuItem('image')}></img>
 );

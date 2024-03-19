@@ -99,8 +99,21 @@ $block: '.#{variables.$ns}onboarding-menu-item';
     &__title {
         @include mixins.text-body-2();
         color: var(--g-color-text-complementary);
-
         overflow: hidden;
         text-overflow: ellipsis;
+    }
+
+    &__text {
+        @include mixins.text-body-1();
+        overflow: hidden;
+        color: var(--g-color-text-complementary);
+        text-overflow: ellipsis;
+    }
+
+    &__image {
+        max-width: 242px;
+        max-height: 118px;
+        border: 1px solid var(--g-color-line-generic);
+        border-radius: 8px;
     }
 }

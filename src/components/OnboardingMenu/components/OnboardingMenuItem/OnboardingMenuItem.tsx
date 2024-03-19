@@ -5,6 +5,9 @@ import {ArrowToggle, Disclosure, Icon, Skeleton} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 
+import {OnboardingMenuItemImage} from './OnboardingMenuItemImage';
+import {OnboardingMenuItemText} from './OnboardingMenuItemText';
+
 import './OnboardingMenuItem.scss';
 
 export type OnboardingMenuItemProps = {
@@ -20,7 +23,7 @@ const ICON_SIZE = 20;
 
 const cnOnboardingMenuItem = block('onboarding-menu-item');
 
-export const OnboardingMenuItem = ({
+const OnboardingMenuItemParent = ({
     title,
     status,
     children,
@@ -104,3 +107,8 @@ export const OnboardingMenuItem = ({
         </div>
     );
 };
+
+export const OnboardingMenuItem = Object.assign(OnboardingMenuItemParent, {
+    Text: OnboardingMenuItemText,
+    Image: OnboardingMenuItemImage,
+});
