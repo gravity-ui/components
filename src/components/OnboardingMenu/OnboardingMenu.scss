@@ -1,9 +1,7 @@
 @use '../variables.scss';
 @use '@gravity-ui/uikit/styles/mixins';
 
-$block: '.#{variables.$ns}guide';
-
-$layer-popup: 1000;
+$block: '.#{variables.$ns}onboarding-menu';
 
 #{$block} {
     max-width: 280px;
@@ -12,7 +10,7 @@ $layer-popup: 1000;
     width: fit-content;
 
     &__content {
-        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+        box-shadow: 0 2px 8px 0 var(--g-color-sfx-shadow-light);
         display: flex;
         flex-direction: column;
         overflow: hidden;
@@ -31,19 +29,6 @@ $layer-popup: 1000;
         }
     }
 
-    &__title-text {
-        color: var(--g-color-text-brand-contrast);
-        @include mixins.text-subheader-2();
-
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-wrap: nowrap;
-
-        &_expand {
-            @include mixins.text-subheader-3();
-        }
-    }
-
     &__title {
         display: flex;
         align-items: center;
@@ -51,7 +36,6 @@ $layer-popup: 1000;
 
         margin-block-end: var(--g-spacing-1);
 
-        color: var(--g-color-text-light-primary);
         background: none;
         border: none;
         cursor: pointer;
@@ -59,15 +43,21 @@ $layer-popup: 1000;
 
         padding: 0;
 
+        color: var(--g-color-text-brand-contrast);
+        @include mixins.text-subheader-2();
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+
         &_expand {
             margin-block-end: var(--g-spacing-2);
+            @include mixins.text-subheader-3();
         }
     }
 
     &__title-icon {
         flex-shrink: 0;
         margin-inline: var(--g-spacing-2) var(--g-spacing-2);
-        color: var(--g-color-text-brand-contrast);
     }
 
     &__header {

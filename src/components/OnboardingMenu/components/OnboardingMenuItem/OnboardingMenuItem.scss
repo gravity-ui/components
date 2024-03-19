@@ -1,7 +1,7 @@
 @use '../../../variables.scss';
 @use '@gravity-ui/uikit/styles/mixins';
 
-$block: '.#{variables.$ns}guide-menu-item';
+$block: '.#{variables.$ns}onboarding-menu-item';
 
 #{$block} {
     &__collapse {
@@ -20,11 +20,15 @@ $block: '.#{variables.$ns}guide-menu-item';
         align-self: flex-start;
         display: flex;
         align-items: center;
-        height: --g-spacing-5;
+        height: var(--g-spacing-5);
     }
 
     &__status-icon {
-        color: var(--g-color-base-brand);
+        color: var(--g-color-text-positive);
+
+        &_pending {
+            color: var(--g-color-text-info);
+        }
 
         &_disabled {
             color: var(--g-color-text-hint);
@@ -61,7 +65,7 @@ $block: '.#{variables.$ns}guide-menu-item';
         margin: var(--g-spacing-3) var(--g-spacing-6);
     }
 
-    &__avatar {
+    &__skeleton-avatar {
         flex-shrink: 0;
         height: 20px;
         width: 20px;
@@ -70,7 +74,7 @@ $block: '.#{variables.$ns}guide-menu-item';
         margin-inline-end: 8px;
     }
 
-    &__person {
+    &__skeleton-title {
         height: 17px;
 
         width: 100%;

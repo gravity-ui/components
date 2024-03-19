@@ -18,7 +18,7 @@ export type OnboardingMenuItemProps = {
 
 const ICON_SIZE = 20;
 
-const cnOnboardingMenuItem = block('guide-menu-item');
+const cnOnboardingMenuItem = block('onboarding-menu-item');
 
 export const OnboardingMenuItem = ({
     title,
@@ -34,7 +34,7 @@ export const OnboardingMenuItem = ({
                 <Icon
                     size={ICON_SIZE}
                     data={Clock}
-                    className={cnOnboardingMenuItem('status-icon')}
+                    className={cnOnboardingMenuItem('status-icon_pending')}
                 />
             );
         }
@@ -87,10 +87,10 @@ export const OnboardingMenuItem = ({
             <React.Fragment>
                 <div className={cnOnboardingMenuItem('skeleton')}>
                     <Skeleton
-                        className={cnOnboardingMenuItem('avatar')}
+                        className={cnOnboardingMenuItem('skeleton-avatar')}
                         style={{width: `${ICON_SIZE}px`, height: `${ICON_SIZE}px`}}
                     />
-                    <Skeleton className={cnOnboardingMenuItem('person')} />
+                    <Skeleton className={cnOnboardingMenuItem('skeleton-title')} />
                 </div>
                 {hasDivider && <div className={cnOnboardingMenuItem('divider')}></div>}
             </React.Fragment>

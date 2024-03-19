@@ -8,7 +8,7 @@ import i18n from './i18n';
 
 import './OnboardingMenu.scss';
 
-const cnOnboardingMenu = block('guide');
+const cnOnboardingMenu = block('onboarding-menu');
 
 export type OnboardingMenuProps = {
     title: React.ReactNode;
@@ -23,8 +23,8 @@ export type OnboardingMenuProps = {
     className?: string;
 
     onExpand?: (expanded: boolean) => void;
-    onCompleteClick: () => void;
-    onRollUpClick?: (event: React.MouseEvent) => void;
+    onCompleteClick: (event: React.MouseEvent) => void;
+    onCollapseClick?: (event: React.MouseEvent) => void;
 };
 
 export const OnboardingMenu = ({
@@ -33,7 +33,7 @@ export const OnboardingMenu = ({
     icon,
     defaultExpanded,
     onExpand,
-    onRollUpClick,
+    onCollapseClick,
     onCompleteClick,
     collapseButtonText,
     completeButtonText,
@@ -51,12 +51,12 @@ export const OnboardingMenu = ({
         }
     };
 
-    const onRollUpClickCallback = (event: React.MouseEvent) => {
+    const onCollapseClickCallback = (event: React.MouseEvent) => {
         const newExpand = !expand;
 
         setExpand(newExpand);
-        if (onRollUpClick) {
-            onRollUpClick(event);
+        if (onCollapseClick) {
+            onCollapseClick(event);
         }
         if (onExpand) {
             onExpand(newExpand);
@@ -81,9 +81,10 @@ export const OnboardingMenu = ({
                             />
                         ) : null}
 
-                        <span className={cnOnboardingMenu('title-text', {expand: expand})}>
+                        {/* <span>
                             {title}
-                        </span>
+                        </span> */}
+                        {title}
                     </button>
                     <Progress
                         size={expand ? 's' : 'xs'}
@@ -107,7 +108,7 @@ export const OnboardingMenu = ({
                             <Button
                                 view="normal-contrast"
                                 size="m"
-                                onClick={onRollUpClickCallback}
+                                onClick={onCollapseClickCallback}
                                 width="max"
                             >
                                 {collapseButtonText ?? i18n('collapse')}

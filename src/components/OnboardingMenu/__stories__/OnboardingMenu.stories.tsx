@@ -8,8 +8,8 @@ import type {Meta, Story} from '@storybook/react';
 import type {OnboardingMenuProps} from '../OnboardingMenu';
 import {OnboardingMenu} from '../OnboardingMenu';
 import {OnboardingMenuItem} from '../components/OnboardingMenuItem/OnboardingMenuItem';
-import {OnboardingMenuItemText} from '../components/OnboardingMenuItem/frequentFunctions/OnboardingMenuItemText/OnboardingMenuItemText';
-import {OnboardingMenuItemImage} from '../components/OnboardingMenuItem/frequentFunctions/OnboardingMenutemImage/OnboardingMenuItemImage';
+import {OnboardingMenuItemText} from '../components/OnboardingMenuItemText/OnboardingMenuItemText';
+import {OnboardingMenuItemImage} from '../components/OnboardingMenutemImage/OnboardingMenuItemImage';
 
 export default {
     title: 'Components/OnboardingMenu',
@@ -57,6 +57,7 @@ LongHeader.args = {
 WithLoader.args = {
     title: 'Header text',
     defaultExpanded: true,
+    progress: 30,
     children: [
         <OnboardingMenuItem
             key={'testItem'}
@@ -242,8 +243,8 @@ WithManyItems.args = {
                     alt="2019"
                     key={'testItem'}
                 />,
+                <OnboardingMenuItemText text={'Test text'} key={'testItem'} />,
             ]}
-            {[<OnboardingMenuItemText text={'Test text'} key={'testItem'} />]}
         </OnboardingMenuItem>,
         <OnboardingMenuItem
             key={'testItem'}
