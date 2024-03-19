@@ -14,11 +14,6 @@ export default {
         onStoryClick: {
             action: 'onStoryClick',
         },
-        locale: {
-            name: 'Date locale',
-            options: ['en', 'ru'],
-            control: {type: 'radio'},
-        },
     },
 } as Meta;
 
