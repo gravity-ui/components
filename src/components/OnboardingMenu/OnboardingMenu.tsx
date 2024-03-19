@@ -132,6 +132,8 @@ const OnboardingMenuParent = ({
     );
 };
 
+OnboardingMenuParent.displayName = 'OnboardingMenu';
+
 export const OnboardingMenu = Object.assign(OnboardingMenuParent, {
     Item: OnboardingMenuItem,
     ItemText: OnboardingMenuItemText,
