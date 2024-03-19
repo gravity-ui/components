@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {dateTimeParse, settings} from '@gravity-ui/date-utils';
+import {dateTimeParse} from '@gravity-ui/date-utils';
 import {CirclePlay} from '@gravity-ui/icons';
-import {Button, Icon, Label} from '@gravity-ui/uikit';
+import {Button, Icon, Label, getConfig} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 import {i18n} from '../../i18n';
@@ -50,12 +50,12 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
         let value;
         if (!data.date) return value;
 
-        const locale = settings.getLocale();
+        const {lang} = getConfig();
         Object.keys(formatLangDisplay).some((format) => {
             const langFormat = formatLangDisplay[format as keyof typeof formatLangDisplay];
             const dt = dateTimeParse(data.date, {format});
             if (dt?.isValid()) {
-                value = dt.format(langFormat[locale as keyof typeof langFormat] || langFormat.en);
+                value = dt.format(langFormat[lang as keyof typeof langFormat] || langFormat.en);
                 return true;
             }
             return false;

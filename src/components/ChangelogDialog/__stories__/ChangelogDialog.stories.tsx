@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {settings} from '@gravity-ui/date-utils';
-import {Button} from '@gravity-ui/uikit';
+import {Button, Lang, configure} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
 
 import {ChangelogDialog} from '../ChangelogDialog';
@@ -93,6 +93,7 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps & {locale: string}> = (
         (async () => {
             await settings.loadLocale(props.locale);
             settings.setLocale(props.locale);
+            configure({lang: props.locale as Lang});
             setCurrentLocale(settings.getLocale());
         })();
     }, [props.locale]);
