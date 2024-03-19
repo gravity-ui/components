@@ -7,11 +7,11 @@ interface ImageData {
 }
 
 export interface ChangelogItem {
-    date: string;
+    date?: string;
     isNew?: boolean;
     title: string;
     image?: ImageData;
-    description: React.ReactNode;
+    description?: React.ReactNode;
     storyId?: string;
     link?: string;
 }
