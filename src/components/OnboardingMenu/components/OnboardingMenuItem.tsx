@@ -3,10 +3,7 @@ import React from 'react';
 import {CircleCheckFill, Clock} from '@gravity-ui/icons';
 import {ArrowToggle, Disclosure, Icon, Skeleton} from '@gravity-ui/uikit';
 
-import {block} from '../../../utils/cn';
-
-import {OnboardingMenuItemImage} from './OnboardingMenuItemImage';
-import {OnboardingMenuItemText} from './OnboardingMenuItemText';
+import {block} from '../../utils/cn';
 
 import './OnboardingMenuItem.scss';
 
@@ -23,7 +20,7 @@ const ICON_SIZE = 20;
 
 const cnOnboardingMenuItem = block('onboarding-menu-item');
 
-const OnboardingMenuItemParent = ({
+export const OnboardingMenuItem = ({
     title,
     status,
     children,
@@ -107,8 +104,3 @@ const OnboardingMenuItemParent = ({
         </div>
     );
 };
-
-export const OnboardingMenuItem = Object.assign(OnboardingMenuItemParent, {
-    Text: OnboardingMenuItemText,
-    Image: OnboardingMenuItemImage,
-});

@@ -7,7 +7,7 @@ import type {Meta, Story} from '@storybook/react';
 
 import type {OnboardingMenuProps} from '../OnboardingMenu';
 import {OnboardingMenu} from '../OnboardingMenu';
-import {OnboardingMenuItem} from '../components/OnboardingMenuItem/OnboardingMenuItem';
+// import {OnboardingMenu.ItemImage} from '../OnboardingMenu.ItemImage';
 
 export default {
     title: 'Components/OnboardingMenu',
@@ -59,7 +59,7 @@ WithLoader.args = {
     progress: 30,
     defaultExpanded: true,
     children: [
-        <OnboardingMenuItem
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Test element"
             loading
@@ -72,9 +72,9 @@ WithLoader.args = {
                 </Button>,
             ]}
         >
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="The test element"
             hasDivider={false}
@@ -88,8 +88,8 @@ WithLoader.args = {
                 </Button>,
             ]}
         >
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
     ],
 };
 
@@ -98,7 +98,7 @@ WithItems.args = {
     progress: 30,
     defaultExpanded: true,
     children: [
-        <OnboardingMenuItem
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Text"
             buttons={[
@@ -110,9 +110,9 @@ WithItems.args = {
                 </Button>,
             ]}
         >
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image"
             buttons={[
@@ -125,14 +125,14 @@ WithItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             hasDivider={false}
@@ -146,14 +146,14 @@ WithItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
-                <OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />,
+                <OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />,
             ]}
-        </OnboardingMenuItem>,
+        </OnboardingMenu.Item>,
     ],
 };
 
@@ -162,7 +162,7 @@ WithManyItems.args = {
     progress: 30,
     defaultExpanded: true,
     children: [
-        <OnboardingMenuItem
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -175,15 +175,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -196,15 +196,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -217,15 +217,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -238,15 +238,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
-                <OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />,
+                <OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />,
             ]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -259,15 +259,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -280,15 +280,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -301,15 +301,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -322,15 +322,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -343,15 +343,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -364,15 +364,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -385,15 +385,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -406,15 +406,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -427,15 +427,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -448,15 +448,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -469,15 +469,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -490,15 +490,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -511,15 +511,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             buttons={[
@@ -532,15 +532,15 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item
             key={'testItem'}
             title="Image and text"
             hasDivider={false}
@@ -554,14 +554,14 @@ WithManyItems.args = {
             ]}
         >
             {[
-                <OnboardingMenuItem.Image
+                <OnboardingMenu.ItemImage
                     src="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-1.png"
                     alt="2019"
                     key={'testItem'}
                 />,
             ]}
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
     ],
 };
 
@@ -570,15 +570,15 @@ SomeIcons.args = {
     progress: 30,
     defaultExpanded: true,
     children: [
-        <OnboardingMenuItem status="completed" key={'testItem'} title="finished">
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem status="pending" key={'testItem'} title="pending">
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
-        <OnboardingMenuItem key={'testItem'} title="default" hasDivider={false}>
-            {[<OnboardingMenuItem.Text text={'Test text'} key={'testItem'} />]}
-        </OnboardingMenuItem>,
+        <OnboardingMenu.Item status="completed" key={'testItem'} title="finished">
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item status="pending" key={'testItem'} title="pending">
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
+        <OnboardingMenu.Item key={'testItem'} title="default" hasDivider={false}>
+            {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
+        </OnboardingMenu.Item>,
     ],
 };
 
@@ -586,7 +586,7 @@ WithoutArrow.args = {
     title: 'Header text',
     progress: 30,
     defaultExpanded: true,
-    children: [<OnboardingMenuItem status="completed" key={'testItem'} title="finished" />],
+    children: [<OnboardingMenu.Item status="completed" key={'testItem'} title="finished" />],
 };
 
 CustomButtonText.args = {

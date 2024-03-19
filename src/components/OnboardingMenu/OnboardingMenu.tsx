@@ -4,6 +4,9 @@ import {Button, Icon, IconData, Progress} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
+import {OnboardingMenuItem} from './components/OnboardingMenuItem';
+import {OnboardingMenuItemImage} from './components/OnboardingMenuItemImage';
+import {OnboardingMenuItemText} from './components/OnboardingMenuItemText';
 import i18n from './i18n';
 
 import './OnboardingMenu.scss';
@@ -27,7 +30,7 @@ export type OnboardingMenuProps = {
     onCollapseClick?: (event: React.MouseEvent) => void;
 };
 
-export const OnboardingMenu = ({
+const OnboardingMenuParent = ({
     title,
     progress,
     icon,
@@ -128,3 +131,9 @@ export const OnboardingMenu = ({
         </div>
     );
 };
+
+export const OnboardingMenu = Object.assign(OnboardingMenuParent, {
+    Item: OnboardingMenuItem,
+    ItemText: OnboardingMenuItemText,
+    ItemImage: OnboardingMenuItemImage,
+});
