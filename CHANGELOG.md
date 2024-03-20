@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.3.0](https://github.com/gravity-ui/components/compare/v3.2.0...v3.3.0) (2024-03-20)
+
+
+### Features
+
+* add OnboardingMenu component ([#121](https://github.com/gravity-ui/components/issues/121)) ([e296ed4](https://github.com/gravity-ui/components/commit/e296ed47792533ad88881f82234979eebd536a7c))
+* **СhangelogDialog:** make date and description optional, add date format ([#65](https://github.com/gravity-ui/components/issues/65)) ([261f7ca](https://github.com/gravity-ui/components/commit/261f7cadc6b7d807ec7c6376dfa5de4b78fb67af))
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** add re-export and docs  ([#166](https://github.com/gravity-ui/components/issues/166)) ([84df613](https://github.com/gravity-ui/components/commit/84df6139463737c31630fdfb8f61a48d3505c720))
+* **OnboardingMenu:** fix item title styles ([#167](https://github.com/gravity-ui/components/issues/167)) ([f534f78](https://github.com/gravity-ui/components/commit/f534f78a4803967165a9b3ae4fe1c1728823852a))
+* **PlaceholderContainer:** change text in example image in storybook ([#164](https://github.com/gravity-ui/components/issues/164)) ([d97305f](https://github.com/gravity-ui/components/commit/d97305f774cd8053afb5493f0fad20ed89f44588))
+
 ## [3.2.0](https://github.com/gravity-ui/components/compare/v3.1.0...v3.2.0) (2024-03-12)
 
 
