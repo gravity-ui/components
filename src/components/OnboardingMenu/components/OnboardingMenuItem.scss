@@ -101,6 +101,7 @@ $block: '.#{variables.$ns}onboarding-menu-item';
         color: var(--g-color-text-complementary);
         overflow: hidden;
         text-overflow: ellipsis;
+        text-align: start;
     }
 
     &__text {
