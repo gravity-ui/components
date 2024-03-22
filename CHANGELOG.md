@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.4.0](https://github.com/gravity-ui/components/compare/v3.3.0...v3.4.0) (2024-03-22)
+
+
+### Features
+
+* **ConfirmDialog:** add dialog confirm component ([#169](https://github.com/gravity-ui/components/issues/169)) ([7f7c32e](https://github.com/gravity-ui/components/commit/7f7c32e43744459bca7a1324754d69d3ba5e728e))
+* **useSyncWithLS:** disable callback in active tab ([#170](https://github.com/gravity-ui/components/issues/170)) ([e05dc26](https://github.com/gravity-ui/components/commit/e05dc2601aac0e6652e7e4ad7bd72c9a0997d03d))
+
 ## [3.3.0](https://github.com/gravity-ui/components/compare/v3.2.0...v3.3.0) (2024-03-20)
 
 
