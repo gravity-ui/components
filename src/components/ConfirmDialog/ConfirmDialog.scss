@@ -1,0 +1,10 @@
+@use '@gravity-ui/uikit/styles/mixins';
+@use '../../components/variables';
+
+$block: '.#{variables.$ns}confirm-dialog';
+
+#{$block} {
+    &__body {
+        @include mixins.text-body-2;
+    }
+}
