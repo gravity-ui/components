@@ -19,3 +19,4 @@ export * from './SharePopover';
 export * from './StoreBadge';
 export * from './Stories';
 export * from './StoriesGroup';
+export * from './ConfirmDialog';
