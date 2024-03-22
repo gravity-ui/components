@@ -17,6 +17,7 @@ export interface ShareListItemProps extends ShareOptionsData {
     type?: ShareOptions;
     icon?: IconData;
     label?: string;
+    urlTitle?: string;
     className?: string;
     direction?: LayoutDirection;
 
@@ -25,7 +26,7 @@ export interface ShareListItemProps extends ShareOptionsData {
 
 export class ShareListItem extends React.PureComponent<ShareListItemProps> {
     render() {
-        const {type, direction, className, label, getShareLink, ...rest} = this.props;
+        const {type, direction, className, label, getShareLink, urlTitle, ...rest} = this.props;
         const icon = this.props.icon || (type && icons[type]);
         const url = getShareLink?.(rest) ?? (type && this.getShareLink(type));
         const typeModifier = type?.toLowerCase();
@@ -44,6 +45,7 @@ export class ShareListItem extends React.PureComponent<ShareListItemProps> {
                     target="_blank"
                     width="max"
                     className={b(null, className)}
+                    title={urlTitle}
                     extraProps={{'aria-label': i18n('label_share', {name})}}
                 >
                     {icon && (
@@ -61,6 +63,7 @@ export class ShareListItem extends React.PureComponent<ShareListItemProps> {
                 target="_blank"
                 className={b(null, className)}
                 extraProps={{'aria-label': i18n('label_share', {name})}}
+                title={urlTitle}
             >
                 {icon && <Icon data={icon} size={24} className={b('icon', {type: typeModifier})} />}
             </Button>

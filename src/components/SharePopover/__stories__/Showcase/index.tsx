@@ -25,6 +25,14 @@ export function SharePopoverDemo() {
         ShareOptions.LinkedIn,
         ShareOptions.Mail,
     ];
+    const shareUrlTitles = {
+        [ShareOptions.Telegram]: 'Opens in a new tab',
+        [ShareOptions.Facebook]: 'Opens in a new tab',
+        [ShareOptions.Twitter]: 'Opens in a new tab',
+        [ShareOptions.VK]: 'Opens in a new tab',
+        [ShareOptions.LinkedIn]: 'Opens in a new tab',
+        [ShareOptions.Mail]: 'Opens in a new tab',
+    };
 
     const ShareTitle = <div>Share</div>;
 
@@ -199,6 +207,19 @@ export function SharePopoverDemo() {
                             {label}
                         </Button>
                     )}
+                />
+            </div>
+
+            <div style={{margin: 16, display: 'flex', alignItems: 'center'}}>
+                <span style={{marginRight: 8}}>Share options with url title</span>
+                <SharePopover
+                    url={url}
+                    title={title}
+                    text={text}
+                    shareOptions={shareOptions}
+                    withCopyLink={false}
+                    openByHover={false}
+                    shareUrlTitles={shareUrlTitles}
                 />
             </div>
         </div>

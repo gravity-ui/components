@@ -103,6 +103,7 @@ export const SharePopover = (props: SharePopoverProps) => {
         renderCopy,
         children,
         onClick,
+        shareUrlTitles,
     } = props;
     const [isOpen, setIsOpen] = React.useState(false);
     const tooltipId = useUniqId();
@@ -119,6 +120,7 @@ export const SharePopover = (props: SharePopoverProps) => {
                 copyTitle={copyTitle}
                 copyIcon={copyIcon}
                 renderCopy={renderCopy}
+                shareUrlTitles={shareUrlTitles}
             >
                 {children}
             </ShareList>

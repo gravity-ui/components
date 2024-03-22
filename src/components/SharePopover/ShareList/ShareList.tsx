@@ -18,6 +18,8 @@ const isShareListItemComponent = isOfType(ShareListItem);
 export interface ShareListDefaultProps {
     /** share options list */
     shareOptions: ShareOptions[];
+    /** share link titles */
+    shareUrlTitles?: Partial<Record<ShareOptions, string>>;
     /** should show copy button */
     withCopyLink: boolean;
 }
@@ -93,7 +95,7 @@ export class ShareList extends React.PureComponent<ShareListInnerProps, ShareLis
     }
 
     private renderShareOptionsLinks() {
-        const {url, title, text, shareOptions, direction} = this.props;
+        const {url, title, text, shareOptions, direction, shareUrlTitles = {}} = this.props;
         return (
             <div className={b('option')}>
                 {shareOptions.map((type) => (
@@ -105,6 +107,7 @@ export class ShareList extends React.PureComponent<ShareListInnerProps, ShareLis
                         text={text}
                         className={b('link')}
                         direction={direction}
+                        urlTitle={shareUrlTitles[type]}
                     />
                 ))}
             </div>
