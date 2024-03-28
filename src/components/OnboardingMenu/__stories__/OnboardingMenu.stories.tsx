@@ -17,18 +17,18 @@ const actionsButtonHandlers = () => actions('onClick').onClick('Click on the but
 const actionsButtonComplete = () => actions('onClick').onClick('Click on the end button');
 
 const DefaultTemplate: Story<OnboardingMenuProps> = (args) => {
+    const [expanded, setExpanded] = React.useState(false);
+
     const actionsOnboardingMenuHandlers = (expanded: boolean) => {
         actions('onHeaderClick').onHeaderClick('Click on the header');
-        setExpand(expanded);
+        setExpanded(expanded);
     };
-
-    const [expand, setExpand] = React.useState(false);
 
     return (
         <div style={{margin: '20px'}}>
             <OnboardingMenu
                 {...args}
-                expand={expand}
+                expanded={expanded}
                 icon={GraduationCap}
                 onExpand={actionsOnboardingMenuHandlers}
                 onCompleteClick={actionsButtonComplete}

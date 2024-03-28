@@ -18,7 +18,7 @@ export type OnboardingMenuProps = {
     progress: number;
     icon?: IconData;
 
-    expand: boolean;
+    expanded: boolean;
     children?: React.ReactNode;
 
     collapseButtonText?: string;
@@ -34,7 +34,7 @@ const OnboardingMenuParent = ({
     title,
     progress,
     icon,
-    expand,
+    expanded,
     onExpand,
     onCollapseClick,
     onCompleteClick,
@@ -44,7 +44,7 @@ const OnboardingMenuParent = ({
     children,
 }: OnboardingMenuProps) => {
     const onExpandCallback = () => {
-        const newExpand = !expand;
+        const newExpand = !expanded;
 
         if (onExpand) {
             onExpand(newExpand);
@@ -52,7 +52,7 @@ const OnboardingMenuParent = ({
     };
 
     const onCollapseClickCallback = (event: React.MouseEvent) => {
-        const newExpand = !expand;
+        const newExpand = !expanded;
 
         if (onCollapseClick) {
             onCollapseClick(event);
@@ -64,10 +64,10 @@ const OnboardingMenuParent = ({
 
     return (
         <div className={cnOnboardingMenu(null, className)}>
-            <div className={cnOnboardingMenu('content', {expand: expand})}>
-                <div className={cnOnboardingMenu('header', {expand: expand})}>
+            <div className={cnOnboardingMenu('content', {expand: expanded})}>
+                <div className={cnOnboardingMenu('header', {expand: expanded})}>
                     <button
-                        className={cnOnboardingMenu('title', {expand: expand})}
+                        className={cnOnboardingMenu('title', {expand: expanded})}
                         onClick={onExpandCallback}
                         tabIndex={0}
                     >
@@ -82,7 +82,7 @@ const OnboardingMenuParent = ({
                         {title}
                     </button>
                     <Progress
-                        size={expand ? 's' : 'xs'}
+                        size={expanded ? 's' : 'xs'}
                         stack={[
                             {
                                 value: progress,
@@ -96,7 +96,7 @@ const OnboardingMenuParent = ({
                     />
                 </div>
 
-                {expand && (
+                {expanded && (
                     <React.Fragment>
                         <div className={cnOnboardingMenu('lining')}>{children}</div>
                         <div className={cnOnboardingMenu('buttons')}>
