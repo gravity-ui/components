@@ -56,7 +56,7 @@ export const OnboardingMenuItem = ({
                 className={cnOnboardingMenuItem('status-icon_disabled')}
             />
         );
-    }, []);
+    }, [status]);
 
     const summary = (
         <div className={cnOnboardingMenuItem('collapse-header')}>
