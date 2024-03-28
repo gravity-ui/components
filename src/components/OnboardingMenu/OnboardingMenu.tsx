@@ -18,7 +18,7 @@ export type OnboardingMenuProps = {
     progress: number;
     icon?: IconData;
 
-    defaultExpanded: boolean;
+    expand: boolean;
     children?: React.ReactNode;
 
     collapseButtonText?: string;
@@ -34,7 +34,7 @@ const OnboardingMenuParent = ({
     title,
     progress,
     icon,
-    defaultExpanded,
+    expand,
     onExpand,
     onCollapseClick,
     onCompleteClick,
@@ -43,12 +43,9 @@ const OnboardingMenuParent = ({
     className,
     children,
 }: OnboardingMenuProps) => {
-    const [expand, setExpand] = React.useState(defaultExpanded);
-
     const onExpandCallback = () => {
         const newExpand = !expand;
 
-        setExpand(newExpand);
         if (onExpand) {
             onExpand(newExpand);
         }
@@ -57,7 +54,6 @@ const OnboardingMenuParent = ({
     const onCollapseClickCallback = (event: React.MouseEvent) => {
         const newExpand = !expand;
 
-        setExpand(newExpand);
         if (onCollapseClick) {
             onCollapseClick(event);
         }
