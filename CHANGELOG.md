@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/gravity-ui/components/compare/v3.4.0...v3.4.1) (2024-03-29)
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** bad useMemo Icon, took out the expand state ([#172](https://github.com/gravity-ui/components/issues/172)) ([32bd68d](https://github.com/gravity-ui/components/commit/32bd68da8d4a6d42cd6dc758f289ed33f68e20c0))
+
 ## [3.4.0](https://github.com/gravity-ui/components/compare/v3.3.0...v3.4.0) (2024-03-22)
 
 
