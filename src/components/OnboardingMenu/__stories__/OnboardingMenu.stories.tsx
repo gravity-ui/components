@@ -7,7 +7,6 @@ import type {Meta, Story} from '@storybook/react';
 
 import type {OnboardingMenuProps} from '../OnboardingMenu';
 import {OnboardingMenu} from '../OnboardingMenu';
-// import {OnboardingMenu.ItemImage} from '../OnboardingMenu.ItemImage';
 
 export default {
     title: 'Components/OnboardingMenu',
@@ -18,14 +17,18 @@ const actionsButtonHandlers = () => actions('onClick').onClick('Click on the but
 const actionsButtonComplete = () => actions('onClick').onClick('Click on the end button');
 
 const DefaultTemplate: Story<OnboardingMenuProps> = (args) => {
-    const actionsOnboardingMenuHandlers = () => {
+    const [expanded, setExpanded] = React.useState(false);
+
+    const actionsOnboardingMenuHandlers = (expanded: boolean) => {
         actions('onHeaderClick').onHeaderClick('Click on the header');
+        setExpanded(expanded);
     };
 
     return (
         <div style={{margin: '20px'}}>
             <OnboardingMenu
                 {...args}
+                expanded={expanded}
                 icon={GraduationCap}
                 onExpand={actionsOnboardingMenuHandlers}
                 onCompleteClick={actionsButtonComplete}
@@ -57,7 +60,6 @@ LongHeader.args = {
 WithLoader.args = {
     title: 'Header text',
     progress: 30,
-    defaultExpanded: true,
     children: [
         <OnboardingMenu.Item
             key={'testItem'}
@@ -96,7 +98,6 @@ WithLoader.args = {
 WithItems.args = {
     title: 'Header text',
     progress: 30,
-    defaultExpanded: true,
     children: [
         <OnboardingMenu.Item
             key={'testItem'}
@@ -160,7 +161,6 @@ WithItems.args = {
 WithManyItems.args = {
     title: 'Header text',
     progress: 30,
-    defaultExpanded: true,
     children: [
         <OnboardingMenu.Item
             key={'testItem'}
@@ -568,7 +568,6 @@ WithManyItems.args = {
 SomeIcons.args = {
     title: 'Header text',
     progress: 30,
-    defaultExpanded: true,
     children: [
         <OnboardingMenu.Item status="completed" key={'testItem'} title="finished">
             {[<OnboardingMenu.ItemText text={'Test text'} key={'testItem'} />]}
@@ -585,14 +584,12 @@ SomeIcons.args = {
 WithoutArrow.args = {
     title: 'Header text',
     progress: 30,
-    defaultExpanded: true,
     children: [<OnboardingMenu.Item status="completed" key={'testItem'} title="finished" />],
 };
 
 CustomButtonText.args = {
     title: 'Header text',
     progress: 30,
-    defaultExpanded: true,
     collapseButtonText: 'left button',
     completeButtonText: 'right button',
 };
@@ -600,7 +597,6 @@ CustomButtonText.args = {
 Custom.args = {
     title: 'Different icons',
     progress: 30,
-    defaultExpanded: true,
     className: 'testName',
     children: [
         'Custom reaction node',
