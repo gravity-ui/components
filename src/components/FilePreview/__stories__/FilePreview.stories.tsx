@@ -107,3 +107,29 @@ const NoClickableTemplate: StoryFn<Omit<FilePreviewProps, 'actions'>> = (args) =
 };
 
 export const NoClickable = NoClickableTemplate.bind({});
+
+const WithoutActionTooltipTemplate: StoryFn<Omit<FilePreviewProps, 'actions'>> = (args) => {
+    return (
+        <Flex gap={4}>
+            <FilePreview
+                {...args}
+                file={{name: 'Clicable without tooltip', type: 'text/docs'} as File}
+                onClick={() => {
+                    window.open('https://disk.yandex.com', '_blank');
+                }}
+                actions={[
+                    {
+                        icon: Xmark,
+                        onClick: () => alert('Are you sure you want to delete the file?'),
+                        title: 'Close',
+                        tooltipExtraProps: {
+                            disabled: true,
+                        },
+                    },
+                ]}
+            />
+        </Flex>
+    );
+};
+
+export const WithoutActionTooltip = WithoutActionTooltipTemplate.bind({});
