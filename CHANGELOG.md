@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.2](https://github.com/gravity-ui/components/compare/v3.4.1...v3.4.2) (2024-04-04)
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** long header, expand items ([#175](https://github.com/gravity-ui/components/issues/175)) ([4031a47](https://github.com/gravity-ui/components/commit/4031a47d3153e2098c0b354bfe3ac6ce4236efce))
+
 ## [3.4.1](https://github.com/gravity-ui/components/compare/v3.4.0...v3.4.1) (2024-03-29)
 
 
