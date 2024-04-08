@@ -5,7 +5,7 @@ $block: '.#{variables.$ns}onboarding-menu-item';
 
 #{$block} {
     &__collapse {
-        padding: var(--g-spacing-3) var(--g-spacing-6);
+        padding: var(--g-spacing-3) var(--g-spacing-4) var(--g-spacing-3) var(--g-spacing-5);
     }
 
     &__collapse-header {

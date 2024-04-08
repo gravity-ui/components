@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, Icon, IconData, Progress} from '@gravity-ui/uikit';
+import {Button, Icon, IconData, Progress, Text} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -24,6 +24,7 @@ export type OnboardingMenuProps = {
     collapseButtonText?: string;
     completeButtonText?: string;
     className?: string;
+    liningClassName?: string;
 
     onExpand?: (expanded: boolean) => void;
     onCompleteClick: (event: React.MouseEvent) => void;
@@ -41,6 +42,7 @@ const OnboardingMenuParent = ({
     collapseButtonText,
     completeButtonText,
     className,
+    liningClassName,
     children,
 }: OnboardingMenuProps) => {
     const onExpandCallback = () => {
@@ -79,7 +81,13 @@ const OnboardingMenuParent = ({
                                 className={cnOnboardingMenu('title-icon')}
                             />
                         ) : null}
-                        {title}
+                        <Text
+                            variant={expanded ? 'subheader-3' : 'subheader-2'}
+                            ellipsisLines={3}
+                            className={cnOnboardingMenu('title-text')}
+                        >
+                            {title}
+                        </Text>
                     </button>
                     <Progress
                         size={expanded ? 's' : 'xs'}
@@ -98,7 +106,9 @@ const OnboardingMenuParent = ({
 
                 {expanded && (
                     <React.Fragment>
-                        <div className={cnOnboardingMenu('lining')}>{children}</div>
+                        <div className={cnOnboardingMenu('lining', liningClassName)}>
+                            {children}
+                        </div>
                         <div className={cnOnboardingMenu('buttons')}>
                             <Button
                                 view="normal-contrast"

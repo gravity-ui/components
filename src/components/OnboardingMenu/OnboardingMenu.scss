@@ -16,7 +16,7 @@ $block: '.#{variables.$ns}onboarding-menu';
         overflow: hidden;
 
         box-sizing: border-box;
-        width: 210px;
+        width: 230px;
 
         background-color: var(--g-color-base-brand);
         border-radius: 16px;
@@ -25,13 +25,13 @@ $block: '.#{variables.$ns}onboarding-menu';
             width: 280px;
             border-radius: 20px;
             height: fit-content;
-            min-height: 300px;
+            min-height: 600px;
         }
     }
 
     &__title {
         display: flex;
-        align-items: center;
+        align-items: start;
         justify-content: center;
 
         margin-block-end: var(--g-spacing-1);
@@ -42,22 +42,15 @@ $block: '.#{variables.$ns}onboarding-menu';
         width: 100%;
 
         padding: 0;
-
-        color: var(--g-color-text-brand-contrast);
-        @include mixins.text-subheader-2();
-        overflow: hidden;
-        text-overflow: ellipsis;
-        text-wrap: nowrap;
-
-        &_expand {
-            margin-block-end: var(--g-spacing-2);
-            @include mixins.text-subheader-3();
-        }
     }
 
     &__title-icon {
         flex-shrink: 0;
-        margin-inline: var(--g-spacing-2) var(--g-spacing-2);
+        margin-inline: 0 var(--g-spacing-2);
+    }
+
+    &__title-text {
+        text-align: start;
     }
 
     &__header {
@@ -70,7 +63,7 @@ $block: '.#{variables.$ns}onboarding-menu';
 
     &__lining {
         overflow-y: auto;
-        max-height: 530px;
+        height: 500px;
 
         box-sizing: border-box;
 
