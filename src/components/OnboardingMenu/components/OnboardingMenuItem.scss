@@ -94,6 +94,7 @@ $block: '.#{variables.$ns}onboarding-menu-item';
         background-color: transparent;
         border: none;
         padding: 0;
+        color: var(--g-color-text-primary);
     }
 
     &__title {
