@@ -40,6 +40,7 @@ $block: '.#{variables.$ns}onboarding-menu';
         border: none;
         cursor: pointer;
         width: 100%;
+        color: var(--g-color-text-brand-contrast);
 
         padding: 0;
     }

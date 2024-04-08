@@ -10,6 +10,7 @@ import './OnboardingMenuItem.scss';
 export type OnboardingMenuItemProps = {
     title: string;
     status?: 'completed' | 'pending';
+    defaultExpanded?: boolean;
     children?: React.ReactNode;
     buttons?: React.ReactNode;
     hasDivider?: boolean;
@@ -24,6 +25,7 @@ export const OnboardingMenuItem = ({
     title,
     status,
     children,
+    defaultExpanded,
     buttons,
     hasDivider = true,
     loading = false,
@@ -66,7 +68,11 @@ export const OnboardingMenuItem = ({
     );
 
     const header = children ? (
-        <Disclosure size="l" className={cnOnboardingMenuItem('title-header')}>
+        <Disclosure
+            size="l"
+            className={cnOnboardingMenuItem('title-header')}
+            defaultExpanded={defaultExpanded}
+        >
             <Disclosure.Summary>
                 {(props) => (
                     <button {...props} className={cnOnboardingMenuItem('title-summary')}>
