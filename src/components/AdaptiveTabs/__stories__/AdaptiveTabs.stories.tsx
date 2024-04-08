@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Meta, Story} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 
 import {AdaptiveTabs, AdaptiveTabsProps} from '../AdaptiveTabs';
 
@@ -17,7 +17,7 @@ export default {
         },
     },
 } as Meta;
-const Template: Story<{size: 'm' | 'l' | 'xl'} & AdaptiveTabs<{}>> = (args) => {
+const Template: StoryFn<{size: 'm' | 'l' | 'xl'} & AdaptiveTabs<{}>> = (args) => {
     const [activeTab, setActiveTab] = React.useState('active');
     const items: AdaptiveTabsProps<{}>['items'] = React.useMemo(
         () => [
@@ -59,7 +59,7 @@ const Template: Story<{size: 'm' | 'l' | 'xl'} & AdaptiveTabs<{}>> = (args) => {
 };
 export const Default = Template.bind({});
 
-const WrapTemplate: Story<AdaptiveTabsProps<{}>> = (args) => {
+const WrapTemplate: StoryFn<AdaptiveTabsProps<{}>> = (args) => {
     const [activeTab, setActiveTab] = React.useState('active');
     const items: AdaptiveTabsProps<{}>['items'] = React.useMemo(
         () => [
@@ -109,7 +109,7 @@ const WrapTemplate: Story<AdaptiveTabsProps<{}>> = (args) => {
 };
 export const Wrap = WrapTemplate.bind({});
 
-const CustomTabTemplate: Story<AdaptiveTabsProps<{}>> = (args) => {
+const CustomTabTemplate: StoryFn<AdaptiveTabsProps<{}>> = (args) => {
     const [activeTab, setActiveTab] = React.useState('active');
     return (
         <div style={{resize: 'horizontal', overflow: 'auto'}}>
