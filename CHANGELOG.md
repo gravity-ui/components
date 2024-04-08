@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/gravity-ui/components/compare/v3.4.2...v3.5.0) (2024-04-08)
+
+
+### Features
+
+* **Onboarding Menu:** defaultExpanded in OnboardingMenuItem ([#179](https://github.com/gravity-ui/components/issues/179)) ([57987ad](https://github.com/gravity-ui/components/commit/57987ad0a252a0c1d4b220b7172e939afb642002))
+
 ## [3.4.2](https://github.com/gravity-ui/components/compare/v3.4.1...v3.4.2) (2024-04-04)
 
 
