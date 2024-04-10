@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type {Meta, Story} from '@storybook/react';
+import type {Meta, StoryFn} from '@storybook/react';
 
 import {InfiniteScroll} from '../InfiniteScroll';
 
@@ -11,5 +11,5 @@ export default {
     component: InfiniteScroll,
 } as Meta;
 
-export const Playground: Story = () => <InfiniteScrollShowcase />;
+export const Playground: StoryFn = () => <InfiniteScrollShowcase />;
 Playground.storyName = 'InfiniteScroll';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {useArgs} from '@storybook/client-api';
-import {Meta, Story} from '@storybook/react';
+import {useArgs} from '@storybook/manager-api';
+import {Meta, StoryFn} from '@storybook/react';
 
 import {ItemSelector, ItemSelectorProps} from '../ItemSelector';
 
@@ -56,7 +56,7 @@ export default {
     },
 } as Meta;
 
-const DefaultTemplate: Story<ItemSelectorProps<{name: string; type: string}>> = (args) => {
+const DefaultTemplate: StoryFn<ItemSelectorProps<{name: string; type: string}>> = (args) => {
     const [, setStoryArgs] = useArgs();
     return (
         <ItemSelector

@@ -3,7 +3,7 @@ import React from 'react';
 import {GraduationCap} from '@gravity-ui/icons';
 import {Button} from '@gravity-ui/uikit';
 import {actions} from '@storybook/addon-actions';
-import type {Meta, Story} from '@storybook/react';
+import type {Meta, StoryFn} from '@storybook/react';
 
 import type {OnboardingMenuProps} from '../OnboardingMenu';
 import {OnboardingMenu} from '../OnboardingMenu';
@@ -16,7 +16,7 @@ export default {
 const actionsButtonHandlers = () => actions('onClick').onClick('Click on the button');
 const actionsButtonComplete = () => actions('onClick').onClick('Click on the end button');
 
-const DefaultTemplate: Story<OnboardingMenuProps> = (args) => {
+const DefaultTemplate: StoryFn<OnboardingMenuProps> = (args) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const actionsOnboardingMenuHandlers = (expanded: boolean) => {
