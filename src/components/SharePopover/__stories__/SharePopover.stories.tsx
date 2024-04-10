@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type {ComponentMeta, ComponentStory} from '@storybook/react';
+import type {Meta, StoryFn} from '@storybook/react';
 
 import {SharePopover, sharePopoverDefaultProps} from '../SharePopover';
 
@@ -18,12 +18,12 @@ export default {
         },
     },
     args: {...sharePopoverDefaultProps},
-} as ComponentMeta<typeof SharePopover>;
+} as Meta<typeof SharePopover>;
 
-const DefaultTemplate: ComponentStory<typeof SharePopover> = (args) => <SharePopover {...args} />;
+const DefaultTemplate: StoryFn<typeof SharePopover> = (args) => <SharePopover {...args} />;
 export const Default = DefaultTemplate.bind({});
 
-const ShowcaseTemplate: ComponentStory<typeof SharePopover & typeof SharePopoverDemo> = () => (
+const ShowcaseTemplate: StoryFn<typeof SharePopover & typeof SharePopoverDemo> = () => (
     <SharePopoverDemo />
 );
 export const Showcase = ShowcaseTemplate.bind({});

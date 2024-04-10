@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Meta, Story} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 
 import {ActionsPanel, ActionsPanelProps} from '../../ActionsPanel';
 
@@ -11,7 +11,7 @@ export default {
     component: ActionsPanel,
 } as Meta;
 
-const WithIconsTemplate: Story<ActionsPanelProps> = (args) => {
+const WithIconsTemplate: StoryFn<ActionsPanelProps> = (args) => {
     return (
         <ActionsPanel
             {...args}
@@ -22,7 +22,7 @@ const WithIconsTemplate: Story<ActionsPanelProps> = (args) => {
 };
 export const WithIcons = WithIconsTemplate.bind({});
 
-const WithNoteTemplate: Story<ActionsPanelProps> = (args) => {
+const WithNoteTemplate: StoryFn<ActionsPanelProps> = (args) => {
     return (
         <ActionsPanel
             {...args}
@@ -34,12 +34,12 @@ const WithNoteTemplate: Story<ActionsPanelProps> = (args) => {
 };
 export const WithNote = WithNoteTemplate.bind({});
 
-const GroupsTemplate: Story<ActionsPanelProps> = (args) => {
+const GroupsTemplate: StoryFn<ActionsPanelProps> = (args) => {
     return <ActionsPanel {...args} actions={actionsGroups} />;
 };
 export const Groups = GroupsTemplate.bind({});
 
-const SubmenuTemplate: Story<ActionsPanelProps> = (args) => {
+const SubmenuTemplate: StoryFn<ActionsPanelProps> = (args) => {
     return <ActionsPanel {...args} actions={actionsSubmenu} />;
 };
 export const Submenu = SubmenuTemplate.bind({});

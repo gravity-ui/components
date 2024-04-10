@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Platform} from '@gravity-ui/uikit';
-import {Meta, Story} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 
 import {StoreBadge, StoreBadgeProps} from '../StoreBadge';
 
@@ -13,11 +13,11 @@ export default {
     },
 } as Meta;
 
-const Template: Story<StoreBadgeProps> = (args) => <StoreBadge {...args} />;
+const Template: StoryFn<StoreBadgeProps> = (args) => <StoreBadge {...args} />;
 
 export const Default = Template.bind({});
 
-const WithHrefTemplate: Story<StoreBadgeProps> = (args) => (
+const WithHrefTemplate: StoryFn<StoreBadgeProps> = (args) => (
     <StoreBadge {...args} href="https://github.com/gravity-ui/uikit" />
 );
 
