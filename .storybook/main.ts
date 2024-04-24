@@ -15,6 +15,7 @@ const config: StorybookConfig = {
         {name: '@storybook/addon-essentials', options: {backgrounds: false}},
         './theme-addon/register.tsx',
         '@storybook/addon-webpack5-compiler-babel',
+        '@storybook/addon-a11y',
     ],
 
     webpackFinal: (storybookBaseConfig) => {

@@ -26,6 +26,19 @@ export default {
         children: argTypeReactNode,
         labelHelpPopover: argTypeReactNode,
     },
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta<typeof FormRow>;
 
 const Template: StoryFn<typeof FormRow> = (args) => <FormRow {...args} />;
@@ -79,6 +92,9 @@ WithHelpPopover.args = {
         <HelpPopover
             content={'Your name as it used in your foreign passport.'}
             placement={['top', 'bottom']}
+            buttonProps={{
+                'aria-label': 'Note',
+            }}
         />
     ),
 };

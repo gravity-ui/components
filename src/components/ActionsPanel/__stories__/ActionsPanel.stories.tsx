@@ -9,6 +9,19 @@ import {actions, actionsGroups, actionsSubmenu, actionsWithIcons} from './action
 export default {
     title: 'Components/ActionsPanel',
     component: ActionsPanel,
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta;
 
 const WithIconsTemplate: StoryFn<ActionsPanelProps> = (args) => {

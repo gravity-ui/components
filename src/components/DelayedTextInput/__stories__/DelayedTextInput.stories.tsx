@@ -7,7 +7,12 @@ import {DelayedTextInput} from '../DelayedTextInput';
 export default {
     title: 'Components/DelayedTextInput',
     component: DelayedTextInput,
-} as Meta;
+    args: {
+        controlProps: {
+            'aria-label': 'Search',
+        },
+    },
+} as Meta<typeof DelayedTextInput>;
 
 const DefaultTemplate: StoryFn<React.ComponentProps<typeof DelayedTextInput>> = (
     props: React.ComponentProps<typeof DelayedTextInput>,

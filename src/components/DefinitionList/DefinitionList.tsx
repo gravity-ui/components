@@ -6,6 +6,7 @@ import {HelpPopover} from '../HelpPopover';
 import type {HelpPopoverProps} from '../HelpPopover';
 import {block} from '../utils/cn';
 
+import i18n from './i18n';
 import {isUnbreakableOver} from './utils';
 
 import './DefinitionList.scss';
@@ -56,13 +57,24 @@ function getNoteElement(note?: DefinitionListItemNote) {
                     className={popoverClassName}
                     content={note}
                     placement={['bottom', 'top']}
+                    buttonProps={{
+                        'aria-label': i18n('label_note'),
+                    }}
                 />
             );
         }
 
         if (typeof note === 'object') {
             noteElement = (
-                <HelpPopover className={popoverClassName} placement={['bottom', 'top']} {...note} />
+                <HelpPopover
+                    className={popoverClassName}
+                    placement={['bottom', 'top']}
+                    {...note}
+                    buttonProps={{
+                        'aria-label': i18n('label_note'),
+                        ...(note.buttonProps || {}),
+                    }}
+                />
             );
         }
     }
@@ -109,6 +121,9 @@ export function DefinitionList({
                                 text={copyText}
                                 className={b('copy-button')}
                                 view={iconInside ? 'raised' : 'flat-secondary'}
+                                extraProps={{
+                                    'aria-label': i18n('label_copy'),
+                                }}
                             />
                         </div>
                     ) : (

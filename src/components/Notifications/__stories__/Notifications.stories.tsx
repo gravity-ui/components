@@ -19,6 +19,28 @@ import {
 export default {
     title: 'Components/Notifications',
     component: Notifications,
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'button-name',
+                        enabled: false,
+                        selector: 'button[aria-labelledby]',
+                    },
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                    {
+                        id: 'link-in-text-block',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta<typeof Notifications>;
 
 const wrapperStyles = {

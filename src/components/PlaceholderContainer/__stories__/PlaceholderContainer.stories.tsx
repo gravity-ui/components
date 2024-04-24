@@ -9,6 +9,19 @@ import {PlaceholderContainerShowcase} from './PlaceholderContainerShowcase';
 export default {
     title: 'Components/PlaceholderContainer',
     component: PlaceholderContainer,
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta;
 
 const ShowcaseTemplate: StoryFn = () => <PlaceholderContainerShowcase />;

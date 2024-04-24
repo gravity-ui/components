@@ -13,7 +13,11 @@ const items: DefinitionListItem[] = [
                 name="Charles Darwin"
                 size="xl"
                 description="Adventurer"
-                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                avatar={{
+                    text: 'Charles Darwin',
+                    theme: 'brand',
+                    title: 'Charles Darwin avatar',
+                }}
             />
         ),
         content: 'value',
@@ -114,7 +118,7 @@ const items: DefinitionListItem[] = [
                 name="Charles Darwin"
                 size="xl"
                 description="Adventurer"
-                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                avatar={{text: 'Charles Darwin', theme: 'brand', title: 'Charles Darwin avatar'}}
             />
         ),
         note: 'This is avatar',
@@ -132,6 +136,19 @@ export default {
         items,
         responsive: false,
         contentMaxWidth: 480,
+    },
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
     },
 } as Meta;
 

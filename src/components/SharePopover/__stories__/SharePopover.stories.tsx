@@ -17,7 +17,29 @@ export default {
             description: 'link text',
         },
     },
-    args: {...sharePopoverDefaultProps},
+    args: {
+        ...sharePopoverDefaultProps,
+        controlAriaLabel: 'Share',
+    },
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'aria-valid-attr-value',
+                        enabled: false,
+                        // the id in aria-controls will resolve on hover
+                        selector: '.gc-share-popover__container[aria-controls]',
+                    },
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta<typeof SharePopover>;
 
 const DefaultTemplate: StoryFn<typeof SharePopover> = (args) => <SharePopover {...args} />;

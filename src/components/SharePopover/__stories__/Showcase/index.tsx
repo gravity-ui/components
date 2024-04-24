@@ -12,6 +12,7 @@ import {Cloud, Custom, ShareArrowUp} from './icons';
 import './SharePopover.scss';
 
 const b = block('share-popover-demo');
+const shareControlLabel = 'Share';
 
 export function SharePopoverDemo() {
     const url = 'https://www.example.com';
@@ -40,7 +41,12 @@ export function SharePopoverDemo() {
         >
             <div style={{margin: 16, display: 'flex', alignItems: 'center'}}>
                 <span style={{marginRight: 8}}>Copy only</span>
-                <SharePopover url={url} title={title} text={text} />
+                <SharePopover
+                    url={url}
+                    title={title}
+                    text={text}
+                    controlAriaLabel={shareControlLabel}
+                />
             </div>
 
             <div style={{margin: 16, display: 'flex', alignItems: 'center'}}>
@@ -51,6 +57,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     withCopyLink={false}
+                    controlAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -63,6 +70,7 @@ export function SharePopoverDemo() {
                     shareOptions={shareOptions}
                     withCopyLink={false}
                     openByHover={false}
+                    controlAriaLabel={shareControlLabel}
                 >
                     <ShareList.Item
                         icon={Custom}
@@ -82,6 +90,7 @@ export function SharePopoverDemo() {
                     shareOptions={shareOptions}
                     withCopyLink={true}
                     openByHover={false}
+                    controlAriaLabel={shareControlLabel}
                 >
                     <ShareList.Item
                         icon={Custom}
@@ -94,12 +103,22 @@ export function SharePopoverDemo() {
 
             <div style={{margin: 16, display: 'flex', alignItems: 'center'}}>
                 <span style={{marginRight: 8}}>Default share options with copy</span>
-                <SharePopover url={url} title={title} text={text} shareOptions={shareOptions} />
+                <SharePopover
+                    url={url}
+                    title={title}
+                    text={text}
+                    shareOptions={shareOptions}
+                    controlAriaLabel={shareControlLabel}
+                />
             </div>
 
             <div style={{margin: 16, display: 'flex', alignItems: 'center'}}>
                 <span style={{marginRight: 8}}>Share options with copy (only URL)</span>
-                <SharePopover url={url} shareOptions={shareOptions} />
+                <SharePopover
+                    url={url}
+                    shareOptions={shareOptions}
+                    controlAriaLabel={shareControlLabel}
+                />
             </div>
 
             <div style={{margin: 16, display: 'flex', alignItems: 'center'}}>
@@ -110,6 +129,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     openByHover={false}
+                    controlAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -121,6 +141,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     useWebShareApi={true}
+                    controlAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -132,6 +153,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     direction={LayoutDirection.Column}
+                    controlAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -143,6 +165,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     customIcon={ShareArrowUp}
+                    controlAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -199,6 +222,7 @@ export function SharePopoverDemo() {
                             {label}
                         </Button>
                     )}
+                    controlAriaLabel={shareControlLabel}
                 />
             </div>
         </div>

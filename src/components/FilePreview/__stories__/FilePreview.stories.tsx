@@ -10,6 +10,19 @@ import {FILE_TYPES} from '../types';
 export default {
     title: 'Components/FilePreview',
     component: FilePreview,
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta<typeof FilePreview>;
 
 const CollageTemplate: StoryFn<FilePreviewProps> = () => {

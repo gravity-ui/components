@@ -5,11 +5,14 @@ import {Button, Icon} from '@gravity-ui/uikit';
 
 import {AdaptiveTabsProps} from '../AdaptiveTabs';
 
+const buttonAddLabel = 'Add';
+const buttonRemoveLabel = 'Remove';
+
 const RenderTitleWithWrap = (props: {title: string | React.ReactNode}) => {
     const {title} = props;
     return (
         <div>
-            <Button size="xs" view="flat">
+            <Button size="xs" view="flat" extraProps={{'aria-label': buttonAddLabel}}>
                 <Icon data={SquarePlus} size="xs" />
             </Button>
 
@@ -25,7 +28,7 @@ const RenderTitleWithWrap = (props: {title: string | React.ReactNode}) => {
             >
                 {title}
             </span>
-            <Button size="xs">
+            <Button size="xs" extraProps={{'aria-label': buttonRemoveLabel}}>
                 <Icon data={SquareXmark} size="xs" />
             </Button>
         </div>
