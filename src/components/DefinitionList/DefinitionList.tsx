@@ -72,7 +72,7 @@ function getNoteElement(note?: DefinitionListItemNote) {
                     {...note}
                     buttonProps={{
                         'aria-label': i18n('label_note'),
-                        ...(note.buttonProps || {}),
+                        ...note.buttonProps,
                     }}
                 />
             );
