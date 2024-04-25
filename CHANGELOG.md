@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/gravity-ui/components/compare/v3.5.0...v3.6.0) (2024-04-15)
+
+
+### Features
+
+* **FilePreview:** add tooltip props for actions ([#174](https://github.com/gravity-ui/components/issues/174)) ([e16cef8](https://github.com/gravity-ui/components/commit/e16cef822e746a4571a2da0ca5116f7dbed94bd1))
+
 ## [3.5.0](https://github.com/gravity-ui/components/compare/v3.4.2...v3.5.0) (2024-04-08)
 
 
