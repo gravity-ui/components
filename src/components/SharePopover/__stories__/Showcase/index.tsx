@@ -45,7 +45,7 @@ export function SharePopoverDemo() {
                     url={url}
                     title={title}
                     text={text}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -57,7 +57,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     withCopyLink={false}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -70,7 +70,7 @@ export function SharePopoverDemo() {
                     shareOptions={shareOptions}
                     withCopyLink={false}
                     openByHover={false}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 >
                     <ShareList.Item
                         icon={Custom}
@@ -90,7 +90,7 @@ export function SharePopoverDemo() {
                     shareOptions={shareOptions}
                     withCopyLink={true}
                     openByHover={false}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 >
                     <ShareList.Item
                         icon={Custom}
@@ -108,7 +108,7 @@ export function SharePopoverDemo() {
                     title={title}
                     text={text}
                     shareOptions={shareOptions}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -117,7 +117,7 @@ export function SharePopoverDemo() {
                 <SharePopover
                     url={url}
                     shareOptions={shareOptions}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -129,7 +129,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     openByHover={false}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -141,7 +141,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     useWebShareApi={true}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -153,7 +153,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     direction={LayoutDirection.Column}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -165,7 +165,7 @@ export function SharePopoverDemo() {
                     text={text}
                     shareOptions={shareOptions}
                     customIcon={ShareArrowUp}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
 
@@ -222,7 +222,7 @@ export function SharePopoverDemo() {
                             {label}
                         </Button>
                     )}
-                    controlAriaLabel={shareControlLabel}
+                    buttonAriaLabel={shareControlLabel}
                 />
             </div>
         </div>

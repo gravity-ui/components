@@ -19,7 +19,7 @@ export default {
     },
     args: {
         ...sharePopoverDefaultProps,
-        controlAriaLabel: 'Share',
+        buttonAriaLabel: 'Share',
     },
     parameters: {
         a11y: {

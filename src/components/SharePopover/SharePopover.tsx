@@ -55,12 +55,12 @@ export interface SharePopoverProps extends ShareListProps, Partial<SharePopoverD
     tooltipContentClassName?: string;
     /** sitcher mixin */
     switcherClassName?: string;
-    /** aria-label of control */
-    controlAriaLabel?: string;
     /** custom icon */
     customIcon?: IconData;
     /** icon title */
     buttonTitle?: string | React.ReactNode;
+    /** aria-label of button */
+    buttonAriaLabel?: string;
     /** custom onClick handler */
     onClick?: (event?: React.MouseEvent<HTMLSpanElement>) => void;
     /** custom copy link button title */
@@ -105,7 +105,7 @@ export const SharePopover = (props: SharePopoverProps) => {
         renderCopy,
         children,
         onClick,
-        controlAriaLabel,
+        buttonAriaLabel,
     } = props;
     const [isOpen, setIsOpen] = React.useState(false);
     const tooltipId = useUniqId();
@@ -178,7 +178,7 @@ export const SharePopover = (props: SharePopoverProps) => {
                     aria-expanded={openByHover ? undefined : isOpen}
                     aria-controls={tooltipId}
                     aria-describedby={tooltipId}
-                    aria-label={controlAriaLabel}
+                    aria-label={buttonAriaLabel}
                     onClick={onClickInner}
                 >
                     <div className={b('icon-container')}>
