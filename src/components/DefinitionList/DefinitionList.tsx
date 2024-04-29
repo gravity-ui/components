@@ -121,9 +121,6 @@ export function DefinitionList({
                                 text={copyText}
                                 className={b('copy-button')}
                                 view={iconInside ? 'raised' : 'flat-secondary'}
-                                extraProps={{
-                                    'aria-label': i18n('label_copy'),
-                                }}
                             />
                         </div>
                     ) : (
