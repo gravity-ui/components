@@ -1,9 +1,13 @@
 * @amje @ValeraS @korvin89
+/src/components/AdaptiveTabs @artemipanchuk
+/src/components/DefinitionList @Raubzeug
 /src/components/FilePreview @KirillDyachkovskiy
 /src/components/FormRow @ogonkov
 /src/components/HelpPopover @Raubzeug
+/src/components/OnboardingMenu @nikita-jpg
 /src/components/PlaceholderContainer @Marginy605
 /src/components/PromoSheet @Avol-V
 /src/components/SharePopover @niktverd
 /src/components/StoreBadge @NikitaCG
 /src/components/Stories @darkgenius
+/src/components/ConfirmDialog @kseniya57

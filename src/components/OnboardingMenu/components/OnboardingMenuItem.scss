@@ -1,0 +1,121 @@
+@use '../../variables.scss';
+@use '@gravity-ui/uikit/styles/mixins';
+
+$block: '.#{variables.$ns}onboarding-menu-item';
+
+#{$block} {
+    &__collapse {
+        padding: var(--g-spacing-3) var(--g-spacing-4) var(--g-spacing-3) var(--g-spacing-5);
+    }
+
+    &__collapse-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__icon {
+        margin-inline-end: var(--g-spacing-2);
+
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        height: var(--g-spacing-5);
+    }
+
+    &__status-icon {
+        color: var(--g-color-text-positive);
+
+        &_pending {
+            color: var(--g-color-text-info);
+        }
+
+        &_disabled {
+            color: var(--g-color-text-hint);
+        }
+    }
+
+    &__node {
+        display: flex;
+        flex-direction: column;
+        gap: var(--g-spacing-2);
+
+        margin-block: var(--g-spacing-3);
+        margin-block-start: var(--g-spacing-3);
+    }
+
+    &__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--g-spacing-2);
+
+        max-width: 100%;
+    }
+
+    &__divider {
+        border-block-start: 1px solid var(--g-color-line-generic);
+        margin-inline: var(--g-spacing-1);
+    }
+
+    &__skeleton {
+        height: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: var(--g-spacing-3) var(--g-spacing-6);
+    }
+
+    &__skeleton-avatar {
+        flex-shrink: 0;
+        height: 20px;
+        width: 20px;
+
+        border-radius: 50%;
+        margin-inline-end: 8px;
+    }
+
+    &__skeleton-title {
+        height: 17px;
+
+        width: 100%;
+    }
+
+    &__title-header {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    &__title-summary {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        color: var(--g-color-text-primary);
+    }
+
+    &__title {
+        @include mixins.text-body-2();
+        color: var(--g-color-text-complementary);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: start;
+    }
+
+    &__text {
+        @include mixins.text-body-1();
+        overflow: hidden;
+        color: var(--g-color-text-complementary);
+        text-overflow: ellipsis;
+    }
+
+    &__image {
+        max-width: 242px;
+        max-height: 118px;
+        border: 1px solid var(--g-color-line-generic);
+        border-radius: 8px;
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ActionTooltip, Button, Icon, IconData} from '@gravity-ui/uikit';
+import {ActionTooltip, ActionTooltipProps, Button, Icon, IconData} from '@gravity-ui/uikit';
 
 export interface FilePreviewActionProps {
     id?: string;
@@ -12,6 +12,7 @@ export interface FilePreviewActionProps {
     extraProps?:
         | React.ButtonHTMLAttributes<HTMLButtonElement>
         | React.AnchorHTMLAttributes<HTMLAnchorElement>;
+    tooltipExtraProps?: Omit<ActionTooltipProps, 'id' | 'title' | 'children'>;
 }
 
 export function FilePreviewAction({
@@ -22,9 +23,10 @@ export function FilePreviewAction({
     disabled,
     onClick,
     extraProps,
+    tooltipExtraProps,
 }: FilePreviewActionProps) {
     return (
-        <ActionTooltip id={id} title={title}>
+        <ActionTooltip id={id} title={title} {...tooltipExtraProps}>
             <Button
                 onClick={onClick}
                 view="raised"

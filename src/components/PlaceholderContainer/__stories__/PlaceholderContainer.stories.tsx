@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Meta, Story} from '@storybook/react';
+import {Meta, StoryFn} from '@storybook/react';
 
 import {PlaceholderContainer} from '../PlaceholderContainer';
 
@@ -11,5 +11,5 @@ export default {
     component: PlaceholderContainer,
 } as Meta;
 
-const ShowcaseTemplate: Story = () => <PlaceholderContainerShowcase />;
+const ShowcaseTemplate: StoryFn = () => <PlaceholderContainerShowcase />;
 export const Showcase = ShowcaseTemplate.bind({});

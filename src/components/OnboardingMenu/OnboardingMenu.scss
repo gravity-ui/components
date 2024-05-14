@@ -1,0 +1,92 @@
+@use '../variables.scss';
+@use '@gravity-ui/uikit/styles/mixins';
+
+$block: '.#{variables.$ns}onboarding-menu';
+
+#{$block} {
+    max-width: 280px;
+
+    background: none;
+    width: fit-content;
+
+    &__content {
+        box-shadow: 0 2px 8px 0 var(--g-color-sfx-shadow-light);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        box-sizing: border-box;
+        width: 230px;
+
+        background-color: var(--g-color-base-brand);
+        border-radius: 16px;
+
+        &_expand {
+            width: 280px;
+            border-radius: 20px;
+            height: fit-content;
+            min-height: 600px;
+        }
+    }
+
+    &__title {
+        display: flex;
+        align-items: start;
+        justify-content: center;
+
+        margin-block-end: var(--g-spacing-1);
+
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        color: var(--g-color-text-brand-contrast);
+
+        padding: 0;
+    }
+
+    &__title-icon {
+        flex-shrink: 0;
+        margin-inline: 0 var(--g-spacing-2);
+    }
+
+    &__title-text {
+        text-align: start;
+    }
+
+    &__header {
+        padding: var(--g-spacing-2) var(--g-spacing-4) var(--g-spacing-3) var(--g-spacing-4);
+
+        &_expand {
+            padding: var(--g-spacing-3) var(--g-spacing-5) var(--g-spacing-4) var(--g-spacing-5);
+        }
+    }
+
+    &__lining {
+        overflow-y: auto;
+        height: 500px;
+
+        box-sizing: border-box;
+
+        flex: 1 1 auto;
+
+        padding: var(--g-spacing-2) 0px;
+
+        margin-inline: 1px;
+
+        margin-block-end: var(--g-spacing-4);
+        background-color: var(--g-color-base-float);
+
+        border-radius: var(--g-border-radius-xl);
+    }
+
+    &__buttons {
+        display: flex;
+        gap: var(--g-spacing-2);
+        justify-content: space-between;
+
+        max-width: 100%;
+        padding-inline: var(--g-spacing-5);
+        margin-block-end: var(--g-spacing-5);
+    }
+}

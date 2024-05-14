@@ -1,5 +1,75 @@
 # Changelog
 
+## [3.6.0](https://github.com/gravity-ui/components/compare/v3.5.0...v3.6.0) (2024-04-15)
+
+
+### Features
+
+* **FilePreview:** add tooltip props for actions ([#174](https://github.com/gravity-ui/components/issues/174)) ([e16cef8](https://github.com/gravity-ui/components/commit/e16cef822e746a4571a2da0ca5116f7dbed94bd1))
+
+## [3.5.0](https://github.com/gravity-ui/components/compare/v3.4.2...v3.5.0) (2024-04-08)
+
+
+### Features
+
+* **Onboarding Menu:** defaultExpanded in OnboardingMenuItem ([#179](https://github.com/gravity-ui/components/issues/179)) ([57987ad](https://github.com/gravity-ui/components/commit/57987ad0a252a0c1d4b220b7172e939afb642002))
+
+## [3.4.2](https://github.com/gravity-ui/components/compare/v3.4.1...v3.4.2) (2024-04-04)
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** long header, expand items ([#175](https://github.com/gravity-ui/components/issues/175)) ([4031a47](https://github.com/gravity-ui/components/commit/4031a47d3153e2098c0b354bfe3ac6ce4236efce))
+
+## [3.4.1](https://github.com/gravity-ui/components/compare/v3.4.0...v3.4.1) (2024-03-29)
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** bad useMemo Icon, took out the expand state ([#172](https://github.com/gravity-ui/components/issues/172)) ([32bd68d](https://github.com/gravity-ui/components/commit/32bd68da8d4a6d42cd6dc758f289ed33f68e20c0))
+
+## [3.4.0](https://github.com/gravity-ui/components/compare/v3.3.0...v3.4.0) (2024-03-22)
+
+
+### Features
+
+* **ConfirmDialog:** add dialog confirm component ([#169](https://github.com/gravity-ui/components/issues/169)) ([7f7c32e](https://github.com/gravity-ui/components/commit/7f7c32e43744459bca7a1324754d69d3ba5e728e))
+* **useSyncWithLS:** disable callback in active tab ([#170](https://github.com/gravity-ui/components/issues/170)) ([e05dc26](https://github.com/gravity-ui/components/commit/e05dc2601aac0e6652e7e4ad7bd72c9a0997d03d))
+
+## [3.3.0](https://github.com/gravity-ui/components/compare/v3.2.0...v3.3.0) (2024-03-20)
+
+
+### Features
+
+* add OnboardingMenu component ([#121](https://github.com/gravity-ui/components/issues/121)) ([e296ed4](https://github.com/gravity-ui/components/commit/e296ed47792533ad88881f82234979eebd536a7c))
+* **СhangelogDialog:** make date and description optional, add date format ([#65](https://github.com/gravity-ui/components/issues/65)) ([261f7ca](https://github.com/gravity-ui/components/commit/261f7cadc6b7d807ec7c6376dfa5de4b78fb67af))
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** add re-export and docs  ([#166](https://github.com/gravity-ui/components/issues/166)) ([84df613](https://github.com/gravity-ui/components/commit/84df6139463737c31630fdfb8f61a48d3505c720))
+* **OnboardingMenu:** fix item title styles ([#167](https://github.com/gravity-ui/components/issues/167)) ([f534f78](https://github.com/gravity-ui/components/commit/f534f78a4803967165a9b3ae4fe1c1728823852a))
+* **PlaceholderContainer:** change text in example image in storybook ([#164](https://github.com/gravity-ui/components/issues/164)) ([d97305f](https://github.com/gravity-ui/components/commit/d97305f774cd8053afb5493f0fad20ed89f44588))
+
+## [3.2.0](https://github.com/gravity-ui/components/compare/v3.1.0...v3.2.0) (2024-03-12)
+
+
+### Features
+
+* add DefinitionList ([#143](https://github.com/gravity-ui/components/issues/143)) ([3db3bbf](https://github.com/gravity-ui/components/commit/3db3bbf8f175995d4d1c052291e72ba32d58a7d2))
+
+## [3.1.0](https://github.com/gravity-ui/components/compare/v3.0.0...v3.1.0) (2024-03-06)
+
+
+### Features
+
+* **AdaptiveTabs:** allow to control some properties in More control ([#145](https://github.com/gravity-ui/components/issues/145)) ([e7c2a4e](https://github.com/gravity-ui/components/commit/e7c2a4e2bc7d1884771ba3888517cc832fd85530))
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix border-case with incorrect firstHiddenTabIndex ([#151](https://github.com/gravity-ui/components/issues/151)) ([2f553f4](https://github.com/gravity-ui/components/commit/2f553f4caa7674d630f7a323d8ce1afcb4cce3f5))
+
 ## [3.0.0](https://github.com/gravity-ui/components/compare/v2.12.0...v3.0.0) (2024-02-06)
 
 
