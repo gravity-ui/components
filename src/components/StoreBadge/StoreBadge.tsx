@@ -35,6 +35,16 @@ const badgeData: Record<
         en: GooglePlayEn,
     },
 };
+const badgeLabelData: Record<StoreBadgePlatform, Record<Lang, string>> = {
+    [iosPlatform]: {
+        ru: 'Скачать в App Store',
+        en: 'Download on the App Store',
+    },
+    [androidPlatform]: {
+        ru: 'Скачать из Google Play',
+        en: 'Get it on Google Play',
+    },
+};
 
 export const StoreBadge = ({
     platform,
@@ -46,6 +56,7 @@ export const StoreBadge = ({
 }: StoreBadgeProps) => {
     // const lang = i18n.lang as Lang;
     const iconData = badgeData?.[platform][lang];
+    const iconLabelData = badgeLabelData?.[platform][lang];
 
     if (!iconData) {
         return null;
@@ -54,7 +65,7 @@ export const StoreBadge = ({
     if (!href) {
         return (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
-            <div role="button" onClick={onClick}>
+            <div role="button" onClick={onClick} aria-label={iconLabelData}>
                 <Icon className={b(null, className)} data={iconData} />
             </div>
         );
@@ -68,6 +79,10 @@ export const StoreBadge = ({
             target="_blank"
             rel="noopener"
             {...restLinkProps}
+            extraProps={{
+                'aria-label': iconLabelData,
+                ...restLinkProps.extraProps,
+            }}
         >
             <Icon data={iconData} />
         </Link>

@@ -13,7 +13,27 @@ const b = cn('help-popover-showcase');
 export default {
     title: 'Components/HelpPopover',
     component: HelpPopover,
-} as Meta;
+    args: {
+        buttonProps: {
+            'aria-label': 'Note',
+        },
+    },
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'button-name',
+                        enabled: false,
+                        // aria-labelledby id is valid after tooltip content is rendered
+                        selector: 'button[aria-labelledby="helpPopoverWithoutActionsId"]',
+                    },
+                ],
+            },
+        },
+    },
+} as Meta<typeof HelpPopover>;
 
 const DefaultTemplate: StoryFn<HelpPopoverProps> = (args) => <HelpPopover {...args} />;
 export const Default = DefaultTemplate.bind({});
@@ -37,7 +57,6 @@ export const Accessible: StoryFn = (args) => {
                     aria-hidden={true}
                     buttonProps={{
                         'aria-labelledby': helpPopoverWithoutActionsId,
-                        role: 'generic',
                     }}
                 />
             </div>

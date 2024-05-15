@@ -16,8 +16,11 @@ export default {
     args: {
         showCopyButton: true,
         showRevealButton: true,
+        controlProps: {
+            'aria-label': 'Password',
+        },
     },
-} as Meta;
+} as Meta<typeof PasswordInput>;
 
 const DefaultTemplate: StoryFn<PasswordInputProps> = (args) => {
     const [value, setValue] = React.useState('');

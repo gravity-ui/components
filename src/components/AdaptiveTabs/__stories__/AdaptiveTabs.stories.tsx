@@ -16,6 +16,19 @@ export default {
             defaultValue: 'm',
         },
     },
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta;
 const Template: StoryFn<{size: 'm' | 'l' | 'xl'} & AdaptiveTabs<{}>> = (args) => {
     const [activeTab, setActiveTab] = React.useState('active');

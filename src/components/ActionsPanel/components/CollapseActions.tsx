@@ -4,6 +4,7 @@ import {Ellipsis} from '@gravity-ui/icons';
 import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';
 
 import {block} from '../../utils/cn';
+import i18n from '../i18n';
 import {ActionItem} from '../types';
 
 import {OBSERVER_TARGET_ATTR, useCollapseActions} from './hooks';
@@ -57,7 +58,13 @@ export const CollapseActions = ({actions}: Props) => {
                             size="s"
                             items={dropdownItems}
                             switcher={
-                                <Button view="flat-contrast" size="m">
+                                <Button
+                                    view="flat-contrast"
+                                    size="m"
+                                    extraProps={{
+                                        'aria-label': i18n('label_more'),
+                                    }}
+                                >
                                     <Icon data={Ellipsis} />
                                 </Button>
                             }

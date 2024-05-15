@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useArgs} from '@storybook/manager-api';
+import {useArgs} from '@storybook/preview-api';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {ItemSelector, ItemSelectorProps} from '../ItemSelector';
@@ -49,6 +49,21 @@ export default {
     component: ItemSelector,
     parameters: {
         disableStrictMode: true,
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'aria-allowed-attr',
+                        enabled: false, // https://github.com/gravity-ui/uikit/issues/1336
+                    },
+                    {
+                        id: 'scrollable-region-focusable', // https://github.com/gravity-ui/uikit/issues/1549
+                        enabled: false,
+                    },
+                ],
+            },
+        },
     },
     args: {
         items,

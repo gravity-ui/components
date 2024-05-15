@@ -6,6 +6,7 @@ import {Button, Icon, Text} from '@gravity-ui/uikit';
 import {block} from '../utils/cn';
 
 import {CollapseActions} from './components/CollapseActions';
+import i18n from './i18n';
 import {ActionsPanelProps} from './types';
 
 import './ActionsPanel.scss';
@@ -29,7 +30,14 @@ export const ActionsPanel = ({className, actions, onClose, renderNote}: ActionsP
             <CollapseActions actions={actions} />
             {typeof onClose === 'function' && (
                 <div className={b('button-close-wrapper')}>
-                    <Button view="flat-contrast" size="m" onClick={onClose}>
+                    <Button
+                        view="flat-contrast"
+                        size="m"
+                        onClick={onClose}
+                        extraProps={{
+                            'aria-label': i18n('label_close'),
+                        }}
+                    >
                         <Icon key="icon" data={Xmark} />
                     </Button>
                 </div>
