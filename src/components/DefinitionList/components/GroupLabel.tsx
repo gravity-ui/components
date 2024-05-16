@@ -5,12 +5,12 @@ import {Text} from '@gravity-ui/uikit';
 import {b} from '../utils';
 
 interface GroupLabelProps {
-    label: string;
+    label: React.ReactNode;
 }
 
 export function GroupLabel({label}: GroupLabelProps) {
     return (
-        <div className={b('subheader')}>
+        <div className={b('title')}>
             <Text variant="subheader-1" color="complementary">
                 {label}
             </Text>

@@ -2,11 +2,11 @@ import React from 'react';
 
 import {ClipboardButton} from '@gravity-ui/uikit';
 
-import type {DefinitionListItem, DefinitionListProps} from '../types';
+import type {DefinitionListProps, DefinitionListSingleItem} from '../types';
 import {b} from '../utils';
 
 interface DefinitionProps
-    extends Pick<DefinitionListItem, 'copyText' | 'content'>,
+    extends Pick<DefinitionListSingleItem, 'copyText' | 'content'>,
         Pick<DefinitionListProps, 'copyPosition'> {}
 
 export function Definition({copyText, content, copyPosition}: DefinitionProps) {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {HelpPopover} from '../../HelpPopover';
-import {DefinitionListItem, DefinitionListItemNote} from '../types';
+import {DefinitionListItemNote, DefinitionListSingleItem} from '../types';
 import {b, getTitle} from '../utils';
 
 interface NoteElementsProps {
@@ -30,7 +30,7 @@ function NoteElement({note}: NoteElementsProps) {
 }
 
 export interface TermProps
-    extends Pick<DefinitionListItem, 'note' | 'name' | 'nameTitle' | 'multilineName'> {}
+    extends Pick<DefinitionListSingleItem, 'note' | 'name' | 'nameTitle' | 'multilineName'> {}
 
 export function Term({note, name, nameTitle, multilineName}: TermProps) {
     const noteElement = (

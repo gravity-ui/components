@@ -2,7 +2,12 @@ import React from 'react';
 
 import {block} from '../utils/cn';
 
-import type {DefinitionListGroup, DefinitionListItem, DefinitionListItemGrouped} from './types';
+import type {
+    DefinitionListGroup,
+    DefinitionListItem,
+    DefinitionListItemGrouped,
+    DefinitionListSingleItem,
+} from './types';
 
 export const b = block('definition-list');
 
@@ -14,14 +19,13 @@ export function isUnbreakableOver(limit: number) {
     };
 }
 
-export const isGroup = (
-    item: DefinitionListItem | DefinitionListGroup,
-): item is DefinitionListGroup => 'label' in item;
+export const isGroup = (item: DefinitionListItem): item is DefinitionListGroup =>
+    'label' in item && !('name' in item);
 
 export function getFlattenItems(
-    items: (DefinitionListItem | DefinitionListGroup)[],
+    items: (DefinitionListSingleItem | DefinitionListGroup)[],
 ): (DefinitionListItemGrouped | DefinitionListGroup)[] {
-    return items.reduce<(DefinitionListItem | DefinitionListGroup)[]>((acc, item) => {
+    return items.reduce<(DefinitionListSingleItem | DefinitionListGroup)[]>((acc, item) => {
         if (isGroup(item)) {
             acc.push({label: item.label});
             const items = [...(item.items ?? [])].map((el) => ({...el, isGrouped: true}));

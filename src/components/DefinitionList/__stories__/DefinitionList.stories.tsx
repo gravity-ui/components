@@ -4,9 +4,9 @@ import {Label, Link, User} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {DefinitionList} from '../DefinitionList';
-import type {DefinitionListItem, DefinitionListProps} from '../types';
+import type {DefinitionListProps, DefinitionListSingleItem} from '../types';
 
-const items: DefinitionListItem[] = [
+const items: DefinitionListSingleItem[] = [
     {name: <Link href="https://cloud.yandex.ru/docs">String value</Link>, content: 'value'},
     {
         name: (
@@ -122,6 +122,8 @@ const items: DefinitionListItem[] = [
                 avatar={{text: 'Charles Darwin', theme: 'brand', title: 'Charles Darwin avatar'}}
             />
         ),
+        copyText:
+            'The HTML <dl> element represents a description list. The element encloses a list of groups of terms (specified using the <dt> element) and descriptions (provided by <dd> elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs)',
         note: 'This is avatar',
     },
     {
