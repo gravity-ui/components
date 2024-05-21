@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/gravity-ui/components/compare/v3.6.0...v3.6.1) (2024-05-15)
+
+
+### Bug Fixes
+
+* a11y issues fixes ([#189](https://github.com/gravity-ui/components/issues/189)) ([4649a40](https://github.com/gravity-ui/components/commit/4649a4053a639b609bd8e8a5fcb661153673dea3))
+
 ## [3.6.0](https://github.com/gravity-ui/components/compare/v3.5.0...v3.6.0) (2024-04-15)
 
 
