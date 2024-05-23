@@ -14,10 +14,6 @@ $block: '.#{variables.$ns}definition-list';
         }
     }
 
-    #{$block}__item:not(#{$block}__item_grouped) + #{$block}__subheader {
-        margin-block-start: var(--g-spacing-5);
-    }
-
     #{$block}__item:is(#{$block}__item_grouped) + #{$block}__item:not(#{$block}__item_grouped) {
         margin-block-start: var(--g-spacing-5);
     }
