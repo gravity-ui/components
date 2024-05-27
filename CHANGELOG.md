@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.2](https://github.com/gravity-ui/components/compare/v3.6.1...v3.6.2) (2024-05-27)
+
+
+### Bug Fixes
+
+* **OnboardingMenu:** change align-items start to flex-start ([#190](https://github.com/gravity-ui/components/issues/190)) ([8246c87](https://github.com/gravity-ui/components/commit/8246c87a6a90b6e486e2702f67671ed9a34f36ca))
+
 ## [3.6.1](https://github.com/gravity-ui/components/compare/v3.6.0...v3.6.1) (2024-05-15)
 
 
