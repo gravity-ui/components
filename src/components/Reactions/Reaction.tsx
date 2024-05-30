@@ -1,58 +1,108 @@
 import React from 'react';
 
-import {Button, ButtonSize, Popover, Text} from '@gravity-ui/uikit';
+import {Button, ButtonSize, PaletteOption, PopoverProps, Popup, Text} from '@gravity-ui/uikit';
 
-export interface ReactionProps {
+import {block} from '../utils/cn';
+import {useStableCallback} from '../utils/useStableCallback';
+
+import {useReactionsContext} from './context';
+import {useReactionsPopup} from './hooks';
+
+export interface ReactionTooltipProps
+    extends Pick<PopoverProps, 'strategy' | 'placement' | 'modifiers'> {
     /**
-     * The reaction (emoji/icon/letter/GIF/image etc).
+     * Tooltip's content.
      */
-    icon: React.ReactNode;
+    content: React.ReactNode;
     /**
-     * Actual value that is sent to backend for example.
+     * Tooltip content's HTML class attribute.
      */
-    value: string;
+    className?: string;
+    /**
+     * Fires when the `onMouseLeave` callback is called.
+     * Usage example:
+     * you have some popup inside a tooltip, you hover on it, you don't want the tooltip to be closed because of that.
+     */
+    canClosePopup?: () => boolean;
+}
+
+export interface ReactionProps extends PaletteOption {
+    /**
+     * Should be true when the user used this reaction.
+     */
+    selected?: boolean;
     /**
      * Display a number after the icon.
      * Represents the number of users who used this reaction.
      */
-    count?: number;
+    counter?: number;
     /**
-     * Is the reaction button disabled.
-     */
-    disabled?: boolean;
-    /**
-     * Is the reaction highlighted.
-     * Should be true when the user used this reaction.
-     */
-    isHighlighted?: boolean;
-    /**
-     * If present, when a user hovers over the reaction, a popover appears with the `popoverContent`.
+     * If present, when a user hovers over the reaction, a popover appears with `tooltip.content`.
      * Can be used to display users who used this reaction.
      */
-    popoverContent?: React.ReactNode;
+    tooltip?: ReactionTooltipProps;
 }
 
-export interface ReactionInnerProps extends ReactionProps {
+interface ReactionInnerProps {
+    reaction: ReactionProps;
     size: ButtonSize;
+    onClick?: (value: string) => void;
 }
 
-export const Reaction = React.memo(function Reaction(props: ReactionInnerProps) {
+const popupDefaultPlacement: PopoverProps['placement'] = [
+    'bottom-start',
+    'bottom',
+    'bottom-end',
+    'top-start',
+    'top',
+    'top-end',
+];
+
+const b = block('reactions');
+
+export function Reaction(props: ReactionInnerProps) {
+    const {value, disabled, selected, content, counter, tooltip} = props.reaction;
+    const {size, onClick} = props;
+
+    const onClickCallback = useStableCallback(() => onClick?.(value));
+
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const {onMouseEnter, onMouseLeave} = useReactionsPopup(props.reaction, buttonRef);
+    const {openedTooltip: currentHoveredReaction} = useReactionsContext();
+
     const button = (
         <Button
-            disabled={props.disabled}
-            size={props.size}
-            view={props.isHighlighted ? 'outlined-info' : 'outlined'}
+            ref={buttonRef}
+            disabled={disabled}
+            size={size}
+            selected={selected}
+            onClick={onClickCallback}
+            view={'outlined'}
         >
-            <Button.Icon>{props.icon}</Button.Icon>
-            {props.count === undefined ? null : <Text>{props.count}</Text>}
+            <Button.Icon>{content}</Button.Icon>
+            {counter === undefined ? null : <Text>{counter}</Text>}
         </Button>
     );
 
-    return props.popoverContent ? (
-        <Popover content={props.popoverContent} hasArrow={false}>
+    return tooltip ? (
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             {button}
-        </Popover>
+
+            {currentHoveredReaction?.reaction.value === value ? (
+                <Popup
+                    anchorRef={currentHoveredReaction.ref}
+                    contentClassName={b('popup', tooltip.className)}
+                    placement={tooltip.placement ?? popupDefaultPlacement}
+                    strategy={tooltip.strategy}
+                    modifiers={tooltip.modifiers}
+                    open={currentHoveredReaction.open}
+                    hasArrow
+                >
+                    {tooltip.content}
+                </Popup>
+            ) : null}
+        </div>
     ) : (
         button
     );
-});
+}

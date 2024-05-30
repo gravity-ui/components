@@ -1,59 +1,108 @@
 import React from 'react';
 
-import {ButtonSize, Flex} from '@gravity-ui/uikit';
+import {FaceSmile} from '@gravity-ui/icons';
+import {Button, Flex, Icon, Palette, PaletteProps, Popover} from '@gravity-ui/uikit';
+import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
+import {useStableCallback} from '../utils/useStableCallback';
 
-import {AddReactionButton} from './AddReactionButton';
 import {Reaction, ReactionProps} from './Reaction';
+import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
 
 import './Reactions.scss';
 
 const b = block('reactions');
 
-export interface ReactionsProps {
+export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'> {
     /**
      * HTML class attribute.
      */
     className?: string;
     /**
-     * A set of reactions to pick from.
-     */
-    reactionsMarket: React.ReactNode;
-    /**
      * Users' reactions.
      */
     reactions: ReactionProps[];
     /**
-     * Are buttons disabled and the «Add reaction» button is hidden.
-     *
-     * @default false
+     * Reactions' palette props.
      */
-    disabled?: boolean;
+    palette: Omit<
+        PaletteProps,
+        'value' | 'defaultValue' | 'onUpdate' | 'size' | 'disabled' | 'multiple'
+    >;
     /**
-     * Buttons' size.
-     *
-     * @default 's'
+     * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
-    size?: ButtonSize;
+    onClickReaction?: (value: string) => void;
 }
 
-export function Reactions(props: ReactionsProps) {
-    const {size = 's'} = props;
+export function Reactions({
+    reactions,
+    className,
+    size = 'm',
+    disabled,
+    palette,
+    onClickReaction,
+}: ReactionsProps) {
+    const [currentHoveredReaction, setCurrentHoveredReaction] = React.useState<
+        ReactionsContextTooltipProps | undefined
+    >(undefined);
+
+    const paletteValue = React.useMemo(
+        () => reactions.filter((reaction) => reaction.selected).map((reaction) => reaction.value),
+        [reactions],
+    );
+
+    const onUpdatePalette = useStableCallback((updated: string[]) => {
+        const diffValues = xor(paletteValue, updated);
+        for (const diffValue of diffValues) {
+            onClickReaction?.(diffValue);
+        }
+    });
 
     return (
-        <Flex className={b(null, props.className)} gap={1}>
-            {props.reactions.map((reaction) => (
-                <Reaction
-                    {...reaction}
-                    disabled={props.disabled || reaction.disabled}
-                    size={size}
-                    key={reaction.value}
-                />
-            ))}
-            {props.disabled ? null : (
-                <AddReactionButton size={size} content={props.reactionsMarket} />
-            )}
-        </Flex>
+        <ReactionsContextProvider
+            value={{
+                openedTooltip: currentHoveredReaction,
+                setOpenedTooltip: setCurrentHoveredReaction,
+            }}
+        >
+            <Flex className={b(null, className)} gap={1}>
+                {/* Reactions' list */}
+                {reactions.map((reaction) => {
+                    return (
+                        <Reaction
+                            key={reaction.value}
+                            reaction={disabled ? {...reaction, disabled} : reaction}
+                            size={size}
+                            onClick={onClickReaction}
+                        />
+                    );
+                })}
+
+                {/* Add reaction button */}
+                {disabled ? null : (
+                    <Popover
+                        content={
+                            <Palette
+                                {...palette}
+                                value={paletteValue}
+                                disabled={disabled}
+                                size={size}
+                                onUpdate={onUpdatePalette}
+                            />
+                        }
+                        openOnHover={false}
+                        hasArrow={false}
+                    >
+                        <Button className={b('add-button')} size={size} view="flat">
+                            <Button.Icon>
+                                <Icon data={FaceSmile} />
+                            </Button.Icon>
+                        </Button>
+                    </Popover>
+                )}
+            </Flex>
+        </ReactionsContextProvider>
     );
 }

@@ -6,4 +6,8 @@ $block: '.#{variables.$ns}reactions';
     &__add-button {
         color: var(--g-color-text-secondary);
     }
+
+    &__popup {
+        padding: 8px;
+    }
 }
