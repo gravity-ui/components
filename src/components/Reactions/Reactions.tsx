@@ -97,7 +97,7 @@ export function Reactions({
                 setOpenedTooltip: setCurrentHoveredReaction,
             }}
         >
-            <Flex className={b(null, className)} style={style} gap={1} wrap={true} data-qa={qa}>
+            <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
                 {/* Reactions' list */}
                 {reactions.map((reaction) => {
                     return (

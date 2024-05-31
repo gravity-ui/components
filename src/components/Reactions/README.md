@@ -93,7 +93,7 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 | `onClickReaction` | `(value: string) => void` |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
 | `size`            | `ButtonSize`              |          | `m`     | Buttons's size                                                                                 |
 | `disabled`        | `boolean`                 |          | `false` | If the buttons' are disabled                                                                   |
-| `qa`              | `string`                  |          |         | `data-qa` html attribute                                                                       |
+| `qa`              | `string`                  |          |         | `qa` attribute for testing                                                                     |
 | `className`       | `string`                  |          |         | HTML class attribute                                                                           |
 | `style`           | `React.CSSProperties`     |          |         | HTML style attribute                                                                           |
 
