@@ -1,7 +1,16 @@
 import React from 'react';
 
 import {FaceSmile} from '@gravity-ui/icons';
-import {Button, Flex, Icon, Palette, PaletteProps, Popover} from '@gravity-ui/uikit';
+import {
+    Button,
+    DOMProps,
+    Flex,
+    Icon,
+    Palette,
+    PaletteProps,
+    Popover,
+    QAProps,
+} from '@gravity-ui/uikit';
 import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
@@ -14,11 +23,7 @@ import './Reactions.scss';
 
 const b = block('reactions');
 
-export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'> {
-    /**
-     * HTML class attribute.
-     */
-    className?: string;
+export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'>, QAProps, DOMProps {
     /**
      * Users' reactions.
      */
@@ -36,12 +41,22 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'> 
     onClickReaction?: (value: string) => void;
 }
 
+const buttonSizeToIconSize = {
+    xs: '12px',
+    s: '16px',
+    m: '16px',
+    l: '16px',
+    xl: '20px',
+};
+
 export function Reactions({
     reactions,
     className,
+    style,
     size = 'm',
     disabled,
     palette,
+    qa,
     onClickReaction,
 }: ReactionsProps) {
     const [currentHoveredReaction, setCurrentHoveredReaction] = React.useState<
@@ -60,6 +75,19 @@ export function Reactions({
         }
     });
 
+    const paletteContent = React.useMemo(
+        () => (
+            <Palette
+                {...palette}
+                value={paletteValue}
+                disabled={disabled}
+                size={size}
+                onUpdate={onUpdatePalette}
+            />
+        ),
+        [paletteValue, disabled, size, palette, onUpdatePalette],
+    );
+
     return (
         <ReactionsContextProvider
             value={{
@@ -67,7 +95,7 @@ export function Reactions({
                 setOpenedTooltip: setCurrentHoveredReaction,
             }}
         >
-            <Flex className={b(null, className)} gap={1}>
+            <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
                 {/* Reactions' list */}
                 {reactions.map((reaction) => {
                     return (
@@ -83,21 +111,18 @@ export function Reactions({
                 {/* Add reaction button */}
                 {disabled ? null : (
                     <Popover
-                        content={
-                            <Palette
-                                {...palette}
-                                value={paletteValue}
-                                disabled={disabled}
-                                size={size}
-                                onUpdate={onUpdatePalette}
-                            />
-                        }
+                        content={paletteContent}
+                        tooltipContentClassName={b('add-reaction-popover')}
                         openOnHover={false}
                         hasArrow={false}
                     >
-                        <Button className={b('add-button')} size={size} view="flat">
+                        <Button
+                            className={b('reaction-button', {size, 'add-button': true})}
+                            size={size}
+                            view="flat"
+                        >
                             <Button.Icon>
-                                <Icon data={FaceSmile} />
+                                <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
                             </Button.Icon>
                         </Button>
                     </Popover>

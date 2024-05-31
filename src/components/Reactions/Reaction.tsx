@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Button, ButtonSize, PaletteOption, PopoverProps, Popup, Text} from '@gravity-ui/uikit';
+import {Button, ButtonSize, PaletteOption, PopoverProps, Popup} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 import {useStableCallback} from '../utils/useStableCallback';
@@ -35,7 +35,7 @@ export interface ReactionProps extends PaletteOption {
      * Display a number after the icon.
      * Represents the number of users who used this reaction.
      */
-    counter?: number;
+    counter?: React.ReactNode;
     /**
      * If present, when a user hovers over the reaction, a popover appears with `tooltip.content`.
      * Can be used to display users who used this reaction.
@@ -72,15 +72,19 @@ export function Reaction(props: ReactionInnerProps) {
 
     const button = (
         <Button
+            className={b('reaction-button', {size})}
             ref={buttonRef}
             disabled={disabled}
             size={size}
             selected={selected}
+            view={selected ? 'outlined-info' : 'outlined'}
+            extraProps={{value}}
             onClick={onClickCallback}
-            view={'outlined'}
         >
             <Button.Icon>{content}</Button.Icon>
-            {counter === undefined ? null : <Text>{counter}</Text>}
+            {counter === undefined || counter === null ? null : (
+                <span className={b('reaction-button-text', {size})}>{counter}</span>
+            )}
         </Button>
     );
 
@@ -88,7 +92,7 @@ export function Reaction(props: ReactionInnerProps) {
         <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             {button}
 
-            {currentHoveredReaction?.reaction.value === value ? (
+            {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (
                 <Popup
                     anchorRef={currentHoveredReaction.ref}
                     contentClassName={b('popup', tooltip.className)}

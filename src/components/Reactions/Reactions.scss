@@ -3,11 +3,47 @@
 $block: '.#{variables.$ns}reactions';
 
 #{$block} {
-    &__add-button {
+    &__reaction-button_add-button {
         color: var(--g-color-text-secondary);
     }
 
     &__popup {
         padding: 8px;
+    }
+
+    &__add-reaction-popover {
+        max-width: unset;
+    }
+
+    &__reaction-button_size_xs {
+        font-size: 12px;
+    }
+    &__reaction-button_size_s {
+        font-size: 16px;
+    }
+    &__reaction-button_size_m {
+        font-size: 16px;
+    }
+    &__reaction-button_size_l {
+        font-size: 16px;
+    }
+    &__reaction-button_size_xl {
+        font-size: 20px;
+    }
+
+    &__reaction-button-text_size_xs {
+        font-size: 10px;
+    }
+    &__reaction-button-text_size_s {
+        font-size: 12px;
+    }
+    &__reaction-button-text_size_m {
+        font-size: 13px;
+    }
+    &__reaction-button-text_size_l {
+        font-size: 14px;
+    }
+    &__reaction-button-text_size_xl {
+        font-size: 16px;
     }
 }

@@ -17,35 +17,41 @@ export const reactionsMockUser = {
     squidward: {name: 'Squidward', avatar: reactionsAvatar.squidward},
 } satisfies Record<string, ReactionsMockUser>;
 
-export const reactionsPalletteMockOption = {
-    'smiling-face': {content: '😊', value: 'smiling-face', title: 'smiling-face'},
-    heart: {content: '❤️', value: 'heart', title: 'heart'},
-    'thumbs-up': {content: '👍', value: 'thumbs-up', title: 'thumbs-up'},
-    laughing: {content: '😂', value: 'laughing', title: 'laughing'},
-    'hearts-eyes': {content: '😍', value: 'hearts-eyes', title: 'hearts-eyes'},
-    cool: {content: '😎', value: 'cool', title: 'cool'},
-    tongue: {content: '😛', value: 'tongue', title: 'tongue'},
-    angry: {content: '😡', value: 'angry', title: 'angry'},
-    sad: {content: '😢', value: 'sad', title: 'sad'},
-    surprised: {content: '😯', value: 'surprised', title: 'surprised'},
-    'face-screaming': {content: '😱', value: 'face-screaming', title: 'face-screaming'},
+const baseMockOption = {
+    'smiling-face': {content: '😊'},
+    heart: {content: '❤️'},
+    'thumbs-up': {content: '👍'},
+    laughing: {content: '😂'},
+    'hearts-eyes': {content: '😍'},
+    cool: {content: '😎'},
+    tongue: {content: '😛'},
+    angry: {content: '😡'},
+    sad: {content: '😢'},
+    surprised: {content: '😯'},
+    'face-screaming': {content: '😱'},
     'smiling-face-with-open-hands': {
         content: '🤗',
-        value: 'value-12',
-        title: 'smiling-face-with-open-hands',
     },
-    nauseated: {content: '🤢', value: 'nauseated', title: 'nauseated'},
-    'lying-face': {content: '🤥', value: 'lying-face', title: 'lying-face'},
-    'star-struck': {content: '🤩', value: 'star-struck', title: 'star-struck'},
+    nauseated: {content: '🤢'},
+    'lying-face': {content: '🤥'},
+    'star-struck': {content: '🤩'},
     'face-with-hand-over-mouth': {
         content: '🤭',
-        value: 'value-16',
-        title: 'face-with-hand-over-mouth',
     },
-    vomiting: {content: '🤮', value: 'vomiting', title: 'vomiting'},
-    partying: {content: '🥳', value: 'partying', title: 'partying'},
-    woozy: {content: '🥴', value: 'woozy', title: 'woozy'},
-    'cold-face': {content: '🥶', value: 'cold-face', title: 'cold-face'},
-} satisfies Record<string, PaletteOption>;
+    vomiting: {content: '🤮'},
+    partying: {content: '🥳'},
+    woozy: {content: '🥴'},
+    'cold-face': {content: '🥶'},
+};
+
+export const reactionsPalletteMockOption = baseMockOption as Record<
+    keyof typeof baseMockOption,
+    PaletteOption
+>;
+
+for (const value of Object.keys(reactionsPalletteMockOption)) {
+    reactionsPalletteMockOption[value as keyof typeof baseMockOption].value = value;
+    reactionsPalletteMockOption[value as keyof typeof baseMockOption].title = value;
+}
 
 export const reactionsPalletteMockOptions = Object.values(reactionsPalletteMockOption);
