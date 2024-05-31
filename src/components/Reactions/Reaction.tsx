@@ -77,7 +77,7 @@ export function Reaction(props: ReactionInnerProps) {
             disabled={disabled}
             size={size}
             selected={selected}
-            view={selected ? 'outlined-info' : 'outlined'}
+            view="outlined"
             extraProps={{value}}
             onClick={onClickCallback}
         >
