@@ -8,6 +8,23 @@ import {useStableCallback} from '../utils/useStableCallback';
 import {useReactionsContext} from './context';
 import {useReactionsPopup} from './hooks';
 
+export interface ReactionProps extends PaletteOption {
+    /**
+     * Should be true when the user used this reaction.
+     */
+    selected?: boolean;
+    /**
+     * Display a number after the icon.
+     * Represents the number of users who used this reaction.
+     */
+    counter?: React.ReactNode;
+    /**
+     * If present, when a user hovers over the reaction, a popover appears with `tooltip.content`.
+     * Can be used to display users who used this reaction.
+     */
+    tooltip?: ReactionTooltipProps;
+}
+
 export interface ReactionTooltipProps
     extends Pick<PopoverProps, 'strategy' | 'placement' | 'modifiers'> {
     /**
@@ -24,23 +41,6 @@ export interface ReactionTooltipProps
      * you have some popup inside a tooltip, you hover on it, you don't want the tooltip to be closed because of that.
      */
     canClosePopup?: () => boolean;
-}
-
-export interface ReactionProps extends PaletteOption {
-    /**
-     * Should be true when the user used this reaction.
-     */
-    selected?: boolean;
-    /**
-     * Display a number after the icon.
-     * Represents the number of users who used this reaction.
-     */
-    counter?: React.ReactNode;
-    /**
-     * If present, when a user hovers over the reaction, a popover appears with `tooltip.content`.
-     * Can be used to display users who used this reaction.
-     */
-    tooltip?: ReactionTooltipProps;
 }
 
 interface ReactionInnerProps {

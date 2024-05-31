@@ -23,6 +23,11 @@ import './Reactions.scss';
 
 const b = block('reactions');
 
+export type ReactionsPaletteProps = Omit<
+    PaletteProps,
+    'value' | 'defaultValue' | 'onUpdate' | 'size' | 'disabled' | 'multiple'
+>;
+
 export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'>, QAProps, DOMProps {
     /**
      * Users' reactions.
@@ -31,10 +36,7 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'>,
     /**
      * Reactions' palette props.
      */
-    palette: Omit<
-        PaletteProps,
-        'value' | 'defaultValue' | 'onUpdate' | 'size' | 'disabled' | 'multiple'
-    >;
+    palette: ReactionsPaletteProps;
     /**
      * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
@@ -95,7 +97,7 @@ export function Reactions({
                 setOpenedTooltip: setCurrentHoveredReaction,
             }}
         >
-            <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
+            <Flex className={b(null, className)} style={style} gap={1} wrap={true} data-qa={qa}>
                 {/* Reactions' list */}
                 {reactions.map((reaction) => {
                     return (
