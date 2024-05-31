@@ -3,9 +3,10 @@ import React from 'react';
 import {Label, Link, User} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
-import {DefinitionList, DefinitionListItem, DefinitionListProps} from '../DefinitionList';
+import {DefinitionList} from '../DefinitionList';
+import type {DefinitionListProps, DefinitionListSingleItem} from '../types';
 
-const items: DefinitionListItem[] = [
+const items: DefinitionListSingleItem[] = [
     {name: <Link href="https://cloud.yandex.ru/docs">String value</Link>, content: 'value'},
     {
         name: (
@@ -13,7 +14,11 @@ const items: DefinitionListItem[] = [
                 name="Charles Darwin"
                 size="xl"
                 description="Adventurer"
-                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                avatar={{
+                    text: 'Charles Darwin',
+                    theme: 'brand',
+                    title: 'Charles Darwin avatar',
+                }}
             />
         ),
         content: 'value',
@@ -114,9 +119,11 @@ const items: DefinitionListItem[] = [
                 name="Charles Darwin"
                 size="xl"
                 description="Adventurer"
-                avatar={{text: 'Charles Darwin', theme: 'brand'}}
+                avatar={{text: 'Charles Darwin', theme: 'brand', title: 'Charles Darwin avatar'}}
             />
         ),
+        copyText:
+            'The HTML <dl> element represents a description list. The element encloses a list of groups of terms (specified using the <dt> element) and descriptions (provided by <dd> elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs)',
         note: 'This is avatar',
     },
     {
@@ -133,6 +140,19 @@ export default {
         responsive: false,
         contentMaxWidth: 480,
     },
+    parameters: {
+        a11y: {
+            element: '#storybook-root',
+            config: {
+                rules: [
+                    {
+                        id: 'color-contrast',
+                        enabled: false,
+                    },
+                ],
+            },
+        },
+    },
 } as Meta;
 
 const DefaultTemplate: StoryFn<DefinitionListProps> = (args) => <DefinitionList {...args} />;
@@ -144,3 +164,29 @@ const TemplateWithIconInside: StoryFn<DefinitionListProps> = (args) => {
     );
 };
 export const ListWithIconInside = TemplateWithIconInside.bind({});
+
+const groupedItems = [
+    {
+        label: 'Compute',
+        items: [{name: 'Link', content: 'value'}],
+    },
+    {
+        label: 'VPC',
+        items: [
+            {name: 'Number value', content: 2},
+            {name: 'Node value', content: <strong>value</strong>},
+            {name: 'Link', content: 'value'},
+        ],
+    },
+    {name: 'Simple value', content: 2},
+    {name: 'Something else', content: <strong>value</strong>},
+    {name: 'Foo bar', content: 'value'},
+    {label: 'Test', items: [{name: 'Node value', content: <strong>value</strong>}]},
+];
+
+export const GroupedItems = DefaultTemplate.bind({});
+GroupedItems.args = {
+    items: groupedItems,
+    responsive: false,
+    contentMaxWidth: 480,
+};

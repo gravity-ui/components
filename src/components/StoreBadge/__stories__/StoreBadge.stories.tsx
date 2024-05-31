@@ -11,7 +11,7 @@ export default {
     args: {
         platform: Platform.ANDROID,
     },
-} as Meta;
+} as Meta<typeof StoreBadge>;
 
 const Template: StoryFn<StoreBadgeProps> = (args) => <StoreBadge {...args} />;
 

@@ -1,7 +1,8 @@
 import React from 'react';
 
 import {render, screen} from '../../../../test-utils/utils';
-import {DefinitionList, b} from '../DefinitionList';
+import {DefinitionList} from '../DefinitionList';
+import {b} from '../utils';
 
 const qaAttribute = 'definition-list';
 
@@ -68,5 +69,30 @@ describe('components: DefinitionList', () => {
 
         const component = screen.getByRole('term');
         expect(component).toHaveClass(b('term-container', {multiline: true}));
+    });
+    it('should render group label', () => {
+        const items = [
+            {
+                label: 'Test group',
+                items: [{name: 'test1', content: 'value1'}],
+            },
+        ];
+        getComponent({items});
+
+        const component = screen.getByText('Test group');
+        expect(component).toBeVisible();
+    });
+    it('should render grouped items', () => {
+        const items = [
+            {
+                label: 'Test group',
+                items: [{name: 'test1', content: 'value1'}],
+            },
+        ];
+        getComponent({items});
+
+        const component = screen.getByText('value1');
+        expect(component).toBeVisible();
+        expect(component).toHaveClass(b('definition'));
     });
 });
