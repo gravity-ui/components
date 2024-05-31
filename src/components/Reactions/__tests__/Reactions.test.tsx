@@ -23,10 +23,10 @@ describe('Reactions', () => {
             render(<TestReactions qa={qaId} size={size} />);
 
             const $component = screen.getByTestId(qaId);
-            const $buttons = within($component).getAllByRole('button');
+            const $reactions = within($component).getAllByRole('button');
 
-            $buttons.forEach(($button: HTMLElement) => {
-                expect($button).toHaveClass(`g-button_size_${size}`);
+            $reactions.forEach(($reaction: HTMLElement) => {
+                expect($reaction).toHaveClass(`g-button_size_${size}`);
             });
         },
     );
@@ -35,10 +35,10 @@ describe('Reactions', () => {
         render(<TestReactions qa={qaId} disabled={true} />);
 
         const $component = screen.getByTestId(qaId);
-        const $buttons = within($component).getAllByRole('button');
+        const $reactions = within($component).getAllByRole('button');
 
-        $buttons.forEach(($button: HTMLElement) => {
-            expect($button).toBeDisabled();
+        $reactions.forEach(($reaction: HTMLElement) => {
+            expect($reaction).toBeDisabled();
         });
     });
 
