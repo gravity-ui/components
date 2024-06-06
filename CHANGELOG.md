@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.12.2](https://github.com/gravity-ui/components/compare/v2.12.1...v2.12.2) (2024-06-06)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix behaviour when resizing with opened "More" menu ([#199](https://github.com/gravity-ui/components/issues/199)) ([d076514](https://github.com/gravity-ui/components/commit/d076514b25d4e7cb4a1cd3fbedfc201b086a9db5))
+
 ## [2.12.1](https://github.com/gravity-ui/components/compare/v2.12.0...v2.12.1) (2024-03-05)
 
 
