@@ -869,7 +869,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
     renderSelect() {
         const activeTabID = this.activeTab;
-        const {firstHiddenTabIndex, tabChosenFromSelectId} = this.state;
+        const {firstHiddenTabIndex, tabChosenFromSelectId, isSelectOpened} = this.state;
         const {items, moreControlProps} = this.props;
 
         const itemsForSelect = items
@@ -886,6 +886,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
         return (
             <Select
+                open={isSelectOpened}
                 onUpdate={this.onChooseTabFromSelect}
                 options={itemsForSelect}
                 value={[]}
