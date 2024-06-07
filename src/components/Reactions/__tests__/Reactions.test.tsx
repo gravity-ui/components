@@ -4,8 +4,9 @@ import {ButtonSize} from '@gravity-ui/uikit';
 import userEvent from '@testing-library/user-event';
 
 import {render, screen, within} from '../../../../test-utils/utils';
-import {reactionsPalletteMockOption as option} from '../mock/mockData';
-import {TestReactions} from '../mock/mockHooks';
+
+import {reactionsPalletteMockOption as option} from './mock/mockData';
+import {TestReactions} from './mock/mockHooks';
 
 const qaId = 'reactions-component';
 

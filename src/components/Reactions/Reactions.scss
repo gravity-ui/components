@@ -32,18 +32,18 @@ $block: '.#{variables.$ns}reactions';
     }
 
     &__reaction-button-text_size_xs {
-        font-size: 10px;
+        font-size: var(--g-text-caption-1-font-size);
     }
     &__reaction-button-text_size_s {
-        font-size: 12px;
+        font-size: var(--g-text-caption-2-font-size);
     }
     &__reaction-button-text_size_m {
-        font-size: 13px;
+        font-size: var(--g-text-body-1-font-size);
     }
     &__reaction-button-text_size_l {
-        font-size: 14px;
+        font-size: var(--g-text-subheader-1-font-size);
     }
     &__reaction-button-text_size_xl {
-        font-size: 16px;
+        font-size: var(--g-text-subheader-2-font-size);
     }
 }

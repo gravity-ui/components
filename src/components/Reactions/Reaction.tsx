@@ -3,12 +3,12 @@ import React from 'react';
 import {Button, ButtonSize, PaletteOption, PopoverProps, Popup} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
-import {useStableCallback} from '../utils/useStableCallback';
 
 import {useReactionsContext} from './context';
 import {useReactionsPopup} from './hooks';
 
-export interface ReactionProps extends PaletteOption {
+export interface ReactionProps
+    extends Pick<PaletteOption, 'disabled' | 'title' | 'value' | 'content'> {
     /**
      * Should be true when the user used this reaction.
      */
@@ -64,7 +64,7 @@ export function Reaction(props: ReactionInnerProps) {
     const {value, disabled, selected, content, counter, tooltip} = props.reaction;
     const {size, onClick} = props;
 
-    const onClickCallback = useStableCallback(() => onClick?.(value));
+    const onClickCallback = React.useCallback(() => onClick?.(value), [onClick, value]);
 
     const buttonRef = React.useRef<HTMLButtonElement>(null);
     const {onMouseEnter, onMouseLeave} = useReactionsPopup(props.reaction, buttonRef);

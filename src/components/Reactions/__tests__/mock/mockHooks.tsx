@@ -1,9 +1,10 @@
+/* eslint-disable no-param-reassign */
 import React from 'react';
 
 import {Flex, Text, User} from '@gravity-ui/uikit';
 
-import {ReactionProps} from '../Reaction';
-import {Reactions, ReactionsProps} from '../Reactions';
+import {ReactionProps} from '../../Reaction';
+import {Reactions, ReactionsProps} from '../../Reactions';
 
 import {
     ReactionsMockUser,

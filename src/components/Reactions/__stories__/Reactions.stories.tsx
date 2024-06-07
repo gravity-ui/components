@@ -4,7 +4,7 @@ import {Flex, Text} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {Reactions} from '../Reactions';
-import {useMockReactions} from '../mock/mockHooks';
+import {useMockReactions} from '../__tests__/mock/mockHooks';
 
 export default {
     title: 'Components/Reactions',
