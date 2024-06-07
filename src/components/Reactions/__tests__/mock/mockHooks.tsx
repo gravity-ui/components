@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import React from 'react';
 
 import {Flex, Text, User} from '@gravity-ui/uikit';
