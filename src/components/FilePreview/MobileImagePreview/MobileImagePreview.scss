@@ -19,7 +19,6 @@ $block: '.#{variables.$ns}mobile-image-preview';
     }
 
     &__image {
-        width: 100%;
         width: auto;
         max-width: 100%;
         max-height: 100%;
@@ -27,14 +26,14 @@ $block: '.#{variables.$ns}mobile-image-preview';
 
     &__back-button {
         position: absolute;
-        top: $previewButtonsTop;
-        left: 15px;
+        inset-block-start: $previewButtonsTop;
+        inset-inline-start: 15px;
     }
 
     &__action-buttons {
         position: absolute;
-        top: $previewButtonsTop;
-        right: 15px;
+        inset-block-start: $previewButtonsTop;
+        inset-inline-end: 15px;
         display: flex;
         flex-direction: column-reverse;
         gap: 12px;
