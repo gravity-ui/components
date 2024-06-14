@@ -59,7 +59,18 @@ const CollageTemplate: StoryFn<FilePreviewProps> = () => {
             <FilePreview
                 file={{name: 'my-image-from-thailand.jpg', type: 'image/png'} as File}
                 imageSrc="https://storage.yandexcloud.net/uikit-storybook-assets/changelog-dialog-picture-2.png"
-                actions={[{icon: CircleExclamation, title: 'some hint'}]}
+                actions={[
+                    {
+                        icon: CircleExclamation,
+                        title: 'some hint',
+                        onClick: () => alert('Some info'),
+                    },
+                    {
+                        icon: Xmark,
+                        onClick: () => alert('Are you sure you want to delete the file?'),
+                        title: 'Close',
+                    },
+                ]}
             />
         </div>
     );

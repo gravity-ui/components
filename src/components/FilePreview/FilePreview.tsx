@@ -11,11 +11,12 @@ import {
     TextAlignLeft as TextIcon,
     Filmstrip as VideoIcon,
 } from '@gravity-ui/icons';
-import {Icon, IconData, Text, useActionHandlers, useUniqId} from '@gravity-ui/uikit';
+import {Icon, IconData, Text, useActionHandlers, useMobile, useUniqId} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
 import {FilePreviewAction, FilePreviewActionProps} from './FilePreviewAction';
+import {MobileImagePreview} from './MobileImagePreview/MobileImagePreview';
 import {FileType} from './types';
 import {getFileType} from './utils';
 
@@ -59,6 +60,8 @@ export function FilePreview({
     const id = useUniqId();
 
     const [previewSrc, setPreviewSrc] = React.useState<string | undefined>(imageSrc);
+    const [showPreviewSheet, setShowPreviewSheet] = React.useState(false);
+    const mobile = useMobile();
     const type = getFileType(file);
 
     const {onKeyDown} = useActionHandlers(onClick);
@@ -82,6 +85,21 @@ export function FilePreview({
     const clickable = Boolean(onClick);
     const withActions = Boolean(actions?.length);
 
+    const isPreviewString = typeof previewSrc === 'string';
+    const hideActions = isPreviewString && mobile;
+
+    const handleClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
+        if (mobile && isPreviewString && !onClick) {
+            setShowPreviewSheet(true);
+        } else {
+            onClick?.(e);
+        }
+    };
+
+    const handleSheetClose = () => {
+        setShowPreviewSheet(false);
+    };
+
     return (
         <div className={cn(null, className)} data-qa={qa}>
             <div
@@ -89,9 +107,9 @@ export function FilePreview({
                 role={clickable ? 'button' : undefined}
                 onKeyDown={clickable ? onKeyDown : undefined}
                 tabIndex={clickable ? 0 : undefined}
-                onClick={onClick}
+                onClick={handleClick}
             >
-                {typeof previewSrc === 'string' ? (
+                {isPreviewString ? (
                     <div className={cn('image')}>
                         <img className={cn('image-img')} src={previewSrc} alt={file.name} />
                     </div>
@@ -115,7 +133,7 @@ export function FilePreview({
                 )}
             </div>
             {actions?.length ? (
-                <div className={cn('actions')}>
+                <div className={cn('actions', {hide: hideActions})}>
                     {actions.map((action, index) => (
                         <FilePreviewAction
                             key={`${id}-${index}`}
@@ -125,6 +143,14 @@ export function FilePreview({
                     ))}
                 </div>
             ) : null}
+
+            <MobileImagePreview
+                visible={showPreviewSheet}
+                onClose={handleSheetClose}
+                actions={actions}
+                previewSrc={previewSrc}
+                fileName={file.name}
+            />
         </div>
     );
 }
