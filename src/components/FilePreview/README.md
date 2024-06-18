@@ -17,14 +17,15 @@ A component for displaying the file.
 
 For a file, you can prescribe actions that will be visible when you hover over it.
 
-| Property   | Type                                                                                 | Required | Default | Description                    |
-| ---------- | ------------------------------------------------------------------------------------ | -------- | ------- | ------------------------------ |
-| id         | `String`                                                                             |          |         | Action id                      |
-| icon       | `String`                                                                             | ✓        |         | Action icon                    |
-| title      | `String`                                                                             | ✓        |         | Action hint on hover           |
-| onClick    | `function`                                                                           |          |         | Action click handler           |
-| href       | `String`                                                                             |          |         | Action button href             |
-| extraProps | `ButtonHTMLAttributes<HTMLButtonElement> \| AnchorHTMLAttributes<HTMLAnchorElement>` |          |         | Additional action button props |
+| Property              | Type                                                                                 | Required | Default | Description                                         |
+| --------------------- | ------------------------------------------------------------------------------------ | -------- | ------- | --------------------------------------------------- |
+| id                    | `String`                                                                             |          |         | Action id                                           |
+| icon                  | `String`                                                                             | ✓        |         | Action icon                                         |
+| title                 | `String`                                                                             | ✓        |         | Action hint on hover                                |
+| onClick               | `function`                                                                           |          |         | Action click handler                                |
+| href                  | `String`                                                                             |          |         | Action button href                                  |
+| extraProps            | `ButtonHTMLAttributes<HTMLButtonElement> \| AnchorHTMLAttributes<HTMLAnchorElement>` |          |         | Additional action button props                      |
+| closeSheetAfterAction | `boolean`                                                                            |          |         | Allow close mobile preview sheet after action click |
 
 ```jsx
 

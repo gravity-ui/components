@@ -13,6 +13,7 @@ export interface FilePreviewActionProps {
         | React.ButtonHTMLAttributes<HTMLButtonElement>
         | React.AnchorHTMLAttributes<HTMLAnchorElement>;
     tooltipExtraProps?: Omit<ActionTooltipProps, 'id' | 'title' | 'children'>;
+    closeSheetAfterAction?: boolean;
 }
 
 export function FilePreviewAction({

@@ -69,6 +69,7 @@ const CollageTemplate: StoryFn<FilePreviewProps> = () => {
                         icon: Xmark,
                         onClick: () => alert('Are you sure you want to delete the file?'),
                         title: 'Close',
+                        closeSheetAfterAction: true,
                     },
                 ]}
             />

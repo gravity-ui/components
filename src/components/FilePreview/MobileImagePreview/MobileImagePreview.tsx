@@ -33,6 +33,16 @@ export function MobileImagePreview({
         setShowError(true);
     };
 
+    const handleActionClick = (
+        e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>,
+        action: FilePreviewActionProps,
+    ) => {
+        action.onClick?.(e);
+        if (action.closeSheetAfterAction) {
+            onClose();
+        }
+    };
+
     return (
         <Sheet visible={showSheet} onClose={onClose} contentClassName={cn('sheet-content')}>
             <div className={cn('container')} style={{}}>
@@ -51,7 +61,12 @@ export function MobileImagePreview({
                 </Button>
                 <div className={cn('action-buttons')}>
                     {actions?.map((action) => (
-                        <Button size="xl" key={action.id} onClick={action.onClick} view="raised">
+                        <Button
+                            size="xl"
+                            key={action.id}
+                            onClick={(e) => handleActionClick(e, action)}
+                            view="raised"
+                        >
                             <Icon data={action.icon} size={20} />
                         </Button>
                     ))}
