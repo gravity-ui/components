@@ -30,9 +30,11 @@ function NoteElement({note}: NoteElementsProps) {
 }
 
 export interface TermProps
-    extends Pick<DefinitionListSingleItem, 'note' | 'name' | 'nameTitle' | 'multilineName'> {}
+    extends Pick<DefinitionListSingleItem, 'note' | 'name' | 'nameTitle' | 'multilineName'> {
+    vertical?: boolean;
+}
 
-export function Term({note, name, nameTitle, multilineName}: TermProps) {
+export function Term({note, name, nameTitle, multilineName, vertical}: TermProps) {
     const noteElement = (
         <React.Fragment>
             &nbsp;
@@ -46,7 +48,7 @@ export function Term({note, name, nameTitle, multilineName}: TermProps) {
                 {multilineName && noteElement}
             </div>
             {!multilineName && noteElement}
-            <div className={b('dots', {'with-note': Boolean(note)})} />
+            {!vertical && <div className={b('dots', {'with-note': Boolean(note)})} />}
         </React.Fragment>
     );
 }

@@ -30,6 +30,7 @@ export interface DefinitionListProps extends QAProps {
     items: DefinitionListItem[];
     copyPosition?: 'inside' | 'outside';
     responsive?: boolean;
+    vertical?: boolean;
     nameMaxWidth?: number;
     contentMaxWidth?: number | 'auto';
     className?: string;

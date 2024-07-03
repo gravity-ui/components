@@ -6,6 +6,7 @@ import type {
     DefinitionListGroup,
     DefinitionListItem,
     DefinitionListItemGrouped,
+    DefinitionListProps,
     DefinitionListSingleItem,
 } from './types';
 
@@ -47,4 +48,30 @@ export function getTitle(title?: string, content?: React.ReactNode) {
     }
 
     return undefined;
+}
+
+export function getKeyStyles({
+    nameMaxWidth,
+    vertical,
+}: Pick<DefinitionListProps, 'nameMaxWidth' | 'vertical'>) {
+    if (!nameMaxWidth) {
+        return {};
+    }
+    if (vertical) {
+        return {maxWidth: nameMaxWidth};
+    }
+    return {flexBasis: nameMaxWidth};
+}
+
+export function getValueStyles({
+    contentMaxWidth,
+    vertical,
+}: Pick<DefinitionListProps, 'contentMaxWidth' | 'vertical'>) {
+    if (!(typeof contentMaxWidth === 'number')) {
+        return {};
+    }
+    if (vertical) {
+        return {maxWidth: contentMaxWidth};
+    }
+    return {flexBasis: contentMaxWidth, maxWidth: contentMaxWidth};
 }

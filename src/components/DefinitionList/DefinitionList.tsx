@@ -4,13 +4,22 @@ import {Definition} from './components/Definition';
 import {GroupLabel} from './components/GroupLabel';
 import {Term} from './components/Term';
 import {DefinitionListProps} from './types';
-import {b, getFlattenItems, getTitle, isGroup, isUnbreakableOver} from './utils';
+import {
+    b,
+    getFlattenItems,
+    getKeyStyles,
+    getTitle,
+    getValueStyles,
+    isGroup,
+    isUnbreakableOver,
+} from './utils';
 
 import './DefinitionList.scss';
 
 export function DefinitionList({
     items,
     responsive,
+    vertical,
     nameMaxWidth,
     contentMaxWidth = 'auto',
     className,
@@ -18,26 +27,16 @@ export function DefinitionList({
     copyPosition = 'outside',
     qa,
 }: DefinitionListProps) {
-    const keyStyle = nameMaxWidth
-        ? {
-              flexBasis: nameMaxWidth,
-          }
-        : {};
+    const keyStyle = getKeyStyles({nameMaxWidth, vertical});
 
-    const valueStyle =
-        typeof contentMaxWidth === 'number'
-            ? {
-                  flexBasis: contentMaxWidth,
-                  maxWidth: contentMaxWidth,
-              }
-            : {};
+    const valueStyle = getValueStyles({contentMaxWidth, vertical});
 
     const normalizedItems = React.useMemo(() => {
         return getFlattenItems(items).map((value, index) => ({...value, key: index}));
     }, [items]);
 
     return (
-        <dl className={b({responsive}, className)} data-qa={qa}>
+        <dl className={b({responsive: responsive, vertical}, className)} data-qa={qa}>
             {normalizedItems.map((item) => {
                 if (isGroup(item)) {
                     const {key, label} = item;
@@ -62,6 +61,7 @@ export function DefinitionList({
                             style={keyStyle}
                         >
                             <Term
+                                vertical={vertical}
                                 name={name}
                                 nameTitle={nameTitle}
                                 note={note}
