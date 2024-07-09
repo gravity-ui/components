@@ -19,7 +19,7 @@ import './DefinitionList.scss';
 export function DefinitionList({
     items,
     responsive,
-    vertical,
+    direction = 'horizontal',
     nameMaxWidth,
     contentMaxWidth = 'auto',
     className,
@@ -27,16 +27,16 @@ export function DefinitionList({
     copyPosition = 'outside',
     qa,
 }: DefinitionListProps) {
-    const keyStyle = getKeyStyles({nameMaxWidth, vertical});
+    const keyStyle = getKeyStyles({nameMaxWidth, direction});
 
-    const valueStyle = getValueStyles({contentMaxWidth, vertical});
+    const valueStyle = getValueStyles({contentMaxWidth, direction});
 
     const normalizedItems = React.useMemo(() => {
         return getFlattenItems(items).map((value, index) => ({...value, key: index}));
     }, [items]);
 
     return (
-        <dl className={b({responsive: responsive, vertical}, className)} data-qa={qa}>
+        <dl className={b({responsive, vertical: direction === 'vertical'}, className)} data-qa={qa}>
             {normalizedItems.map((item) => {
                 if (isGroup(item)) {
                     const {key, label} = item;
@@ -61,7 +61,7 @@ export function DefinitionList({
                             style={keyStyle}
                         >
                             <Term
-                                vertical={vertical}
+                                direction={direction}
                                 name={name}
                                 nameTitle={nameTitle}
                                 note={note}

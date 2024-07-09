@@ -4,16 +4,16 @@ The component to display definition list with term and definition separated by d
 
 ### PropTypes
 
-| Property        | Type                    | Required  | Default | Description                                                  |
-| :-------------- | :---------------------- | :-------: | :------ | :----------------------------------------------------------- |
-| [items](#items) | `DefinitionListItem[]`  |    yes    |         | Items of the list                                            |
-| responsive      | `boolean`               |           |         | If set to `true` list will take 100% width of its parent     |
-| vertical        | `boolean`               |           |         | If set to `true` content will be located under name          |
-| nameMaxWidth    | `number`                |           |         | Maximum width of term                                        |
-| contentMaxWidth | `number \| 'auto'`      |           | 'auto'  | Maximum width of definition                                  |
-| className       | `string`                |           |         | Class name for the list container                            |
-| itemClassName   | `string`                |           |         | Class name for the list item                                 |
-| copyPosition    | `'inside' \| 'outside'` | 'outside' |         | If set to `inside`, copy icon will be placed over definition |
+| Property        | Type                           | Required  | Default      | Description                                                                                         |
+| :-------------- | :----------------------------- | :-------: | :----------- | :-------------------------------------------------------------------------------------------------- |
+| [items](#items) | `DefinitionListItem[]`         |    yes    |              | Items of the list                                                                                   |
+| responsive      | `boolean`                      |           |              | If set to `true` list will take 100% width of its parent                                            |
+| direction       | `'horizontal'` \| `'vertical'` |           | 'horizontal' | If set to `vertical` content will be located under name and list will take 100% width of its parent |
+| nameMaxWidth    | `number`                       |           |              | Maximum width of term                                                                               |
+| contentMaxWidth | `number \| 'auto'`             |           | 'auto'       | Maximum width of definition                                                                         |
+| className       | `string`                       |           |              | Class name for the list container                                                                   |
+| itemClassName   | `string`                       |           |              | Class name for the list item                                                                        |
+| copyPosition    | `'inside' \| 'outside'`        | 'outside' |              | If set to `inside`, copy icon will be placed over definition                                        |
 
 #### Items
 

@@ -217,7 +217,7 @@ const TemplateVertical: StoryFn<DefinitionListProps> = (args) => {
 export const VerticalList = TemplateVertical.bind({});
 VerticalList.args = {
     items: groupedItems,
-    vertical: true,
+    direction: 'vertical',
     contentMaxWidth: 'auto',
     copyPosition: 'inside',
 };

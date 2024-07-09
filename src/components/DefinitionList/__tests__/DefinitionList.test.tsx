@@ -96,7 +96,7 @@ describe('components: DefinitionList', () => {
         expect(component).toHaveClass(b('definition'));
     });
     it('should render vertical view', () => {
-        getComponent({vertical: true});
+        getComponent({direction: 'vertical'});
         const component = screen.getByTestId(qaAttribute);
         expect(component).toHaveClass(b({vertical: true}));
     });

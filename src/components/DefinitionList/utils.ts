@@ -52,12 +52,12 @@ export function getTitle(title?: string, content?: React.ReactNode) {
 
 export function getKeyStyles({
     nameMaxWidth,
-    vertical,
-}: Pick<DefinitionListProps, 'nameMaxWidth' | 'vertical'>) {
+    direction,
+}: Pick<DefinitionListProps, 'nameMaxWidth' | 'direction'>) {
     if (!nameMaxWidth) {
         return {};
     }
-    if (vertical) {
+    if (direction === 'vertical') {
         return {maxWidth: nameMaxWidth};
     }
     return {flexBasis: nameMaxWidth};
@@ -65,12 +65,12 @@ export function getKeyStyles({
 
 export function getValueStyles({
     contentMaxWidth,
-    vertical,
-}: Pick<DefinitionListProps, 'contentMaxWidth' | 'vertical'>) {
+    direction,
+}: Pick<DefinitionListProps, 'contentMaxWidth' | 'direction'>) {
     if (!(typeof contentMaxWidth === 'number')) {
         return {};
     }
-    if (vertical) {
+    if (direction === 'vertical') {
         return {maxWidth: contentMaxWidth};
     }
     return {flexBasis: contentMaxWidth, maxWidth: contentMaxWidth};

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {HelpPopover} from '../../HelpPopover';
-import {DefinitionListItemNote, DefinitionListSingleItem} from '../types';
+import {DefinitionListDirection, DefinitionListItemNote, DefinitionListSingleItem} from '../types';
 import {b, getTitle} from '../utils';
 
 interface NoteElementsProps {
@@ -31,10 +31,10 @@ function NoteElement({note}: NoteElementsProps) {
 
 export interface TermProps
     extends Pick<DefinitionListSingleItem, 'note' | 'name' | 'nameTitle' | 'multilineName'> {
-    vertical?: boolean;
+    direction?: DefinitionListDirection;
 }
 
-export function Term({note, name, nameTitle, multilineName, vertical}: TermProps) {
+export function Term({note, name, nameTitle, multilineName, direction}: TermProps) {
     const noteElement = (
         <React.Fragment>
             &nbsp;
@@ -48,7 +48,9 @@ export function Term({note, name, nameTitle, multilineName, vertical}: TermProps
                 {multilineName && noteElement}
             </div>
             {!multilineName && noteElement}
-            {!vertical && <div className={b('dots', {'with-note': Boolean(note)})} />}
+            {direction === 'horizontal' && (
+                <div className={b('dots', {'with-note': Boolean(note)})} />
+            )}
         </React.Fragment>
     );
 }
