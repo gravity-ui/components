@@ -28,15 +28,17 @@ function NoteElement({note}: NoteElementsProps) {
     }
 
     if (typeof note === 'object') {
+        const {buttonProps, ...rest} = note;
+
         return (
             <HelpPopover
                 className={popoverClassName}
                 placement={['bottom', 'top']}
-                {...note}
                 buttonProps={{
                     'aria-label': i18n('label_note'),
-                    ...note.buttonProps,
+                    ...buttonProps,
                 }}
+                {...rest}
             />
         );
     }
