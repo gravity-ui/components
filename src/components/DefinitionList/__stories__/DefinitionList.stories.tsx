@@ -149,6 +149,10 @@ export default {
                         id: 'color-contrast',
                         enabled: false,
                     },
+                    {
+                        id: 'definition-list', // todo: https://github.com/gravity-ui/components/issues/207
+                        enabled: false,
+                    },
                 ],
             },
         },
