@@ -167,11 +167,11 @@ export const ListWithIconInside = TemplateWithIconInside.bind({});
 
 const groupedItems = [
     {
-        label: 'Compute',
+        label: 'Group 1',
         items: [{name: 'Link', content: 'value'}],
     },
     {
-        label: 'VPC',
+        label: 'Group 2',
         items: [
             {name: 'Number value', content: 2},
             {name: 'Node value', content: <strong>value</strong>},
@@ -181,7 +181,27 @@ const groupedItems = [
     {name: 'Simple value', content: 2},
     {name: 'Something else', content: <strong>value</strong>},
     {name: 'Foo bar', content: 'value'},
-    {label: 'Test', items: [{name: 'Node value', content: <strong>value</strong>}]},
+    {
+        label: 'Group 3',
+        items: [
+            {
+                name: 'String long value with copy',
+                content:
+                    'The HTML <dl> element represents a description list. The element encloses a list of groups of terms (specified using the <dt> element) and descriptions (provided by <dd> elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs)',
+                copyText:
+                    'The HTML <dl> element represents a description list. The element encloses a list of groups of terms (specified using the <dt> element) and descriptions (provided by <dd> elements). Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs)',
+            },
+            {
+                name: 'String long looooooooooooooong looooooooooooooong looooooooooooooong looooooooooooooong value',
+                multilineName: true,
+                note: 'This is multiline value',
+                content:
+                    'https://example.com/long-long/like/beyond/the/farthest/lands/long/path/to/handle?and=some&list=of&query=parameters&that=is&overcomplicated=maybe&with=some&token=inside&not=really&readable=but&sometimes=useful',
+                copyText:
+                    'https://example.com/long-long/like/beyond/the/farthest/lands/long/path/to/handle?and=some&list=of&query=parameters&that=is&overcomplicated=maybe&with=some&token=inside&not=really&readable=but&sometimes=useful',
+            },
+        ],
+    },
 ];
 
 export const GroupedItems = DefaultTemplate.bind({});
@@ -189,4 +209,15 @@ GroupedItems.args = {
     items: groupedItems,
     responsive: false,
     contentMaxWidth: 480,
+};
+
+const TemplateVertical: StoryFn<DefinitionListProps> = (args) => {
+    return <DefinitionList {...args} />;
+};
+export const VerticalList = TemplateVertical.bind({});
+VerticalList.args = {
+    items: groupedItems,
+    direction: 'vertical',
+    contentMaxWidth: 'auto',
+    copyPosition: 'inside',
 };

@@ -121,3 +121,22 @@ $block: '.#{variables.$ns}definition-list';
         }
     }
 }
+
+#{$block}_vertical {
+    #{$block}__term-container {
+        flex: 1 0 auto;
+    }
+    #{$block}__item {
+        flex-direction: column;
+        gap: var(--g-spacing-half);
+    }
+    #{$block}__item + #{$block}__item {
+        margin-block-start: var(--g-spacing-3);
+    }
+    #{$block}__title:not(:first-of-type) {
+        margin-block-start: var(--g-spacing-8);
+    }
+    #{$block}__item:is(#{$block}__item_grouped) + #{$block}__item:not(#{$block}__item_grouped) {
+        margin-block-start: var(--g-spacing-8);
+    }
+}

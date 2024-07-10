@@ -26,10 +26,13 @@ export interface DefinitionListItemGrouped extends DefinitionListSingleItem {
 
 export type DefinitionListItem = DefinitionListSingleItem | DefinitionListGroup;
 
+export type DefinitionListDirection = 'vertical' | 'horizontal';
+
 export interface DefinitionListProps extends QAProps {
     items: DefinitionListItem[];
     copyPosition?: 'inside' | 'outside';
     responsive?: boolean;
+    direction?: DefinitionListDirection;
     nameMaxWidth?: number;
     contentMaxWidth?: number | 'auto';
     className?: string;
