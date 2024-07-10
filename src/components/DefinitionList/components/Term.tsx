@@ -2,7 +2,11 @@ import React from 'react';
 
 import {HelpPopover} from '../../HelpPopover';
 import i18n from '../i18n';
+<<<<<<< HEAD
 import {DefinitionListDirection, DefinitionListItemNote, DefinitionListSingleItem} from '../types';
+=======
+import {DefinitionListItemNote, DefinitionListSingleItem} from '../types';
+>>>>>>> 9b92d30 (On branch ci/storybook-tests: fix a11y issues)
 import {b, getTitle} from '../utils';
 
 interface NoteElementsProps {
