@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.7.0](https://github.com/gravity-ui/components/compare/v3.6.2...v3.7.0) (2024-06-14)
+
+
+### Features
+
+* **DefinitionList:** support grouped items ([#191](https://github.com/gravity-ui/components/issues/191)) ([27bc3f6](https://github.com/gravity-ui/components/commit/27bc3f6ffa1eba9ccc164fd5e02c772c7c46e030))
+* **FilePreview:** support clickable mobile image preview ([#201](https://github.com/gravity-ui/components/issues/201)) ([4129b3a](https://github.com/gravity-ui/components/commit/4129b3a7cb3cc4142707ca0000fcd2d9a50fc25d))
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix behaviour when resizing with opened "More" menu ([#198](https://github.com/gravity-ui/components/issues/198)) ([5dbf4e5](https://github.com/gravity-ui/components/commit/5dbf4e5e2526b447814666dc37ac2cbcd9ed63ed))
+
 ## [3.6.2](https://github.com/gravity-ui/components/compare/v3.6.1...v3.6.2) (2024-05-27)
 
 

@@ -16,7 +16,7 @@ $smallRoundedButtonSize: 24px;
 
     &:hover,
     &:focus-within {
-        #{$block}__actions {
+        #{$block}__actions:not(#{$block}__actions_hide) {
             opacity: 1;
         }
 

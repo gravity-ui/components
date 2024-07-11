@@ -95,4 +95,9 @@ describe('components: DefinitionList', () => {
         expect(component).toBeVisible();
         expect(component).toHaveClass(b('definition'));
     });
+    it('should render vertical view', () => {
+        getComponent({direction: 'vertical'});
+        const component = screen.getByTestId(qaAttribute);
+        expect(component).toHaveClass(b({vertical: true}));
+    });
 });
