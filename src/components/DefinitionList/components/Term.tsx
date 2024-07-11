@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {HelpPopover} from '../../HelpPopover';
+import i18n from '../i18n';
 import {DefinitionListDirection, DefinitionListItemNote, DefinitionListSingleItem} from '../types';
 import {b, getTitle} from '../utils';
 
@@ -19,12 +20,27 @@ function NoteElement({note}: NoteElementsProps) {
                 className={popoverClassName}
                 content={note}
                 placement={['bottom', 'top']}
+                buttonProps={{
+                    'aria-label': i18n('label_note'),
+                }}
             />
         );
     }
 
     if (typeof note === 'object') {
-        return <HelpPopover className={popoverClassName} placement={['bottom', 'top']} {...note} />;
+        const {buttonProps, ...rest} = note;
+
+        return (
+            <HelpPopover
+                className={popoverClassName}
+                placement={['bottom', 'top']}
+                buttonProps={{
+                    'aria-label': i18n('label_note'),
+                    ...buttonProps,
+                }}
+                {...rest}
+            />
+        );
     }
     return null;
 }
