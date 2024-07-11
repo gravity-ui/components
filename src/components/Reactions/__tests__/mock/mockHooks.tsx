@@ -9,7 +9,6 @@ import {
     ReactionsMockUser,
     reactionsPalletteMockOption as option,
     reactionsPalletteMockOptions as options,
-    reactionsPalletteMockOption,
     reactionsMockUser as user,
 } from './mockData';
 
@@ -42,9 +41,8 @@ const renderUsersReacted = (users: ReactionsMockUser[]) => {
     );
 };
 
-const getTooltip = (users: ReactionsMockUser[]): ReactionProps['tooltip'] => ({
-    content: renderUsersReacted(users),
-});
+const getTooltip = (users: ReactionsMockUser[]): ReactionProps['tooltip'] =>
+    renderUsersReacted(users);
 
 export function useMockReactions(): ReactionsProps {
     const [usersReacted, setUsersReacted] = React.useState({
@@ -60,9 +58,7 @@ export function useMockReactions(): ReactionsProps {
         () =>
             Object.entries(usersReacted).map(
                 ([value, users]): ReactionProps => ({
-                    ...reactionsPalletteMockOption[
-                        value as keyof typeof reactionsPalletteMockOption
-                    ],
+                    value,
                     counter: users.length,
                     tooltip: getTooltip(users),
                     selected: users.some(({name}) => name === currentUser.name),

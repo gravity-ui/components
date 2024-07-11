@@ -7,8 +7,7 @@ import {block} from '../utils/cn';
 import {useReactionsContext} from './context';
 import {useReactionsPopup} from './hooks';
 
-export interface ReactionProps
-    extends Pick<PaletteOption, 'disabled' | 'title' | 'value' | 'content'> {
+export interface ReactionProps extends Pick<PaletteOption, 'disabled' | 'value'> {
     /**
      * Should be true when the user used this reaction.
      */
@@ -22,28 +21,10 @@ export interface ReactionProps
      * If present, when a user hovers over the reaction, a popover appears with `tooltip.content`.
      * Can be used to display users who used this reaction.
      */
-    tooltip?: ReactionTooltipProps;
+    tooltip?: React.ReactNode;
 }
 
-export interface ReactionTooltipProps
-    extends Pick<PopoverProps, 'strategy' | 'placement' | 'modifiers'> {
-    /**
-     * Tooltip's content.
-     */
-    content: React.ReactNode;
-    /**
-     * Tooltip content's HTML class attribute.
-     */
-    className?: string;
-    /**
-     * Fires when the `onMouseLeave` callback is called.
-     * Usage example:
-     * you have some popup inside a tooltip, you hover on it, you don't want the tooltip to be closed because of that.
-     */
-    canClosePopup?: () => boolean;
-}
-
-interface ReactionInnerProps {
+interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
     reaction: ReactionProps;
     size: ButtonSize;
     onClick?: (value: string) => void;
@@ -61,8 +42,8 @@ const popupDefaultPlacement: PopoverProps['placement'] = [
 const b = block('reactions');
 
 export function Reaction(props: ReactionInnerProps) {
-    const {value, disabled, selected, content, counter, tooltip} = props.reaction;
-    const {size, onClick} = props;
+    const {value, disabled, selected, counter, tooltip} = props.reaction;
+    const {size, content, onClick} = props;
 
     const onClickCallback = React.useCallback(() => onClick?.(value), [onClick, value]);
 
@@ -94,15 +75,13 @@ export function Reaction(props: ReactionInnerProps) {
 
             {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (
                 <Popup
+                    contentClassName={b('popup')}
                     anchorRef={currentHoveredReaction.ref}
-                    contentClassName={b('popup', tooltip.className)}
-                    placement={tooltip.placement ?? popupDefaultPlacement}
-                    strategy={tooltip.strategy}
-                    modifiers={tooltip.modifiers}
+                    placement={popupDefaultPlacement}
                     open={currentHoveredReaction.open}
                     hasArrow
                 >
-                    {tooltip.content}
+                    {tooltip}
                 </Popup>
             ) : null}
         </div>

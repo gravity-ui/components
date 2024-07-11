@@ -7,6 +7,7 @@ import {
     Flex,
     Icon,
     Palette,
+    PaletteOption,
     PaletteProps,
     Popover,
     QAProps,
@@ -65,6 +66,21 @@ export function Reactions({
         ReactionsContextTooltipProps | undefined
     >(undefined);
 
+    const paletteOptionsMap = React.useMemo(
+        () =>
+            palette.options
+                ? palette.options.reduce<Record<PaletteOption['value'], PaletteOption>>(
+                      (acc, current) => {
+                          // eslint-disable-next-line no-param-reassign
+                          acc[current.value] = current;
+                          return acc;
+                      },
+                      {},
+                  )
+                : {},
+        [palette.options],
+    );
+
     const paletteValue = React.useMemo(
         () => reactions.filter((reaction) => reaction.selected).map((reaction) => reaction.value),
         [reactions],
@@ -100,9 +116,12 @@ export function Reactions({
             <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
                 {/* Reactions' list */}
                 {reactions.map((reaction) => {
+                    const content = paletteOptionsMap[reaction.value]?.content ?? '?';
+
                     return (
                         <Reaction
                             key={reaction.value}
+                            content={content}
                             reaction={disabled ? {...reaction, disabled} : reaction}
                             size={size}
                             onClick={onClickReaction}

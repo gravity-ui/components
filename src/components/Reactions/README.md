@@ -35,7 +35,7 @@ const YourComponent = () => {
         () =>
             Object.entries(usersReacted).map(
                 ([value, users]): ReactionProps => ({
-                    ...option[value as keyof typeof option],
+                    value,
                     counter: users.length,
                     selected: users.some(({name}) => name === currentUser.name),
                 }),
@@ -43,7 +43,7 @@ const YourComponent = () => {
         [usersReacted],
     );
 
-    // You can then handle clicking on a reaction with chaning the inital mapping,
+    // You can then handle clicking on a reaction with changing the inital mapping,
     // and the array of ReactionProps will change accordingly
     const onClickReaction = React.useCallback(
         (value: string) => {
@@ -97,7 +97,7 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 | `className`       | `string`                  |          |         | HTML class attribute                                                                           |
 | `style`           | `React.CSSProperties`     |          |         | HTML style attribute                                                                           |
 
-**ReactionProps** (single reaction props) extends `Palette`'s `PaletteOption`:
+**ReactionProps** (single reaction props) extends `Palette`'s `PaletteOption` `disabled` and `value` props:
 
 | Property   | Type                   | Required | Default | Description                                                   |
 | :--------- | :--------------------- | :------: | :------ | :------------------------------------------------------------ |

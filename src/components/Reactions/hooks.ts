@@ -16,15 +16,12 @@ export function useReactionsPopup(
     ref: React.RefObject<HTMLButtonElement>,
 ) {
     const {value} = reaction;
-    const canClosePopup = reaction.tooltip?.canClosePopup;
 
     const {openedTooltip: currentHoveredReaction, setOpenedTooltip: setCurrentHoveredReaction} =
         useReactionsContext();
 
     const {delayedCall: setDelayedOpen, clearTimeoutRef: clearOpenTimeout} = useTimeoutRef();
     const {delayedCall: setDelayedClose, clearTimeoutRef: clearCloseTimeout} = useTimeoutRef();
-    const {delayedCall: setDelayedCloseRetry, clearTimeoutRef: clearCloseRetryTimeout} =
-        useTimeoutRef();
 
     const open = useStableCallback(() => {
         setCurrentHoveredReaction({reaction, open: true, ref});
@@ -39,7 +36,6 @@ export function useReactionsPopup(
     });
 
     const focus = useStableCallback(() => {
-        clearCloseRetryTimeout();
         clearCloseTimeout();
         setCurrentHoveredReaction({reaction, open: false, ref});
 
@@ -56,35 +52,19 @@ export function useReactionsPopup(
         setDelayedClose(close, DELAY.closeTimeout);
     });
 
-    const fireClosePopup = useStableCallback(() => {
-        clearCloseRetryTimeout();
-
-        if (canClosePopup ? canClosePopup() : true) {
-            delayedClosePopup();
-        } else {
-            setDelayedCloseRetry(fireClosePopup, DELAY.closeTimeout);
-        }
-    });
-
     const onMouseEnter: React.MouseEventHandler<HTMLDivElement> = delayedOpenPopup;
 
-    const onMouseLeave: React.MouseEventHandler<HTMLDivElement> = fireClosePopup;
-
-    const windowFocusCallback = useStableCallback(() => {
-        if (currentHoveredReaction?.reaction.value === value && currentHoveredReaction.open) {
-            setCurrentHoveredReaction({...currentHoveredReaction, open: false});
-        }
-    });
+    const onMouseLeave: React.MouseEventHandler<HTMLDivElement> = delayedClosePopup;
 
     React.useEffect(() => {
         // When the tab gets focus we need to hide the popup,
         // because the user might have changed the cursor position.
-        window.addEventListener('focus', windowFocusCallback);
+        window.addEventListener('focus', close);
 
         return () => {
-            window.removeEventListener('focus', windowFocusCallback);
+            window.removeEventListener('focus', close);
         };
-    }, [windowFocusCallback]);
+    }, [close]);
 
     return {onMouseEnter, onMouseLeave};
 }
