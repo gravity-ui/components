@@ -65,14 +65,14 @@ export const PasswordInput = (props: PasswordInputProps) => {
                     <ClipboardButton
                         view="flat-secondary"
                         text={value}
-                        hasTooltip={hasRevealTooltip}
+                        hasTooltip={hasCopyTooltip}
                         size={actionButtonSize}
                         className={b('copy-button')}
                     />
                 ) : null}
                 {showRevealButton ? (
                     <ActionTooltip
-                        disabled={!hasCopyTooltip}
+                        disabled={!hasRevealTooltip}
                         title={
                             hideValue ? i18n('label_show-password') : i18n('label_hide-password')
                         }
