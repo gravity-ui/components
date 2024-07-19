@@ -15,7 +15,6 @@ import {
 import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
-import {useStableCallback} from '../utils/useStableCallback';
 
 import {Reaction, ReactionProps} from './Reaction';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
@@ -86,12 +85,15 @@ export function Reactions({
         [reactions],
     );
 
-    const onUpdatePalette = useStableCallback((updated: string[]) => {
-        const diffValues = xor(paletteValue, updated);
-        for (const diffValue of diffValues) {
-            onClickReaction?.(diffValue);
-        }
-    });
+    const onUpdatePalette = React.useCallback(
+        (updated: string[]) => {
+            const diffValues = xor(paletteValue, updated);
+            for (const diffValue of diffValues) {
+                onClickReaction?.(diffValue);
+            }
+        },
+        [onClickReaction, paletteValue],
+    );
 
     const paletteContent = React.useMemo(
         () => (

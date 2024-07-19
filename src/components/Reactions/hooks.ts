@@ -1,7 +1,5 @@
 import React from 'react';
 
-import {useStableCallback} from '../utils/useStableCallback';
-
 import type {ReactionProps} from './Reaction';
 import {useReactionsContext} from './context';
 
@@ -23,34 +21,34 @@ export function useReactionsPopup(
     const {delayedCall: setDelayedOpen, clearTimeoutRef: clearOpenTimeout} = useTimeoutRef();
     const {delayedCall: setDelayedClose, clearTimeoutRef: clearCloseTimeout} = useTimeoutRef();
 
-    const open = useStableCallback(() => {
+    const open = React.useCallback(() => {
         setCurrentHoveredReaction({reaction, open: true, ref});
-    });
+    }, [reaction, ref, setCurrentHoveredReaction]);
 
-    const close = useStableCallback(() => {
+    const close = React.useCallback(() => {
         clearOpenTimeout();
 
         if (currentHoveredReaction?.reaction.value === value && currentHoveredReaction.open) {
             setCurrentHoveredReaction({...currentHoveredReaction, open: false});
         }
-    });
+    }, [clearOpenTimeout, currentHoveredReaction, setCurrentHoveredReaction, value]);
 
-    const focus = useStableCallback(() => {
+    const focus = React.useCallback(() => {
         clearCloseTimeout();
         setCurrentHoveredReaction({reaction, open: false, ref});
 
         setDelayedOpen(open, DELAY.openTimeout);
-    });
+    }, [clearCloseTimeout, open, reaction, ref, setCurrentHoveredReaction, setDelayedOpen]);
 
-    const delayedOpenPopup = useStableCallback(() => {
+    const delayedOpenPopup = React.useCallback(() => {
         setDelayedOpen(focus, DELAY.focusTimeout);
-    });
+    }, [focus, setDelayedOpen]);
 
-    const delayedClosePopup = useStableCallback(() => {
+    const delayedClosePopup = React.useCallback(() => {
         clearOpenTimeout();
 
         setDelayedClose(close, DELAY.closeTimeout);
-    });
+    }, [clearOpenTimeout, close, setDelayedClose]);
 
     const onMouseEnter: React.MouseEventHandler<HTMLDivElement> = delayedOpenPopup;
 
@@ -72,17 +70,20 @@ export function useReactionsPopup(
 function useTimeoutRef() {
     const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const clearTimeoutRef = useStableCallback(() => {
+    const clearTimeoutRef = React.useCallback(() => {
         if (timeoutRef.current !== null) {
             clearTimeout(timeoutRef.current);
             timeoutRef.current = null;
         }
-    });
+    }, []);
 
-    const delayedCall = useStableCallback((handler: () => void, delay: number) => {
-        clearTimeoutRef();
-        timeoutRef.current = setTimeout(handler, delay);
-    });
+    const delayedCall = React.useCallback(
+        (handler: () => void, delay: number) => {
+            clearTimeoutRef();
+            timeoutRef.current = setTimeout(handler, delay);
+        },
+        [clearTimeoutRef],
+    );
 
     return {delayedCall, clearTimeoutRef};
 }
