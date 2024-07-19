@@ -16,31 +16,39 @@ import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
 
-import {Reaction, ReactionProps} from './Reaction';
+import {Reaction, ReactionProps, ReactionStateProps} from './Reaction';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
 
 import './Reactions.scss';
 
 const b = block('reactions');
 
-export type ReactionsPaletteProps = Omit<
+export type ReactionsPaletteProps = Pick<
     PaletteProps,
-    'value' | 'defaultValue' | 'onUpdate' | 'size' | 'disabled' | 'multiple'
+    'columns' | 'rowClassName' | 'optionClassName'
 >;
 
-export interface ReactionsProps extends Pick<PaletteProps, 'size' | 'disabled'>, QAProps, DOMProps {
+export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOMProps {
     /**
-     * Users' reactions.
+     * All available reactions.
      */
     reactions: ReactionProps[];
     /**
+     * Users' reactions.
+     */
+    reactionsState: ReactionStateProps[];
+    /**
      * Reactions' palette props.
      */
-    palette: ReactionsPaletteProps;
+    paletteProps?: ReactionsPaletteProps;
+    /**
+     * Reactions' readonly state (when a user is unable to react for some reason).
+     */
+    readOnly?: boolean;
     /**
      * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
-    onClickReaction?: (value: string) => void;
+    onToggle?: (value: string) => void;
 }
 
 const buttonSizeToIconSize = {
@@ -53,13 +61,14 @@ const buttonSizeToIconSize = {
 
 export function Reactions({
     reactions,
+    reactionsState,
     className,
     style,
     size = 'm',
-    disabled,
-    palette,
+    paletteProps,
+    readOnly,
     qa,
-    onClickReaction,
+    onToggle,
 }: ReactionsProps) {
     const [currentHoveredReaction, setCurrentHoveredReaction] = React.useState<
         ReactionsContextTooltipProps | undefined
@@ -67,45 +76,42 @@ export function Reactions({
 
     const paletteOptionsMap = React.useMemo(
         () =>
-            palette.options
-                ? palette.options.reduce<Record<PaletteOption['value'], PaletteOption>>(
-                      (acc, current) => {
-                          // eslint-disable-next-line no-param-reassign
-                          acc[current.value] = current;
-                          return acc;
-                      },
-                      {},
-                  )
-                : {},
-        [palette.options],
+            reactions.reduce<Record<PaletteOption['value'], PaletteOption>>((acc, current) => {
+                // eslint-disable-next-line no-param-reassign
+                acc[current.value] = current;
+                return acc;
+            }, {}),
+        [reactions],
     );
 
     const paletteValue = React.useMemo(
-        () => reactions.filter((reaction) => reaction.selected).map((reaction) => reaction.value),
-        [reactions],
+        () =>
+            reactionsState
+                .filter((reaction) => reaction.selected)
+                .map((reaction) => reaction.value),
+        [reactionsState],
     );
 
     const onUpdatePalette = React.useCallback(
         (updated: string[]) => {
             const diffValues = xor(paletteValue, updated);
             for (const diffValue of diffValues) {
-                onClickReaction?.(diffValue);
+                onToggle?.(diffValue);
             }
         },
-        [onClickReaction, paletteValue],
+        [onToggle, paletteValue],
     );
 
     const paletteContent = React.useMemo(
         () => (
             <Palette
-                {...palette}
+                {...paletteProps}
                 value={paletteValue}
-                disabled={disabled}
                 size={size}
                 onUpdate={onUpdatePalette}
             />
         ),
-        [paletteValue, disabled, size, palette, onUpdatePalette],
+        [paletteValue, size, paletteProps, onUpdatePalette],
     );
 
     return (
@@ -117,22 +123,22 @@ export function Reactions({
         >
             <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
                 {/* Reactions' list */}
-                {reactions.map((reaction) => {
+                {reactionsState.map((reaction) => {
                     const content = paletteOptionsMap[reaction.value]?.content ?? '?';
 
                     return (
                         <Reaction
                             key={reaction.value}
                             content={content}
-                            reaction={disabled ? {...reaction, disabled} : reaction}
+                            reaction={reaction}
                             size={size}
-                            onClick={onClickReaction}
+                            onClick={readOnly ? undefined : onToggle}
                         />
                     );
                 })}
 
                 {/* Add reaction button */}
-                {disabled ? null : (
+                {readOnly ? null : (
                     <Popover
                         content={paletteContent}
                         tooltipContentClassName={b('add-reaction-popover')}

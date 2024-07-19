@@ -15,8 +15,25 @@ export const Default: StoryFn = () => {
     return <Reactions {...useMockReactions()} />;
 };
 
-export const Disabled: StoryFn = () => {
-    return <Reactions {...useMockReactions()} disabled={true} />;
+export const Readonly: StoryFn = () => {
+    const {reactions, reactionsState, onToggle} = useMockReactions();
+
+    return (
+        <Reactions
+            reactions={reactions}
+            reactionsState={reactionsState.map((reaction) => ({
+                ...reaction,
+                tooltip: (
+                    <Flex direction="column" gap={2}>
+                        <Text variant="subheader-1">You must be singed in to react</Text>
+                        {reaction.tooltip}
+                    </Flex>
+                ),
+            }))}
+            onToggle={onToggle}
+            readOnly={true}
+        />
+    );
 };
 
 export const Size: StoryFn = () => {

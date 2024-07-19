@@ -32,17 +32,6 @@ describe('Reactions', () => {
         },
     );
 
-    test('all buttons are disabled when disabled=true prop is given', () => {
-        render(<TestReactions qa={qaId} disabled={true} />);
-
-        const $component = screen.getByTestId(qaId);
-        const $reactions = within($component).getAllByRole('button');
-
-        $reactions.forEach(($reaction: HTMLElement) => {
-            expect($reaction).toBeDisabled();
-        });
-    });
-
     test('show given reaction', () => {
         render(<TestReactions qa={qaId} />);
 

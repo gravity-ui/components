@@ -7,7 +7,13 @@ import {block} from '../utils/cn';
 import {useReactionsContext} from './context';
 import {useReactionsPopup} from './hooks';
 
-export interface ReactionProps extends Pick<PaletteOption, 'disabled' | 'value'> {
+export type ReactionProps = Pick<PaletteOption, 'value' | 'content' | 'title'>;
+
+export interface ReactionStateProps {
+    /**
+     * Reaction's unique value (ID).
+     */
+    value: string;
     /**
      * Should be true when the user used this reaction.
      */
@@ -25,7 +31,7 @@ export interface ReactionProps extends Pick<PaletteOption, 'disabled' | 'value'>
 }
 
 interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
-    reaction: ReactionProps;
+    reaction: ReactionStateProps;
     size: ButtonSize;
     onClick?: (value: string) => void;
 }
@@ -42,7 +48,7 @@ const popupDefaultPlacement: PopoverProps['placement'] = [
 const b = block('reactions');
 
 export function Reaction(props: ReactionInnerProps) {
-    const {value, disabled, selected, counter, tooltip} = props.reaction;
+    const {value, selected, counter, tooltip} = props.reaction;
     const {size, content, onClick} = props;
 
     const onClickCallback = React.useCallback(() => onClick?.(value), [onClick, value]);
@@ -55,7 +61,6 @@ export function Reaction(props: ReactionInnerProps) {
         <Button
             className={b('reaction-button', {size})}
             ref={buttonRef}
-            disabled={disabled}
             size={size}
             selected={selected}
             view="outlined"

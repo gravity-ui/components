@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Flex, Text, User} from '@gravity-ui/uikit';
 
-import {ReactionProps} from '../../Reaction';
+import {ReactionStateProps} from '../../Reaction';
 import {Reactions, ReactionsProps} from '../../Reactions';
 
 import {
@@ -41,7 +41,7 @@ const renderUsersReacted = (users: ReactionsMockUser[]) => {
     );
 };
 
-const getTooltip = (users: ReactionsMockUser[]): ReactionProps['tooltip'] =>
+const getTooltip = (users: ReactionsMockUser[]): ReactionStateProps['tooltip'] =>
     renderUsersReacted(users);
 
 export function useMockReactions(): ReactionsProps {
@@ -54,10 +54,10 @@ export function useMockReactions(): ReactionsProps {
         [option.sad.value]: [user.squidward],
     });
 
-    const reactions = React.useMemo(
+    const reactionsState = React.useMemo(
         () =>
             Object.entries(usersReacted).map(
-                ([value, users]): ReactionProps => ({
+                ([value, users]): ReactionStateProps => ({
                     value,
                     counter: users.length,
                     tooltip: getTooltip(users),
@@ -67,7 +67,7 @@ export function useMockReactions(): ReactionsProps {
         [usersReacted],
     );
 
-    const onClickReaction = React.useCallback(
+    const onToggle = React.useCallback(
         (value: string) => {
             if (!usersReacted[value]) {
                 setUsersReacted((current) => ({...current, [value]: [currentUser]}));
@@ -93,9 +93,9 @@ export function useMockReactions(): ReactionsProps {
     );
 
     return {
-        palette: {options},
-        reactions,
-        onClickReaction,
+        reactions: options,
+        reactionsState,
+        onToggle,
     };
 }
 

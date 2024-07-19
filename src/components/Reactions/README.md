@@ -8,7 +8,7 @@ Component for user reactions (e.g. 👍, 😊, 😎 etc) as new GitHub comments 
 import React from 'react';
 
 import {PaletteOption} from '@gravity-ui/uikit';
-import {ReactionProps, Reactions} from '@gravity-ui/components';
+import {ReactionStateProps, Reactions} from '@gravity-ui/components';
 
 const user = {
     spongeBob: {name: 'Sponge Bob'},
@@ -30,11 +30,11 @@ const YourComponent = () => {
         [option.cool.value]: [user.spongeBob],
     });
 
-    // And then convert that mapping into an array of ReactionProps
+    // And then convert that mapping into an array of ReactionStateProps
     const reactions = React.useMemo(
         () =>
             Object.entries(usersReacted).map(
-                ([value, users]): ReactionProps => ({
+                ([value, users]): ReactionStateProps => ({
                     value,
                     counter: users.length,
                     selected: users.some(({name}) => name === currentUser.name),
@@ -44,8 +44,8 @@ const YourComponent = () => {
     );
 
     // You can then handle clicking on a reaction with changing the inital mapping,
-    // and the array of ReactionProps will change accordingly
-    const onClickReaction = React.useCallback(
+    // and the array of ReactionStateProps will change accordingly
+    const onToggle = React.useCallback(
         (value: string) => {
             if (!usersReacted[value]) {
                 // If the reaction is not present yet
@@ -75,7 +75,7 @@ const YourComponent = () => {
     );
 
     return (
-        <Reactions palette={{options}} reactions={reactions} onClickReaction={onClickReaction} />
+        <Reactions palette={{options}} reactions={reactions} onToggle={onToggle} />
     );
 };
 ```
@@ -86,29 +86,23 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 
 **ReactionsProps** (main component props — Reactions' list):
 
-| Property          | Type                      | Required | Default | Description                                                                                    |
-| :---------------- | :------------------------ | :------: | :------ | :--------------------------------------------------------------------------------------------- |
-| `reactions`       | `ReactionProps[]`         |  `true`  |         | List of Reactions to display                                                                   |
-| `palette`         | `ReactionsPaletteProps`   |  `true`  |         | Notifications' palette props — it's a `Palette` component with available reactions to the user |
-| `onClickReaction` | `(value: string) => void` |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
-| `size`            | `ButtonSize`              |          | `m`     | Buttons's size                                                                                 |
-| `disabled`        | `boolean`                 |          | `false` | If the buttons' are disabled                                                                   |
-| `qa`              | `string`                  |          |         | `qa` attribute for testing                                                                     |
-| `className`       | `string`                  |          |         | HTML class attribute                                                                           |
-| `style`           | `React.CSSProperties`     |          |         | HTML style attribute                                                                           |
+| Property         | Type                      | Required | Default | Description                                                                                    |
+| :--------------- | :------------------------ | :------: | :------ | :--------------------------------------------------------------------------------------------- |
+| `reactions`      | `PaletteOption[]`         |  `true`  |         | List of all available reactions                                                                |
+| `reactionsState` | `ReactionStateProps[]`    |  `true`  |         | List of reactions that were used                                                               |
+| `paletteProps`   | `ReactionsPaletteProps`   |  `true`  |         | Notifications' palette props — it's a `Palette` component with available reactions to the user |
+| `onToggle`       | `(value: string) => void` |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
+| `size`           | `ButtonSize`              |          | `m`     | Buttons's size                                                                                 |
+| `readOnly`       | `boolean`                 |          | `false` | readOnly state (usage example: only signed in users can react)                                 |
+| `qa`             | `string`                  |          |         | `qa` attribute for testing                                                                     |
+| `className`      | `string`                  |          |         | HTML class attribute                                                                           |
+| `style`          | `React.CSSProperties`     |          |         | HTML style attribute                                                                           |
 
-**ReactionProps** (single reaction props) extends `Palette`'s `PaletteOption` `disabled` and `value` props:
+**ReactionStateProps** (single reaction props):
 
-| Property   | Type                   | Required | Default | Description                                                   |
-| :--------- | :--------------------- | :------: | :------ | :------------------------------------------------------------ |
-| `selected` | `boolean`              |          |         | Is reaction selected by the user                              |
-| `counter`  | `React.ReactNode`      |          |         | How many users used this reaction                             |
-| `tooltip`  | `ReactionTooltipProps` |          |         | Reaction's tooltip with the list of reacted users for example |
-
-**ReactionTooltipProps** — notification's type extends `Pick<PopoverProps, 'strategy' | 'placement' | 'modifiers'>`:
-
-| Property        | Type              | Required | Default | Description                                                                                                                                                                      |
-| :-------------- | :---------------- | :------: | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `content`       | `React.ReactNode` |  `true`  |         | Tooltip's content                                                                                                                                                                |
-| `className`     | `string`          |          |         | Tooltip content's HTML class attribute                                                                                                                                           |
-| `canClosePopup` | `() => boolean`   |          |         | Fires when the `onMouseLeave` callback is called. Usage example: you have some popup inside a tooltip, you hover on it, you don't want the tooltip to be closed because of that. |
+| Property   | Type              | Required | Default | Description                                                   |
+| :--------- | :---------------- | :------: | :------ | :------------------------------------------------------------ |
+| `value`    | `string`          |          |         | Reaction's unique value (ID)                                  |
+| `selected` | `boolean`         |          |         | Is reaction selected by the user                              |
+| `counter`  | `React.ReactNode` |          |         | How many users used this reaction                             |
+| `tooltip`  | `React.ReactNode` |          |         | Reaction's tooltip with the list of reacted users for example |

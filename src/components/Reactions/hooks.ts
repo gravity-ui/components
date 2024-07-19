@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type {ReactionProps} from './Reaction';
+import type {ReactionStateProps} from './Reaction';
 import {useReactionsContext} from './context';
 
 const DELAY = {
@@ -10,7 +10,7 @@ const DELAY = {
 } as const;
 
 export function useReactionsPopup(
-    reaction: ReactionProps,
+    reaction: ReactionStateProps,
     ref: React.RefObject<HTMLButtonElement>,
 ) {
     const {value} = reaction;
