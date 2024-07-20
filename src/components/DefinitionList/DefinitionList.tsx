@@ -3,20 +3,24 @@ import React from 'react';
 import {Definition} from './components/Definition';
 import {GroupLabel} from './components/GroupLabel';
 import {Term} from './components/Term';
-import {DefinitionListProps} from './types';
+import {
+    DefinitionListGranularProps,
+    DefinitionListGroupedProps,
+    DefinitionListProps,
+} from './types';
 import {
     b,
-    getFlattenItems,
+    getAllItemsAsGroups,
     getKeyStyles,
     getTitle,
     getValueStyles,
-    isGroup,
     isUnbreakableOver,
+    onlySingleItems,
 } from './utils';
 
 import './DefinitionList.scss';
 
-export function DefinitionList({
+function DefinitionListGranular({
     items,
     responsive,
     direction = 'horizontal',
@@ -26,36 +30,23 @@ export function DefinitionList({
     itemClassName,
     copyPosition = 'outside',
     qa,
-}: DefinitionListProps) {
+}: DefinitionListGranularProps) {
     const keyStyle = getKeyStyles({nameMaxWidth, direction});
 
     const valueStyle = getValueStyles({contentMaxWidth, direction});
 
     const normalizedItems = React.useMemo(() => {
-        return getFlattenItems(items).map((value, index) => ({...value, key: index}));
+        return items.map((value, index) => ({...value, key: index}));
     }, [items]);
 
     return (
         <dl className={b({responsive, vertical: direction === 'vertical'}, className)} data-qa={qa}>
             {normalizedItems.map((item) => {
-                if (isGroup(item)) {
-                    const {key, label} = item;
-                    return <GroupLabel key={key} label={label} />;
-                }
-                const {
-                    name,
-                    key,
-                    content,
-                    contentTitle,
-                    nameTitle,
-                    copyText,
-                    note,
-                    multilineName,
-                    isGrouped,
-                } = item;
+                const {name, key, content, contentTitle, nameTitle, copyText, note, multilineName} =
+                    item;
 
                 return (
-                    <div key={key} className={b('item', {grouped: isGrouped}, itemClassName)}>
+                    <div key={key} className={b('item', itemClassName)}>
                         <dt
                             className={b('term-container', {multiline: multilineName})}
                             style={keyStyle}
@@ -90,4 +81,47 @@ export function DefinitionList({
             })}
         </dl>
     );
+}
+
+function DefinitionListGrouped({
+    items,
+    className,
+    itemClassName,
+    ...rest
+}: DefinitionListGroupedProps) {
+    const normalizedItems = React.useMemo(() => {
+        return items.map((value, index) => ({...value, key: index}));
+    }, [items]);
+
+    return (
+        <div className={b({vertical: rest.direction === 'vertical'}, className)}>
+            {normalizedItems.map((item) => {
+                const {key, label} = item;
+
+                return (
+                    <React.Fragment key={key}>
+                        {label && <GroupLabel label={label} />}
+                        {item.items && (
+                            <DefinitionListGranular
+                                {...rest}
+                                className={b('group', {margin: !label})}
+                                items={item.items}
+                                itemClassName={b('item', {grouped: Boolean(label)}, itemClassName)}
+                            />
+                        )}
+                    </React.Fragment>
+                );
+            })}
+        </div>
+    );
+}
+
+export function DefinitionList({items, ...rest}: DefinitionListProps) {
+    if (onlySingleItems(items)) {
+        return <DefinitionListGranular {...rest} items={items} />;
+    }
+
+    const preparedItems = getAllItemsAsGroups(items);
+
+    return <DefinitionListGrouped {...rest} items={preparedItems} />;
 }

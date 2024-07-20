@@ -14,10 +14,6 @@ $block: '.#{variables.$ns}definition-list';
         }
     }
 
-    #{$block}__item:is(#{$block}__item_grouped) + #{$block}__item:not(#{$block}__item_grouped) {
-        margin-block-start: var(--g-spacing-5);
-    }
-
     &__item {
         display: flex;
         align-items: baseline;
@@ -34,8 +30,15 @@ $block: '.#{variables.$ns}definition-list';
         }
     }
 
+    &__group_margin {
+        &:not(:first-of-type) {
+            margin-block-start: var(--g-spacing-5);
+        }
+    }
+
     &__term-container {
-        flex: 0 0 300px;
+        flex: 0 0 auto;
+        min-width: 300px;
         display: flex;
         align-items: baseline;
 
@@ -136,7 +139,7 @@ $block: '.#{variables.$ns}definition-list';
     #{$block}__title:not(:first-of-type) {
         margin-block-start: var(--g-spacing-8);
     }
-    #{$block}__item:is(#{$block}__item_grouped) + #{$block}__item:not(#{$block}__item_grouped) {
+    #{$block}__group_margin:not(:first-of-type) {
         margin-block-start: var(--g-spacing-8);
     }
 }

@@ -20,10 +20,6 @@ export interface DefinitionListSingleItem {
     multilineName?: boolean;
 }
 
-export interface DefinitionListItemGrouped extends DefinitionListSingleItem {
-    isGrouped?: boolean;
-}
-
 export type DefinitionListItem = DefinitionListSingleItem | DefinitionListGroup;
 
 export type DefinitionListDirection = 'vertical' | 'horizontal';
@@ -37,4 +33,11 @@ export interface DefinitionListProps extends QAProps {
     contentMaxWidth?: number | 'auto';
     className?: string;
     itemClassName?: string;
+}
+
+export interface DefinitionListGranularProps extends Omit<DefinitionListProps, 'items'> {
+    items: DefinitionListSingleItem[];
+}
+export interface DefinitionListGroupedProps extends Omit<DefinitionListProps, 'items'> {
+    items: DefinitionListGroup[];
 }
