@@ -86,17 +86,18 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 
 **ReactionsProps** (main component props — Reactions' list):
 
-| Property         | Type                      | Required | Default | Description                                                                                    |
-| :--------------- | :------------------------ | :------: | :------ | :--------------------------------------------------------------------------------------------- |
-| `reactions`      | `PaletteOption[]`         |  `true`  |         | List of all available reactions                                                                |
-| `reactionsState` | `ReactionStateProps[]`    |  `true`  |         | List of reactions that were used                                                               |
-| `paletteProps`   | `ReactionsPaletteProps`   |  `true`  |         | Notifications' palette props — it's a `Palette` component with available reactions to the user |
-| `onToggle`       | `(value: string) => void` |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
-| `size`           | `ButtonSize`              |          | `m`     | Buttons's size                                                                                 |
-| `readOnly`       | `boolean`                 |          | `false` | readOnly state (usage example: only signed in users can react)                                 |
-| `qa`             | `string`                  |          |         | `qa` attribute for testing                                                                     |
-| `className`      | `string`                  |          |         | HTML class attribute                                                                           |
-| `style`          | `React.CSSProperties`     |          |         | HTML style attribute                                                                           |
+| Property          | Type                      | Required | Default     | Description                                                                                    |
+| :---------------- | :------------------------ | :------: | :---------- | :--------------------------------------------------------------------------------------------- |
+| `reactions`       | `PaletteOption[]`         |  `true`  |             | List of all available reactions                                                                |
+| `reactionsState`  | `ReactionStateProps[]`    |  `true`  |             | List of reactions that were used                                                               |
+| `paletteProps`    | `ReactionsPaletteProps`   |  `true`  |             | Notifications' palette props — it's a `Palette` component with available reactions to the user |
+| `onToggle`        | `(value: string) => void` |          |             | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
+| `size`            | `ButtonSize`              |          | `m`         | Buttons's size                                                                                 |
+| `readOnly`        | `boolean`                 |          | `false`     | readOnly state (usage example: only signed in users can react)                                 |
+| `tooltipBehavior` | `"tooltip" or "popover"`  |          | `"tooltip"` | How a reaction's tooltip should act: as a tooltip, or as a popover                             |
+| `qa`              | `string`                  |          |             | `qa` attribute for testing                                                                     |
+| `className`       | `string`                  |          |             | HTML `class` attribute                                                                         |
+| `style`           | `React.CSSProperties`     |          |             | HTML `style` attribute                                                                         |
 
 **ReactionStateProps** (single reaction props):
 

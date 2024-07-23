@@ -33,6 +33,7 @@ export interface ReactionStateProps {
 interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
     reaction: ReactionStateProps;
     size: ButtonSize;
+    tooltipBehavior: 'tooltip' | 'popover';
     onClick?: (value: string) => void;
 }
 
@@ -58,24 +59,32 @@ export function Reaction(props: ReactionInnerProps) {
     const {openedTooltip: currentHoveredReaction} = useReactionsContext();
 
     const button = (
-        <Button
-            className={b('reaction-button', {size})}
-            ref={buttonRef}
-            size={size}
-            selected={selected}
-            view="outlined"
-            extraProps={{value}}
-            onClick={onClickCallback}
+        <span
+            onMouseEnter={props.tooltipBehavior === 'tooltip' ? onMouseEnter : undefined}
+            onMouseLeave={props.tooltipBehavior === 'tooltip' ? onMouseLeave : undefined}
         >
-            <Button.Icon>{content}</Button.Icon>
-            {counter === undefined || counter === null ? null : (
-                <span className={b('reaction-button-text', {size})}>{counter}</span>
-            )}
-        </Button>
+            <Button
+                className={b('reaction-button', {size})}
+                ref={buttonRef}
+                size={size}
+                selected={selected}
+                view="outlined"
+                extraProps={{value}}
+                onClick={onClickCallback}
+            >
+                <Button.Icon>{content}</Button.Icon>
+                {counter === undefined || counter === null ? null : (
+                    <span className={b('reaction-button-text', {size})}>{counter}</span>
+                )}
+            </Button>
+        </span>
     );
 
     return tooltip ? (
-        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <div
+            onMouseEnter={props.tooltipBehavior === 'popover' ? onMouseEnter : undefined}
+            onMouseLeave={props.tooltipBehavior === 'popover' ? onMouseLeave : undefined}
+        >
             {button}
 
             {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (

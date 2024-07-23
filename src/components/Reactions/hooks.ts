@@ -6,7 +6,7 @@ import {useReactionsContext} from './context';
 const DELAY = {
     focusTimeout: 600,
     openTimeout: 200,
-    closeTimeout: 100,
+    closeTimeout: 200,
 } as const;
 
 export function useReactionsPopup(
@@ -35,14 +35,32 @@ export function useReactionsPopup(
 
     const focus = React.useCallback(() => {
         clearCloseTimeout();
-        setCurrentHoveredReaction({reaction, open: false, ref});
 
-        setDelayedOpen(open, DELAY.openTimeout);
-    }, [clearCloseTimeout, open, reaction, ref, setCurrentHoveredReaction, setDelayedOpen]);
+        // If already hovered over current reaction
+        if (currentHoveredReaction && currentHoveredReaction.reaction.value === reaction.value) {
+            // But if it's not opened yet
+            if (!currentHoveredReaction.open) {
+                setDelayedOpen(open, DELAY.openTimeout);
+            }
+        } else {
+            setCurrentHoveredReaction({reaction, open: false, ref});
+
+            setDelayedOpen(open, DELAY.openTimeout);
+        }
+    }, [
+        clearCloseTimeout,
+        currentHoveredReaction,
+        open,
+        reaction,
+        ref,
+        setCurrentHoveredReaction,
+        setDelayedOpen,
+    ]);
 
     const delayedOpenPopup = React.useCallback(() => {
+        clearCloseTimeout();
         setDelayedOpen(focus, DELAY.focusTimeout);
-    }, [focus, setDelayedOpen]);
+    }, [clearCloseTimeout, focus, setDelayedOpen]);
 
     const delayedClosePopup = React.useCallback(() => {
         clearOpenTimeout();

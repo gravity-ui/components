@@ -62,3 +62,18 @@ export const Size: StoryFn = () => {
         </Flex>
     );
 };
+
+export const TooltipBehavior: StoryFn = () => {
+    return (
+        <Flex direction="column" gap={4}>
+            <Flex direction="column" gap={2}>
+                <Text variant="subheader-1">Behaves as a tooltip</Text>
+                <Reactions {...useMockReactions()} tooltipBehavior="tooltip" />
+            </Flex>
+            <Flex direction="column" gap={2}>
+                <Text variant="subheader-1">Behaves as a popover</Text>
+                <Reactions {...useMockReactions()} tooltipBehavior="popover" />
+            </Flex>
+        </Flex>
+    );
+};

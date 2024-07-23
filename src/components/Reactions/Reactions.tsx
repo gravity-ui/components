@@ -46,6 +46,14 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      */
     readOnly?: boolean;
     /**
+     * How a reaction's tooltip should act:
+     * 1. as a tooltip (you can't hover over the contents — it disappeares),
+     * 2. as a popover (you can hover over the contents — it doesn't disappear).
+     *
+     * Default: 'tooltip'.
+     */
+    tooltipBehavior?: 'tooltip' | 'popover';
+    /**
      * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
     onToggle?: (value: string) => void;
@@ -67,6 +75,7 @@ export function Reactions({
     size = 'm',
     paletteProps,
     readOnly,
+    tooltipBehavior,
     qa,
     onToggle,
 }: ReactionsProps) {
@@ -132,6 +141,7 @@ export function Reactions({
                             key={reaction.value}
                             content={content}
                             reaction={reaction}
+                            tooltipBehavior={tooltipBehavior ?? 'tooltip'}
                             size={size}
                             onClick={readOnly ? undefined : onToggle}
                         />
