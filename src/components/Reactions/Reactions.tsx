@@ -106,12 +106,13 @@ export function Reactions({
         () => (
             <Palette
                 {...paletteProps}
+                options={reactions}
                 value={paletteValue}
                 size={size}
                 onUpdate={onUpdatePalette}
             />
         ),
-        [paletteValue, size, paletteProps, onUpdatePalette],
+        [paletteProps, reactions, paletteValue, size, onUpdatePalette],
     );
 
     return (
@@ -148,6 +149,7 @@ export function Reactions({
                         <Button
                             className={b('reaction-button', {size, 'add-button': true})}
                             size={size}
+                            extraProps={{'aria-label': 'add-reaction'}}
                             view="flat"
                         >
                             <Button.Icon>
