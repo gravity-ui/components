@@ -43,7 +43,7 @@ export type NotificationActionProps = {
     view?: ButtonProps['view'];
     icon?: IconData;
     text: string;
-    onClick?: () => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     href?: string;
     target?: '_blank';
 };
