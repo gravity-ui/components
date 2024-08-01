@@ -2,12 +2,7 @@ import React from 'react';
 
 import {block} from '../utils/cn';
 
-import type {
-    DefinitionListGroup,
-    DefinitionListItem,
-    DefinitionListProps,
-    DefinitionListSingleItem,
-} from './types';
+import type {DefinitionListGroup, DefinitionListItem, DefinitionListSingleItem} from './types';
 
 export const b = block('definition-list');
 
@@ -59,30 +54,4 @@ export function getTitle(title?: string, content?: React.ReactNode) {
     }
 
     return undefined;
-}
-
-export function getKeyStyles({
-    nameMaxWidth,
-    direction,
-}: Pick<DefinitionListProps, 'nameMaxWidth' | 'direction'>) {
-    if (!nameMaxWidth) {
-        return {};
-    }
-    if (direction === 'vertical') {
-        return {maxWidth: nameMaxWidth};
-    }
-    return {flexBasis: nameMaxWidth};
-}
-
-export function getValueStyles({
-    contentMaxWidth,
-    direction,
-}: Pick<DefinitionListProps, 'contentMaxWidth' | 'direction'>) {
-    if (!(typeof contentMaxWidth === 'number')) {
-        return {};
-    }
-    if (direction === 'vertical') {
-        return {maxWidth: contentMaxWidth};
-    }
-    return {flexBasis: contentMaxWidth, maxWidth: contentMaxWidth};
 }
