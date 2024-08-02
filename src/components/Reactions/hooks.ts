@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type {ReactionStateProps} from './Reaction';
+import type {ReactionState} from './Reaction';
 import {useReactionsContext} from './context';
 
 const DELAY = {
@@ -10,7 +10,7 @@ const DELAY = {
 } as const;
 
 export function useReactionsPopup(
-    reaction: ReactionStateProps,
+    reaction: ReactionState,
     ref: React.RefObject<HTMLButtonElement>,
 ) {
     const {value} = reaction;
@@ -68,9 +68,13 @@ export function useReactionsPopup(
         setDelayedClose(close, DELAY.closeTimeout);
     }, [clearOpenTimeout, close, setDelayedClose]);
 
-    const onMouseEnter: React.MouseEventHandler<HTMLDivElement> = delayedOpenPopup;
+    const onMouseEnter: React.MouseEventHandler<
+        HTMLDivElement | HTMLButtonElement | HTMLAnchorElement
+    > = delayedOpenPopup;
 
-    const onMouseLeave: React.MouseEventHandler<HTMLDivElement> = delayedClosePopup;
+    const onMouseLeave: React.MouseEventHandler<
+        HTMLDivElement | HTMLButtonElement | HTMLAnchorElement
+    > = delayedClosePopup;
 
     React.useEffect(() => {
         // When the tab gets focus we need to hide the popup,

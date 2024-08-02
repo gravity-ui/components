@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Flex, Text, User} from '@gravity-ui/uikit';
 
-import {ReactionStateProps} from '../../Reaction';
+import {ReactionState} from '../../Reaction';
 import {Reactions, ReactionsProps} from '../../Reactions';
 
 import {
@@ -41,7 +41,7 @@ const renderUsersReacted = (users: ReactionsMockUser[]) => {
     );
 };
 
-const getTooltip = (users: ReactionsMockUser[]): ReactionStateProps['tooltip'] =>
+const getTooltip = (users: ReactionsMockUser[]): ReactionState['tooltip'] =>
     renderUsersReacted(users);
 
 export function useMockReactions(): ReactionsProps {
@@ -57,7 +57,7 @@ export function useMockReactions(): ReactionsProps {
     const reactionsState = React.useMemo(
         () =>
             Object.entries(usersReacted).map(
-                ([value, users]): ReactionStateProps => ({
+                ([value, users]): ReactionState => ({
                     value,
                     counter: users.length,
                     tooltip: getTooltip(users),

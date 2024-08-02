@@ -1,9 +1,9 @@
 import React from 'react';
 
-import type {ReactionStateProps} from './Reaction';
+import type {ReactionState} from './Reaction';
 
 export interface ReactionsContextTooltipProps {
-    reaction: ReactionStateProps;
+    reaction: ReactionState;
     ref: React.RefObject<HTMLButtonElement>;
     open: boolean;
 }

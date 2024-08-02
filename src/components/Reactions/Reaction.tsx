@@ -9,7 +9,7 @@ import {useReactionsPopup} from './hooks';
 
 export type ReactionProps = Pick<PaletteOption, 'value' | 'content' | 'title'>;
 
-export interface ReactionStateProps {
+export interface ReactionState {
     /**
      * Reaction's unique value (ID).
      */
@@ -31,7 +31,7 @@ export interface ReactionStateProps {
 }
 
 interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
-    reaction: ReactionStateProps;
+    reaction: ReactionState;
     size: ButtonSize;
     tooltipBehavior: 'tooltip' | 'popover';
     onClick?: (value: string) => void;
@@ -59,25 +59,24 @@ export function Reaction(props: ReactionInnerProps) {
     const {openedTooltip: currentHoveredReaction} = useReactionsContext();
 
     const button = (
-        <span
+        <Button
+            className={b('reaction-button', {size})}
+            ref={buttonRef}
+            size={size}
+            selected={selected}
+            view="outlined"
+            extraProps={{value}}
+            onClick={onClickCallback}
             onMouseEnter={props.tooltipBehavior === 'tooltip' ? onMouseEnter : undefined}
             onMouseLeave={props.tooltipBehavior === 'tooltip' ? onMouseLeave : undefined}
         >
-            <Button
-                className={b('reaction-button', {size})}
-                ref={buttonRef}
-                size={size}
-                selected={selected}
-                view="outlined"
-                extraProps={{value}}
-                onClick={onClickCallback}
-            >
-                <Button.Icon>{content}</Button.Icon>
-                {counter === undefined || counter === null ? null : (
-                    <span className={b('reaction-button-text', {size})}>{counter}</span>
-                )}
-            </Button>
-        </span>
+            <Button.Icon>
+                <span className={b('reaction-button-content', {size})}>{content}</span>
+            </Button.Icon>
+            {counter === undefined || counter === null ? null : (
+                <span className={b('reaction-button-content', {size, text: true})}>{counter}</span>
+            )}
+        </Button>
     );
 
     return tooltip ? (

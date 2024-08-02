@@ -16,8 +16,9 @@ import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
 
-import {Reaction, ReactionProps, ReactionStateProps} from './Reaction';
+import {Reaction, ReactionProps, ReactionState} from './Reaction';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
+import {i18n} from './i18n';
 
 import './Reactions.scss';
 
@@ -36,7 +37,7 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
     /**
      * Users' reactions.
      */
-    reactionsState: ReactionStateProps[];
+    reactionsState: ReactionState[];
     /**
      * Reactions' palette props.
      */
@@ -155,11 +156,13 @@ export function Reactions({
                         tooltipContentClassName={b('add-reaction-popover')}
                         openOnHover={false}
                         hasArrow={false}
+                        focusTrap
+                        autoFocus
                     >
                         <Button
                             className={b('reaction-button', {size, 'add-button': true})}
                             size={size}
-                            extraProps={{'aria-label': 'add-reaction'}}
+                            extraProps={{'aria-label': i18n('add-reaction')}}
                             view="flat"
                         >
                             <Button.Icon>
