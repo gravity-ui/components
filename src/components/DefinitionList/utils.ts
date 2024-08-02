@@ -2,13 +2,7 @@ import React from 'react';
 
 import {block} from '../utils/cn';
 
-import type {
-    DefinitionListGroup,
-    DefinitionListItem,
-    DefinitionListItemGrouped,
-    DefinitionListProps,
-    DefinitionListSingleItem,
-} from './types';
+import type {DefinitionListGroup, DefinitionListItem, DefinitionListSingleItem} from './types';
 
 export const b = block('definition-list');
 
@@ -23,19 +17,31 @@ export function isUnbreakableOver(limit: number) {
 export const isGroup = (item: DefinitionListItem): item is DefinitionListGroup =>
     'label' in item && !('name' in item);
 
-export function getFlattenItems(
+export const onlySingleItems = (items: DefinitionListItem[]): items is DefinitionListSingleItem[] =>
+    !items.some((el) => isGroup(el));
+
+export function getAllItemsAsGroups(
     items: (DefinitionListSingleItem | DefinitionListGroup)[],
-): (DefinitionListItemGrouped | DefinitionListGroup)[] {
-    return items.reduce<(DefinitionListSingleItem | DefinitionListGroup)[]>((acc, item) => {
+): DefinitionListGroup[] {
+    const result: DefinitionListGroup[] = [];
+    let temporaryList: DefinitionListSingleItem[] = [];
+    for (const item of items) {
         if (isGroup(item)) {
-            acc.push({label: item.label});
-            const items = [...(item.items ?? [])].map((el) => ({...el, isGrouped: true}));
-            acc.push(...items);
+            if (temporaryList.length) {
+                result.push({items: temporaryList, label: null});
+                temporaryList = [];
+            }
+
+            result.push(item);
         } else {
-            acc.push(item);
+            temporaryList.push(item);
         }
-        return acc;
-    }, []);
+    }
+    if (temporaryList.length) {
+        result.push({items: temporaryList, label: null});
+        temporaryList = [];
+    }
+    return result;
 }
 
 export function getTitle(title?: string, content?: React.ReactNode) {
@@ -48,30 +54,4 @@ export function getTitle(title?: string, content?: React.ReactNode) {
     }
 
     return undefined;
-}
-
-export function getKeyStyles({
-    nameMaxWidth,
-    direction,
-}: Pick<DefinitionListProps, 'nameMaxWidth' | 'direction'>) {
-    if (!nameMaxWidth) {
-        return {};
-    }
-    if (direction === 'vertical') {
-        return {maxWidth: nameMaxWidth};
-    }
-    return {flexBasis: nameMaxWidth};
-}
-
-export function getValueStyles({
-    contentMaxWidth,
-    direction,
-}: Pick<DefinitionListProps, 'contentMaxWidth' | 'direction'>) {
-    if (!(typeof contentMaxWidth === 'number')) {
-        return {};
-    }
-    if (direction === 'vertical') {
-        return {maxWidth: contentMaxWidth};
-    }
-    return {flexBasis: contentMaxWidth, maxWidth: contentMaxWidth};
 }
