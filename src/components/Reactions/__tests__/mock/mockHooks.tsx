@@ -41,8 +41,7 @@ const renderUsersReacted = (users: ReactionsMockUser[]) => {
     );
 };
 
-const getTooltip = (users: ReactionsMockUser[]): ReactionState['tooltip'] =>
-    renderUsersReacted(users);
+const getTooltip = (users: ReactionsMockUser[]) => renderUsersReacted(users);
 
 export function useMockReactions(): ReactionsProps {
     const [usersReacted, setUsersReacted] = React.useState({
@@ -60,7 +59,6 @@ export function useMockReactions(): ReactionsProps {
                 ([value, users]): ReactionState => ({
                     value,
                     counter: users.length,
-                    tooltip: getTooltip(users),
                     selected: users.some(({name}) => name === currentUser.name),
                 }),
             ),
@@ -92,9 +90,15 @@ export function useMockReactions(): ReactionsProps {
         [usersReacted],
     );
 
+    const renderTooltip = React.useCallback(
+        (reaciton: ReactionState) => getTooltip(usersReacted[reaciton.value]),
+        [usersReacted],
+    );
+
     return {
         reactions: options,
         reactionsState,
+        renderTooltip,
         onToggle,
     };
 }

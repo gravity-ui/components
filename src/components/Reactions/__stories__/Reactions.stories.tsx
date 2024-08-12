@@ -16,20 +16,22 @@ export const Default: StoryFn = () => {
 };
 
 export const Readonly: StoryFn = () => {
-    const {reactions, reactionsState, onToggle} = useMockReactions();
+    const {reactions, reactionsState, renderTooltip, onToggle} = useMockReactions();
 
     return (
         <Reactions
             reactions={reactions}
-            reactionsState={reactionsState.map((reaction) => ({
-                ...reaction,
-                tooltip: (
-                    <Flex direction="column" gap={2}>
-                        <Text variant="subheader-1">You must be singed in to react</Text>
-                        {reaction.tooltip}
-                    </Flex>
-                ),
-            }))}
+            renderTooltip={
+                renderTooltip
+                    ? (state) => (
+                          <Flex direction="column" gap={2}>
+                              <Text variant="subheader-1">You must be singed in to react</Text>
+                              {renderTooltip(state)}
+                          </Flex>
+                      )
+                    : undefined
+            }
+            reactionsState={reactionsState}
             onToggle={onToggle}
             readOnly={true}
         />
@@ -58,21 +60,6 @@ export const Size: StoryFn = () => {
             <Flex direction="column" gap={2}>
                 <Text variant="subheader-1">Size XL</Text>
                 <Reactions {...useMockReactions()} size="xl" />
-            </Flex>
-        </Flex>
-    );
-};
-
-export const TooltipBehavior: StoryFn = () => {
-    return (
-        <Flex direction="column" gap={4}>
-            <Flex direction="column" gap={2}>
-                <Text variant="subheader-1">Behaves as a tooltip</Text>
-                <Reactions {...useMockReactions()} tooltipBehavior="tooltip" />
-            </Flex>
-            <Flex direction="column" gap={2}>
-                <Text variant="subheader-1">Behaves as a popover</Text>
-                <Reactions {...useMockReactions()} tooltipBehavior="popover" />
             </Flex>
         </Flex>
     );

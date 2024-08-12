@@ -47,13 +47,10 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      */
     readOnly?: boolean;
     /**
-     * How a reaction's tooltip should act:
-     * 1. as a tooltip (you can't hover over the contents — it disappeares),
-     * 2. as a popover (you can hover over the contents — it doesn't disappear).
-     *
-     * Default: 'tooltip'.
+     * If present, when a user hovers over the reaction, a popover appears with renderTooltip(state) content.
+     * Can be used to display users who used this reaction.
      */
-    tooltipBehavior?: 'tooltip' | 'popover';
+    renderTooltip?: (state: ReactionState) => React.ReactNode;
     /**
      * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
@@ -76,8 +73,8 @@ export function Reactions({
     size = 'm',
     paletteProps,
     readOnly,
-    tooltipBehavior,
     qa,
+    renderTooltip,
     onToggle,
 }: ReactionsProps) {
     const [currentHoveredReaction, setCurrentHoveredReaction] = React.useState<
@@ -142,8 +139,8 @@ export function Reactions({
                             key={reaction.value}
                             content={content}
                             reaction={reaction}
-                            tooltipBehavior={tooltipBehavior ?? 'tooltip'}
                             size={size}
+                            tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
                             onClick={readOnly ? undefined : onToggle}
                         />
                     );

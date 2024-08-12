@@ -23,17 +23,12 @@ export interface ReactionState {
      * Represents the number of users who used this reaction.
      */
     counter?: React.ReactNode;
-    /**
-     * If present, when a user hovers over the reaction, a popover appears with `tooltip.content`.
-     * Can be used to display users who used this reaction.
-     */
-    tooltip?: React.ReactNode;
 }
 
 interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
     reaction: ReactionState;
     size: ButtonSize;
-    tooltipBehavior: 'tooltip' | 'popover';
+    tooltip?: React.ReactNode;
     onClick?: (value: string) => void;
 }
 
@@ -49,8 +44,8 @@ const popupDefaultPlacement: PopoverProps['placement'] = [
 const b = block('reactions');
 
 export function Reaction(props: ReactionInnerProps) {
-    const {value, selected, counter, tooltip} = props.reaction;
-    const {size, content, onClick} = props;
+    const {value, selected, counter} = props.reaction;
+    const {size, content, tooltip, onClick} = props;
 
     const onClickCallback = React.useCallback(() => onClick?.(value), [onClick, value]);
 
@@ -67,8 +62,6 @@ export function Reaction(props: ReactionInnerProps) {
             view="outlined"
             extraProps={{value}}
             onClick={onClickCallback}
-            onMouseEnter={props.tooltipBehavior === 'tooltip' ? onMouseEnter : undefined}
-            onMouseLeave={props.tooltipBehavior === 'tooltip' ? onMouseLeave : undefined}
         >
             <Button.Icon>
                 <span className={b('reaction-button-content', {size})}>{content}</span>
@@ -80,10 +73,7 @@ export function Reaction(props: ReactionInnerProps) {
     );
 
     return tooltip ? (
-        <div
-            onMouseEnter={props.tooltipBehavior === 'popover' ? onMouseEnter : undefined}
-            onMouseLeave={props.tooltipBehavior === 'popover' ? onMouseLeave : undefined}
-        >
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             {button}
 
             {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (
