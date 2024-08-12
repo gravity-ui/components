@@ -10,7 +10,7 @@ interface GroupLabelProps {
 
 export function GroupLabel({label}: GroupLabelProps) {
     return (
-        <div className={b('title')}>
+        <div className={b('group-title')}>
             <Text variant="subheader-1" color="complementary">
                 {label}
             </Text>

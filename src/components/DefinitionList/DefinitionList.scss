@@ -4,18 +4,16 @@
 $block: '.#{variables.$ns}definition-list';
 
 #{$block} {
-    margin: 0;
+    &__list {
+        margin: 0;
+    }
 
-    &__title {
+    &__group-title {
         margin-block-end: var(--g-spacing-3);
 
         &:not(:first-of-type) {
             margin-block-start: var(--g-spacing-5);
         }
-    }
-
-    #{$block}__item:is(#{$block}__item_grouped) + #{$block}__item:not(#{$block}__item_grouped) {
-        margin-block-start: var(--g-spacing-5);
     }
 
     &__item {
@@ -34,8 +32,16 @@ $block: '.#{variables.$ns}definition-list';
         }
     }
 
+    &_margin {
+        &:not(:first-of-type) {
+            margin-block-start: var(--g-spacing-5);
+        }
+    }
+
     &__term-container {
-        flex: 0 0 300px;
+        flex: 0 0 auto;
+        width: 300px;
+        max-width: 300px;
         display: flex;
         align-items: baseline;
 
@@ -133,10 +139,10 @@ $block: '.#{variables.$ns}definition-list';
     #{$block}__item + #{$block}__item {
         margin-block-start: var(--g-spacing-3);
     }
-    #{$block}__title:not(:first-of-type) {
+    #{$block}__group-title:not(:first-of-type) {
         margin-block-start: var(--g-spacing-8);
     }
-    #{$block}__item:is(#{$block}__item_grouped) + #{$block}__item:not(#{$block}__item_grouped) {
+    #{$block}_margin:not(:first-of-type) {
         margin-block-start: var(--g-spacing-8);
     }
 }
