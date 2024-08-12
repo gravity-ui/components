@@ -3,7 +3,7 @@
 $block: '.#{variables.$ns}reactions';
 
 #{$block} {
-    &__reaction-button_add-button {
+    &__add-reaction-button-content {
         color: var(--g-color-text-secondary);
     }
 

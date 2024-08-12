@@ -157,14 +157,16 @@ export function Reactions({
                         autoFocus
                     >
                         <Button
-                            className={b('reaction-button', {size, 'add-button': true})}
+                            className={b('reaction-button')}
                             size={size}
                             extraProps={{'aria-label': i18n('add-reaction')}}
                             view="flat"
                         >
-                            <Button.Icon>
-                                <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
-                            </Button.Icon>
+                            <span className={b('add-reaction-button-content')}>
+                                <Button.Icon>
+                                    <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
+                                </Button.Icon>
+                            </span>
                         </Button>
                     </Popover>
                 )}
