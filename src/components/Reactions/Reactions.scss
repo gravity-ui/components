@@ -3,10 +3,6 @@
 $block: '.#{variables.$ns}reactions';
 
 #{$block} {
-    &__add-reaction-button-content {
-        color: var(--g-color-text-secondary);
-    }
-
     &__popup {
         padding: 8px;
     }

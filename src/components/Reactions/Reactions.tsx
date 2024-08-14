@@ -11,6 +11,7 @@ import {
     PaletteProps,
     Popover,
     QAProps,
+    colorText,
 } from '@gravity-ui/uikit';
 import xor from 'lodash/xor';
 
@@ -162,7 +163,7 @@ export function Reactions({
                             extraProps={{'aria-label': i18n('add-reaction')}}
                             view="flat"
                         >
-                            <span className={b('add-reaction-button-content')}>
+                            <span className={colorText({color: 'secondary'})}>
                                 <Button.Icon>
                                     <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
                                 </Button.Icon>
