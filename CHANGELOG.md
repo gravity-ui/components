@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.8.0](https://github.com/gravity-ui/components/compare/v3.7.0...v3.8.0) (2024-08-20)
+
+
+### Features
+
+* **DefinitionList:** add mobile view ([#205](https://github.com/gravity-ui/components/issues/205)) ([b94ee82](https://github.com/gravity-ui/components/commit/b94ee824f69f7ed075167ff6d16263a30ca62d71))
+* **Reactions:** added new Reactions component ([#197](https://github.com/gravity-ui/components/issues/197)) ([be23d4e](https://github.com/gravity-ui/components/commit/be23d4e5949ac918ac945bbf829044520c7d0106))
+
+
+### Bug Fixes
+
+* add aria-label for DefinitionList help popover ([#208](https://github.com/gravity-ui/components/issues/208)) ([ad93fec](https://github.com/gravity-ui/components/commit/ad93fec84c88702c52aad69e9b6542690c66e4d4))
+* **DefinitionList:** should be semantic correct ([#211](https://github.com/gravity-ui/components/issues/211)) ([8dcc87c](https://github.com/gravity-ui/components/commit/8dcc87c034669553bf52166aa3e9f417f6a8a287))
+* **Notification:** correct `onClick` type for action ([#212](https://github.com/gravity-ui/components/issues/212)) ([b87bad1](https://github.com/gravity-ui/components/commit/b87bad101aeaf29cf1b97138e34d1a2f283b3688))
+* **PasswordInput:** fix incorrect props usage ([#210](https://github.com/gravity-ui/components/issues/210)) ([c740204](https://github.com/gravity-ui/components/commit/c7402042ea8aac95823f2a7f852429d8fd8ab957))
+
 ## [3.7.0](https://github.com/gravity-ui/components/compare/v3.6.2...v3.7.0) (2024-06-14)
 
 
