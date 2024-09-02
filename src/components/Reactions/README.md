@@ -1,6 +1,6 @@
 ## Reactions
 
-Component for user reactions (e.g. 👍, 😊, 😎 etc) as new GitHub comments for example.
+Component for user reactions (e.g. 👍, 😊, 😎 etc) as in GitHub comments for example.
 
 ### Usage example
 
