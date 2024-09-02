@@ -69,16 +69,16 @@ export const AddButtonPosition: StoryFn = () => {
     return (
         <Flex direction="column" gap={4}>
             <Flex direction="column" gap={2}>
-                <Text variant="subheader-1">Left</Text>
-                <Reactions {...useMockReactions()} addButtonPosition="left" />
+                <Text variant="subheader-1">Start</Text>
+                <Reactions {...useMockReactions()} addButtonPosition="start" />
             </Flex>
             <Flex direction="column" gap={2}>
-                <Text variant="subheader-1">Right</Text>
-                <Reactions {...useMockReactions()} addButtonPosition="right" />
+                <Text variant="subheader-1">End</Text>
+                <Reactions {...useMockReactions()} addButtonPosition="end" />
             </Flex>
             <Flex direction="column" gap={2}>
-                <Text variant="subheader-1">None</Text>
-                <Reactions {...useMockReactions()} addButtonPosition="none" />
+                <Text variant="subheader-1">Hide</Text>
+                <Reactions {...useMockReactions()} hideAddButton={true} />
             </Flex>
         </Flex>
     );
