@@ -51,7 +51,7 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      *
      * @default 'end'
      */
-    addButtonPosition?: 'start' | 'end';
+    addButtonPlacement?: 'start' | 'end';
     /**
      * Should we hide the "Add reaction" button.
      *
@@ -86,7 +86,7 @@ export function Reactions({
     paletteProps,
     readOnly,
     qa,
-    addButtonPosition = 'end',
+    addButtonPlacement = 'end',
     hideAddButton = false,
     renderTooltip,
     onToggle,
@@ -166,7 +166,7 @@ export function Reactions({
             }}
         >
             <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
-                {!hideAddButton && addButtonPosition === 'start' ? addReactionButton : null}
+                {!hideAddButton && addButtonPlacement === 'start' ? addReactionButton : null}
 
                 {/* Reactions' list */}
                 {reactionsState.map((reaction) => {
@@ -184,7 +184,7 @@ export function Reactions({
                     );
                 })}
 
-                {!hideAddButton && addButtonPosition === 'end' ? addReactionButton : null}
+                {!hideAddButton && addButtonPlacement === 'end' ? addReactionButton : null}
             </Flex>
         </ReactionsContextProvider>
     );

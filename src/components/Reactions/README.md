@@ -83,20 +83,20 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 
 **ReactionsProps** (main component props — Reactions' list):
 
-| Property            | Type                                        | Required | Default | Description                                                                                    |
-| :------------------ | :------------------------------------------ | :------: | :------ | :--------------------------------------------------------------------------------------------- |
-| `addButtonPosition` | `'start' or 'end'`                          |          | `'end'` | Position of the "Add reaction" button.                                                         |
-| `className`         | `string`                                    |          |         | HTML `class` attribute                                                                         |
-| `hideAddButton`     | `boolean`                                   |          | `false` | Should we hide the "Add reaction" button.                                                      |
-| `onToggle`          | `(value: string) => void`                   |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
-| `paletteProps`      | `ReactionsPaletteProps`                     |  `true`  |         | Notifications' palette props — it's a `Palette` component with available reactions to the user |
-| `qa`                | `string`                                    |          |         | `qa` attribute for testing                                                                     |
-| `reactions`         | `PaletteOption[]`                           |  `true`  |         | List of all available reactions                                                                |
-| `reactionsState`    | `ReactionState[]`                           |  `true`  |         | List of reactions that were used                                                               |
-| `readOnly`          | `boolean`                                   |          | `false` | readOnly state (usage example: only signed in users can react)                                 |
-| `renderTooltip`     | `(state: ReactionState) => React.ReactNode` |          |         | Reaction's tooltip with the list of reacted users for example                                  |
-| `size`              | `ButtonSize`                                |          | `m`     | Buttons's size                                                                                 |
-| `style`             | `React.CSSProperties`                       |          |         | HTML `style` attribute                                                                         |
+| Property             | Type                                        | Required | Default | Description                                                                                    |
+| :------------------- | :------------------------------------------ | :------: | :------ | :--------------------------------------------------------------------------------------------- |
+| `addButtonPlacement` | `'start' or 'end'`                          |          | `'end'` | Position of the "Add reaction" button.                                                         |
+| `className`          | `string`                                    |          |         | HTML `class` attribute                                                                         |
+| `hideAddButton`      | `boolean`                                   |          | `false` | Should we hide the "Add reaction" button.                                                      |
+| `onToggle`           | `(value: string) => void`                   |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
+| `paletteProps`       | `ReactionsPaletteProps`                     |  `true`  |         | Notifications' palette props — it's a `Palette` component with available reactions to the user |
+| `qa`                 | `string`                                    |          |         | `qa` attribute for testing                                                                     |
+| `reactions`          | `PaletteOption[]`                           |  `true`  |         | List of all available reactions                                                                |
+| `reactionsState`     | `ReactionState[]`                           |  `true`  |         | List of reactions that were used                                                               |
+| `readOnly`           | `boolean`                                   |          | `false` | readOnly state (usage example: only signed in users can react)                                 |
+| `renderTooltip`      | `(state: ReactionState) => React.ReactNode` |          |         | Reaction's tooltip with the list of reacted users for example                                  |
+| `size`               | `ButtonSize`                                |          | `m`     | Buttons's size                                                                                 |
+| `style`              | `React.CSSProperties`                       |          |         | HTML `style` attribute                                                                         |
 
 **ReactionState** (single reaction props):
 

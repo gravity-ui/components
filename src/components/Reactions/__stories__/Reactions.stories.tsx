@@ -65,16 +65,16 @@ export const Size: StoryFn = () => {
     );
 };
 
-export const AddButtonPosition: StoryFn = () => {
+export const AddButtonPlacement: StoryFn = () => {
     return (
         <Flex direction="column" gap={4}>
             <Flex direction="column" gap={2}>
                 <Text variant="subheader-1">Start</Text>
-                <Reactions {...useMockReactions()} addButtonPosition="start" />
+                <Reactions {...useMockReactions()} addButtonPlacement="start" />
             </Flex>
             <Flex direction="column" gap={2}>
                 <Text variant="subheader-1">End</Text>
-                <Reactions {...useMockReactions()} addButtonPosition="end" />
+                <Reactions {...useMockReactions()} addButtonPlacement="end" />
             </Flex>
             <Flex direction="column" gap={2}>
                 <Text variant="subheader-1">Hide</Text>
