@@ -47,6 +47,13 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      */
     readOnly?: boolean;
     /**
+     * Position of the "Add reaction" button.
+     * Use 'none' to hide the button.
+     *
+     * @default 'right'
+     */
+    addButtonPosition?: 'left' | 'right' | 'none';
+    /**
      * If present, when a user hovers over the reaction, a popover appears with renderTooltip(state) content.
      * Can be used to display users who used this reaction.
      */
@@ -74,6 +81,7 @@ export function Reactions({
     paletteProps,
     readOnly,
     qa,
+    addButtonPosition = 'right',
     renderTooltip,
     onToggle,
 }: ReactionsProps) {
@@ -122,6 +130,28 @@ export function Reactions({
         [paletteProps, reactions, paletteValue, size, onUpdatePalette],
     );
 
+    const addReactionButton = readOnly ? null : (
+        <Popover
+            content={paletteContent}
+            tooltipContentClassName={b('add-reaction-popover')}
+            openOnHover={false}
+            hasArrow={false}
+            focusTrap
+            autoFocus
+        >
+            <Button
+                className={b('reaction-button')}
+                size={size}
+                extraProps={{'aria-label': i18n('add-reaction')}}
+                view="flat-secondary"
+            >
+                <Button.Icon>
+                    <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
+                </Button.Icon>
+            </Button>
+        </Popover>
+    );
+
     return (
         <ReactionsContextProvider
             value={{
@@ -130,6 +160,8 @@ export function Reactions({
             }}
         >
             <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
+                {addButtonPosition === 'left' ? addReactionButton : null}
+
                 {/* Reactions' list */}
                 {reactionsState.map((reaction) => {
                     const content = paletteOptionsMap[reaction.value]?.content ?? '?';
@@ -146,28 +178,7 @@ export function Reactions({
                     );
                 })}
 
-                {/* Add reaction button */}
-                {readOnly ? null : (
-                    <Popover
-                        content={paletteContent}
-                        tooltipContentClassName={b('add-reaction-popover')}
-                        openOnHover={false}
-                        hasArrow={false}
-                        focusTrap
-                        autoFocus
-                    >
-                        <Button
-                            className={b('reaction-button')}
-                            size={size}
-                            extraProps={{'aria-label': i18n('add-reaction')}}
-                            view="flat-secondary"
-                        >
-                            <Button.Icon>
-                                <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
-                            </Button.Icon>
-                        </Button>
-                    </Popover>
-                )}
+                {addButtonPosition === 'right' ? addReactionButton : null}
             </Flex>
         </ReactionsContextProvider>
     );

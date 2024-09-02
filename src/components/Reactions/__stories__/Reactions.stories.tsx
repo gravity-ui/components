@@ -64,3 +64,22 @@ export const Size: StoryFn = () => {
         </Flex>
     );
 };
+
+export const AddButtonPosition: StoryFn = () => {
+    return (
+        <Flex direction="column" gap={4}>
+            <Flex direction="column" gap={2}>
+                <Text variant="subheader-1">Left</Text>
+                <Reactions {...useMockReactions()} addButtonPosition="left" />
+            </Flex>
+            <Flex direction="column" gap={2}>
+                <Text variant="subheader-1">Right</Text>
+                <Reactions {...useMockReactions()} addButtonPosition="right" />
+            </Flex>
+            <Flex direction="column" gap={2}>
+                <Text variant="subheader-1">None</Text>
+                <Reactions {...useMockReactions()} addButtonPosition="none" />
+            </Flex>
+        </Flex>
+    );
+};
