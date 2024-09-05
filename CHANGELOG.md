@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/gravity-ui/components/compare/v3.8.0...v3.9.0) (2024-09-05)
+
+
+### Features
+
+* **Reactions:** add `addButtonPlacement` property ([#215](https://github.com/gravity-ui/components/issues/215)) ([6eccd44](https://github.com/gravity-ui/components/commit/6eccd446342564612a63623d8a435bec59551b67))
+
 ## [3.8.0](https://github.com/gravity-ui/components/compare/v3.7.0...v3.8.0) (2024-08-20)
 
 
