@@ -76,10 +76,6 @@ export const AddButtonPlacement: StoryFn = () => {
                 <Text variant="subheader-1">End</Text>
                 <Reactions {...useMockReactions()} addButtonPlacement="end" />
             </Flex>
-            <Flex direction="column" gap={2}>
-                <Text variant="subheader-1">Hide</Text>
-                <Reactions {...useMockReactions()} hideAddButton={true} />
-            </Flex>
         </Flex>
     );
 };

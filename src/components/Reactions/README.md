@@ -87,7 +87,6 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 | :------------------- | :------------------------------------------ | :------: | :------ | :--------------------------------------------------------------------------------------------- |
 | `addButtonPlacement` | `'start' or 'end'`                          |          | `'end'` | Position of the "Add reaction" button.                                                         |
 | `className`          | `string`                                    |          |         | HTML `class` attribute                                                                         |
-| `hideAddButton`      | `boolean`                                   |          | `false` | Should we hide the "Add reaction" button.                                                      |
 | `onToggle`           | `(value: string) => void`                   |          |         | Fires when a user clicks on a Reaction (in a Palette or in the Reactions' list)                |
 | `paletteProps`       | `ReactionsPaletteProps`                     |  `true`  |         | Notifications' palette props — it's a `Palette` component with available reactions to the user |
 | `qa`                 | `string`                                    |          |         | `qa` attribute for testing                                                                     |
