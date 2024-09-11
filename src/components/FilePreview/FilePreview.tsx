@@ -11,7 +11,15 @@ import {
     TextAlignLeft as TextIcon,
     Filmstrip as VideoIcon,
 } from '@gravity-ui/icons';
-import {Icon, IconData, Text, useActionHandlers, useMobile, useUniqId} from '@gravity-ui/uikit';
+import {
+    Icon,
+    IconData,
+    QAProps,
+    Text,
+    useActionHandlers,
+    useMobile,
+    useUniqId,
+} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -36,9 +44,8 @@ const FILE_ICON: Record<FileType, IconData> = {
     table: TableIcon,
 };
 
-export interface FilePreviewProps {
+export interface FilePreviewProps extends QAProps {
     className?: string;
-    qa?: string;
 
     file: File;
     imageSrc?: string;
