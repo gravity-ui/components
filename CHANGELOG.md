@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.10.0](https://github.com/gravity-ui/components/compare/v3.9.0...v3.10.0) (2024-09-11)
+
+
+### Features
+
+* **Notifications:** add qa prop ([#218](https://github.com/gravity-ui/components/issues/218)) ([786595a](https://github.com/gravity-ui/components/commit/786595a9e27299fb32e5a21d32a9243262bab2ff))
+
+
+### Bug Fixes
+
+* share popover a11y ([#214](https://github.com/gravity-ui/components/issues/214)) ([262cab8](https://github.com/gravity-ui/components/commit/262cab82a67a309363763c1eae241c03e63e9aa4))
+
 ## [3.9.0](https://github.com/gravity-ui/components/compare/v3.8.0...v3.9.0) (2024-09-05)
 
 
