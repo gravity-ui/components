@@ -1,10 +1,10 @@
+import {QAProps} from '@gravity-ui/uikit';
+
 import {NotificationActionProps, NotificationProps} from '../Notification/definitions';
 
 export type NotificationsActionProps = NotificationActionProps;
 
 export type NotificationsProps = {
-    qa?: string;
-
     title?: React.ReactNode;
     actions?: React.ReactNode;
 
@@ -23,4 +23,4 @@ export type NotificationsProps = {
     emptyImage?: React.ReactNode;
 
     swipeThreshold?: number;
-};
+} & QAProps;

@@ -1,4 +1,4 @@
-import {ButtonProps, IconData} from '@gravity-ui/uikit';
+import {ButtonProps, IconData, QAProps} from '@gravity-ui/uikit';
 
 export type NotificationTheme = 'success' | 'info' | 'warning' | 'danger';
 
@@ -40,11 +40,10 @@ export type NotificationProps = {
 };
 
 export type NotificationActionProps = {
-    qa?: string;
     view?: ButtonProps['view'];
     icon?: IconData;
     text: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
     href?: string;
     target?: '_blank';
-};
+} & QAProps;
