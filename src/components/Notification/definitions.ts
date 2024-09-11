@@ -40,6 +40,7 @@ export type NotificationProps = {
 };
 
 export type NotificationActionProps = {
+    qa?: string;
     view?: ButtonProps['view'];
     icon?: IconData;
     text: string;

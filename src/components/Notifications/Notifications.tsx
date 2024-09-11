@@ -54,7 +54,7 @@ export const Notifications = React.memo(function Notifications(props: Notificati
     }
 
     return (
-        <div className={b()}>
+        <div className={b()} data-qa={props.qa}>
             <div className={b('head')}>
                 <div className={b('head-title')}>{props.title || i18n('title')}</div>
                 {<div className={b('actions')}>{props.actions}</div>}
