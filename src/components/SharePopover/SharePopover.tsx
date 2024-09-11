@@ -156,11 +156,12 @@ export const SharePopover = (props: SharePopoverProps) => {
         [onClick, text, title, url, useWebShareApi],
     );
 
+    const shouldOpenByHover = openByHover && !useWebShareApi;
     return (
         <Popover
             placement={placement}
             hasArrow={false}
-            openOnHover={openByHover && !useWebShareApi}
+            openOnHover={shouldOpenByHover}
             autoclosable={autoclosable}
             delayClosing={closeDelay}
             content={content}
@@ -171,6 +172,8 @@ export const SharePopover = (props: SharePopoverProps) => {
             tooltipId={tooltipId}
             disablePortal
             onOpenChange={setIsOpen}
+            focusTrap={!shouldOpenByHover}
+            autoFocus={!shouldOpenByHover}
         >
             {({onClick: onClickInner}) => (
                 <button
