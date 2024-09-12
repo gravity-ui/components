@@ -108,6 +108,7 @@ export const SharePopover = (props: SharePopoverProps) => {
         buttonAriaLabel,
     } = props;
     const [isOpen, setIsOpen] = React.useState(false);
+    const buttonRef = React.useRef<HTMLButtonElement>(null);
     const tooltipId = useUniqId();
 
     const content = React.useMemo(
@@ -174,6 +175,7 @@ export const SharePopover = (props: SharePopoverProps) => {
             onOpenChange={setIsOpen}
             focusTrap={!shouldOpenByHover}
             autoFocus={!shouldOpenByHover}
+            restoreFocusRef={shouldOpenByHover ? undefined : buttonRef}
         >
             {({onClick: onClickInner}) => (
                 <button
@@ -183,6 +185,7 @@ export const SharePopover = (props: SharePopoverProps) => {
                     aria-describedby={tooltipId}
                     aria-label={buttonAriaLabel}
                     onClick={onClickInner}
+                    ref={buttonRef}
                 >
                     <div className={b('icon-container')}>
                         <Icon
