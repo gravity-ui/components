@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.1](https://github.com/gravity-ui/components/compare/v3.10.0...v3.10.1) (2024-09-12)
+
+
+### Bug Fixes
+
+* **SharePopover:** restore focus on close ([#221](https://github.com/gravity-ui/components/issues/221)) ([4cd524e](https://github.com/gravity-ui/components/commit/4cd524e636e8be8ba36cea840dd7e3f46a8cf2c3))
+
 ## [3.10.0](https://github.com/gravity-ui/components/compare/v3.9.0...v3.10.0) (2024-09-11)
 
 
