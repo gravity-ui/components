@@ -5,7 +5,6 @@ import {Modal} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
-import type {StoriesLayoutProps} from './components/StoriesLayout/StoriesLayout';
 import {IndexType, StoriesLayout} from './components/StoriesLayout/StoriesLayout';
 import {useSyncWithLS} from './hooks';
 import type {StoriesItem} from './types';
@@ -26,7 +25,6 @@ export interface StoriesProps {
     onNextClick?: (storyIndex: number) => void;
     disableOutsideClick?: boolean;
     className?: string;
-    action?: StoriesLayoutProps['action'];
     syncInTabsKey?: string;
 }
 
@@ -39,7 +37,6 @@ export function Stories({
     initialStoryIndex = 0,
     disableOutsideClick = true,
     className,
-    action,
     syncInTabsKey,
 }: StoriesProps) {
     const [storyIndex, setStoryIndex] = React.useState(initialStoryIndex);
@@ -125,7 +122,6 @@ export function Stories({
                 handleButtonClose={handleButtonClose}
                 handleGotoNext={handleGotoNext}
                 handleGotoPrevious={handleGotoPrevious}
-                action={action}
             />
         </Modal>
     );

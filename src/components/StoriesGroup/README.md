@@ -37,6 +37,7 @@ Component for displaying group of stories. It looks like a carousel in a modal w
             'and organizations, settings, help center, search, notifications, favorites.',
           url: 'https://yandex.eu',
           media: {
+            type: 'image',
             url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-2.png',
           },
         },
@@ -56,6 +57,7 @@ Component for displaying group of stories. It looks like a carousel in a modal w
           title: 'New navigation (3)',
           description: 'Switch to the new navigation right now',
           media: {
+            type: 'image',
             url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-4.png',
           },
         },
