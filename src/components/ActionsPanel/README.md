@@ -1,4 +1,6 @@
-# ActionsPanel
+# ⚠️[DEPRECATED] ActionsPanel
+
+⚠️ It's been moved to `@gravity-ui/uikit`. It's available there since version 6.30.0
 
 ## Usage
 
