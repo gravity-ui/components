@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export type StoriesItemMedia = {url: string} & (
     | {
           /** default 'image' */
@@ -12,7 +14,9 @@ export type StoriesItemMedia = {url: string} & (
 
 export interface StoriesItem {
     title?: string;
+    /** @deprecated use `content` property instead */
     description?: string;
+    content?: React.ReactNode;
     /** Url for link "more" */
     url?: string;
     media?: StoriesItemMedia;
