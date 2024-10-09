@@ -60,6 +60,11 @@ export const StoriesLayout = (props: StoriesLayoutProps) => {
                                             {currentStory.description}
                                         </div>
                                     )}
+                                    {currentStory.content && (
+                                        <div className={b('text-content')}>
+                                            {currentStory.content}
+                                        </div>
+                                    )}
                                     {currentStory.url && (
                                         <div className={b('story-link-block')}>
                                             <Link href={currentStory.url} target={'_blank'}>
