@@ -55,7 +55,12 @@ export const StoriesLayout = (props: StoriesLayoutProps) => {
                                     {currentStory.title && (
                                         <div className={b('text-header')}>{currentStory.title}</div>
                                     )}
-                                    {currentStory.description && (
+                                    {currentStory.content && (
+                                        <div className={b('text-content')}>
+                                            {currentStory.content}
+                                        </div>
+                                    )}
+                                    {!currentStory.content && currentStory.description && (
                                         <div className={b('text-content')}>
                                             {currentStory.description}
                                         </div>
