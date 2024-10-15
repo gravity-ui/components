@@ -17,7 +17,7 @@ const groups: StoriesGroupItem[] = [
         items: [
             {
                 title: 'New navigation',
-                description:
+                content:
                     'At the top of the panel is the service navigation for each service. ' +
                     'Below are common navigation elements: a component for switching between accounts ' +
                     'and organizations, settings, help center, search, notifications, favorites.',
@@ -28,7 +28,7 @@ const groups: StoriesGroupItem[] = [
             },
             {
                 title: 'New navigation (2)',
-                description: 'A little more about the new navigation',
+                content: 'A little more about the new navigation',
                 media: {
                     url: 'https://storage.yandexcloud.net/uikit-storybook-assets/sample_960x400_ocean_with_audio.mp4',
                     type: 'video',
@@ -40,7 +40,7 @@ const groups: StoriesGroupItem[] = [
         items: [
             {
                 title: 'New navigation (3)',
-                description: 'Switch to the new navigation right now',
+                content: 'Switch to the new navigation right now',
                 media: {
                     url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-4.png',
                 },

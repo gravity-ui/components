@@ -18,13 +18,12 @@ Component for displaying stories. It looks like a carousel in a modal with given
 
 ### StoriesItem object
 
-| Field       | Type               | Required | Default | Description                      |
-| ----------- | ------------------ | -------- | ------- | -------------------------------- |
-| title       | `String`           |          |         | Title                            |
-| description | `String`           |          |         | Main text, deprecated            |
-| content     | `React.ReactNode`  |          |         | Main content                     |
-| url         | `String`           |          |         | Link to display more information |
-| media       | `StoriesItemMedia` |          |         | Media content                    |
+| Field   | Type               | Required | Default | Description                      |
+| ------- | ------------------ | -------- | ------- | -------------------------------- |
+| title   | `String`           |          |         | Title                            |
+| content | `React.ReactNode`  |          |         | Main content                     |
+| url     | `String`           |          |         | Link to display more information |
+| media   | `StoriesItemMedia` |          |         | Media content                    |
 
 ### StoriesItemMedia object
 
