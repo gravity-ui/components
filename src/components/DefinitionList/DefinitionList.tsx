@@ -125,6 +125,7 @@ function DefinitionListGrouped({
     );
 }
 
+/** @deprecated it's been moved to `@gravity-ui/uikit`. It's available there since version 6.32.0 */
 export function DefinitionList({items, ...rest}: DefinitionListProps) {
     if (onlySingleItems(items)) {
         return <DefinitionListGranular {...rest} items={items} />;
