@@ -13,6 +13,8 @@ import './ActionsPanel.scss';
 
 const b = block('actions-panel');
 
+// eslint-disable-next-line valid-jsdoc
+/** @deprecated it's been moved to `@gravity-ui/uikit`. It's available there since version 6.30.0 */
 export const ActionsPanel = ({className, actions, onClose, renderNote}: ActionsPanelProps) => {
     return (
         <div className={b(null, className)}>

@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.11.0](https://github.com/gravity-ui/components/compare/v3.10.1...v3.11.0) (2024-10-14)
+
+
+### Features
+
+* **Stories:** Add content property ([#225](https://github.com/gravity-ui/components/issues/225)) ([3b59e08](https://github.com/gravity-ui/components/commit/3b59e088ff420dc7b078962afd9465c0c0e8494e))
+
+
+### Bug Fixes
+
+* update universal-cookie ([#227](https://github.com/gravity-ui/components/issues/227)) ([5f0b471](https://github.com/gravity-ui/components/commit/5f0b47100804bd9d61a95abb8e0566d596478681))
+
 ## [3.10.1](https://github.com/gravity-ui/components/compare/v3.10.0...v3.10.1) (2024-09-12)
 
 
