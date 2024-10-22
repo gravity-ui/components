@@ -72,6 +72,7 @@ ConsentPopup.args = {
     consentMode: ConsentMode.Manage,
     policyLink: 'https://google.com',
     cookieList,
+    modalClassName: 'unique-class-name-for-adblockers',
 } as DefaultTemplateProps;
 
 export const ManageCookies = DefaultTemplate.bind({});
@@ -80,6 +81,7 @@ ManageCookies.args = {
     manageCookies: true,
     policyLink: 'https://google.com',
     cookieList,
+    modalClassName: 'unique-class-name-for-adblockers',
 } as DefaultTemplateProps;
 
 export const ConsentNotification = DefaultTemplate.bind({});
