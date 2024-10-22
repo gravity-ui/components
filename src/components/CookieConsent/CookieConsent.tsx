@@ -49,6 +49,7 @@ export const CookieConsent = ({
                     <ConsentPopup
                         {...popupProps}
                         className={b()}
+                        rootClassName={b('root')}
                         step={manageCookies ? ConsentPopupStep.Manage : ConsentPopupStep.Main}
                         onAction={onConsentPopupAction}
                         onClose={onClose}

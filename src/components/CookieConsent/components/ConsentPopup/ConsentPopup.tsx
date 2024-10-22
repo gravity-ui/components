@@ -101,6 +101,7 @@ export const ConsentPopup = ({
     policyLink,
     onAction,
     className,
+    rootClassName,
     policyLinkText = i18n('label_policy_extended'),
     text,
     manageLabelText = i18n('manage_label_text_extended'),
@@ -156,6 +157,7 @@ export const ConsentPopup = ({
             open
             disableOutsideClick
             disableEscapeKeyDown
+            className={rootClassName}
             contentClassName={b('modal-content', {step: currentStep, mobile})}
             onClose={onClose}
         >
