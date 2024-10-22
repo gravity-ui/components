@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.0](https://github.com/gravity-ui/components/compare/v3.11.0...v3.12.0) (2024-10-22)
+
+
+### Features
+
+* **CookieConsent:** add `modalClassName` property to `ConsentPopup` Modal ([#230](https://github.com/gravity-ui/components/issues/230)) ([58b64e6](https://github.com/gravity-ui/components/commit/58b64e686641c4707a0afc38889f9b70dac3a27a))
+
 ## [3.11.0](https://github.com/gravity-ui/components/compare/v3.10.1...v3.11.0) (2024-10-14)
 
 
