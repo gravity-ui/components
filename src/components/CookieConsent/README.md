@@ -53,6 +53,7 @@ const Analytics = () => {
       consentManager={consentManager}
       cookieList={cookieList}
       onConsentPopupClose={props.onClose}
+      modalClassName={'unique-class-name-for-adblockers'}
     />
   );
 };
