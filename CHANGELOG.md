@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.1](https://github.com/gravity-ui/components/compare/v3.12.0...v3.12.1) (2024-10-23)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** fix calc of tabs width ([#232](https://github.com/gravity-ui/components/issues/232)) ([111b0d5](https://github.com/gravity-ui/components/commit/111b0d5ae8c30e6eeb5a79c04360d5bb4b058469))
+
 ## [3.12.0](https://github.com/gravity-ui/components/compare/v3.11.0...v3.12.0) (2024-10-22)
 
 
