@@ -353,7 +353,9 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             this.tabsWidth[i] = width;
         }
 
-        this.switcherWidth = this.selectSwitcherNode.current?.getBoundingClientRect().width || 0;
+        this.switcherWidth =
+            (this.selectSwitcherNode.current?.getBoundingClientRect().width || 0) +
+            this.tabItemPaddingRight;
 
         this.setState({dimensionsWereCollected: true});
 
@@ -389,6 +391,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     /*
         Recalculating the Layout - Phases 1 and 2
      */
+    // eslint-disable-next-line complexity
     recalculateTabs = () => {
         if (!this.tabsRootNode.current) {
             return;
@@ -436,8 +439,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
          of the switcher width will not exceed the width of the container */
         for (let i = 0; i < this.tabsWidth.length; i++) {
             renderedTabsSumWidth = renderedTabsSumWidth + this.tabsWidth[i];
-            const switcherWidthCorrection = i >= items.length - 1 ? 0 : this.switcherWidth;
-            const isOverflown = renderedTabsSumWidth + switcherWidthCorrection > tabsRootNodeWidth;
+            const switcherWidthCorrection = i === items.length - 1 ? 0 : this.switcherWidth;
+            const isOverflown =
+                renderedTabsSumWidth + switcherWidthCorrection + this.tabItemPaddingRight >
+                tabsRootNodeWidth;
 
             if (firstHiddenTabIndexForSequentialCase === null && isOverflown) {
                 firstHiddenTabIndexForSequentialCase = i;
@@ -456,6 +461,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             }
         }
 
+        if (tabChosenFromSelectIndex > -1) {
+            maxHiddenTabWidth = this.tabsWidth[tabChosenFromSelectIndex];
+        }
+
         if (maxHiddenTabWidth && typeof firstHiddenTabIndexForSequentialCase === 'number') {
             let rightSpace = maxHiddenTabWidth - emptySpace;
 
@@ -465,10 +474,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             firstHiddenTabIndex = firstHiddenTabIndexForSequentialCase;
 
             for (let j = firstHiddenTabIndexForSequentialCase - 1; j >= 0; j--) {
-                // We need to use maxHiddenTabWidth instead of tabWidth[i],
-                // beacause the tab, that we are going to render at index j
-                // may be active tab, which can be wider than real tab at index j
-                rightSpace = rightSpace - maxHiddenTabWidth;
+                rightSpace = rightSpace - this.tabsWidth[j];
 
                 if (rightSpace < 0) {
                     firstHiddenTabIndex = j + (tabChosenFromSelectIndex > j ? 0 : 1);
@@ -506,6 +512,10 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         }
 
         this.setState({firstHiddenTabIndex});
+
+        if (firstHiddenTabIndex > tabChosenFromSelectIndex) {
+            this.setState({tabChosenFromSelectId: null});
+        }
 
         /*phase 1 is complete, call the method of adjusting the width of the overflowing tabs to fill the entire width of the container*/
         this.setUpOverflownTabs(firstHiddenTabIndex, activeTabIndex, tabsRootNodeWidth);
@@ -845,7 +855,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
         const maxWidth =
             dimensionsWereCollected && typeof this.overflownTabsCurrentWidth[tabIndex] === 'number'
-                ? this.overflownTabsCurrentWidth[tabIndex] - this.tabItemPaddingRight
+                ? this.overflownTabsCurrentWidth[tabIndex] + this.tabItemPaddingRight
                 : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
 
         const tabNode = <Tab {...item} active={item.id === activeTabID} />;
