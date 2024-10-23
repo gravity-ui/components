@@ -40,6 +40,8 @@ export type ConsentPopupProps = ConsentPopupData &
     CookieConsentBaseProps & {
         /* Active step */
         step?: `${ConsentPopupStep}`;
+        /* Class for the root Modal node */
+        modalClassName?: string;
     };
 
 export interface HeaderProps {
