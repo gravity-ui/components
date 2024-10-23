@@ -353,9 +353,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             this.tabsWidth[i] = width;
         }
 
-        this.switcherWidth =
-            (this.selectSwitcherNode.current?.getBoundingClientRect().width || 0) +
-            this.tabItemPaddingRight;
+        this.switcherWidth = this.selectSwitcherNode.current?.getBoundingClientRect().width || 0;
 
         this.setState({dimensionsWereCollected: true});
 
@@ -440,9 +438,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         for (let i = 0; i < this.tabsWidth.length; i++) {
             renderedTabsSumWidth = renderedTabsSumWidth + this.tabsWidth[i];
             const switcherWidthCorrection = i === items.length - 1 ? 0 : this.switcherWidth;
-            const isOverflown =
-                renderedTabsSumWidth + switcherWidthCorrection + this.tabItemPaddingRight >
-                tabsRootNodeWidth;
+            const isOverflown = renderedTabsSumWidth + switcherWidthCorrection > tabsRootNodeWidth;
 
             if (firstHiddenTabIndexForSequentialCase === null && isOverflown) {
                 firstHiddenTabIndexForSequentialCase = i;
