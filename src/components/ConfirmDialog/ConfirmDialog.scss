@@ -5,6 +5,6 @@ $block: '.#{variables.$ns}confirm-dialog';
 
 #{$block} {
     &__body {
-        @include mixins.text-body-2;
+        @include mixins.text-body-1;
     }
 }
