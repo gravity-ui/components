@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.2](https://github.com/gravity-ui/components/compare/v3.12.1...v3.12.2) (2024-10-24)
+
+
+### Bug Fixes
+
+* **ConfirmDialog:** change fontSize to text-body-1 ([#234](https://github.com/gravity-ui/components/issues/234)) ([1134f3c](https://github.com/gravity-ui/components/commit/1134f3cb51cba0abb4a74d64f938eb669a1750ad))
+
 ## [3.12.1](https://github.com/gravity-ui/components/compare/v3.12.0...v3.12.1) (2024-10-23)
 
 
