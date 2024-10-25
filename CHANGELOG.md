@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.3](https://github.com/gravity-ui/components/compare/v3.12.2...v3.12.3) (2024-10-25)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** revert padding calculation ([#236](https://github.com/gravity-ui/components/issues/236)) ([c18f137](https://github.com/gravity-ui/components/commit/c18f1375af0580a813144ac6fc38f6b2a8a34f97))
+
 ## [3.12.2](https://github.com/gravity-ui/components/compare/v3.12.1...v3.12.2) (2024-10-24)
 
 
