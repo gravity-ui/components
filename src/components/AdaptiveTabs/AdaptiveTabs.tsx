@@ -851,7 +851,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
 
         const maxWidth =
             dimensionsWereCollected && typeof this.overflownTabsCurrentWidth[tabIndex] === 'number'
-                ? this.overflownTabsCurrentWidth[tabIndex] + this.tabItemPaddingRight
+                ? this.overflownTabsCurrentWidth[tabIndex] - this.tabItemPaddingRight
                 : `${this.tabMaxWidthInPercentsForScreenSize[currentContainerWidthName!]}%`;
 
         const tabNode = <Tab {...item} active={item.id === activeTabID} />;
