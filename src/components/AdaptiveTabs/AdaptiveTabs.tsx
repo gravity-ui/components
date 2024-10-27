@@ -56,7 +56,7 @@ type OpenChangeProps = Parameters<NonNullable<SelectProps['onOpenChange']>>[0];
 export interface TabProps {
     id: string;
     title?: string | React.ReactNode;
-    hint?: string;
+    hint?: string | React.ReactNode;
     active?: boolean;
     disabled?: boolean;
     onClick?: (id: string, event: React.MouseEvent) => void;
@@ -71,7 +71,7 @@ class Tab extends React.Component<TabProps> {
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events
             <div
                 className={b('tab', {active, disabled})}
-                title={stringTitle}
+                title={typeof stringTitle === 'string' ? stringTitle : undefined}
                 onClick={disabled ? undefined : this.onClick}
             >
                 {title}
@@ -769,14 +769,14 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const {items} = this.props;
         const activeTab = items.find((item) => item.id === this.activeTab);
         const tab = activeTab ?? items[0];
-        const hint = tab.hint ?? ((typeof tab.title === 'string' && tab.title) || tab.id);
+        const hint = tab.hint ?? (tab.title || tab.id);
 
         return this.renderSwitcher({...switcherProps, text: hint, active: Boolean(activeTab)});
     };
 
     renderSwitcher = (
         switcherProps: RenderControlProps & {
-            text: string;
+            text: string | React.ReactNode;
             active?: boolean;
         },
     ) => {
