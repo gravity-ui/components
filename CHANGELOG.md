@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.4](https://github.com/gravity-ui/components/compare/v3.12.3...v3.12.4) (2024-10-28)
+
+
+### Bug Fixes
+
+* **AdaptiveTabs:** add ReactNode support for `hint` ([#239](https://github.com/gravity-ui/components/issues/239)) ([e90c81e](https://github.com/gravity-ui/components/commit/e90c81e314d7abdc66e336b8d72ed1d0741e7311))
+
 ## [3.12.3](https://github.com/gravity-ui/components/compare/v3.12.2...v3.12.3) (2024-10-25)
 
 
