@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.12.5](https://github.com/gravity-ui/components/compare/v3.12.4...v3.12.5) (2024-11-27)
+
+
+### Bug Fixes
+
+* **Reactions:** add component export ([#241](https://github.com/gravity-ui/components/issues/241)) ([1c5ee73](https://github.com/gravity-ui/components/commit/1c5ee7307431090ee4a05848e59680e3fe393bc1))
+
 ## [3.12.4](https://github.com/gravity-ui/components/compare/v3.12.3...v3.12.4) (2024-10-28)
 
 

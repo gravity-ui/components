@@ -1,6 +1,6 @@
 {
   "name": "@gravity-ui/components",
-  "version": "3.12.4",
+  "version": "3.12.5",
   "description": "",
   "license": "MIT",
   "main": "./build/cjs/index.js",
