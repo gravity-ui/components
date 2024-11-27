@@ -20,3 +20,4 @@ export * from './StoreBadge';
 export * from './Stories';
 export * from './StoriesGroup';
 export * from './ConfirmDialog';
+export * from './Reactions';
