@@ -9,7 +9,7 @@ import {
     Palette,
     PaletteOption,
     PaletteProps,
-    Popover,
+    Popup,
     QAProps,
 } from '@gravity-ui/uikit';
 import xor from 'lodash/xor';
@@ -84,6 +84,16 @@ export function Reactions({
     renderTooltip,
     onToggle,
 }: ReactionsProps) {
+    const addReactionButtonRef = React.useRef<HTMLSpanElement>(null);
+    const [palettePopupOpened, setPalettePopupOpened] = React.useState(false);
+
+    const onOpenPalettePopup = React.useCallback(() => setPalettePopupOpened(true), []);
+    const onClosePalettePopup = React.useCallback(() => setPalettePopupOpened(false), []);
+    const onTogglePalettePopup = React.useCallback(
+        () => (palettePopupOpened ? onClosePalettePopup() : onOpenPalettePopup()),
+        [onClosePalettePopup, onOpenPalettePopup, palettePopupOpened],
+    );
+
     const [currentHoveredReaction, setCurrentHoveredReaction] = React.useState<
         ReactionsContextTooltipProps | undefined
     >(undefined);
@@ -112,8 +122,10 @@ export function Reactions({
             for (const diffValue of diffValues) {
                 onToggle?.(diffValue);
             }
+
+            onClosePalettePopup();
         },
-        [onToggle, paletteValue],
+        [onClosePalettePopup, onToggle, paletteValue],
     );
 
     const paletteContent = React.useMemo(
@@ -130,25 +142,33 @@ export function Reactions({
     );
 
     const addReactionButton = readOnly ? null : (
-        <Popover
-            content={paletteContent}
-            tooltipContentClassName={b('add-reaction-popover')}
-            openOnHover={false}
+        <Button
+            className={b('reaction-button')}
+            ref={addReactionButtonRef}
+            size={size}
+            extraProps={{'aria-label': i18n('add-reaction')}}
+            onClick={onTogglePalettePopup}
+            view="flat-secondary"
+        >
+            <Button.Icon>
+                <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
+            </Button.Icon>
+        </Button>
+    );
+
+    const addReactionPopup = readOnly ? null : (
+        <Popup
+            anchorRef={addReactionButtonRef}
+            contentClassName={b('add-reaction-popover')}
+            open={palettePopupOpened}
             hasArrow={false}
             focusTrap
             autoFocus
+            onOutsideClick={onClosePalettePopup}
+            onEscapeKeyDown={onClosePalettePopup}
         >
-            <Button
-                className={b('reaction-button')}
-                size={size}
-                extraProps={{'aria-label': i18n('add-reaction')}}
-                view="flat-secondary"
-            >
-                <Button.Icon>
-                    <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
-                </Button.Icon>
-            </Button>
-        </Popover>
+            {paletteContent}
+        </Popup>
     );
 
     return (
@@ -179,6 +199,8 @@ export function Reactions({
 
                 {addButtonPlacement === 'end' ? addReactionButton : null}
             </Flex>
+
+            {addReactionPopup}
         </ReactionsContextProvider>
     );
 }
