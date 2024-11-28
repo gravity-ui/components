@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.13.0](https://github.com/gravity-ui/components/compare/v3.12.5...v3.13.0) (2024-11-28)
+
+
+### Features
+
+* **Reactions:** The popup now closes when choosing a reaction ([#243](https://github.com/gravity-ui/components/issues/243)) ([5f3a336](https://github.com/gravity-ui/components/commit/5f3a33671bbb94fb27537c1372a298b398c70606))
+
 ## [3.12.5](https://github.com/gravity-ui/components/compare/v3.12.4...v3.12.5) (2024-11-27)
 
 
