@@ -9,6 +9,7 @@ $block: '.#{variables.$ns}reactions';
 
     &__add-reaction-popover {
         max-width: unset;
+        padding: 16px;
     }
 
     &__reaction-button-content_size_xs {
