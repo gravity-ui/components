@@ -3,9 +3,31 @@
   "version": "3.12.5",
   "description": "",
   "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./build/esm/index.d.ts",
+      "require": "./build/cjs/index.js",
+      "import": "./build/esm/index.js"
+    },
+    "./unstable": {
+      "types": "./build/esm/components/unstable/index.d.ts",
+      "require": "./build/cjs/components/unstable/index.js",
+      "import": "./build/esm/components/unstable/index.js"
+    }
+  },
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
   "types": "./build/esm/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "index.d.ts": [
+        "./build/esm/index.d.ts"
+      ],
+      "unstable": [
+        "./build/esm/components/unstable/index.d.ts"
+      ]
+    }
+  },
   "sideEffects": [
     "*.css",
     "*.scss"
