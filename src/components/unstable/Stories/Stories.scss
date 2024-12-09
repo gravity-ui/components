@@ -1,0 +1,16 @@
+@use '../../variables';
+
+$block: '.#{variables.$ns}stories';
+
+#{$block} {
+    --g-modal-border-radius: var(--g-spacing-5);
+    --g-modal-margin: var(--g-spacing-5);
+
+    & .g-modal__content-wrapper {
+        overflow-x: initial;
+    }
+
+    &__modal-content {
+        border-radius: var(--g-spacing-5);
+    }
+}
