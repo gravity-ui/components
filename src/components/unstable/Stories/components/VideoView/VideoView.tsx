@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {block} from '../../../../utils/cn';
+import {block} from '../../../utils/cn';
 import type {MediaRendererProps} from '../MediaRenderer/MediaRenderer';
 
 import './VideoView.scss';

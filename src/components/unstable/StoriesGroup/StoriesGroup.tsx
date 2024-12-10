@@ -3,8 +3,8 @@ import React from 'react';
 import {Modal} from '@gravity-ui/uikit';
 import type {ModalCloseReason} from '@gravity-ui/uikit';
 
-import {block} from '../../utils/cn';
 import {IndexType, StoriesLayout} from '../Stories/components/StoriesLayout/StoriesLayout';
+import {block} from '../utils/cn';
 
 import {StoriesPreview} from './components';
 import type {StoriesGroupItem} from './types';

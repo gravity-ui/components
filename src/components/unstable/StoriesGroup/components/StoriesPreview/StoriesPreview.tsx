@@ -4,9 +4,9 @@ import {ChevronLeft, ChevronRight} from '@gravity-ui/icons';
 import {Button, Icon} from '@gravity-ui/uikit';
 import type {ButtonProps, ModalCloseReason} from '@gravity-ui/uikit';
 
-import {block} from '../../../../utils/cn';
 import {MediaRenderer} from '../../../Stories/components';
 import type {StoriesItemMedia} from '../../../Stories/types';
+import {block} from '../../../utils/cn';
 import type {StoriesGroupItem} from '../../types';
 
 import './StoriesPreview.scss';

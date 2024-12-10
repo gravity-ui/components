@@ -4,7 +4,7 @@ import {ChevronLeft, ChevronRight, Xmark} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Link, Text} from '@gravity-ui/uikit';
 
 import {MediaRenderer} from '..';
-import {block} from '../../../../utils/cn';
+import {block} from '../../../utils/cn';
 import {i18n} from '../../i18n';
 import type {StoriesItem} from '../../types';
 import {StoriesTextBlockStyle} from '../../types';

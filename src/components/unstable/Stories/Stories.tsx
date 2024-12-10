@@ -3,7 +3,7 @@ import React from 'react';
 import type {ModalCloseReason} from '@gravity-ui/uikit';
 import {Modal} from '@gravity-ui/uikit';
 
-import {block} from '../../utils/cn';
+import {block} from '../utils/cn';
 
 import {IndexType, StoriesLayout} from './components/StoriesLayout/StoriesLayout';
 import {useSyncWithLS} from './hooks';

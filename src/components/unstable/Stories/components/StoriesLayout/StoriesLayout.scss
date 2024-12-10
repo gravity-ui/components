@@ -1,5 +1,5 @@
 @use '@gravity-ui/uikit/styles/mixins';
-@use '../../../../variables';
+@use '../../../variables';
 
 $block: '.#{variables.$ns}stories-layout';
 
