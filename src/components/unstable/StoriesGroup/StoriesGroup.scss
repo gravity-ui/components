@@ -1,0 +1,18 @@
+@use '../variables';
+
+$block: '.#{variables.$ns}stories-group';
+$borderRadius: 20px;
+
+#{$block} {
+    --g-modal-border-radius: #{$borderRadius};
+    --g-modal-margin: 20px;
+
+    & .g-modal__content-wrapper {
+        overflow-x: initial;
+    }
+
+    &__modal-content {
+        background-color: inherit;
+        border-radius: $borderRadius;
+    }
+}
