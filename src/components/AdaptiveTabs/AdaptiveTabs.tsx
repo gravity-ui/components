@@ -91,6 +91,7 @@ export type TabItem<T> = T & {
     title?: React.ReactNode;
     hint?: string;
     disabled?: boolean;
+    qa?: string;
 };
 
 export type TabsSize = 'm' | 'l' | 'xl';
@@ -119,6 +120,7 @@ export interface AdaptiveTabsProps<T> {
     allowNotSelected?: boolean;
     /** Settings to control popup with hidden tabs list */
     moreControlProps?: Pick<SelectProps, 'virtualizationThreshold' | 'popupWidth'>;
+    qa?: string;
 }
 
 interface AdaptiveTabsState {
@@ -867,6 +869,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                         this.onTabClick(item.id, e);
                     }
                 }}
+                data-qa={item.qa}
             >
                 {wrapTo ? wrapTo(item, tabNode, tabIndex) : tabNode}
             </div>
@@ -939,7 +942,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
     }
 
     render() {
-        const {items, className, size = 'm'} = this.props;
+        const {items, className, size = 'm', qa} = this.props;
 
         return (
             <div
@@ -951,6 +954,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
                     },
                     [className],
                 )}
+                data-qa={qa}
             >
                 {(this.state.currentContainerWidthName === SMALL_CONTAINER_WIDTH_NAME ||
                     this.state.firstHiddenTabIndex === 0) &&
