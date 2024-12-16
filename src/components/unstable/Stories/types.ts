@@ -24,7 +24,7 @@ export enum StoriesMediaBlockStyle {
     FullSize = 'full-size',
 }
 
-interface StoriesItemTextColorStyles {
+export interface StoriesItemTextColorStyles {
     titleColor?: string;
     descriptionColor?: string;
     counterColor?: string;
