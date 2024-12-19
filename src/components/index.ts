@@ -21,3 +21,5 @@ export * from './Stories';
 export * from './StoriesGroup';
 export * from './ConfirmDialog';
 export * from './Reactions';
+export * from './Gallery';
+export * from './FilesGallery';

@@ -1,0 +1,31 @@
+@use '../variables';
+
+$block: '.#{variables.$ns}files-gallery';
+
+$filePreviewBlock: '.#{variables.$ns}file-preview';
+
+#{$block} {
+    &__active-item-info {
+        align-self: center;
+    }
+
+    &__file-preview {
+        &[class] {
+            width: 100%;
+            height: 100%;
+        }
+
+        #{$filePreviewBlock}__card {
+            width: 100%;
+            min-width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+
+        #{$filePreviewBlock}__image,
+        #{$filePreviewBlock}__icon {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

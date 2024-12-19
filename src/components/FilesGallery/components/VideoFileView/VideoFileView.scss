@@ -1,0 +1,12 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}video-file-view';
+
+#{$block} {
+    width: 100%;
+    height: 100%;
+
+    &__spin {
+        position: absolute;
+    }
+}
