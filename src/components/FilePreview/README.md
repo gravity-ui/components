@@ -12,19 +12,20 @@ A component for displaying the file.
 | className           | `string`                   |          |         | Class name for the file container                                                                                |
 | onClick             | `function`                 |          |         | Click handler for the file container                                                                             |
 | [actions](#actions) | `FilePreviewActionProps[]` |          | `[]`    | Click handler for the file container                                                                             |
+| hideName            | `Boolean`                  |          |         | Hide the file name                                                                                               |
 
 #### Actions
 
 For a file, you can prescribe actions that will be visible when you hover over it.
 
-| Property   | Type                                                                                 | Required | Default | Description                    |
-| ---------- | ------------------------------------------------------------------------------------ | -------- | ------- | ------------------------------ |
-| id         | `String`                                                                             |          |         | Action id                      |
-| icon       | `String`                                                                             | ✓        |         | Action icon                    |
-| title      | `String`                                                                             | ✓        |         | Action hint on hover           |
-| onClick    | `function`                                                                           |          |         | Action click handler           |
-| href       | `String`                                                                             |          |         | Action button href             |
-| extraProps | `ButtonHTMLAttributes<HTMLButtonElement> \| AnchorHTMLAttributes<HTMLAnchorElement>` |          |         | Additional action button props |
+| Property   | Type                                      | Required                                 | Default | Description                    |
+| ---------- | ----------------------------------------- | ---------------------------------------- | ------- | ------------------------------ |
+| id         | `String`                                  |                                          |         | Action id                      |
+| icon       | `String`                                  | ✓                                        |         | Action icon                    |
+| title      | `String`                                  | ✓                                        |         | Action hint on hover           |
+| onClick    | `function`                                |                                          |         | Action click handler           |
+| href       | `String`                                  |                                          |         | Action button href             |
+| extraProps | `ButtonHTMLAttributes<HTMLButtonElement>` | AnchorHTMLAttributes<HTMLAnchorElement>` |         | Additional action button props |
 
 ```jsx
 

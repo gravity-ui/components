@@ -53,6 +53,7 @@ export interface FilePreviewProps extends QAProps {
 
     onClick?: React.MouseEventHandler<HTMLDivElement>;
     actions?: FilePreviewActionProps[];
+    hideName?: boolean;
 }
 
 export function FilePreview({
@@ -63,6 +64,7 @@ export function FilePreview({
     description,
     onClick,
     actions,
+    hideName,
 }: FilePreviewProps) {
     const id = useUniqId();
 
@@ -125,9 +127,11 @@ export function FilePreview({
                         <Icon className={cn('icon-svg')} data={FILE_ICON[type]} size={20} />
                     </div>
                 )}
-                <Text className={cn('name')} color="secondary" ellipsis title={file.name}>
-                    {file.name}
-                </Text>
+                {!hideName && (
+                    <Text className={cn('name')} color="secondary" ellipsis title={file.name}>
+                        {file.name}
+                    </Text>
+                )}
                 {Boolean(description) && (
                     <Text
                         className={cn('description')}
