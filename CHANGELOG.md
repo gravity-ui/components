@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.13.1](https://github.com/gravity-ui/components/compare/v3.13.0...v3.13.1) (2024-12-16)
+
+
+### Bug Fixes
+
+* **unstable:** add missed exports ([#249](https://github.com/gravity-ui/components/issues/249)) ([9508491](https://github.com/gravity-ui/components/commit/950849170e8c4091ff48426f2201a502c92fd148))
+
 ## [3.13.0](https://github.com/gravity-ui/components/compare/v3.12.5...v3.13.0) (2024-12-10)
 
 
