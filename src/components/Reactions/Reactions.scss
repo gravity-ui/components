@@ -12,10 +12,6 @@ $block: '.#{variables.$ns}reactions';
         padding: 16px;
     }
 
-    &__reaction-button {
-        --g-button-border-radius: 16px;
-    }
-
     &__reaction-button-content_size_xs {
         font-size: 12px;
     }
