@@ -61,6 +61,7 @@ export function Reaction(props: ReactionInnerProps) {
             selected={selected}
             view="outlined"
             extraProps={{value}}
+            pin="circle-circle"
             onClick={onClickCallback}
         >
             <Button.Icon>
