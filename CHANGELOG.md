@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.13.2](https://github.com/gravity-ui/components/compare/v3.13.1...v3.13.2) (2024-12-24)
+
+
+### Bug Fixes
+
+* rename unstable namespace keyset ([#253](https://github.com/gravity-ui/components/issues/253)) ([1d5052a](https://github.com/gravity-ui/components/commit/1d5052a308ad1208a1df99b9109d72e0b00f04f9))
+
 ## [3.13.1](https://github.com/gravity-ui/components/compare/v3.13.0...v3.13.1) (2024-12-16)
 
 
