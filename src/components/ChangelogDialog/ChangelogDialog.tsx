@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ArrowUpRightFromSquare} from '@gravity-ui/icons';
 import type {DialogProps} from '@gravity-ui/uikit';

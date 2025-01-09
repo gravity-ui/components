@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import clamp from 'lodash/clamp';
 
@@ -43,7 +43,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
         );
         const leftActionElement = leftAction ? actionsElements[0] : undefined;
         const rightActionElement = rightAction
-            ? actionsElements[1] ?? actionsElements[0]
+            ? (actionsElements[1] ?? actionsElements[0])
             : undefined;
 
         if (!notificationWrapperElement) return () => {};

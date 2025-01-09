@@ -1,3 +1,5 @@
+import type * as React from 'react';
+
 import {ButtonProps, IconData, QAProps} from '@gravity-ui/uikit';
 
 export type NotificationTheme = 'success' | 'info' | 'warning' | 'danger';

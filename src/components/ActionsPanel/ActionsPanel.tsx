@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Xmark} from '@gravity-ui/icons';
 import {Button, Icon, Text} from '@gravity-ui/uikit';
 

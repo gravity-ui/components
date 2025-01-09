@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {GraduationCap} from '@gravity-ui/icons';
 import {Button} from '@gravity-ui/uikit';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ImageView, VideoView} from '../../components';
 import type {StoriesItemMedia} from '../../types';
 import {StoriesMediaBlockStyle} from '../../types';

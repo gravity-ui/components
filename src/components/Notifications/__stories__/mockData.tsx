@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
 import {DropdownMenu, Link} from '@gravity-ui/uikit';

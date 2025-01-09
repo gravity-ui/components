@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Button, Portal} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';

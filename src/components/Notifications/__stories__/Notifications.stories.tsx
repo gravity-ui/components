@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Bell} from '@gravity-ui/icons';
 import {Button, Checkbox, Flex, Icon, Popup} from '@gravity-ui/uikit';

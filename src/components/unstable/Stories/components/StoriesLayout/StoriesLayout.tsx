@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ChevronLeft, ChevronRight, Xmark} from '@gravity-ui/icons';
 import {Button, Flex, Icon, Link, Text} from '@gravity-ui/uikit';

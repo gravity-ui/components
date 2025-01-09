@@ -1,6 +1,6 @@
 import pick from 'lodash/pick';
 import Cookies from 'universal-cookie';
-import type {CookieSetOptions} from 'universal-cookie/cjs/types';
+import type {CookieSetOptions} from 'universal-cookie';
 
 import type {IConsentManager, Subscriber} from './types';
 
