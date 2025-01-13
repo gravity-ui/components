@@ -6,14 +6,10 @@ $block: '.#{variables.$ns}share-popover';
 #{$block} {
     position: relative;
 
-    &__tooltip {
+    // for guaranteed popover style override
+    #{$block} &__tooltip {
         max-width: none;
         padding: 8px;
-    }
-
-    // for guaranteed popover style override
-    #{$block} &__tooltip-content {
-        max-width: none;
     }
 
     &__container {

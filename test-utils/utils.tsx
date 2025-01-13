@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ThemeContext} from '@gravity-ui/uikit';
 import type {ThemeContextProps} from '@gravity-ui/uikit';
@@ -11,12 +11,12 @@ const themeContextValue: ThemeContextProps = {
     themeValue: 'light',
 };
 
-function Providers({children}: {children: React.ReactElement}) {
+function Providers({children}: {children: React.ReactNode}) {
     return <ThemeContext.Provider value={themeContextValue}>{children}</ThemeContext.Provider>;
 }
 
-function createWrapper(Component: React.JSXElementConstructor<{children: React.ReactElement}>) {
-    return function Wrapper({children}: {children: React.ReactElement}) {
+function createWrapper(Component: React.JSXElementConstructor<{children: React.ReactNode}>) {
+    return function Wrapper({children}: {children: React.ReactNode}) {
         return (
             <Providers>
                 <Component>{children}</Component>

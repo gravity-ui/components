@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-import {ActionTooltip, Button, Icon, useUniqId} from '@gravity-ui/uikit';
+import {ActionTooltip, Button, Icon} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -14,31 +14,21 @@ type Props = {action: NotificationActionProps};
 
 export const NotificationAction = React.memo(function NotificationAction({action}: Props) {
     const content = renderContent(action);
-    const tooltipId = useUniqId();
 
     const button = (
         <Button
             qa={action.qa}
             className={b('action', {icon: Boolean(action.icon)})}
             view={action.view ?? 'flat'}
-            href={action.href}
+            href={action.href as any}
             target={action.target}
             onClick={action.onClick}
-            extraProps={{
-                'aria-labelledby': action.icon ? tooltipId : undefined,
-            }}
         >
             {content}
         </Button>
     );
 
-    return action.icon ? (
-        <ActionTooltip title={action.text} id={tooltipId}>
-            {button}
-        </ActionTooltip>
-    ) : (
-        button
-    );
+    return action.icon ? <ActionTooltip title={action.text}>{button}</ActionTooltip> : button;
 });
 
 function renderContent(action: NotificationActionProps): React.ReactNode {

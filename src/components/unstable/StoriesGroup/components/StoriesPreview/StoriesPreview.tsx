@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ChevronLeft, ChevronRight} from '@gravity-ui/icons';
 import {Button, Icon} from '@gravity-ui/uikit';
-import type {ButtonProps, ModalCloseReason} from '@gravity-ui/uikit';
+import type {ButtonButtonProps, ModalCloseReason} from '@gravity-ui/uikit';
 
 import {MediaRenderer} from '../../../Stories/components';
 import type {StoriesItemMedia} from '../../../Stories/types';
@@ -102,7 +102,7 @@ const StoriesPreviewListWithSlider = ({
         setOffset(currentOffset);
     }, [groupIndex, maxSliderItemsCount]);
 
-    const setPreviewOffset = React.useCallback<NonNullable<ButtonProps['onClick']>>(
+    const setPreviewOffset = React.useCallback<NonNullable<ButtonButtonProps['onClick']>>(
         (event) => {
             event.preventDefault();
             event.stopPropagation();
@@ -114,7 +114,7 @@ const StoriesPreviewListWithSlider = ({
         [maxSliderItemsCount],
     );
 
-    const setNextOffset = React.useCallback<NonNullable<ButtonProps['onClick']>>(
+    const setNextOffset = React.useCallback<NonNullable<ButtonButtonProps['onClick']>>(
         (event) => {
             event.preventDefault();
             event.stopPropagation();
