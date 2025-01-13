@@ -1,4 +1,4 @@
-@import '@gravity-ui/uikit/styles/mixins';
+@forward '@gravity-ui/uikit/styles/mixins';
 
 @mixin focusable($offset: 0, $mode: 'outline') {
     @if $mode == 'outline' {

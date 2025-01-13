@@ -1,10 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ChevronDown} from '@gravity-ui/icons';
 import {Icon, Select, SelectProps} from '@gravity-ui/uikit';
 import difference from 'lodash/difference';
 import throttle from 'lodash/throttle';
-import ResizeObserver from 'resize-observer-polyfill';
 
 import {block} from '../utils/cn';
 

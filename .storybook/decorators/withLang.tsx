@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {settings} from '@gravity-ui/date-utils';
 import {configure} from '@gravity-ui/uikit';

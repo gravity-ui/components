@@ -5,7 +5,7 @@
 ## Usage
 
 ```tsx
-import React from 'react';
+import * as React from 'react';
 import {ActionsPanel, ActionsPanelProps} from '@gravity-ui/components';
 
 const actions: ActionsPanelProps['actions'] = [

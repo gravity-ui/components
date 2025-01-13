@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Button, Flex, Text} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';

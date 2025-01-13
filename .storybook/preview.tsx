@@ -10,14 +10,10 @@ import {withLang} from './decorators/withLang';
 import {withMobile} from './decorators/withMobile';
 import {withStrictMode} from './decorators/withStrictMode';
 import {withTheme} from './decorators/withTheme';
-import {Docs} from './docs';
 
 const preview: Preview = {
     decorators: [withLang, withMobile, withTheme, withStrictMode],
     parameters: {
-        docs: {
-            page: Docs,
-        },
         jsx: {showFunctions: true},
         viewport: {
             viewports: MINIMAL_VIEWPORTS,

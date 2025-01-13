@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Button, Icon} from '@gravity-ui/uikit';
 import type {IconData} from '@gravity-ui/uikit';

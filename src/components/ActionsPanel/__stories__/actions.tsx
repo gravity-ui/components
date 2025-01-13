@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {ChevronDown, PencilToSquare} from '@gravity-ui/icons';
 import {Icon} from '@gravity-ui/uikit';
 

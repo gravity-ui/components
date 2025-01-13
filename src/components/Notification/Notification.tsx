@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Icon, Link, useMobile, useUniqId} from '@gravity-ui/uikit';
 

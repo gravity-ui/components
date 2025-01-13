@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Button, ButtonSize, PaletteOption, PopoverProps, Popup} from '@gravity-ui/uikit';
 
@@ -79,7 +79,7 @@ export function Reaction(props: ReactionInnerProps) {
 
             {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (
                 <Popup
-                    contentClassName={b('popup')}
+                    className={b('popup')}
                     anchorRef={currentHoveredReaction.ref}
                     placement={popupDefaultPlacement}
                     open={currentHoveredReaction.open}

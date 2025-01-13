@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {NotificationProps} from '../Notification/definitions';
 import {block} from '../utils/cn';
