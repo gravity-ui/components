@@ -2,8 +2,8 @@
 const path = require('path');
 
 const {task, src, dest, series, parallel} = require('gulp');
-const sass = require('gulp-dart-sass');
 const replace = require('gulp-replace');
+const sass = require('gulp-sass')(require('sass'));
 const ts = require('gulp-typescript');
 const {rimrafSync} = require('rimraf');
 
@@ -11,14 +11,16 @@ const BUILD_DIR = path.resolve('build');
 
 task('clean', (done) => {
     rimrafSync(BUILD_DIR);
-    rimrafSync('styles/**/*.css');
+    rimrafSync('styles/**/*.css', {glob: true});
     done();
 });
 
 function compileTs(modules = false) {
     const tsProject = ts.createProject('tsconfig.json', {
         declaration: true,
-        module: modules ? 'esnext' : 'commonjs',
+        module: modules ? 'esnext' : 'nodenext',
+        moduleResolution: modules ? 'bundler' : 'nodenext',
+        ...(modules ? undefined : {verbatimModuleSyntax: false}),
     });
 
     return src([
@@ -27,6 +29,9 @@ function compileTs(modules = false) {
         '!src/stories/**/*',
         '!src/**/__stories__/**/*',
         '!src/**/__tests__/**/*',
+        '!src/**/__mocks__/**/*',
+        '!src/**/*.test.{ts,tsx}',
+        '!src/**/__snapshots__/**/*',
     ])
         .pipe(replace(/(import.+)\.scss/g, '$1.css'))
         .pipe(tsProject())
@@ -50,11 +55,11 @@ task('copy-i18n', () => {
 task('styles-components', () => {
     return src(['src/components/**/*.scss', '!src/components/**/__stories__/**/*'])
         .pipe(
-            sass({
-                includePaths: ['node_modules'],
+            sass.sync({includePaths: ['node_modules']}).on('error', function (error) {
+                sass.logError.call(this, error);
+                process.exit(1);
             }),
         )
-        .pipe(sass().on('error', sass.logError))
         .pipe(dest(path.resolve(BUILD_DIR, 'esm', 'components')))
         .pipe(dest(path.resolve(BUILD_DIR, 'cjs', 'components')));
 });

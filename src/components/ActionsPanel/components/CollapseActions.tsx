@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Ellipsis} from '@gravity-ui/icons';
 import {Button, DropdownMenu, Icon} from '@gravity-ui/uikit';

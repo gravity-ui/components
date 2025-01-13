@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
 import {Button, Icon, Link, Modal, Text, useDirection, useMobile} from '@gravity-ui/uikit';

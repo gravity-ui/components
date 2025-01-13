@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {actions} from '@storybook/addon-actions';
 import type {Meta, StoryFn} from '@storybook/react';
 

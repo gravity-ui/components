@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import type {ModalCloseReason} from '@gravity-ui/uikit';
 import {Modal} from '@gravity-ui/uikit';

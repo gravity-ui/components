@@ -5,7 +5,7 @@ Component for user reactions (e.g. 👍, 😊, 😎 etc) as in GitHub comments f
 ### Usage example
 
 ```typescript
-import React from 'react';
+import * as React from 'react';
 
 import {Reactions, ReactionProps, ReactionState} from '@gravity-ui/components';
 

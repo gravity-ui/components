@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {FaceSmile} from '@gravity-ui/icons';
 import {
@@ -84,7 +84,7 @@ export function Reactions({
     renderTooltip,
     onToggle,
 }: ReactionsProps) {
-    const addReactionButtonRef = React.useRef<HTMLSpanElement>(null);
+    const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
     const [palettePopupOpened, setPalettePopupOpened] = React.useState(false);
 
     const onOpenPalettePopup = React.useCallback(() => setPalettePopupOpened(true), []);
@@ -159,10 +159,10 @@ export function Reactions({
     const addReactionPopup = readOnly ? null : (
         <Popup
             anchorRef={addReactionButtonRef}
-            contentClassName={b('add-reaction-popover')}
+            className={b('add-reaction-popover')}
             open={palettePopupOpened}
             hasArrow={false}
-            focusTrap
+            modalFocus
             autoFocus
             onOutsideClick={onClosePalettePopup}
             onEscapeKeyDown={onClosePalettePopup}

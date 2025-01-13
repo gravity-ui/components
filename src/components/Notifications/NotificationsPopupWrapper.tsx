@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const WIDTH = '320px';
 const HEIGHT = '470px';

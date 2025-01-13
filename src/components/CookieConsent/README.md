@@ -3,7 +3,7 @@
 ## Usage ConsentMode.Base
 
 ```tsx
-import React from 'react';
+import * as React from 'react';
 import {CookieConsent} from '@gravity-ui/components';
 
 const consentManager = new ConsentManager('base');
@@ -24,7 +24,7 @@ const Analytics = () => {
 ## Usage ConsentMode.Manage
 
 ```tsx
-import React from 'react';
+import * as React from 'react';
 import {CookieConsent} from '@gravity-ui/components';
 
 const consentManager = new ConsentManager('manage');
