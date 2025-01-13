@@ -17,6 +17,7 @@ export type PromoSheetProps = {
     closeText: string;
     actionHref?: string;
     imageSrc?: string;
+    imageAlt?: string;
     className?: string;
     contentClassName?: string;
     imageContainerClassName?: string;
@@ -37,6 +38,7 @@ export function PromoSheet({
     closeText,
     actionHref,
     imageSrc,
+    imageAlt = '',
     className,
     contentClassName,
     imageContainerClassName,
@@ -122,7 +124,7 @@ export function PromoSheet({
                         role="presentation"
                         className={cn('image', imageClassName)}
                         src={imageSrc}
-                        alt=""
+                        alt={imageAlt}
                         width={imageSizes?.width}
                         height={imageSizes?.height}
                     />

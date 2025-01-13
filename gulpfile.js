@@ -55,7 +55,7 @@ task('copy-i18n', () => {
 task('styles-components', () => {
     return src(['src/components/**/*.scss', '!src/components/**/__stories__/**/*'])
         .pipe(
-            sass.sync({includePaths: ['node_modules']}).on('error', function (error) {
+            sass.sync({loadPaths: ['node_modules']}).on('error', function (error) {
                 sass.logError.call(this, error);
                 process.exit(1);
             }),
