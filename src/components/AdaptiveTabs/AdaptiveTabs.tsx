@@ -795,7 +795,6 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} />;
 
         return (
-            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
             <div
                 {...triggerProps}
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
