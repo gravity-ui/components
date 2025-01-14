@@ -12,13 +12,16 @@ $fixedBtnSize: 44px;
 $actionBtnZIndex: 50;
 $textContentZIndex: 30;
 
+$borderRadius: 20px;
+$borderRadiusCard: 14px;
+
 #{$block} {
     &__wrap-outer {
         height: calc(100vh - 2 * var(--g-modal-margin));
         width: calc(100vw - 2 * var(--g-modal-margin));
         background-color: var(--g-color-base-background);
         display: flex;
-        border-radius: var(--g-spacing-5);
+        border-radius: $borderRadius;
         max-width: $maxWidth;
         max-height: $maxHeight;
         min-width: $minWidth;
@@ -28,7 +31,7 @@ $textContentZIndex: 30;
     &__container {
         display: flex;
         box-shadow: 0 8px 20px var(--g-color-sfx-shadow);
-        border-radius: var(--g-spacing-5);
+        border-radius: $borderRadius;
         position: relative;
 
         width: 100%;
@@ -50,7 +53,7 @@ $textContentZIndex: 30;
 
         &_blockStyle_card {
             background-color: var(--g-color-base-background);
-            border-radius: var(--g-spacing-3);
+            border-radius: $borderRadiusCard;
         }
 
         &_blockStyle_transparent {

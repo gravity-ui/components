@@ -2,8 +2,10 @@
 
 $block: '.#{variables.$ns}stories';
 
+$borderRadius: 20px;
+
 #{$block} {
-    --g-modal-border-radius: var(--g-spacing-5);
+    --g-modal-border-radius: $borderRadius;
     --g-modal-margin: var(--g-spacing-5);
 
     & .g-modal__content-wrapper {
@@ -11,6 +13,6 @@ $block: '.#{variables.$ns}stories';
     }
 
     &__modal-content {
-        border-radius: var(--g-spacing-5);
+        border-radius: $borderRadius;
     }
 }
