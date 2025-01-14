@@ -3,8 +3,9 @@ import * as React from 'react';
 import {Button} from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
 
-import {StoriesGroup} from '../../StoriesGroup/StoriesGroup';
-import type {StoriesGroupProps} from '../../StoriesGroup/StoriesGroup';
+import {StoriesMediaBlockStyle, StoriesTextBlockStyle} from '../../Stories';
+import {StoriesGroup} from '../StoriesGroup';
+import type {StoriesGroupProps} from '../StoriesGroup';
 import type {StoriesGroupItem} from '../types';
 
 export default {
@@ -12,22 +13,27 @@ export default {
     component: StoriesGroup,
 } as Meta;
 
-const groups: StoriesGroupItem[] = [
-    {
+const baseGroups: StoriesGroupItem[] = new Array(12).fill(0).map((_, index) => {
+    return {
         items: [
             {
                 title: 'New navigation',
+                textBlockStyle: StoriesTextBlockStyle.Card,
+                mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
                 description:
                     'At the top of the panel is the service navigation for each service. ' +
                     'Below are common navigation elements: a component for switching between accounts ' +
                     'and organizations, settings, help center, search, notifications, favorites.',
                 url: 'https://yandex.eu',
                 media: {
-                    url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-2.png',
+                    type: 'image',
+                    url: `https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-${(index % 3) + 5}.png`,
                 },
             },
             {
                 title: 'New navigation (2)',
+                textBlockStyle: StoriesTextBlockStyle.Transparent,
+                mediaBlockStyle: StoriesMediaBlockStyle.HalfSizeWithMargins,
                 description: 'A little more about the new navigation',
                 media: {
                     url: 'https://storage.yandexcloud.net/uikit-storybook-assets/sample_960x400_ocean_with_audio.mp4',
@@ -35,18 +41,69 @@ const groups: StoriesGroupItem[] = [
                 },
             },
         ],
-    },
+    };
+});
+
+const groups: StoriesGroupItem[] = [
     {
         items: [
             {
-                title: 'New navigation (3)',
-                description: 'Switch to the new navigation right now',
+                title: 'New navigation',
+                textBlockStyle: StoriesTextBlockStyle.Card,
+                mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
+                firstAction: {
+                    children: 'First button',
+                    view: 'action',
+                },
+                secondAction: {
+                    children: 'Second button',
+                    view: 'normal',
+                },
+                content:
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.',
+                url: 'https://yandex.eu',
                 media: {
-                    url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-4.png',
+                    type: 'image',
+                    url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-6.png',
+                },
+            },
+            {
+                title: 'New navigation',
+                textBlockStyle: StoriesTextBlockStyle.Transparent,
+                mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
+                content:
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.',
+                url: 'https://yandex.eu',
+                media: {
+                    type: 'image',
+                    url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-6.png',
+                },
+            },
+            {
+                title: 'New navigation (2)',
+                textBlockStyle: StoriesTextBlockStyle.Transparent,
+                mediaBlockStyle: StoriesMediaBlockStyle.HalfSizeWithMargins,
+                firstAction: {
+                    children: 'First button',
+                    view: 'action',
+                },
+                secondAction: {
+                    children: 'Second button',
+                    view: 'normal',
+                },
+                content: 'A little more about the new navigation',
+                media: {
+                    url: 'https://storage.yandexcloud.net/uikit-storybook-assets/sample_960x400_ocean_with_audio.mp4',
+                    type: 'video',
                 },
             },
         ],
     },
+    ...baseGroups,
 ];
 
 const DefaultTemplate: StoryFn<StoriesGroupProps> = (props: StoriesGroupProps) => {
@@ -81,6 +138,15 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
     initialStoryIndex: [0, 0],
     open: false,
-    groups,
+    groups: groups.slice(0, 2),
 };
 Default.argTypes = {};
+
+export const MoreGroups = DefaultTemplate.bind({});
+
+MoreGroups.args = {
+    initialStoryIndex: [0, 0],
+    open: false,
+    groups,
+};
+MoreGroups.argTypes = {};
