@@ -26,7 +26,7 @@ const items: StoriesItem[] = [
             children: 'Second button',
             view: 'normal',
         },
-        description:
+        content:
             'At the top of the panel is the service navigation for each service. ' +
             'Below are common navigation elements: a component for switching between accounts ' +
             'and organizations, settings, help center, search, notifications, favorites.' +
@@ -50,7 +50,7 @@ const items: StoriesItem[] = [
     },
     {
         title: 'New navigation (2)',
-        description: 'A little more about the new navigation',
+        content: 'A little more about the new navigation',
         textBlockStyle: StoriesTextBlockStyle.Transparent,
         mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
         firstAction: {
@@ -68,7 +68,7 @@ const items: StoriesItem[] = [
     },
     {
         title: 'New navigation (2)',
-        description: 'A little more about the new navigation',
+        content: 'A little more about the new navigation',
         textBlockStyle: StoriesTextBlockStyle.Transparent,
         mediaBlockStyle: StoriesMediaBlockStyle.HalfSize,
         media: {
@@ -78,7 +78,7 @@ const items: StoriesItem[] = [
     },
     {
         title: 'New navigation (2)',
-        description: 'A little more about the new navigation',
+        content: 'A little more about the new navigation',
         textBlockStyle: StoriesTextBlockStyle.Card,
         mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
         media: {
@@ -88,7 +88,7 @@ const items: StoriesItem[] = [
     },
     {
         title: 'New navigation (3)',
-        description: 'Switch to the new navigation right now',
+        content: 'Switch to the new navigation right now',
         textBlockStyle: StoriesTextBlockStyle.Transparent,
         mediaBlockStyle: StoriesMediaBlockStyle.HalfSizeWithMargins,
         media: {
@@ -130,7 +130,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             title: 'Default story with simple text',
             textBlockStyle: StoriesTextBlockStyle.Card,
             mediaBlockStyle: StoriesMediaBlockStyle.HalfSizeWithMargins,
-            description:
+            content:
                 'This story has default value for props textBlockStyle = "card" and mediaBlockStyle = "half-size-with-margins" ',
             media: {
                 type: 'image',
@@ -141,7 +141,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             title: 'Story without margins in media block',
             textBlockStyle: StoriesTextBlockStyle.Card,
             mediaBlockStyle: StoriesMediaBlockStyle.HalfSize,
-            description:
+            content:
                 'Props value: textBlockStyle = "card", mediaBlockStyle = "half-size-with-margins" and media type = "image"',
             media: {
                 type: 'image',
@@ -152,7 +152,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             title: 'Story with full-size media block',
             textBlockStyle: StoriesTextBlockStyle.Card,
             mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
-            description:
+            content:
                 'Props value: textBlockStyle = "card", mediaBlockStyle = "full-size" and media type = "image"',
             media: {
                 type: 'image',
@@ -163,7 +163,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             title: 'Story with full-size media block and transparent text-block',
             textBlockStyle: StoriesTextBlockStyle.Transparent,
             mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
-            description:
+            content:
                 'Props value: textBlockStyle = "transparent", mediaBlockStyle = "full-size" and media type = "image"',
             media: {
                 type: 'image',
@@ -177,7 +177,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             title: 'Story with video half-size',
             textBlockStyle: StoriesTextBlockStyle.Transparent,
             mediaBlockStyle: StoriesMediaBlockStyle.HalfSize,
-            description:
+            content:
                 'Props value: textBlockStyle = "transparent", mediaBlockStyle = "half-size" and media type = "video"',
             media: {
                 type: 'video',
@@ -196,7 +196,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
                 children: 'Second button',
                 view: 'normal',
             },
-            description:
+            content:
                 'Props value: textBlockStyle = "card", mediaBlockStyle = "half-size-with-margins" and media type = "video"',
             media: {
                 type: 'video',
@@ -207,7 +207,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             title: 'Story with video full-size',
             textBlockStyle: StoriesTextBlockStyle.Card,
             mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
-            description:
+            content:
                 'Props value: textBlockStyle = "card", mediaBlockStyle = "full-size" and media type = "video"',
             media: {
                 type: 'video',
@@ -229,7 +229,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
                 children: 'Second button',
                 view: 'normal',
             },
-            description:
+            content:
                 'Lorem ipsum odor amet, consectetuer adipiscing elit. Nunc at parturient tristique senectus class duis eget per taciti. Eu rutrum est euismod risus aliquet in. Vehicula habitant nostra enim quis blandit consequat. Blandit ex ut purus; vestibulum accumsan duis? Porttitor accumsan at molestie integer nulla habitant? Egestas urna suscipit eleifend tortor mauris montes vulputate primis?Tempor viverra vitae tempus consectetur egestas? Quam dolor dictumst pellentesque porta; pulvinar conubia placerat risus. Leo at elementum vivamus fermentum erat taciti. Turpis ipsum faucibus primis purus, montes curae eu vel. Lacus metus sagittis dictumst diam libero imperdiet rhoncus neque. Natoque nullam inceptos porttitor integer porttitor nascetur a interdum. Imperdiet scelerisque rutrum congue massa eleifend torquent nisi. Sociosqu libero volutpat nisl orci viverra. Tristique egestas auctor conubia; etiam lectus scelerisque ligula. Magnis ultrices venenatis vivamus hac taciti inceptos leo. Interdum magnis sollicitudin elementum placerat montes. Lacinia platea netus nascetur ornare sociosqu. Inceptos taciti iaculis interdum nisl sodales in eros fermentum. Justo maecenas elementum condimentum feugiat consectetur semper sollicitudin. Primis sodales posuere facilisis donec ipsum efficitur. Faucibus accumsan lectus bibendum rhoncus maecenas, eget aliquam netus. Lectus torquent ut sodales fringilla natoque.',
             media: {
                 type: 'image',
@@ -253,7 +253,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
                 children: 'Second button',
                 view: 'normal-contrast',
             },
-            description:
+            content:
                 'Lorem ipsum odor amet, consectetuer adipiscing elit. Nunc at parturient tristique senectus class duis eget per taciti. Eu rutrum est euismod risus aliquet in. Vehicula habitant nostra enim quis blandit consequat. Blandit ex ut purus; vestibulum accumsan duis? Porttitor accumsan at molestie integer nulla habitant? Egestas urna suscipit eleifend tortor mauris montes vulputate primis?Tempor viverra vitae tempus consectetur egestas? Quam dolor dictumst pellentesque porta; pulvinar conubia placerat risus. Leo at elementum vivamus fermentum erat taciti. Turpis ipsum faucibus primis purus, montes curae eu vel. Lacus metus sagittis dictumst diam libero imperdiet rhoncus neque. Natoque nullam inceptos porttitor integer porttitor nascetur a interdum. Imperdiet scelerisque rutrum congue massa eleifend torquent nisi. Sociosqu libero volutpat nisl orci viverra. Tristique egestas auctor conubia; etiam lectus scelerisque ligula. Magnis ultrices venenatis vivamus hac taciti inceptos leo. Interdum magnis sollicitudin elementum placerat montes. Lacinia platea netus nascetur ornare sociosqu. Inceptos taciti iaculis interdum nisl sodales in eros fermentum. Justo maecenas elementum condimentum feugiat consectetur semper sollicitudin. Primis sodales posuere facilisis donec ipsum efficitur. Faucibus accumsan lectus bibendum rhoncus maecenas, eget aliquam netus. Lectus torquent ut sodales fringilla natoque.',
             media: {
                 type: 'image',
@@ -272,7 +272,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
                 children: 'Second button',
                 view: 'normal',
             },
-            description:
+            content:
                 'Lorem ipsum odor amet, consectetuer adipiscing elit. Nunc at parturient tristique senectus class duis eget per taciti. Eu rutrum est euismod risus aliquet in. Vehicula habitant nostra enim quis blandit consequat. Blandit ex ut purus; vestibulum accumsan duis? Porttitor accumsan at molestie integer nulla habitant? Egestas urna suscipit eleifend tortor mauris montes vulputate primis?Tempor viverra vitae tempus consectetur egestas? Quam dolor dictumst pellentesque porta; pulvinar conubia placerat risus. Leo at elementum vivamus fermentum erat taciti. Turpis ipsum faucibus primis purus, montes curae eu vel. Lacus metus sagittis dictumst diam libero imperdiet rhoncus neque. Natoque nullam inceptos porttitor integer porttitor nascetur a interdum. Imperdiet scelerisque rutrum congue massa eleifend torquent nisi. Sociosqu libero volutpat nisl orci viverra. Tristique egestas auctor conubia; etiam lectus scelerisque ligula. Magnis ultrices venenatis vivamus hac taciti inceptos leo. Interdum magnis sollicitudin elementum placerat montes. Lacinia platea netus nascetur ornare sociosqu. Inceptos taciti iaculis interdum nisl sodales in eros fermentum. Justo maecenas elementum condimentum feugiat consectetur semper sollicitudin. Primis sodales posuere facilisis donec ipsum efficitur. Faucibus accumsan lectus bibendum rhoncus maecenas, eget aliquam netus. Lectus torquent ut sodales fringilla natoque.',
             media: {
                 type: 'video',

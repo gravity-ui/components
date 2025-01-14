@@ -59,7 +59,7 @@ const groups: StoriesGroupItem[] = [
                     children: 'Second button',
                     view: 'normal',
                 },
-                description:
+                content:
                     'At the top of the panel is the service navigation for each service. ' +
                     'Below are common navigation elements: a component for switching between accounts ' +
                     'and organizations, settings, help center, search, notifications, favorites.',
@@ -73,7 +73,7 @@ const groups: StoriesGroupItem[] = [
                 title: 'New navigation',
                 textBlockStyle: StoriesTextBlockStyle.Transparent,
                 mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
-                description:
+                content:
                     'At the top of the panel is the service navigation for each service. ' +
                     'Below are common navigation elements: a component for switching between accounts ' +
                     'and organizations, settings, help center, search, notifications, favorites.',
@@ -95,7 +95,7 @@ const groups: StoriesGroupItem[] = [
                     children: 'Second button',
                     view: 'normal',
                 },
-                description: 'A little more about the new navigation',
+                content: 'A little more about the new navigation',
                 media: {
                     url: 'https://storage.yandexcloud.net/uikit-storybook-assets/sample_960x400_ocean_with_audio.mp4',
                     type: 'video',

@@ -80,7 +80,7 @@ export const StoriesLayout = ({
                                         {currentStory.title}
                                     </Text>
                                 )}
-                                {currentStory.description && (
+                                {currentStory.content && (
                                     <Text
                                         variant="body-2"
                                         className={b('text-content')}
@@ -93,7 +93,7 @@ export const StoriesLayout = ({
                                                 : undefined
                                         }
                                     >
-                                        {currentStory.description}
+                                        {currentStory.content}
                                     </Text>
                                 )}
                                 {currentStory.url && (

@@ -20,7 +20,7 @@ Component for displaying stories. It looks like a carousel in a modal with given
 | Field           | Type                     | Required | Default | Description                              |
 | --------------- | ------------------------ | -------- | ------- | ---------------------------------------- |
 | title           | `String`                 |          |         | Title                                    |
-| description     | `String`                 |          |         | Main text                                |
+| content         | `React.ReactNode`        |          |         | Main content                             |
 | url             | `String`                 |          |         | Link to display more information         |
 | media           | `StoriesItemMedia`       |          |         | Media content                            |
 | firstAction     | `ButtonProps`            |          |         | Custom action button props               |

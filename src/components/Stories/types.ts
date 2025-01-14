@@ -1,4 +1,5 @@
 import type * as React from 'react';
+
 import {ButtonProps} from '@gravity-ui/uikit';
 
 export type StoriesItemMedia = {url: string} & (
@@ -33,7 +34,7 @@ export interface StoriesItemTextColorStyles {
 
 export interface StoriesItem {
     title?: string;
-    description?: string;
+    content?: React.ReactNode;
     textColorStyles?: StoriesItemTextColorStyles;
     textBlockStyle: StoriesTextBlockStyle;
     mediaBlockStyle: StoriesMediaBlockStyle;
