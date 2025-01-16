@@ -9,7 +9,6 @@ export * from './Notification';
 export * from './Notifications';
 export * from './OnboardingMenu';
 export * from './PromoSheet';
-export * from './ActionsPanel';
 export * from './SharePopover';
 export * from './StoreBadge';
 export * from './Stories';
