@@ -161,9 +161,8 @@ export function Reactions({
             anchorRef={addReactionButtonRef}
             className={b('add-reaction-popover')}
             open={palettePopupOpened}
-            hasArrow={false}
-            modalFocus
-            autoFocus
+            modal
+            initialFocus={0}
             onOutsideClick={onClosePalettePopup}
             onEscapeKeyDown={onClosePalettePopup}
         >

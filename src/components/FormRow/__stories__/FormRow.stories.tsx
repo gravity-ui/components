@@ -88,12 +88,7 @@ RequiredField.args = {
 export const WithHelpMark = Template.bind({});
 WithHelpMark.args = {
     labelHelpPopover: (
-        <HelpMark
-            placement={['top', 'bottom']}
-            buttonProps={{
-                'aria-label': 'Note',
-            }}
-        >
+        <HelpMark aria-label="Note" popoverProps={{placement: ['top', 'bottom']}}>
             Your name as it used in your foreign passport.
         </HelpMark>
     ),
