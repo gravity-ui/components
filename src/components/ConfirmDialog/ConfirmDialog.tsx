@@ -35,7 +35,7 @@ export const ConfirmDialog = ({
     ...dialogProps
 }: ConfirmDialogProps) => {
     return (
-        <Dialog {...dialogProps}>
+        <Dialog initialFocus="apply" {...dialogProps}>
             <Dialog.Header caption={title} />
             <Dialog.Body className={b('body')}>{message}</Dialog.Body>
             <Dialog.Footer
