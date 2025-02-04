@@ -1,5 +1,37 @@
 # Changelog
 
+## [4.0.0](https://github.com/gravity-ui/components/compare/v3.13.2...v4.0.0) (2025-02-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* update uikit
+* **ActionsPanel:** remove component
+* use ts target es2022
+* major update Stories and StoriesGroup ([#256](https://github.com/gravity-ui/components/issues/256))
+* prepare v4 release (deps + removals) ([#255](https://github.com/gravity-ui/components/issues/255))
+
+### Features
+
+* **ActionsPanel:** remove component ([8751b74](https://github.com/gravity-ui/components/commit/8751b74bb648bb8ca61c7c645421df2d5fbb40de))
+* major update Stories and StoriesGroup ([#256](https://github.com/gravity-ui/components/issues/256)) ([abd9815](https://github.com/gravity-ui/components/commit/abd98158c74f251c46e030346a8a8ee8a75019d9))
+* prepare v4 release (deps + removals) ([#255](https://github.com/gravity-ui/components/issues/255)) ([0633b74](https://github.com/gravity-ui/components/commit/0633b740a1dde06309b9965b85a1796e211ef80f))
+* update uikit ([798e980](https://github.com/gravity-ui/components/commit/798e9801cd6087bc6f446840a5754e372deee6fd))
+* update uikit ([b987225](https://github.com/gravity-ui/components/commit/b987225d62a75cb1ea2630d470b88565d21e2207))
+* update uikit ([241a836](https://github.com/gravity-ui/components/commit/241a83644d0ae544e0ef5ab103851d99e4219829))
+* update uikit ([b29686c](https://github.com/gravity-ui/components/commit/b29686cd41cf4e3369a862a96418d4084f44c47f))
+* use ts target es2022 ([0ae913f](https://github.com/gravity-ui/components/commit/0ae913f29ed42b6cfbe4cdcdc8b441e0fdae1b5b))
+
+
+### Bug Fixes
+
+* a better solution for rounding Reactions' buttons ([9de1f35](https://github.com/gravity-ui/components/commit/9de1f35f01c599471541eaa321fb9d66277d7ca0))
+* add exports field ([7663c45](https://github.com/gravity-ui/components/commit/7663c45c8371f78b673345fd68825a1480a9d33f))
+* bundling and tests ([9d6540a](https://github.com/gravity-ui/components/commit/9d6540ae1c77019678b32384c7f8ff64271d13e4))
+* **ConfirmDialog:** focus on apply to submit on Enter ([c529bb9](https://github.com/gravity-ui/components/commit/c529bb9b3d04c5f33bc642e6912f574182493ec4))
+* lint issues ([368e7d4](https://github.com/gravity-ui/components/commit/368e7d468528541af8351989da0ab0810e5bc493))
+* set 16px as border-radius for Reactions' buttons ([3918114](https://github.com/gravity-ui/components/commit/3918114817a3ae749984774dc5c3f86eaf92a533))
+
 ## [3.13.2](https://github.com/gravity-ui/components/compare/v3.13.1...v3.13.2) (2024-12-24)
 
 
