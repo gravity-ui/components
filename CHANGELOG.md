@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/gravity-ui/components/compare/v4.0.0...v4.0.1) (2025-02-07)
+
+
+### Bug Fixes
+
+* fix esm build ([#260](https://github.com/gravity-ui/components/issues/260)) ([3398560](https://github.com/gravity-ui/components/commit/3398560145b7d6936edb7b8cd579b53642d14fbb))
+
 ## [4.0.0](https://github.com/gravity-ui/components/compare/v3.13.2...v4.0.0) (2025-02-04)
 
 
