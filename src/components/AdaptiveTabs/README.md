@@ -10,6 +10,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | id       | `String`                    |  `true`  |         | Tab's ID                                             |
 | title    | `String`, `React.ReactNode` |          |         | Tab's text                                           |
 | disabled | `Boolean`                   |          |         | Indicates that the user cannot interact with the tab |
+| qa       | `String`                    |          |         | HTML data-qa attribute, used in tests                |
 
 ### AdaptiveTabs PropTypes
 
@@ -24,6 +25,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | className                               | `String`                                                                  |          |         | Class name for the tabs container                                  |
 | [breakpointsConfig](#breakpointsConfig) | `Record<string, number>`                                                  |          |         | Breakpoints config which control the thersholds of tab size.       |
 | moreControlProps                        | `{popupWidth?: 'fit' \| number; virtualizationThreshold?: number;}`       |          |         | Settings to control popup with hidden tabs list                    |
+| qa                                      | `String`                                                                  |          |         | HTML data-qa attribute, used in tests                              |
 
 ### breakpointsConfig
 
