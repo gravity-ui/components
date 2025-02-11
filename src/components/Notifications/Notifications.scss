@@ -79,7 +79,7 @@ $block: '.#{variables.$ns}notifications';
     &__notification-wrapper_unread + &__notification-wrapper::before {
         content: '';
         display: block;
-        border-block-start: 1px solid transparent;
+        border-block-start: 4px solid transparent;
         margin: 0 12px;
     }
 
