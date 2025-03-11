@@ -125,6 +125,7 @@ export function PromoSheet({
                         alt=""
                         width={imageSizes?.width}
                         height={imageSizes?.height}
+                        data-qa="presentation-image"
                     />
                 </div>
             )}
