@@ -25,6 +25,11 @@ export default {
                         id: 'color-contrast',
                         enabled: false,
                     },
+                    // Temporary disable the rule untill the uikit's Select component fulfils this requirement
+                    {
+                        id: 'aria-input-field-name',
+                        enabled: false,
+                    },
                 ],
             },
         },
