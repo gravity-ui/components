@@ -25,7 +25,7 @@ export default {
                         id: 'color-contrast',
                         enabled: false,
                     },
-                    // Temporary disable the rule untill the uikit's Select component fulfils this requirement
+                    // Temporary disable the rule untill issue is resolved https://github.com/gravity-ui/components/issues/270
                     {
                         id: 'aria-input-field-name',
                         enabled: false,
