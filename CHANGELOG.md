@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.2](https://github.com/gravity-ui/components/compare/v4.0.1...v4.0.2) (2025-03-13)
+
+
+### Bug Fixes
+
+* change the distance between notifications 1px -&gt; 4px (Notifications) ([#262](https://github.com/gravity-ui/components/issues/262)) ([ca74270](https://github.com/gravity-ui/components/commit/ca74270d4d4758c161adc731abf9bf50bd94e052))
+
 ## [4.0.1](https://github.com/gravity-ui/components/compare/v4.0.0...v4.0.1) (2025-02-07)
 
 
