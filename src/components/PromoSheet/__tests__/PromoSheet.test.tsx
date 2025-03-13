@@ -25,7 +25,7 @@ test('Renders base content', () => {
     expect(screen.getByRole('button', {name: closeText})).toBeInTheDocument();
     expect(screen.getByRole('button', {name: actionText})).toBeInTheDocument();
 
-    expect(screen.queryByRole('presentation')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('promo-image')).not.toBeInTheDocument();
 });
 
 test('Has image when imageSrc property is set', () => {
@@ -48,7 +48,7 @@ test('Has image when imageSrc property is set', () => {
         onLoad();
     });
 
-    expect(screen.getByRole('presentation')).toBeInTheDocument();
+    expect(screen.getByTestId('promo-image')).toBeInTheDocument();
 });
 
 test('Call onActionClick and onClose by action button', async () => {

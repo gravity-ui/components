@@ -80,7 +80,7 @@
     "@gravity-ui/prettier-config": "^1.1.0",
     "@gravity-ui/stylelint-config": "^4.0.1",
     "@gravity-ui/tsconfig": "^1.0.0",
-    "@gravity-ui/uikit": "^6.13.0",
+    "@gravity-ui/uikit": "^6.43.2",
     "@storybook/addon-a11y": "^8.0.9",
     "@storybook/addon-actions": "^8.0.6",
     "@storybook/addon-docs": "^8.0.6",
@@ -93,7 +93,7 @@
     "@storybook/preview-api": "^8.0.9",
     "@storybook/react": "^8.0.6",
     "@storybook/react-webpack5": "^8.0.6",
-    "@storybook/test-runner": "^0.17.0",
+    "@storybook/test-runner": "^0.22.0",
     "@storybook/theming": "^8.0.6",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.4.1",
@@ -102,7 +102,7 @@
     "@types/jest": "^29.5.11",
     "@types/react": "^18.2.51",
     "@types/react-dom": "^18.2.18",
-    "axe-playwright": "^2.0.1",
+    "axe-playwright": "^2.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-testing-library": "^6.2.0",
     "gulp": "^4.0.2",
@@ -130,7 +130,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@gravity-ui/uikit": "^6.13.0",
+    "@gravity-ui/uikit": "^6.43.2",
     "react": "^16.0.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.0.0 || ^17.0.0 || ^18.0.0"
   },
