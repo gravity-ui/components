@@ -1,0 +1,19 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}gallery-fallback-text';
+
+#{$block} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0 var(--g-spacing-10);
+
+    font-size: 25px;
+    line-height: 1.2;
+
+    color: var(--g-color-text-secondary);
+}
