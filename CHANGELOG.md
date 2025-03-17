@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.13.3](https://github.com/gravity-ui/components/compare/v3.13.2...v3.13.3) (2025-03-13)
+
+
+### Bug Fixes
+
+* **ConfirmDialog:** Make apply button ignored on keyboard enter click ([#265](https://github.com/gravity-ui/components/issues/265)) ([40d5fad](https://github.com/gravity-ui/components/commit/40d5fad5201ead76b0efa024e09e4690c9eb8cb3))
+
 ## [3.13.2](https://github.com/gravity-ui/components/compare/v3.13.1...v3.13.2) (2024-12-24)
 
 
