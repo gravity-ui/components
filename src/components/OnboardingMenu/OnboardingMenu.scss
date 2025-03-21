@@ -9,6 +9,8 @@ $block: '.#{variables.$ns}onboarding-menu';
     background: none;
     width: fit-content;
 
+    position: relative;
+
     &__content {
         box-shadow: 0 2px 8px 0 var(--g-color-sfx-shadow-light);
         display: flex;
@@ -70,7 +72,7 @@ $block: '.#{variables.$ns}onboarding-menu';
 
         flex: 1 1 auto;
 
-        padding: var(--g-spacing-2) 0px;
+        padding: var(--g-spacing-2) 0;
 
         margin-inline: 1px;
 
@@ -88,5 +90,12 @@ $block: '.#{variables.$ns}onboarding-menu';
         max-width: 100%;
         padding-inline: var(--g-spacing-5);
         margin-block-end: var(--g-spacing-5);
+    }
+
+    &__close-button {
+        position: absolute;
+
+        inset-block-start: calc(-1 * var(--g-spacing-1));
+        inset-inline-end: calc(-1 * var(--g-spacing-1));
     }
 }
