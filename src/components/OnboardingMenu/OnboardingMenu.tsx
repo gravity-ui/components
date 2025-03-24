@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import {Xmark} from '@gravity-ui/icons';
 import {Button, Icon, IconData, Progress, Text} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
@@ -25,10 +26,12 @@ export type OnboardingMenuProps = {
     completeButtonText?: string;
     className?: string;
     liningClassName?: string;
+    withCloseButton?: boolean;
 
     onExpand?: (expanded: boolean) => void;
     onCompleteClick: (event: React.MouseEvent) => void;
     onCollapseClick?: (event: React.MouseEvent) => void;
+    onCloseClick?: (event: React.MouseEvent) => void;
 };
 
 const OnboardingMenuParent = ({
@@ -37,6 +40,8 @@ const OnboardingMenuParent = ({
     icon,
     expanded,
     onExpand,
+    withCloseButton,
+    onCloseClick,
     onCollapseClick,
     onCompleteClick,
     collapseButtonText,
@@ -45,6 +50,20 @@ const OnboardingMenuParent = ({
     liningClassName,
     children,
 }: OnboardingMenuProps) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+
+    const onMouseEnter = React.useCallback(() => {
+        if (withCloseButton) {
+            setIsHovered(true);
+        }
+    }, [withCloseButton, setIsHovered]);
+
+    const onMouseLeave = React.useCallback(() => {
+        if (withCloseButton) {
+            setIsHovered(false);
+        }
+    }, [withCloseButton, setIsHovered]);
+
     const onExpandCallback = () => {
         const newExpand = !expanded;
 
@@ -65,7 +84,22 @@ const OnboardingMenuParent = ({
     };
 
     return (
-        <div className={cnOnboardingMenu(null, className)}>
+        <div
+            className={cnOnboardingMenu(null, className)}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        >
+            {!expanded && withCloseButton && isHovered && (
+                <Button
+                    className={cnOnboardingMenu('close-button')}
+                    view="raised"
+                    size="xs"
+                    pin="circle-circle"
+                    onClick={onCloseClick}
+                >
+                    <Icon data={Xmark} size={12} />
+                </Button>
+            )}
             <div className={cnOnboardingMenu('content', {expand: expanded})}>
                 <div className={cnOnboardingMenu('header', {expand: expanded})}>
                     <button
