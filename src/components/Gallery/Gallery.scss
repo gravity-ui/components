@@ -1,0 +1,198 @@
+@use '../variables';
+
+$block: '.#{variables.$ns}gallery';
+
+$horizontalGalleryMargin: 132px;
+$verticalGalleryMargin: 28px;
+
+#{$block} {
+    --g-modal-margin: 0;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+
+        width: calc(100vw - $horizontalGalleryMargin * 2);
+        height: calc(100vh - $verticalGalleryMargin * 2);
+    }
+
+    &__header {
+        display: flex;
+        align-items: start;
+
+        padding: var(--g-spacing-2) var(--g-spacing-3) var(--g-spacing-2) var(--g-spacing-5);
+
+        > * {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    &__navigation {
+        display: flex;
+        gap: var(--g-spacing-2);
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__actions {
+        display: flex;
+        gap: var(--g-spacing-1);
+        align-items: stretch;
+        justify-content: flex-end;
+    }
+
+    &__active-item-info {
+        align-self: stretch;
+        align-items: center;
+        display: flex;
+    }
+
+    &__body {
+        position: relative;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex: 1;
+        min-height: 0;
+
+        padding: 0 var(--g-spacing-2);
+    }
+
+    &__body-navigation-button {
+        position: absolute;
+        inset-block: 0 60px;
+        z-index: 2;
+
+        width: 200px;
+        max-width: 20%;
+        padding: 0;
+        margin: 0;
+
+        appearance: none;
+        cursor: pointer;
+
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+        &_direction_start {
+            inset-inline-start: 0;
+
+            cursor:
+                url('./assets/arrow-left.svg') 2 2,
+                default;
+        }
+
+        &_direction_end {
+            inset-inline-end: var(--g-spacing-7);
+
+            cursor:
+                url('./assets/arrow-right.svg') 2 2,
+                default;
+        }
+    }
+
+    &__footer {
+        padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-4) var(--g-spacing-5);
+    }
+
+    &__preview-list {
+        display: flex;
+        gap: var(--g-spacing-2);
+        align-items: stretch;
+        overflow: auto hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__preview-list-item {
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+        border-radius: var(--g-border-radius-l);
+        padding: 0;
+        margin: 0;
+
+        appearance: none;
+        cursor: pointer;
+
+        background-color: transparent;
+        outline: none;
+        overflow: hidden;
+
+        &_selected {
+            border-color: var(--g-color-line-brand);
+        }
+    }
+
+    &_mode_full-screen {
+        overflow: hidden;
+
+        --g-modal-border-radius: 0;
+
+        #{$block} {
+            &__content {
+                width: 100vw;
+                height: 100vh;
+            }
+
+            &__body {
+                padding: 0;
+            }
+
+            &__header {
+                position: absolute;
+                inset-block-start: 0;
+                inset-inline: 0;
+                z-index: 3;
+
+                opacity: 0;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+
+            &__footer {
+                position: absolute;
+                inset-inline: 0;
+                inset-block-end: 0;
+                z-index: 1;
+
+                opacity: 0;
+                background-color: rgba(0, 0, 0, 0.45);
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.g-root_theme_light,
+.g-root_theme_light-hc {
+    #{$block}_mode_full-screen {
+        #{$block}__header {
+            background-color: rgba(255, 255, 255, 0.45);
+        }
+    }
+}
+
+.g-root_theme_dark,
+.g-root_theme_dark-hc {
+    #{$block}_mode_full-screen {
+        #{$block}__header {
+            background-color: rgba(0, 0, 0, 0.45);
+        }
+    }
+}
