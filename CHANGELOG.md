@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.1.0](https://github.com/gravity-ui/components/compare/v4.0.1...v4.1.0) (2025-03-26)
+
+
+### Features
+
+* **Gallery:** add Gallery component ([#247](https://github.com/gravity-ui/components/issues/247)) ([28b1ca7](https://github.com/gravity-ui/components/commit/28b1ca759d9d12c55df5a5125aa818483c04c09e))
+* **OnboardingMenu:** Add close button ([#272](https://github.com/gravity-ui/components/issues/272)) ([208415f](https://github.com/gravity-ui/components/commit/208415f8336284829a1ff244eb2abe5fb5efff13))
+
+
+### Bug Fixes
+
+* change the distance between notifications 1px -&gt; 4px (Notifications) ([#262](https://github.com/gravity-ui/components/issues/262)) ([ca74270](https://github.com/gravity-ui/components/commit/ca74270d4d4758c161adc731abf9bf50bd94e052))
+
 ## [4.0.1](https://github.com/gravity-ui/components/compare/v4.0.0...v4.0.1) (2025-02-07)
 
 
