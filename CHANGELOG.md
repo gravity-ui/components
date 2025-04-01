@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.1](https://github.com/gravity-ui/components/compare/v4.1.0...v4.1.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **Gallery:** remove custom assets ([#273](https://github.com/gravity-ui/components/issues/273)) ([a76faa8](https://github.com/gravity-ui/components/commit/a76faa80c0b6c8b87b6d9aa247a5edcb3f2440f6))
+
 ## [4.1.0](https://github.com/gravity-ui/components/compare/v4.0.1...v4.1.0) (2025-03-26)
 
 
