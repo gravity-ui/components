@@ -1,0 +1,45 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}gallery-navigation-button';
+
+#{$block} {
+    position: absolute;
+    inset-block: 0 60px;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+
+    width: 200px;
+    max-width: 20%;
+    padding: 0;
+    margin: 0;
+
+    appearance: none;
+    cursor: pointer;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    opacity: 0;
+
+    &_position_start {
+        inset-inline-start: 0;
+        padding-inline-start: var(--g-spacing-7);
+    }
+
+    &_position_end {
+        inset-inline-end: var(--g-spacing-7);
+        justify-content: end;
+    }
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &__icon {
+        &_position_end {
+            transform: rotate(180deg);
+        }
+    }
+}
