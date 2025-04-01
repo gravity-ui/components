@@ -2,12 +2,13 @@ import * as React from 'react';
 
 import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
 import type {ButtonProps, ModalProps} from '@gravity-ui/uikit';
-import {ActionTooltip, Button, Icon, Modal, Text} from '@gravity-ui/uikit';
+import {ActionTooltip, Button, Icon, Modal, Text, useDirection} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
 import type {GalleryItemProps} from './GalleryItem';
 import {GalleryFallbackText} from './components/FallbackText';
+import {NavigationButton} from './components/NavigationButton/NavigationButton';
 import {FullScreenAction} from './components/actions';
 import {useFullScreen} from './hooks/useFullScreen';
 import type {UseNavigationProps} from './hooks/useNavigation';
@@ -36,6 +37,8 @@ export const Gallery = ({
     children,
     emptyMessage,
 }: GalleryProps) => {
+    const direction = useDirection();
+
     const items = children ? React.Children.map(children, (child) => child.props) : emptyItems;
     const itemsCount = items.length;
 
@@ -89,13 +92,13 @@ export const Gallery = ({
                     {items.length > 0 && (
                         <div className={cnGallery('navigation')}>
                             <Button size="l" view="flat" onClick={handleGoToPrevious}>
-                                <Icon data={ArrowLeft} />
+                                <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} />
                             </Button>
                             <Text color="secondary" variant="body-1">
                                 {activeItemIndex + 1}/{items.length}
                             </Text>
                             <Button size="l" view="flat" onClick={handleGoToNext}>
-                                <Icon data={ArrowRight} />
+                                <Icon data={direction === 'rtl' ? ArrowLeft : ArrowRight} />
                             </Button>
                         </div>
                     )}
@@ -150,20 +153,8 @@ export const Gallery = ({
                     {activeItem?.view}
                     {activeItem && !activeItem.interactive && (
                         <React.Fragment>
-                            <button
-                                onClick={handleGoToPrevious}
-                                type="button"
-                                className={cnGallery('body-navigation-button', {
-                                    direction: 'start',
-                                })}
-                            />
-                            <button
-                                onClick={handleGoToNext}
-                                type="button"
-                                className={cnGallery('body-navigation-button', {
-                                    direction: 'end',
-                                })}
-                            />
+                            <NavigationButton onClick={handleGoToPrevious} position="start" />
+                            <NavigationButton onClick={handleGoToNext} position="end" />
                         </React.Fragment>
                     )}
                 </div>

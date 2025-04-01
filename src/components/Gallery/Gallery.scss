@@ -61,40 +61,6 @@ $verticalGalleryMargin: 28px;
         padding: 0 var(--g-spacing-2);
     }
 
-    &__body-navigation-button {
-        position: absolute;
-        inset-block: 0 60px;
-        z-index: 2;
-
-        width: 200px;
-        max-width: 20%;
-        padding: 0;
-        margin: 0;
-
-        appearance: none;
-        cursor: pointer;
-
-        background-color: transparent;
-        border: none;
-        outline: none;
-
-        &_direction_start {
-            inset-inline-start: 0;
-
-            cursor:
-                url('./assets/arrow-left.svg') 2 2,
-                default;
-        }
-
-        &_direction_end {
-            inset-inline-end: var(--g-spacing-7);
-
-            cursor:
-                url('./assets/arrow-right.svg') 2 2,
-                default;
-        }
-    }
-
     &__footer {
         padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-4) var(--g-spacing-5);
     }
