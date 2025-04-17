@@ -23,7 +23,7 @@ const emptyItems: GalleryItemProps[] = [];
 
 export type GalleryProps = {
     className?: string;
-    children?: React.ReactElement<GalleryItemProps>[];
+    children?: React.ReactElement<GalleryItemProps>[] | React.ReactElement<GalleryItemProps>;
     emptyMessage?: string;
 } & Pick<ModalProps, 'open' | 'container' | 'onOpenChange'> &
     Pick<UseNavigationProps, 'initialItemIndex'>;
@@ -79,6 +79,8 @@ export const Gallery = ({
 
     const activeItem = items[activeItemIndex] || items[0];
 
+    const withNavigation = items.length > 1;
+
     return (
         <Modal
             container={container}
@@ -89,7 +91,7 @@ export const Gallery = ({
             <div className={cnGallery('content')}>
                 <div className={cnGallery('header')}>
                     <div className={cnGallery('active-item-info')}>{activeItem?.name}</div>
-                    {items.length > 0 && (
+                    {withNavigation && (
                         <div className={cnGallery('navigation')}>
                             <Button size="l" view="flat" onClick={handleGoToPrevious}>
                                 <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} />
@@ -151,7 +153,7 @@ export const Gallery = ({
                         </GalleryFallbackText>
                     )}
                     {activeItem?.view}
-                    {activeItem && !activeItem.interactive && (
+                    {withNavigation && activeItem && !activeItem.interactive && (
                         <React.Fragment>
                             <NavigationButton onClick={handleGoToPrevious} position="start" />
                             <NavigationButton onClick={handleGoToNext} position="end" />
@@ -160,27 +162,29 @@ export const Gallery = ({
                 </div>
                 {!fullScreen && (
                     <div className={cnGallery('footer')}>
-                        <div className={cnGallery('preview-list')}>
-                            {items.map((item, index) => {
-                                const handleClick = () => {
-                                    setActiveItemIndex(index);
-                                };
+                        {withNavigation && (
+                            <div className={cnGallery('preview-list')}>
+                                {items.map((item, index) => {
+                                    const handleClick = () => {
+                                        setActiveItemIndex(index);
+                                    };
 
-                                const selected = activeItemIndex === index;
+                                    const selected = activeItemIndex === index;
 
-                                return (
-                                    <button
-                                        ref={itemRefs[index]}
-                                        type="button"
-                                        key={index}
-                                        onClick={handleClick}
-                                        className={cnGallery('preview-list-item', {selected})}
-                                    >
-                                        {item.thumbnail}
-                                    </button>
-                                );
-                            })}
-                        </div>
+                                    return (
+                                        <button
+                                            ref={itemRefs[index]}
+                                            type="button"
+                                            key={index}
+                                            onClick={handleClick}
+                                            className={cnGallery('preview-list-item', {selected})}
+                                        >
+                                            {item.thumbnail}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
