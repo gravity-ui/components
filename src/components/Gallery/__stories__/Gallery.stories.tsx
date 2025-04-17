@@ -183,3 +183,33 @@ const EmptyGalleryTemplate: StoryFn<GalleryProps> = () => {
 };
 
 export const EmptyGallery = EmptyGalleryTemplate.bind({});
+
+const SingleItemGalleryTemplate: StoryFn<GalleryProps> = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleToggle = React.useCallback(() => {
+        setOpen(false);
+    }, []);
+
+    const handleOpen = React.useCallback(() => {
+        setOpen(true);
+    }, []);
+
+    const imageGalleryItem = getGalleryItemImage({
+        src: 'https://santreyd.ru/upload/iblock/acc/accd0c751590e792f7e43a05f22472f9.jpg',
+        name: 'Corgi image',
+    });
+
+    return (
+        <React.Fragment>
+            <Button onClick={handleOpen} view="action" size="l">
+                Open gallery
+            </Button>
+            <Gallery open={open} onOpenChange={handleToggle}>
+                <GalleryItem {...imageGalleryItem} />
+            </Gallery>
+        </React.Fragment>
+    );
+};
+
+export const SingleItemGallery = SingleItemGalleryTemplate.bind({});
