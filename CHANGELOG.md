@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.2](https://github.com/gravity-ui/components/compare/v4.1.1...v4.1.2) (2025-04-17)
+
+
+### Bug Fixes
+
+* **Gallery:** hide navigation in single item mode ([#276](https://github.com/gravity-ui/components/issues/276)) ([1afc220](https://github.com/gravity-ui/components/commit/1afc2203421ec50cb66de21ce14569759b570b79))
+
 ## [4.1.1](https://github.com/gravity-ui/components/compare/v4.1.0...v4.1.1) (2025-04-01)
 
 
