@@ -12,6 +12,7 @@ The children of the Gallery should be an array of [GalleryItem with the required
 | open             | `Boolean`                 |          |        |         | The modal opened state        |
 | onOpenChange     | `(open: boolean) => void` |          |        |         | The modal toggle handler      |
 | className        | `String`                  |          |        |         | The modal class               |
+| container        | `HTMLElement`             |          |        |         | The modal container           |
 | emptyMessage     | `String`                  |          |        | No data | No data message               |
 
 ### GalleryItem
