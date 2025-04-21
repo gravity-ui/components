@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
-import {DropdownMenu, Link} from '@gravity-ui/uikit';
+import {Avatar, DropdownMenu, Icon, Link} from '@gravity-ui/uikit';
 
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -99,25 +99,19 @@ export const mockNotifications: NotificationProps[] = [
                 <Link target={'_blank'} href={LINK}>
                     ticket
                 </Link>
-                <img
-                    alt=""
-                    style={{
-                        position: 'absolute',
-                        insetBlockEnd: 0,
-                        insetInlineEnd: 0,
-                        borderRadius: '100%',
-                        background: 'rgba(0, 0, 0, 0.1)',
-                    }}
-                    width={18}
-                    height={18}
-                    src={trackerUserIcon}
-                ></img>
             </div>
         ),
         formattedDate: 'just now',
         source: {
             title: 'Tracker',
-            icon: svgTrackerStoryIcon,
+            custom: (
+                <div style={{position: 'relative'}}>
+                    <Avatar imgUrl={trackerUserIcon} />
+                    <div style={{position: 'absolute', right: '0', bottom: '0'}}>
+                        <Icon size={14} data={svgTrackerStoryIcon} />
+                    </div>
+                </div>
+            ),
             href: LINK,
         },
         swipeActions: notificationsMockSwipeActions,

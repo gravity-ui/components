@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Icon, Link, useMobile, useUniqId} from '@gravity-ui/uikit';
+import {Flex, Icon, Link, useMobile, useUniqId} from '@gravity-ui/uikit';
 
 import {CnMods, block} from '../utils/cn';
 
@@ -22,6 +22,36 @@ export const Notification = React.memo(function Notification(props: Props) {
 
     const sourceIcon = source && renderSourceIcon(source, titleId);
 
+    const renderedTitle = title ? (
+        <div className={b('title-wrapper')}>{<div className={b('title')}>{title}</div>}</div>
+    ) : null;
+
+    const renderedSideActions = (
+        <div className={b('actions', {'side-actions': true})}>{props.notification.sideActions}</div>
+    );
+
+    const renderedBottomActions = props.notification.bottomActions ? (
+        <div className={b('actions', {'bottom-actions': true})}>
+            {props.notification.bottomActions}
+        </div>
+    ) : null;
+
+    const renderedContent = <div className={b('content')}>{content}</div>;
+
+    const renderedSourceText = (
+        <Flex className={b('source-text')} gap={1}>
+            {source?.title
+                ? renderSourceTitle({
+                      title: source.title,
+                      href: source.href,
+                      id: titleId,
+                  })
+                : null}
+            {source?.title && formattedDate ? <span>•</span> : null}
+            {formattedDate ? <div className={b('right-date')}>{formattedDate}</div> : null}
+        </Flex>
+    );
+
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
         <div
@@ -31,35 +61,26 @@ export const Notification = React.memo(function Notification(props: Props) {
             onClick={notification.onClick}
         >
             {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
-            <div className={b('right')}>
-                <div className={b('right-top-part')}>
-                    <div className={b('right-meta-and-title')}>
-                        <div className={b('right-meta')}>
-                            {source?.title
-                                ? renderSourceTitle({
-                                      title: source.title,
-                                      href: source.href,
-                                      id: titleId,
-                                  })
-                                : null}
-                            {source?.title && formattedDate ? <span>•</span> : null}
-                            {formattedDate ? (
-                                <div className={b('right-date')}>{formattedDate}</div>
-                            ) : null}
+
+            <Flex className={b('right')} justifyContent="space-between" gap={2} overflow="hidden">
+                <Flex direction="column" overflow="hidden">
+                    {renderedTitle ? (
+                        <div className={b('title-and-actions')}>
+                            {renderedTitle}
+                            {renderedSideActions}
                         </div>
-                        {title ? <div className={b('right-title')}>{title}</div> : null}
-                    </div>
-                    <div className={b('actions', {'right-side-actions': true})}>
-                        {props.notification.sideActions}
-                    </div>
-                </div>
-                <div className={b('right-content')}>{content}</div>
-                {props.notification.bottomActions ? (
-                    <div className={b('actions', {'right-bottom-actions': true})}>
-                        {props.notification.bottomActions}
-                    </div>
-                ) : null}
-            </div>
+                    ) : null}
+
+                    <Flex direction="column">
+                        {renderedContent}
+                        {renderedSourceText}
+                    </Flex>
+
+                    {renderedBottomActions}
+                </Flex>
+
+                {renderedTitle ? null : renderedSideActions}
+            </Flex>
         </div>
     );
 });
@@ -69,7 +90,7 @@ interface RenderSourceTitleOptions {
     href?: string;
     id: string;
 }
-function renderSourceTitle({title, href, id}: RenderSourceTitleOptions): JSX.Element {
+function renderSourceTitle({title, href, id}: RenderSourceTitleOptions): React.ReactNode {
     return href ? (
         <Link className={b('right-source-title')} href={href} target="_blank" title={title} id={id}>
             {title}
@@ -81,7 +102,7 @@ function renderSourceTitle({title, href, id}: RenderSourceTitleOptions): JSX.Ele
     );
 }
 
-function renderSourceIcon(source: NotificationSourceProps, titleId: string): JSX.Element | null {
+function renderSourceIcon(source: NotificationSourceProps, titleId: string): React.ReactNode {
     const iconElement = getIconElement(source);
 
     if (!iconElement) return null;
@@ -95,11 +116,13 @@ function renderSourceIcon(source: NotificationSourceProps, titleId: string): JSX
     );
 }
 
-function getIconElement(source: NotificationSourceProps): JSX.Element | null {
+function getIconElement(source: NotificationSourceProps): React.ReactNode {
     if ('icon' in source && source.icon) {
         return <Icon className={b('source-icon')} size={36} data={source.icon} />;
     } else if ('imageSrc' in source && source.imageSrc) {
         return <img alt="" className={b('source-icon')} src={source.imageSrc} />;
+    } else if ('custom' in source && source.custom) {
+        return source.custom;
     } else {
         return null;
     }

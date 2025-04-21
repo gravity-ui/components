@@ -4,12 +4,12 @@ import {ButtonProps, IconData, QAProps} from '@gravity-ui/uikit';
 
 export type NotificationTheme = 'success' | 'info' | 'warning' | 'danger';
 
-type SvgOrImage = {icon: IconData} | {imageSrc: string};
+type NotificationIcon = {icon: IconData} | {imageSrc: string} | {custom: React.ReactNode};
 
 export type NotificationSourceProps = {
     title?: string;
     href?: string;
-} & Partial<SvgOrImage>;
+} & Partial<NotificationIcon>;
 
 export type NotificationSwipeActionProps = {
     content: React.ReactNode;
