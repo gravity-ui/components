@@ -23,7 +23,9 @@ export const Notification = React.memo(function Notification(props: Props) {
     const sourceIcon = source && renderSourceIcon(source, titleId);
 
     const renderedTitle = title ? (
-        <div className={b('title-wrapper')}>{<div className={b('title')}>{title}</div>}</div>
+        <div className={b('title-wrapper')}>
+            <div className={b('title')}>{title}</div>
+        </div>
     ) : null;
 
     const renderedSideActions = (
