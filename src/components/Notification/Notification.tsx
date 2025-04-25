@@ -117,8 +117,8 @@ function withSideActions(content: React.ReactNode, sideActions: React.ReactNode)
 function renderTitleAndSource(title: React.ReactNode, source: React.ReactNode) {
     return title && source ? (
         <Flex className={b('title-with-source')} direction="column" overflow="hidden">
-            {title}
             {source}
+            {title}
         </Flex>
     ) : (
         (title ?? source)
