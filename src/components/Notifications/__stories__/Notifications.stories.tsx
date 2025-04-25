@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Bell} from '@gravity-ui/icons';
-import {Button, Checkbox, Flex, Icon, Popup, SegmentedRadioGroup} from '@gravity-ui/uikit';
+import {Button, Checkbox, Flex, Icon, Popup, SegmentedRadioGroup, Text} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {delay} from '../../InfiniteScroll/__stories__/utils';
@@ -186,14 +186,17 @@ function useNotificationsVariationsControl() {
                 >
                     Notification actions
                 </Checkbox>
-                <SegmentedRadioGroup<NotificationSourcePlacement>
-                    value={sourcePlacement}
-                    onUpdate={setSourcePlacement}
-                    options={[
-                        {value: 'bottom', content: 'Bottom'},
-                        {value: 'top', content: 'Top'},
-                    ]}
-                />
+                <Flex direction="column" gap={1}>
+                    <Text>Source/date placement</Text>
+                    <SegmentedRadioGroup<NotificationSourcePlacement>
+                        value={sourcePlacement}
+                        onUpdate={setSourcePlacement}
+                        options={[
+                            {value: 'bottom', content: 'Bottom'},
+                            {value: 'top', content: 'Top'},
+                        ]}
+                    />
+                </Flex>
             </Flex>
         ),
     };
