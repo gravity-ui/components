@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
-import {Avatar, DropdownMenu, Icon, Link} from '@gravity-ui/uikit';
+import {DropdownMenu, Icon, Link} from '@gravity-ui/uikit';
 
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -106,7 +106,13 @@ export const mockNotifications: NotificationProps[] = [
             title: 'Tracker',
             custom: (
                 <div style={{position: 'relative'}}>
-                    <Avatar imgUrl={trackerUserIcon} />
+                    <img
+                        alt="Shrek"
+                        style={{borderRadius: '100%', background: 'rgba(0, 0, 0, 0.1)'}}
+                        width={36}
+                        height={36}
+                        src={trackerUserIcon}
+                    ></img>
                     <div style={{position: 'absolute', right: '0', bottom: '0'}}>
                         <Icon size={14} data={svgTrackerStoryIcon} />
                     </div>
