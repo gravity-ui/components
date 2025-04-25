@@ -15,7 +15,15 @@ type Props = {notification: NotificationProps};
 export const Notification = React.memo(function Notification(props: Props) {
     const mobile = useMobile();
     const {notification} = props;
-    const {title, content, formattedDate, source, unread, theme} = notification;
+    const {
+        title,
+        content,
+        formattedDate,
+        source,
+        unread,
+        theme,
+        sourcePlacement = 'bottom',
+    } = notification;
 
     const modifiers: CnMods = {unread, theme, mobile, active: Boolean(notification.onClick)};
     const titleId = useUniqId();
@@ -40,19 +48,30 @@ export const Notification = React.memo(function Notification(props: Props) {
 
     const renderedContent = <div className={b('content')}>{content}</div>;
 
-    const renderedSourceText = (
-        <Flex className={b('source-text')} gap={1}>
-            {source?.title
-                ? renderSourceTitle({
-                      title: source.title,
-                      href: source.href,
-                      id: titleId,
-                  })
-                : null}
-            {source?.title && formattedDate ? <span>•</span> : null}
-            {formattedDate ? <div className={b('right-date')}>{formattedDate}</div> : null}
-        </Flex>
-    );
+    const renderedSourceText =
+        source?.title || formattedDate ? (
+            <Flex className={b('source-text')} gap={1}>
+                {source?.title
+                    ? renderSourceTitle({
+                          title: source.title,
+                          href: source.href,
+                          id: titleId,
+                      })
+                    : null}
+                {source?.title && formattedDate ? <span>•</span> : null}
+                {formattedDate ? <div className={b('right-date')}>{formattedDate}</div> : null}
+            </Flex>
+        ) : null;
+
+    const hasSourceOnTop = renderedSourceText && sourcePlacement === 'top';
+    const hasSourceOnBottom = renderedSourceText && sourcePlacement === 'bottom';
+    const topPart =
+        renderedTitle || hasSourceOnTop
+            ? withSideActions(
+                  renderTitleAndSource(renderedTitle, hasSourceOnTop ? renderedSourceText : null),
+                  renderedSideActions,
+              )
+            : null;
 
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -65,33 +84,53 @@ export const Notification = React.memo(function Notification(props: Props) {
             {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
 
             <Flex className={b('right')} justifyContent="space-between" gap={2} overflow="hidden">
-                <Flex direction="column" overflow="hidden">
-                    {renderedTitle ? (
-                        <div className={b('title-and-actions')}>
-                            {renderedTitle}
-                            {renderedSideActions}
-                        </div>
-                    ) : null}
+                <Flex direction="column" overflow="hidden" width="100%">
+                    {topPart}
 
-                    <Flex direction="column">
-                        {renderedContent}
-                        {renderedSourceText}
-                    </Flex>
+                    {withSideActions(
+                        renderedContent,
+                        !renderedTitle && !hasSourceOnTop ? renderedSideActions : null,
+                    )}
+
+                    {hasSourceOnBottom ? (
+                        <div className={b('bottom-source')}>{renderedSourceText}</div>
+                    ) : null}
 
                     {renderedBottomActions}
                 </Flex>
-
-                {renderedTitle ? null : renderedSideActions}
             </Flex>
         </div>
     );
 });
+
+function withSideActions(content: React.ReactNode, sideActions: React.ReactNode) {
+    return sideActions ? (
+        <Flex alignItems="center" justifyContent="space-between" width="100%" overflow="hidden">
+            {content}
+            {sideActions}
+        </Flex>
+    ) : (
+        content
+    );
+}
+
+function renderTitleAndSource(title: React.ReactNode, source: React.ReactNode) {
+    return title && source ? (
+        <Flex className={b('title-with-source')} direction="column" overflow="hidden">
+            {title}
+            {source}
+        </Flex>
+    ) : (
+        (title ?? source)
+    );
+}
 
 interface RenderSourceTitleOptions {
     title: string;
     href?: string;
     id: string;
 }
+
 function renderSourceTitle({title, href, id}: RenderSourceTitleOptions): React.ReactNode {
     return href ? (
         <Link className={b('right-source-title')} href={href} target="_blank" title={title} id={id}>

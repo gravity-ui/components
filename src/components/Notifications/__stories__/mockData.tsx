@@ -94,7 +94,7 @@ export const mockNotifications: NotificationProps[] = [
         id: 'tracker',
         title: 'An unread notification',
         content: (
-            <div style={{position: 'relative', paddingInlineEnd: '16px'}}>
+            <div>
                 Shrek desperately wants your attention in this{' '}
                 <Link target={'_blank'} href={LINK}>
                     ticket

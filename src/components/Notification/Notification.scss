@@ -20,13 +20,6 @@ $notificationSourceIconSize: 36px;
         flex: 1;
     }
 
-    &__title-and-actions {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        overflow-x: hidden;
-    }
-
     &__title-wrapper {
         flex: 1;
         min-width: 0;
@@ -44,9 +37,17 @@ $notificationSourceIconSize: 36px;
         color: var(--g-color-text-secondary);
     }
 
+    &__bottom-source {
+        margin-block-start: 4px;
+    }
+
     &__title {
         font-weight: 500;
         color: var(--g-color-text-primary);
+    }
+
+    &__title-with-source {
+        margin-block-end: 4px;
     }
 
     &__content {

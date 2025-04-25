@@ -11,6 +11,8 @@ export type NotificationSourceProps = {
     href?: string;
 } & Partial<NotificationIcon>;
 
+export type NotificationSourcePlacement = 'top' | 'bottom';
+
 export type NotificationSwipeActionProps = {
     content: React.ReactNode;
     onSwipe?: () => void;
@@ -29,6 +31,7 @@ export type NotificationProps = {
     unread?: boolean;
     archived?: boolean;
     source?: NotificationSourceProps;
+    sourcePlacement?: NotificationSourcePlacement;
     theme?: NotificationTheme;
     className?: string;
 
