@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.2.0](https://github.com/gravity-ui/components/compare/v4.1.2...v4.2.0) (2025-04-30)
+
+
+### Features
+
+* **Gallery:** add a hook for opening the gallery ([#275](https://github.com/gravity-ui/components/issues/275)) ([69c4f98](https://github.com/gravity-ui/components/commit/69c4f98800bbdfc789c8af445f9b2fe5c7bf3691))
+* **Notifications:** Allowed ReactNode in source icon + added `sourcePlacement` property (`bottom` is used by default) ([#278](https://github.com/gravity-ui/components/issues/278)) ([08c403a](https://github.com/gravity-ui/components/commit/08c403aa9be0b4a9ce6c67deb701391770168d29))
+
 ## [4.1.2](https://github.com/gravity-ui/components/compare/v4.1.1...v4.1.2) (2025-04-17)
 
 
