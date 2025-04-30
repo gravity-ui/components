@@ -61,7 +61,10 @@ const ImagesGalleryTemplate: StoryFn<GalleryProps> = () => {
             </Button>
             <Gallery open={open} onOpenChange={handleToggle}>
                 {images.map((image, index) => (
-                    <GalleryItem key={index} {...getGalleryItemImage({src: image, name: image})} />
+                    <GalleryItem
+                        key={index}
+                        {...getGalleryItemImage({src: image.url, name: image.name})}
+                    />
                 ))}
             </Gallery>
         </React.Fragment>
