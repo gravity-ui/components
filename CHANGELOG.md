@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.2](https://github.com/gravity-ui/components/compare/v4.2.1...v4.2.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* add hooks export ([#285](https://github.com/gravity-ui/components/issues/285)) ([3ec1df7](https://github.com/gravity-ui/components/commit/3ec1df7d5d992685352a8c15116757ed58207aac))
+
 ## [4.2.1](https://github.com/gravity-ui/components/compare/v4.2.0...v4.2.1) (2025-05-06)
 
 
