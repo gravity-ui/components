@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.1](https://github.com/gravity-ui/components/compare/v4.2.0...v4.2.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* **useGallery:** fix build ([#283](https://github.com/gravity-ui/components/issues/283)) ([55940d1](https://github.com/gravity-ui/components/commit/55940d100ef4a17d7aede9141a20c2109c3b98f0))
+
 ## [4.2.0](https://github.com/gravity-ui/components/compare/v4.1.2...v4.2.0) (2025-04-30)
 
 
