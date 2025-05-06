@@ -31,6 +31,13 @@ const config: StorybookConfig = {
             use: [{loader: 'markdown-loader'}],
         });
 
+        storybookBaseConfig.resolve = {
+            ...storybookBaseConfig.resolve,
+            extensionAlias: {
+                '.js': ['.js', '.ts', '.tsx'],
+            },
+        };
+
         // to turn fileName in context.parameters into path form number in production bundle
         if (storybookBaseConfig?.optimization) {
             storybookBaseConfig.optimization.moduleIds = 'named';
