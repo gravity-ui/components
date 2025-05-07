@@ -84,7 +84,10 @@ export function Reactions({
     renderTooltip,
     onToggle,
 }: ReactionsProps) {
-    const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
+    const [addReactionsElement, setAddReactionsElement] = React.useState<HTMLButtonElement | null>(
+        null,
+    );
+
     const [palettePopupOpened, setPalettePopupOpened] = React.useState(false);
 
     const onOpenPalettePopup = React.useCallback(() => setPalettePopupOpened(true), []);
@@ -92,6 +95,15 @@ export function Reactions({
     const onTogglePalettePopup = React.useCallback(
         () => (palettePopupOpened ? onClosePalettePopup() : onOpenPalettePopup()),
         [onClosePalettePopup, onOpenPalettePopup, palettePopupOpened],
+    );
+
+    const onOpenedChanged = React.useCallback(
+        (opened: boolean) => {
+            if (!opened) {
+                onClosePalettePopup();
+            }
+        },
+        [onClosePalettePopup],
     );
 
     const [currentHoveredReaction, setCurrentHoveredReaction] = React.useState<
@@ -144,9 +156,9 @@ export function Reactions({
     const addReactionButton = readOnly ? null : (
         <Button
             className={b('reaction-button')}
-            ref={addReactionButtonRef}
+            ref={setAddReactionsElement}
             size={size}
-            extraProps={{'aria-label': i18n('add-reaction')}}
+            aria-label={i18n('add-reaction')}
             onClick={onTogglePalettePopup}
             view="flat-secondary"
         >
@@ -158,13 +170,12 @@ export function Reactions({
 
     const addReactionPopup = readOnly ? null : (
         <Popup
-            anchorRef={addReactionButtonRef}
             className={b('add-reaction-popover')}
+            anchorElement={addReactionsElement}
             open={palettePopupOpened}
-            modal
             initialFocus={0}
-            onOutsideClick={onClosePalettePopup}
-            onEscapeKeyDown={onClosePalettePopup}
+            modal={true}
+            onOpenChange={onOpenedChanged}
         >
             {paletteContent}
         </Popup>
