@@ -185,7 +185,7 @@ function NotificationsWithCustomHeader() {
 
     return (
         <Notifications
-            renderCustomHeader={(title) => (
+            renderCustomHeader={({title}) => (
                 <CustomHeaderComponent
                     title={title}
                     activeTab={activeTab}

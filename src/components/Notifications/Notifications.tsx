@@ -53,15 +53,15 @@ export const Notifications = React.memo(function Notifications(props: Notificati
         );
     }
 
-    const Title = <div className={b('head-title')}>{props.title || i18n('title')}</div>;
+    const title = <div className={b('head-title')}>{props.title || i18n('title')}</div>;
 
     return (
         <div className={b()} data-qa={props.qa}>
             {props.renderCustomHeader ? (
-                props.renderCustomHeader(Title)
+                props.renderCustomHeader({title})
             ) : (
                 <div className={b('head')}>
-                    {Title}
+                    {title}
                     <div className={b('actions')}>{props.actions}</div>
                 </div>
             )}
