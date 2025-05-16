@@ -8,6 +8,8 @@ export type NotificationsProps = {
     title?: React.ReactNode;
     actions?: React.ReactNode;
 
+    renderCustomHeader?: (title: React.ReactNode) => JSX.Element;
+
     notifications: NotificationProps[];
     areAllNotificationsLoaded?: boolean;
     onLoadMoreNotifications?: () => Promise<void>;
