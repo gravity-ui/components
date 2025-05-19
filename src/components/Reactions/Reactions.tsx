@@ -52,6 +52,7 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      * @default 'end'
      */
     addButtonPlacement?: 'start' | 'end';
+
     /**
      * If present, when a user hovers over the reaction, a popover appears with renderTooltip(state) content.
      * Can be used to display users who used this reaction.

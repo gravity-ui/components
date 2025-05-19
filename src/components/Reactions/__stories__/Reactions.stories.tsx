@@ -1,6 +1,7 @@
 import {Flex, Text} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
+import {PopupWithButton, PopupWithLink, PopupWithPalette} from '../DELETE_ME_PLEASE';
 import {Reactions} from '../Reactions';
 import {useMockReactions} from '../__tests__/mock/mockHooks';
 
@@ -22,6 +23,9 @@ export const Default: StoryFn = () => {
                 <div>
                     <div style={{height: '2000px'}}></div>
                 </div>
+                <PopupWithPalette />
+                <PopupWithButton />
+                <PopupWithLink />
                 <Reactions {...useMockReactions()} />
             </Flex>
         </div>
