@@ -1,10 +1,11 @@
 import React from 'react';
 
-import {Bell} from '@gravity-ui/icons';
-import {Button, Checkbox, Flex, Icon, Popup} from '@gravity-ui/uikit';
+import {Bell, Funnel, Gear} from '@gravity-ui/icons';
+import {Button, Checkbox, Flex, Icon, Popup, Tabs} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {delay} from '../../InfiniteScroll/__stories__/utils';
+import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationProps} from '../../Notification/definitions';
 import {Notifications} from '../Notifications';
 import {NotificationsPopupWrapper} from '../NotificationsPopupWrapper';
@@ -159,6 +160,79 @@ export const Empty: StoryFn = () => {
         </Wrapper>
     );
 };
+
+export const CustomHeader: StoryFn = () => {
+    return (
+        <Wrapper>
+            <NotificationsWithCustomHeader />
+        </Wrapper>
+    );
+};
+
+function NotificationsWithCustomHeader() {
+    const [activeTab, setActiveTab] = React.useState('first');
+
+    return (
+        <Notifications
+            renderCustomHeader={({title}) => (
+                <CustomHeaderComponent
+                    title={title}
+                    activeTab={activeTab}
+                    onTabUpdate={setActiveTab}
+                />
+            )}
+            notifications={activeTab === 'first' ? mockNotifications : []}
+        />
+    );
+}
+
+interface CustomHeaderComponentProps {
+    title: React.ReactNode;
+    activeTab: string;
+    onTabUpdate?: (tab: string) => void;
+}
+
+function CustomHeaderComponent({title, activeTab, onTabUpdate}: CustomHeaderComponentProps) {
+    return (
+        <div>
+            <div
+                style={{
+                    padding: '16px 16px 0 16px',
+                }}
+            >
+                {title}
+            </div>
+            <div style={{position: 'relative'}}>
+                <Tabs
+                    activeTab={activeTab}
+                    onSelectTab={onTabUpdate}
+                    items={[
+                        {
+                            id: 'first',
+                            title: 'First tab',
+                            extraProps: {style: {marginLeft: '16px'}},
+                        },
+                        {id: 'second', title: 'Second tab'},
+                    ]}
+                />
+                <Flex
+                    style={{
+                        position: 'absolute',
+                        right: '16px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                    }}
+                    gap={1}
+                >
+                    <NotificationAction action={{icon: Funnel, text: 'Filter'}} />
+                    {activeTab === 'second' && (
+                        <NotificationAction action={{icon: Gear, text: 'Settings'}} />
+                    )}
+                </Flex>
+            </div>
+        </div>
+    );
+}
 
 function useNotificationsVariationsControl() {
     const [showNotificationsActions, setShowNotificationsActions] = React.useState(true);
