@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.0](https://github.com/gravity-ui/components/compare/v4.2.2...v4.3.0) (2025-05-16)
+
+
+### Features
+
+* **Notifications:** add the renderCustomHeader prop ([b7ddd4b](https://github.com/gravity-ui/components/commit/b7ddd4b1c031d086a73b0752007bf719ce65480c))
+
 ## [4.2.2](https://github.com/gravity-ui/components/compare/v4.2.1...v4.2.2) (2025-05-06)
 
 
