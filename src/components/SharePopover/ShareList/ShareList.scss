@@ -42,6 +42,10 @@ $block: '.#{variables.$ns}share-list';
                 flex-direction: column;
                 width: 100%;
             }
+
+            #{$block}__link {
+                justify-content: flex-start;
+            }
         }
     }
 
