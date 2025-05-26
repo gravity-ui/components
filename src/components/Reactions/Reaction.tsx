@@ -49,18 +49,18 @@ export function Reaction(props: ReactionInnerProps) {
 
     const onClickCallback = React.useCallback(() => onClick?.(value), [onClick, value]);
 
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const {onMouseEnter, onMouseLeave} = useReactionsPopup(props.reaction, buttonRef);
+    const [buttonElement, setButtonElement] = React.useState<HTMLButtonElement | null>(null);
+    const {onMouseEnter, onMouseLeave} = useReactionsPopup(props.reaction, buttonElement);
     const {openedTooltip: currentHoveredReaction} = useReactionsContext();
 
     const button = (
         <Button
             className={b('reaction-button', {size})}
-            ref={buttonRef}
+            ref={setButtonElement}
             size={size}
             selected={selected}
             view="outlined"
-            extraProps={{value}}
+            value={value}
             pin="circle-circle"
             onClick={onClickCallback}
         >
@@ -80,7 +80,7 @@ export function Reaction(props: ReactionInnerProps) {
             {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (
                 <Popup
                     className={b('popup')}
-                    anchorRef={currentHoveredReaction.ref}
+                    anchorElement={buttonElement}
                     placement={popupDefaultPlacement}
                     open={currentHoveredReaction.open}
                     hasArrow
