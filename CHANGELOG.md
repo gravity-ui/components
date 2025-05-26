@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.3.1](https://github.com/gravity-ui/components/compare/v4.3.0...v4.3.1) (2025-05-26)
+
+
+### Bug Fixes
+
+* **SharePopover:** update ShareList component styles ([#294](https://github.com/gravity-ui/components/issues/294)) ([327efbf](https://github.com/gravity-ui/components/commit/327efbfee90c03e88b40008beb6223cf4190555b))
+
 ## [4.3.0](https://github.com/gravity-ui/components/compare/v4.2.2...v4.3.0) (2025-05-16)
 
 
