@@ -28,6 +28,7 @@ export interface ChangelogDialogProps {
     onRetryClick?: () => void;
     loading?: boolean;
     error?: boolean | {title: string; description: string};
+    disableHeightTransition?: boolean;
 }
 
 let nextId = 1;
@@ -41,6 +42,7 @@ export function ChangelogDialog({
     fullListLink,
     items,
     disableBodyScrollLock = true,
+    disableHeightTransition = true,
     disableOutsideClick,
     onClose,
     onStoryClick,
@@ -61,6 +63,7 @@ export function ChangelogDialog({
             disableBodyScrollLock={disableBodyScrollLock}
             disableOutsideClick={disableOutsideClick}
             aria-labelledby={dialogCaptionId}
+            disableHeightTransition={disableHeightTransition}
         >
             <Dialog.Header caption={title} id={dialogCaptionId} />
             {fullListLink ? (
