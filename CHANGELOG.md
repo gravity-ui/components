@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.4.0](https://github.com/gravity-ui/components/compare/v4.3.1...v4.4.0) (2025-05-28)
+
+
+### Features
+
+* Add ability disable height transition for ChangelogDialog ([#296](https://github.com/gravity-ui/components/issues/296)) ([65f6bd6](https://github.com/gravity-ui/components/commit/65f6bd6d84946857d936b70588ccc793f737f388))
+
 ## [4.3.1](https://github.com/gravity-ui/components/compare/v4.3.0...v4.3.1) (2025-05-26)
 
 
