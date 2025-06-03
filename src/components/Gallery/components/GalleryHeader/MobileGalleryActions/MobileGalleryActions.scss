@@ -1,0 +1,15 @@
+@use '../../../../variables';
+
+@import '~@gravity-ui/uikit/styles/mixins';
+
+$block: '.#{variables.$ns}mobile-gallery-actions';
+
+#{$block} {
+    --g-sheet-content-padding: var(--g-spacing-1) 0;
+    &__list-item {
+        display: flex;
+        align-items: center;
+        padding: var(--g-spacing-3);
+        gap: var(--g-spacing-3);
+    }
+}
