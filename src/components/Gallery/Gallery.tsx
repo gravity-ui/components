@@ -1,15 +1,15 @@
 import * as React from 'react';
 
-import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
-import type {ButtonProps, ModalProps} from '@gravity-ui/uikit';
-import {ActionTooltip, Button, Icon, Modal, Text, useDirection} from '@gravity-ui/uikit';
+import type {ModalProps} from '@gravity-ui/uikit';
+import {Modal, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
 import type {GalleryItemProps} from './GalleryItem';
 import {GalleryFallbackText} from './components/FallbackText';
+import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
-import {FullScreenAction} from './components/actions';
+import {ViewWithGestures} from './components/views/ViewWithGestures/ViewWithGestures';
 import {useFullScreen} from './hooks/useFullScreen';
 import type {UseNavigationProps} from './hooks/useNavigation';
 import {useNavigation} from './hooks/useNavigation';
@@ -28,6 +28,14 @@ export type GalleryProps = {
 } & Pick<ModalProps, 'open' | 'container' | 'onOpenChange'> &
     Pick<UseNavigationProps, 'initialItemIndex'>;
 
+const getMode = (isMobile: boolean, fullScreen: boolean) => {
+    if (fullScreen) {
+        return 'full-screen';
+    }
+
+    return isMobile ? 'mobile' : 'defaulg';
+};
+
 export const Gallery = ({
     initialItemIndex,
     open,
@@ -37,7 +45,7 @@ export const Gallery = ({
     children,
     emptyMessage,
 }: GalleryProps) => {
-    const direction = useDirection();
+    const isMobile = useMobile();
 
     const items = children ? React.Children.map(children, (child) => child.props) : emptyItems;
     const itemsCount = items.length;
@@ -59,6 +67,12 @@ export const Gallery = ({
 
     const {fullScreen, setFullScreen} = useFullScreen();
 
+    const [hiddenHeader, setHiddenHeader] = React.useState(false);
+
+    const handleBackClick = React.useCallback(() => {
+        onOpenChange?.(false);
+    }, [onOpenChange]);
+
     const handleClose = React.useCallback(() => {
         onOpenChange?.(false);
         setFullScreen(false);
@@ -79,88 +93,73 @@ export const Gallery = ({
 
     const activeItem = items[activeItemIndex] || items[0];
 
+    const handleTap = React.useCallback(() => {
+        if (!activeItem?.interactive) {
+            setHiddenHeader((prevValue) => !prevValue);
+        }
+    }, [activeItem?.interactive]);
+
     const withNavigation = items.length > 1;
+    const withGestures = isMobile;
+
+    const showNavigationButtons =
+        withNavigation && !isMobile && activeItem && !activeItem.interactive;
+    const showFooter = !fullScreen && !isMobile;
 
     return (
         <Modal
             container={container}
-            className={cnGallery({mode: fullScreen ? 'full-screen' : 'default'}, className)}
+            className={cnGallery(
+                {
+                    mode: getMode(isMobile, fullScreen),
+                    interactive: isMobile && activeItem?.interactive,
+                },
+                className,
+            )}
             open={open}
             onOpenChange={handleOpenChange}
         >
             <div className={cnGallery('content')}>
-                <div className={cnGallery('header')}>
-                    <div className={cnGallery('active-item-info')}>{activeItem?.name}</div>
-                    {withNavigation && (
-                        <div className={cnGallery('navigation')}>
-                            <Button size="l" view="flat" onClick={handleGoToPrevious}>
-                                <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} />
-                            </Button>
-                            <Text color="secondary" variant="body-1">
-                                {activeItemIndex + 1}/{items.length}
-                            </Text>
-                            <Button size="l" view="flat" onClick={handleGoToNext}>
-                                <Icon data={direction === 'rtl' ? ArrowLeft : ArrowRight} />
-                            </Button>
-                        </div>
-                    )}
-                    <div className={cnGallery('actions')}>
-                        {activeItem?.actions?.map((action) => {
-                            const buttonProps: ButtonProps = {
-                                type: 'button',
-                                size: 'l',
-                                view: 'flat',
-                                onClick: action.onClick,
-                                href: action.href,
-                                target: '__blank',
-                                'aria-label': action.title,
-                                children: action.icon,
-                            };
-
-                            return action.render ? (
-                                <React.Fragment key={action.id}>
-                                    {action.render(buttonProps)}
-                                </React.Fragment>
-                            ) : (
-                                <ActionTooltip
-                                    key={action.id}
-                                    title={action.title}
-                                    hotkey={action.hotkey}
-                                >
-                                    <Button {...buttonProps} />
-                                </ActionTooltip>
-                            );
-                        })}
-                        <FullScreenAction
-                            key="full-screen"
-                            fullScreen={fullScreen}
-                            onUpdateFullScreen={setFullScreen}
-                        />
-                        <Button
-                            size="l"
-                            view="flat"
-                            aria-label={i18n('close')}
-                            onClick={handleClose}
-                        >
-                            <Icon data={Xmark} />
-                        </Button>
-                    </div>
-                </div>
+                <GalleryHeader
+                    itemName={activeItem?.name}
+                    actions={activeItem?.actions}
+                    withNavigation={withNavigation}
+                    activeItemIndex={activeItemIndex}
+                    itemsLength={items.length}
+                    fullScreen={fullScreen}
+                    onBackClick={handleBackClick}
+                    onGoToPrevious={handleGoToPrevious}
+                    onGoToNext={handleGoToNext}
+                    onUpdateFullScreen={setFullScreen}
+                    onClose={handleClose}
+                    hidden={hiddenHeader}
+                    interactive={activeItem?.interactive}
+                />
                 <div key={activeItemIndex} className={cnGallery('body')}>
                     {!items.length && (
                         <GalleryFallbackText>
                             {emptyMessage ?? i18n('no-items')}
                         </GalleryFallbackText>
                     )}
-                    {activeItem?.view}
-                    {withNavigation && activeItem && !activeItem.interactive && (
+                    {withGestures ? (
+                        <ViewWithGestures
+                            onSwipeLeft={handleGoToNext}
+                            onSwipeRight={handleGoToPrevious}
+                            onTap={handleTap}
+                        >
+                            {activeItem?.view}
+                        </ViewWithGestures>
+                    ) : (
+                        activeItem?.view
+                    )}
+                    {showNavigationButtons && (
                         <React.Fragment>
                             <NavigationButton onClick={handleGoToPrevious} position="start" />
                             <NavigationButton onClick={handleGoToNext} position="end" />
                         </React.Fragment>
                     )}
                 </div>
-                {!fullScreen && (
+                {showFooter && (
                     <div className={cnGallery('footer')}>
                         {withNavigation && (
                             <div className={cnGallery('preview-list')}>

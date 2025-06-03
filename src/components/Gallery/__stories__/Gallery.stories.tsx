@@ -18,6 +18,7 @@ import {
     GalleryItemAction,
     getGalleryItemDocument,
     getGalleryItemImage,
+    getGalleryItemUnsupported,
     getGalleryItemVideo,
 } from '../';
 import type {GalleryProps} from '../';
@@ -83,6 +84,7 @@ const getGalleryItemFile = (file: GalleryFile) => {
             return getGalleryItemDocument({
                 src: file.url,
                 file: {name: file.name, type: file.type} as File,
+                isMobile: true,
             });
         case 'text':
             return {
@@ -92,6 +94,8 @@ const getGalleryItemFile = (file: GalleryFile) => {
                 view: <Text variant="body-1">{file.text}</Text>,
                 name: file.name,
             };
+        default:
+            return getGalleryItemUnsupported({file: file as File});
     }
 };
 
@@ -115,7 +119,7 @@ const FilesGalleryTemplate: StoryFn<GalleryProps> = () => {
                 render: (buttonProps) => (
                     <CopyToClipboard
                         onCopy={() => alert(file.type === 'text' ? 'Text copied!' : 'Link copied!')}
-                        text={file.type === 'text' ? file.text : file.url}
+                        text={file.type === 'text' ? file.text : file.url || ''}
                     >
                         {() => (
                             <div>

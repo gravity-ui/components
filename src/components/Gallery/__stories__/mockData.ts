@@ -133,7 +133,8 @@ export type GalleryFile =
           url: string;
           interactive?: boolean;
       }
-    | {name: string; type: 'text'; text: string; interactive?: boolean};
+    | {name: string; type: 'text'; text: string; interactive?: boolean}
+    | {name: string; type: 'unsupported'; url?: string; interactive?: boolean};
 
 export const files: GalleryFile[] = [
     {
@@ -156,5 +157,9 @@ export const files: GalleryFile[] = [
         url: 'https://preview.gravity-ui.com/icons',
         name: 'Html page',
         interactive: true,
+    },
+    {
+        type: 'unsupported',
+        name: 'Unsupported data',
     },
 ];

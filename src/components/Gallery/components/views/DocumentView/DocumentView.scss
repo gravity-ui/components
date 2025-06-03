@@ -7,4 +7,51 @@ $block: '.#{variables.$ns}gallery-document-view';
     height: 100%;
 
     border: none;
+
+    &_mobile {
+        pointer-events: none;
+        position: relative;
+
+        &-interactive {
+            pointer-events: auto;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: transparent;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        &_interactive::after {
+            display: none;
+        }
+    }
+}
+
+#{$block}-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    #{$block}_mobile:not(#{$block}_mobile_interactive):hover &,
+    #{$block}_mobile:not(#{$block}_mobile_interactive):active & {
+        opacity: 1;
+    }
 }
