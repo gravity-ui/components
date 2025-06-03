@@ -1,4 +1,8 @@
 {
   "close": "Close",
-  "no-items": "No data"
+  "no-items": "No data",
+  "enter-fullscreen": "Enter fullscreen",
+  "exit-fullscreen": "Exit fullscreen",
+  "format-not-supported": "Format not supported",
+  "back": "Back"
 }

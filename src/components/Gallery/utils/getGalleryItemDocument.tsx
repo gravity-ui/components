@@ -12,10 +12,18 @@ export type GetDefaultGalleryItemDocumentArgs = Omit<DocumentViewProps, 'name'> 
 export function getGalleryItemDocument({
     src,
     file,
+    isMobile,
     ...documentFileViewProps
 }: GetDefaultGalleryItemDocumentArgs): GalleryItemProps {
     return {
-        view: <DocumentView name={file.name} src={src} {...documentFileViewProps} />,
+        view: (
+            <DocumentView
+                name={file.name}
+                src={src}
+                isMobile={isMobile}
+                {...documentFileViewProps}
+            />
+        ),
         thumbnail: <FilePreview view="compact" file={file} />,
         name: (
             <Text color="primary" variant="subheader-1" ellipsis whiteSpace="nowrap">

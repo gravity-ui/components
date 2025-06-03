@@ -1,4 +1,5 @@
 @use '../variables';
+@use './variables.scss' as gallery-css-variables;
 
 $block: '.#{variables.$ns}gallery';
 
@@ -28,26 +29,6 @@ $verticalGalleryMargin: 28px;
         }
     }
 
-    &__navigation {
-        display: flex;
-        gap: var(--g-spacing-2);
-        align-items: center;
-        justify-content: center;
-    }
-
-    &__actions {
-        display: flex;
-        gap: var(--g-spacing-1);
-        align-items: stretch;
-        justify-content: flex-end;
-    }
-
-    &__active-item-info {
-        align-self: stretch;
-        align-items: center;
-        display: flex;
-    }
-
     &__body {
         position: relative;
 
@@ -59,6 +40,8 @@ $verticalGalleryMargin: 28px;
         min-height: 0;
 
         padding: 0 var(--g-spacing-2);
+
+        grid-area: body;
     }
 
     &__footer {
@@ -100,7 +83,8 @@ $verticalGalleryMargin: 28px;
         }
     }
 
-    &_mode_full-screen {
+    &_mode_full-screen,
+    &_mode_mobile {
         overflow: hidden;
 
         --g-modal-border-radius: 0;
@@ -109,6 +93,7 @@ $verticalGalleryMargin: 28px;
             &__content {
                 width: 100vw;
                 height: 100vh;
+                position: relative;
             }
 
             &__body {
@@ -143,13 +128,42 @@ $verticalGalleryMargin: 28px;
             }
         }
     }
+
+    &_mode_mobile {
+        &#{$block}_interactive {
+            #{$block} {
+                &__content {
+                    display: grid;
+                    grid-template: 'mobile-header' min-content 'body' auto 'mobile-footer' min-content;
+                }
+
+                &__body {
+                    flex: 1;
+                    min-height: 0;
+                    overflow: hidden;
+                }
+
+                &__header {
+                    position: static;
+                    opacity: 1;
+                    z-index: auto;
+                }
+            }
+        }
+    }
 }
 
 .g-root_theme_light,
 .g-root_theme_light-hc {
     #{$block}_mode_full-screen {
         #{$block}__header {
-            background-color: rgba(255, 255, 255, 0.45);
+            background-color: gallery-css-variables.$lightThemeGalleryBaseColor;
+        }
+    }
+
+    #{$block}_mode_mobile {
+        #{$block}__content {
+            background-color: gallery-css-variables.$lightThemeGalleryBackgroundColor;
         }
     }
 }
@@ -158,7 +172,13 @@ $verticalGalleryMargin: 28px;
 .g-root_theme_dark-hc {
     #{$block}_mode_full-screen {
         #{$block}__header {
-            background-color: rgba(0, 0, 0, 0.45);
+            background-color: gallery-css-variables.$darkThemeGalleryBaseColor;
+        }
+    }
+
+    #{$block}_mode_mobile {
+        #{$block}__content {
+            background-color: gallery-css-variables.$darkThemeGalleryBackgroundColor;
         }
     }
 }

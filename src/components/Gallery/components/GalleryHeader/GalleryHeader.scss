@@ -1,0 +1,87 @@
+@use '../../../variables';
+@use '../../variables.scss' as gallery-css-variables;
+
+$block: '.#{variables.$ns}gallery-header';
+
+#{$block} {
+    &__active-item-info {
+        align-self: stretch;
+        align-items: center;
+        display: flex;
+        flex: 1;
+    }
+
+    &__navigation {
+        display: flex;
+        gap: var(--g-spacing-2);
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+    }
+
+    &__actions {
+        display: flex;
+        gap: var(--g-spacing-1);
+        align-items: stretch;
+        justify-content: flex-end;
+        flex: 1;
+    }
+
+    &__mobile-header {
+        align-items: center;
+        justify-items: center;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        width: 100%;
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline: 0;
+        z-index: 3;
+        padding: 0 var(--g-spacing-3);
+        grid-area: mobile-header;
+        box-sizing: border-box;
+
+        &_hidden {
+            display: none;
+        }
+
+        &_interactive {
+            position: static;
+            background-color: var(--g-color-base-background);
+        }
+    }
+
+    &__mobile-footer {
+        width: 100%;
+        padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-2);
+        position: absolute;
+        bottom: 0;
+        z-index: 3;
+        grid-area: mobile-footer;
+
+        &_hidden {
+            display: none;
+        }
+
+        &_interactive {
+            position: static;
+            background-color: var(--g-color-base-background);
+        }
+    }
+}
+
+.g-root_theme_light,
+.g-root_theme_light-hc {
+    #{$block}__mobile-header,
+    #{$block}__mobile-footer {
+        background-color: gallery-css-variables.$lightThemeGalleryBaseColor;
+    }
+}
+
+.g-root_theme_dark,
+.g-root_theme_dark-hc {
+    #{$block}__mobile-header,
+    #{$block}__mobile-footer {
+        background-color: gallery-css-variables.$darkThemeGalleryBaseColor;
+    }
+}
