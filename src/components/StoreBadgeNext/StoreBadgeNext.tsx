@@ -12,6 +12,8 @@ import {RuStoreColor} from '../../icons/stores/RuStoreColor';
 import {RuStoreMono} from '../../icons/stores/RuStoreMono';
 import {cn} from '../utils/cn';
 
+import {i18n} from './i18n';
+
 const b = cn('store-badge');
 
 const playmarketPlatform = 'playmarket';
@@ -28,7 +30,7 @@ export type StoreBadgePlatform =
 export type StoreBadgeAppearance = 'color' | 'monochrome';
 
 export interface StoreBadgeNextProps extends Omit<LinkProps, 'view' | 'onClick'> {
-    /** store platform name */
+    /** store name */
     store: StoreBadgePlatform;
     appearance?: StoreBadgeAppearance;
     onClick?: React.MouseEventHandler<HTMLElement>;
@@ -73,7 +75,7 @@ export const StoreBadgeNext = ({
     if (!href) {
         return (
             // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/interactive-supports-focus
-            <div role="button" onClick={onClick}>
+            <div role="button" onClick={onClick} aria-label={i18n(`${store}`)}>
                 <Icon className={b(null, className)} data={iconData} />
             </div>
         );
@@ -88,6 +90,7 @@ export const StoreBadgeNext = ({
             rel="noopener"
             {...restLinkProps}
             extraProps={{
+                'aria-label': i18n(`${store}`),
                 ...restLinkProps.extraProps,
             }}
         >
