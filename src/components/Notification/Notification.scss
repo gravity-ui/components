@@ -17,52 +17,44 @@ $notificationSourceIconSize: 36px;
     }
 
     &__right {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
         flex: 1;
-        overflow-x: hidden;
     }
 
-    &__right-top-part {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    &__right-meta-and-title {
+    &__title-wrapper {
         flex: 1;
         min-width: 0;
         overflow-x: hidden;
     }
 
-    &__right-meta,
-    &__right-title {
+    &__source-text,
+    &__title {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    &__right-meta {
-        display: flex;
-        gap: 4px;
+    &__source-text {
         color: var(--g-color-text-secondary);
     }
 
-    &__right-title {
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 18px;
+    &__bottom-source {
+        margin-block-start: 4px;
+    }
 
+    &__title {
+        font-weight: 500;
         color: var(--g-color-text-primary);
     }
 
-    &__right-content {
+    &__title-with-source {
+        margin-block-end: 4px;
+    }
+
+    &__content {
         font-size: 13px;
         line-height: 18px;
 
-        color: var(--g-color-text-secondary);
+        color: var(--g-color-text-complementary);
     }
 
     &_unread {
@@ -75,23 +67,23 @@ $notificationSourceIconSize: 36px;
     &__actions {
         display: flex;
         align-items: center;
+    }
+
+    &__actions_bottom-actions {
+        margin-block-start: 8px;
+        gap: 8px;
         flex-wrap: wrap;
     }
 
-    &__actions_right-bottom-actions {
-        margin-block-start: 8px;
-        gap: 8px;
-    }
-
-    &__actions_right-side-actions {
+    &__actions_side-actions {
         height: 28px;
         opacity: 0;
     }
-    &:hover &__actions_right-side-actions,
-    &__actions_right-side-actions:focus-within {
+    &:hover &__actions_side-actions,
+    &__actions_side-actions:focus-within {
         opacity: 1;
     }
-    &_mobile &__actions_right-side-actions {
+    &_mobile &__actions_side-actions {
         opacity: 1;
     }
 

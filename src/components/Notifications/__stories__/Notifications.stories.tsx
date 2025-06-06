@@ -1,12 +1,12 @@
 import React from 'react';
 
 import {Bell, Funnel, Gear} from '@gravity-ui/icons';
-import {Button, Checkbox, Flex, Icon, Popup, Tabs} from '@gravity-ui/uikit';
+import {Button, Checkbox, Flex, Icon, Popup, RadioButton, Tabs, Text} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
 import {delay} from '../../InfiniteScroll/__stories__/utils';
 import {NotificationAction} from '../../Notification/NotificationAction';
-import {NotificationProps} from '../../Notification/definitions';
+import {NotificationProps, NotificationSourcePlacement} from '../../Notification/definitions';
 import {Notifications} from '../Notifications';
 import {NotificationsPopupWrapper} from '../NotificationsPopupWrapper';
 
@@ -62,12 +62,13 @@ const Wrapper = (props: React.PropsWithChildren) => {
 type BooleanMap = Record<string, boolean | undefined>;
 
 export const Default: StoryFn = () => {
-    const {showNotificationsActions, showNotificationActions, renderControls} =
+    const {showNotificationsActions, showNotificationActions, sourcePlacement, renderControls} =
         useNotificationsVariationsControl();
 
     const {notifications, actions} = useNotificationsWithActions({
         showNotificationsActions,
         showNotificationActions,
+        sourcePlacement,
     });
 
     return (
@@ -237,10 +238,13 @@ function CustomHeaderComponent({title, activeTab, onTabUpdate}: CustomHeaderComp
 function useNotificationsVariationsControl() {
     const [showNotificationsActions, setShowNotificationsActions] = React.useState(true);
     const [showNotificationActions, setShowNotificationActions] = React.useState(true);
+    const [sourcePlacement, setSourcePlacement] =
+        React.useState<NotificationSourcePlacement>('bottom');
 
     return {
         showNotificationsActions,
         showNotificationActions,
+        sourcePlacement,
         renderControls: () => (
             <Flex gap={2} direction="column">
                 <Checkbox
@@ -256,6 +260,17 @@ function useNotificationsVariationsControl() {
                 >
                     Notification actions
                 </Checkbox>
+                <Flex direction="column" gap={1}>
+                    <Text>Source/date placement</Text>
+                    <RadioButton<NotificationSourcePlacement>
+                        value={sourcePlacement}
+                        onUpdate={setSourcePlacement}
+                        options={[
+                            {value: 'bottom', content: 'Bottom'},
+                            {value: 'top', content: 'Top'},
+                        ]}
+                    />
+                </Flex>
             </Flex>
         ),
     };
@@ -264,6 +279,11 @@ function useNotificationsVariationsControl() {
 function useNotificationsWithActions({
     showNotificationsActions = true,
     showNotificationActions = true,
+    sourcePlacement = 'bottom',
+}: {
+    showNotificationsActions?: boolean;
+    showNotificationActions?: boolean;
+    sourcePlacement?: NotificationSourcePlacement;
 } = {}) {
     const [unreadNotifications, setUnreadNotifications] = React.useState<BooleanMap>({
         tracker: true,
@@ -303,9 +323,10 @@ function useNotificationsWithActions({
                     unread,
                     archived,
                     sideActions: getSideActions(id, unread, archived),
+                    sourcePlacement,
                 };
             }),
-        [unreadNotifications, archivedNotifications, getSideActions],
+        [unreadNotifications, archivedNotifications, sourcePlacement, getSideActions],
     );
 
     const actions = showNotificationsActions ? (

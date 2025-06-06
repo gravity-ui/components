@@ -68,7 +68,7 @@ $block: '.#{variables.$ns}notifications';
         content: '';
         display: block;
         border-block-start: 1px solid var(--g-color-line-generic);
-        margin: 0 12px;
+        margin: 2px 12px;
     }
 
     // :hover
@@ -80,7 +80,7 @@ $block: '.#{variables.$ns}notifications';
         content: '';
         display: block;
         border-block-start: 1px solid transparent;
-        margin: 0 12px;
+        margin: 2px 12px;
     }
 
     &__notification-wrapper {
