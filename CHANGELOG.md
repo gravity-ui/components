@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.15.0](https://github.com/gravity-ui/components/compare/v3.14.0...v3.15.0) (2025-06-06)
+
+
+### Features
+
+* **Notifications:** add custom source icon; add sourcePlacement property ([#299](https://github.com/gravity-ui/components/issues/299)) ([36b41d4](https://github.com/gravity-ui/components/commit/36b41d4b871ab8309c1ead887d5b38ff4091f3e6))
+
 ## [3.14.0](https://github.com/gravity-ui/components/compare/v3.13.3...v3.14.0) (2025-05-19)
 
 
