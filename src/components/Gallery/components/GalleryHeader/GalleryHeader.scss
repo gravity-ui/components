@@ -4,6 +4,8 @@
 $block: '.#{variables.$ns}gallery-header';
 
 #{$block} {
+    $minButtonWidth: 44px;
+
     &__active-item-info {
         align-self: stretch;
         align-items: center;
@@ -31,7 +33,7 @@ $block: '.#{variables.$ns}gallery-header';
         align-items: center;
         justify-items: center;
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: minmax($minButtonWidth, auto) 1fr minmax($minButtonWidth, auto);
         width: 100%;
         position: absolute;
         inset-block-start: 0;
@@ -41,8 +43,17 @@ $block: '.#{variables.$ns}gallery-header';
         grid-area: mobile-header;
         box-sizing: border-box;
 
+        // Animation properties
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+            opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
         &_hidden {
-            display: none;
+            opacity: 0;
+            transform: translateY(-100%);
+            pointer-events: none;
         }
 
         &_interactive {
@@ -59,8 +70,17 @@ $block: '.#{variables.$ns}gallery-header';
         z-index: 3;
         grid-area: mobile-footer;
 
+        // Animation properties
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+            opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
         &_hidden {
-            display: none;
+            opacity: 0;
+            transform: translateY(100%);
+            pointer-events: none;
         }
 
         &_interactive {

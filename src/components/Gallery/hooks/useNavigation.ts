@@ -11,7 +11,6 @@ export function useNavigation({initialItemIndex = 0, itemRefs}: UseNavigationPro
     const itemsCount = itemRefs.length;
 
     const handleGoToPrevious = React.useCallback(() => {
-        console.log('handleGoToPrevious');
         setActiveItemIndex((previousActiveItemIndex) => {
             const nextActiveItemIndex = previousActiveItemIndex - 1;
             return nextActiveItemIndex > -1 ? nextActiveItemIndex : itemsCount - 1;
@@ -19,7 +18,6 @@ export function useNavigation({initialItemIndex = 0, itemRefs}: UseNavigationPro
     }, [itemsCount]);
 
     const handleGoToNext = React.useCallback(() => {
-        console.log('handleGoToNext');
         setActiveItemIndex((previousActiveItemIndex) => (previousActiveItemIndex + 1) % itemsCount);
     }, [itemsCount]);
 

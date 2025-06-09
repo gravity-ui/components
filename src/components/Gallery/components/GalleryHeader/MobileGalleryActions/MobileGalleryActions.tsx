@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {List, Sheet, Text} from '@gravity-ui/uikit';
+import {Button, ButtonProps, Flex, List, Sheet} from '@gravity-ui/uikit';
 
 import {block} from '../../../../utils/cn';
-import type {GalleryItemProps} from '../../../GalleryItem';
+import type {GalleryItemAction, GalleryItemProps} from '../../../GalleryItem';
 
 import './MobileGalleryActions.scss';
 
@@ -15,52 +15,46 @@ export type MobileGalleryActionsProps = {
     onClose: () => void;
 };
 
-interface ActionItem {
-    id: string;
-    title: string;
-    icon: React.ReactNode;
-    onClick?: () => void;
-}
-
 export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGalleryActionsProps) => {
-    const renderListItem = React.useCallback((item: ActionItem) => {
-        return (
-            <div className={cnMobileGalleryActions('list-item')}>
-                {item.icon}
-                <Text variant="body-2" title={item.title} ellipsis>
+    const renderListItem = React.useCallback((item: GalleryItemAction) => {
+        const buttonProps: ButtonProps & {icon: React.ReactNode} = {
+            type: 'button',
+            size: 'xl',
+            view: 'flat',
+            onClick: item.onClick,
+            href: item.href,
+            target: '__blank',
+            'aria-label': item.title,
+            className: cnMobileGalleryActions('list-item'),
+            width: 'max',
+            icon: item.icon,
+            children: (
+                <Flex alignItems="center" gap={3} className={cnMobileGalleryActions('custom-item')}>
+                    {item.icon}
                     {item.title}
-                </Text>
-            </div>
+                </Flex>
+            ),
+        };
+
+        return (
+            <React.Fragment>
+                {item.render ? (
+                    <React.Fragment key={item.id}>{item.render(buttonProps)}</React.Fragment>
+                ) : (
+                    <Button {...buttonProps} />
+                )}
+            </React.Fragment>
         );
     }, []);
 
-    const handleItemClick = React.useCallback(
-        (item: ActionItem) => {
-            item.onClick?.();
-            onClose();
-        },
-        [onClose],
-    );
-
-    const listItems: ActionItem[] = React.useMemo(() => {
-        const items: ActionItem[] = [];
-
-        actions.forEach((action) => {
-            items.push({
-                id: action.id,
-                title: action.title,
-                icon: action.icon,
-                onClick: action.onClick,
-            });
-        });
-
-        return items;
-    }, [actions]);
+    const handleItemClick = React.useCallback(() => {
+        onClose();
+    }, [onClose]);
 
     return (
         <Sheet className={cnMobileGalleryActions()} visible={open} onClose={onClose}>
             <List
-                items={listItems}
+                items={actions}
                 filterable={false}
                 renderItem={renderListItem}
                 itemHeight={44}

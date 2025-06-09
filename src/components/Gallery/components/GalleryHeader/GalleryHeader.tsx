@@ -40,6 +40,8 @@ export type GalleryHeaderProps = {
     interactive?: boolean;
 };
 
+const MOBILE_ICON_SIZE = 20;
+
 export const GalleryHeader = ({
     itemName,
     actions,
@@ -86,7 +88,7 @@ export const GalleryHeader = ({
                         aria-label={i18n('back')}
                         color="primary"
                     >
-                        <Icon size={20} data={ChevronLeft} />
+                        <Icon size={MOBILE_ICON_SIZE} data={ChevronLeft} />
                     </Button>
 
                     {withNavigation && (
@@ -103,7 +105,7 @@ export const GalleryHeader = ({
                             aria-label={i18n('close')}
                             color="primary"
                         >
-                            <Icon size={20} data={Ellipsis} />
+                            <Icon size={MOBILE_ICON_SIZE} data={Ellipsis} />
                         </Button>
                     )}
                 </div>

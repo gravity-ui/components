@@ -52,6 +52,7 @@ const isTouchOnInteractiveElement = (target: EventTarget | null): boolean => {
 export type ImageGesturesState = {
     scale: number;
     position: {x: number; y: number};
+    isSwitching: boolean;
 };
 
 export type ImageGesturesActions = {
@@ -67,6 +68,7 @@ export type UseMobileGesturesProps = {
     onSwipeRight?: () => void;
     onTap?: () => void;
     maxScale?: number;
+    enableSwitchAnimation?: boolean;
 };
 
 export function useMobileGestures({
@@ -74,9 +76,11 @@ export function useMobileGestures({
     onSwipeRight,
     onTap,
     maxScale = 3,
+    enableSwitchAnimation = true,
 }: UseMobileGesturesProps = {}): [ImageGesturesState, ImageGesturesActions] {
     const [scale, setScale] = React.useState(1);
     const [position, setPosition] = React.useState({x: 0, y: 0});
+    const [isSwitching, setIsSwitching] = React.useState(false);
     const [startPosition, setStartPosition] = React.useState<{x: number; y: number} | null>(null);
     const [startDistance, setStartDistance] = React.useState<number | null>(null);
     const [touchStartTime, setTouchStartTime] = React.useState<number | null>(null);
@@ -90,7 +94,6 @@ export function useMobileGestures({
 
     const handleTouchStart = React.useCallback(
         (e: React.TouchEvent) => {
-            console.log('handleTouchStart', e);
             if (e.touches.length === 1) {
                 setStartPosition({
                     x: e.touches[0].clientX - position.x,
@@ -115,8 +118,6 @@ export function useMobileGestures({
 
     const handleTouchMove = React.useCallback(
         (e: React.TouchEvent) => {
-            console.log('handleTouchMove', e);
-
             if (e.touches.length === 1 && startPosition) {
                 const deltaX = e.touches[0].clientX - startPosition.x;
                 const deltaY = e.touches[0].clientY - startPosition.y;
@@ -137,12 +138,26 @@ export function useMobileGestures({
 
                     if (!isTouchOnInteractiveElement(touchStartTarget)) {
                         if (deltaX > 0 && onSwipeRight) {
-                            console.log('onSwipeRight');
-                            onSwipeRight();
+                            if (enableSwitchAnimation && !isSwitching) {
+                                setIsSwitching(true);
+                                setTimeout(() => {
+                                    onSwipeRight();
+                                    setTimeout(() => setIsSwitching(false), 50);
+                                }, 150);
+                            } else {
+                                onSwipeRight();
+                            }
                             setStartPosition(null);
                         } else if (deltaX < 0 && onSwipeLeft) {
-                            console.log('onSwipeLeft');
-                            onSwipeLeft();
+                            if (enableSwitchAnimation && !isSwitching) {
+                                setIsSwitching(true);
+                                setTimeout(() => {
+                                    onSwipeLeft();
+                                    setTimeout(() => setIsSwitching(false), 50);
+                                }, 150);
+                            } else {
+                                onSwipeLeft();
+                            }
                             setStartPosition(null);
                         }
                     }
@@ -207,7 +222,7 @@ export function useMobileGestures({
     }, [scale, resetZoom]);
 
     return [
-        {scale, position},
+        {scale, position, isSwitching},
         {resetZoom, handleTouchStart, handleTouchMove, handleTouchEnd, handleDoubleClick},
     ];
 }
