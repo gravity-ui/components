@@ -7,26 +7,25 @@ import type {DocumentViewProps} from '../components/views/DocumentView/DocumentV
 
 export type GetDefaultGalleryItemDocumentArgs = Omit<DocumentViewProps, 'name'> & {
     file: FilePreviewProps['file'];
+    mobile?: boolean;
 };
 
 export function getGalleryItemDocument({
     src,
     file,
-    isMobile,
+    mobile,
     ...documentFileViewProps
 }: GetDefaultGalleryItemDocumentArgs): GalleryItemProps {
     return {
-        view: (
-            <DocumentView
-                name={file.name}
-                src={src}
-                isMobile={isMobile}
-                {...documentFileViewProps}
-            />
-        ),
+        view: <DocumentView name={file.name} src={src} {...documentFileViewProps} />,
         thumbnail: <FilePreview view="compact" file={file} />,
         name: (
-            <Text color="primary" variant="subheader-1" ellipsis whiteSpace="nowrap">
+            <Text
+                color="primary"
+                variant={mobile ? 'subheader-2' : 'subheader-1'}
+                ellipsis
+                whiteSpace="nowrap"
+            >
                 {file.name}
             </Text>
         ),

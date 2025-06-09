@@ -44,6 +44,33 @@ $verticalGalleryMargin: 28px;
         grid-area: body;
     }
 
+    &__body-content {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    // Mobile file switching animation
+    &_mode_mobile &__body {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &_mode_mobile &__body-content {
+        opacity: 1;
+        transform: translateX(0);
+        transition:
+            opacity 0.25s ease-in-out,
+            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &_mode_mobile &__body-content_switching {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
     &__footer {
         padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-4) var(--g-spacing-5);
     }

@@ -9,8 +9,8 @@ import type {GalleryItemProps} from './GalleryItem';
 import {GalleryFallbackText} from './components/FallbackText';
 import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
-import {ViewWithGestures} from './components/views/ViewWithGestures/ViewWithGestures';
 import {useFullScreen} from './hooks/useFullScreen';
+import {useMobileGestures} from './hooks/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
 import {useNavigation} from './hooks/useNavigation';
 import {i18n} from './i18n';
@@ -99,8 +99,29 @@ export const Gallery = ({
         }
     }, [activeItem?.interactive]);
 
+    // Mobile gestures for the entire gallery
+    const [{isSwitching}, {handleTouchStart, handleTouchMove, handleTouchEnd}] = useMobileGestures({
+        onSwipeLeft: handleGoToNext,
+        onSwipeRight: handleGoToPrevious,
+        onTap: handleTap,
+        enableSwitchAnimation: isMobile,
+    });
+
+    // Enhanced setActiveItemIndex with animation for mobile
+    const setActiveItemIndexWithAnimation = React.useCallback(
+        (index: number) => {
+            if (isMobile && !isSwitching && index !== activeItemIndex) {
+                // For direct item selection, we don't use swipe animation
+                // but we could add a different animation here if needed
+                setActiveItemIndex(index);
+            } else {
+                setActiveItemIndex(index);
+            }
+        },
+        [isMobile, isSwitching, activeItemIndex, setActiveItemIndex],
+    );
+
     const withNavigation = items.length > 1;
-    const withGestures = isMobile;
 
     const showNavigationButtons =
         withNavigation && !isMobile && activeItem && !activeItem.interactive;
@@ -119,7 +140,12 @@ export const Gallery = ({
             open={open}
             onOpenChange={handleOpenChange}
         >
-            <div className={cnGallery('content')}>
+            <div
+                className={cnGallery('content')}
+                onTouchStart={isMobile ? handleTouchStart : undefined}
+                onTouchMove={isMobile ? handleTouchMove : undefined}
+                onTouchEnd={isMobile ? handleTouchEnd : undefined}
+            >
                 <GalleryHeader
                     itemName={activeItem?.name}
                     actions={activeItem?.actions}
@@ -136,28 +162,22 @@ export const Gallery = ({
                     interactive={activeItem?.interactive}
                 />
                 <div key={activeItemIndex} className={cnGallery('body')}>
-                    {!items.length && (
-                        <GalleryFallbackText>
-                            {emptyMessage ?? i18n('no-items')}
-                        </GalleryFallbackText>
-                    )}
-                    {withGestures ? (
-                        <ViewWithGestures
-                            onSwipeLeft={handleGoToNext}
-                            onSwipeRight={handleGoToPrevious}
-                            onTap={handleTap}
-                        >
-                            {activeItem?.view}
-                        </ViewWithGestures>
-                    ) : (
-                        activeItem?.view
-                    )}
-                    {showNavigationButtons && (
-                        <React.Fragment>
-                            <NavigationButton onClick={handleGoToPrevious} position="start" />
-                            <NavigationButton onClick={handleGoToNext} position="end" />
-                        </React.Fragment>
-                    )}
+                    <div
+                        className={cnGallery('body-content', {switching: isMobile && isSwitching})}
+                    >
+                        {!items.length && (
+                            <GalleryFallbackText>
+                                {emptyMessage ?? i18n('no-items')}
+                            </GalleryFallbackText>
+                        )}
+                        {activeItem?.view}
+                        {showNavigationButtons && (
+                            <React.Fragment>
+                                <NavigationButton onClick={handleGoToPrevious} position="start" />
+                                <NavigationButton onClick={handleGoToNext} position="end" />
+                            </React.Fragment>
+                        )}
+                    </div>
                 </div>
                 {showFooter && (
                     <div className={cnGallery('footer')}>
@@ -165,7 +185,7 @@ export const Gallery = ({
                             <div className={cnGallery('preview-list')}>
                                 {items.map((item, index) => {
                                     const handleClick = () => {
-                                        setActiveItemIndex(index);
+                                        setActiveItemIndexWithAnimation(index);
                                     };
 
                                     const selected = activeItemIndex === index;
