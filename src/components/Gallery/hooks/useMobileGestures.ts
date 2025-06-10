@@ -89,6 +89,7 @@ export function useMobileGestures({
     const [touchStartTarget, setTouchStartTarget] = React.useState<EventTarget | null>(null);
 
     const resetZoom = React.useCallback(() => {
+        console.log('resetZoom');
         setScale(1);
         setPosition({x: 0, y: 0});
     }, []);
@@ -170,6 +171,7 @@ export function useMobileGestures({
                 const scaleRatio = distance / startDistance;
                 const newScale = Math.max(1, Math.min(maxScale, startScale * scaleRatio));
                 setScale(newScale);
+                setStartDistance(distance);
             }
         },
         [
@@ -188,6 +190,10 @@ export function useMobileGestures({
     const handleTouchEnd = React.useCallback(() => {
         const touchEndTime = Date.now();
         const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
+
+        alert(
+            `scale: ${scale}, position: ${position.x}, ${position.y}, duration: ${touchDuration}, hasMoved: ${hasMoved}, startDistance: ${startDistance}`,
+        );
 
         // Check if this was a single tap:
         // - Touch started and ended within reasonable time (< 300ms)
