@@ -11,7 +11,7 @@ const isTouchOnGalleryContent = (target: EventTarget | null): boolean => {
     const element = target as Element;
 
     // Check if the touch is within the gallery body content area
-    const isInGalleryBody = element.closest(cnGallery(BODY_CONTENT_CLASS_NAME));
+    const isInGalleryBody = element.closest(`.${cnGallery(BODY_CONTENT_CLASS_NAME)}`);
 
     return Boolean(isInGalleryBody);
 };
@@ -129,13 +129,14 @@ export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileG
         // - No significant movement occurred
         // - Touch is on gallery content (not on overlay elements)
         else if (
+            onTap &&
             touchStartTime &&
             touchDuration < MAX_TAP_DURATION &&
             !hasMoved &&
             !startDistance &&
             isTouchOnGalleryContent(touchStartTarget)
         ) {
-            onTap?.();
+            onTap();
         }
 
         setStartPosition(null);
