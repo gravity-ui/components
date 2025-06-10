@@ -90,10 +90,7 @@ export function useMobileGestures({
     const [hasMoved, setHasMoved] = React.useState(false);
     const [touchStartTarget, setTouchStartTarget] = React.useState<EventTarget | null>(null);
 
-    const log = React.useRef('');
-
     const resetZoom = React.useCallback(() => {
-        log.current = log.current + 'resetZoom\n';
         setScale(1);
         setPosition({x: 0, y: 0});
     }, []);
@@ -176,9 +173,6 @@ export function useMobileGestures({
 
                 const scaleRatio = distance / startDistance;
                 const newScale = Math.max(1, Math.min(MAX_SCALE, scale * scaleRatio));
-                log.current =
-                    log.current +
-                    `scale: ${scale}, distance: ${distance}, startDistance: ${startDistance}, scaleRatio: ${scaleRatio}, newScale: ${newScale}\n`;
 
                 setScale(newScale);
             }
@@ -189,8 +183,6 @@ export function useMobileGestures({
     const handleTouchEnd = React.useCallback(() => {
         const touchEndTime = Date.now();
         const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
-
-        alert(log.current);
 
         // Check if this was a single tap:
         // - Touch started and ended within reasonable time (< 300ms)
@@ -214,7 +206,6 @@ export function useMobileGestures({
     }, [touchStartTime, hasMoved, startDistance, touchStartTarget, onTap]);
 
     const handleDoubleClick = React.useCallback(() => {
-        log.current = log.current + 'handleDoubleClick\n';
         if (scale > 1) {
             resetZoom();
         } else {
