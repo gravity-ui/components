@@ -83,6 +83,7 @@ export function useMobileGestures({
     const [isSwitching, setIsSwitching] = React.useState(false);
     const [startPosition, setStartPosition] = React.useState<{x: number; y: number} | null>(null);
     const [startDistance, setStartDistance] = React.useState<number | null>(null);
+    const [startScale, setStartScale] = React.useState<number>(1);
     const [touchStartTime, setTouchStartTime] = React.useState<number | null>(null);
     const [hasMoved, setHasMoved] = React.useState(false);
     const [touchStartTarget, setTouchStartTarget] = React.useState<EventTarget | null>(null);
@@ -108,12 +109,13 @@ export function useMobileGestures({
                 const dy = e.touches[0].clientY - e.touches[1].clientY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 setStartDistance(distance);
+                setStartScale(scale);
                 setTouchStartTime(null);
                 setHasMoved(true);
                 setTouchStartTarget(null);
             }
         },
-        [position],
+        [position.x, position.y, scale],
     );
 
     const handleTouchMove = React.useCallback(
@@ -134,32 +136,28 @@ export function useMobileGestures({
                     setPosition({x: newX, y: newY});
                     // Handle horizontal swipe for navigation when not zoomed
                 } else if (Math.abs(deltaX) > 50) {
-                    // Only handle swipes if touch didn't start on an interactive element
-
-                    if (!isTouchOnInteractiveElement(touchStartTarget)) {
-                        if (deltaX > 0 && onSwipeRight) {
-                            if (enableSwitchAnimation && !isSwitching) {
-                                setIsSwitching(true);
-                                setTimeout(() => {
-                                    onSwipeRight();
-                                    setTimeout(() => setIsSwitching(false), 50);
-                                }, 150);
-                            } else {
+                    if (deltaX > 0 && onSwipeRight) {
+                        if (enableSwitchAnimation && !isSwitching) {
+                            setIsSwitching(true);
+                            setTimeout(() => {
                                 onSwipeRight();
-                            }
-                            setStartPosition(null);
-                        } else if (deltaX < 0 && onSwipeLeft) {
-                            if (enableSwitchAnimation && !isSwitching) {
-                                setIsSwitching(true);
-                                setTimeout(() => {
-                                    onSwipeLeft();
-                                    setTimeout(() => setIsSwitching(false), 50);
-                                }, 150);
-                            } else {
-                                onSwipeLeft();
-                            }
-                            setStartPosition(null);
+                                setTimeout(() => setIsSwitching(false), 50);
+                            }, 150);
+                        } else {
+                            onSwipeRight();
                         }
+                        setStartPosition(null);
+                    } else if (deltaX < 0 && onSwipeLeft) {
+                        if (enableSwitchAnimation && !isSwitching) {
+                            setIsSwitching(true);
+                            setTimeout(() => {
+                                onSwipeLeft();
+                                setTimeout(() => setIsSwitching(false), 50);
+                            }, 150);
+                        } else {
+                            onSwipeLeft();
+                        }
+                        setStartPosition(null);
                     }
                 }
             } else if (e.touches.length === 2 && startDistance !== null) {
@@ -169,33 +167,32 @@ export function useMobileGestures({
                 const dy = e.touches[0].clientY - e.touches[1].clientY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                const newScale = Math.max(
-                    1,
-                    Math.min(maxScale, scale * (distance / startDistance)),
-                );
+                const scaleRatio = distance / startDistance;
+                const newScale = Math.max(1, Math.min(maxScale, startScale * scaleRatio));
                 setScale(newScale);
-                setStartDistance(distance);
             }
         },
         [
-            scale,
             startPosition,
             startDistance,
-            onSwipeLeft,
+            scale,
             onSwipeRight,
+            onSwipeLeft,
+            enableSwitchAnimation,
+            isSwitching,
             maxScale,
-            touchStartTarget,
+            startScale,
         ],
     );
 
     const handleTouchEnd = React.useCallback(() => {
+        const touchEndTime = Date.now();
+        const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
+
         // Check if this was a single tap:
         // - Touch started and ended within reasonable time (< 300ms)
         // - No significant movement occurred
         // - No pinch gesture was performed
-        const touchEndTime = Date.now();
-        const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
-
         if (
             touchStartTime &&
             touchDuration < 300 &&
@@ -208,9 +205,9 @@ export function useMobileGestures({
 
         setStartPosition(null);
         setStartDistance(null);
+        setStartScale(1);
         setTouchStartTime(null);
         setHasMoved(false);
-        setTouchStartTarget(null);
     }, [touchStartTime, hasMoved, startDistance, touchStartTarget, onTap]);
 
     const handleDoubleClick = React.useCallback(() => {

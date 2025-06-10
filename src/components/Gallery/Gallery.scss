@@ -53,24 +53,6 @@ $verticalGalleryMargin: 28px;
         justify-content: center;
     }
 
-    // Mobile file switching animation
-    &_mode_mobile &__body {
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    &_mode_mobile &__body-content {
-        opacity: 1;
-        transform: translateX(0);
-        transition:
-            opacity 0.25s ease-in-out,
-            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    &_mode_mobile &__body-content_switching {
-        opacity: 0;
-        transform: translateX(20px);
-    }
-
     &__footer {
         padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-4) var(--g-spacing-5);
     }
@@ -175,6 +157,32 @@ $verticalGalleryMargin: 28px;
                     opacity: 1;
                     z-index: auto;
                 }
+            }
+        }
+
+        #{$block} {
+            &__body {
+                // Zoom support
+                overflow: hidden;
+
+                // File switching animation
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &__body-content {
+                overflow: hidden;
+                touch-action: none; // Prevent default touch behaviors during zoom
+
+                opacity: 1;
+                transform: translateX(0);
+                transition:
+                    opacity 0.25s ease-in-out,
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &__body-content_switching {
+                opacity: 0;
+                transform: translateX(20px);
             }
         }
     }

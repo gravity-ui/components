@@ -9,6 +9,7 @@ import type {GalleryItemProps} from './GalleryItem';
 import {GalleryFallbackText} from './components/FallbackText';
 import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
+import {ZoomProvider} from './contexts/ZoomContext';
 import {useFullScreen} from './hooks/useFullScreen';
 import {useMobileGestures} from './hooks/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
@@ -33,7 +34,7 @@ const getMode = (isMobile: boolean, fullScreen: boolean) => {
         return 'full-screen';
     }
 
-    return isMobile ? 'mobile' : 'defaulg';
+    return isMobile ? 'mobile' : 'default';
 };
 
 export const Gallery = ({
@@ -100,26 +101,41 @@ export const Gallery = ({
     }, [activeItem?.interactive]);
 
     // Mobile gestures for the entire gallery
-    const [{isSwitching}, {handleTouchStart, handleTouchMove, handleTouchEnd}] = useMobileGestures({
+    const [
+        {scale, position, isSwitching},
+        {resetZoom, handleTouchStart, handleTouchMove, handleTouchEnd, handleDoubleClick},
+    ] = useMobileGestures({
         onSwipeLeft: handleGoToNext,
         onSwipeRight: handleGoToPrevious,
         onTap: handleTap,
         enableSwitchAnimation: isMobile,
     });
 
-    // Enhanced setActiveItemIndex with animation for mobile
-    const setActiveItemIndexWithAnimation = React.useCallback(
-        (index: number) => {
-            if (isMobile && !isSwitching && index !== activeItemIndex) {
-                // For direct item selection, we don't use swipe animation
-                // but we could add a different animation here if needed
-                setActiveItemIndex(index);
-            } else {
-                setActiveItemIndex(index);
-            }
-        },
-        [isMobile, isSwitching, activeItemIndex, setActiveItemIndex],
-    );
+    const enhancedActiveView = React.useMemo(() => {
+        if (!activeItem?.view) return null;
+
+        const view = activeItem.view;
+        if (
+            isMobile &&
+            React.isValidElement(view) &&
+            typeof view.type === 'function' &&
+            view.type.name === 'ImageView'
+        ) {
+            return (
+                <ZoomProvider
+                    value={{
+                        scale,
+                        position,
+                        onDoubleClick: handleDoubleClick,
+                    }}
+                >
+                    {view}
+                </ZoomProvider>
+            );
+        }
+
+        return view;
+    }, [activeItem?.view, isMobile, scale, position, handleDoubleClick]);
 
     const withNavigation = items.length > 1;
 
@@ -170,7 +186,7 @@ export const Gallery = ({
                                 {emptyMessage ?? i18n('no-items')}
                             </GalleryFallbackText>
                         )}
-                        {activeItem?.view}
+                        {enhancedActiveView}
                         {showNavigationButtons && (
                             <React.Fragment>
                                 <NavigationButton onClick={handleGoToPrevious} position="start" />
@@ -185,7 +201,12 @@ export const Gallery = ({
                             <div className={cnGallery('preview-list')}>
                                 {items.map((item, index) => {
                                     const handleClick = () => {
-                                        setActiveItemIndexWithAnimation(index);
+                                        setActiveItemIndex(index);
+
+                                        // Reset zoom when changing items
+                                        if (isMobile && !isSwitching && index !== activeItemIndex) {
+                                            resetZoom();
+                                        }
                                     };
 
                                     const selected = activeItemIndex === index;

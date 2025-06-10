@@ -17,7 +17,7 @@ export type MobileGalleryActionsProps = {
 
 export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGalleryActionsProps) => {
     const renderListItem = React.useCallback((item: GalleryItemAction) => {
-        const buttonProps: ButtonProps & {icon: React.ReactNode} = {
+        const buttonProps: ButtonProps = {
             type: 'button',
             size: 'xl',
             view: 'flat',
@@ -27,7 +27,6 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
             'aria-label': item.title,
             className: cnMobileGalleryActions('list-item'),
             width: 'max',
-            icon: item.icon,
             children: (
                 <Flex alignItems="center" gap={3} className={cnMobileGalleryActions('custom-item')}>
                     {item.icon}
