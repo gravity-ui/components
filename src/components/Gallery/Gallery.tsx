@@ -108,7 +108,6 @@ export const Gallery = ({
         onSwipeLeft: handleGoToNext,
         onSwipeRight: handleGoToPrevious,
         onTap: handleTap,
-        enableSwitchAnimation: isMobile,
     });
 
     const enhancedActiveView = React.useMemo(() => {

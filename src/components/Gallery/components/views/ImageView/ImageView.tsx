@@ -39,11 +39,13 @@ export const ImageView = ({className, src, alt = '', mobile}: ImageViewProps) =>
     }
 
     const mobileAnimationStyle: React.CSSProperties = {
-        transform: `translate(${position.x / scale}px, ${position.y / scale}px) scale(${scale})`,
+        transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
         transformOrigin: 'center center',
         transition: scale === 1 ? 'transform 0.3s ease-out' : 'none',
         cursor: scale > 1 ? 'grab' : 'zoom-in',
     };
+
+    alert(`scale in imageview is ${scale}`);
 
     const mobileProps = mobile ? {style: mobileAnimationStyle, onDoubleClick} : {};
 
