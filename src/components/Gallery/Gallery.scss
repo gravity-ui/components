@@ -171,7 +171,7 @@ $verticalGalleryMargin: 28px;
 
             &__body-content {
                 overflow: hidden;
-                touch-action: none; // Prevent default touch behaviors during zoom
+                touch-action: pan-x pan-y pinch-zoom; // Allow pan and pinch-zoom
 
                 opacity: 1;
                 transform: translateX(0);

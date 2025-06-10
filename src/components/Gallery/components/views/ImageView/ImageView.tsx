@@ -46,6 +46,8 @@ export const ImageView = ({className, src, alt = '', mobile}: ImageViewProps) =>
 
     const mobileProps = mobile ? {style: mobileAnimationStyle, onDoubleClick} : {};
 
+    alert(`mobile: ${mobile}, mobileProps: ${JSON.stringify(mobileProps)}`);
+
     return (
         <React.Fragment>
             {status === 'loading' && <Spin className={cnImageView('spin')} size="xl" />}

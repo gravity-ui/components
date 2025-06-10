@@ -178,7 +178,8 @@ export function useMobileGestures({
                 const newScale = Math.max(1, Math.min(MAX_SCALE, scale * scaleRatio));
                 log.current =
                     log.current +
-                    `scale: ${scale}, distance: ${distance}, startDistance: ${startDistance}, newScale: ${newScale}\n`;
+                    `scale: ${scale}, distance: ${distance}, startDistance: ${startDistance}, scaleRatio: ${scaleRatio}, newScale: ${newScale}\n`;
+
                 setScale(newScale);
             }
         },
