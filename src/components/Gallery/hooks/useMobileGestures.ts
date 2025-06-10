@@ -90,7 +90,10 @@ export function useMobileGestures({
     const [hasMoved, setHasMoved] = React.useState(false);
     const [touchStartTarget, setTouchStartTarget] = React.useState<EventTarget | null>(null);
 
+    const log = React.useRef('');
+
     const resetZoom = React.useCallback(() => {
+        log.current = log.current + 'resetZoom\n';
         setScale(1);
         setPosition({x: 0, y: 0});
     }, []);
@@ -171,8 +174,11 @@ export function useMobileGestures({
                 const dy = e.touches[0].clientY - e.touches[1].clientY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                const scaleRatio = (scale * distance) / startDistance;
-                const newScale = Math.max(1, Math.min(MAX_SCALE, scaleRatio));
+                const scaleRatio = distance / startDistance;
+                const newScale = Math.max(1, Math.min(MAX_SCALE, scale * scaleRatio));
+                log.current =
+                    log.current +
+                    `scale: ${scale}, distance: ${distance}, startDistance: ${startDistance}, newScale: ${newScale}\n`;
                 setScale(newScale);
             }
         },
@@ -183,9 +189,7 @@ export function useMobileGestures({
         const touchEndTime = Date.now();
         const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
 
-        alert(
-            `scale: ${scale}, position: ${position.x}, ${position.y}, duration: ${touchDuration}, hasMoved: ${hasMoved}, startDistance: ${startDistance}`,
-        );
+        alert(log.current);
 
         // Check if this was a single tap:
         // - Touch started and ended within reasonable time (< 300ms)
@@ -206,18 +210,10 @@ export function useMobileGestures({
         setTouchStartTime(null);
         setHasMoved(false);
         setTouchStartTarget(null);
-    }, [
-        touchStartTime,
-        scale,
-        position.x,
-        position.y,
-        hasMoved,
-        startDistance,
-        touchStartTarget,
-        onTap,
-    ]);
+    }, [touchStartTime, hasMoved, startDistance, touchStartTarget, onTap]);
 
     const handleDoubleClick = React.useCallback(() => {
+        log.current = log.current + 'handleDoubleClick\n';
         if (scale > 1) {
             resetZoom();
         } else {

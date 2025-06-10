@@ -114,6 +114,8 @@ export const Gallery = ({
         if (!activeItem?.view) return null;
 
         const view = activeItem.view;
+
+        console.log(scale, position, 'scale position');
         if (
             isMobile &&
             React.isValidElement(view) &&
