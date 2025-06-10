@@ -13,6 +13,7 @@ export type ImageViewProps = {
     className?: string;
     src: string;
     alt?: string;
+    mobile?: boolean;
 };
 
 export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {

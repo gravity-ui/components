@@ -6,18 +6,25 @@ import type {VideoViewProps} from '../components/views/VideoView/VideoView';
 
 export type GetDefaultGalleryItemVideoArgs = VideoViewProps & {
     name: string;
+    mobile?: boolean;
 };
 
 export function getGalleryItemVideo({
     name,
     src,
+    mobile,
     ...videoFileViewProps
 }: GetDefaultGalleryItemVideoArgs): GalleryItemProps {
     return {
         view: <VideoView src={src} {...videoFileViewProps} />,
         thumbnail: <FilePreview view="compact" file={{name, type: 'video'} as File} />,
         name: (
-            <Text color="primary" variant="subheader-1" ellipsis whiteSpace="nowrap">
+            <Text
+                color="primary"
+                variant={mobile ? 'subheader-2' : 'subheader-1'}
+                ellipsis
+                whiteSpace="nowrap"
+            >
                 {name}
             </Text>
         ),
