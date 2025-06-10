@@ -3,13 +3,11 @@ import * as React from 'react';
 import type {ModalProps} from '@gravity-ui/uikit';
 import {Modal, useMobile} from '@gravity-ui/uikit';
 
-import {block} from '../utils/cn';
-
 import type {GalleryItemProps} from './GalleryItem';
 import {GalleryFallbackText} from './components/FallbackText';
 import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
-import {ZoomProvider} from './contexts/ZoomContext';
+import {BODY_CONTENT_CLASS_NAME, cnGallery} from './constants';
 import {useFullScreen} from './hooks/useFullScreen';
 import {useMobileGestures} from './hooks/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
@@ -17,8 +15,6 @@ import {useNavigation} from './hooks/useNavigation';
 import {i18n} from './i18n';
 
 import './Gallery.scss';
-
-const cnGallery = block('gallery');
 
 const emptyItems: GalleryItemProps[] = [];
 
@@ -101,42 +97,17 @@ export const Gallery = ({
     }, [activeItem?.interactive]);
 
     // Mobile gestures for the entire gallery
-    const [
-        {scale, position, isSwitching},
-        {resetZoom, handleTouchStart, handleTouchMove, handleTouchEnd, handleDoubleClick},
-    ] = useMobileGestures({
+    const [{isSwitching}, {handleTouchStart, handleTouchMove, handleTouchEnd}] = useMobileGestures({
         onSwipeLeft: handleGoToNext,
         onSwipeRight: handleGoToPrevious,
         onTap: handleTap,
     });
 
-    const enhancedActiveView = React.useMemo(() => {
+    const activeItemView = React.useMemo(() => {
         if (!activeItem?.view) return null;
 
-        const view = activeItem.view;
-
-        console.log(scale, position, 'scale position');
-        if (
-            isMobile &&
-            React.isValidElement(view) &&
-            typeof view.type === 'function' &&
-            view.type.name === 'ImageView'
-        ) {
-            return (
-                <ZoomProvider
-                    value={{
-                        scale,
-                        position,
-                        onDoubleClick: handleDoubleClick,
-                    }}
-                >
-                    {view}
-                </ZoomProvider>
-            );
-        }
-
-        return view;
-    }, [activeItem?.view, isMobile, scale, position, handleDoubleClick]);
+        return activeItem.view;
+    }, [activeItem.view]);
 
     const withNavigation = items.length > 1;
 
@@ -180,14 +151,16 @@ export const Gallery = ({
                 />
                 <div key={activeItemIndex} className={cnGallery('body')}>
                     <div
-                        className={cnGallery('body-content', {switching: isMobile && isSwitching})}
+                        className={cnGallery(BODY_CONTENT_CLASS_NAME, {
+                            switching: isMobile && isSwitching,
+                        })}
                     >
                         {!items.length && (
                             <GalleryFallbackText>
                                 {emptyMessage ?? i18n('no-items')}
                             </GalleryFallbackText>
                         )}
-                        {enhancedActiveView}
+                        {activeItemView}
                         {showNavigationButtons && (
                             <React.Fragment>
                                 <NavigationButton onClick={handleGoToPrevious} position="start" />
@@ -203,11 +176,6 @@ export const Gallery = ({
                                 {items.map((item, index) => {
                                     const handleClick = () => {
                                         setActiveItemIndex(index);
-
-                                        // Reset zoom when changing items
-                                        if (isMobile && !isSwitching && index !== activeItemIndex) {
-                                            resetZoom();
-                                        }
                                     };
 
                                     const selected = activeItemIndex === index;

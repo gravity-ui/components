@@ -1,62 +1,26 @@
 import * as React from 'react';
 
-const isInteractiveElement = (element: Element): boolean => {
-    const interactiveTags = ['BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'A', 'IFRAME'];
-    const interactiveRoles = ['button', 'link', 'textbox', 'combobox', 'listbox', 'tab'];
+import {BODY_CONTENT_CLASS_NAME, cnGallery} from '../constants';
 
-    // Check if element itself is interactive
-    if (interactiveTags.includes(element.tagName)) {
-        return true;
-    }
-
-    // Check for interactive roles
-    const role = element.getAttribute('role');
-    if (role && interactiveRoles.includes(role)) {
-        return true;
-    }
-
-    // Check for tabindex (focusable elements)
-    const tabIndex = element.getAttribute('tabindex');
-    if (tabIndex && parseInt(tabIndex, 10) >= 0) {
-        return true;
-    }
-
-    // Check for contenteditable
-    if (element.getAttribute('contenteditable') === 'true') {
-        return true;
-    }
-
-    // Check for onclick handlers or cursor pointer (likely interactive)
-    const computedStyle = window.getComputedStyle(element);
-    if (computedStyle.cursor === 'pointer') {
-        return true;
-    }
-
-    return false;
-};
-
-// Helper function to check if touch target or any parent is interactive
-const isTouchOnInteractiveElement = (target: EventTarget | null): boolean => {
+// Helper function to check if touch target is on gallery content (not on overlay elements)
+const isTouchOnGalleryContent = (target: EventTarget | null): boolean => {
     if (!target || !(target instanceof Element)) {
         return false;
     }
 
-    const element: Element | null = target;
-    if (isInteractiveElement(element)) {
-        return true;
-    }
+    const element = target as Element;
 
-    return false;
+    // Check if the touch is within the gallery body content area
+    const isInGalleryBody = element.closest(cnGallery(BODY_CONTENT_CLASS_NAME));
+
+    return Boolean(isInGalleryBody);
 };
 
 export type ImageGesturesState = {
-    scale: number;
-    position: {x: number; y: number};
     isSwitching: boolean;
 };
 
 export type ImageGesturesActions = {
-    resetZoom: () => void;
     handleTouchStart: (e: React.TouchEvent) => void;
     handleTouchMove: (e: React.TouchEvent) => void;
     handleTouchEnd: () => void;
@@ -70,54 +34,49 @@ export type UseMobileGesturesProps = {
     enableSwitchAnimation?: boolean;
 };
 
-const MAX_SCALE = 3;
 const MIN_SWIPE_DISTANCE = 50;
 const MAX_TAP_DURATION = 300;
 const SWITCHING_TIMEOUT = 50;
 const SWIPE_TIMEOUT = 150;
 
-export function useMobileGestures({
-    onSwipeLeft,
-    onSwipeRight,
-    onTap,
-}: UseMobileGesturesProps = {}): [ImageGesturesState, ImageGesturesActions] {
-    const [scale, setScale] = React.useState(1);
-    const [position, setPosition] = React.useState({x: 0, y: 0});
+const swipeWithSwithingAnimation = ({
+    swipeAction,
+    isSwitching,
+    setIsSwitching,
+}: {
+    swipeAction: () => void;
+    isSwitching: boolean;
+    setIsSwitching: (value: boolean) => void;
+}) => {
+    if (isSwitching) {
+        swipeAction();
+    } else {
+        setIsSwitching(true);
+        setTimeout(() => {
+            swipeAction();
+            setTimeout(() => setIsSwitching(false), SWITCHING_TIMEOUT);
+        }, SWIPE_TIMEOUT);
+    }
+};
+
+export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileGesturesProps = {}) {
     const [isSwitching, setIsSwitching] = React.useState(false);
     const [startPosition, setStartPosition] = React.useState<{x: number; y: number} | null>(null);
     const [startDistance, setStartDistance] = React.useState<number | null>(null);
     const [touchStartTime, setTouchStartTime] = React.useState<number | null>(null);
     const [hasMoved, setHasMoved] = React.useState(false);
     const [touchStartTarget, setTouchStartTarget] = React.useState<EventTarget | null>(null);
+    const [pendingSwipe, setPendingSwipe] = React.useState<'left' | 'right' | null>(null);
 
-    const resetZoom = React.useCallback(() => {
-        setScale(1);
-        setPosition({x: 0, y: 0});
+    const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
+        if (e.touches.length === 1) {
+            setStartPosition({x: e.touches[0].clientX, y: e.touches[0].clientY});
+            setTouchStartTime(Date.now());
+            setHasMoved(false);
+            setTouchStartTarget(e.target);
+            setPendingSwipe(null);
+        }
     }, []);
-
-    const handleTouchStart = React.useCallback(
-        (e: React.TouchEvent) => {
-            if (e.touches.length === 1) {
-                setStartPosition({
-                    x: e.touches[0].clientX - position.x,
-                    y: e.touches[0].clientY - position.y,
-                });
-                setTouchStartTime(Date.now());
-                setHasMoved(false);
-                setTouchStartTarget(e.target);
-            } else if (e.touches.length === 2) {
-                // Calculate the distance between two touch points for pinch zoom
-                const dx = e.touches[0].clientX - e.touches[1].clientX;
-                const dy = e.touches[0].clientY - e.touches[1].clientY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                setStartDistance(distance);
-                setTouchStartTime(null);
-                setHasMoved(true);
-                setTouchStartTarget(null);
-            }
-        },
-        [position.x, position.y],
-    );
 
     const handleTouchMove = React.useCallback(
         (e: React.TouchEvent) => {
@@ -132,68 +91,49 @@ export function useMobileGestures({
                     setHasMoved(true);
                 }
 
-                // Handle panning when zoomed in
-                if (scale > 1) {
-                    setPosition({
-                        x: currentX - startPosition.x,
-                        y: currentY - startPosition.y,
-                    });
-                    // Handle horizontal swipe for navigation when not zoomed
-                } else if (Math.abs(deltaX) > MIN_SWIPE_DISTANCE) {
+                // Detect swipe direction but don't trigger the event yet
+                if (Math.abs(deltaX) > MIN_SWIPE_DISTANCE) {
                     if (deltaX > 0 && onSwipeRight) {
-                        if (isSwitching) {
-                            onSwipeRight();
-                        } else {
-                            setIsSwitching(true);
-                            setTimeout(() => {
-                                onSwipeRight();
-                                setTimeout(() => setIsSwitching(false), SWITCHING_TIMEOUT);
-                            }, SWIPE_TIMEOUT);
-                        }
-                        setStartPosition(null);
+                        setPendingSwipe('right');
                     } else if (deltaX < 0 && onSwipeLeft) {
-                        if (isSwitching) {
-                            onSwipeLeft();
-                        } else {
-                            setIsSwitching(true);
-                            setTimeout(() => {
-                                onSwipeLeft();
-                                setTimeout(() => setIsSwitching(false), SWITCHING_TIMEOUT);
-                            }, SWIPE_TIMEOUT);
-                        }
-                        setStartPosition(null);
+                        setPendingSwipe('left');
                     }
                 }
-            } else if (e.touches.length === 2 && startDistance !== null) {
-                setHasMoved(true);
-                // Handle pinch zoom
-                const dx = e.touches[0].clientX - e.touches[1].clientX;
-                const dy = e.touches[0].clientY - e.touches[1].clientY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                const scaleRatio = distance / startDistance;
-                const newScale = Math.max(1, Math.min(MAX_SCALE, scale * scaleRatio));
-
-                setScale(newScale);
             }
         },
-        [startPosition, startDistance, scale, onSwipeRight, onSwipeLeft, isSwitching],
+        [startPosition, onSwipeRight, onSwipeLeft],
     );
 
     const handleTouchEnd = React.useCallback(() => {
         const touchEndTime = Date.now();
         const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
 
+        // Execute pending swipe if detected
+        if (pendingSwipe) {
+            if (pendingSwipe === 'right' && onSwipeRight) {
+                swipeWithSwithingAnimation({
+                    swipeAction: onSwipeRight,
+                    isSwitching,
+                    setIsSwitching,
+                });
+            } else if (pendingSwipe === 'left' && onSwipeLeft) {
+                swipeWithSwithingAnimation({
+                    swipeAction: onSwipeLeft,
+                    isSwitching,
+                    setIsSwitching,
+                });
+            }
+        }
         // Check if this was a single tap:
         // - Touch started and ended within reasonable time (< 300ms)
         // - No significant movement occurred
-        // - No pinch gesture was performed
-        if (
+        // - Touch is on gallery content (not on overlay elements)
+        else if (
             touchStartTime &&
             touchDuration < MAX_TAP_DURATION &&
             !hasMoved &&
             !startDistance &&
-            !isTouchOnInteractiveElement(touchStartTarget)
+            isTouchOnGalleryContent(touchStartTarget)
         ) {
             onTap?.();
         }
@@ -203,18 +143,18 @@ export function useMobileGestures({
         setTouchStartTime(null);
         setHasMoved(false);
         setTouchStartTarget(null);
-    }, [touchStartTime, hasMoved, startDistance, touchStartTarget, onTap]);
+        setPendingSwipe(null);
+    }, [
+        touchStartTime,
+        hasMoved,
+        startDistance,
+        touchStartTarget,
+        onTap,
+        pendingSwipe,
+        onSwipeRight,
+        onSwipeLeft,
+        isSwitching,
+    ]);
 
-    const handleDoubleClick = React.useCallback(() => {
-        if (scale > 1) {
-            resetZoom();
-        } else {
-            setScale(2);
-        }
-    }, [scale, resetZoom]);
-
-    return [
-        {scale, position, isSwitching},
-        {resetZoom, handleTouchStart, handleTouchMove, handleTouchEnd, handleDoubleClick},
-    ];
+    return [{isSwitching}, {handleTouchStart, handleTouchMove, handleTouchEnd}];
 }
