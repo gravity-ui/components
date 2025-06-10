@@ -16,7 +16,7 @@ export function getGalleryItemImage({
     ...imageFileViewProps
 }: GetDefaultGalleryItemImageArgs): GalleryItemProps {
     return {
-        view: <ImageView src={src} mobile={mobile} {...imageFileViewProps} />,
+        view: <ImageView src={src} {...imageFileViewProps} />,
         thumbnail: (
             <FilePreview view="compact" file={{name, type: 'image'} as File} imageSrc={src} />
         ),
