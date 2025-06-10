@@ -107,7 +107,7 @@ export const Gallery = ({
         if (!activeItem?.view) return null;
 
         return activeItem.view;
-    }, [activeItem.view]);
+    }, [activeItem?.view]);
 
     const withNavigation = items.length > 1;
 
