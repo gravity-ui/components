@@ -109,18 +109,18 @@ export const GalleryHeader = ({
                         </Button>
                     )}
                 </div>
-                {withNavigation && (
-                    <Flex
-                        alignItems="center"
-                        justifyContent="center"
-                        className={cnGalleryHeader('mobile-footer', {
-                            hidden: isPanelsHidden,
-                            interactive,
-                        })}
-                    >
-                        {itemName}
-                    </Flex>
-                )}
+
+                <Flex
+                    alignItems="center"
+                    justifyContent="center"
+                    className={cnGalleryHeader('mobile-footer', {
+                        hidden: isPanelsHidden,
+                        interactive,
+                    })}
+                >
+                    {itemName}
+                </Flex>
+
                 {mobileActionsOpen && (
                     <MobileGalleryActions
                         open={mobileActionsOpen}
