@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Spin} from '@gravity-ui/uikit';
 
 import {block} from '../../../../utils/cn';
+import {useZoom} from '../../../contexts/ZoomContext';
 import {GalleryFallbackText} from '../../FallbackText';
 
 import './ImageView.scss';
@@ -13,9 +14,16 @@ export type ImageViewProps = {
     className?: string;
     src: string;
     alt?: string;
+    mobile?: boolean;
 };
 
-export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
+export const ImageView = ({className, src, alt = '', mobile}: ImageViewProps) => {
+    // Get zoom data from context
+    const zoomContext = useZoom();
+
+    const scale = zoomContext?.scale ?? 1;
+    const position = zoomContext?.position ?? {x: 0, y: 0};
+    const onDoubleClick = zoomContext?.onDoubleClick;
     const [status, setStatus] = React.useState<'loading' | 'complete' | 'error'>('loading');
 
     const handleLoad = React.useCallback(() => {
@@ -30,15 +38,25 @@ export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
         return <GalleryFallbackText />;
     }
 
+    const mobileAnimationStyle: React.CSSProperties = {
+        transform: `translate(${position.x / scale}px, ${position.y / scale}px) scale(${scale})`,
+        transformOrigin: 'center center',
+        transition: scale === 1 ? 'transform 0.3s ease-out' : 'none',
+        cursor: scale > 1 ? 'grab' : 'zoom-in',
+    };
+
+    const mobileProps = mobile ? {style: mobileAnimationStyle, onDoubleClick} : {};
+
     return (
         <React.Fragment>
             {status === 'loading' && <Spin className={cnImageView('spin')} size="xl" />}
             <img
-                className={cnImageView(null, className)}
+                className={cnImageView({mobile}, className)}
                 src={src}
                 alt={alt}
                 onLoad={handleLoad}
                 onError={handleError}
+                {...mobileProps}
             />
         </React.Fragment>
     );

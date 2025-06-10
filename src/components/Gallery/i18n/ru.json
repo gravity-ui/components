@@ -1,8 +1,5 @@
 {
   "close": "Закрыть",
   "no-items": "Нет данных",
-  "enter-fullscreen": "Полноэкранный режим",
-  "exit-fullscreen": "Выйти из полноэкранного режима",
-  "format-not-supported": "Формат не поддерживается",
   "back": "Назад"
 }

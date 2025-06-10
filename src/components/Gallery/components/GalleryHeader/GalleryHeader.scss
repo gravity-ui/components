@@ -30,8 +30,7 @@ $block: '.#{variables.$ns}gallery-header';
     }
 
     &__mobile-header {
-        align-items: center;
-        justify-items: center;
+        place-items: center;
         display: grid;
         grid-template-columns: minmax($minButtonWidth, auto) 1fr minmax($minButtonWidth, auto);
         width: 100%;
@@ -43,7 +42,6 @@ $block: '.#{variables.$ns}gallery-header';
         grid-area: mobile-header;
         box-sizing: border-box;
 
-        // Animation properties
         opacity: 1;
         transform: translateY(0);
         transition:
@@ -66,11 +64,10 @@ $block: '.#{variables.$ns}gallery-header';
         width: 100%;
         padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-2);
         position: absolute;
-        bottom: 0;
+        inset-block-end: 0;
         z-index: 3;
         grid-area: mobile-footer;
 
-        // Animation properties
         opacity: 1;
         transform: translateY(0);
         transition:

@@ -1,7 +1,5 @@
 @use '../../../../variables';
 
-@import '~@gravity-ui/uikit/styles/mixins';
-
 $block: '.#{variables.$ns}mobile-gallery-actions';
 
 #{$block} {
