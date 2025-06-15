@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import {Button, ButtonProps, Flex, List, Sheet} from '@gravity-ui/uikit';
 
-import {block} from '../../../../utils/cn';
-import type {GalleryItemAction, GalleryItemProps} from '../../../GalleryItem';
+import {block} from '../../../utils/cn';
+import type {GalleryItemAction, GalleryItemProps} from '../../GalleryItem';
 
 import './MobileGalleryActions.scss';
 
@@ -46,10 +46,6 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
         );
     }, []);
 
-    const handleItemClick = React.useCallback(() => {
-        onClose();
-    }, [onClose]);
-
     return (
         <Sheet className={cnMobileGalleryActions()} visible={open} onClose={onClose}>
             <List
@@ -58,7 +54,7 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
                 renderItem={renderListItem}
                 itemHeight={44}
                 virtualized={false}
-                onItemClick={handleItemClick}
+                onItemClick={onClose}
             />
         </Sheet>
     );

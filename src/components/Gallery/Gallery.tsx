@@ -9,10 +9,11 @@ import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
 import {BODY_CONTENT_CLASS_NAME, cnGallery} from './constants';
 import {useFullScreen} from './hooks/useFullScreen';
-import {useMobileGestures} from './hooks/useMobileGestures';
+import {useMobileGestures} from './hooks/useMobileGestures/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
 import {useNavigation} from './hooks/useNavigation';
 import {i18n} from './i18n';
+import {getMode} from './utils/mods';
 
 import './Gallery.scss';
 
@@ -24,14 +25,6 @@ export type GalleryProps = {
     emptyMessage?: string;
 } & Pick<ModalProps, 'open' | 'container' | 'onOpenChange'> &
     Pick<UseNavigationProps, 'initialItemIndex'>;
-
-const getMode = (isMobile: boolean, fullScreen: boolean) => {
-    if (fullScreen) {
-        return 'full-screen';
-    }
-
-    return isMobile ? 'mobile' : 'default';
-};
 
 export const Gallery = ({
     initialItemIndex,
@@ -51,6 +44,8 @@ export const Gallery = ({
         items.map(() => React.createRef()),
     );
 
+    const [hiddenHeader, setHiddenHeader] = React.useState(false);
+
     React.useEffect(() => {
         setItemRefs(Array.from({length: itemsCount}, () => React.createRef()));
     }, [itemsCount]);
@@ -63,8 +58,6 @@ export const Gallery = ({
     );
 
     const {fullScreen, setFullScreen} = useFullScreen();
-
-    const [hiddenHeader, setHiddenHeader] = React.useState(false);
 
     const handleBackClick = React.useCallback(() => {
         onOpenChange?.(false);
@@ -102,12 +95,6 @@ export const Gallery = ({
         onSwipeRight: handleGoToPrevious,
         onTap: handleTap,
     });
-
-    const activeItemView = React.useMemo(() => {
-        if (!activeItem?.view) return null;
-
-        return activeItem.view;
-    }, [activeItem?.view]);
 
     const withNavigation = items.length > 1;
 
@@ -160,7 +147,7 @@ export const Gallery = ({
                                 {emptyMessage ?? i18n('no-items')}
                             </GalleryFallbackText>
                         )}
-                        {activeItemView}
+                        {activeItem?.view}
                         {showNavigationButtons && (
                             <React.Fragment>
                                 <NavigationButton onClick={handleGoToPrevious} position="start" />

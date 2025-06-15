@@ -6,9 +6,11 @@ import {
     Button,
     CopyToClipboard,
     FilePreview,
+    Flex,
     Icon,
     Text,
     ThemeProvider,
+    spacing,
     useMobile,
 } from '@gravity-ui/uikit';
 import type {Meta, StoryFn} from '@storybook/react';
@@ -79,21 +81,29 @@ export const ImagesGallery = ImagesGalleryTemplate.bind({});
 const getGalleryItemFile = (file: GalleryFile, mobile?: boolean) => {
     switch (file.type) {
         case 'image':
-            return getGalleryItemImage({src: file.url, name: file.name, mobile});
+            return getGalleryItemImage({src: file.url, name: file.name});
         case 'video':
-            return getGalleryItemVideo({src: file.url, name: file.name, mobile});
+            return getGalleryItemVideo({src: file.url, name: file.name});
         case 'document':
             return getGalleryItemDocument({
                 src: file.url,
                 file: {name: file.name, type: file.type} as File,
-                mobile,
             });
         case 'text':
             return {
                 thumbnail: (
                     <FilePreview view="compact" file={{name: file.name, type: file.type} as File} />
                 ),
-                view: <Text variant="body-1">{file.text}</Text>,
+                view: (
+                    <Flex
+                        overflow="auto"
+                        justifyContent="center"
+                        height="100%"
+                        className={spacing({px: 3, py: 3})}
+                    >
+                        <Text variant="body-1">{file.text}</Text>
+                    </Flex>
+                ),
                 name: <Text variant={mobile ? 'body-2' : 'body-1'}>{file.name}</Text>,
             };
     }
