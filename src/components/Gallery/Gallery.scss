@@ -1,4 +1,5 @@
 @use '../variables';
+@use './variables.scss' as gallery-css-variables;
 
 $block: '.#{variables.$ns}gallery';
 
@@ -16,38 +17,6 @@ $verticalGalleryMargin: 28px;
         height: calc(100vh - $verticalGalleryMargin * 2);
     }
 
-    &__header {
-        display: flex;
-        align-items: start;
-
-        padding: var(--g-spacing-2) var(--g-spacing-3) var(--g-spacing-2) var(--g-spacing-5);
-
-        > * {
-            flex: 1;
-            min-width: 0;
-        }
-    }
-
-    &__navigation {
-        display: flex;
-        gap: var(--g-spacing-2);
-        align-items: center;
-        justify-content: center;
-    }
-
-    &__actions {
-        display: flex;
-        gap: var(--g-spacing-1);
-        align-items: stretch;
-        justify-content: flex-end;
-    }
-
-    &__active-item-info {
-        align-self: stretch;
-        align-items: center;
-        display: flex;
-    }
-
     &__body {
         position: relative;
 
@@ -59,6 +28,17 @@ $verticalGalleryMargin: 28px;
         min-height: 0;
 
         padding: 0 var(--g-spacing-2);
+
+        grid-area: body;
+    }
+
+    &__body-content {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &__footer {
@@ -100,7 +80,8 @@ $verticalGalleryMargin: 28px;
         }
     }
 
-    &_mode_full-screen {
+    &_mode_full-screen,
+    &_mode_mobile {
         overflow: hidden;
 
         --g-modal-border-radius: 0;
@@ -109,23 +90,12 @@ $verticalGalleryMargin: 28px;
             &__content {
                 width: 100vw;
                 height: 100vh;
+                position: relative;
+                overflow: hidden;
             }
 
             &__body {
                 padding: 0;
-            }
-
-            &__header {
-                position: absolute;
-                inset-block-start: 0;
-                inset-inline: 0;
-                z-index: 3;
-
-                opacity: 0;
-
-                &:hover {
-                    opacity: 1;
-                }
             }
 
             &__footer {
@@ -143,22 +113,70 @@ $verticalGalleryMargin: 28px;
             }
         }
     }
+
+    &_mode_mobile {
+        &#{$block}_interactive {
+            #{$block} {
+                &__content {
+                    display: grid;
+                    grid-template: 'mobile-header' min-content 'body' auto 'mobile-footer' min-content;
+                }
+
+                &__body {
+                    flex: 1;
+                    min-height: 0;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        #{$block} {
+            &__content {
+                // recommended full-height style for mobile
+                height: 100dvh;
+            }
+
+            &__body {
+                // Zoom support
+                overflow: hidden;
+
+                // File switching animation
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &__body-content {
+                overflow: hidden;
+                touch-action: none; // Prevent default touch behaviors during zoom
+
+                opacity: 1;
+                transform: translateX(0);
+                transition:
+                    opacity 0.25s ease-in-out,
+                    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            &__body-content_switching {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+        }
+    }
 }
 
 .g-root_theme_light,
 .g-root_theme_light-hc {
-    #{$block}_mode_full-screen {
-        #{$block}__header {
-            background-color: rgba(255, 255, 255, 0.45);
+    #{$block}_mode_mobile {
+        #{$block}__content {
+            background-color: gallery-css-variables.$lightThemeGalleryBackgroundColor;
         }
     }
 }
 
 .g-root_theme_dark,
 .g-root_theme_dark-hc {
-    #{$block}_mode_full-screen {
-        #{$block}__header {
-            background-color: rgba(0, 0, 0, 0.45);
+    #{$block}_mode_mobile {
+        #{$block}__content {
+            background-color: gallery-css-variables.$darkThemeGalleryBackgroundColor;
         }
     }
 }

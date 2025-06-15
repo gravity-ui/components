@@ -1,0 +1,13 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}mobile-gallery-actions';
+
+#{$block} {
+    --g-sheet-content-padding: var(--g-spacing-1) 0;
+    --g-button-border-radius: 0;
+
+    &__list-item {
+        justify-content: flex-start;
+        transition: background-color 0.2s ease-in-out;
+    }
+}
