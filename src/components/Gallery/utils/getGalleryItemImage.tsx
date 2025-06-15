@@ -1,7 +1,7 @@
 import {FilePreview} from '@gravity-ui/uikit';
 
 import type {GalleryItemProps} from '../GalleryItem';
-import {DefaultNameBlock} from '../components/views/DefaultNameBlock/DefaultNameBlock';
+import {DefaultNameBlock} from '../components/DefaultNameBlock/DefaultNameBlock';
 import {ImageView} from '../components/views/ImageView/ImageView';
 import type {ImageViewProps} from '../components/views/ImageView/ImageView';
 
