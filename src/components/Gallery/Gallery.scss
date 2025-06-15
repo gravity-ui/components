@@ -89,10 +89,7 @@ $verticalGalleryMargin: 28px;
         #{$block} {
             &__content {
                 width: 100vw;
-                // fallback for old browsers
                 height: 100vh;
-                // recommended full-height style for mobile
-                height: 100dvh;
                 position: relative;
                 overflow: hidden;
             }
@@ -134,6 +131,11 @@ $verticalGalleryMargin: 28px;
         }
 
         #{$block} {
+            &__content {
+                // recommended full-height style for mobile
+                height: 100dvh;
+            }
+
             &__body {
                 // Zoom support
                 overflow: hidden;
