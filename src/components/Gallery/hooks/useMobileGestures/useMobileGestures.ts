@@ -1,62 +1,13 @@
 import * as React from 'react';
 
-import {BODY_CONTENT_CLASS_NAME, cnGallery} from '../constants';
-
-// Helper function to check if touch target is on gallery content (not on overlay elements)
-const isTouchOnGalleryContent = (target: EventTarget | null): boolean => {
-    if (!target || !(target instanceof Element)) {
-        return false;
-    }
-
-    const element = target as Element;
-
-    // Check if the touch is within the gallery body content area
-    const isInGalleryBody = element.closest(`.${cnGallery(BODY_CONTENT_CLASS_NAME)}`);
-
-    return Boolean(isInGalleryBody);
-};
-
-export type ImageGesturesState = {
-    isSwitching: boolean;
-};
-
-export type ImageGesturesActions = {
-    handleTouchStart: (e: React.TouchEvent) => void;
-    handleTouchMove: (e: React.TouchEvent) => void;
-    handleTouchEnd: () => void;
-    handleDoubleClick: () => void;
-};
+import {MAX_TAP_DURATION, MIN_SWIPE_DISTANCE} from './constants';
+import {isTouchOnGalleryContent, swipeWithSwithingAnimation} from './utils';
 
 export type UseMobileGesturesProps = {
     onSwipeLeft?: () => void;
     onSwipeRight?: () => void;
     onTap?: () => void;
     enableSwitchAnimation?: boolean;
-};
-
-const MIN_SWIPE_DISTANCE = 50;
-const MAX_TAP_DURATION = 300;
-const SWITCHING_TIMEOUT = 50;
-const SWIPE_TIMEOUT = 150;
-
-const swipeWithSwithingAnimation = ({
-    swipeAction,
-    isSwitching,
-    setIsSwitching,
-}: {
-    swipeAction: () => void;
-    isSwitching: boolean;
-    setIsSwitching: (value: boolean) => void;
-}) => {
-    if (isSwitching) {
-        swipeAction();
-    } else {
-        setIsSwitching(true);
-        setTimeout(() => {
-            swipeAction();
-            setTimeout(() => setIsSwitching(false), SWITCHING_TIMEOUT);
-        }, SWIPE_TIMEOUT);
-    }
 };
 
 export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileGesturesProps = {}) {

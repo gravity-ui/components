@@ -1,24 +1,14 @@
 import * as React from 'react';
 
-import {ArrowLeft, ArrowRight, ChevronLeft, Ellipsis, Xmark} from '@gravity-ui/icons';
+import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
 import type {ButtonProps} from '@gravity-ui/uikit';
-import {
-    ActionTooltip,
-    Button,
-    Flex,
-    Icon,
-    Text,
-    spacing,
-    useDirection,
-    useMobile,
-} from '@gravity-ui/uikit';
+import {ActionTooltip, Button, Flex, Icon, Text, useDirection, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 import type {GalleryItemAction} from '../../GalleryItem';
 import {i18n} from '../../i18n';
+import {MobileGalleryHeader} from '../MobileGalleryHeader/MobileGalleryHeader';
 import {FullScreenAction} from '../actions';
-
-import {MobileGalleryActions} from './MobileGalleryActions/MobileGalleryActions';
 
 import './GalleryHeader.scss';
 
@@ -40,8 +30,6 @@ export type GalleryHeaderProps = {
     interactive?: boolean;
 };
 
-const MOBILE_ICON_SIZE = 20;
-
 export const GalleryHeader = ({
     itemName,
     actions,
@@ -60,75 +48,18 @@ export const GalleryHeader = ({
     const direction = useDirection();
     const isMobile = useMobile();
 
-    const [mobileActionsOpen, setMobileActionsOpen] = React.useState(false);
-
     if (isMobile) {
-        const handleMobileActionClose = () => {
-            setMobileActionsOpen(false);
-        };
-
-        const handleMobileActionClick = () => {
-            setMobileActionsOpen(true);
-        };
-
-        const isPanelsHidden = hidden && !interactive;
-
         return (
-            <React.Fragment>
-                <div
-                    className={cnGalleryHeader('mobile-header', {
-                        hidden: isPanelsHidden,
-                        interactive,
-                    })}
-                >
-                    <Button
-                        size="xl"
-                        view="flat"
-                        onClick={onBackClick}
-                        aria-label={i18n('back')}
-                        color="primary"
-                    >
-                        <Icon size={MOBILE_ICON_SIZE} data={ChevronLeft} />
-                    </Button>
-
-                    {withNavigation && (
-                        <Text color="primary" variant="subheader-2">
-                            {activeItemIndex + 1}/{itemsLength}
-                        </Text>
-                    )}
-
-                    {actions?.length && (
-                        <Button
-                            size="xl"
-                            view="flat"
-                            onClick={handleMobileActionClick}
-                            aria-label={i18n('close')}
-                            color="primary"
-                        >
-                            <Icon size={MOBILE_ICON_SIZE} data={Ellipsis} />
-                        </Button>
-                    )}
-                </div>
-
-                <Flex
-                    alignItems="center"
-                    justifyContent="center"
-                    className={cnGalleryHeader('mobile-footer', {
-                        hidden: isPanelsHidden,
-                        interactive,
-                    })}
-                >
-                    {itemName}
-                </Flex>
-
-                {mobileActionsOpen && (
-                    <MobileGalleryActions
-                        open={mobileActionsOpen}
-                        actions={actions}
-                        onClose={handleMobileActionClose}
-                    />
-                )}
-            </React.Fragment>
+            <MobileGalleryHeader
+                itemName={itemName}
+                actions={actions}
+                withNavigation={withNavigation}
+                activeItemIndex={activeItemIndex}
+                itemsLength={itemsLength}
+                onBackClick={onBackClick}
+                hidden={hidden}
+                interactive={interactive}
+            />
         );
     }
 
@@ -136,7 +67,7 @@ export const GalleryHeader = ({
         <Flex
             alignItems="start"
             justifyContent="space-between"
-            className={spacing({py: 2, pr: 3, pl: 5})}
+            className={cnGalleryHeader({'full-screen': fullScreen})}
         >
             <div className={cnGalleryHeader('active-item-info')}>{itemName}</div>
             {withNavigation && (
