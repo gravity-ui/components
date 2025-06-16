@@ -13,7 +13,7 @@ import {useMobileGestures} from './hooks/useMobileGestures/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
 import {useNavigation} from './hooks/useNavigation';
 import {i18n} from './i18n';
-import {getMode} from './utils/mods';
+import {getMode} from './utils/getMode';
 
 import './Gallery.scss';
 

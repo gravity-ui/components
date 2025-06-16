@@ -6,8 +6,9 @@ import {Button, Flex, Icon, Text} from '@gravity-ui/uikit';
 import {block} from '../../../utils/cn';
 import type {GalleryItemAction} from '../../GalleryItem';
 import {i18n} from '../../i18n';
-import {MOBILE_ICON_SIZE} from '../GalleryHeader/constants';
 import {MobileGalleryActions} from '../MobileGalleryActions/MobileGalleryActions';
+
+import {MOBILE_ICON_SIZE} from './constants';
 
 import './MobileGalleryHeader.scss';
 

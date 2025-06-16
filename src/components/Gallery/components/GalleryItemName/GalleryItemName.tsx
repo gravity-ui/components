@@ -1,10 +1,10 @@
 import {Text, useMobile} from '@gravity-ui/uikit';
 
-export type DefaultNameBlockProps = {
+export type GalleryItemNameProps = {
     name: string;
 };
 
-export const DefaultNameBlock = ({name}: DefaultNameBlockProps) => {
+export const GalleryItemName = ({name}: GalleryItemNameProps) => {
     const mobile = useMobile();
 
     return (

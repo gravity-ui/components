@@ -2,13 +2,12 @@ import {FilePreview} from '@gravity-ui/uikit';
 import type {FilePreviewProps} from '@gravity-ui/uikit';
 
 import type {GalleryItemProps} from '../GalleryItem';
-import {DefaultNameBlock} from '../components/DefaultNameBlock/DefaultNameBlock';
+import {GalleryItemName} from '../components/GalleryItemName/GalleryItemName';
 import {DocumentView} from '../components/views/DocumentView/DocumentView';
 import type {DocumentViewProps} from '../components/views/DocumentView/DocumentView';
 
 export type GetDefaultGalleryItemDocumentArgs = Omit<DocumentViewProps, 'name'> & {
     file: FilePreviewProps['file'];
-    mobile?: boolean;
 };
 
 export function getGalleryItemDocument({
@@ -19,6 +18,6 @@ export function getGalleryItemDocument({
     return {
         view: <DocumentView name={file.name} src={src} {...documentFileViewProps} />,
         thumbnail: <FilePreview view="compact" file={file} />,
-        name: <DefaultNameBlock name={file.name} />,
+        name: <GalleryItemName name={file.name} />,
     };
 }

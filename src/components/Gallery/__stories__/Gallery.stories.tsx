@@ -47,8 +47,6 @@ export default {
 } as Meta<typeof Gallery>;
 
 const ImagesGalleryTemplate: StoryFn<GalleryProps> = () => {
-    const mobile = useMobile();
-
     const [open, setOpen] = React.useState(false);
 
     const handleToggle = React.useCallback(() => {
@@ -68,7 +66,7 @@ const ImagesGalleryTemplate: StoryFn<GalleryProps> = () => {
                 {images.map((image, index) => (
                     <GalleryItem
                         key={index}
-                        {...getGalleryItemImage({src: image.url, name: image.name, mobile})}
+                        {...getGalleryItemImage({src: image.url, name: image.name})}
                     />
                 ))}
             </Gallery>
@@ -214,8 +212,6 @@ const EmptyGalleryTemplate: StoryFn<GalleryProps> = () => {
 export const EmptyGallery = EmptyGalleryTemplate.bind({});
 
 const SingleItemGalleryTemplate: StoryFn<GalleryProps> = () => {
-    const mobile = useMobile();
-
     const [open, setOpen] = React.useState(false);
 
     const handleToggle = React.useCallback(() => {
@@ -229,7 +225,6 @@ const SingleItemGalleryTemplate: StoryFn<GalleryProps> = () => {
     const imageGalleryItem = getGalleryItemImage({
         src: 'https://santreyd.ru/upload/iblock/acc/accd0c751590e792f7e43a05f22472f9.jpg',
         name: 'Corgi image',
-        mobile,
     });
 
     return (

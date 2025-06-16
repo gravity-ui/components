@@ -1,7 +1,7 @@
 @use '../../../variables';
 @use '../../variables.scss' as gallery-css-variables;
 
-$block: '.#{variables.$ns}gallery-header';
+$block: '.#{variables.$ns}desktop-gallery-header';
 
 #{$block} {
     $minButtonWidth: 44px;
