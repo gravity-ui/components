@@ -9,4 +9,10 @@ $block: '.#{variables.$ns}gallery-image-view';
     &__spin {
         position: absolute;
     }
+
+    &_mobile {
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+    }
 }

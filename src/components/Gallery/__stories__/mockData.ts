@@ -145,6 +145,7 @@ export const files: GalleryFile[] = [
         type: 'video',
         url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
         name: 'Bunny Film',
+        interactive: true,
     },
     {
         type: 'text',

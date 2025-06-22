@@ -1,7 +1,8 @@
-import {FilePreview, Text} from '@gravity-ui/uikit';
+import {FilePreview} from '@gravity-ui/uikit';
 import type {FilePreviewProps} from '@gravity-ui/uikit';
 
 import type {GalleryItemProps} from '../GalleryItem';
+import {GalleryItemName} from '../components/GalleryItemName/GalleryItemName';
 import {DocumentView} from '../components/views/DocumentView/DocumentView';
 import type {DocumentViewProps} from '../components/views/DocumentView/DocumentView';
 
@@ -17,10 +18,6 @@ export function getGalleryItemDocument({
     return {
         view: <DocumentView name={file.name} src={src} {...documentFileViewProps} />,
         thumbnail: <FilePreview view="compact" file={file} />,
-        name: (
-            <Text color="primary" variant="subheader-1" ellipsis whiteSpace="nowrap">
-                {file.name}
-            </Text>
-        ),
+        name: <GalleryItemName name={file.name} />,
     };
 }

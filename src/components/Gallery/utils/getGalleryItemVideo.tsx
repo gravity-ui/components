@@ -1,6 +1,7 @@
-import {FilePreview, Text} from '@gravity-ui/uikit';
+import {FilePreview} from '@gravity-ui/uikit';
 
 import type {GalleryItemProps} from '../GalleryItem';
+import {GalleryItemName} from '../components/GalleryItemName/GalleryItemName';
 import {VideoView} from '../components/views/VideoView/VideoView';
 import type {VideoViewProps} from '../components/views/VideoView/VideoView';
 
@@ -16,10 +17,6 @@ export function getGalleryItemVideo({
     return {
         view: <VideoView src={src} {...videoFileViewProps} />,
         thumbnail: <FilePreview view="compact" file={{name, type: 'video'} as File} />,
-        name: (
-            <Text color="primary" variant="subheader-1" ellipsis whiteSpace="nowrap">
-                {name}
-            </Text>
-        ),
+        name: <GalleryItemName name={name} />,
     };
 }
