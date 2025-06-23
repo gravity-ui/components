@@ -17,6 +17,8 @@ $maxItemsHeight: 70vh;
         overflow-y: auto;
         margin-block-end: var(--g-spacing-5);
 
+        padding-inline-end: var(--g-spacing-5);
+
         #{$block}__item:last-child {
             margin-block-end: 0;
         }
