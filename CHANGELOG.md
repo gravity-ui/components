@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.15.1](https://github.com/gravity-ui/components/compare/v3.15.0...v3.15.1) (2025-06-26)
+
+
+### Bug Fixes
+
+* **Stories:** add react node type to description ([#304](https://github.com/gravity-ui/components/issues/304)) ([043e626](https://github.com/gravity-ui/components/commit/043e6261a1931e8df27b1d59915e97f152e6cd67))
+
 ## [3.15.0](https://github.com/gravity-ui/components/compare/v3.14.0...v3.15.0) (2025-06-06)
 
 
