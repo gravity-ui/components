@@ -15,7 +15,7 @@ export type StoriesItemMedia = {url: string} & (
 export interface StoriesItem {
     title?: string;
     /** @deprecated use `content` property instead */
-    description?: string;
+    description?: string | React.ReactNode;
     content?: React.ReactNode;
     /** Url for link "more" */
     url?: string;
