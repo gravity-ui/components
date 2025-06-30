@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.0](https://github.com/gravity-ui/components/compare/v4.4.0...v4.5.0) (2025-06-16)
+
+
+### Features
+
+* **Gallery:** add mobile view ([#302](https://github.com/gravity-ui/components/issues/302)) ([82dd6ec](https://github.com/gravity-ui/components/commit/82dd6ecffbfbd761475decf24b16573ca7ba8fc4))
+
 ## [4.4.0](https://github.com/gravity-ui/components/compare/v4.3.1...v4.4.0) (2025-05-28)
 
 
