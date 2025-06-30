@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.5.1](https://github.com/gravity-ui/components/compare/v4.5.0...v4.5.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* **build:** treeshaking ([#306](https://github.com/gravity-ui/components/issues/306)) ([952d23d](https://github.com/gravity-ui/components/commit/952d23d775dd265e0105f97b5149a3641d529c0d))
+
 ## [4.5.0](https://github.com/gravity-ui/components/compare/v4.4.0...v4.5.0) (2025-06-16)
 
 
