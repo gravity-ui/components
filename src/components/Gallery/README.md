@@ -224,8 +224,8 @@ const files: GalleryFile[] = [
   },
   {
     type: 'video',
-    url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    name: 'Bunny Film',
+    url: 'https://storage.yandexcloud.net/uikit-storybook-assets/sample_960x400_ocean_with_audio.mp4',
+    name: 'Video',
   },
   {
     type: 'text',
