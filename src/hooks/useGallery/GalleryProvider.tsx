@@ -37,6 +37,9 @@ export const GalleryProvider = ({
                 });
                 setIsOpen(true);
             },
+            closeGallery: () => {
+                setIsOpen(false);
+            },
         }),
         [],
     );
