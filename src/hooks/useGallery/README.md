@@ -45,9 +45,10 @@ _GalleryProvider_:
 
 _useGallery hook returns_:
 
-| Property    | Type                                                       | Description                          |
-| :---------- | :--------------------------------------------------------- | :----------------------------------- |
-| openGallery | `(items: GalleryItem[], initialItemIndex: number) => void` | The function for opening the gallery |
+| Property     | Type                                                       | Description                          |
+| :----------- | :--------------------------------------------------------- | :----------------------------------- |
+| openGallery  | `(items: GalleryItem[], initialItemIndex: number) => void` | The function for opening the gallery |
+| closeGallery | `() => void`                                               | The function for closing the gallery |
 
 _openGallery function args_:
 
