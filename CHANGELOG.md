@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.6.0](https://github.com/gravity-ui/components/compare/v4.5.1...v4.6.0) (2025-07-07)
+
+
+### Features
+
+* **Gallery:** add closeGallery ([#308](https://github.com/gravity-ui/components/issues/308)) ([a71005f](https://github.com/gravity-ui/components/commit/a71005fc750b63a7ab7d2f916b87f714433358ad))
+
 ## [4.5.1](https://github.com/gravity-ui/components/compare/v4.5.0...v4.5.1) (2025-06-30)
 
 
