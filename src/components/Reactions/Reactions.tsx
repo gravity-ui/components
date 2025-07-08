@@ -79,7 +79,7 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
     /**
      * A class for the reaction container
      */
-    reactionsPopup?: {
+    reactionsPopupProps?: {
         className?: string;
         placement?: PopupPlacement;
     };
@@ -110,7 +110,7 @@ export function Reactions({
     renderTooltip,
     onToggle,
     addButtonProps,
-    reactionsPopup,
+    reactionsPopupProps,
     reactionButtonProps,
 }: ReactionsProps) {
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -195,10 +195,10 @@ export function Reactions({
     const addReactionPopup = readOnly ? null : (
         <Popup
             anchorRef={addReactionButtonRef}
-            className={b('add-reaction-popover', reactionsPopup?.className)}
+            className={b('add-reaction-popover', reactionsPopupProps?.className)}
             open={palettePopupOpened}
             modal
-            placement={reactionsPopup?.placement}
+            placement={reactionsPopupProps?.placement}
             initialFocus={0}
             onOutsideClick={onClosePalettePopup}
             onEscapeKeyDown={onClosePalettePopup}
