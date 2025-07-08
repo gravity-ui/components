@@ -1,6 +1,15 @@
 import * as React from 'react';
 
-import {Button, ButtonSize, PaletteOption, PopoverProps, Popup} from '@gravity-ui/uikit';
+import {
+    Button,
+    ButtonPin,
+    ButtonSize,
+    ButtonView,
+    ButtonWidth,
+    PaletteOption,
+    PopoverProps,
+    Popup,
+} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -25,11 +34,18 @@ export interface ReactionState {
     counter?: React.ReactNode;
 }
 
-interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
+export interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
     reaction: ReactionState;
     size: ButtonSize;
     tooltip?: React.ReactNode;
     onClick?: (value: string) => void;
+    reactionButtonProps?: {
+        view?: ButtonView;
+        size?: ButtonSize;
+        pin?: ButtonPin;
+        className?: string;
+        width?: ButtonWidth;
+    };
 }
 
 const popupDefaultPlacement: PopoverProps['placement'] = [
@@ -55,7 +71,6 @@ export function Reaction(props: ReactionInnerProps) {
 
     const button = (
         <Button
-            className={b('reaction-button', {size})}
             ref={buttonRef}
             size={size}
             selected={selected}
@@ -63,6 +78,8 @@ export function Reaction(props: ReactionInnerProps) {
             extraProps={{value}}
             pin="circle-circle"
             onClick={onClickCallback}
+            {...props.reactionButtonProps}
+            className={b('reaction-button', {size}, props.reactionButtonProps?.className)}
         >
             <Button.Icon>
                 <span className={b('reaction-button-content', {size})}>{content}</span>

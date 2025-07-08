@@ -3,6 +3,10 @@ import * as React from 'react';
 import {FaceSmile} from '@gravity-ui/icons';
 import {
     Button,
+    ButtonPin,
+    ButtonSize,
+    ButtonView,
+    ButtonWidth,
     DOMProps,
     Flex,
     Icon,
@@ -10,13 +14,14 @@ import {
     PaletteOption,
     PaletteProps,
     Popup,
+    PopupPlacement,
     QAProps,
 } from '@gravity-ui/uikit';
 import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
 
-import {Reaction, ReactionProps, ReactionState} from './Reaction';
+import {Reaction, ReactionInnerProps, ReactionProps, ReactionState} from './Reaction';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
 import {i18n} from './i18n';
 
@@ -26,7 +31,7 @@ const b = block('reactions');
 
 export type ReactionsPaletteProps = Pick<
     PaletteProps,
-    'columns' | 'rowClassName' | 'optionClassName'
+    'columns' | 'rowClassName' | 'optionClassName' | 'size' | 'className'
 >;
 
 export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOMProps {
@@ -61,6 +66,27 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
     onToggle?: (value: string) => void;
+    /**
+     * Props for the add reactions button
+     */
+    addButtonProps?: {
+        className?: string;
+        view?: ButtonView;
+        pin?: ButtonPin;
+        width?: ButtonWidth;
+        size?: ButtonSize;
+    };
+    /**
+     * A class for the reaction container
+     */
+    reactionsPopup?: {
+        className?: string;
+        placement?: PopupPlacement;
+    };
+    /**
+     * Props for selected reactions
+     */
+    reactionButtonProps?: ReactionInnerProps['reactionButtonProps'];
 }
 
 const buttonSizeToIconSize = {
@@ -83,6 +109,9 @@ export function Reactions({
     addButtonPlacement = 'end',
     renderTooltip,
     onToggle,
+    addButtonProps,
+    reactionsPopup,
+    reactionButtonProps,
 }: ReactionsProps) {
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
     const [palettePopupOpened, setPalettePopupOpened] = React.useState(false);
@@ -131,11 +160,11 @@ export function Reactions({
     const paletteContent = React.useMemo(
         () => (
             <Palette
-                {...paletteProps}
+                size={size}
                 options={reactions}
                 value={paletteValue}
-                size={size}
                 onUpdate={onUpdatePalette}
+                {...paletteProps}
             />
         ),
         [paletteProps, reactions, paletteValue, size, onUpdatePalette],
@@ -143,12 +172,19 @@ export function Reactions({
 
     const addReactionButton = readOnly ? null : (
         <Button
-            className={b('reaction-button')}
             ref={addReactionButtonRef}
             size={size}
             extraProps={{'aria-label': i18n('add-reaction')}}
             onClick={onTogglePalettePopup}
             view="flat-secondary"
+            {...addButtonProps}
+            className={b(
+                'reaction-button',
+                {
+                    active: palettePopupOpened,
+                },
+                addButtonProps?.className,
+            )}
         >
             <Button.Icon>
                 <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
@@ -159,9 +195,10 @@ export function Reactions({
     const addReactionPopup = readOnly ? null : (
         <Popup
             anchorRef={addReactionButtonRef}
-            className={b('add-reaction-popover')}
+            className={b('add-reaction-popover', reactionsPopup?.className)}
             open={palettePopupOpened}
             modal
+            placement={reactionsPopup?.placement}
             initialFocus={0}
             onOutsideClick={onClosePalettePopup}
             onEscapeKeyDown={onClosePalettePopup}
@@ -192,6 +229,7 @@ export function Reactions({
                             size={size}
                             tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
                             onClick={readOnly ? undefined : onToggle}
+                            reactionButtonProps={reactionButtonProps}
                         />
                     );
                 })}
