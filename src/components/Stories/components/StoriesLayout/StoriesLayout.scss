@@ -75,13 +75,15 @@ $borderRadiusCard: 14px;
     }
 
     &__text-block {
+        box-sizing: border-box;
+        height: 100%;
+        min-height: 0;
         display: flex;
         flex-grow: 1;
         align-items: flex-start;
         justify-content: flex-start;
         flex-direction: column;
         margin-block-start: var(--g-spacing-10);
-        overflow-y: scroll;
     }
 
     &__action-block {
@@ -94,6 +96,7 @@ $borderRadiusCard: 14px;
 
     &__text-content {
         color: var(--g-color-text-complementary);
+        overflow-y: auto;
 
         #{$block}__text-header + & {
             margin-block-start: var(--g-spacing-4);
