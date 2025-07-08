@@ -1,6 +1,7 @@
 import {Flex, Text} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
+import {PopupWithButton} from '../DELETE_ME_PLEASE';
 import {Reactions} from '../Reactions';
 import {useMockReactions} from '../__tests__/mock/mockHooks';
 
@@ -10,29 +11,50 @@ export default {
 } as Meta<typeof Reactions>;
 
 export const Default: StoryFn = () => {
-    return <Reactions {...useMockReactions()} />;
+    return (
+        <div>
+            <Flex
+                direction="column"
+                gap={4}
+                overflow="auto"
+                height="600px"
+                style={{border: '1px solid black'}}
+            >
+                <div>
+                    <div style={{height: '2000px'}}></div>
+                </div>
+                {/* <PopupWithPalette /> */}
+                <PopupWithButton />
+                {/* <PopupWithLink /> */}
+                {/* <Reactions {...useMockReactions()} /> */}
+            </Flex>
+        </div>
+    );
 };
 
 export const Readonly: StoryFn = () => {
     const {reactions, reactionsState, renderTooltip, onToggle} = useMockReactions();
 
     return (
-        <Reactions
-            reactions={reactions}
-            renderTooltip={
-                renderTooltip
-                    ? (state) => (
-                          <Flex direction="column" gap={2}>
-                              <Text variant="subheader-1">You must be singed in to react</Text>
-                              {renderTooltip(state)}
-                          </Flex>
-                      )
-                    : undefined
-            }
-            reactionsState={reactionsState}
-            onToggle={onToggle}
-            readOnly={true}
-        />
+        <Flex direction="column" gap={4} overflow="auto" height="600px">
+            <div style={{height: '2000px'}}></div>
+            <Reactions
+                reactions={reactions}
+                renderTooltip={
+                    renderTooltip
+                        ? (state) => (
+                              <Flex direction="column" gap={2}>
+                                  <Text variant="subheader-1">You must be singed in to react</Text>
+                                  {renderTooltip(state)}
+                              </Flex>
+                          )
+                        : undefined
+                }
+                reactionsState={reactionsState}
+                onToggle={onToggle}
+                readOnly={true}
+            />
+        </Flex>
     );
 };
 

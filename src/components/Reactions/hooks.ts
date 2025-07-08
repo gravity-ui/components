@@ -9,10 +9,7 @@ const DELAY = {
     closeTimeout: 200,
 } as const;
 
-export function useReactionsPopup(
-    reaction: ReactionState,
-    ref: React.RefObject<HTMLButtonElement>,
-) {
+export function useReactionsPopup(reaction: ReactionState, element: HTMLButtonElement | null) {
     const {value} = reaction;
 
     const {openedTooltip: currentHoveredReaction, setOpenedTooltip: setCurrentHoveredReaction} =
@@ -22,8 +19,10 @@ export function useReactionsPopup(
     const {delayedCall: setDelayedClose, clearTimeoutRef: clearCloseTimeout} = useTimeoutRef();
 
     const open = React.useCallback(() => {
-        setCurrentHoveredReaction({reaction, open: true, ref});
-    }, [reaction, ref, setCurrentHoveredReaction]);
+        if (!element) return;
+
+        setCurrentHoveredReaction({reaction, open: true, element});
+    }, [reaction, element, setCurrentHoveredReaction]);
 
     const close = React.useCallback(() => {
         clearOpenTimeout();
@@ -43,7 +42,9 @@ export function useReactionsPopup(
                 setDelayedOpen(open, DELAY.openTimeout);
             }
         } else {
-            setCurrentHoveredReaction({reaction, open: false, ref});
+            if (!element) return;
+
+            setCurrentHoveredReaction({reaction, open: false, element});
 
             setDelayedOpen(open, DELAY.openTimeout);
         }
@@ -52,15 +53,17 @@ export function useReactionsPopup(
         currentHoveredReaction,
         open,
         reaction,
-        ref,
+        element,
         setCurrentHoveredReaction,
         setDelayedOpen,
     ]);
 
     const delayedOpenPopup = React.useCallback(() => {
+        if (!element) return;
+
         clearCloseTimeout();
         setDelayedOpen(focus, DELAY.focusTimeout);
-    }, [clearCloseTimeout, focus, setDelayedOpen]);
+    }, [clearCloseTimeout, element, focus, setDelayedOpen]);
 
     const delayedClosePopup = React.useCallback(() => {
         clearOpenTimeout();
