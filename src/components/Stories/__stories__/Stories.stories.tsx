@@ -131,7 +131,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             textBlockStyle: StoriesTextBlockStyle.Card,
             mediaBlockStyle: StoriesMediaBlockStyle.HalfSizeWithMargins,
             content:
-                'This story has default value for props textBlockStyle = "card" and mediaBlockStyle = "half-size-with-margins" ',
+                'This story has default value for props textBlockStyle = "card" and mediaBlockStyle = "half-size-with-margins". And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long... And its content is very long...',
             media: {
                 type: 'image',
                 url: 'https://storage.yandexcloud.net/uikit-storybook-assets/story-picture-7.png',
