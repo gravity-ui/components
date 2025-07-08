@@ -11,9 +11,9 @@ export function ImageView({media, style}: ImageViewProps) {
     if (media.type === 'image') {
         return (
             <div
-                className={b({style})}
+                className={b({style}, b('image'))}
                 style={{
-                    background: `url("${media.url2x ?? media.url}") left 0 top 0 / cover no-repeat`,
+                    backgroundImage: `url("${media.url2x ?? media.url}")`,
                 }}
             />
         );
