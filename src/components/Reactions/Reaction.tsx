@@ -25,7 +25,7 @@ export interface ReactionState {
     counter?: React.ReactNode;
 }
 
-export interface RenderReactionProps<ReactionRef extends HTMLElement> {
+export interface RenderReactionProps<ReactionRef extends HTMLElement = HTMLButtonElement> {
     /** Reaction content */
     content: React.ReactNode;
     /** Click handler */
@@ -38,7 +38,7 @@ export interface RenderReactionProps<ReactionRef extends HTMLElement> {
     selected?: boolean;
 }
 
-export interface ReactionInnerProps<ReactionRef extends HTMLElement>
+export interface ReactionInnerProps<ReactionRef extends HTMLElement = HTMLButtonElement>
     extends Pick<PaletteOption, 'content'> {
     reaction: ReactionState;
     size: ButtonSize;

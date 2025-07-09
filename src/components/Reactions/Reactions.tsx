@@ -30,7 +30,7 @@ export type ReactionsPaletteProps = Pick<
     'columns' | 'rowClassName' | 'optionClassName' | 'size' | 'className'
 >;
 
-export interface RenderAddProps<AddReactionRef extends HTMLElement> {
+export interface RenderAddProps<AddReactionRef extends HTMLElement = HTMLButtonElement> {
     paletteOpened: boolean;
     ref: React.RefObject<AddReactionRef>;
     triggerProps: {
@@ -40,8 +40,10 @@ export interface RenderAddProps<AddReactionRef extends HTMLElement> {
         'aria-controls' | 'aria-haspopup' | 'aria-expanded'
     >;
 }
-export interface ReactionsProps<AddReactionRef extends HTMLElement, ReactionRef extends HTMLElement>
-    extends Pick<PaletteProps, 'size'>,
+export interface ReactionsProps<
+    AddReactionRef extends HTMLElement = HTMLButtonElement,
+    ReactionRef extends HTMLElement = HTMLButtonElement,
+> extends Pick<PaletteProps, 'size'>,
         QAProps,
         DOMProps {
     /**
@@ -95,6 +97,8 @@ const buttonSizeToIconSize = {
     l: '16px',
     xl: '20px',
 };
+
+const popupId = 'reactions-palette-popup';
 
 export function Reactions<
     AddReactionRef extends HTMLElement = HTMLButtonElement,
@@ -188,7 +192,7 @@ export function Reactions<
                     onClick: onTogglePalettePopup,
                     'aria-expanded': palettePopupOpened,
                     'aria-haspopup': 'true',
-                    'aria-controls': 'reactions-palette-popup',
+                    'aria-controls': popupId,
                 },
             });
         }
@@ -213,7 +217,7 @@ export function Reactions<
 
     const addReactionPopup = readOnly ? null : (
         <Popup
-            id="reactions-palette-popup"
+            id={popupId}
             anchorRef={renderAddReaction ? addReactionRef : addReactionButtonRef}
             className={b('add-reaction-popover', popupClassName)}
             open={palettePopupOpened}
