@@ -62,6 +62,24 @@ const groups: StoriesGroupItem[] = [
                 content:
                     'At the top of the panel is the service navigation for each service. ' +
                     'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.' +
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.' +
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.' +
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.' +
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.' +
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
+                    'and organizations, settings, help center, search, notifications, favorites.' +
+                    'At the top of the panel is the service navigation for each service. ' +
+                    'Below are common navigation elements: a component for switching between accounts ' +
                     'and organizations, settings, help center, search, notifications, favorites.',
                 url: 'https://yandex.eu',
                 media: {
