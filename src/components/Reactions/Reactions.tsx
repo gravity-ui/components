@@ -3,7 +3,6 @@ import * as React from 'react';
 import {FaceSmile} from '@gravity-ui/icons';
 import {
     Button,
-    ButtonSize,
     DOMProps,
     Flex,
     Icon,
@@ -31,14 +30,20 @@ export type ReactionsPaletteProps = Pick<
     'columns' | 'rowClassName' | 'optionClassName' | 'size' | 'className'
 >;
 
-export interface RenderAddProps {
-    size: ButtonSize;
+export interface RenderAddProps<AddReactionRef extends HTMLElement> {
     paletteOpened: boolean;
-    buttonRef: React.RefObject<HTMLButtonElement>;
-    onClick: () => void;
-    className: string;
+    ref: React.RefObject<AddReactionRef>;
+    triggerProps: {
+        onClick: () => void;
+    } & Pick<
+        React.ButtonHTMLAttributes<HTMLElement>,
+        'aria-controls' | 'aria-haspopup' | 'aria-expanded'
+    >;
 }
-export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOMProps {
+export interface ReactionsProps<AddReactionRef extends HTMLElement, ReactionRef extends HTMLElement>
+    extends Pick<PaletteProps, 'size'>,
+        QAProps,
+        DOMProps {
     /**
      * All available reactions.
      */
@@ -73,16 +78,14 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
     /**
      * A class for the reaction container
      */
-    popupProps?: {
-        className?: string;
-        placement?: PopupPlacement;
-    };
+    popupClassName?: string;
+    popupPlacement?: PopupPlacement;
     /**
      * Custom render function for the reaction button
      * Allows to fully customize the appearance of the button
      */
-    renderReaction?: ReactionInnerProps['renderReaction'];
-    renderAddReaction?: (props: RenderAddProps) => React.ReactNode;
+    renderReaction?: ReactionInnerProps<ReactionRef>['renderReaction'];
+    renderAddReaction?: (props: RenderAddProps<AddReactionRef>) => React.ReactNode;
 }
 
 const buttonSizeToIconSize = {
@@ -93,7 +96,10 @@ const buttonSizeToIconSize = {
     xl: '20px',
 };
 
-export function Reactions({
+export function Reactions<
+    AddReactionRef extends HTMLElement = HTMLButtonElement,
+    ReactionRef extends HTMLElement = HTMLButtonElement,
+>({
     reactions,
     reactionsState,
     className,
@@ -105,11 +111,14 @@ export function Reactions({
     addButtonPlacement = 'end',
     renderTooltip,
     onToggle,
-    popupProps,
+    popupClassName,
+    popupPlacement,
     renderReaction,
     renderAddReaction,
-}: ReactionsProps) {
+}: ReactionsProps<AddReactionRef, ReactionRef>) {
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
+    const addReactionRef = React.useRef<AddReactionRef>(null);
+
     const [palettePopupOpened, setPalettePopupOpened] = React.useState(false);
 
     const onOpenPalettePopup = React.useCallback(() => setPalettePopupOpened(true), []);
@@ -173,11 +182,14 @@ export function Reactions({
 
         if (renderAddReaction) {
             return renderAddReaction({
-                size,
                 paletteOpened: palettePopupOpened,
-                buttonRef: addReactionButtonRef,
-                onClick: onTogglePalettePopup,
-                className: b('reaction-button'),
+                ref: addReactionRef,
+                triggerProps: {
+                    onClick: onTogglePalettePopup,
+                    'aria-expanded': palettePopupOpened,
+                    'aria-haspopup': 'true',
+                    'aria-controls': 'reactions-palette-popup',
+                },
             });
         }
 
@@ -201,11 +213,12 @@ export function Reactions({
 
     const addReactionPopup = readOnly ? null : (
         <Popup
-            anchorRef={addReactionButtonRef}
-            className={b('add-reaction-popover', popupProps?.className)}
+            id="reactions-palette-popup"
+            anchorRef={renderAddReaction ? addReactionRef : addReactionButtonRef}
+            className={b('add-reaction-popover', popupClassName)}
             open={palettePopupOpened}
             modal
-            placement={popupProps?.placement}
+            placement={popupPlacement}
             initialFocus={0}
             onOutsideClick={onClosePalettePopup}
             onEscapeKeyDown={onClosePalettePopup}
