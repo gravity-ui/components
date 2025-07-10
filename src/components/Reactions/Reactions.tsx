@@ -4,7 +4,6 @@ import {FaceSmile} from '@gravity-ui/icons';
 import {
     Button,
     DOMProps,
-    Flex,
     Icon,
     Palette,
     PaletteOption,
@@ -18,6 +17,7 @@ import xor from 'lodash/xor';
 import {block} from '../utils/cn';
 
 import {Reaction, ReactionInnerProps, ReactionProps, ReactionState} from './Reaction';
+import {ReactionsContainer} from './ReactionsContainer';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
 import {i18n} from './i18n';
 
@@ -40,10 +40,8 @@ export interface RenderAddProps<AddReactionRef extends HTMLElement = HTMLButtonE
         'aria-controls' | 'aria-haspopup' | 'aria-expanded'
     >;
 }
-export interface ReactionsProps<
-    AddReactionRef extends HTMLElement = HTMLButtonElement,
-    ReactionRef extends HTMLElement = HTMLButtonElement,
-> extends Pick<PaletteProps, 'size'>,
+export interface ReactionsProps<AddReactionRef extends HTMLElement = HTMLButtonElement>
+    extends Pick<PaletteProps, 'size'>,
         QAProps,
         DOMProps {
     /**
@@ -64,7 +62,7 @@ export interface ReactionsProps<
     readOnly?: boolean;
     /**
      * Position of the "Add reaction" button.
-     *
+     * @deprecated Use renderReactionsContent prop instead for full layout customization
      * @default 'end'
      */
     addButtonPlacement?: 'start' | 'end';
@@ -86,8 +84,54 @@ export interface ReactionsProps<
      * Custom render function for the reaction button
      * Allows to fully customize the appearance of the button
      */
-    renderReaction?: ReactionInnerProps<ReactionRef>['renderReaction'];
+    renderReaction?: ReactionInnerProps['renderReaction'];
     renderAddReaction?: (props: RenderAddProps<AddReactionRef>) => React.ReactNode;
+    /**
+     * Callback function to render custom reactions content.
+     *
+     * @param {Object} props - Reaction rendering properties
+     * @param {ReactNode} props.addReactionButton - Button component for adding a new reaction
+     * @param {ReactNode} props.reactionList - Component that displays the list of reactions
+     * @returns {ReactNode} Custom reactions container
+     *
+     * @example
+     * ```tsx
+     * import { Reactions, ReactionsContainer } from '@gravity-ui/components';
+     *
+     * <Reactions
+     *   renderReactionsContent={(props) => {
+     *     return (
+     *       <ReactionsContainer>
+     *         {props.addReactionButton}
+     *         {props.reactionList}
+     *       </ReactionsContainer>
+     *     );
+     *   }}
+     * />
+     * ```
+     *
+     * @example
+     * // You can customize the layout of reaction elements by wrapping them in your own container:
+     * ```tsx
+     * <Reactions
+     *   renderReactionsContent={(props) => {
+     *     return (
+     *       <div className="custom-reactions-wrapper">
+     *         <div className="reactions-header">Reactions:</div>
+     *         {props.addReactionButton}
+     *         <div className="reactions-list-container">
+     *           {props.reactionList}
+     *         </div>
+     *       </div>
+     *     );
+     *   }}
+     * />
+     * ```
+     */
+    renderReactionsContent?: (props: {
+        reactionList: React.ReactNode;
+        addReactionButton: React.ReactNode;
+    }) => React.ReactNode;
 }
 
 const buttonSizeToIconSize = {
@@ -100,10 +144,7 @@ const buttonSizeToIconSize = {
 
 const popupId = 'reactions-palette-popup';
 
-export function Reactions<
-    AddReactionRef extends HTMLElement = HTMLButtonElement,
-    ReactionRef extends HTMLElement = HTMLButtonElement,
->({
+export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement>({
     reactions,
     reactionsState,
     className,
@@ -119,7 +160,8 @@ export function Reactions<
     popupPlacement,
     renderReaction,
     renderAddReaction,
-}: ReactionsProps<AddReactionRef, ReactionRef>) {
+    renderReactionsContent,
+}: ReactionsProps<AddReactionRef>) {
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
     const addReactionRef = React.useRef<AddReactionRef>(null);
 
@@ -234,6 +276,43 @@ export function Reactions<
         </Popup>
     );
 
+    const reactionList = (
+        <React.Fragment>
+            {reactionsState.map((reaction) => {
+                const content = paletteOptionsMap[reaction.value]?.content ?? '?';
+
+                return (
+                    <Reaction
+                        key={reaction.value}
+                        content={content}
+                        reaction={reaction}
+                        size={size}
+                        tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
+                        onClick={readOnly ? undefined : onToggle}
+                        renderReaction={renderReaction}
+                    />
+                );
+            })}
+        </React.Fragment>
+    );
+
+    const renderReactions = () => {
+        if (renderReactionsContent) {
+            return renderReactionsContent({
+                reactionList,
+                addReactionButton,
+            });
+        }
+
+        return (
+            <ReactionsContainer className={className} qa={qa} style={style}>
+                {addButtonPlacement === 'start' ? addReactionButton : null}
+                {reactionList}
+                {addButtonPlacement === 'end' ? addReactionButton : null}
+            </ReactionsContainer>
+        );
+    };
+
     return (
         <ReactionsContextProvider
             value={{
@@ -241,28 +320,7 @@ export function Reactions<
                 setOpenedTooltip: setCurrentHoveredReaction,
             }}
         >
-            <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
-                {addButtonPlacement === 'start' ? addReactionButton : null}
-
-                {/* Reactions' list */}
-                {reactionsState.map((reaction) => {
-                    const content = paletteOptionsMap[reaction.value]?.content ?? '?';
-
-                    return (
-                        <Reaction
-                            key={reaction.value}
-                            content={content}
-                            reaction={reaction}
-                            size={size}
-                            tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
-                            onClick={readOnly ? undefined : onToggle}
-                            renderReaction={renderReaction}
-                        />
-                    );
-                })}
-
-                {addButtonPlacement === 'end' ? addReactionButton : null}
-            </Flex>
+            {renderReactions()}
 
             {addReactionPopup}
         </ReactionsContextProvider>
