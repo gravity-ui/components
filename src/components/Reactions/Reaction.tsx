@@ -25,11 +25,30 @@ export interface ReactionState {
     counter?: React.ReactNode;
 }
 
-interface ReactionInnerProps extends Pick<PaletteOption, 'content'> {
+export interface RenderReactionProps<ReactionRef extends HTMLElement = HTMLButtonElement> {
+    /** Reaction content */
+    content: React.ReactNode;
+    /** Click handler */
+    onClick: () => void;
+    /** Button reference needed for popup positioning */
+    ref?: React.RefObject<ReactionRef>;
+    /** Counter value */
+    counter?: React.ReactNode;
+    /** Is reaction selected */
+    selected?: boolean;
+}
+
+export interface ReactionInnerProps<ReactionRef extends HTMLElement = HTMLButtonElement>
+    extends Pick<PaletteOption, 'content'> {
     reaction: ReactionState;
     size: ButtonSize;
     tooltip?: React.ReactNode;
     onClick?: (value: string) => void;
+    /**
+     * Custom render function for the reaction button
+     * Allows to fully customize the appearance of the button
+     */
+    renderReaction?: (props: RenderReactionProps<ReactionRef>) => React.ReactNode;
 }
 
 const popupDefaultPlacement: PopoverProps['placement'] = [
@@ -43,19 +62,21 @@ const popupDefaultPlacement: PopoverProps['placement'] = [
 
 const b = block('reactions');
 
-export function Reaction(props: ReactionInnerProps) {
+export function Reaction<ReactionRef extends HTMLElement = HTMLButtonElement>(
+    props: ReactionInnerProps<ReactionRef>,
+) {
     const {value, selected, counter} = props.reaction;
-    const {size, content, tooltip, onClick} = props;
+    const {size, content, tooltip, onClick, renderReaction} = props;
 
     const onClickCallback = React.useCallback(() => onClick?.(value), [onClick, value]);
 
     const buttonRef = React.useRef<HTMLButtonElement>(null);
+    const reactionRef = React.useRef<ReactionRef>(null);
     const {onMouseEnter, onMouseLeave} = useReactionsPopup(props.reaction, buttonRef);
     const {openedTooltip: currentHoveredReaction} = useReactionsContext();
 
-    const button = (
+    const defaultButton = (
         <Button
-            className={b('reaction-button', {size})}
             ref={buttonRef}
             size={size}
             selected={selected}
@@ -63,6 +84,7 @@ export function Reaction(props: ReactionInnerProps) {
             extraProps={{value}}
             pin="circle-circle"
             onClick={onClickCallback}
+            className={b('reaction-button', {size})}
         >
             <Button.Icon>
                 <span className={b('reaction-button-content', {size})}>{content}</span>
@@ -72,6 +94,16 @@ export function Reaction(props: ReactionInnerProps) {
             )}
         </Button>
     );
+
+    const button = renderReaction
+        ? renderReaction({
+              content,
+              counter,
+              selected,
+              ref: reactionRef,
+              onClick: onClickCallback,
+          })
+        : defaultButton;
 
     return tooltip ? (
         <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>

@@ -10,13 +10,14 @@ import {
     PaletteOption,
     PaletteProps,
     Popup,
+    PopupPlacement,
     QAProps,
 } from '@gravity-ui/uikit';
 import xor from 'lodash/xor';
 
 import {block} from '../utils/cn';
 
-import {Reaction, ReactionProps, ReactionState} from './Reaction';
+import {Reaction, ReactionInnerProps, ReactionProps, ReactionState} from './Reaction';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
 import {i18n} from './i18n';
 
@@ -26,10 +27,25 @@ const b = block('reactions');
 
 export type ReactionsPaletteProps = Pick<
     PaletteProps,
-    'columns' | 'rowClassName' | 'optionClassName'
+    'columns' | 'rowClassName' | 'optionClassName' | 'size' | 'className'
 >;
 
-export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOMProps {
+export interface RenderAddProps<AddReactionRef extends HTMLElement = HTMLButtonElement> {
+    paletteOpened: boolean;
+    ref: React.RefObject<AddReactionRef>;
+    triggerProps: {
+        onClick: () => void;
+    } & Pick<
+        React.ButtonHTMLAttributes<HTMLElement>,
+        'aria-controls' | 'aria-haspopup' | 'aria-expanded'
+    >;
+}
+export interface ReactionsProps<
+    AddReactionRef extends HTMLElement = HTMLButtonElement,
+    ReactionRef extends HTMLElement = HTMLButtonElement,
+> extends Pick<PaletteProps, 'size'>,
+        QAProps,
+        DOMProps {
     /**
      * All available reactions.
      */
@@ -61,6 +77,17 @@ export interface ReactionsProps extends Pick<PaletteProps, 'size'>, QAProps, DOM
      * Callback for clicking on a reaction in the Palette or directly in the reactions' list.
      */
     onToggle?: (value: string) => void;
+    /**
+     * A class for the reaction container
+     */
+    popupClassName?: string;
+    popupPlacement?: PopupPlacement;
+    /**
+     * Custom render function for the reaction button
+     * Allows to fully customize the appearance of the button
+     */
+    renderReaction?: ReactionInnerProps<ReactionRef>['renderReaction'];
+    renderAddReaction?: (props: RenderAddProps<AddReactionRef>) => React.ReactNode;
 }
 
 const buttonSizeToIconSize = {
@@ -71,7 +98,12 @@ const buttonSizeToIconSize = {
     xl: '20px',
 };
 
-export function Reactions({
+const popupId = 'reactions-palette-popup';
+
+export function Reactions<
+    AddReactionRef extends HTMLElement = HTMLButtonElement,
+    ReactionRef extends HTMLElement = HTMLButtonElement,
+>({
     reactions,
     reactionsState,
     className,
@@ -83,8 +115,14 @@ export function Reactions({
     addButtonPlacement = 'end',
     renderTooltip,
     onToggle,
-}: ReactionsProps) {
+    popupClassName,
+    popupPlacement,
+    renderReaction,
+    renderAddReaction,
+}: ReactionsProps<AddReactionRef, ReactionRef>) {
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
+    const addReactionRef = React.useRef<AddReactionRef>(null);
+
     const [palettePopupOpened, setPalettePopupOpened] = React.useState(false);
 
     const onOpenPalettePopup = React.useCallback(() => setPalettePopupOpened(true), []);
@@ -131,37 +169,63 @@ export function Reactions({
     const paletteContent = React.useMemo(
         () => (
             <Palette
-                {...paletteProps}
+                size={size}
                 options={reactions}
                 value={paletteValue}
-                size={size}
                 onUpdate={onUpdatePalette}
+                {...paletteProps}
             />
         ),
         [paletteProps, reactions, paletteValue, size, onUpdatePalette],
     );
 
-    const addReactionButton = readOnly ? null : (
-        <Button
-            className={b('reaction-button')}
-            ref={addReactionButtonRef}
-            size={size}
-            extraProps={{'aria-label': i18n('add-reaction')}}
-            onClick={onTogglePalettePopup}
-            view="flat-secondary"
-        >
-            <Button.Icon>
-                <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
-            </Button.Icon>
-        </Button>
-    );
+    const addReactionButton = React.useMemo(() => {
+        if (readOnly) {
+            return null;
+        }
+
+        if (renderAddReaction) {
+            return renderAddReaction({
+                paletteOpened: palettePopupOpened,
+                ref: addReactionRef,
+                triggerProps: {
+                    onClick: onTogglePalettePopup,
+                    'aria-expanded': palettePopupOpened,
+                    'aria-haspopup': 'true',
+                    'aria-controls': popupId,
+                },
+            });
+        }
+
+        return (
+            <Button
+                ref={addReactionButtonRef}
+                size={size}
+                aria-label={i18n('add-reaction')}
+                aria-expanded={palettePopupOpened}
+                aria-haspopup={true}
+                aria-controls={popupId}
+                onClick={onTogglePalettePopup}
+                view="flat-secondary"
+                className={b('reaction-button', {
+                    active: palettePopupOpened,
+                })}
+            >
+                <Button.Icon>
+                    <Icon data={FaceSmile} size={buttonSizeToIconSize[size]} />
+                </Button.Icon>
+            </Button>
+        );
+    }, [readOnly, renderAddReaction, size, onTogglePalettePopup, palettePopupOpened]);
 
     const addReactionPopup = readOnly ? null : (
         <Popup
-            anchorRef={addReactionButtonRef}
-            className={b('add-reaction-popover')}
+            id={popupId}
+            anchorRef={renderAddReaction ? addReactionRef : addReactionButtonRef}
+            className={b('add-reaction-popover', popupClassName)}
             open={palettePopupOpened}
             modal
+            placement={popupPlacement}
             initialFocus={0}
             onOutsideClick={onClosePalettePopup}
             onEscapeKeyDown={onClosePalettePopup}
@@ -192,6 +256,7 @@ export function Reactions({
                             size={size}
                             tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
                             onClick={readOnly ? undefined : onToggle}
+                            renderReaction={renderReaction}
                         />
                     );
                 })}
