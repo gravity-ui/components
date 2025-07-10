@@ -1,5 +1,18 @@
 # Changelog
 
+## [4.7.0](https://github.com/gravity-ui/components/compare/v4.6.0...v4.7.0) (2025-07-10)
+
+
+### Features
+
+* **Reactions:** add new props for reactions ([#310](https://github.com/gravity-ui/components/issues/310)) ([6bbef78](https://github.com/gravity-ui/components/commit/6bbef7848ebf6e469b97fc02132898dab81bb99d))
+* **StoriesGroup:** add scroll to text and update background-image styles ([#311](https://github.com/gravity-ui/components/issues/311)) ([73054ce](https://github.com/gravity-ui/components/commit/73054ceb8e0393ce33012194452a0897734de171))
+
+
+### Bug Fixes
+
+* **Gallery:** actions placement ([#314](https://github.com/gravity-ui/components/issues/314)) ([248d60d](https://github.com/gravity-ui/components/commit/248d60db68078615b166b1802b4effca463cbb9f))
+
 ## [4.6.0](https://github.com/gravity-ui/components/compare/v4.5.1...v4.6.0) (2025-07-07)
 
 
