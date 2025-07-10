@@ -212,6 +212,7 @@ const EmptyGalleryTemplate: StoryFn<GalleryProps> = () => {
 export const EmptyGallery = EmptyGalleryTemplate.bind({});
 
 const SingleItemGalleryTemplate: StoryFn<GalleryProps> = () => {
+    const mobile = useMobile();
     const [open, setOpen] = React.useState(false);
 
     const handleToggle = React.useCallback(() => {
@@ -227,13 +228,60 @@ const SingleItemGalleryTemplate: StoryFn<GalleryProps> = () => {
         name: 'Corgi image',
     });
 
+    const renderActions = React.useCallback(
+        (file: GalleryFile) => {
+            const result: GalleryItemAction[] = [
+                {
+                    id: 'clipboard',
+                    title: file.type === 'text' ? 'Copy text' : 'Copy link',
+                    icon: <Icon data={Link} size={mobile ? 18 : 16} />,
+                    render: (buttonProps) => {
+                        return (
+                            <CopyToClipboard
+                                onCopy={() =>
+                                    alert(file.type === 'text' ? 'Text copied!' : 'Link copied!')
+                                }
+                                text={file.type === 'text' ? file.text : file.url || ''}
+                            >
+                                {() => {
+                                    if (mobile) {
+                                        return <Button {...buttonProps} />;
+                                    }
+                                    return (
+                                        <ActionTooltip
+                                            title={file.type === 'text' ? 'Copy text' : 'Copy link'}
+                                        >
+                                            <Button {...buttonProps} />
+                                        </ActionTooltip>
+                                    );
+                                }}
+                            </CopyToClipboard>
+                        );
+                    },
+                },
+            ];
+
+            if (file.type !== 'text') {
+                result.push({
+                    id: 'new-tab',
+                    title: 'Open in new tab',
+                    icon: <Icon data={ArrowUpRightFromSquare} size={mobile ? 18 : 16} />,
+                    href: file.url,
+                });
+            }
+
+            return result;
+        },
+        [mobile],
+    );
+
     return (
         <React.Fragment>
             <Button onClick={handleOpen} view="action" size="l">
                 Open gallery
             </Button>
             <Gallery open={open} onOpenChange={handleToggle}>
-                <GalleryItem {...imageGalleryItem} />
+                <GalleryItem {...imageGalleryItem} actions={renderActions(files[0])} />
             </Gallery>
         </React.Fragment>
     );
