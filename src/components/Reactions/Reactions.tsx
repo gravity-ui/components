@@ -4,7 +4,6 @@ import {FaceSmile} from '@gravity-ui/icons';
 import {
     Button,
     DOMProps,
-    Flex,
     Icon,
     Palette,
     PaletteOption,
@@ -18,6 +17,7 @@ import xor from 'lodash/xor';
 import {block} from '../utils/cn';
 
 import {Reaction, ReactionInnerProps, ReactionProps, ReactionState} from './Reaction';
+import {ReactionsContainer} from './ReactionsContainer';
 import {ReactionsContextProvider, ReactionsContextTooltipProps} from './context';
 import {i18n} from './i18n';
 
@@ -81,17 +81,12 @@ export interface ReactionsProps<AddReactionRef extends HTMLElement = HTMLButtonE
     popupClassName?: string;
     popupPlacement?: PopupPlacement;
     /**
-     * That the component will be rendered with a container
-     */
-    withContainer?: boolean;
-    /**
      * Custom render function for the reaction button
      * Allows to fully customize the appearance of the button
      */
     renderReaction?: ReactionInnerProps['renderReaction'];
     renderAddReaction?: (props: RenderAddProps<AddReactionRef>) => React.ReactNode;
     renderReactionsContent?: (props: {
-        container: (child: JSX.Element) => JSX.Element;
         reactionList: React.ReactNode;
         addReactionButton: React.ReactNode;
     }) => React.ReactNode;
@@ -259,27 +254,20 @@ export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement
         </React.Fragment>
     );
 
-    const container = (content: JSX.Element) => (
-        <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
-            {content}
-        </Flex>
-    );
-
     const renderReactions = () => {
         if (renderReactionsContent) {
             return renderReactionsContent({
-                container,
                 reactionList,
                 addReactionButton,
             });
         }
 
-        return container(
-            <React.Fragment>
+        return (
+            <ReactionsContainer className={className} qa={qa} style={style}>
                 {addButtonPlacement === 'start' ? addReactionButton : null}
                 {reactionList}
                 {addButtonPlacement === 'end' ? addReactionButton : null}
-            </React.Fragment>,
+            </ReactionsContainer>
         );
     };
 
