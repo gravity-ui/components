@@ -40,10 +40,8 @@ export interface RenderAddProps<AddReactionRef extends HTMLElement = HTMLButtonE
         'aria-controls' | 'aria-haspopup' | 'aria-expanded'
     >;
 }
-export interface ReactionsProps<
-    AddReactionRef extends HTMLElement = HTMLButtonElement,
-    ReactionRef extends HTMLElement = HTMLButtonElement,
-> extends Pick<PaletteProps, 'size'>,
+export interface ReactionsProps<AddReactionRef extends HTMLElement = HTMLButtonElement>
+    extends Pick<PaletteProps, 'size'>,
         QAProps,
         DOMProps {
     /**
@@ -83,10 +81,14 @@ export interface ReactionsProps<
     popupClassName?: string;
     popupPlacement?: PopupPlacement;
     /**
+     * That the component will be rendered with a container
+     */
+    withContainer?: boolean;
+    /**
      * Custom render function for the reaction button
      * Allows to fully customize the appearance of the button
      */
-    renderReaction?: ReactionInnerProps<ReactionRef>['renderReaction'];
+    renderReaction?: ReactionInnerProps['renderReaction'];
     renderAddReaction?: (props: RenderAddProps<AddReactionRef>) => React.ReactNode;
 }
 
@@ -100,10 +102,7 @@ const buttonSizeToIconSize = {
 
 const popupId = 'reactions-palette-popup';
 
-export function Reactions<
-    AddReactionRef extends HTMLElement = HTMLButtonElement,
-    ReactionRef extends HTMLElement = HTMLButtonElement,
->({
+export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement>({
     reactions,
     reactionsState,
     className,
@@ -117,9 +116,10 @@ export function Reactions<
     onToggle,
     popupClassName,
     popupPlacement,
+    withContainer = true,
     renderReaction,
     renderAddReaction,
-}: ReactionsProps<AddReactionRef, ReactionRef>) {
+}: ReactionsProps<AddReactionRef>) {
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
     const addReactionRef = React.useRef<AddReactionRef>(null);
 
@@ -241,28 +241,53 @@ export function Reactions<
                 setOpenedTooltip: setCurrentHoveredReaction,
             }}
         >
-            <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
-                {addButtonPlacement === 'start' ? addReactionButton : null}
+            {withContainer ? (
+                <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
+                    {addButtonPlacement === 'start' ? addReactionButton : null}
 
-                {/* Reactions' list */}
-                {reactionsState.map((reaction) => {
-                    const content = paletteOptionsMap[reaction.value]?.content ?? '?';
+                    {/* Reactions' list */}
+                    {reactionsState.map((reaction) => {
+                        const content = paletteOptionsMap[reaction.value]?.content ?? '?';
 
-                    return (
-                        <Reaction
-                            key={reaction.value}
-                            content={content}
-                            reaction={reaction}
-                            size={size}
-                            tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
-                            onClick={readOnly ? undefined : onToggle}
-                            renderReaction={renderReaction}
-                        />
-                    );
-                })}
+                        return (
+                            <Reaction
+                                key={reaction.value}
+                                content={content}
+                                reaction={reaction}
+                                size={size}
+                                tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
+                                onClick={readOnly ? undefined : onToggle}
+                                renderReaction={renderReaction}
+                            />
+                        );
+                    })}
 
-                {addButtonPlacement === 'end' ? addReactionButton : null}
-            </Flex>
+                    {addButtonPlacement === 'end' ? addReactionButton : null}
+                </Flex>
+            ) : (
+                <React.Fragment>
+                    {addButtonPlacement === 'start' ? addReactionButton : null}
+
+                    {/* Reactions' list */}
+                    {reactionsState.map((reaction) => {
+                        const content = paletteOptionsMap[reaction.value]?.content ?? '?';
+
+                        return (
+                            <Reaction
+                                key={reaction.value}
+                                content={content}
+                                reaction={reaction}
+                                size={size}
+                                tooltip={renderTooltip ? renderTooltip(reaction) : undefined}
+                                onClick={readOnly ? undefined : onToggle}
+                                renderReaction={renderReaction}
+                            />
+                        );
+                    })}
+
+                    {addButtonPlacement === 'end' ? addReactionButton : null}
+                </React.Fragment>
+            )}
 
             {addReactionPopup}
         </ReactionsContextProvider>
