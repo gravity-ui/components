@@ -201,7 +201,10 @@ export function Reactions<
             <Button
                 ref={addReactionButtonRef}
                 size={size}
-                extraProps={{'aria-label': i18n('add-reaction')}}
+                aria-label={i18n('add-reaction')}
+                aria-expanded={palettePopupOpened}
+                aria-haspopup={true}
+                aria-controls={popupId}
                 onClick={onTogglePalettePopup}
                 view="flat-secondary"
                 className={b('reaction-button', {
