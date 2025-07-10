@@ -86,6 +86,48 @@ export interface ReactionsProps<AddReactionRef extends HTMLElement = HTMLButtonE
      */
     renderReaction?: ReactionInnerProps['renderReaction'];
     renderAddReaction?: (props: RenderAddProps<AddReactionRef>) => React.ReactNode;
+    /**
+     * Callback function to render custom reactions content.
+     *
+     * @param {Object} props - Reaction rendering properties
+     * @param {ReactNode} props.addReactionButton - Button component for adding a new reaction
+     * @param {ReactNode} props.reactionList - Component that displays the list of reactions
+     * @returns {ReactNode} Custom reactions container
+     *
+     * @example
+     * ```tsx
+     * import { Reactions, ReactionsContainer } from '@gravity-ui/components';
+     *
+     * <Reactions
+     *   renderReactionsContent={(props) => {
+     *     return (
+     *       <ReactionsContainer>
+     *         {props.addReactionButton}
+     *         {props.reactionList}
+     *       </ReactionsContainer>
+     *     );
+     *   }}
+     * />
+     * ```
+     *
+     * @example
+     * // You can customize the layout of reaction elements by wrapping them in your own container:
+     * ```tsx
+     * <Reactions
+     *   renderReactionsContent={(props) => {
+     *     return (
+     *       <div className="custom-reactions-wrapper">
+     *         <div className="reactions-header">Reactions:</div>
+     *         {props.addReactionButton}
+     *         <div className="reactions-list-container">
+     *           {props.reactionList}
+     *         </div>
+     *       </div>
+     *     );
+     *   }}
+     * />
+     * ```
+     */
     renderReactionsContent?: (props: {
         reactionList: React.ReactNode;
         addReactionButton: React.ReactNode;
