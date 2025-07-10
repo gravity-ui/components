@@ -105,10 +105,10 @@ For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-
 **ReactionState** (single reaction props):
 
 | Property   | Type              | Required | Default | Description                       |
-| :--------- | :---------------- | :------: | :------ | :-------------------------------- | --- |
+| :--------- | :---------------- | :------: | :------ | :-------------------------------- |
 | `counter`  | `React.ReactNode` |          |         | How many users used this reaction |
 | `selected` | `boolean`         |          |         | Is reaction selected by the user  |
-| `value`    | `string`          |          |         | Reaction's unique value (ID)      |     |
+| `value`    | `string`          |          |         | Reaction's unique value (ID)      |
 
 **RenderAddProps** (for custom rendering of add reaction button):
 
