@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.7.1](https://github.com/gravity-ui/components/compare/v4.7.0...v4.7.1) (2025-07-10)
+
+
+### Bug Fixes
+
+* **Reaction:** add withContainer prop and remove ReactionRef generic ([#316](https://github.com/gravity-ui/components/issues/316)) ([8a7a6da](https://github.com/gravity-ui/components/commit/8a7a6dad20cf86be4a94bf26d72e849d40436bf2))
+
 ## [4.7.0](https://github.com/gravity-ui/components/compare/v4.6.0...v4.7.0) (2025-07-10)
 
 
