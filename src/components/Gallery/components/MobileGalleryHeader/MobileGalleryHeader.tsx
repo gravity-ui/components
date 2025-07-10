@@ -77,6 +77,7 @@ export const MobileGalleryHeader = ({
                         onClick={handleMobileActionClick}
                         aria-label={i18n('close')}
                         color="primary"
+                        className={cnGalleryHeaderMobile('button-actions')}
                     >
                         <Icon size={MOBILE_ICON_SIZE} data={Ellipsis} />
                     </Button>
