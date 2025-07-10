@@ -37,6 +37,10 @@ $block: '.#{variables.$ns}gallery-header-mobile';
         }
     }
 
+    &__button-actions {
+        grid-column: 3;
+    }
+
     &__footer {
         width: 100%;
         padding: var(--g-spacing-2) var(--g-spacing-5) var(--g-spacing-2);
