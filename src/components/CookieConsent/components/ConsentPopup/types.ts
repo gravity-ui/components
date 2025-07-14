@@ -13,6 +13,7 @@ export interface ConsentPopupCookieListItem extends Pick<FoldableListItem, 'titl
     type: `${ConsentType}`;
     title?: string;
     text?: string;
+    defaultChecked?: boolean;
 }
 
 export interface ConsentPopupData {

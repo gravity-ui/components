@@ -13,7 +13,12 @@ export default {
     component: CookieConsent,
 } as Meta;
 
-const cookieList = Object.values(ConsentType).map((type) => {
+const cookieList = [
+    ConsentType.Necessary,
+    ConsentType.Functional,
+    ConsentType.Analytics,
+    ConsentType.Marketing,
+].map((type) => {
     const result: ConsentPopupCookieListItem = {
         type,
         link: {href: 'https://google.com'},
@@ -21,6 +26,10 @@ const cookieList = Object.values(ConsentType).map((type) => {
 
     if (type === ConsentType.Necessary) {
         result.titleLabel = 'Always active';
+    }
+
+    if (type === ConsentType.Functional) {
+        result.defaultChecked = true;
     }
 
     return result;

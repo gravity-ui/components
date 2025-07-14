@@ -12,6 +12,8 @@
   "cookie_marketing_title": "Marketing cookies",
   "cookie_necessary_text": "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions by visitors which amount to a request for services, such as setting privacy preferences, logging in or filling out forms. You can set your browser to block or alert you about these cookies, but this may cause parts of the website to not work properly.",
   "cookie_necessary_title": "Strictly necessary cookies",
+  "cookie_functional_text": "These cookies provide insights for improving your interaction with the site. They collect data about your system and settings, such as device and browser information, but only after you log in. Disabling these cookies makes it harder to identify and debug website issues.",
+  "cookie_functional_title": "Functional cookies",
   "details_text": "For details, please read our",
   "label_manage_cookie": "You can also",
   "label_manage_cookie_link_text": "Manage cookies",
