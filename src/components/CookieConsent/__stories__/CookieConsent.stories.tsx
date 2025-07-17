@@ -11,6 +11,57 @@ import type {CookieConsentProps} from '../types';
 export default {
     title: 'Components/CookieConsent',
     component: CookieConsent,
+    argTypes: {
+        consentMode: {
+            control: 'select',
+            options: Object.values(ConsentMode),
+        },
+        manageCookies: {
+            control: 'boolean',
+        },
+        text: {
+            control: 'text',
+        },
+        policyLink: {
+            control: 'text',
+        },
+        policyLinkText: {
+            control: 'text',
+        },
+        buttonAcceptText: {
+            control: 'text',
+        },
+        buttonDeclineText: {
+            control: 'text',
+        },
+        buttonNecessaryText: {
+            control: 'text',
+        },
+        buttonConfirmText: {
+            control: 'text',
+        },
+        manageLabelText: {
+            control: 'text',
+        },
+        manageTitleText: {
+            control: 'text',
+        },
+        mainTitleText: {
+            control: 'text',
+        },
+        noSubtitle: {
+            control: 'boolean',
+        },
+        modalClassName: {
+            control: 'text',
+        },
+        className: {
+            control: 'text',
+        },
+        cookieList: {
+            control: 'object',
+        },
+    },
 } as Meta;
 
 const cookieList = [

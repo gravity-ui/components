@@ -33,8 +33,16 @@ export interface ConsentPopupData {
     buttonConfirmText?: string;
     /* Text about cookie management */
     manageLabelText?: string;
+    /* Title text for manage cookies step */
+    manageTitleText?: string;
+    /* Title text for main step */
+    mainTitleText?: string;
+    /* Hide subtitle in manage cookies step */
+    noSubtitle?: boolean;
     cookieList?: ConsentPopupCookieListItem[];
     onClose: () => void;
+    /* Disable modal animation */
+    disableHeightTransition?: boolean;
 }
 
 export type ConsentPopupProps = ConsentPopupData &
@@ -51,14 +59,18 @@ export interface HeaderProps {
     /* Initial step */
     initialStep: `${ConsentPopupStep}`;
     onClose: () => void;
-    onChangeStep: (step: `${ConsentPopupStep}`) => () => void;
     /* Is mobile view */
     isMobile?: boolean;
+    /* Title text for manage cookies step */
+    manageTitleText?: string;
+    /* Title text for main step */
+    mainTitleText?: string;
 }
 
 export interface FooterProps {
     /* Active step */
     currentStep: `${ConsentPopupStep}`;
+    initialStep: `${ConsentPopupStep}`;
     /* Text on the consent acceptance button */
     buttonAcceptText?: string;
     /* Text on the button for accepting required cookies */
@@ -68,4 +80,5 @@ export interface FooterProps {
     onAction: (consents: Consents | 'All' | 'OnlyNecessary') => void;
     /* Current consent */
     currentConsents: Consents;
+    onChangeStep: (step: `${ConsentPopupStep}`) => void;
 }
