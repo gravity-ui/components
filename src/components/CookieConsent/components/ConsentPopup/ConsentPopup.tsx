@@ -8,6 +8,7 @@ import {ConsentType} from '../../ConsentManager';
 import type {Consents} from '../../ConsentManager';
 import {i18n} from '../../i18n';
 import {FoldableList} from '../FoldableList/FoldableList';
+import {FoldableListItem} from '../FoldableList/types';
 
 import {
     ConsentPopupCookieListItem,
@@ -93,11 +94,11 @@ const Footer = ({
             <Button
                 key="confirm"
                 className={b('button')}
-                onClick={isManageStep ? confirmSelectedConsent : onButtonClick(false)}
+                onClick={confirmSelectedConsent}
                 size="l"
                 view="action"
             >
-                {isManageStep ? buttonConfirmText : buttonAcceptText}
+                {buttonConfirmText}
             </Button>
         ),
         acceptAll: (view: 'action' | 'flat-secondary') => (
@@ -187,12 +188,13 @@ export const ConsentPopup = ({
         setCurrentStep(newStep);
     };
     const isManageStep = currentStep === ConsentPopupStep.Manage;
-    const preparedCookieList = React.useMemo(() => {
-        return cookieList?.map((item) => {
+    const foldableListItems = React.useMemo(() => {
+        return cookieList?.map((item): FoldableListItem => {
             const isNecessaryItem = item.type === ConsentType.Necessary;
 
             return {
-                checked: Boolean(currentConsents[item.type] || item.defaultChecked),
+                checked: Boolean(currentConsents[item.type]),
+                defaultChecked: item.defaultChecked,
                 disabled: isNecessaryItem,
                 defaultExpand: isNecessaryItem,
                 title: item.title || i18n(`cookie_${item.type}_title`),
@@ -262,11 +264,11 @@ export const ConsentPopup = ({
                                 )}
                                 .
                             </div>
-                            {preparedCookieList ? (
+                            {foldableListItems ? (
                                 <FoldableList
                                     isMobile={mobile}
                                     className={b('cookie-list')}
-                                    items={preparedCookieList}
+                                    items={foldableListItems}
                                     onChooseItem={onChoose}
                                 />
                             ) : null}
