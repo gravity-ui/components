@@ -61,6 +61,9 @@ export default {
         cookieList: {
             control: 'object',
         },
+        disableHeightTransition: {
+            control: 'boolean',
+        },
     },
 } as Meta;
 
