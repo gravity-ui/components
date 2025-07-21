@@ -101,9 +101,9 @@ const Footer = ({
                 {buttonConfirmText}
             </Button>
         ),
-        acceptAll: (view: 'action' | 'flat-secondary') => (
+        allowAll: (view: 'action' | 'flat-secondary') => (
             <Button
-                key="acceptAll"
+                key="allowAll"
                 className={b('button')}
                 onClick={onButtonClick(false)}
                 size="l"
@@ -139,7 +139,7 @@ const Footer = ({
     if (isManageStep && initialStep === ConsentPopupStep.Manage) {
         return (
             <div className={b('buttons')}>
-                <div> {buttons.acceptAll('flat-secondary')}</div>
+                <div> {buttons.allowAll('flat-secondary')}</div>
 
                 <div className={b('action-buttons')}>
                     {buttons.onlyNecessary()}
@@ -155,7 +155,7 @@ const Footer = ({
 
             <div className={b('action-buttons')}>
                 {buttons.onlyNecessary()}
-                {isManageStep ? buttons.confirm() : buttons.acceptAll('action')}
+                {isManageStep ? buttons.confirm() : buttons.allowAll('action')}
             </div>
         </div>
     );
