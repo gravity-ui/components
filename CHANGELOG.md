@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.0](https://github.com/gravity-ui/components/compare/v4.8.0...v4.9.0) (2025-07-24)
+
+
+### Features
+
+* **ItemSelector:** add renderValueItem property and title attribute to title node ([#321](https://github.com/gravity-ui/components/issues/321)) ([0473ba6](https://github.com/gravity-ui/components/commit/0473ba6466b73bf3ec2150b7cb07be8dc444b8cc))
+
 ## [4.8.0](https://github.com/gravity-ui/components/compare/v4.7.1...v4.8.0) (2025-07-24)
 
 
