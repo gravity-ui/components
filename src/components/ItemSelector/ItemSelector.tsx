@@ -45,36 +45,48 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         }
         return getItemId(item);
     };
-    renderItem = (item: T, active: boolean) => (
-        <div className={b('item', {active})}>
-            <span className={b('item-text')}>{this.renderItemTitle(item)}</span>
-            <Button
-                view="flat-secondary"
-                size="s"
-                className={b('item-select')}
-                onClick={this.onAddItem.bind(this, item)}
-            >
-                {i18n('button_select')}
-            </Button>
-        </div>
-    );
+    renderItem = (item: T, active: boolean) => {
+        const title = this.renderItemTitle(item);
+        const nativeTitle = typeof title === 'string' ? title : undefined;
+        return (
+            <div className={b('item', {active})}>
+                <span className={b('item-text')} title={nativeTitle}>
+                    {title}
+                </span>
+                <Button
+                    view="flat-secondary"
+                    size="s"
+                    className={b('item-select')}
+                    onClick={this.onAddItem.bind(this, item)}
+                >
+                    {i18n('button_select')}
+                </Button>
+            </div>
+        );
+    };
     filterItem = (filter: string) => (item: T) => {
         const {getItemId} = this.props;
         return getItemId(item).includes(filter);
     };
-    renderValueItem = (item: T, active: boolean) => (
-        <div className={b('value-item', {active})}>
-            <span className={b('value-item-text')}>{this.renderItemTitle(item)}</span>
-            <Button
-                view="flat-secondary"
-                size="s"
-                className={b('value-item-remove')}
-                onClick={() => this.onRemoveItem(item)}
-            >
-                <Icon data={Xmark} size={16} />
-            </Button>
-        </div>
-    );
+    renderValueItem = (item: T, active: boolean) => {
+        const title = this.renderItemTitle(item);
+        const nativeTitle = typeof title === 'string' ? title : undefined;
+        return (
+            <div className={b('value-item', {active})}>
+                <span className={b('value-item-text')} title={nativeTitle}>
+                    {title}
+                </span>
+                <Button
+                    view="flat-secondary"
+                    size="s"
+                    className={b('value-item-remove')}
+                    onClick={() => this.onRemoveItem(item)}
+                >
+                    <Icon data={Xmark} size={16} />
+                </Button>
+            </div>
+        );
+    };
     getActualItems() {
         const {items, value, hideSelected, getItemId} = this.props;
         const actualItems = [];
