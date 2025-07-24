@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.8.0](https://github.com/gravity-ui/components/compare/v4.7.1...v4.8.0) (2025-07-24)
+
+
+### Features
+
+* **CookieConsent:** add functional cookie type and defaultChecked for cookieList items ([#319](https://github.com/gravity-ui/components/issues/319)) ([7eae491](https://github.com/gravity-ui/components/commit/7eae49177abe4e110800524f6cf05735c7a80183))
+
 ## [4.7.1](https://github.com/gravity-ui/components/compare/v4.7.0...v4.7.1) (2025-07-10)
 
 
