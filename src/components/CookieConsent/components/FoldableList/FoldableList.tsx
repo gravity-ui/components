@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ChevronLeft, ChevronRight} from '@gravity-ui/icons';
 import {
@@ -24,7 +24,7 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
     const direction = useDirection();
     const [checkedItems, setChecked] = React.useState<number[]>(() =>
         items.reduce((acc: number[], item: FoldableListItem, index: number) => {
-            if (item.checked) {
+            if (item.checked || item.defaultChecked) {
                 acc.push(index);
             }
 

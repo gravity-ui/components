@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Button, Icon} from '@gravity-ui/uikit';
 
 import {ShareList, ShareOptions, SharePopover} from '../../../SharePopover';

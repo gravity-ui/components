@@ -2,44 +2,34 @@
 @use '../../../variables';
 
 $block: '.#{variables.$ns}stories-layout';
-$borderRadius: 20px;
+
 $maxWidth: 1280px;
 $maxHeight: 640px;
 $minWidth: 800px;
 $minHeight: 480px;
-$leftPaneBorderRadius: 17px;
-$leftPanePadding: 32px;
-$rightPanePadding: 68px;
-$smallMargin: 8px;
-$textBlockMargin: 16px;
+$fixedBtnSize: 44px;
+
+$actionBtnZIndex: 50;
+$textContentZIndex: 30;
+
+$borderRadius: 20px;
+$borderRadiusCard: 14px;
 
 #{$block} {
     &__wrap-outer {
         height: calc(100vh - 2 * var(--g-modal-margin));
         width: calc(100vw - 2 * var(--g-modal-margin));
+        background-color: var(--g-color-base-background);
         display: flex;
         border-radius: $borderRadius;
         max-width: $maxWidth;
         max-height: $maxHeight;
         min-width: $minWidth;
         min-height: $minHeight;
-        background-color: var(--g-color-base-selection);
-    }
-
-    &__wrap-inner {
-        background-color: var(--g-color-base-background);
-        border-radius: $borderRadius;
-        max-width: $maxWidth;
-        max-height: $maxHeight;
-        min-width: $minWidth;
-        min-height: $minHeight;
-        width: 100%;
-        height: 100%;
     }
 
     &__container {
         display: flex;
-        background-color: var(--g-color-base-selection);
         box-shadow: 0 8px 20px var(--g-color-sfx-shadow);
         border-radius: $borderRadius;
         position: relative;
@@ -49,80 +39,96 @@ $textBlockMargin: 16px;
     }
 
     &__left-pane {
-        width: 464px;
-        flex-shrink: 0;
-        margin-inline-start: $smallMargin;
-        margin-block: $smallMargin;
-        background-color: var(--g-color-base-background);
-        border-radius: $leftPaneBorderRadius;
-        padding: $leftPanePadding;
+        flex-basis: calc(50% - var(--g-spacing-4));
+        margin-inline: var(--g-spacing-2);
+        margin-block: var(--g-spacing-2);
+        padding: var(--g-spacing-8);
+
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        flex-shrink: 0;
         box-sizing: border-box;
+        z-index: $textContentZIndex;
+
+        &_blockStyle_card {
+            background-color: var(--g-color-base-background);
+            border-radius: $borderRadiusCard;
+        }
+
+        &_blockStyle_transparent {
+            background-color: transparent;
+        }
     }
 
     &__right-pane {
-        padding: $rightPanePadding;
+        flex-basis: 50%;
+
+        width: 100%;
+        height: 100%;
+
         display: flex;
-        flex-grow: 1;
-        align-items: center;
     }
 
     &__counter {
-        @include mixins.text-body-2();
         color: var(--g-color-text-secondary);
     }
 
     &__text-block {
+        box-sizing: border-box;
+        height: 100%;
+        min-height: 0;
         display: flex;
         flex-grow: 1;
         align-items: flex-start;
-        justify-content: center;
+        justify-content: flex-start;
         flex-direction: column;
-        margin-block-end: $smallMargin;
-        overflow: hidden;
+        margin-block-start: var(--g-spacing-10);
+    }
+
+    &__action-block {
+        margin-block-start: var(--g-spacing-8);
     }
 
     &__text-header {
-        @include mixins.text-display-2();
         color: var(--g-color-text-primary);
     }
 
     &__text-content {
-        @include mixins.text-body-2();
         color: var(--g-color-text-complementary);
-        overflow-y: scroll;
+        overflow-y: auto;
 
         #{$block}__text-header + & {
-            margin-block-start: $textBlockMargin;
+            margin-block-start: var(--g-spacing-4);
         }
     }
 
     &__story-link-block {
-        margin-block-start: $textBlockMargin;
+        margin-block-start: var(--g-spacing-4);
     }
 
-    &__controls-block {
-        display: flex;
-        gap: #{$smallMargin};
+    &__navigation-btn {
+        --g-border-radius-xl: 50%;
 
-        button {
-            max-width: 50%;
+        position: absolute;
+        inset-block-start: calc(50% - ($fixedBtnSize / 2));
+        z-index: $actionBtnZIndex;
+
+        &_back {
+            inset-inline-start: calc(0px - ($fixedBtnSize / 2));
+        }
+
+        &_next {
+            inset-inline-end: calc(0px - ($fixedBtnSize / 2));
         }
     }
 
-    &__media-block {
-        position: relative;
-        display: flex;
-        width: 100%;
-        height: 100%;
-    }
-
     &__close-btn {
+        --g-border-radius-xl: 50%;
+
         position: absolute;
-        inset-block-start: 14px;
-        inset-inline-end: 20px;
-        z-index: 1;
+        inset-block-start: var(--g-spacing-4);
+        inset-inline-end: var(--g-spacing-4);
+        z-index: $actionBtnZIndex;
     }
 }

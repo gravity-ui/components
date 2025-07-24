@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {dateTimeParse} from '@gravity-ui/date-utils';
 import {CirclePlay} from '@gravity-ui/icons';

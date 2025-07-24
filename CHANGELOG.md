@@ -1,5 +1,176 @@
 # Changelog
 
+## [4.8.0](https://github.com/gravity-ui/components/compare/v4.7.1...v4.8.0) (2025-07-24)
+
+
+### Features
+
+* **CookieConsent:** add functional cookie type and defaultChecked for cookieList items ([#319](https://github.com/gravity-ui/components/issues/319)) ([7eae491](https://github.com/gravity-ui/components/commit/7eae49177abe4e110800524f6cf05735c7a80183))
+
+## [4.7.1](https://github.com/gravity-ui/components/compare/v4.7.0...v4.7.1) (2025-07-10)
+
+
+### Bug Fixes
+
+* **Reaction:** add withContainer prop and remove ReactionRef generic ([#316](https://github.com/gravity-ui/components/issues/316)) ([8a7a6da](https://github.com/gravity-ui/components/commit/8a7a6dad20cf86be4a94bf26d72e849d40436bf2))
+
+## [4.7.0](https://github.com/gravity-ui/components/compare/v4.6.0...v4.7.0) (2025-07-10)
+
+
+### Features
+
+* **Reactions:** add new props for reactions ([#310](https://github.com/gravity-ui/components/issues/310)) ([6bbef78](https://github.com/gravity-ui/components/commit/6bbef7848ebf6e469b97fc02132898dab81bb99d))
+* **StoriesGroup:** add scroll to text and update background-image styles ([#311](https://github.com/gravity-ui/components/issues/311)) ([73054ce](https://github.com/gravity-ui/components/commit/73054ceb8e0393ce33012194452a0897734de171))
+
+
+### Bug Fixes
+
+* **Gallery:** actions placement ([#314](https://github.com/gravity-ui/components/issues/314)) ([248d60d](https://github.com/gravity-ui/components/commit/248d60db68078615b166b1802b4effca463cbb9f))
+
+## [4.6.0](https://github.com/gravity-ui/components/compare/v4.5.1...v4.6.0) (2025-07-07)
+
+
+### Features
+
+* **Gallery:** add closeGallery ([#308](https://github.com/gravity-ui/components/issues/308)) ([a71005f](https://github.com/gravity-ui/components/commit/a71005fc750b63a7ab7d2f916b87f714433358ad))
+
+## [4.5.1](https://github.com/gravity-ui/components/compare/v4.5.0...v4.5.1) (2025-06-30)
+
+
+### Bug Fixes
+
+* **build:** treeshaking ([#306](https://github.com/gravity-ui/components/issues/306)) ([952d23d](https://github.com/gravity-ui/components/commit/952d23d775dd265e0105f97b5149a3641d529c0d))
+
+## [4.5.0](https://github.com/gravity-ui/components/compare/v4.4.0...v4.5.0) (2025-06-16)
+
+
+### Features
+
+* **Gallery:** add mobile view ([#302](https://github.com/gravity-ui/components/issues/302)) ([82dd6ec](https://github.com/gravity-ui/components/commit/82dd6ecffbfbd761475decf24b16573ca7ba8fc4))
+
+## [4.4.0](https://github.com/gravity-ui/components/compare/v4.3.1...v4.4.0) (2025-05-28)
+
+
+### Features
+
+* Add ability disable height transition for ChangelogDialog ([#296](https://github.com/gravity-ui/components/issues/296)) ([65f6bd6](https://github.com/gravity-ui/components/commit/65f6bd6d84946857d936b70588ccc793f737f388))
+
+## [4.3.1](https://github.com/gravity-ui/components/compare/v4.3.0...v4.3.1) (2025-05-26)
+
+
+### Bug Fixes
+
+* **SharePopover:** update ShareList component styles ([#294](https://github.com/gravity-ui/components/issues/294)) ([327efbf](https://github.com/gravity-ui/components/commit/327efbfee90c03e88b40008beb6223cf4190555b))
+
+## [4.3.0](https://github.com/gravity-ui/components/compare/v4.2.2...v4.3.0) (2025-05-16)
+
+
+### Features
+
+* **Notifications:** add the renderCustomHeader prop ([b7ddd4b](https://github.com/gravity-ui/components/commit/b7ddd4b1c031d086a73b0752007bf719ce65480c))
+
+## [4.2.2](https://github.com/gravity-ui/components/compare/v4.2.1...v4.2.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* add hooks export ([#285](https://github.com/gravity-ui/components/issues/285)) ([3ec1df7](https://github.com/gravity-ui/components/commit/3ec1df7d5d992685352a8c15116757ed58207aac))
+
+## [4.2.1](https://github.com/gravity-ui/components/compare/v4.2.0...v4.2.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* **useGallery:** fix build ([#283](https://github.com/gravity-ui/components/issues/283)) ([55940d1](https://github.com/gravity-ui/components/commit/55940d100ef4a17d7aede9141a20c2109c3b98f0))
+
+## [4.2.0](https://github.com/gravity-ui/components/compare/v4.1.2...v4.2.0) (2025-04-30)
+
+
+### Features
+
+* **Gallery:** add a hook for opening the gallery ([#275](https://github.com/gravity-ui/components/issues/275)) ([69c4f98](https://github.com/gravity-ui/components/commit/69c4f98800bbdfc789c8af445f9b2fe5c7bf3691))
+* **Notifications:** Allowed ReactNode in source icon + added `sourcePlacement` property (`bottom` is used by default) ([#278](https://github.com/gravity-ui/components/issues/278)) ([08c403a](https://github.com/gravity-ui/components/commit/08c403aa9be0b4a9ce6c67deb701391770168d29))
+
+## [4.1.2](https://github.com/gravity-ui/components/compare/v4.1.1...v4.1.2) (2025-04-17)
+
+
+### Bug Fixes
+
+* **Gallery:** hide navigation in single item mode ([#276](https://github.com/gravity-ui/components/issues/276)) ([1afc220](https://github.com/gravity-ui/components/commit/1afc2203421ec50cb66de21ce14569759b570b79))
+
+## [4.1.1](https://github.com/gravity-ui/components/compare/v4.1.0...v4.1.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **Gallery:** remove custom assets ([#273](https://github.com/gravity-ui/components/issues/273)) ([a76faa8](https://github.com/gravity-ui/components/commit/a76faa80c0b6c8b87b6d9aa247a5edcb3f2440f6))
+
+## [4.1.0](https://github.com/gravity-ui/components/compare/v4.0.1...v4.1.0) (2025-03-26)
+
+
+### Features
+
+* **Gallery:** add Gallery component ([#247](https://github.com/gravity-ui/components/issues/247)) ([28b1ca7](https://github.com/gravity-ui/components/commit/28b1ca759d9d12c55df5a5125aa818483c04c09e))
+* **OnboardingMenu:** Add close button ([#272](https://github.com/gravity-ui/components/issues/272)) ([208415f](https://github.com/gravity-ui/components/commit/208415f8336284829a1ff244eb2abe5fb5efff13))
+
+
+### Bug Fixes
+
+* change the distance between notifications 1px -&gt; 4px (Notifications) ([#262](https://github.com/gravity-ui/components/issues/262)) ([ca74270](https://github.com/gravity-ui/components/commit/ca74270d4d4758c161adc731abf9bf50bd94e052))
+
+## [4.0.1](https://github.com/gravity-ui/components/compare/v4.0.0...v4.0.1) (2025-02-07)
+
+
+### Bug Fixes
+
+* fix esm build ([#260](https://github.com/gravity-ui/components/issues/260)) ([3398560](https://github.com/gravity-ui/components/commit/3398560145b7d6936edb7b8cd579b53642d14fbb))
+
+## [4.0.0](https://github.com/gravity-ui/components/compare/v3.13.2...v4.0.0) (2025-02-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* update uikit
+* **ActionsPanel:** remove component
+* use ts target es2022
+* major update Stories and StoriesGroup ([#256](https://github.com/gravity-ui/components/issues/256))
+* prepare v4 release (deps + removals) ([#255](https://github.com/gravity-ui/components/issues/255))
+
+### Features
+
+* **ActionsPanel:** remove component ([8751b74](https://github.com/gravity-ui/components/commit/8751b74bb648bb8ca61c7c645421df2d5fbb40de))
+* major update Stories and StoriesGroup ([#256](https://github.com/gravity-ui/components/issues/256)) ([abd9815](https://github.com/gravity-ui/components/commit/abd98158c74f251c46e030346a8a8ee8a75019d9))
+* prepare v4 release (deps + removals) ([#255](https://github.com/gravity-ui/components/issues/255)) ([0633b74](https://github.com/gravity-ui/components/commit/0633b740a1dde06309b9965b85a1796e211ef80f))
+* update uikit ([798e980](https://github.com/gravity-ui/components/commit/798e9801cd6087bc6f446840a5754e372deee6fd))
+* update uikit ([b987225](https://github.com/gravity-ui/components/commit/b987225d62a75cb1ea2630d470b88565d21e2207))
+* update uikit ([241a836](https://github.com/gravity-ui/components/commit/241a83644d0ae544e0ef5ab103851d99e4219829))
+* update uikit ([b29686c](https://github.com/gravity-ui/components/commit/b29686cd41cf4e3369a862a96418d4084f44c47f))
+* use ts target es2022 ([0ae913f](https://github.com/gravity-ui/components/commit/0ae913f29ed42b6cfbe4cdcdc8b441e0fdae1b5b))
+
+
+### Bug Fixes
+
+* a better solution for rounding Reactions' buttons ([9de1f35](https://github.com/gravity-ui/components/commit/9de1f35f01c599471541eaa321fb9d66277d7ca0))
+* add exports field ([7663c45](https://github.com/gravity-ui/components/commit/7663c45c8371f78b673345fd68825a1480a9d33f))
+* bundling and tests ([9d6540a](https://github.com/gravity-ui/components/commit/9d6540ae1c77019678b32384c7f8ff64271d13e4))
+* **ConfirmDialog:** focus on apply to submit on Enter ([c529bb9](https://github.com/gravity-ui/components/commit/c529bb9b3d04c5f33bc642e6912f574182493ec4))
+* lint issues ([368e7d4](https://github.com/gravity-ui/components/commit/368e7d468528541af8351989da0ab0810e5bc493))
+* set 16px as border-radius for Reactions' buttons ([3918114](https://github.com/gravity-ui/components/commit/3918114817a3ae749984774dc5c3f86eaf92a533))
+
+## [3.13.2](https://github.com/gravity-ui/components/compare/v3.13.1...v3.13.2) (2024-12-24)
+
+
+### Bug Fixes
+
+* rename unstable namespace keyset ([#253](https://github.com/gravity-ui/components/issues/253)) ([1d5052a](https://github.com/gravity-ui/components/commit/1d5052a308ad1208a1df99b9109d72e0b00f04f9))
+
+## [3.13.1](https://github.com/gravity-ui/components/compare/v3.13.0...v3.13.1) (2024-12-16)
+
+
+### Bug Fixes
+
+* **unstable:** add missed exports ([#249](https://github.com/gravity-ui/components/issues/249)) ([9508491](https://github.com/gravity-ui/components/commit/950849170e8c4091ff48426f2201a502c92fd148))
+
 ## [3.13.0](https://github.com/gravity-ui/components/compare/v3.12.5...v3.13.0) (2024-12-10)
 
 

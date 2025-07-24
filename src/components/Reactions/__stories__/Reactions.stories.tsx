@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Flex, Text} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 

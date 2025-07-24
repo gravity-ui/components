@@ -1,10 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 
 import {ChevronDown} from '@gravity-ui/icons';
 import {Icon, Select, SelectProps} from '@gravity-ui/uikit';
 import difference from 'lodash/difference';
 import throttle from 'lodash/throttle';
-import ResizeObserver from 'resize-observer-polyfill';
 
 import {block} from '../utils/cn';
 
@@ -783,7 +782,7 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         },
     ) => {
         const {wrapTo} = this.props;
-        const {onClick, active, ref, text, onKeyDown} = switcherProps;
+        const {active, ref, text, triggerProps} = switcherProps;
 
         const title = (
             <div className={b('switcher-tab-content')}>
@@ -798,13 +797,11 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         const tabItemNode = <Tab {...switcherTabProps} active={Boolean(active)} />;
 
         return (
-            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
             <div
+                {...triggerProps}
                 // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
                 tabIndex={0}
                 key="switcher"
-                onClick={onClick}
-                onKeyDown={onKeyDown}
                 className={b('tab-container', {'switcher-tab': true})}
                 ref={ref as React.LegacyRef<HTMLDivElement>} // https://github.com/gravity-ui/uikit/issues/552
             >

@@ -1,18 +1,23 @@
-import React from 'react';
-
 import {block} from '../../../utils/cn';
-import type {StoriesItemMedia} from '../../types';
+import type {MediaRendererProps} from '../MediaRenderer/MediaRenderer';
 
 import './ImageView.scss';
 
 const b = block('stories-image-view');
 
-export interface ImageViewProps {
-    media: StoriesItemMedia;
-}
+export interface ImageViewProps extends MediaRendererProps {}
 
-export function ImageView({media}: ImageViewProps) {
-    const type = media.type || 'image';
+export function ImageView({media, style}: ImageViewProps) {
+    if (media.type === 'image') {
+        return (
+            <div
+                className={b({style}, b('image'))}
+                style={{
+                    backgroundImage: `url("${media.url2x ?? media.url}")`,
+                }}
+            />
+        );
+    }
 
-    return type === 'image' ? <img className={b()} src={media.url} alt="" /> : null;
+    return null;
 }

@@ -1,7 +1,7 @@
 * @amje @ValeraS @korvin89
-/src/components/AdaptiveTabs @artemipanchuk
+/src/components/AdaptiveTabs
 /src/components/DefinitionList @Raubzeug
-/src/components/FilePreview @KirillDyachkovskiy
+/src/components/FilePreview @mournfulCoroner
 /src/components/FormRow @ogonkov
 /src/components/HelpPopover @Raubzeug
 /src/components/Notifications @Ruminat
@@ -13,3 +13,5 @@
 /src/components/StoreBadge @NikitaCG
 /src/components/Stories @darkgenius
 /src/components/ConfirmDialog @kseniya57
+/src/components/Gallery @kseniya57
+/src/hooks/useGallery @kseniya57

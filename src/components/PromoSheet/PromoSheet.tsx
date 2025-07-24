@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Xmark} from '@gravity-ui/icons';
 import {Button, Icon, Sheet} from '@gravity-ui/uikit';
@@ -17,6 +17,7 @@ export type PromoSheetProps = {
     closeText: string;
     actionHref?: string;
     imageSrc?: string;
+    imageAlt?: string;
     className?: string;
     contentClassName?: string;
     imageContainerClassName?: string;
@@ -37,6 +38,7 @@ export function PromoSheet({
     closeText,
     actionHref,
     imageSrc,
+    imageAlt = '',
     className,
     contentClassName,
     imageContainerClassName,
@@ -48,8 +50,8 @@ export function PromoSheet({
     const [loaded, setLoaded] = React.useState(!imageSrc);
     const [imageSizes, setImageSizes] = React.useState<ImageSizes | undefined>();
 
-    const handleActionClick = React.useCallback<NonNullable<PromoSheetProps['onActionClick']>>(
-        (event) => {
+    const handleActionClick = React.useCallback<NonNullable<ButtonProps['onClick']>>(
+        (event: any) => {
             setVisible(false);
             onActionClick?.(event);
         },
@@ -122,7 +124,7 @@ export function PromoSheet({
                         role="presentation"
                         className={cn('image', imageClassName)}
                         src={imageSrc}
-                        alt=""
+                        alt={imageAlt}
                         width={imageSizes?.width}
                         height={imageSizes?.height}
                     />
@@ -134,8 +136,8 @@ export function PromoSheet({
                     size="xl"
                     view="outlined-contrast"
                     width="max"
-                    href={actionHref}
-                    onClick={handleActionClick}
+                    href={actionHref as any}
+                    onClick={handleActionClick as any}
                 >
                     {actionText}
                 </Button>

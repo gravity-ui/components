@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Meta, StoryFn} from '@storybook/react';
 
@@ -23,6 +23,11 @@ export default {
                 rules: [
                     {
                         id: 'color-contrast',
+                        enabled: false,
+                    },
+                    // Temporary disable the rule untill issue is resolved https://github.com/gravity-ui/components/issues/270
+                    {
+                        id: 'aria-input-field-name',
                         enabled: false,
                     },
                 ],

@@ -1,13 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 
-import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
-import {Button, Icon, Link, Modal, Text, useDirection, useMobile} from '@gravity-ui/uikit';
+import {Xmark} from '@gravity-ui/icons';
+import {Button, Icon, Link, Modal, Text, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 import {ConsentType} from '../../ConsentManager';
 import type {Consents} from '../../ConsentManager';
 import {i18n} from '../../i18n';
 import {FoldableList} from '../FoldableList/FoldableList';
+import {FoldableListItem} from '../FoldableList/types';
 
 import {
     ConsentPopupCookieListItem,
@@ -21,36 +22,38 @@ import './ConsentPopup.scss';
 
 const b = block('consent-popup');
 
-const Header = ({currentStep, initialStep, onClose, onChangeStep, isMobile}: HeaderProps) => {
-    const direction = useDirection();
-    const buttonsEnabled = currentStep === ConsentPopupStep.Manage;
-    const isBackButtonVisible = buttonsEnabled && initialStep === ConsentPopupStep.Main;
+const Header = ({
+    currentStep,
+    initialStep,
+    onClose,
+    isMobile,
+    manageTitleText,
+    mainTitleText,
+}: HeaderProps) => {
+    const renderTitle = () => {
+        if (currentStep === ConsentPopupStep.Manage) {
+            return manageTitleText || i18n('label_title_manage');
+        }
+        return mainTitleText || i18n('label_title_main');
+    };
 
     return (
         <div className={b('header')}>
             <div>
-                {isBackButtonVisible ? (
-                    <Button
-                        className={b('arrow-button')}
-                        view="flat"
-                        size="s"
-                        onClick={onChangeStep(ConsentPopupStep.Main)}
-                    >
-                        <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} size={16} />
-                    </Button>
-                ) : null}
                 <Text
                     className={b('title')}
-                    variant={buttonsEnabled && !isMobile ? 'body-3' : 'header-1'}
+                    variant={
+                        currentStep === ConsentPopupStep.Manage && !isMobile ? 'body-3' : 'header-1'
+                    }
                 >
-                    {i18n(buttonsEnabled ? 'label_title_manage' : 'label_title_main')}
+                    {renderTitle()}
                 </Text>
             </div>
-            {buttonsEnabled && !isBackButtonVisible ? (
+            {initialStep === ConsentPopupStep.Main ? null : (
                 <Button className={b('close-button')} view="flat" size="s" onClick={onClose}>
                     <Icon data={Xmark} size={16} />
                 </Button>
-            ) : null}
+            )}
         </div>
     );
 };
@@ -62,9 +65,11 @@ const Footer = ({
     buttonAcceptText = i18n('button_accept_all'),
     buttonNecessaryText = i18n('button_necessary'),
     buttonConfirmText = i18n('button_confirm'),
+    onChangeStep,
+    initialStep,
 }: FooterProps) => {
     const isManageStep = currentStep === ConsentPopupStep.Manage;
-    const onButtonClick = (onlyNecessary?: boolean) => {
+    const onButtonClick = (onlyNecessary: boolean) => {
         return () => {
             onAction(onlyNecessary ? 'OnlyNecessary' : 'All');
         };
@@ -73,26 +78,85 @@ const Footer = ({
         onAction(currentConsents);
     };
 
-    return (
-        <div className={b('buttons')}>
+    const buttons = {
+        onlyNecessary: () => (
             <Button
-                key="reject"
+                key="onlyNecessary"
                 className={b('button')}
                 onClick={onButtonClick(true)}
                 size="l"
-                view="normal"
+                view="flat-secondary"
             >
                 {buttonNecessaryText}
             </Button>
+        ),
+        confirm: () => (
             <Button
                 key="confirm"
                 className={b('button')}
-                onClick={isManageStep ? confirmSelectedConsent : onButtonClick()}
+                onClick={confirmSelectedConsent}
                 size="l"
                 view="action"
             >
-                {isManageStep ? buttonConfirmText : buttonAcceptText}
+                {buttonConfirmText}
             </Button>
+        ),
+        allowAll: (view: 'action' | 'flat-secondary') => (
+            <Button
+                key="allowAll"
+                className={b('button')}
+                onClick={onButtonClick(false)}
+                size="l"
+                view={view}
+            >
+                {buttonAcceptText}
+            </Button>
+        ),
+        manageCookies: () => (
+            <Button
+                key="manage"
+                className={b('button')}
+                onClick={() => onChangeStep(ConsentPopupStep.Manage)}
+                size="l"
+                view="flat-secondary"
+            >
+                {i18n('label_manage_cookie_link_text')}
+            </Button>
+        ),
+        back: () => (
+            <Button
+                key="back"
+                className={b('button')}
+                onClick={() => onChangeStep(ConsentPopupStep.Main)}
+                size="l"
+                view="flat-secondary"
+            >
+                {i18n('button_back')}
+            </Button>
+        ),
+    };
+
+    if (isManageStep && initialStep === ConsentPopupStep.Manage) {
+        return (
+            <div className={b('buttons')}>
+                <div> {buttons.allowAll('flat-secondary')}</div>
+
+                <div className={b('action-buttons')}>
+                    {buttons.onlyNecessary()}
+                    {buttons.confirm()}
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className={b('buttons')}>
+            <div>{isManageStep ? buttons.back() : buttons.manageCookies()}</div>
+
+            <div className={b('action-buttons')}>
+                {buttons.onlyNecessary()}
+                {isManageStep ? buttons.confirm() : buttons.allowAll('action')}
+            </div>
         </div>
     );
 };
@@ -105,10 +169,14 @@ export const ConsentPopup = ({
     policyLinkText = i18n('label_policy_extended'),
     text,
     manageLabelText = i18n('manage_label_text_extended'),
+    manageTitleText,
+    mainTitleText,
+    noSubtitle,
     step = ConsentPopupStep.Main,
     cookieList,
     onClose,
     consentManager,
+    disableHeightTransition,
     ...buttonsParams
 }: ConsentPopupProps) => {
     const mobile = useMobile();
@@ -117,15 +185,16 @@ export const ConsentPopup = ({
     );
     const [currentStep, setCurrentStep] = React.useState<`${ConsentPopupStep}`>(step);
     const onChangeStep = (newStep: `${ConsentPopupStep}`) => {
-        return () => setCurrentStep(newStep);
+        setCurrentStep(newStep);
     };
     const isManageStep = currentStep === ConsentPopupStep.Manage;
-    const preparedCookieList = React.useMemo(() => {
-        return cookieList?.map((item) => {
+    const foldableListItems = React.useMemo(() => {
+        return cookieList?.map((item): FoldableListItem => {
             const isNecessaryItem = item.type === ConsentType.Necessary;
 
             return {
                 checked: Boolean(currentConsents[item.type]),
+                defaultChecked: item.defaultChecked,
                 disabled: isNecessaryItem,
                 defaultExpand: isNecessaryItem,
                 title: item.title || i18n(`cookie_${item.type}_title`),
@@ -140,6 +209,7 @@ export const ConsentPopup = ({
             };
         });
     }, [cookieList, currentConsents]);
+
     const onChoose = (checkedItems: number[]) => {
         if (!cookieList) return;
 
@@ -160,24 +230,28 @@ export const ConsentPopup = ({
             className={modalClassName}
             contentClassName={b('modal-content', {step: currentStep, mobile})}
             onClose={onClose}
+            disableHeightTransition={disableHeightTransition}
         >
             <div className={b(null, className)}>
                 <Header
                     currentStep={currentStep}
                     initialStep={step}
                     onClose={onClose}
-                    onChangeStep={onChangeStep}
                     isMobile={mobile}
+                    manageTitleText={manageTitleText}
+                    mainTitleText={mainTitleText}
                 />
                 <div className={b('body', {step})}>
                     {isManageStep ? (
                         <React.Fragment>
-                            <Text
-                                className={b('text')}
-                                variant={mobile ? 'header-1' : 'subheader-2'}
-                            >
-                                {i18n('manage_subtitle_extended')}
-                            </Text>
+                            {noSubtitle ? null : (
+                                <Text
+                                    className={b('text')}
+                                    variant={mobile ? 'header-1' : 'subheader-2'}
+                                >
+                                    {i18n('manage_subtitle_extended')}
+                                </Text>
+                            )}
                             <div className={b('text')}>
                                 {manageLabelText}
                                 {policyLink && policyLinkText && (
@@ -190,11 +264,11 @@ export const ConsentPopup = ({
                                 )}
                                 .
                             </div>
-                            {preparedCookieList ? (
+                            {foldableListItems ? (
                                 <FoldableList
                                     isMobile={mobile}
                                     className={b('cookie-list')}
-                                    items={preparedCookieList}
+                                    items={foldableListItems}
                                     onChooseItem={onChoose}
                                 />
                             ) : null}
@@ -208,14 +282,6 @@ export const ConsentPopup = ({
                                     }}
                                 />
                             </div>
-                            <div className={b('text')}>
-                                <Button
-                                    onClick={onChangeStep(ConsentPopupStep.Manage)}
-                                    view="outlined-action"
-                                >
-                                    {i18n('label_manage_cookie_link_text')}
-                                </Button>
-                            </div>
                         </React.Fragment>
                     )}
                 </div>
@@ -223,6 +289,8 @@ export const ConsentPopup = ({
                     currentStep={currentStep}
                     onAction={onAction}
                     currentConsents={currentConsents}
+                    onChangeStep={onChangeStep}
+                    initialStep={step}
                     {...buttonsParams}
                 />
             </div>

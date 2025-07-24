@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Button} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
@@ -11,9 +11,68 @@ import type {CookieConsentProps} from '../types';
 export default {
     title: 'Components/CookieConsent',
     component: CookieConsent,
+    argTypes: {
+        consentMode: {
+            control: 'select',
+            options: Object.values(ConsentMode),
+        },
+        manageCookies: {
+            control: 'boolean',
+        },
+        text: {
+            control: 'text',
+        },
+        policyLink: {
+            control: 'text',
+        },
+        policyLinkText: {
+            control: 'text',
+        },
+        buttonAcceptText: {
+            control: 'text',
+        },
+        buttonDeclineText: {
+            control: 'text',
+        },
+        buttonNecessaryText: {
+            control: 'text',
+        },
+        buttonConfirmText: {
+            control: 'text',
+        },
+        manageLabelText: {
+            control: 'text',
+        },
+        manageTitleText: {
+            control: 'text',
+        },
+        mainTitleText: {
+            control: 'text',
+        },
+        noSubtitle: {
+            control: 'boolean',
+        },
+        modalClassName: {
+            control: 'text',
+        },
+        className: {
+            control: 'text',
+        },
+        cookieList: {
+            control: 'object',
+        },
+        disableHeightTransition: {
+            control: 'boolean',
+        },
+    },
 } as Meta;
 
-const cookieList = Object.values(ConsentType).map((type) => {
+const cookieList = [
+    ConsentType.Necessary,
+    ConsentType.Functional,
+    ConsentType.Analytics,
+    ConsentType.Marketing,
+].map((type) => {
     const result: ConsentPopupCookieListItem = {
         type,
         link: {href: 'https://google.com'},
@@ -21,6 +80,10 @@ const cookieList = Object.values(ConsentType).map((type) => {
 
     if (type === ConsentType.Necessary) {
         result.titleLabel = 'Always active';
+    }
+
+    if (type === ConsentType.Functional) {
+        result.defaultChecked = true;
     }
 
     return result;

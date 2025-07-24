@@ -1,13 +1,13 @@
-import React from 'react';
+import * as React from 'react';
 
-import {Xmark} from '@gravity-ui/icons';
-import {Button, Icon, Link} from '@gravity-ui/uikit';
-import type {ButtonProps} from '@gravity-ui/uikit';
+import {ChevronLeft, ChevronRight, Xmark} from '@gravity-ui/icons';
+import {Button, Flex, Icon, Link, Text} from '@gravity-ui/uikit';
 
 import {MediaRenderer} from '..';
 import {block} from '../../../utils/cn';
 import {i18n} from '../../i18n';
 import type {StoriesItem} from '../../types';
+import {StoriesTextBlockStyle} from '../../types';
 
 import './StoriesLayout.scss';
 
@@ -24,114 +24,143 @@ export type StoriesLayoutProps = {
     items: StoriesItem[];
     storyIndex: number;
     indexType: IndexType;
-
     handleButtonClose: (
         event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>,
     ) => void;
     handleGotoPrevious: () => void;
     handleGotoNext: () => void;
-    action?: ButtonProps;
 };
 
 // StoriesGroup component also use it
-export const StoriesLayout = (props: StoriesLayoutProps) => {
-    const currentStory = props.items[props.storyIndex];
+export const StoriesLayout = ({
+    items,
+    indexType,
+    storyIndex,
+    handleButtonClose,
+    handleGotoNext,
+    handleGotoPrevious,
+}: StoriesLayoutProps) => {
+    const currentStory = items[storyIndex];
 
     return (
         <div className={b('wrap-outer')}>
-            <div className={b('wrap-inner')}>
-                <div className={b('container')}>
-                    <div className={b('left-pane')}>
-                        {props.items.length > 1 && (
-                            <div className={b('counter')}>
-                                <span dir="ltr">
-                                    {props.storyIndex + 1}&nbsp;/&nbsp;{props.items.length}
-                                </span>
-                            </div>
-                        )}
-                        <div className={b('text-block')}>
-                            {currentStory && (
-                                <React.Fragment>
-                                    {currentStory.title && (
-                                        <div className={b('text-header')}>{currentStory.title}</div>
-                                    )}
-                                    {currentStory.content && (
-                                        <div className={b('text-content')}>
-                                            {currentStory.content}
-                                        </div>
-                                    )}
-                                    {!currentStory.content && currentStory.description && (
-                                        <div className={b('text-content')}>
-                                            {currentStory.description}
-                                        </div>
-                                    )}
-                                    {currentStory.url && (
-                                        <div className={b('story-link-block')}>
-                                            <Link href={currentStory.url} target={'_blank'}>
-                                                {i18n('label_more')}
-                                            </Link>
-                                        </div>
-                                    )}
-                                </React.Fragment>
-                            )}
-                        </div>
-                        <div className={b('controls-block')}>
-                            {IndexType.Single === props.indexType ? (
-                                <Button onClick={props.handleButtonClose} size="l" width="max">
-                                    {i18n('label_close')}
-                                </Button>
-                            ) : (
-                                <React.Fragment>
-                                    {IndexType.Start !== props.indexType && (
-                                        <Button
-                                            onClick={props.handleGotoPrevious}
-                                            view="outlined"
-                                            size="l"
-                                            width="max"
-                                        >
-                                            {i18n('label_back')}
-                                        </Button>
-                                    )}
-                                    {IndexType.InProccess !== props.indexType && (
-                                        <Button
-                                            onClick={props.handleButtonClose}
-                                            size="l"
-                                            width="max"
-                                        >
-                                            {i18n('label_close')}
-                                        </Button>
-                                    )}
-                                    {IndexType.End !== props.indexType && (
-                                        <Button
-                                            onClick={props.handleGotoNext}
-                                            view="action"
-                                            size="l"
-                                            width="max"
-                                        >
-                                            {i18n('label_next')}
-                                        </Button>
-                                    )}
-                                </React.Fragment>
-                            )}
-                            {props.action && <Button size="l" width="max" {...props.action} />}
-                        </div>
-                    </div>
-                    <div className={b('right-pane')}>
-                        <Button
-                            view="flat"
-                            size="l"
-                            className={b('close-btn')}
-                            onClick={props.handleButtonClose}
+            <div className={b('container')}>
+                <div
+                    className={b('left-pane', {
+                        blockStyle:
+                            currentStory.textBlockStyle || StoriesTextBlockStyle.Transparent,
+                    })}
+                >
+                    {items.length > 1 && (
+                        <Text
+                            variant="body-2"
+                            className={b('counter')}
+                            style={
+                                currentStory.textColorStyles?.counterColor
+                                    ? {color: currentStory.textColorStyles.counterColor}
+                                    : undefined
+                            }
                         >
-                            <Icon data={Xmark} size={18} />
-                        </Button>
-                        {currentStory?.media && (
-                            <div className={b('media-block')}>
-                                <MediaRenderer media={currentStory.media} />
-                            </div>
+                            {storyIndex + 1}&nbsp;/&nbsp;{items.length}
+                        </Text>
+                    )}
+                    <div className={b('text-block')}>
+                        {currentStory && (
+                            <React.Fragment>
+                                {currentStory.title && (
+                                    <Text
+                                        variant="display-2"
+                                        className={b('text-header')}
+                                        style={
+                                            currentStory.textColorStyles?.titleColor
+                                                ? {color: currentStory.textColorStyles.titleColor}
+                                                : undefined
+                                        }
+                                    >
+                                        {currentStory.title}
+                                    </Text>
+                                )}
+                                {currentStory.content && (
+                                    <Text
+                                        variant="body-2"
+                                        className={b('text-content')}
+                                        style={
+                                            currentStory.textColorStyles?.descriptionColor
+                                                ? {
+                                                      color: currentStory.textColorStyles
+                                                          .descriptionColor,
+                                                  }
+                                                : undefined
+                                        }
+                                    >
+                                        {currentStory.content}
+                                    </Text>
+                                )}
+                                {currentStory.url && (
+                                    <div className={b('story-link-block')}>
+                                        <Link href={currentStory.url} target={'_blank'}>
+                                            {i18n('label_more')}
+                                        </Link>
+                                    </div>
+                                )}
+                                {Boolean(currentStory.firstAction || currentStory.secondAction) && (
+                                    <Flex gap={4} className={b('action-block')}>
+                                        {currentStory.firstAction && (
+                                            <Button
+                                                size="l"
+                                                width="max"
+                                                {...currentStory.firstAction}
+                                            />
+                                        )}
+                                        {currentStory.secondAction && (
+                                            <Button
+                                                size="l"
+                                                width="max"
+                                                {...currentStory.secondAction}
+                                            />
+                                        )}
+                                    </Flex>
+                                )}
+                            </React.Fragment>
                         )}
                     </div>
                 </div>
+                <div className={b('right-pane')}>
+                    {currentStory?.media && (
+                        <MediaRenderer
+                            media={currentStory.media}
+                            style={currentStory.mediaBlockStyle}
+                        />
+                    )}
+                </div>
+                <Button
+                    view="raised"
+                    size="xl"
+                    className={b('close-btn')}
+                    onClick={handleButtonClose}
+                >
+                    <Icon data={Xmark} size={20} />
+                </Button>
+                {indexType !== IndexType.Start && indexType !== IndexType.Single && (
+                    <Button
+                        onClick={handleGotoPrevious}
+                        view="raised"
+                        className={b('navigation-btn', {back: true})}
+                        size="xl"
+                    >
+                        <Icon size={20} data={ChevronLeft} />
+                    </Button>
+                )}
+                {indexType !== IndexType.End && indexType !== IndexType.Single && (
+                    <Button
+                        onClick={handleGotoNext}
+                        className={b('navigation-btn', {next: true})}
+                        view="raised"
+                        size="xl"
+                    >
+                        <Icon size={20} data={ChevronRight} />
+                    </Button>
+                )}
             </div>
         </div>
     );

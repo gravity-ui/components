@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {Link} from '@gravity-ui/icons';
 import {Button, CopyToClipboard, Icon} from '@gravity-ui/uikit';

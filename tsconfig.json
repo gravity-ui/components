@@ -1,12 +1,13 @@
 {
   "extends": "@gravity-ui/tsconfig/tsconfig",
   "compilerOptions": {
+    "target": "es2022",
     "declaration": true,
     "resolveJsonModule": true,
     "outDir": "dist",
     "module": "esnext",
-    "jsx": "react"
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["**/__tests__", "**/*.test.ts", "**/*.test.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "test-utils/*", ".storybook/**/*"]
 }

@@ -1,16 +1,15 @@
-import React from 'react';
+import * as React from 'react';
 
-import {TextInput} from '@gravity-ui/uikit';
+import {HelpMark, TextInput} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
-import {HelpPopover} from '../../HelpPopover';
 import {FormRow} from '../FormRow';
 
 const fieldId = 'form-row-input-id';
 const fieldDescriptionId = `${fieldId}-description`;
 
 const argTypeReactNode = {
-    control: {type: null},
+    control: {type: undefined},
 };
 
 export default {
@@ -86,24 +85,20 @@ RequiredField.args = {
     required: true,
 };
 
-export const WithHelpPopover = Template.bind({});
-WithHelpPopover.args = {
+export const WithHelpMark = Template.bind({});
+WithHelpMark.args = {
     labelHelpPopover: (
-        <HelpPopover
-            content={'Your name as it used in your foreign passport.'}
-            placement={['top', 'bottom']}
-            buttonProps={{
-                'aria-label': 'Note',
-            }}
-        />
+        <HelpMark aria-label="Note" popoverProps={{placement: ['top', 'bottom']}}>
+            Your name as it used in your foreign passport.
+        </HelpMark>
     ),
 };
 
-export const WithHelpPopoverAndLongLabel = Template.bind({});
-WithHelpPopoverAndLongLabel.storyName = 'With Help Popover (Long Label)';
-WithHelpPopoverAndLongLabel.args = {
+export const WithHelpMarkAndLongLabel = Template.bind({});
+WithHelpMarkAndLongLabel.storyName = 'With Help Popover (Long Label)';
+WithHelpMarkAndLongLabel.args = {
     ...WithLongLabel.args,
-    ...WithHelpPopover.args,
+    ...WithHelpMark.args,
 };
 
 export const ColumnDirection = Template.bind({});

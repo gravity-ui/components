@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import type {DialogProps} from '@gravity-ui/uikit';
 import {Dialog, DialogFooterProps} from '@gravity-ui/uikit';
@@ -35,13 +35,12 @@ export const ConfirmDialog = ({
     ...dialogProps
 }: ConfirmDialogProps) => {
     return (
-        <Dialog {...dialogProps}>
+        <Dialog initialFocus="apply" {...dialogProps}>
             <Dialog.Header caption={title} />
             <Dialog.Body className={b('body')}>{message}</Dialog.Body>
             <Dialog.Footer
                 preset="default"
                 showError={false}
-                listenKeyEnter
                 textButtonApply={textButtonApply}
                 textButtonCancel={textButtonCancel}
                 onClickButtonApply={onClickButtonApply}

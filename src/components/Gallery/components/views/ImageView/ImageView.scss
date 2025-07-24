@@ -1,0 +1,18 @@
+@use '../../../../variables';
+
+$block: '.#{variables.$ns}gallery-image-view';
+
+#{$block} {
+    max-width: 100%;
+    max-height: 100%;
+
+    &__spin {
+        position: absolute;
+    }
+
+    &_mobile {
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: none;
+    }
+}

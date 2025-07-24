@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {CircleCheckFill, Clock} from '@gravity-ui/icons';
 import {ArrowToggle, Disclosure, Icon, Skeleton} from '@gravity-ui/uikit';

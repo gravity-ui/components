@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import {getThemeType} from '@gravity-ui/uikit';
 import {type API, addons, types, useGlobals} from '@storybook/manager-api';
