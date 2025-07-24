@@ -28,6 +28,7 @@ export interface ItemSelectorProps<T> {
 
     renderItemValue?: (item: T) => React.ReactNode;
     renderItem?: ListProps<T>['renderItem'];
+    renderValueItem?: ListProps<T>['renderItem'];
     filterItem?: ListProps<T>['filterItem'];
 }
 
@@ -130,6 +131,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
             value,
             selectorTitle,
             renderItem = this.renderItem,
+            renderValueItem = this.renderValueItem,
             filterItem = this.filterItem,
             hideSelectAllButton,
         } = this.props;
@@ -174,7 +176,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                     </div>
                     <List
                         items={selected}
-                        renderItem={this.renderValueItem}
+                        renderItem={renderValueItem}
                         filterItem={filterItem}
                         filterPlaceholder={i18n('placeholder_search')}
                         sortable={true}
