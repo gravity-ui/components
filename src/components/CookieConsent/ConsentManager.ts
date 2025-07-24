@@ -16,6 +16,7 @@ export enum ConsentType {
     Necessary = 'necessary',
     Analytics = 'analytics',
     Marketing = 'marketing',
+    Functional = 'functional',
 }
 
 export enum ConsentMode {
