@@ -26,20 +26,26 @@ $block: '.#{variables.$ns}gallery-navigation-button';
     &_position_start {
         inset-inline-start: 0;
         padding-inline-start: var(--g-spacing-7);
+        cursor: w-resize;
     }
 
     &_position_end {
         inset-inline-end: var(--g-spacing-7);
         justify-content: end;
+        cursor: e-resize;
+    }
+
+    &_direction_rtl {
+        &#{$block}_position_start {
+            cursor: e-resize;
+        }
+
+        &#{$block}_position_end {
+            cursor: w-resize;
+        }
     }
 
     &:hover {
         opacity: 1;
-    }
-
-    &__icon {
-        &_position_end {
-            transform: rotate(180deg);
-        }
     }
 }
