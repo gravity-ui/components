@@ -82,8 +82,6 @@ $verticalGalleryMargin: 28px;
 
     &_mode_full-screen,
     &_mode_mobile {
-        overflow: hidden;
-
         --g-modal-border-radius: 0;
 
         #{$block} {
