@@ -101,19 +101,23 @@ export const Gallery = ({
     const showNavigationButtons =
         withNavigation && !isMobile && activeItem && !activeItem.interactive;
     const showFooter = !fullScreen && !isMobile;
+    const mode = getMode(isMobile, fullScreen);
 
     return (
         <Modal
             container={container}
             className={cnGallery(
                 {
-                    mode: getMode(isMobile, fullScreen),
+                    mode,
                     interactive: isMobile && activeItem?.interactive,
                 },
                 className,
             )}
             open={open}
             onOpenChange={handleOpenChange}
+            style={{
+                overflow: mode === 'default' ? 'auto' : 'hidden',
+            }}
         >
             <div
                 className={cnGallery('content')}
