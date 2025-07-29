@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.9.1](https://github.com/gravity-ui/components/compare/v4.9.0...v4.9.1) (2025-07-29)
+
+
+### Bug Fixes
+
+* **Gallery:** remove scroll for fullscreen mode ([#325](https://github.com/gravity-ui/components/issues/325)) ([04b512f](https://github.com/gravity-ui/components/commit/04b512f71abfb03cc3c4b67444a59f80bc3e1b16))
+* **Gallery:** replace screen navigation arrows with arrow cursor ([#323](https://github.com/gravity-ui/components/issues/323)) ([a959d0e](https://github.com/gravity-ui/components/commit/a959d0e109b6374b080aad36c339f9007e4b07c3))
+
 ## [4.9.0](https://github.com/gravity-ui/components/compare/v4.8.0...v4.9.0) (2025-07-24)
 
 
