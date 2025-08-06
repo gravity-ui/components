@@ -57,6 +57,21 @@ import {
     {...getGalleryItemDocument({src, name, className})}
     actions={renderActions()}
 />
+
+//if you want to also render the pre-defined file actions (copy and download) use the additional props
+<GalleryItem
+    key={index}
+    {...getGalleryItemImage({
+        src,
+        name,
+        className,
+        downloadLink: 'https://example.jpg',
+        copyLink: 'https://example.jpg',
+        onLinkCopied: () => console.log('link copied'),
+        onDownloaded: () => console.log('file downloaded'),
+        actions: renderActions()
+    })}
+/>
 ```
 
 ### Examples
@@ -239,4 +254,88 @@ const files: GalleryFile[] = [
     interactive: true,
   },
 ];
+```
+
+#### Files gallery with pre-defined actions
+
+```tsx
+import * as React from 'react';
+
+import {Button, Text, usePortalContainer, ThemeProvider} from '@gravity-ui/uikit';
+import {
+  FilePreview,
+  Gallery,
+  GalleryItem,
+  GalleryProps,
+  getGalleryItemDocument,
+  getGalleryItemImage,
+  getGalleryItemVideo,
+} from '@gravity-ui/components';
+
+const GalleryTemplate: StoryFn<GalleryProps> = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const container = usePortalContainer();
+
+  const handleClose = React.useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  const handleOpen = React.useCallback(() => {
+    setOpen(true);
+  }, []);
+
+  return (
+    <React.Fragment>
+      <Button onClick={handleOpen} view="action" size="l">
+        Open gallery
+      </Button>
+      <ThemeProvider theme="dark">
+        <Gallery open={open} onClose={handleClose} container={container || undefined}>
+          {files.map((file, index) => (
+            <GalleryItem key={index} {...getGalleryItemFile(file)} interactive={file.interactive} />
+          ))}
+        </Gallery>
+      </ThemeProvider>
+    </React.Fragment>
+  );
+};
+
+const getGalleryItemFile = (file: GalleryFile) => {
+  switch (file.type) {
+    case 'image':
+      return getGalleryItemImage({
+        src: file.url,
+        name: file.name,
+        downloadLink: file.url,
+        copyLink: file.url,
+        onLinkCopied: () => alert('link copied'),
+        onDownloaded: () => alert('file downloaded'),
+      });
+    case 'video':
+      return getGalleryItemVideo({
+        src: file.url,
+        name: file.name,
+        downloadLink: file.url,
+        copyLink: file.url,
+        onLinkCopied: () => alert('link copied'),
+        onDownloaded: () => alert('file downlloaded'),
+      });
+    case 'document':
+      return getGalleryItemDocument({
+        src: file.url,
+        file: {name: file.name, type: file.type} as File,
+        downloadLink: file.url,
+        copyLink: file.url,
+        onLinkCopied: () => alert('link copied'),
+        onDownloaded: () => alert('file downloaded'),
+      });
+    case 'text':
+      return {
+        thumbnail: <FilePreview file={{name: file.name, type: file.type} as File} hideName />,
+        view: <Text variant="body-1">{file.text}</Text>,
+        name: file.name,
+      };
+  }
+};
 ```
