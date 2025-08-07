@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.9.2](https://github.com/gravity-ui/components/compare/v4.9.1...v4.9.2) (2025-08-07)
+
+
+### Bug Fixes
+
+* **ConsentCookie:** allow override default consent ([#329](https://github.com/gravity-ui/components/issues/329)) ([221dff5](https://github.com/gravity-ui/components/commit/221dff5b7f39c5266f2f6d980b4648d91406ef3f))
+
 ## [4.9.1](https://github.com/gravity-ui/components/compare/v4.9.0...v4.9.1) (2025-07-29)
 
 
