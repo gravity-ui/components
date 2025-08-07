@@ -39,12 +39,13 @@ export type CookieSettings = CookieSetOptions;
 const cookies = new Cookies();
 
 export class ConsentManager implements IConsentManager {
+    protected consents: Consents = {};
+
     private consentMode: `${ConsentMode}`;
     private consentEdition: number | undefined;
     private projectConsentEdition: number | undefined;
 
     private closed = false;
-    private consents: Consents = {};
     private readonly cookieSettings: CookieSettings;
     private readonly cookiesTypes: Array<ConsentType> = Object.values(ConsentType);
     private readonly subscribers: Subscriber[] = [];
@@ -78,7 +79,7 @@ export class ConsentManager implements IConsentManager {
             return this.consents;
         }
 
-        return this.prepareConsent('OnlyNecessary');
+        return this.getDefaultConsent();
     }
 
     subscribe(handler: Subscriber) {
@@ -120,7 +121,11 @@ export class ConsentManager implements IConsentManager {
         return !this.isAllConsentsDefined() || this.projectConsentEdition !== this.consentEdition;
     }
 
-    private prepareConsent(value: 'All' | 'OnlyNecessary') {
+    protected getDefaultConsent() {
+        return this.prepareConsent('OnlyNecessary');
+    }
+
+    protected prepareConsent(value: 'All' | 'OnlyNecessary') {
         return this.cookiesTypes.reduce((acc: Consents, type: `${ConsentType}`) => {
             acc[type] = value === 'All' ? true : type === ConsentType.Necessary;
 
@@ -128,7 +133,7 @@ export class ConsentManager implements IConsentManager {
         }, {});
     }
 
-    private isAllConsentsDefined() {
+    protected isAllConsentsDefined() {
         return Object.values(this.cookiesTypes).every(
             (type) => typeof this.consents[type] === 'boolean',
         );

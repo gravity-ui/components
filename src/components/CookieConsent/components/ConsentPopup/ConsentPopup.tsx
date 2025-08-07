@@ -194,7 +194,6 @@ export const ConsentPopup = ({
 
             return {
                 checked: Boolean(currentConsents[item.type]),
-                defaultChecked: item.defaultChecked,
                 disabled: isNecessaryItem,
                 defaultExpand: isNecessaryItem,
                 title: item.title || i18n(`cookie_${item.type}_title`),

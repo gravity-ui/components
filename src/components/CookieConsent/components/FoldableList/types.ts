@@ -12,7 +12,6 @@ export interface FoldableListItem {
     /* Inintial expand */
     defaultExpand?: boolean;
     /* Inintial check */
-    defaultChecked?: boolean;
     checked?: boolean;
     /* Inintial disable */
     disabled?: boolean;

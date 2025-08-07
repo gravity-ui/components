@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Button} from '@gravity-ui/uikit';
 import {Meta, StoryFn} from '@storybook/react';
 
-import {ConsentManager, ConsentMode, ConsentType} from '../ConsentManager';
+import {ConsentManager, ConsentMode, ConsentType, Consents} from '../ConsentManager';
 import {ConsentPopupCookieListItem} from '../components/ConsentPopup/types';
 import {CookieConsent} from '../index';
 import type {CookieConsentProps} from '../types';
@@ -64,6 +64,9 @@ export default {
         disableHeightTransition: {
             control: 'boolean',
         },
+        defaultFunctionalCookies: {
+            control: 'boolean',
+        },
     },
 } as Meta;
 
@@ -82,22 +85,33 @@ const cookieList = [
         result.titleLabel = 'Always active';
     }
 
-    if (type === ConsentType.Functional) {
-        result.defaultChecked = true;
-    }
-
     return result;
 });
 
+class CustomConcentManager extends ConsentManager {
+    protected override getDefaultConsent(): Consents {
+        return {[ConsentType.Necessary]: true, [ConsentType.Functional]: true};
+    }
+}
+
 type DefaultTemplateProps = Omit<CookieConsentProps, 'consentManager'> & {
     consentMode: `${ConsentMode}`;
+    defaultFunctionalCookies?: boolean;
 };
 
-const DefaultTemplate: StoryFn<DefaultTemplateProps> = ({consentMode, manageCookies, ...args}) => {
+const DefaultTemplate: StoryFn<DefaultTemplateProps> = ({
+    consentMode,
+    manageCookies,
+    defaultFunctionalCookies,
+    ...args
+}) => {
     const [edition, setEdition] = React.useState(1);
     const consentManager = React.useMemo(
-        () => new ConsentManager(consentMode, edition),
-        [consentMode, edition],
+        () =>
+            defaultFunctionalCookies
+                ? new CustomConcentManager(consentMode, edition)
+                : new ConsentManager(consentMode, edition),
+        [consentMode, edition, defaultFunctionalCookies],
     );
     const [showResetButton, setShowResetButton] = React.useState(
         !consentManager.isConsentNotDefined(),
