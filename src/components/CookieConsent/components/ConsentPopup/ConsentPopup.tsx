@@ -180,9 +180,20 @@ export const ConsentPopup = ({
     ...buttonsParams
 }: ConsentPopupProps) => {
     const mobile = useMobile();
-    const [currentConsents, setCurrentConsents] = React.useState<Consents>(
-        consentManager.getConsents(),
-    );
+    const [currentConsents, setCurrentConsents] = React.useState<Consents>(() => {
+        const existingConsents = consentManager.getConsents();
+
+        if (cookieList) {
+            return cookieList.reduce((acc: Consents, item) => {
+                if (item.defaultChecked) {
+                    return {...acc, [item.type]: true};
+                }
+                return acc;
+            }, existingConsents);
+        }
+
+        return existingConsents;
+    });
     const [currentStep, setCurrentStep] = React.useState<`${ConsentPopupStep}`>(step);
     const onChangeStep = (newStep: `${ConsentPopupStep}`) => {
         setCurrentStep(newStep);
