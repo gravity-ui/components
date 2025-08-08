@@ -190,6 +190,84 @@ const FilesGalleryTemplate: StoryFn<GalleryProps> = () => {
 
 export const FilesGallery = FilesGalleryTemplate.bind({});
 
+const getGalleryItemFileWithPreDeginedActions = (file: GalleryFile, mobile?: boolean) => {
+    switch (file.type) {
+        case 'image':
+            return getGalleryItemImage({
+                src: file.url,
+                name: file.name,
+                copyLink: file.url,
+                downloadLink: file.url,
+            });
+        case 'video':
+            return getGalleryItemVideo({
+                src: file.url,
+                name: file.name,
+                copyLink: file.url,
+                downloadLink: file.url,
+            });
+        case 'document':
+            return getGalleryItemDocument({
+                src: file.url,
+                file: {name: file.name, type: file.type} as File,
+                copyLink: file.url,
+                downloadLink: file.url,
+            });
+        case 'text':
+            return {
+                thumbnail: (
+                    <FilePreview view="compact" file={{name: file.name, type: file.type} as File} />
+                ),
+                view: (
+                    <Flex
+                        overflow="auto"
+                        justifyContent="center"
+                        height="100%"
+                        className={spacing({px: 3, py: 3})}
+                    >
+                        <Text variant="body-1">{file.text}</Text>
+                    </Flex>
+                ),
+                name: <Text variant={mobile ? 'body-2' : 'body-1'}>{file.name}</Text>,
+            };
+    }
+};
+
+const FilesGalleryWithPreDefinedActionsTemplate: StoryFn<GalleryProps> = () => {
+    const mobile = useMobile();
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleToggle = React.useCallback(() => {
+        setOpen(false);
+    }, []);
+
+    const handleOpen = React.useCallback(() => {
+        setOpen(true);
+    }, []);
+
+    return (
+        <React.Fragment>
+            <Button onClick={handleOpen} view="action" size="l">
+                Open gallery
+            </Button>
+            <ThemeProvider theme="dark">
+                <Gallery open={open} onOpenChange={handleToggle}>
+                    {files.map((file, index) => (
+                        <GalleryItem
+                            key={index}
+                            {...getGalleryItemFileWithPreDeginedActions(file, mobile)}
+                            interactive={file.interactive}
+                        />
+                    ))}
+                </Gallery>
+            </ThemeProvider>
+        </React.Fragment>
+    );
+};
+
+export const FilesGalleryWithPreDefinedActions = FilesGalleryWithPreDefinedActionsTemplate.bind({});
+
 const EmptyGalleryTemplate: StoryFn<GalleryProps> = () => {
     const [open, setOpen] = React.useState(false);
 
