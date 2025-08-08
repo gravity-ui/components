@@ -40,6 +40,7 @@ export const GalleryProvider = ({
             closeGallery: () => {
                 setIsOpen(false);
             },
+            open: isOpen,
         }),
         [],
     );
