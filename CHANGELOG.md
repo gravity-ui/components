@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.10.0](https://github.com/gravity-ui/components/compare/v4.9.2...v4.10.0) (2025-08-11)
+
+
+### Features
+
+* **Gallery:** add callback to close action ([#330](https://github.com/gravity-ui/components/issues/330)) ([1b1e6b0](https://github.com/gravity-ui/components/commit/1b1e6b0d13d4936e7c1e62b35cccb031c634af0b))
+* **Gallery:** add default gallery file actions ([#327](https://github.com/gravity-ui/components/issues/327)) ([3136570](https://github.com/gravity-ui/components/commit/3136570fd1a9dd69e6d5fbbdfb086c30612b6ece))
+
 ## [4.9.2](https://github.com/gravity-ui/components/compare/v4.9.1...v4.9.2) (2025-08-07)
 
 
