@@ -5,3 +5,5 @@ export * from './components/GalleryItemName';
 export {getGalleryItemVideo} from './utils/getGalleryItemVideo';
 export {getGalleryItemImage} from './utils/getGalleryItemImage';
 export {getGalleryItemDocument} from './utils/getGalleryItemDocument';
+export {getGalleryItemDownloadAction} from './utils/getGalleryItemDownloadAction';
+export {getGalleryItemCopyLinkAction} from './utils/getGalleryItemCopyLinkAction';
