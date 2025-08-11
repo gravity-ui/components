@@ -57,6 +57,22 @@ import {
     {...getGalleryItemDocument({src, name, className})}
     actions={renderActions()}
 />
+
+// you can use the pre-defined file actions (copy and download)
+<GalleryItem
+    key={index}
+    {...getGalleryItemImage({src, name, className})}
+    actions={[
+        getGalleryItemCopyLinkAction({
+            copyUrl: 'https://example.jpg',
+            onCopy: () => console.log('link copied'),
+        }),
+        getGalleryItemDownloadAction({
+            downloadUrl:  'https://example.jpg',
+            onClick: () => console.log('download action clicked'),
+        }),
+    ]}
+/>
 ```
 
 ### Examples
