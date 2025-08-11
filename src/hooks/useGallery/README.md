@@ -49,6 +49,7 @@ _useGallery hook returns_:
 | :----------- | :--------------------------------------------------------- | :----------------------------------- |
 | openGallery  | `(items: GalleryItem[], initialItemIndex: number) => void` | The function for opening the gallery |
 | closeGallery | `() => void`                                               | The function for closing the gallery |
+| open         | `boolean`                                                  | The boolean value of gallery state   |
 
 _openGallery function args_:
 

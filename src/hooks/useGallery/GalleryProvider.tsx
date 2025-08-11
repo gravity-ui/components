@@ -42,7 +42,7 @@ export const GalleryProvider = ({
             },
             open: isOpen,
         }),
-        [],
+        [isOpen],
     );
 
     return (
