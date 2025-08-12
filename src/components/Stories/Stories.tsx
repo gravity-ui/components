@@ -26,6 +26,7 @@ export interface StoriesProps {
     disableOutsideClick?: boolean;
     className?: string;
     syncInTabsKey?: string;
+    resetStoryIndexOnClose?: boolean;
 }
 
 export function Stories({
@@ -38,14 +39,18 @@ export function Stories({
     disableOutsideClick = true,
     className,
     syncInTabsKey,
+    resetStoryIndexOnClose,
 }: StoriesProps) {
     const [storyIndex, setStoryIndex] = React.useState(initialStoryIndex);
 
     const handleClose = React.useCallback<NonNullable<StoriesProps['onClose']>>(
         (event, reason) => {
+            if (resetStoryIndexOnClose) {
+                setStoryIndex(initialStoryIndex);
+            }
             onClose?.(event, reason);
         },
-        [onClose],
+        [onClose, setStoryIndex, initialStoryIndex, resetStoryIndexOnClose],
     );
 
     const {callback: closeWithLS} = useSyncWithLS<NonNullable<StoriesProps['onClose']>>({
