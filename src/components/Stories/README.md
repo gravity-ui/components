@@ -9,7 +9,7 @@ Component for displaying stories. It looks like a carousel in a modal with given
 | open                   | `Boolean`       | ✓        |         | Visibility flag                                   |
 | items                  | `StoriesItem[]` | ✓        |         | List of stories to display                        |
 | initialStoryIndex      | `Number`        |          | 0       | Index of the first story to be displayed          |
-| resetStoryIndexOnClose | `Number`        |          | false   | If `true`, reset story index to initialStoryIndex |
+| resetStoryIndexOnClose | `Boolean`       |          | false   | If `true`, reset story index to initialStoryIndex |
 | onClose                | `Function`      |          |         | Action on close                                   |
 | onPreviousClick        | `Function`      |          |         | Action when switching to previous story           |
 | onNextClick            | `Function`      |          |         | Action when switching to next story               |
