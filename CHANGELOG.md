@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.11.0](https://github.com/gravity-ui/components/compare/v4.10.0...v4.11.0) (2025-08-12)
+
+
+### Features
+
+* **Stories:** add props to reset story index on close ([#333](https://github.com/gravity-ui/components/issues/333)) ([9f54cc6](https://github.com/gravity-ui/components/commit/9f54cc6c1c0eb8bc20cb565655d7855118d82fb2))
+
 ## [4.10.0](https://github.com/gravity-ui/components/compare/v4.9.2...v4.10.0) (2025-08-11)
 
 
