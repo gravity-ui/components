@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.12.0](https://github.com/gravity-ui/components/compare/v4.11.0...v4.12.0) (2025-08-28)
+
+
+### Features
+
+* **Notification:** add href to notification props ([#335](https://github.com/gravity-ui/components/issues/335)) ([aca71c5](https://github.com/gravity-ui/components/commit/aca71c53e76dad73ef581ebbe909112e22d912e9))
+
 ## [4.11.0](https://github.com/gravity-ui/components/compare/v4.10.0...v4.11.0) (2025-08-12)
 
 
