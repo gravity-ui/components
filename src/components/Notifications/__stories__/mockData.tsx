@@ -140,6 +140,20 @@ export const mockNotifications: NotificationProps[] = [
         swipeActions: notificationsMockSwipeActions,
     },
     {
+        id: 'click',
+        content: <i>Notification with onClick callback</i>,
+        formattedDate: '29 seconds ago',
+        swipeActions: notificationsMockSwipeActions,
+        onClick: () => alert('notification clicked'),
+    },
+    {
+        id: 'link',
+        content: <i>Notification with href</i>,
+        formattedDate: '29 seconds ago',
+        swipeActions: notificationsMockSwipeActions,
+        href: 'https://ya.ru',
+    },
+    {
         id: 'yandex',
         content: (
             <React.Fragment>

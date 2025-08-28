@@ -25,7 +25,12 @@ export const Notification = React.memo(function Notification(props: Props) {
         sourcePlacement = 'bottom',
     } = notification;
 
-    const modifiers: CnMods = {unread, theme, mobile, active: Boolean(notification.onClick)};
+    const modifiers: CnMods = {
+        unread,
+        theme,
+        mobile,
+        active: Boolean(notification.onClick || notification.href),
+    };
     const titleId = useUniqId();
 
     const sourceIcon = source && renderSourceIcon(source, titleId);
@@ -73,14 +78,8 @@ export const Notification = React.memo(function Notification(props: Props) {
               )
             : null;
 
-    return (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-        <div
-            className={b(modifiers, notification.className)}
-            onMouseEnter={notification.onMouseEnter}
-            onMouseLeave={notification.onMouseLeave}
-            onClick={notification.onClick}
-        >
+    const notificationContent = (
+        <React.Fragment>
             {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
 
             <Flex className={b('right')} justifyContent="space-between" gap={2} overflow="hidden">
@@ -99,6 +98,43 @@ export const Notification = React.memo(function Notification(props: Props) {
                     {renderedBottomActions}
                 </Flex>
             </Flex>
+        </React.Fragment>
+    );
+
+    if (notification.href) {
+        const handleLinkClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
+            if (event.target instanceof Element && event.target.closest('button')) {
+                event.preventDefault();
+                return;
+            }
+
+            notification.onClick?.(event);
+        };
+
+        return (
+            <a
+                className={b(modifiers, notification.className)}
+                onMouseEnter={notification.onMouseEnter}
+                onMouseLeave={notification.onMouseLeave}
+                onClick={handleLinkClick}
+                href={notification.href}
+                target={notification.target ?? '_blank'}
+                rel="noreferrer"
+            >
+                {notificationContent}
+            </a>
+        );
+    }
+
+    return (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        <div
+            className={b(modifiers, notification.className)}
+            onMouseEnter={notification.onMouseEnter}
+            onMouseLeave={notification.onMouseLeave}
+            onClick={notification.onClick}
+        >
+            {notificationContent}
         </div>
     );
 });

@@ -39,9 +39,11 @@ export type NotificationProps = {
     bottomActions?: React.ReactNode;
     swipeActions?: NotificationSwipeActionsProps;
 
-    onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
-    onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    onMouseEnter?: React.MouseEventHandler<HTMLElement>;
+    onMouseLeave?: React.MouseEventHandler<HTMLElement>;
+    onClick?: React.MouseEventHandler<HTMLElement>;
+    href?: string;
+    target?: React.HTMLAttributeAnchorTarget;
 };
 
 export type NotificationActionProps = {

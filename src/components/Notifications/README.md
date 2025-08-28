@@ -67,22 +67,24 @@ For more code examples go to [Notifications.stories.tsx](https://github.com/grav
 
 **NotificationProps** — notification's type:
 
-| Property      | Type                            | Required | Default | Description                                                      |
-| :------------ | :------------------------------ | :------: | :------ | :--------------------------------------------------------------- |
-| id            | `string`                        |  `true`  |         | Unique identifier (used in `key` for example)                    |
-| content       | `ReactNode`                     |  `true`  |         | Notification's content (what it's about)                         |
-| title         | `ReactNode`                     |          |         | Notification's title (bold)                                      |
-| formattedDate | `ReactNode`                     |          |         | Notification's creation date (already formatted)                 |
-| unread        | `boolean`                       |          | `false` | Is notification unread                                           |
-| archived      | `boolean`                       |          | `false` | Is notification archived (invisible to the user)                 |
-| source        | `NotificationSourceProps`       |          |         | Notification's source (e.g. Cloud/Tracker/Console)               |
-| theme         | `NotificationTheme`             |          |         | Notification's theme (e.g. warning/danger)                       |
-| className     | `string`                        |          |         | Notification's `className`                                       |
-| sideActions   | `ReactNode`                     |          |         | Notification's actions on the right side                         |
-| bottomActions | `ReactNode`                     |          |         | Notification's bottom actions (as buttons by default)            |
-| swipeActions  | `NotificationSwipeActionsProps` |          |         | Notification's action on left/right swipe (mobile mode required) |
-| onMouseEnter  | `MouseEventHandler`             |          |         | Callback for `onMouseEnter`                                      |
-| onMouseLeave  | `MouseEventHandler`             |          |         | Callback for `onMouseLeave`                                      |
-| onClick       | `MouseEventHandler`             |          |         | Callback for `onClick`                                           |
+| Property      | Type                            | Required | Default   | Description                                                      |
+| :------------ | :------------------------------ | :------: | :-------- | :--------------------------------------------------------------- |
+| id            | `string`                        |  `true`  |           | Unique identifier (used in `key` for example)                    |
+| content       | `ReactNode`                     |  `true`  |           | Notification's content (what it's about)                         |
+| title         | `ReactNode`                     |          |           | Notification's title (bold)                                      |
+| formattedDate | `ReactNode`                     |          |           | Notification's creation date (already formatted)                 |
+| unread        | `boolean`                       |          | `false`   | Is notification unread                                           |
+| archived      | `boolean`                       |          | `false`   | Is notification archived (invisible to the user)                 |
+| source        | `NotificationSourceProps`       |          |           | Notification's source (e.g. Cloud/Tracker/Console)               |
+| theme         | `NotificationTheme`             |          |           | Notification's theme (e.g. warning/danger)                       |
+| className     | `string`                        |          |           | Notification's `className`                                       |
+| sideActions   | `ReactNode`                     |          |           | Notification's actions on the right side                         |
+| bottomActions | `ReactNode`                     |          |           | Notification's bottom actions (as buttons by default)            |
+| swipeActions  | `NotificationSwipeActionsProps` |          |           | Notification's action on left/right swipe (mobile mode required) |
+| onMouseEnter  | `MouseEventHandler`             |          |           | Callback for `onMouseEnter`                                      |
+| onMouseLeave  | `MouseEventHandler`             |          |           | Callback for `onMouseLeave`                                      |
+| onClick       | `MouseEventHandler`             |          |           | Callback for `onClick`                                           |
+| href          | `string`                        |          |           | Notification url                                                 |
+| target        | `HTMLAttributeAnchorTarget`     |          | `__blank` | Notification link target                                         |
 
 For a more detailed info on types go to [Notifications' types](https://github.com/gravity-ui/components/blob/main/src/components/Notifications/definitions.ts) and [Notification' types](https://github.com/gravity-ui/components/blob/main/src/components/Notification/definitions.ts).
