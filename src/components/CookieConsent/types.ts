@@ -16,13 +16,13 @@ export type CookieConsentComponentProps =
 
 export type Subscriber = (changedConsents: Consents, allConsents: Consents) => void;
 
-export interface IConsentManager {
+export interface IConsentManager<TConsentType extends `${ConsentType}` = ConsentType> {
     /* Mode for managing cookies and showing component. 'notification' | 'base' | 'manage' */
     mode: `${ConsentMode}`;
     /* Types of cookies */
-    cookies: ConsentType[];
+    cookies: TConsentType[];
     /* See CookieSetOptions from universal-cookie */
-    cookiesSettings: CookieSettings;
+    cookiesSettings: CookieSettings<TConsentType>;
     /* Get current consents */
     getConsents: () => Consents;
     /* To subscribe a component to update consents; e.g, to send actual consents to ga */
