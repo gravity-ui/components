@@ -60,6 +60,8 @@ export interface SharePopoverProps extends ShareListProps, Partial<SharePopoverD
     buttonTitle?: string | React.ReactNode;
     /** aria-label of button */
     buttonAriaLabel?: string;
+    /** button props */
+    buttonProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
     /** custom onClick handler */
     onClick?: (event?: React.MouseEvent<HTMLSpanElement>) => void;
     /** custom copy link button title */
@@ -104,6 +106,7 @@ export const SharePopover = (props: SharePopoverProps) => {
         children,
         onClick,
         buttonAriaLabel,
+        buttonProps,
     } = props;
     const [isOpen, setIsOpen] = React.useState(false);
     const buttonRef = React.useRef<HTMLButtonElement>(null);
@@ -182,6 +185,7 @@ export const SharePopover = (props: SharePopoverProps) => {
                     aria-describedby={tooltipId}
                     aria-label={buttonAriaLabel}
                     onClick={onClickInner}
+                    {...(buttonProps ?? {})}
                     ref={buttonRef}
                 >
                     <div className={b('icon-container')}>
