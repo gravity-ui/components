@@ -9,3 +9,18 @@ global.ResizeObserver = class implements ResizeObserver {
     observe(_target: Element, _options?: ResizeObserverOptions) {}
     unobserve(_target: Element) {}
 };
+
+global.matchMedia = function matchMedia(media: string) {
+    return {
+        matches: false,
+        media,
+        addEventListener() {},
+        removeEventListener() {},
+        onchange() {},
+        dispatchEvent() {
+            return true;
+        },
+        addListener() {},
+        removeListener() {},
+    } satisfies MediaQueryList;
+};

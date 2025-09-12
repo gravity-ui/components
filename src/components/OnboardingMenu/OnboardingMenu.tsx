@@ -8,7 +8,7 @@ import {block} from '../utils/cn';
 import {OnboardingMenuItem} from './components/OnboardingMenuItem';
 import {OnboardingMenuItemImage} from './components/OnboardingMenuItemImage';
 import {OnboardingMenuItemText} from './components/OnboardingMenuItemText';
-import i18n from './i18n';
+import {i18n} from './i18n';
 
 import './OnboardingMenu.scss';
 
