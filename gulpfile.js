@@ -7,6 +7,8 @@ const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const {rimrafSync} = require('rimraf');
 
+const {version, sideEffects} = require('./package.json');
+
 const BUILD_DIR = path.resolve('build');
 
 task('clean', (done) => {
@@ -55,7 +57,8 @@ async function compileTs(modules = false) {
                     fileName: 'package.json',
                     text: JSON.stringify({
                         type: modules ? 'module' : 'commonjs',
-                        sideEffects: ['*.css', '*.scss'],
+                        sideEffects,
+                        version,
                     }),
                 }),
             )
