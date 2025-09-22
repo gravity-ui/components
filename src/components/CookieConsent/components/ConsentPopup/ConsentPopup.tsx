@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Xmark} from '@gravity-ui/icons';
-import {Button, Icon, Link, Modal, Text, useMobile} from '@gravity-ui/uikit';
+import {Button, ButtonView, Icon, Link, Modal, Text, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 import {ConsentType} from '../../ConsentManager';
@@ -43,7 +43,7 @@ const Header = ({
                 <Text
                     className={b('title')}
                     variant={
-                        currentStep === ConsentPopupStep.Manage && !isMobile ? 'body-3' : 'header-1'
+                        currentStep === ConsentPopupStep.Manage && !isMobile ? 'body-3' : 'header-2'
                     }
                 >
                     {renderTitle()}
@@ -68,6 +68,7 @@ const Footer = ({
     onChangeStep,
     initialStep,
 }: FooterProps) => {
+    const mobile = useMobile();
     const isManageStep = currentStep === ConsentPopupStep.Manage;
     const onButtonClick = (onlyNecessary: boolean) => {
         return () => {
@@ -85,7 +86,7 @@ const Footer = ({
                 className={b('button')}
                 onClick={onButtonClick(true)}
                 size="l"
-                view="flat-secondary"
+                view={mobile ? 'normal' : 'flat-secondary'}
             >
                 {buttonNecessaryText}
             </Button>
@@ -101,7 +102,7 @@ const Footer = ({
                 {buttonConfirmText}
             </Button>
         ),
-        allowAll: (view: 'action' | 'flat-secondary') => (
+        allowAll: (view: ButtonView) => (
             <Button
                 key="allowAll"
                 className={b('button')}
@@ -138,7 +139,7 @@ const Footer = ({
 
     if (isManageStep && initialStep === ConsentPopupStep.Manage) {
         return (
-            <div className={b('buttons')}>
+            <div className={b('footer')}>
                 <div> {buttons.allowAll('flat-secondary')}</div>
 
                 <div className={b('action-buttons')}>
@@ -150,8 +151,8 @@ const Footer = ({
     }
 
     return (
-        <div className={b('buttons')}>
-            <div>{isManageStep ? buttons.back() : buttons.manageCookies()}</div>
+        <div className={b('footer')}>
+            {isManageStep ? buttons.back() : buttons.manageCookies()}
 
             <div className={b('action-buttons')}>
                 {buttons.onlyNecessary()}
@@ -232,57 +233,59 @@ export const ConsentPopup = ({
             disableHeightTransition={disableHeightTransition}
         >
             <div className={b(null, className)}>
-                <Header
-                    currentStep={currentStep}
-                    initialStep={step}
-                    onClose={onClose}
-                    isMobile={mobile}
-                    manageTitleText={manageTitleText}
-                    mainTitleText={mainTitleText}
-                />
-                <div className={b('body', {step})}>
-                    {isManageStep ? (
-                        <React.Fragment>
-                            {noSubtitle ? null : (
-                                <Text
-                                    className={b('text')}
-                                    variant={mobile ? 'header-1' : 'subheader-2'}
-                                >
-                                    {i18n('manage_subtitle_extended')}
-                                </Text>
-                            )}
-                            <div className={b('text')}>
-                                {manageLabelText}
-                                {policyLink && policyLinkText && (
-                                    <React.Fragment>
-                                        {' '}
-                                        <Link href={policyLink} target="_blank">
-                                            {policyLinkText}
-                                        </Link>
-                                    </React.Fragment>
+                <div>
+                    <Header
+                        currentStep={currentStep}
+                        initialStep={step}
+                        onClose={onClose}
+                        isMobile={mobile}
+                        manageTitleText={manageTitleText}
+                        mainTitleText={mainTitleText}
+                    />
+                    <div className={b('body', {step})}>
+                        {isManageStep ? (
+                            <React.Fragment>
+                                {noSubtitle ? null : (
+                                    <Text
+                                        className={b('text')}
+                                        variant={mobile ? 'subheader-3' : 'subheader-2'}
+                                    >
+                                        {i18n('manage_subtitle_extended')}
+                                    </Text>
                                 )}
-                                .
-                            </div>
-                            {foldableListItems ? (
-                                <FoldableList
-                                    isMobile={mobile}
-                                    className={b('cookie-list')}
-                                    items={foldableListItems}
-                                    onChooseItem={onChoose}
-                                />
-                            ) : null}
-                        </React.Fragment>
-                    ) : (
-                        <React.Fragment>
-                            <div className={b('text')}>
-                                <span
-                                    dangerouslySetInnerHTML={{
-                                        __html: text ? text : i18n('label_text_extended'),
-                                    }}
-                                />
-                            </div>
-                        </React.Fragment>
-                    )}
+                                <div className={b('text')}>
+                                    {manageLabelText}
+                                    {policyLink && policyLinkText && (
+                                        <React.Fragment>
+                                            {' '}
+                                            <Link href={policyLink} target="_blank">
+                                                {policyLinkText}
+                                            </Link>
+                                        </React.Fragment>
+                                    )}
+                                    .
+                                </div>
+                                {foldableListItems ? (
+                                    <FoldableList
+                                        isMobile={mobile}
+                                        className={b('cookie-list')}
+                                        items={foldableListItems}
+                                        onChooseItem={onChoose}
+                                    />
+                                ) : null}
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <div className={b('text')}>
+                                    <span
+                                        dangerouslySetInnerHTML={{
+                                            __html: text ? text : i18n('label_text_extended'),
+                                        }}
+                                    />
+                                </div>
+                            </React.Fragment>
+                        )}
+                    </div>
                 </div>
                 <Footer
                     currentStep={currentStep}
