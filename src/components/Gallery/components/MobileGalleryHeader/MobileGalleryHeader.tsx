@@ -66,7 +66,7 @@ export const MobileGalleryHeader = ({
 
                 {withNavigation && (
                     <Text color="primary" variant="subheader-2">
-                        {activeItemIndex + 1}/{itemsLength}
+                        {activeItemIndex + 1} / {itemsLength}
                     </Text>
                 )}
 
