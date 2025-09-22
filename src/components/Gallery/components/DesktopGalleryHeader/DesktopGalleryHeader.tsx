@@ -53,7 +53,7 @@ export const DesktopGalleryHeader = ({
                         <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} />
                     </Button>
                     <Text color="secondary" variant="body-1">
-                        {activeItemIndex + 1}/{itemsLength}
+                        {activeItemIndex + 1} / {itemsLength}
                     </Text>
                     <Button size="l" view="flat" onClick={onGoToNext}>
                         <Icon data={direction === 'rtl' ? ArrowLeft : ArrowRight} />
