@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.13.0](https://github.com/gravity-ui/components/compare/v4.12.0...v4.13.0) (2025-09-22)
+
+
+### Features
+
+* **Gallery:** add space between gallery navigation counters ([#345](https://github.com/gravity-ui/components/issues/345)) ([eeb34f7](https://github.com/gravity-ui/components/commit/eeb34f728b48146e507c4b91d6541c0610331275))
+* **i18n:** export Keysets type ([#338](https://github.com/gravity-ui/components/issues/338)) ([199d8a1](https://github.com/gravity-ui/components/commit/199d8a1aad1dc88459f5ea7966e49b29ef5d086f))
+
 ## [4.12.0](https://github.com/gravity-ui/components/compare/v4.11.0...v4.12.0) (2025-08-28)
 
 
