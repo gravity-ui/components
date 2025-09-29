@@ -1,14 +1,13 @@
 $ns: 'gc-';
 
 // Sizes
-$tinyOffset: 5px;
-$inlineOffset: 12px;
-$regularOffset: 16px;
-$normalOffset: 20px;
-$mediumOffset: 30px;
-$bigOffset: 40px;
-$doubleInlineOffset: $inlineOffset * 2;
-$doubleRegularOffset: $regularOffset * 2;
+$inlineOffset: var(--g-spacing-3);
+$regularOffset: var(--g-spacing-4);
+$normalOffset: var(--g-spacing-5);
+$mediumOffset: var(--g-spacing-8);
+$bigOffset: var(--g-spacing-10);
+$doubleInlineOffset: calc(#{$inlineOffset} * 2);
+$doubleRegularOffset: calc(#{$regularOffset} * 2);
 $smallOffset: calc(#{$normalOffset} * 0.5);
-$microOffset: calc(#{$regularOffset} * 0.5);
-$nanoOffset: calc(#{$microOffset} * 0.5);
+$microOffset: var(--g-spacing-2);
+$nanoOffset: var(--g-spacing-1);

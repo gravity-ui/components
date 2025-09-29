@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}consent-popup';
 #{$block} {
     @include mixins.text-body-2;
 
-    padding: variables.$doubleRegularOffset;
+    padding: variables.$mediumOffset variables.$doubleRegularOffset;
     border-radius: 14px;
     max-width: calc(720px - #{variables.$doubleRegularOffset} * 2);
 
@@ -24,23 +24,24 @@ $block: '.#{variables.$ns}consent-popup';
         line-height: variables.$doubleInlineOffset;
 
         &_step_manage {
-            margin-block-end: variables.$doubleRegularOffset;
+            margin-block-end: variables.$regularOffset;
         }
     }
 
     &__text {
         & + & {
-            margin-block-start: variables.$regularOffset;
+            margin-block-start: variables.$microOffset;
         }
     }
 
-    &__buttons {
+    &__footer {
         display: flex;
         justify-content: space-between;
     }
 
-    &__button + &__button {
-        margin-inline-start: variables.$regularOffset;
+    &__action-buttons {
+        display: flex;
+        gap: variables.$regularOffset;
     }
 
     &__close-button {
@@ -57,10 +58,6 @@ $block: '.#{variables.$ns}consent-popup';
         inset-block-start: -2px;
     }
 
-    &__cookie-list {
-        margin-block-start: variables.$doubleInlineOffset;
-    }
-
     &__modal-content_mobile {
         #{$block} {
             max-width: initial;
@@ -71,31 +68,35 @@ $block: '.#{variables.$ns}consent-popup';
             line-height: 20px;
         }
 
-        #{$block}__buttons {
-            justify-content: flex-start;
-        }
-
-        #{$block}__button + #{$block}__button {
-            margin-inline-start: variables.$inlineOffset;
+        #{$block}__footer,
+        #{$block}__action-buttons {
+            flex-direction: column-reverse;
+            gap: variables.$microOffset;
         }
 
         #{$block}__arrow-button {
             margin-inline-end: variables.$regularOffset;
         }
 
-        &#{$block}__modal-content_step_manage {
+        &#{$block}__modal-content {
             position: fixed;
             inset: 0;
             margin: 0;
             overflow-y: scroll;
             border-radius: 0;
+            min-height: 100vh;
 
             #{$block} {
-                padding: variables.$doubleRegularOffset variables.$doubleInlineOffset;
+                padding: var(--g-spacing-9);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                min-height: 100%;
+                box-sizing: border-box;
             }
 
             #{$block}__body {
-                margin: variables.$doubleRegularOffset 0;
+                margin: variables.$normalOffset 0 variables.$bigOffset;
             }
 
             #{$block}__text + #{$block}__text {
