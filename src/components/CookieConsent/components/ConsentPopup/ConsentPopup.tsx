@@ -109,6 +109,7 @@ const Footer = ({
                 onClick={onButtonClick(false)}
                 size="l"
                 view={view}
+                width={mobile ? 'max' : 'auto'}
             >
                 {buttonAcceptText}
             </Button>
@@ -140,7 +141,7 @@ const Footer = ({
     if (isManageStep && initialStep === ConsentPopupStep.Manage) {
         return (
             <div className={b('footer')}>
-                <div> {buttons.allowAll('flat-secondary')}</div>
+                <div> {buttons.allowAll(mobile ? 'flat' : 'flat-secondary')}</div>
 
                 <div className={b('action-buttons')}>
                     {buttons.onlyNecessary()}

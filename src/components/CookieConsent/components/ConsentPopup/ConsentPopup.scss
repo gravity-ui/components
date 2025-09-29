@@ -6,7 +6,7 @@ $block: '.#{variables.$ns}consent-popup';
 #{$block} {
     @include mixins.text-body-2;
 
-    padding: variables.$doubleRegularOffset;
+    padding: variables.$mediumOffset variables.$doubleRegularOffset;
     border-radius: 14px;
     max-width: calc(720px - #{variables.$doubleRegularOffset} * 2);
 
@@ -24,13 +24,13 @@ $block: '.#{variables.$ns}consent-popup';
         line-height: variables.$doubleInlineOffset;
 
         &_step_manage {
-            margin-block-end: variables.$doubleRegularOffset;
+            margin-block-end: variables.$regularOffset;
         }
     }
 
     &__text {
         & + & {
-            margin-block-start: variables.$regularOffset;
+            margin-block-start: variables.$microOffset;
         }
     }
 
@@ -58,10 +58,6 @@ $block: '.#{variables.$ns}consent-popup';
         inset-block-start: -2px;
     }
 
-    &__cookie-list {
-        margin-block-start: variables.$doubleInlineOffset;
-    }
-
     &__modal-content_mobile {
         #{$block} {
             max-width: initial;
@@ -82,10 +78,6 @@ $block: '.#{variables.$ns}consent-popup';
             margin-inline-end: variables.$regularOffset;
         }
 
-        #{$block}__cookie-list {
-            margin-block-start: variables.$normalOffset;
-        }
-
         &#{$block}__modal-content {
             position: fixed;
             inset: 0;
@@ -95,7 +87,7 @@ $block: '.#{variables.$ns}consent-popup';
             min-height: 100vh;
 
             #{$block} {
-                padding: variables.$doubleRegularOffset;
+                padding: var(--g-spacing-9);
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -104,7 +96,7 @@ $block: '.#{variables.$ns}consent-popup';
             }
 
             #{$block}__body {
-                margin: variables.$regularOffset 0 variables.$bigOffset;
+                margin: variables.$normalOffset 0 variables.$bigOffset;
             }
 
             #{$block}__text + #{$block}__text {

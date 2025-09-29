@@ -63,15 +63,17 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                             <Disclosure.Summary>
                                 {({onClick, ariaControls, expanded}) => (
                                     <div className={b('item-title-wrapper')}>
-                                        <Checkbox
-                                            className={b('item-checkbox', {
-                                                multiline: Boolean(titleLabel),
-                                            })}
-                                            checked={checked || isChecked}
-                                            size="l"
-                                            onChange={onCheckItem(index)}
-                                            disabled={disabled}
-                                        />
+                                        <div>
+                                            <Checkbox
+                                                className={b('item-checkbox', {
+                                                    multiline: Boolean(titleLabel),
+                                                })}
+                                                checked={checked || isChecked}
+                                                size="l"
+                                                onChange={onCheckItem(index)}
+                                                disabled={disabled}
+                                            />
+                                        </div>
                                         <button
                                             type="button"
                                             className={b('item-button')}
@@ -80,14 +82,9 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                                             aria-expanded={expanded}
                                         >
                                             <div className={b('title')}>
-                                                <div className={b('title-text')}>
-                                                    <Text
-                                                        className={b('title-text')}
-                                                        variant="subheader-2"
-                                                    >
-                                                        {title}
-                                                    </Text>
-                                                    {titleLabel ? (
+                                                <div>
+                                                    <Text variant="subheader-2">{title}</Text>
+                                                    {titleLabel && !isMobile ? (
                                                         <Label className={b('title-label')}>
                                                             {titleLabel}
                                                         </Label>
@@ -106,24 +103,31 @@ export const FoldableList = ({items, className, isMobile, onChooseItem}: Foldabl
                                 )}
                             </Disclosure.Summary>
                             <div className={b('content')}>
-                                <Text variant="body-2" className={b('content-text')}>
-                                    {text}
-                                </Text>
-                                {link ? (
-                                    <Link
-                                        {...link}
-                                        className={b('content-link')}
-                                        href={link.href}
-                                        target="_blank"
-                                    >
-                                        {link.title}
-                                        <Icon
-                                            className={b('content-icon')}
-                                            data={direction === 'rtl' ? ChevronLeft : ChevronRight}
-                                            size={16}
-                                        />
-                                    </Link>
+                                {titleLabel && isMobile ? (
+                                    <Label className={b('title-label')}>{titleLabel}</Label>
                                 ) : null}
+                                <div>
+                                    <Text variant="body-2" className={b('content-text')}>
+                                        {text}
+                                    </Text>
+                                    {link ? (
+                                        <Link
+                                            {...link}
+                                            className={b('content-link')}
+                                            href={link.href}
+                                            target="_blank"
+                                        >
+                                            {link.title}
+                                            <Icon
+                                                className={b('content-icon')}
+                                                data={
+                                                    direction === 'rtl' ? ChevronLeft : ChevronRight
+                                                }
+                                                size={16}
+                                            />
+                                        </Link>
+                                    ) : null}
+                                </div>
                             </div>
                         </Disclosure>
                     );
