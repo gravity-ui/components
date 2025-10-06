@@ -81,11 +81,6 @@ $block: '.#{variables.$ns}foldable-list';
             align-items: center;
         }
 
-        #{$block}__content {
-            //margin-inline-start: variables.$doubleRegularOffset;
-            //margin-block-start: 8px;
-        }
-
         &#{$block}__item {
             margin-block: variables.$normalOffset;
             padding: 0;
