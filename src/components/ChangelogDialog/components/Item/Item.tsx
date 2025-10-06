@@ -79,6 +79,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
                 {data.image && data.image.src ? (
                     <Picture
                         className={b('image')}
+                        imageData={b('image-bordered')}
                         src={data.image.src}
                         ratio={data.image.ratio}
                         alt={data.image.alt}

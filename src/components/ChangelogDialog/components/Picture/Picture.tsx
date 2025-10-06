@@ -14,12 +14,13 @@ const SHOW_LOADER_TIMEOUT = 150;
 
 export interface PictureProps {
     className?: string;
+    imageData?: string;
     src: string;
     alt?: string;
     ratio?: number;
 }
 
-export function Picture({className, src, alt = '', ratio}: PictureProps) {
+export function Picture({className, imageData, src, alt = '', ratio}: PictureProps) {
     const [loadingState, setLoadingState] = React.useState<LoadingState>('loading');
     const [isVisibleLoader, setIsVisibleLoader] = React.useState<boolean>(false);
 
@@ -63,15 +64,19 @@ export function Picture({className, src, alt = '', ratio}: PictureProps) {
                     ) : null}
 
                     <img
-                        className={b('image-with-ratio', {
-                            visible: loadingState === 'loaded',
-                        })}
+                        className={b(
+                            'image-with-ratio',
+                            {
+                                visible: loadingState === 'loaded',
+                            },
+                            imageData,
+                        )}
                         src={src}
                         alt={alt}
                     />
                 </div>
             ) : (
-                <img className={b('image')} src={src} alt={alt} />
+                <img className={b('image', imageData)} src={src} alt={alt} />
             )}
         </div>
     );

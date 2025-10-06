@@ -21,8 +21,6 @@ $block: '.#{variables.$ns}changelog-dialog-picture';
         height: 0px;
         opacity: 0;
         transition: opacity 0.15s linear;
-        border: 1px solid var(--g-color-private-blue-600-solid);
-        border-radius: 20px;
 
         &_visible {
             height: auto;
