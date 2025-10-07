@@ -19,6 +19,7 @@ export interface ChangelogDialogProps {
     open: boolean;
     title?: string;
     fullListLink?: string;
+    imageData?: string;
     items: ChangelogItem[];
     disableBodyScrollLock?: boolean;
     disableOutsideClick?: boolean;
@@ -40,6 +41,7 @@ export function ChangelogDialog({
     open,
     title = i18n('title'),
     fullListLink,
+    imageData = '',
     items,
     disableBodyScrollLock = true,
     disableHeightTransition = true,
@@ -90,6 +92,7 @@ export function ChangelogDialog({
                             <Item
                                 key={index}
                                 className={b('item')}
+                                imageData={imageData}
                                 data={item}
                                 onStoryClick={onStoryClick}
                                 onLinkClick={onLinkClick}

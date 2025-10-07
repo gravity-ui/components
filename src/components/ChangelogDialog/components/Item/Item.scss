@@ -36,11 +36,6 @@ $metaWidth: 80px;
         overflow: hidden;
     }
 
-    &__image-bordered {
-        border: 1px solid var(--g-color-private-blue-600-solid);
-        border-radius: 20px;
-    }
-
     &__description {
         margin-block-start: var(--g-spacing-3);
     }

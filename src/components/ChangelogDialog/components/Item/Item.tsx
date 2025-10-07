@@ -15,6 +15,7 @@ const b = block('changelog-dialog-item');
 
 export interface ItemProps {
     className?: string;
+    imageData?: string;
     data: ChangelogItem;
     onStoryClick?: (storyId: string) => void;
     onLinkClick?: (link: string) => void;
@@ -33,7 +34,7 @@ const formatLangDisplay = {
     },
 };
 
-export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
+export function Item({className, imageData = '', data, onStoryClick, onLinkClick}: ItemProps) {
     const handleLinkClick = React.useCallback(() => {
         if (onLinkClick && data.link) {
             onLinkClick(data.link);
@@ -79,7 +80,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
                 {data.image && data.image.src ? (
                     <Picture
                         className={b('image')}
-                        imageData={b('image-bordered')}
+                        imageData={imageData}
                         src={data.image.src}
                         ratio={data.image.ratio}
                         alt={data.image.alt}
