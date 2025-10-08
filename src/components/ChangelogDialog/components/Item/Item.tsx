@@ -78,7 +78,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
                 <h3 className={b('title')}>{data.title}</h3>
                 {data.image && data.image.src ? (
                     <Picture
-                        className={b('image')}
+                        className={b('image', data.image.className)}
                         src={data.image.src}
                         ratio={data.image.ratio}
                         alt={data.image.alt}

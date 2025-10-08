@@ -2,6 +2,7 @@ import * as React from 'react';
 
 interface ImageData {
     src: string;
+    className?: string;
     alt?: string;
     ratio?: number;
 }
