@@ -9,12 +9,10 @@ $block: '.#{variables.$ns}foldable-list';
     @include mixins.text-body-2();
 
     &__item {
-        border-block-start: 1px solid $border-color;
-        padding: variables.$regularOffset variables.$microOffset;
-
-        &:last-child {
-            border-block-end: 1px solid $border-color;
-        }
+        padding: variables.$regularOffset 0;
+        display: flex;
+        flex-direction: column;
+        gap: variables.$smallOffset;
     }
 
     &__item-title-wrapper {
@@ -49,10 +47,6 @@ $block: '.#{variables.$ns}foldable-list';
         margin-inline-start: variables.$microOffset;
     }
 
-    &__content {
-        margin-block-start: 16px;
-    }
-
     &__content-text {
         line-height: variables.$doubleInlineOffset;
     }
@@ -60,7 +54,7 @@ $block: '.#{variables.$ns}foldable-list';
     &__content-link {
         display: flex;
         align-items: center;
-        margin-block-start: variables.$regularOffset;
+        margin-block-start: variables.$smallOffset;
     }
 
     &__item_mobile {
@@ -73,43 +67,23 @@ $block: '.#{variables.$ns}foldable-list';
             align-items: center;
         }
 
-        #{$block}__title-text {
-            font-size: variables.$normalOffset;
-            line-height: variables.$doubleInlineOffset;
-            display: flex;
-            flex-direction: column-reverse;
-        }
-
         #{$block}__title-label {
             align-self: flex-start;
             margin-inline-start: 0;
-            margin-block-end: variables.$microOffset;
+            margin-block-end: variables.$smallOffset;
         }
 
         #{$block}__item-checkbox {
-            margin-inline-end: variables.$regularOffset;
-
-            &_multiline {
-                align-self: flex-start;
-            }
+            margin-inline-end: variables.$microOffset;
         }
 
         #{$block}__item-title-wrapper {
             align-items: center;
         }
 
-        #{$block}__title-arrow_multiline {
-            align-self: flex-start;
-        }
-
-        #{$block}__content {
-            margin-inline-start: variables.$doubleRegularOffset;
-            margin-block-start: 8px;
-        }
-
         &#{$block}__item {
-            padding: variables.$doubleRegularOffset variables.$regularOffset
-                variables.$doubleRegularOffset 0;
+            margin-block: variables.$normalOffset;
+            padding: 0;
         }
     }
 }
