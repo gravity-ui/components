@@ -5,7 +5,7 @@ import type {CookieSetOptions} from 'universal-cookie';
 import type {IConsentManager, Subscriber} from './types';
 
 export const COOKIE_NAME = 'analyticsConsents';
-export const CONSENT_COOKIE_SETTINGS: CookieSettings = {
+export const CONSENT_COOKIE_SETTINGS = {
     path: '/',
     maxAge: 60 * 60 * 24 * 365,
     secure: true,
@@ -34,11 +34,16 @@ export type Consents = {
     [k in `${ConsentType | AdditionalConsentParams}`]?: boolean | number;
 };
 
-export type CookieSettings = CookieSetOptions;
+export type CookieSettings<TConsentType extends `${ConsentType}` = ConsentType> =
+    CookieSetOptions & {
+        cookiesTypes?: TConsentType[];
+    };
 
 const cookies = new Cookies();
 
-export class ConsentManager implements IConsentManager {
+export class ConsentManager<TConsentType extends `${ConsentType}` = ConsentType>
+    implements IConsentManager<TConsentType>
+{
     protected consents: Consents = {};
 
     private consentMode: `${ConsentMode}`;
@@ -46,18 +51,20 @@ export class ConsentManager implements IConsentManager {
     private projectConsentEdition: number | undefined;
 
     private closed = false;
-    private readonly cookieSettings: CookieSettings;
-    private readonly cookiesTypes: Array<ConsentType> = Object.values(ConsentType);
+    private readonly cookieSettings: CookieSettings<TConsentType>;
+    private readonly cookiesTypes: TConsentType[];
     private readonly subscribers: Subscriber[] = [];
 
     constructor(
         mode: `${ConsentMode}`,
         edition?: number,
-        cookieSettings = CONSENT_COOKIE_SETTINGS,
+        options: CookieSettings<TConsentType> = CONSENT_COOKIE_SETTINGS,
     ) {
+        const {cookiesTypes, ...cookieSettings} = options;
         this.consentMode = mode;
         this.projectConsentEdition = edition;
         this.cookieSettings = cookieSettings;
+        this.cookiesTypes = cookiesTypes || (Object.values(ConsentType) as TConsentType[]);
 
         this.setInitValues();
     }
