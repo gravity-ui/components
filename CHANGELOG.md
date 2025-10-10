@@ -1,5 +1,14 @@
 # Changelog
 
+## [4.14.0](https://github.com/gravity-ui/components/compare/v4.13.0...v4.14.0) (2025-10-10)
+
+
+### Features
+
+* **Changelog:** add `className` property to ChangelogItem image ([#347](https://github.com/gravity-ui/components/issues/347)) ([951b46b](https://github.com/gravity-ui/components/commit/951b46b91d9757c910f6078649037da772cc95e7))
+* **ConsentManager:** add ConsentType as generic ([#348](https://github.com/gravity-ui/components/issues/348)) ([2fab054](https://github.com/gravity-ui/components/commit/2fab054a98ef946bd16fec03fb905959c061e7b4))
+* **CookieConsent:** Consent modal design ([#346](https://github.com/gravity-ui/components/issues/346)) ([c650f10](https://github.com/gravity-ui/components/commit/c650f100b4e97068e3e0a9229d1e31ad523a5f29))
+
 ## [4.13.0](https://github.com/gravity-ui/components/compare/v4.12.0...v4.13.0) (2025-09-22)
 
 
