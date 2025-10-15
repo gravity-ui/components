@@ -22,7 +22,7 @@ export const VideoView = ({className, src, autoPlay = true, controls = true}: Vi
     const [status, setStatus] = React.useState<'loading' | 'playing' | 'error'>('loading');
     const [errorMessage, setErrorMessage] = React.useState<string>();
 
-    const handleLoad = React.useCallback(() => {
+    const handleCanPlay = React.useCallback(() => {
         setStatus('playing');
     }, []);
 
@@ -47,9 +47,9 @@ export const VideoView = ({className, src, autoPlay = true, controls = true}: Vi
             <video
                 className={cnVideoView(null, className)}
                 src={src}
-                controls={controls}
+                controls={status === 'loading' ? false : controls}
                 autoPlay={autoPlay}
-                onLoadedMetadata={handleLoad}
+                onCanPlay={handleCanPlay}
                 onError={status === 'playing' ? undefined : handleError}
             />
         </React.Fragment>

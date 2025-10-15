@@ -8,5 +8,6 @@ $block: '.#{variables.$ns}gallery-video-view';
 
     &__spin {
         position: absolute;
+        z-index: 1;
     }
 }
