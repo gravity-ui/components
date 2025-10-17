@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.14.1](https://github.com/gravity-ui/components/compare/v4.14.0...v4.14.1) (2025-10-15)
+
+
+### Bug Fixes
+
+* **Gallery:** remove native spinner from VideoView ([#350](https://github.com/gravity-ui/components/issues/350)) ([dce1ea3](https://github.com/gravity-ui/components/commit/dce1ea3a676a407be9774f3018814e0f9a0656fa))
+
 ## [4.14.0](https://github.com/gravity-ui/components/compare/v4.13.0...v4.14.0) (2025-10-10)
 
 
