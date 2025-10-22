@@ -6,6 +6,7 @@ $maxItemsHeight: 70vh;
 
 #{$block} {
     width: $width;
+    --gc-changelog-dialog-meta-width: 80px;
 
     &__full-list-link-icon {
         margin-inline-start: var(--g-spacing-1);
