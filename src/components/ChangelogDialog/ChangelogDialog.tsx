@@ -29,6 +29,7 @@ export interface ChangelogDialogProps {
     loading?: boolean;
     error?: boolean | {title: string; description: string};
     disableHeightTransition?: boolean;
+    containerClassName?: string;
 }
 
 let nextId = 1;
@@ -50,6 +51,7 @@ export function ChangelogDialog({
     onRetryClick,
     loading,
     error,
+    containerClassName,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
@@ -57,7 +59,7 @@ export function ChangelogDialog({
 
     return (
         <Dialog
-            className={b()}
+            className={b(null, containerClassName)}
             open={open}
             onClose={onClose}
             disableBodyScrollLock={disableBodyScrollLock}
