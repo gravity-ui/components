@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.16.0](https://github.com/gravity-ui/components/compare/v4.15.0...v4.16.0) (2025-10-22)
+
+
+### Features
+
+* **ChangelogDialog:** add className prop ([#354](https://github.com/gravity-ui/components/issues/354)) ([6e6b6e2](https://github.com/gravity-ui/components/commit/6e6b6e237577d028802600c4a6629d2170769c81))
+
 ## [4.15.0](https://github.com/gravity-ui/components/compare/v4.14.1...v4.15.0) (2025-10-22)
 
 
