@@ -2,7 +2,7 @@
 @use '../../../variables';
 
 $block: '.#{variables.$ns}changelog-dialog-item';
-$metaWidth: 80px;
+$metaWidth: 90px;
 
 #{$block} {
     display: flex;
