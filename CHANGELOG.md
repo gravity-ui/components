@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.15.0](https://github.com/gravity-ui/components/compare/v4.14.1...v4.15.0) (2025-10-22)
+
+
+### Features
+
+* **ChangelogDialog:** add `--gc-changelog-dialog-width` & `--gc-changelog-dialog-meta-width` css tokens ([#352](https://github.com/gravity-ui/components/issues/352)) ([e513121](https://github.com/gravity-ui/components/commit/e513121cd07e25dd78e110a52602392279263a92))
+
 ## [4.14.1](https://github.com/gravity-ui/components/compare/v4.14.0...v4.14.1) (2025-10-15)
 
 
