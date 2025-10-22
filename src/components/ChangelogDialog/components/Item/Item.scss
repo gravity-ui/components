@@ -2,13 +2,12 @@
 @use '../../../variables';
 
 $block: '.#{variables.$ns}changelog-dialog-item';
-$metaWidth: 80px;
 
 #{$block} {
     display: flex;
 
     &__meta {
-        width: $metaWidth;
+        width: var(--gc-changelog-dialog-meta-width);
     }
 
     &__date {
