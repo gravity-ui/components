@@ -51,6 +51,7 @@ const OnboardingMenuParent = ({
     children,
 }: OnboardingMenuProps) => {
     const [isHovered, setIsHovered] = React.useState(false);
+    const {t} = i18n.useTranslation();
 
     const onMouseEnter = React.useCallback(() => {
         if (withCloseButton) {
@@ -150,7 +151,7 @@ const OnboardingMenuParent = ({
                                 onClick={onCollapseClickCallback}
                                 width="max"
                             >
-                                {collapseButtonText ?? i18n('collapse')}
+                                {collapseButtonText ?? t('collapse')}
                             </Button>
                             <Button
                                 view="outlined-contrast"
@@ -158,7 +159,7 @@ const OnboardingMenuParent = ({
                                 size="m"
                                 width="max"
                             >
-                                {completeButtonText ?? i18n('complete')}
+                                {completeButtonText ?? t('complete')}
                             </Button>
                         </div>
                     </React.Fragment>
