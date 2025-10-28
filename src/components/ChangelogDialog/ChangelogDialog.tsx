@@ -17,7 +17,7 @@ const b = block('changelog-dialog');
 
 export interface ChangelogDialogProps {
     open: boolean;
-    title?: string;
+    title?: React.ReactNode;
     fullListLink?: string;
     items: ChangelogItem[];
     disableBodyScrollLock?: boolean;
@@ -29,6 +29,7 @@ export interface ChangelogDialogProps {
     loading?: boolean;
     error?: boolean | {title: string; description: string};
     disableHeightTransition?: boolean;
+    className?: string;
 }
 
 let nextId = 1;
@@ -50,6 +51,7 @@ export function ChangelogDialog({
     onRetryClick,
     loading,
     error,
+    className,
 }: ChangelogDialogProps) {
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
@@ -57,7 +59,7 @@ export function ChangelogDialog({
 
     return (
         <Dialog
-            className={b()}
+            className={b(null, className)}
             open={open}
             onClose={onClose}
             disableBodyScrollLock={disableBodyScrollLock}
