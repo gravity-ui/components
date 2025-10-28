@@ -5,6 +5,4 @@ import {NAMESPACE} from '../../../../../utils/cn';
 import en from './en.json';
 import ru from './ru.json';
 
-export type FullScreenActionI18nKeys = 'enter-full-screen' | 'exit-full-screen';
-
 export const i18n = addComponentKeysets({en, ru}, `${NAMESPACE}gallery-full-screen-action`);
