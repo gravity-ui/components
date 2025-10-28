@@ -30,6 +30,8 @@ import {CookieConsent} from '@gravity-ui/components';
 const consentManager = new ConsentManager('manage');
 
 const Analytics = () => {
+  const {t} = i18n.useTranslation();
+
   const onUpdateConsent = (consents: Consents) => {
     // do something: e.g. sent events to analytics
   };
@@ -38,7 +40,7 @@ const Analytics = () => {
     return ['necessary', 'analytics'].map((type) => {
       return {
         type,
-        titleLabel: type === 'necessary' ? i18n('necessary_cookie_title_label') : undefined,
+        titleLabel: type === 'necessary' ? t('necessary_cookie_title_label') : undefined,
         link: {href: 'https://google.com'},
       };
     });

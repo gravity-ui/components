@@ -11,14 +11,18 @@ import './ConsentNotification.scss';
 
 const b = block('consent-notification');
 
-export const ConsentNotification = ({
-    policyLink,
-    onAction,
-    className,
-    policyLinkText = i18n('label_policy'),
-    text = i18n('label_text'),
-    buttonOkText = i18n('button_OK'),
-}: ConsentNotificationProps) => {
+export const ConsentNotification = (props: ConsentNotificationProps) => {
+    const {t} = i18n.useTranslation();
+
+    const {
+        policyLink,
+        onAction,
+        className,
+        policyLinkText = t('label_policy'),
+        text = t('label_text'),
+        buttonOkText = t('button_OK'),
+    } = props;
+
     const mobile = useMobile();
     const onClick = () => {
         onAction('All');
@@ -28,7 +32,7 @@ export const ConsentNotification = ({
             <span className={b('text')}>{text}</span>
             {policyLink ? (
                 <span className={b('text')}>
-                    {i18n('details_text')}{' '}
+                    {t('details_text')}{' '}
                     <Link href={policyLink} target="_blank">
                         {policyLinkText}
                     </Link>
