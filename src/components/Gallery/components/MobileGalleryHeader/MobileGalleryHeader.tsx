@@ -34,6 +34,8 @@ export const MobileGalleryHeader = ({
     hidden,
     interactive,
 }: MobileGalleryHeaderProps) => {
+    const {t} = i18n.useTranslation();
+
     const [mobileActionsOpen, setMobileActionsOpen] = React.useState(false);
 
     const handleMobileActionClose = React.useCallback(() => {
@@ -58,7 +60,7 @@ export const MobileGalleryHeader = ({
                     size="xl"
                     view="flat"
                     onClick={onBackClick}
-                    aria-label={i18n('back')}
+                    aria-label={t('back')}
                     color="primary"
                 >
                     <Icon size={MOBILE_ICON_SIZE} data={ChevronLeft} />
@@ -75,7 +77,7 @@ export const MobileGalleryHeader = ({
                         size="xl"
                         view="flat"
                         onClick={handleMobileActionClick}
-                        aria-label={i18n('close')}
+                        aria-label={t('close')}
                         color="primary"
                         className={cnGalleryHeaderMobile('button-actions')}
                     >

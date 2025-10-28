@@ -13,13 +13,15 @@ export type FullScreenActionProps = {
 
 export const FullScreenAction = React.memo(
     ({fullScreen, onUpdateFullScreen, ...buttonProps}: FullScreenActionProps) => {
+        const {t} = i18n.useTranslation();
+
         const handleToggleFullScreen = React.useCallback(() => {
             onUpdateFullScreen((value) => !value);
         }, [onUpdateFullScreen]);
 
         return (
             <ActionTooltip
-                title={fullScreen ? i18n('exit-full-screen') : i18n('enter-full-screen')}
+                title={fullScreen ? t('exit-full-screen') : t('enter-full-screen')}
                 hotkey="Shift+F"
             >
                 <Button
@@ -27,7 +29,7 @@ export const FullScreenAction = React.memo(
                     size="l"
                     view="flat"
                     onClick={handleToggleFullScreen}
-                    aria-label={fullScreen ? i18n('exit-full-screen') : i18n('enter-full-screen')}
+                    aria-label={fullScreen ? t('exit-full-screen') : t('enter-full-screen')}
                     {...buttonProps}
                 >
                     <Icon data={fullScreen ? ChevronsCollapseUpRight : ChevronsExpandUpRight} />

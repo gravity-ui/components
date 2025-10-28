@@ -22,19 +22,24 @@ export const VideoView = ({className, src, autoPlay = true, controls = true}: Vi
     const [status, setStatus] = React.useState<'loading' | 'playing' | 'error'>('loading');
     const [errorMessage, setErrorMessage] = React.useState<string>();
 
+    const {t} = i18n.useTranslation();
+
     const handleCanPlay = React.useCallback(() => {
         setStatus('playing');
     }, []);
 
-    const handleError = React.useCallback((event: React.SyntheticEvent<HTMLVideoElement>) => {
-        setStatus('error');
+    const handleError = React.useCallback(
+        (event: React.SyntheticEvent<HTMLVideoElement>) => {
+            setStatus('error');
 
-        const error = (event.target as HTMLVideoElement).error;
+            const error = (event.target as HTMLVideoElement).error;
 
-        setErrorMessage(
-            error?.MEDIA_ERR_SRC_NOT_SUPPORTED ? i18n('not-supported-video') : i18n('video-error'),
-        );
-    }, []);
+            setErrorMessage(
+                error?.MEDIA_ERR_SRC_NOT_SUPPORTED ? t('not-supported-video') : t('video-error'),
+            );
+        },
+        [t],
+    );
 
     if (status === 'error') {
         return <GalleryFallbackText>{errorMessage}</GalleryFallbackText>;
