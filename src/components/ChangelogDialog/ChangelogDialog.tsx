@@ -17,7 +17,7 @@ const b = block('changelog-dialog');
 
 export interface ChangelogDialogProps {
     open: boolean;
-    title?: string;
+    title?: React.ReactNode;
     fullListLink?: string;
     items: ChangelogItem[];
     disableBodyScrollLock?: boolean;
