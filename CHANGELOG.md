@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.16.0](https://github.com/gravity-ui/components/compare/v4.15.0...v4.16.0) (2025-10-28)
+
+
+### Features
+
+* **ChangelogDialog:** add className prop ([#354](https://github.com/gravity-ui/components/issues/354)) ([6e6b6e2](https://github.com/gravity-ui/components/commit/6e6b6e237577d028802600c4a6629d2170769c81))
+
+
+### Bug Fixes
+
+* **ChangelogDialog:** change type of title to React.ReactNode ([#357](https://github.com/gravity-ui/components/issues/357)) ([5047c8d](https://github.com/gravity-ui/components/commit/5047c8d6a72f344a236fdfa4e740c8dd43d032a6))
+
 ## [4.15.0](https://github.com/gravity-ui/components/compare/v4.14.1...v4.15.0) (2025-10-22)
 
 
