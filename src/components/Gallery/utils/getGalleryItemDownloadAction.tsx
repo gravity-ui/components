@@ -13,6 +13,8 @@ export function getGalleryItemDownloadAction({
     downloadUrl,
     onClick,
 }: GetGalleryItemDownloadActionArgs): GalleryItemAction {
+    const {t} = i18n.useTranslation();
+
     const handleClick = (event?: MouseEvent) => {
         event?.stopPropagation();
         onClick?.();
@@ -20,7 +22,7 @@ export function getGalleryItemDownloadAction({
 
     return {
         id: 'download',
-        title: i18n('download'),
+        title: t('download'),
         icon: <Icon data={ArrowDownToLine} />,
         href: downloadUrl,
         onClick: handleClick,

@@ -39,6 +39,7 @@ export const DesktopGalleryHeader = ({
     onClose,
 }: DesktopGalleryHeaderProps) => {
     const direction = useDirection();
+    const {t} = i18n.useTranslation();
 
     return (
         <Flex
@@ -88,7 +89,7 @@ export const DesktopGalleryHeader = ({
                     fullScreen={fullScreen}
                     onUpdateFullScreen={onUpdateFullScreen}
                 />
-                <Button size="l" view="flat" aria-label={i18n('close')} onClick={onClose}>
+                <Button size="l" view="flat" aria-label={t('close')} onClick={onClose}>
                     <Icon data={Xmark} />
                 </Button>
             </div>

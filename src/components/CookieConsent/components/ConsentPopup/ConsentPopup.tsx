@@ -30,11 +30,13 @@ const Header = ({
     manageTitleText,
     mainTitleText,
 }: HeaderProps) => {
+    const {t} = i18n.useTranslation();
+
     const renderTitle = () => {
         if (currentStep === ConsentPopupStep.Manage) {
-            return manageTitleText || i18n('label_title_manage');
+            return manageTitleText || t('label_title_manage');
         }
-        return mainTitleText || i18n('label_title_main');
+        return mainTitleText || t('label_title_main');
     };
 
     return (
@@ -58,16 +60,20 @@ const Header = ({
     );
 };
 
-const Footer = ({
-    onAction,
-    currentStep,
-    currentConsents,
-    buttonAcceptText = i18n('button_accept_all'),
-    buttonNecessaryText = i18n('button_necessary'),
-    buttonConfirmText = i18n('button_confirm'),
-    onChangeStep,
-    initialStep,
-}: FooterProps) => {
+const Footer = (props: FooterProps) => {
+    const {t} = i18n.useTranslation();
+
+    const {
+        onAction,
+        currentStep,
+        currentConsents,
+        buttonAcceptText = t('button_accept_all'),
+        buttonNecessaryText = t('button_necessary'),
+        buttonConfirmText = t('button_confirm'),
+        onChangeStep,
+        initialStep,
+    } = props;
+
     const mobile = useMobile();
     const isManageStep = currentStep === ConsentPopupStep.Manage;
     const onButtonClick = (onlyNecessary: boolean) => {
@@ -122,7 +128,7 @@ const Footer = ({
                 size="l"
                 view="flat-secondary"
             >
-                {i18n('label_manage_cookie_link_text')}
+                {t('label_manage_cookie_link_text')}
             </Button>
         ),
         back: () => (
@@ -133,7 +139,7 @@ const Footer = ({
                 size="l"
                 view="flat-secondary"
             >
-                {i18n('button_back')}
+                {t('button_back')}
             </Button>
         ),
     };
@@ -163,24 +169,28 @@ const Footer = ({
     );
 };
 
-export const ConsentPopup = ({
-    policyLink,
-    onAction,
-    className,
-    modalClassName,
-    policyLinkText = i18n('label_policy_extended'),
-    text,
-    manageLabelText = i18n('manage_label_text_extended'),
-    manageTitleText,
-    mainTitleText,
-    noSubtitle,
-    step = ConsentPopupStep.Main,
-    cookieList,
-    onClose,
-    consentManager,
-    disableHeightTransition,
-    ...buttonsParams
-}: ConsentPopupProps) => {
+export const ConsentPopup = (props: ConsentPopupProps) => {
+    const {t} = i18n.useTranslation();
+
+    const {
+        policyLink,
+        onAction,
+        className,
+        modalClassName,
+        policyLinkText = t('label_policy_extended'),
+        text,
+        manageLabelText = t('manage_label_text_extended'),
+        manageTitleText,
+        mainTitleText,
+        noSubtitle,
+        step = ConsentPopupStep.Main,
+        cookieList,
+        onClose,
+        consentManager,
+        disableHeightTransition,
+        ...buttonsParams
+    } = props;
+
     const mobile = useMobile();
     const [currentConsents, setCurrentConsents] = React.useState<Consents>(
         consentManager.getConsents(),
@@ -198,18 +208,18 @@ export const ConsentPopup = ({
                 checked: Boolean(currentConsents[item.type]),
                 disabled: isNecessaryItem,
                 defaultExpand: isNecessaryItem,
-                title: item.title || i18n(`cookie_${item.type}_title`),
-                text: item.text || i18n(`cookie_${item.type}_text`),
+                title: item.title || t(`cookie_${item.type}_title`),
+                text: item.text || t(`cookie_${item.type}_text`),
                 link: item.link
                     ? {
                           href: item.link?.href,
-                          title: item.link?.title || i18n(`cookie_link_text`),
+                          title: item.link?.title || t(`cookie_link_text`),
                       }
                     : undefined,
                 titleLabel: item.titleLabel,
             };
         });
-    }, [cookieList, currentConsents]);
+    }, [cookieList, currentConsents, t]);
 
     const onChoose = (checkedItems: number[]) => {
         if (!cookieList) return;
@@ -251,7 +261,7 @@ export const ConsentPopup = ({
                                         className={b('text')}
                                         variant={mobile ? 'subheader-3' : 'subheader-2'}
                                     >
-                                        {i18n('manage_subtitle_extended')}
+                                        {t('manage_subtitle_extended')}
                                     </Text>
                                 )}
                                 <div className={b('text')}>
@@ -280,7 +290,7 @@ export const ConsentPopup = ({
                                 <div className={b('text')}>
                                     <span
                                         dangerouslySetInnerHTML={{
-                                            __html: text ? text : i18n('label_text_extended'),
+                                            __html: text ? text : t('label_text_extended'),
                                         }}
                                     />
                                 </div>
