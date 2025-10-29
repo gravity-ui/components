@@ -10,8 +10,12 @@ const cnFallbackText = block('gallery-fallback-text');
 
 export type GalleryFallbackTextProps = React.HTMLAttributes<HTMLElement>;
 
-export const GalleryFallbackText = ({children, className, ...props}: GalleryFallbackTextProps) => (
-    <div className={cnFallbackText(null, className)} {...props}>
-        {children || i18n('cannot-display-file')}
-    </div>
-);
+export const GalleryFallbackText = ({children, className, ...props}: GalleryFallbackTextProps) => {
+    const {t} = i18n.useTranslation();
+
+    return (
+        <div className={cnFallbackText(null, className)} {...props}>
+            {children || t('cannot-display-file')}
+        </div>
+    );
+};

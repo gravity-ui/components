@@ -36,6 +36,7 @@ export const Gallery = ({
     emptyMessage,
 }: GalleryProps) => {
     const isMobile = useMobile();
+    const {t} = i18n.useTranslation();
 
     const items = children ? React.Children.map(children, (child) => child.props) : emptyItems;
     const itemsCount = items.length;
@@ -148,7 +149,7 @@ export const Gallery = ({
                     >
                         {!items.length && (
                             <GalleryFallbackText>
-                                {emptyMessage ?? i18n('no-items')}
+                                {emptyMessage ?? t('no-items')}
                             </GalleryFallbackText>
                         )}
                         {activeItem?.view}
