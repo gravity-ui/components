@@ -11,11 +11,13 @@ const b = block('simple-consent');
 const buttons = ['decline', 'accept'] as const;
 
 export const SimpleConsent = (props: SimpleConsentProps) => {
+    const {t} = i18n.useTranslation();
+
     const {
         className,
-        text = i18n('label_text'),
-        buttonAcceptText = i18n('button_accept'),
-        buttonDeclineText = i18n('button_decline'),
+        text = t('label_text'),
+        buttonAcceptText = t('button_accept'),
+        buttonDeclineText = t('button_decline'),
         onAction,
     } = props;
 
