@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import {useLatest} from '../useLatest';
+
 import {MAX_TAP_DURATION, MIN_SWIPE_DISTANCE} from './constants';
 import {isTouchOnGalleryContent, swipeWithSwithingAnimation} from './utils';
 
@@ -8,9 +10,15 @@ export type UseMobileGesturesProps = {
     onSwipeRight?: () => void;
     onTap?: () => void;
     enableSwitchAnimation?: boolean;
+    disabled?: boolean;
 };
 
-export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileGesturesProps = {}) {
+export function useMobileGestures({
+    onSwipeLeft,
+    onSwipeRight,
+    onTap,
+    disabled,
+}: UseMobileGesturesProps = {}) {
     const [isSwitching, setIsSwitching] = React.useState(false);
     const [startPosition, setStartPosition] = React.useState<{x: number; y: number} | null>(null);
     const [startDistance, setStartDistance] = React.useState<number | null>(null);
@@ -18,6 +26,7 @@ export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileG
     const [hasMoved, setHasMoved] = React.useState(false);
     const [touchStartTarget, setTouchStartTarget] = React.useState<EventTarget | null>(null);
     const [pendingSwipe, setPendingSwipe] = React.useState<'left' | 'right' | null>(null);
+    const disabledRef = useLatest(disabled);
 
     const handleTouchStart = React.useCallback((e: React.TouchEvent) => {
         if (e.touches.length === 1) {
@@ -31,6 +40,8 @@ export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileG
 
     const handleTouchMove = React.useCallback(
         (e: React.TouchEvent) => {
+            if (disabledRef.current) return;
+
             if (e.touches.length === 1 && startPosition) {
                 const currentX = e.touches[0].clientX;
                 const currentY = e.touches[0].clientY;
@@ -52,15 +63,16 @@ export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileG
                 }
             }
         },
-        [startPosition, onSwipeRight, onSwipeLeft],
+        [disabledRef, startPosition, onSwipeRight, onSwipeLeft],
     );
 
     const handleTouchEnd = React.useCallback(() => {
+        const disabled = disabledRef.current;
         const touchEndTime = Date.now();
         const touchDuration = touchStartTime ? touchEndTime - touchStartTime : 0;
 
         // Execute pending swipe if detected
-        if (pendingSwipe) {
+        if (!disabled && pendingSwipe) {
             if (pendingSwipe === 'right' && onSwipeRight) {
                 swipeWithSwithingAnimation({
                     swipeAction: onSwipeRight,
@@ -80,6 +92,7 @@ export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileG
         // - No significant movement occurred
         // - Touch is on gallery content (not on overlay elements)
         else if (
+            !disabled &&
             onTap &&
             touchStartTime &&
             touchDuration < MAX_TAP_DURATION &&
@@ -97,6 +110,7 @@ export function useMobileGestures({onSwipeLeft, onSwipeRight, onTap}: UseMobileG
         setTouchStartTarget(null);
         setPendingSwipe(null);
     }, [
+        disabledRef,
         touchStartTime,
         hasMoved,
         startDistance,

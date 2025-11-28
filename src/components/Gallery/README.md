@@ -4,6 +4,14 @@ The base component for rendering galleries of any type of data.
 The component is responsible for the gallery navigation (keyboard arrows, body side click and header arrow click).
 The children of the Gallery should be an array of [GalleryItem with the required properties](#GalleryItem) for rendering the gallery item view.
 
+### Features
+
+- **Navigation**: Keyboard arrows, body side click, and header arrow click
+- **Image Zoom**: Built-in zoom and pan functionality for images (desktop and mobile)
+- **Swipe Gestures**: Mobile swipe navigation (automatically disabled during zoom interaction)
+- **Fullscreen Mode**: Toggle fullscreen view
+- **Custom Actions**: Add custom action buttons for each gallery item
+
 ### PropTypes
 
 | Property         | Type                      | Required | Values | Default | Description                   |
@@ -24,6 +32,28 @@ The children of the Gallery should be an array of [GalleryItem with the required
 | name        | `ReactNode`   |          |        |         | The gallery item name info (displayed in the gallery header left side)                           |
 | actions     | `ReactNode[]` |          |        |         | The array of the gallery item action buttons                                                     |
 | interactive | `boolean`     |          |        |         | Provide true if the gallery item is interactive and the navigation by body click should not work |
+
+### Image Zoom
+
+Gallery includes built-in zoom functionality for images via the [`useImageZoom`](./hooks/useImageZoom/README.md) hook:
+
+**Desktop:**
+
+- Click to toggle 1x ↔ 2x zoom
+- Drag to pan when zoomed
+
+**Mobile:**
+
+- Double tap to toggle 1x ↔ 3x zoom
+- Pinch to zoom (1.0 - 3.0)
+- Single finger drag to pan when zoomed
+- Swipe gestures automatically disabled during zoom interaction
+
+See [`useImageZoom` documentation](./hooks/useImageZoom/README.md) for more details.
+
+### Gallery Context
+
+Gallery provides a context for child views to communicate interaction state. See [`GalleryContext` documentation](./contexts/README.md) for details.
 
 ### Default gallery item props
 

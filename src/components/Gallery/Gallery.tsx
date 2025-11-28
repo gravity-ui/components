@@ -8,6 +8,7 @@ import {GalleryFallbackText} from './components/FallbackText';
 import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
 import {BODY_CONTENT_CLASS_NAME, cnGallery} from './constants';
+import {GalleryContextProvider} from './contexts/GalleryContext';
 import {useFullScreen} from './hooks/useFullScreen';
 import {useMobileGestures} from './hooks/useMobileGestures/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
@@ -46,6 +47,7 @@ export const Gallery = ({
     );
 
     const [hiddenHeader, setHiddenHeader] = React.useState(false);
+    const [isViewInteracting, setIsViewInteracting] = React.useState(false);
 
     React.useEffect(() => {
         setItemRefs(Array.from({length: itemsCount}, () => React.createRef()));
@@ -57,6 +59,14 @@ export const Gallery = ({
             itemRefs,
         },
     );
+
+    React.useEffect(() => {
+        setIsViewInteracting(false);
+    }, [activeItemIndex]);
+
+    React.useEffect(() => {
+        if (isViewInteracting) setHiddenHeader(true);
+    }, [isViewInteracting]);
 
     const {fullScreen, setFullScreen} = useFullScreen();
 
@@ -95,12 +105,13 @@ export const Gallery = ({
         onSwipeLeft: handleGoToNext,
         onSwipeRight: handleGoToPrevious,
         onTap: handleTap,
+        disabled: isViewInteracting,
     });
 
     const withNavigation = items.length > 1;
 
     const showNavigationButtons =
-        withNavigation && !isMobile && activeItem && !activeItem.interactive;
+        withNavigation && !isMobile && activeItem && !activeItem.interactive && !isViewInteracting;
     const showFooter = !fullScreen && !isMobile;
     const mode = getMode(isMobile, fullScreen);
 
@@ -152,7 +163,12 @@ export const Gallery = ({
                                 {emptyMessage ?? t('no-items')}
                             </GalleryFallbackText>
                         )}
-                        {activeItem?.view}
+                        <GalleryContextProvider
+                            onTap={handleTap}
+                            onViewInteractionChange={setIsViewInteracting}
+                        >
+                            {activeItem?.view}
+                        </GalleryContextProvider>
                         {showNavigationButtons && (
                             <React.Fragment>
                                 <NavigationButton onClick={handleGoToPrevious} position="start" />
