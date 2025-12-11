@@ -15,11 +15,13 @@ const errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="174" height="17
 type Props = {image?: React.ReactNode; title?: React.ReactNode; content?: React.ReactNode};
 
 export const NotificationsErrorState = React.memo(function NotificationsEmptyState(props: Props) {
+    const {t} = i18n.useTranslation();
+
     return (
         <div className={b('empty')}>
             {props.image ? props.image : <Icon data={errorSvg} width="174" height="172" />}
             <div className={b('empty-message')}>
-                <div className={b('empty-title')}>{props.title || i18n('notifications-error')}</div>
+                <div className={b('empty-title')}>{props.title || t('notifications-error')}</div>
                 {props.content ? (
                     <div className={b('empty-message-content')}>{props.content}</div>
                 ) : null}

@@ -19,6 +19,8 @@ const FormRowComponent = ({
     children,
     direction = 'row',
 }: FormRowProps) => {
+    const {t} = i18n.useTranslation();
+
     const LabelComponent = fieldId ? 'label' : 'span';
 
     return (
@@ -32,7 +34,7 @@ const FormRowComponent = ({
                             &nbsp;
                             <sup
                                 className={b('required-mark')}
-                                aria-label={i18n('label_required-field')}
+                                aria-label={t('label_required-field')}
                             >
                                 *
                             </sup>
