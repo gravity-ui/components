@@ -10,19 +10,21 @@ interface ErrorContainerProps {
 }
 
 export function ErrorContainer({onRetryClick, error}: ErrorContainerProps) {
+    const {t} = i18n.useTranslation();
+
     const {title, description} = React.useMemo(() => {
         return error && typeof error === 'object' ? error : {};
     }, [error]);
 
     return (
         <Alert
-            title={title || i18n('label_error-title')}
+            title={title || t('label_error-title')}
             message={description}
             theme={'danger'}
             actions={
                 onRetryClick && [
                     {
-                        text: i18n('button_retry'),
+                        text: t('button_retry'),
                         handler: onRetryClick,
                     },
                 ]

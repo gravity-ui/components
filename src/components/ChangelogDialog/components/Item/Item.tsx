@@ -34,6 +34,8 @@ const formatLangDisplay = {
 };
 
 export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
+    const {t} = i18n.useTranslation();
+
     const handleLinkClick = React.useCallback(() => {
         if (onLinkClick && data.link) {
             onLinkClick(data.link);
@@ -70,7 +72,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
                 {formattedDate ? <div className={b('date')}>{formattedDate}</div> : null}
                 {data.isNew ? (
                     <Label className={b('label-new')} theme="info">
-                        {i18n('label_new')}
+                        {t('label_new')}
                     </Label>
                 ) : null}
             </div>
@@ -95,7 +97,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
                         target={'_blank'}
                         onClick={handleLinkClick}
                     >
-                        {i18n('action_read-more')}
+                        {t('action_read-more')}
                     </Button>
                 ) : null}
                 {data.storyId && onStoryClick ? (
@@ -104,7 +106,7 @@ export function Item({className, data, onStoryClick, onLinkClick}: ItemProps) {
                         view="outlined-action"
                         onClick={handleStoryClick}
                     >
-                        {i18n('button_view_story')}
+                        {t('button_view_story')}
                         <Icon data={CirclePlay} size={14} />
                     </Button>
                 ) : null}

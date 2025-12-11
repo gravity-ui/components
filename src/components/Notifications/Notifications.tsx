@@ -15,6 +15,8 @@ import './Notifications.scss';
 const b = block('notifications');
 
 export const Notifications = React.memo(function Notifications(props: NotificationsProps) {
+    const {t} = i18n.useTranslation();
+
     let content: JSX.Element;
 
     const visibleNotificationsCount = props.notifications.filter((n) => !n.archived).length;
@@ -53,7 +55,7 @@ export const Notifications = React.memo(function Notifications(props: Notificati
         );
     }
 
-    const title = <div className={b('head-title')}>{props.title || i18n('title')}</div>;
+    const title = <div className={b('head-title')}>{props.title || t('title')}</div>;
 
     return (
         <div className={b()} data-qa={props.qa}>

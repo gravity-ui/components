@@ -162,6 +162,8 @@ export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement
     renderAddReaction,
     renderReactionsContent,
 }: ReactionsProps<AddReactionRef>) {
+    const {t} = i18n.useTranslation();
+
     const addReactionButtonRef = React.useRef<HTMLButtonElement>(null);
     const addReactionRef = React.useRef<AddReactionRef>(null);
 
@@ -243,7 +245,7 @@ export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement
             <Button
                 ref={addReactionButtonRef}
                 size={size}
-                aria-label={i18n('add-reaction')}
+                aria-label={t('add-reaction')}
                 aria-expanded={palettePopupOpened}
                 aria-haspopup={true}
                 aria-controls={popupId}
@@ -258,7 +260,7 @@ export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement
                 </Button.Icon>
             </Button>
         );
-    }, [readOnly, renderAddReaction, size, onTogglePalettePopup, palettePopupOpened]);
+    }, [readOnly, renderAddReaction, size, onTogglePalettePopup, palettePopupOpened, t]);
 
     const addReactionPopup = readOnly ? null : (
         <Popup

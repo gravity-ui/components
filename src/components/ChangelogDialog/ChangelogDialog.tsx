@@ -37,22 +37,26 @@ function getNextId() {
     return nextId++;
 }
 
-export function ChangelogDialog({
-    open,
-    title = i18n('title'),
-    fullListLink,
-    items,
-    disableBodyScrollLock = true,
-    disableHeightTransition = true,
-    disableOutsideClick,
-    onClose,
-    onStoryClick,
-    onLinkClick,
-    onRetryClick,
-    loading,
-    error,
-    className,
-}: ChangelogDialogProps) {
+export function ChangelogDialog(props: ChangelogDialogProps) {
+    const {t} = i18n.useTranslation();
+
+    const {
+        open,
+        title = t('title'),
+        fullListLink,
+        items,
+        disableBodyScrollLock = true,
+        disableHeightTransition = true,
+        disableOutsideClick,
+        onClose,
+        onStoryClick,
+        onLinkClick,
+        onRetryClick,
+        loading,
+        error,
+        className,
+    } = props;
+
     const idRef = React.useRef<number>();
     idRef.current = idRef.current || getNextId();
     const dialogCaptionId = `changelog-dialog-title-${idRef.current}`;
@@ -71,7 +75,7 @@ export function ChangelogDialog({
             {fullListLink ? (
                 <Dialog.Body key="full-list-link">
                     <Link href={fullListLink} target="_blank">
-                        <span>{i18n('link_full_list')}</span>
+                        <span>{t('link_full_list')}</span>
                         <span className={b('full-list-link-icon')}>
                             <Icon data={ArrowUpRightFromSquare} size={14} />
                         </span>
@@ -98,7 +102,7 @@ export function ChangelogDialog({
                             />
                         ))
                     ) : (
-                        <div className={b('empty-placeholder')}>{i18n('label_empty')}</div>
+                        <div className={b('empty-placeholder')}>{t('label_empty')}</div>
                     ))}
             </Dialog.Body>
         </Dialog>

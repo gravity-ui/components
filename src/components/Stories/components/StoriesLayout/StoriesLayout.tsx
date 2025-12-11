@@ -40,6 +40,8 @@ export const StoriesLayout = ({
     handleGotoNext,
     handleGotoPrevious,
 }: StoriesLayoutProps) => {
+    const {t} = i18n.useTranslation();
+
     const currentStory = items[storyIndex];
 
     return (
@@ -99,7 +101,7 @@ export const StoriesLayout = ({
                                 {currentStory.url && (
                                     <div className={b('story-link-block')}>
                                         <Link href={currentStory.url} target={'_blank'}>
-                                            {i18n('label_more')}
+                                            {t('label_more')}
                                         </Link>
                                     </div>
                                 )}
