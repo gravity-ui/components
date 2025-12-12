@@ -3,6 +3,7 @@ import * as React from 'react';
 import {ArrowLeft, ArrowRight, Xmark} from '@gravity-ui/icons';
 import type {ButtonProps} from '@gravity-ui/uikit';
 import {ActionTooltip, Button, Flex, Icon, Text, useDirection} from '@gravity-ui/uikit';
+import isFunction from 'lodash/isFunction';
 
 import {block} from '../../../utils/cn';
 import type {GalleryItemAction} from '../../GalleryItem';
@@ -63,6 +64,7 @@ export const DesktopGalleryHeader = ({
             )}
             <div className={cnDesktopGalleryHeader('actions')}>
                 {actions?.map((action) => {
+                    const title = isFunction(action.title) ? action.title({t}) : action.title;
                     const buttonProps: ButtonProps = {
                         type: 'button',
                         size: 'l',
@@ -70,16 +72,16 @@ export const DesktopGalleryHeader = ({
                         onClick: action.onClick,
                         href: action.href,
                         target: '__blank',
-                        'aria-label': action.title,
+                        'aria-label': title,
                         children: action.icon,
                     };
 
                     return action.render ? (
                         <React.Fragment key={action.id}>
-                            {action.render(buttonProps)}
+                            {action.render(buttonProps, {t})}
                         </React.Fragment>
                     ) : (
-                        <ActionTooltip key={action.id} title={action.title} hotkey={action.hotkey}>
+                        <ActionTooltip key={action.id} title={title} hotkey={action.hotkey}>
                             <Button {...buttonProps} />
                         </ActionTooltip>
                     );

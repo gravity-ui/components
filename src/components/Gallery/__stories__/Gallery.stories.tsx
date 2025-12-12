@@ -337,3 +337,39 @@ const SingleItemGalleryTemplate: StoryFn<GalleryProps> = () => {
 };
 
 export const SingleItemGallery = SingleItemGalleryTemplate.bind({});
+
+const SmallImagesTemplate: StoryFn<GalleryProps> = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleToggle = React.useCallback(() => {
+        setOpen(false);
+    }, []);
+
+    const handleOpen = React.useCallback(() => {
+        setOpen(true);
+    }, []);
+
+    return (
+        <React.Fragment>
+            <Button onClick={handleOpen} view="action" size="l">
+                Open gallery
+            </Button>
+            <Gallery open={open} onOpenChange={handleToggle}>
+                <GalleryItem
+                    {...getGalleryItemImage({
+                        src: 'https://i.pinimg.com/236x/6d/4a/02/6d4a022b29ce165692672be0d35ec1df.jpg',
+                        name: '1',
+                    })}
+                />
+                <GalleryItem
+                    {...getGalleryItemImage({
+                        src: 'https://i.pinimg.com/236x/5a/ec/22/5aec2220c6ebe1869b059801e2107044.jpg',
+                        name: '2',
+                    })}
+                />
+            </Gallery>
+        </React.Fragment>
+    );
+};
+
+export const SmallImages = SmallImagesTemplate.bind({});
