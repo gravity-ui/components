@@ -63,6 +63,7 @@ export const DesktopGalleryHeader = ({
             )}
             <div className={cnDesktopGalleryHeader('actions')}>
                 {actions?.map((action) => {
+                    const title = action.__titleT ? action.__titleT({t}) : action.title;
                     const buttonProps: ButtonProps = {
                         type: 'button',
                         size: 'l',
@@ -70,18 +71,36 @@ export const DesktopGalleryHeader = ({
                         onClick: action.onClick,
                         href: action.href,
                         target: '__blank',
-                        'aria-label': action.title,
+                        'aria-label': title,
                         children: action.icon,
                     };
 
-                    return action.render ? (
-                        <React.Fragment key={action.id}>
-                            {action.render(buttonProps)}
-                        </React.Fragment>
-                    ) : (
-                        <ActionTooltip key={action.id} title={action.title} hotkey={action.hotkey}>
-                            <Button {...buttonProps} />
-                        </ActionTooltip>
+                    const render = () => {
+                        if (action.__renderT) {
+                            return (
+                                <React.Fragment key={action.id}>
+                                    {action.__renderT(buttonProps, {t})}
+                                </React.Fragment>
+                            );
+                        }
+
+                        if (action.render) {
+                            return (
+                                <React.Fragment key={action.id}>
+                                    {action.render(buttonProps)}
+                                </React.Fragment>
+                            );
+                        }
+
+                        return null;
+                    };
+
+                    return (
+                        render() ?? (
+                            <ActionTooltip key={action.id} title={title} hotkey={action.hotkey}>
+                                <Button {...buttonProps} />
+                            </ActionTooltip>
+                        )
                     );
                 })}
                 <FullScreenAction
