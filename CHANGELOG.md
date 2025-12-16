@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.17.0](https://github.com/gravity-ui/components/compare/v4.16.0...v4.17.0) (2025-12-16)
+
+
+### Features
+
+* added i18n.useTranslation in components ([#362](https://github.com/gravity-ui/components/issues/362)) ([a609bd5](https://github.com/gravity-ui/components/commit/a609bd5993cceda2a5b6fe3d960e5dadc3096284))
+* **Gallery:** add image scaling ([#361](https://github.com/gravity-ui/components/issues/361)) ([325a4cb](https://github.com/gravity-ui/components/commit/325a4cb26f96f4fe863cfd2e50d48c307970b481))
+
 ## [4.16.0](https://github.com/gravity-ui/components/compare/v4.15.0...v4.16.0) (2025-10-28)
 
 
