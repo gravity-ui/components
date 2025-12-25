@@ -26,6 +26,7 @@ $block: '.#{variables.$ns}desktop-gallery-header';
         align-items: center;
         justify-content: center;
         flex: 1;
+        white-space: nowrap;
     }
 
     &__actions {

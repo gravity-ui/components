@@ -15,6 +15,7 @@ $verticalGalleryMargin: 28px;
 
         width: calc(100vw - $horizontalGalleryMargin * 2);
         height: calc(100vh - $verticalGalleryMargin * 2);
+        min-width: 480px;
     }
 
     &__body {
@@ -87,6 +88,7 @@ $verticalGalleryMargin: 28px;
         #{$block} {
             &__content {
                 width: 100vw;
+                min-width: 100vw;
                 height: 100vh;
                 position: relative;
                 overflow: hidden;
