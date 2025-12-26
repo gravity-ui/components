@@ -1,6 +1,7 @@
 @use '../../../variables';
 
 $block: '.#{variables.$ns}changelog-dialog-picture';
+$image-max-width: 500px;
 
 #{$block} {
     &__placeholder {
@@ -18,6 +19,7 @@ $block: '.#{variables.$ns}changelog-dialog-picture';
     &__image-with-ratio {
         display: block;
         width: 100%;
+        max-width: $image-max-width;
         height: 0px;
         opacity: 0;
         transition: opacity 0.15s linear;
@@ -31,5 +33,6 @@ $block: '.#{variables.$ns}changelog-dialog-picture';
     &__image {
         display: block;
         width: 100%;
+        max-width: $image-max-width;
     }
 }
