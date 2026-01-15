@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.17.1](https://github.com/gravity-ui/components/compare/v4.17.0...v4.17.1) (2026-01-15)
+
+
+### Bug Fixes
+
+* **Gallery:** add min-width for the gallery content ([#364](https://github.com/gravity-ui/components/issues/364)) ([962426b](https://github.com/gravity-ui/components/commit/962426bcb1ca8a84ed230847263544f38687b87d))
+* **Gallery:** reduce gallery controls area height ([#367](https://github.com/gravity-ui/components/issues/367)) ([b69d7f3](https://github.com/gravity-ui/components/commit/b69d7f3d60d1a0ddab5d81c8255c22155b20b2e2))
+
 ## [4.17.0](https://github.com/gravity-ui/components/compare/v4.16.0...v4.17.0) (2025-12-16)
 
 
