@@ -9,6 +9,7 @@ import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
 import {BODY_CONTENT_CLASS_NAME, cnGallery} from './constants';
 import {GalleryContextProvider} from './contexts/GalleryContext';
+import {useBackButton} from './hooks/useBackButton';
 import {useFullScreen} from './hooks/useFullScreen';
 import {useMobileGestures} from './hooks/useMobileGestures/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
@@ -107,6 +108,8 @@ export const Gallery = ({
         onTap: handleTap,
         disabled: isViewInteracting,
     });
+
+    useBackButton({callback: handleBackClick});
 
     const withNavigation = items.length > 1;
 
