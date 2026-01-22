@@ -94,6 +94,28 @@ export function Stories({
         });
     }, [items, onNextClick]);
 
+    React.useEffect(() => {
+        if (!open) {
+            return;
+        }
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                handleGotoPrevious();
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                handleGotoNext();
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [open, handleGotoPrevious, handleGotoNext]);
+
     if (items.length === 0) {
         return null;
     }
