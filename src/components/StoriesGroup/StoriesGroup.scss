@@ -14,5 +14,6 @@ $borderRadius: 20px;
     &__modal-content {
         background-color: inherit;
         border-radius: $borderRadius;
+        clip-path: none;
     }
 }
