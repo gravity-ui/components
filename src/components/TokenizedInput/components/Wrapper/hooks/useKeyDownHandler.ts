@@ -4,6 +4,40 @@ import {KeyCode} from '../../../constants';
 import {useTokenizedInput} from '../../../context';
 import type {Token, TokenValueBase} from '../../../types';
 
+type ShortcutMap = {
+    isTokenModifier: (e: React.KeyboardEvent) => boolean;
+    isFieldModifier: (e: React.KeyboardEvent) => boolean;
+    isApplyModifier: (e: React.KeyboardEvent) => boolean;
+    isUndo: (e: React.KeyboardEvent) => boolean;
+    isRedo: (e: React.KeyboardEvent) => boolean;
+};
+
+const macShortcuts: ShortcutMap = {
+    isTokenModifier: (e) => e.metaKey,
+    isFieldModifier: (e) => e.altKey,
+    isApplyModifier: (e) => e.metaKey,
+    isUndo: (e) => e.metaKey && !e.shiftKey && e.code === 'KeyZ',
+    isRedo: (e) => e.metaKey && e.shiftKey && e.code === 'KeyZ',
+};
+
+const winShortcuts: ShortcutMap = {
+    isTokenModifier: (e) => e.ctrlKey && e.altKey,
+    isFieldModifier: (e) => e.ctrlKey && !e.altKey,
+    isApplyModifier: (e) => e.ctrlKey,
+    isUndo: (e) => e.ctrlKey && !e.shiftKey && e.code === 'KeyZ',
+    isRedo: (e) =>
+        (e.ctrlKey && e.code === 'KeyY') || (e.ctrlKey && e.shiftKey && e.code === 'KeyZ'),
+};
+
+const isMac = () => {
+    if (typeof window === 'undefined') {
+        return false;
+    }
+    return navigator.userAgent.toUpperCase().indexOf('MAC') >= 0;
+};
+
+const shortcuts = isMac() ? macShortcuts : winShortcuts;
+
 export const useKeyDownHandler = () => {
     const {focusInfo, inputInfo, options} = useTokenizedInput();
 
@@ -203,10 +237,10 @@ export const useKeyDownHandler = () => {
     const navigationHandler = React.useCallback(
         (e: React.KeyboardEvent) => {
             if (!e.shiftKey) {
-                if (e.metaKey || e.ctrlKey) {
+                if (shortcuts.isTokenModifier(e)) {
                     return jumpToNeighborToken(e);
                 }
-                if (e.altKey) {
+                if (shortcuts.isFieldModifier(e)) {
                     return jumpToNeighborField(e);
                 }
                 if (!checkKey(e, KeyCode.Tab)) {
@@ -227,7 +261,7 @@ export const useKeyDownHandler = () => {
             }
 
             if (checkKey(e, KeyCode.Backspace)) {
-                if (e.ctrlKey || e.metaKey) {
+                if (shortcuts.isTokenModifier(e)) {
                     e.preventDefault();
 
                     let idx = focus.idx;
@@ -294,7 +328,7 @@ export const useKeyDownHandler = () => {
                 e.preventDefault();
                 onApplyChanges();
 
-                if (e.ctrlKey || e.metaKey) {
+                if (shortcuts.isApplyModifier(e)) {
                     handler();
 
                     return true;
@@ -383,17 +417,14 @@ export const useKeyDownHandler = () => {
                 });
             };
 
-            if (
-                (e.metaKey && e.shiftKey && e.code === 'KeyZ') ||
-                (e.ctrlKey && e.code === 'KeyY')
-            ) {
+            if (shortcuts.isRedo(e)) {
                 e.preventDefault();
                 const newTokens = onRedo();
                 focusLastToken(newTokens);
 
                 return true;
             }
-            if ((e.metaKey || e.ctrlKey) && e.code === 'KeyZ') {
+            if (shortcuts.isUndo(e)) {
                 e.preventDefault();
                 const newTokens = onUndo();
                 focusLastToken(newTokens);

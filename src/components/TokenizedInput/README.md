@@ -14,11 +14,12 @@ This component is for writing queries/filters and working with them as tokens. H
 
 ### Hotkeys
 
-- `Cmd/Ctrl + Arrow` — move between tokens
-- `Option/Alt + Arrow` — move between token fields
-- `Cmd/Ctrl + Delete` — delete the current token
-- `Cmd/Ctrl + Z` — undo
-- `Cmd + Shift + Z / Ctrl + Y` — redo
+- `Cmd + Arrow` (Mac) / `Ctrl + Alt + Arrow` (Win/Linux) — move between tokens
+- `Option + Arrow` (Mac) / `Ctrl + Arrow` (Win/Linux) — move between token fields
+- `Cmd + Backspace` (Mac) / `Ctrl + Alt + Backspace` (Win/Linux) — delete the current token
+- `Cmd + Z` (Mac) / `Ctrl + Z` (Win/Linux) — undo
+- `Cmd + Shift + Z` (Mac) / `Ctrl + Y` or `Ctrl + Shift + Z` (Win/Linux) — redo
 - `Escape` — close the suggestions menu; press again to remove focus
-- `Cmd/Ctrl + I` — open the suggestions menu
+- `Cmd + I` (Mac) / `Ctrl + I` (Win/Linux) — open the suggestions menu
+- `Cmd + Enter` (Mac) / `Ctrl + Enter` (Win/Linux) — finish the current token and go to the next (when the suggestions menu is closed)
 - `Enter` — select a suggestion / finish the current token and go to the next (when the suggestions menu is closed)
