@@ -55,6 +55,7 @@
     "@bem-react/classname": "^1.6.0",
     "@gravity-ui/date-utils": "^2.1.0",
     "@gravity-ui/icons": "^2.11.0",
+    "fuzzy-search": "^3.2.1",
     "lodash": "^4.17.21",
     "universal-cookie": "^7.2.0"
   },
