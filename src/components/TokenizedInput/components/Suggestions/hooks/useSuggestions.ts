@@ -137,13 +137,6 @@ export const useSuggestions = <T extends TokenValueBase>({
     );
 
     React.useEffect(() => {
-        // Fixes the situation where the content of the popup goes beyond the viewport
-        if (suggestions.hint || suggestions.items.length) {
-            window.dispatchEvent(new Event('resize'));
-        }
-    }, [suggestions]);
-
-    React.useEffect(() => {
         handleGetSuggestions.cancel();
         if (currentFnId.current) {
             cancelledFns.current.push(currentFnId.current);
