@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 import {Flex, Text} from '@gravity-ui/uikit';
 import {StoryFn} from '@storybook/react';
 
