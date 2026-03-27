@@ -33,10 +33,13 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
 }: UseTokenizedInputInfoOptions<T>): TokenizedInputInfo<T> => {
     const validateTokens = React.useCallback(
         (t: Token<T>[]): Token<T>[] =>
-            t.map((token) => ({
-                ...token,
-                errors: validateToken ? validateToken(token.value) : undefined,
-            })),
+            t.map(
+                (token) =>
+                    ({
+                        ...token,
+                        errors: validateToken ? validateToken(token.value) : undefined,
+                    }) as Token<T>,
+            ),
         [validateToken],
     );
 
@@ -56,6 +59,8 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             setTokens(newTokens);
             undoRedoManager.current.init(newTokens);
         }
+        // We only want to sync the internal state when externalTokens change from props,
+        // to avoid infinite loops if internal tokens or transformation functions change on every render.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [externalTokens]);
 
@@ -112,7 +117,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             const transformedTokens = tokensRef.current.map((t) => {
                 const {value, options} = transformTokens([t.value])[0];
 
-                return {...t, value, options};
+                return {...t, value, options} as Token<T>;
             });
             const newTokens = removeEmptyTokens(transformedTokens)
                 .map((t) => {

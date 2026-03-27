@@ -41,7 +41,10 @@ export const useDeleteHandler = <T extends TokenValueBase>({
                         idx--;
                     }
 
-                    if (idx < 0 || tokens[idx].options?.notRemovable) {
+                    if (
+                        idx < 0 ||
+                        (tokens[idx].kind === 'regular' && tokens[idx].options?.notRemovable)
+                    ) {
                         return false;
                     }
 
@@ -66,7 +69,8 @@ export const useDeleteHandler = <T extends TokenValueBase>({
                     if (
                         (focus.key === key && focus.idx === idx) ||
                         !prevToken ||
-                        prevToken.options?.readOnlyFields?.includes(key)
+                        (prevToken.kind === 'regular' &&
+                            prevToken.options?.readOnlyFields?.includes(key))
                     ) {
                         return false;
                     }

@@ -33,7 +33,7 @@ export type TokenizedInputContextOptions<T extends TokenValueBase> = {
     options: TokenizedInputOptionsInfo<T>;
 };
 
-const InputContext = React.createContext<TokenizedInputInfo<TokenValueBase>>({
+export const InputContext = React.createContext<TokenizedInputInfo<TokenValueBase>>({
     state: {
         tokens: [],
         wrapperRef: {current: null},
@@ -52,7 +52,7 @@ const InputContext = React.createContext<TokenizedInputInfo<TokenValueBase>>({
     },
 });
 
-const FocusContext = React.createContext<TokenizedInputFocusInfo<TokenValueBase>>({
+export const FocusContext = React.createContext<TokenizedInputFocusInfo<TokenValueBase>>({
     state: {focus: undefined, autoFocus: false},
     callbacks: {
         onFocus: () => undefined,
@@ -66,7 +66,7 @@ const FocusContext = React.createContext<TokenizedInputFocusInfo<TokenValueBase>
     },
 });
 
-const OptionsContext = React.createContext<TokenizedInputOptionsInfo<TokenValueBase>>({
+export const OptionsContext = React.createContext<TokenizedInputOptionsInfo<TokenValueBase>>({
     onSuggest: () => ({
         items: [],
     }),

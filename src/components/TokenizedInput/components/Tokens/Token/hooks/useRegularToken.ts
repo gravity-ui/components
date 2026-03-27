@@ -3,6 +3,7 @@ import * as React from 'react';
 import {b} from '../../../../constants';
 import {useInputContext, useTokenizedInputComponents} from '../../../../context';
 import {useApplyCallbackOnBlur} from '../../../../hooks';
+import type {RegularToken, TokenValueBase} from '../../../../types';
 
 import {useTokenCallbacks} from './useTokenCallbacks';
 
@@ -14,7 +15,7 @@ export const useRegularToken = (idx: number) => {
     const {onApplyChanges, onRemoveToken} = inputInfo.callbacks;
     const {onChangeField, onFocusField} = useTokenCallbacks();
 
-    const token = tokens[idx];
+    const token = tokens[idx] as RegularToken<TokenValueBase>;
 
     const hasChanges = React.useRef(false);
 

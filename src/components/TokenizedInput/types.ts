@@ -8,21 +8,26 @@ import {
 
 export type TokenValueBase = Record<string, string>;
 
-export interface Token<T extends TokenValueBase> {
-    /** Token ID */
+export type RegularToken<T extends TokenValueBase> = {
     id: string;
-    /** Token field values */
+    kind: 'regular';
     value: T;
-    /** Kind of token */
-    kind: 'new' | 'regular';
-    /** Extra options */
     options?: {
         readOnlyFields?: (keyof T)[];
         notRemovable?: boolean;
     };
-    /** Validation errors */
     errors?: Partial<Record<keyof T, string>>;
-}
+};
+
+export type NewToken<T extends TokenValueBase> = {
+    id: string;
+    kind: 'new';
+    value: T;
+    options?: undefined;
+    errors?: undefined;
+};
+
+export type Token<T extends TokenValueBase> = RegularToken<T> | NewToken<T>;
 
 export type TokenOnKeyDownOptions<T extends TokenValueBase> = {
     /** Current token */

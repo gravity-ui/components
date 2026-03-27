@@ -63,6 +63,8 @@ export const useField = ({
             setOffset(undefined);
             setSelection(undefined);
         }
+        // We only want to trigger this effect when focus changes or the input element mounts,
+        // not when hideSuggestions changes, to prevent unexpected focus resets.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fieldKey, focusOffset, idx, isFocused, inputElement]);
 

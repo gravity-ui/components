@@ -40,7 +40,7 @@ const fields: TokenField<TokenValue>[] = [
 const onSuggest = (
     ctx: TokenizedSuggestionContext<TokenValue>,
 ): TokenizedSuggestions<TokenValue> => {
-    const values = ctx.tokens.map(({value}) => value.value);
+    const values = ctx.tokens.filter((v) => v.kind === 'regular').map(({value}) => value.value);
     const items = [
         'Red',
         'Green',

@@ -14,6 +14,8 @@ export const useSuggestionsInitialCall = <T extends TokenValueBase>(
         } else {
             initialCallRef.current = true;
         }
+        // We only want to reset the initial call flag when the focused field changes,
+        // not when the entire focus object reference or debounceFlushStrategy changes.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [focus?.key, focus?.idx]);
 

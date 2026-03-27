@@ -166,6 +166,8 @@ export const useSuggestions = <T extends TokenValueBase>({
         return () => {
             handleGetSuggestions.cancel();
         };
+        // We only want to fetch suggestions when the input value, cursor offset, or focused field changes.
+        // Including tokens or selection might trigger unnecessary fetches.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idx, fieldKey, value, offset]);
 
