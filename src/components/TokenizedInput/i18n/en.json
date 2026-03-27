@@ -1,3 +1,4 @@
 {
-  "suggestions.items_not_found": "No matches for the search string «{{text}}»"
+  "suggestions.items_not_found": "No matches for the search string «{{text}}»",
+  "clear_input": "Clear input"
 }

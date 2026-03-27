@@ -13,8 +13,8 @@ export interface Token<T extends TokenValueBase> {
     id: string;
     /** Token field values */
     value: T;
-    /** Whether this is a new (in-progress) token */
-    isNew: boolean;
+    /** Kind of token */
+    kind: 'new' | 'regular';
     /** Extra options */
     options?: {
         readOnlyFields?: (keyof T)[];

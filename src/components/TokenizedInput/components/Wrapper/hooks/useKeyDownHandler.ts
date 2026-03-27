@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {KeyCode} from '../../../constants';
-import {useTokenizedInput} from '../../../context';
+import {useFocusContext, useInputContext, useOptionsContext} from '../../../context';
 import type {Token, TokenValueBase} from '../../../types';
 
 type ShortcutMap = {
@@ -29,17 +29,20 @@ const winShortcuts: ShortcutMap = {
         (e.ctrlKey && e.code === 'KeyY') || (e.ctrlKey && e.shiftKey && e.code === 'KeyZ'),
 };
 
-const isMac = () => {
-    if (typeof window === 'undefined') {
-        return false;
-    }
-    return navigator.userAgent.toUpperCase().indexOf('MAC') >= 0;
+const useShortcuts = () => {
+    return React.useMemo(() => {
+        if (typeof window === 'undefined') {
+            return winShortcuts;
+        }
+        return navigator.userAgent.toUpperCase().includes('MAC') ? macShortcuts : winShortcuts;
+    }, []);
 };
 
-const shortcuts = isMac() ? macShortcuts : winShortcuts;
-
 export const useKeyDownHandler = () => {
-    const {focusInfo, inputInfo, options} = useTokenizedInput();
+    const shortcuts = useShortcuts();
+    const focusInfo = useFocusContext();
+    const inputInfo = useInputContext();
+    const options = useOptionsContext();
 
     const {fields, tokens} = inputInfo.state;
     const {onRemoveToken, onChangeToken, onUndo, onRedo, onApplyChanges} = inputInfo.callbacks;
@@ -249,7 +252,14 @@ export const useKeyDownHandler = () => {
             }
             return tabJumping(e);
         },
-        [checkKey, jumpToNeighborField, jumpToNeighborToken, moveToNeighborField, tabJumping],
+        [
+            checkKey,
+            jumpToNeighborField,
+            jumpToNeighborToken,
+            moveToNeighborField,
+            shortcuts,
+            tabJumping,
+        ],
     );
 
     const deleteHandler = React.useCallback(
@@ -290,10 +300,12 @@ export const useKeyDownHandler = () => {
                     });
 
                     const {idx, key} = prevField;
+                    const prevToken = tokens[idx];
 
                     if (
                         (focus.key === key && focus.idx === idx) ||
-                        tokens[idx].options?.readOnlyFields?.includes(key)
+                        !prevToken ||
+                        prevToken.options?.readOnlyFields?.includes(key)
                     ) {
                         return false;
                     }
@@ -313,7 +325,17 @@ export const useKeyDownHandler = () => {
 
             return false;
         },
-        [checkKey, fields, focus, getFocusRules, onChangeToken, onFocus, onRemoveToken, tokens],
+        [
+            checkKey,
+            fields,
+            focus,
+            getFocusRules,
+            onChangeToken,
+            onFocus,
+            onRemoveToken,
+            shortcuts,
+            tokens,
+        ],
     );
 
     const blurHandler = React.useCallback(
@@ -357,7 +379,16 @@ export const useKeyDownHandler = () => {
 
             return false;
         },
-        [checkKey, focus, getCursorOffset, getFocusRules, onApplyChanges, onBlur, onFocus],
+        [
+            checkKey,
+            focus,
+            getCursorOffset,
+            getFocusRules,
+            onApplyChanges,
+            onBlur,
+            onFocus,
+            shortcuts,
+        ],
     );
 
     const specialKeysActionsHandler = React.useCallback(
@@ -382,7 +413,7 @@ export const useKeyDownHandler = () => {
 
             const token = tokens[focus.idx] ?? {
                 id: `tokenNew${tokens.length}`,
-                isNew: true,
+                kind: 'new',
                 value: {},
             };
 
@@ -408,7 +439,7 @@ export const useKeyDownHandler = () => {
             }
 
             const focusLastToken = (newTokens: Token<TokenValueBase>[]) => {
-                const idx = newTokens.findIndex((t) => t.isNew);
+                const idx = newTokens.findIndex((t) => t.kind === 'new');
 
                 onFocus({
                     idx: idx === -1 ? newTokens.length : idx,
@@ -434,7 +465,7 @@ export const useKeyDownHandler = () => {
 
             return false;
         },
-        [fields, focus, onFocus, onRedo, onUndo],
+        [fields, focus, onFocus, onRedo, onUndo, shortcuts],
     );
 
     const externalKeyDown = React.useCallback(
@@ -447,7 +478,7 @@ export const useKeyDownHandler = () => {
 
             const token = tokens[focus.idx] ?? {
                 id: `tokenNew${tokens.length}`,
-                isNew: true,
+                kind: 'new',
                 value: {},
             };
 

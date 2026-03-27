@@ -3,7 +3,7 @@ import * as React from 'react';
 import {getUniqId} from '@gravity-ui/uikit';
 import debounce from 'lodash/debounce';
 
-import {useTokenizedInput} from '../../../context';
+import {useFocusContext, useInputContext, useOptionsContext} from '../../../context';
 import type {
     Token,
     TokenValueBase,
@@ -30,7 +30,9 @@ export const useSuggestions = <T extends TokenValueBase>({
     inputElement,
     onKeyDown,
 }: UseSuggestionsOptions<T>) => {
-    const {inputInfo, focusInfo, options} = useTokenizedInput<T>();
+    const inputInfo = useInputContext<T>();
+    const focusInfo = useFocusContext<T>();
+    const options = useOptionsContext<T>();
 
     const {tokens} = inputInfo.state;
     const {onChangeToken, onApplyChanges} = inputInfo.callbacks;
@@ -171,7 +173,7 @@ export const useSuggestions = <T extends TokenValueBase>({
         (suggestion: TokenizedSuggestionsItem<T>) => {
             const focusIdx = focus?.idx ?? 0;
             const token = tokens[focusIdx];
-            const isNew = !token || token.isNew;
+            const isNew = !token || token.kind === 'new';
 
             onChangeToken(focusIdx, suggestion.value);
 

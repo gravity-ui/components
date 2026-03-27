@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {KeyCode} from '../../../constants';
-import {useTokenizedInput} from '../../../context';
+import {useFocusContext} from '../../../context';
 import type {TokenValueBase} from '../../../types';
 import type {SuggestionsNavigationOptions} from '../types';
 
@@ -22,7 +22,7 @@ export const useSuggestionsNavigation = <T extends TokenValueBase>({
     suggestion,
     currentWord,
 }: UseSuggestionsNavigationOptions<T>) => {
-    const {focusInfo} = useTokenizedInput<T>();
+    const focusInfo = useFocusContext<T>();
     const {focus} = focusInfo.state;
 
     React.useEffect(() => {

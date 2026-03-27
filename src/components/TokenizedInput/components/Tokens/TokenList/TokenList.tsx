@@ -6,13 +6,13 @@ export function TokenList() {
     return (
         <div className={classNames.wrapper}>
             {tokens.map((token, idx) => {
-                if (token.isNew) {
+                if (token.kind === 'new') {
                     return null;
                 }
 
                 return <Token key={token.id} idx={idx} />;
             })}
-            <Token key={`newToken-${newTokenIdx}`} idx={newTokenIdx} isNew />
+            <Token key={`newToken-${newTokenIdx}`} idx={newTokenIdx} kind="new" />
         </div>
     );
 }

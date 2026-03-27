@@ -74,7 +74,7 @@ export const transformTokens = (tokens: TokenValue[]): Token<TokenValue>[] => {
     return tokens.map((t) => ({
         id: getUniqId(),
         value: t,
-        isNew: false,
+        kind: 'regular',
         options: {readOnlyFields: ['value']},
     }));
 };

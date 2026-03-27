@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import {b} from '../../../constants';
-import {useTokenizedInput, useTokenizedInputComponents} from '../../../context';
+import {useInputContext, useTokenizedInputComponents} from '../../../context';
 
 export const useTokenList = () => {
-    const {inputInfo} = useTokenizedInput();
+    const inputInfo = useInputContext();
     const {Token} = useTokenizedInputComponents();
 
     const {tokens} = inputInfo.state;
 
-    const newTokenIdx = tokens.filter((t) => !t.isNew).length;
+    const newTokenIdx = tokens.filter((t) => t.kind !== 'new').length;
     const classNames = React.useMemo(() => ({wrapper: b('token-list')}), []);
 
     return React.useMemo(

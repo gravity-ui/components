@@ -1,11 +1,9 @@
 import * as React from 'react';
 
-import {useTokenizedInput} from '../context';
+import {useOptionsContext} from '../context';
 
 export const useApplyCallbackOnBlur = (fn: (e: React.FocusEvent) => void) => {
-    const {
-        options: {shouldAllowBlur},
-    } = useTokenizedInput();
+    const {shouldAllowBlur} = useOptionsContext();
     return React.useCallback(
         (e: React.FocusEvent) => {
             if (!e.currentTarget.contains(e.relatedTarget) && shouldAllowBlur?.(e)) {

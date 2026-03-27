@@ -2,8 +2,8 @@ import {NewToken as NewTokenComponent, NewTokenProps} from './NewToken';
 import {RegularToken as RegularTokenComponent, RegularTokenProps} from './RegularToken';
 
 export type TokenProps = (
-    | ({isNew: true} & NewTokenProps)
-    | ({isNew?: false} & RegularTokenProps)
+    | ({kind: 'new'} & NewTokenProps)
+    | ({kind?: 'regular'} & RegularTokenProps)
 ) & {
     NewToken?: typeof NewTokenComponent;
     RegularToken?: typeof RegularTokenComponent;
@@ -14,7 +14,7 @@ const TokenComponent = ({
     RegularToken = RegularTokenComponent,
     ...props
 }: TokenProps) => {
-    if (props.isNew === true) {
+    if (props.kind === 'new') {
         return <NewToken {...props} />;
     }
 

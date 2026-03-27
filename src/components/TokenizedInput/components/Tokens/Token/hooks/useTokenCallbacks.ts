@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import {useTokenizedInput} from '../../../../context';
+import {useFocusContext, useInputContext} from '../../../../context';
 
 export const useTokenCallbacks = () => {
-    const {inputInfo, focusInfo} = useTokenizedInput();
+    const inputInfo = useInputContext();
+    const focusInfo = useFocusContext();
 
     const {onChangeToken} = inputInfo.callbacks;
     const {onFocus} = focusInfo.callbacks;

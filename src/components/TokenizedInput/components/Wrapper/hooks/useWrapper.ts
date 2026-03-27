@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import {b} from '../../../constants';
-import {useTokenizedInput} from '../../../context';
+import {useFocusContext, useInputContext} from '../../../context';
 import {useApplyCallbackOnBlur} from '../../../hooks';
 
 import {useKeyDownHandler} from './useKeyDownHandler';
 
 export const useWrapper = () => {
-    const {focusInfo, inputInfo} = useTokenizedInput();
+    const focusInfo = useFocusContext();
+    const inputInfo = useInputContext();
 
     const {tokens, fields, isEditable, isClearable, className, wrapperRef} = inputInfo.state;
     const {onApplyChanges, onClearInput} = inputInfo.callbacks;

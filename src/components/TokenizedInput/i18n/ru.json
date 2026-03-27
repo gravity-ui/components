@@ -1,3 +1,4 @@
 {
-  "suggestions.items_not_found": "По запросу «{{text}}» ничего не найдено"
+  "suggestions.items_not_found": "По запросу «{{text}}» ничего не найдено",
+  "clear_input": "Очистить поле"
 }

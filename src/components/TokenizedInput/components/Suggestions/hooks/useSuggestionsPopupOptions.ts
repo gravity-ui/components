@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import type {PopupOffset} from '@gravity-ui/uikit';
 
-import {useTokenizedInput} from '../../../context';
+import {useInputContext, useOptionsContext} from '../../../context';
 
 export const useSuggestionsPopupOptions = (inputElement: HTMLInputElement | null) => {
-    const {inputInfo, options} = useTokenizedInput();
+    const inputInfo = useInputContext();
+    const options = useOptionsContext();
 
     const {wrapperRef} = inputInfo.state;
     const {fullWidthSuggestions} = options;

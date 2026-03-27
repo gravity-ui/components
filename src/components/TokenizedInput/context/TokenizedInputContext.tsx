@@ -9,73 +9,72 @@ import type {
     TokenizedInputInfo,
 } from '../types';
 
-type TokenizedInputContextOptions<T extends TokenValueBase> = {
-    /** Input state and callbacks */
-    inputInfo: TokenizedInputInfo<T>;
-    /** Focus state and callbacks */
-    focusInfo: TokenizedInputFocusInfo<T>;
-    /** Extra options from props */
-    options: {
-        /** Suggestions fetcher */
-        onSuggest: TokenizedInputData<T>['onSuggest'];
-        /** Keydown handler; return true to stop further handling */
-        onKeyDown: TokenizedInputData<T>['onKeyDown'];
-        /** Suggestions debounce delay */
-        debounceDelay: number | Record<keyof T, number>;
-        /** First suggestions call: ensures the first focus triggers a request without debounce */
-        suggestionsInitialCall: {
-            value: React.MutableRefObject<boolean>;
-            setValue: (v: boolean) => void;
-        };
-        /** Render suggestions full width below the input */
-        fullWidthSuggestions: boolean;
-        /** Return true to allow blur, false to prevent it */
-        shouldAllowBlur?: (e: React.FocusEvent) => boolean;
+export type TokenizedInputOptionsInfo<T extends TokenValueBase> = {
+    /** Suggestions fetcher */
+    onSuggest: TokenizedInputData<T>['onSuggest'];
+    /** Keydown handler; return true to stop further handling */
+    onKeyDown: TokenizedInputData<T>['onKeyDown'];
+    /** Suggestions debounce delay */
+    debounceDelay: number | Record<keyof T, number>;
+    /** First suggestions call: ensures the first focus triggers a request without debounce */
+    suggestionsInitialCall: {
+        value: React.MutableRefObject<boolean>;
+        setValue: (v: boolean) => void;
     };
+    /** Render suggestions full width below the input */
+    fullWidthSuggestions: boolean;
+    /** Return true to allow blur, false to prevent it */
+    shouldAllowBlur?: (e: React.FocusEvent) => boolean;
 };
 
-const TokenizedInputContext = React.createContext<TokenizedInputContextOptions<TokenValueBase>>({
-    inputInfo: {
-        state: {
-            tokens: [],
-            wrapperRef: {current: null},
-            fields: [],
-            isEditable: true,
-            isClearable: true,
-        },
-        callbacks: {
-            onApplyChanges: () => undefined,
-            onChangeToken: () => [],
-            onChangeTokens: () => [],
-            onRemoveToken: () => [],
-            onClearInput: () => [],
-            onUndo: () => [],
-            onRedo: () => [],
-        },
+export type TokenizedInputContextOptions<T extends TokenValueBase> = {
+    inputInfo: TokenizedInputInfo<T>;
+    focusInfo: TokenizedInputFocusInfo<T>;
+    options: TokenizedInputOptionsInfo<T>;
+};
+
+const InputContext = React.createContext<TokenizedInputInfo<TokenValueBase>>({
+    state: {
+        tokens: [],
+        wrapperRef: {current: null},
+        fields: [],
+        isEditable: true,
+        isClearable: true,
     },
-    focusInfo: {
-        state: {focus: undefined, autoFocus: false},
-        callbacks: {
-            onFocus: () => undefined,
-            onBlur: () => undefined,
-            getFocusRules: () => ({
-                nextField: {idx: 0, key: ''},
-                prevField: {idx: 0, key: ''},
-                nextToken: {idx: 0, key: ''},
-                prevToken: {idx: 0, key: ''},
-            }),
-        },
+    callbacks: {
+        onApplyChanges: () => undefined,
+        onChangeToken: () => [],
+        onChangeTokens: () => [],
+        onRemoveToken: () => [],
+        onClearInput: () => [],
+        onUndo: () => [],
+        onRedo: () => [],
     },
-    options: {
-        onSuggest: () => ({
-            items: [],
+});
+
+const FocusContext = React.createContext<TokenizedInputFocusInfo<TokenValueBase>>({
+    state: {focus: undefined, autoFocus: false},
+    callbacks: {
+        onFocus: () => undefined,
+        onBlur: () => undefined,
+        getFocusRules: () => ({
+            nextField: {idx: 0, key: ''},
+            prevField: {idx: 0, key: ''},
+            nextToken: {idx: 0, key: ''},
+            prevToken: {idx: 0, key: ''},
         }),
-        onKeyDown: () => false,
-        debounceDelay: 150,
-        suggestionsInitialCall: {value: {current: true}, setValue: () => undefined},
-        fullWidthSuggestions: false,
-        shouldAllowBlur: () => true,
     },
+});
+
+const OptionsContext = React.createContext<TokenizedInputOptionsInfo<TokenValueBase>>({
+    onSuggest: () => ({
+        items: [],
+    }),
+    onKeyDown: () => false,
+    debounceDelay: 150,
+    suggestionsInitialCall: {value: {current: true}, setValue: () => undefined},
+    fullWidthSuggestions: false,
+    shouldAllowBlur: () => true,
 });
 
 export function TokenizedInputContextProvider<T extends TokenValueBase>({
@@ -126,26 +125,20 @@ export function TokenizedInputContextProvider<T extends TokenValueBase>({
         onFocus,
     });
 
-    const ctxValue = React.useMemo(
+    const optionsValue = React.useMemo(
         () =>
             ({
-                inputInfo,
-                focusInfo,
-                options: {
-                    onSuggest,
-                    onKeyDown,
-                    debounceDelay,
-                    suggestionsInitialCall,
-                    fullWidthSuggestions,
-                    shouldAllowBlur,
-                },
-            }) as unknown as TokenizedInputContextOptions<TokenValueBase>,
+                onSuggest,
+                onKeyDown,
+                debounceDelay,
+                suggestionsInitialCall,
+                fullWidthSuggestions,
+                shouldAllowBlur,
+            }) as unknown as TokenizedInputOptionsInfo<TokenValueBase>,
         [
             debounceDelay,
             shouldAllowBlur,
-            focusInfo,
             fullWidthSuggestions,
-            inputInfo,
             onKeyDown,
             onSuggest,
             suggestionsInitialCall,
@@ -153,18 +146,65 @@ export function TokenizedInputContextProvider<T extends TokenValueBase>({
     );
 
     return (
-        <TokenizedInputContext.Provider value={ctxValue}>{children}</TokenizedInputContext.Provider>
+        <OptionsContext.Provider value={optionsValue}>
+            <InputContext.Provider
+                value={inputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+            >
+                <FocusContext.Provider
+                    value={focusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+                >
+                    {children}
+                </FocusContext.Provider>
+            </InputContext.Provider>
+        </OptionsContext.Provider>
     );
 }
 
-export const useTokenizedInput = <T extends TokenValueBase>() => {
-    const ctx = React.useContext(
-        TokenizedInputContext as unknown as React.Context<TokenizedInputContextOptions<T>>,
-    );
+export const useInputContext = <T extends TokenValueBase>() => {
+    const ctx = React.useContext(InputContext as unknown as React.Context<TokenizedInputInfo<T>>);
 
     if (!ctx) {
-        throw new Error('TokenizedInput context is not defined');
+        throw new Error('InputContext is not defined');
     }
 
     return ctx;
+};
+
+export const useFocusContext = <T extends TokenValueBase>() => {
+    const ctx = React.useContext(
+        FocusContext as unknown as React.Context<TokenizedInputFocusInfo<T>>,
+    );
+
+    if (!ctx) {
+        throw new Error('FocusContext is not defined');
+    }
+
+    return ctx;
+};
+
+export const useOptionsContext = <T extends TokenValueBase>() => {
+    const ctx = React.useContext(
+        OptionsContext as unknown as React.Context<TokenizedInputOptionsInfo<T>>,
+    );
+
+    if (!ctx) {
+        throw new Error('OptionsContext is not defined');
+    }
+
+    return ctx;
+};
+
+export const useTokenizedInput = <T extends TokenValueBase>(): TokenizedInputContextOptions<T> => {
+    const inputInfo = useInputContext<T>();
+    const focusInfo = useFocusContext<T>();
+    const options = useOptionsContext<T>();
+
+    return React.useMemo(
+        () => ({
+            inputInfo,
+            focusInfo,
+            options,
+        }),
+        [inputInfo, focusInfo, options],
+    );
 };

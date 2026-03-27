@@ -49,7 +49,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
     );
 
     React.useEffect(() => {
-        if (!isEqual(getValuesFromTokens(tokens.filter((t) => !t.isNew)), externalTokens)) {
+        if (!isEqual(getValuesFromTokens(tokens.filter((t) => t.kind !== 'new')), externalTokens)) {
             const newTokens = validateTokens(transformTokens(externalTokens));
 
             tokensRef.current = newTokens;
@@ -75,11 +75,11 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             const prevTokens = tokensRef.current;
 
             if (idx >= prevTokens.length) {
-                const newTokens = [
+                const newTokens: Token<T>[] = [
                     ...prevTokens,
                     {
                         id: `tokenId${getUniqId()}`,
-                        isNew: true,
+                        kind: 'new',
                         value: {
                             ...getDefaultTokenValue(fields),
                             ...newValue,
@@ -117,14 +117,14 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             const newTokens = removeEmptyTokens(transformedTokens)
                 .map((t) => {
                     // apply changes only to existing tokens (not the in-progress new token)
-                    if (currentTokens && t.isNew) {
+                    if (currentTokens && t.kind === 'new') {
                         return undefined;
                     }
                     const formattedValue = formatToken?.(t.value) ?? t.value;
 
                     return {
                         ...t,
-                        isNew: false,
+                        kind: 'regular',
                         value: formattedValue,
                         errors: validateToken ? validateToken(formattedValue) : undefined,
                     };
@@ -139,6 +139,10 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
 
     const onRemoveToken = React.useCallback(
         (idx: number) => {
+            if (idx < 0 || idx >= tokensRef.current.length) {
+                return tokensRef.current;
+            }
+
             const newTokens = tokensRef.current.filter((_, i) => i !== idx);
             onChange(getValuesFromTokens(newTokens));
             return onChangeTokens(newTokens);
@@ -157,7 +161,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
 
         tokensRef.current = newTokens;
         setTokens(newTokens);
-        onChange(getValuesFromTokens(removeEmptyTokens(newTokens.filter((t) => !t.isNew))));
+        onChange(getValuesFromTokens(removeEmptyTokens(newTokens.filter((t) => t.kind !== 'new'))));
 
         return newTokens;
     }, [onChange]);
@@ -167,7 +171,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
 
         tokensRef.current = newTokens;
         setTokens(newTokens);
-        onChange(getValuesFromTokens(removeEmptyTokens(newTokens.filter((t) => !t.isNew))));
+        onChange(getValuesFromTokens(removeEmptyTokens(newTokens.filter((t) => t.kind !== 'new'))));
 
         return newTokens;
     }, [onChange]);

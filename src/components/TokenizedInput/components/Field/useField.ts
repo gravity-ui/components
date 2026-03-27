@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {KeyCode, b} from '../../constants';
-import {useTokenizedInput, useTokenizedInputComponents} from '../../context';
+import {useFocusContext, useOptionsContext, useTokenizedInputComponents} from '../../context';
 import {useApplyCallbackOnBlur} from '../../hooks';
 
 import {FieldProps} from './Field';
@@ -23,7 +23,8 @@ export const useField = ({
     autoFocus,
     ...inputProps
 }: UseFieldOptions) => {
-    const {focusInfo, options} = useTokenizedInput();
+    const focusInfo = useFocusContext();
+    const options = useOptionsContext();
     const {Suggestions} = useTokenizedInputComponents();
 
     const {focus} = focusInfo.state;

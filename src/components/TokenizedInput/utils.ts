@@ -20,7 +20,7 @@ export const removeEmptyTokens = <T extends TokenValueBase>(tokens: Token<T>[]):
 
 export const removeNewTokens = <T extends TokenValueBase>(tokens: Token<T>[]): Token<T>[] => {
     return tokens.filter((token) => {
-        return !token.isNew;
+        return token.kind !== 'new';
     });
 };
 
@@ -46,7 +46,7 @@ export const defaultTransformTokens = <T extends TokenValueBase>(tokens: T[]): T
     return tokens.map((value) => {
         return {
             id: `tokenId${getUniqId()}`,
-            isNew: false,
+            kind: 'regular',
             value,
         };
     });

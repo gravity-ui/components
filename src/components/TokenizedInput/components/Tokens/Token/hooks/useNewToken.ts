@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import {b} from '../../../../constants';
-import {useTokenizedInput, useTokenizedInputComponents} from '../../../../context';
+import {useFocusContext, useInputContext, useTokenizedInputComponents} from '../../../../context';
 import {getDefaultTokenValue} from '../../../../utils';
 
 import {useTokenCallbacks} from './useTokenCallbacks';
 
 export const useNewToken = (idx: number) => {
-    const {inputInfo, focusInfo} = useTokenizedInput();
+    const inputInfo = useInputContext();
+    const focusInfo = useFocusContext();
     const {Field} = useTokenizedInputComponents();
 
     const {tokens, fields, placeholder} = inputInfo.state;
@@ -16,7 +17,7 @@ export const useNewToken = (idx: number) => {
     const {onChangeField, onFocusField} = useTokenCallbacks();
 
     const token = React.useMemo(
-        () => tokens[idx] ?? {id: 'new-token', value: getDefaultTokenValue(fields), isNew: true},
+        () => tokens[idx] ?? {id: 'new-token', value: getDefaultTokenValue(fields), kind: 'new'},
         [fields, idx, tokens],
     );
 

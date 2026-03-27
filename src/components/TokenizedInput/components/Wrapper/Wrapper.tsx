@@ -2,6 +2,9 @@
 import * as React from 'react';
 
 import {Xmark} from '@gravity-ui/icons';
+import {Icon} from '@gravity-ui/uikit';
+
+import i18n from '../../i18n';
 
 import {useWrapper} from './hooks';
 
@@ -15,8 +18,14 @@ export function Wrapper({children}: React.PropsWithChildren<unknown>) {
         <div className={classNames.wrapper} onBlur={onBlur} onKeyDown={onKeyDown} ref={wrapperRef}>
             {children}
             {isClearable && (
-                <button className={classNames.clearButton} onClick={onClear} tabIndex={-1}>
-                    <Xmark />
+                <button
+                    className={classNames.clearButton}
+                    onClick={onClear}
+                    tabIndex={-1}
+                    aria-label={i18n('clear_input')}
+                    title={i18n('clear_input')}
+                >
+                    <Icon data={Xmark} />
                 </button>
             )}
         </div>

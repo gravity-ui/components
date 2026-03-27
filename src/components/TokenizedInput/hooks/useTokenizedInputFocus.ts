@@ -26,7 +26,7 @@ const getInitialFocus = <T extends TokenValueBase>(
         return undefined;
     }
 
-    const newTokenIdx = tokens.findIndex((t) => t.isNew);
+    const newTokenIdx = tokens.findIndex((t) => t.kind === 'new');
 
     return {idx: newTokenIdx === -1 ? tokens.length : newTokenIdx, key: fields[0].key, offset: -1};
 };
@@ -54,14 +54,15 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
             const {idx, key, offset, ignoreChecks} = newFocus;
 
             const isNewToken =
-                (idx === tokens.length && tokens[idx - 1]?.isNew) ||
-                (idx === tokens.length + 1 && !tokens.at(-1)?.isNew);
+                (idx === tokens.length && tokens[idx - 1]?.kind === 'new') ||
+                (idx === tokens.length + 1 && tokens.at(-1)?.kind !== 'new');
 
             // new token is being finalized and not all fields are empty
             if (isNewToken) {
                 const hasNonEmptyFields =
-                    Object.values(tokens.find((t) => t.isNew)?.value ?? {}).some(Boolean) ||
-                    ignoreChecks;
+                    Object.values(tokens.find((t) => t.kind === 'new')?.value ?? {}).some(
+                        Boolean,
+                    ) || ignoreChecks;
 
                 if (hasNonEmptyFields) {
                     onApplyChanges();
@@ -90,7 +91,7 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
                     return newFocus;
                 }
                 // existing (non-new) tokens: no checks needed
-                if (tokens[cur.idx] && !tokens[cur.idx].isNew) {
+                if (tokens[cur.idx] && tokens[cur.idx].kind !== 'new') {
                     return newFocus;
                 }
 
@@ -166,7 +167,7 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
                 offset: -1,
             };
 
-            if (nextToken.idx === tokens.length || tokens[nextToken.idx]?.isNew) {
+            if (nextToken.idx === tokens.length || tokens[nextToken.idx]?.kind === 'new') {
                 nextToken.key = fields[0].key;
             }
 

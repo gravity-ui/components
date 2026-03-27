@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import {b} from '../../../../constants';
-import {useTokenizedInput, useTokenizedInputComponents} from '../../../../context';
+import {useInputContext, useTokenizedInputComponents} from '../../../../context';
 import {useApplyCallbackOnBlur} from '../../../../hooks';
 
 import {useTokenCallbacks} from './useTokenCallbacks';
 
 export const useRegularToken = (idx: number) => {
-    const {inputInfo} = useTokenizedInput();
+    const inputInfo = useInputContext();
     const {Field} = useTokenizedInputComponents();
 
     const {tokens, isEditable, fields, placeholder} = inputInfo.state;
@@ -17,6 +17,10 @@ export const useRegularToken = (idx: number) => {
     const token = tokens[idx];
 
     const hasChanges = React.useRef(false);
+
+    React.useEffect(() => {
+        hasChanges.current = false;
+    }, [idx]);
 
     const handleChangeField = React.useCallback(
         (index: number, key: string, value: string) => {
