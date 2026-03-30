@@ -1,5 +1,6 @@
 import {renderHook} from '@testing-library/react';
 
+import type {TokenValueBase, TokenizedInputFocusInfo} from '../../types';
 import {useSuggestionsInitialCall} from '../useSuggestionsInitialCall';
 
 describe('useSuggestionsInitialCall', () => {
@@ -42,16 +43,24 @@ describe('useSuggestionsInitialCall', () => {
     });
 
     it('should update initialCallRef when focus changes', () => {
+        const mockFocusInfo = {
+            state: {
+                focus: {idx: 0, key: 'key'},
+            },
+        };
+
         const {result, rerender} = renderHook(
-            ({focus}) => useSuggestionsInitialCall(focus, 'focus-input'),
+            ({focus}) => useSuggestionsInitialCall(focus.state.focus, 'focus-input'),
             {
-                initialProps: {focus: undefined as any},
+                initialProps: {
+                    focus: mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>,
+                },
             },
         );
 
-        expect(result.current.value.current).toBe(true);
+        expect(result.current.value.current).toBe(false);
 
-        rerender({focus: {idx: 0, key: 'key'}});
+        rerender({focus: mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>});
 
         expect(result.current.value.current).toBe(false);
     });

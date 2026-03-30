@@ -3,7 +3,17 @@ import * as React from 'react';
 import {renderHook} from '@testing-library/react';
 
 import {KeyCode} from '../../../../constants';
-import {FocusContext, InputContext} from '../../../../context/TokenizedInputContext';
+import {
+    FocusContext,
+    InputContext,
+    OptionsContext,
+} from '../../../../context/TokenizedInputContext';
+import type {
+    TokenValueBase,
+    TokenizedInputFocusInfo,
+    TokenizedInputInfo,
+    TokenizedInputOptionsInfo,
+} from '../../../../types';
 import {useDeleteHandler} from '../useDeleteHandler';
 
 describe('useDeleteHandler', () => {
@@ -45,9 +55,19 @@ describe('useDeleteHandler', () => {
         isRedo: jest.fn(),
     };
 
+    const mockOptionsInfo = {
+        shouldAllowBlur: jest.fn().mockReturnValue(true),
+    };
+
     const wrapper = ({children}: {children: React.ReactNode}) => (
-        <InputContext.Provider value={mockInputInfo as any}>
-            <FocusContext.Provider value={mockFocusInfo as any}>{children}</FocusContext.Provider>
+        <InputContext.Provider
+            value={mockInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+        >
+            <FocusContext.Provider
+                value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+            >
+                {children}
+            </FocusContext.Provider>
         </InputContext.Provider>
     );
 
@@ -113,9 +133,19 @@ describe('useDeleteHandler', () => {
         };
 
         const deleteWrapper = ({children}: {children: React.ReactNode}) => (
-            <InputContext.Provider value={deleteInputInfo as any}>
-                <FocusContext.Provider value={deleteFocusInfo as any}>
-                    {children}
+            <InputContext.Provider
+                value={deleteInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+            >
+                <FocusContext.Provider
+                    value={deleteFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+                >
+                    <OptionsContext.Provider
+                        value={
+                            mockOptionsInfo as unknown as TokenizedInputOptionsInfo<TokenValueBase>
+                        }
+                    >
+                        {children}
+                    </OptionsContext.Provider>
                 </FocusContext.Provider>
             </InputContext.Provider>
         );
@@ -170,8 +200,12 @@ describe('useDeleteHandler', () => {
         };
 
         const readOnlyWrapper = ({children}: {children: React.ReactNode}) => (
-            <InputContext.Provider value={readOnlyInputInfo as any}>
-                <FocusContext.Provider value={mockFocusInfo as any}>
+            <InputContext.Provider
+                value={readOnlyInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+            >
+                <FocusContext.Provider
+                    value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+                >
                     {children}
                 </FocusContext.Provider>
             </InputContext.Provider>

@@ -2,7 +2,17 @@ import * as React from 'react';
 
 import {renderHook} from '@testing-library/react';
 
-import {FocusContext, InputContext} from '../../../../context/TokenizedInputContext';
+import {
+    FocusContext,
+    InputContext,
+    OptionsContext,
+} from '../../../../context/TokenizedInputContext';
+import type {
+    TokenValueBase,
+    TokenizedInputFocusInfo,
+    TokenizedInputInfo,
+    TokenizedInputOptionsInfo,
+} from '../../../../types';
 import {useUndoRedoHandler} from '../useUndoRedoHandler';
 
 describe('useUndoRedoHandler', () => {
@@ -37,9 +47,23 @@ describe('useUndoRedoHandler', () => {
         isRedo: jest.fn(),
     };
 
+    const mockOptionsInfo = {
+        shouldAllowBlur: jest.fn().mockReturnValue(true),
+    };
+
     const wrapper = ({children}: {children: React.ReactNode}) => (
-        <InputContext.Provider value={mockInputInfo as any}>
-            <FocusContext.Provider value={mockFocusInfo as any}>{children}</FocusContext.Provider>
+        <InputContext.Provider
+            value={mockInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+        >
+            <FocusContext.Provider
+                value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+            >
+                <OptionsContext.Provider
+                    value={mockOptionsInfo as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+                >
+                    {children}
+                </OptionsContext.Provider>
+            </FocusContext.Provider>
         </InputContext.Provider>
     );
 

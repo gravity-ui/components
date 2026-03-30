@@ -3,7 +3,17 @@ import * as React from 'react';
 import {renderHook} from '@testing-library/react';
 
 import {TokenizedInputComponentContextProvider} from '../../../../context/TokenizedInputComponentsContext';
-import {InputContext} from '../../../../context/TokenizedInputContext';
+import {
+    FocusContext,
+    InputContext,
+    OptionsContext,
+} from '../../../../context/TokenizedInputContext';
+import type {
+    TokenValueBase,
+    TokenizedInputFocusInfo,
+    TokenizedInputInfo,
+    TokenizedInputOptionsInfo,
+} from '../../../../types';
 import {useTokenList} from '../useTokenList';
 
 describe('useTokenList', () => {
@@ -25,6 +35,16 @@ describe('useTokenList', () => {
         },
     };
 
+    const mockFocusInfo = {
+        state: {
+            focus: {idx: 0, key: 'key'},
+        },
+    };
+
+    const mockOptionsInfo = {
+        shouldAllowBlur: jest.fn().mockReturnValue(true),
+    };
+
     const mockComponentsInfo = {
         Token: () => <div />,
         Wrapper: () => <div />,
@@ -34,10 +54,20 @@ describe('useTokenList', () => {
     };
 
     const wrapper = ({children}: {children: React.ReactNode}) => (
-        <InputContext.Provider value={mockInputInfo as any}>
-            <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
-                {children}
-            </TokenizedInputComponentContextProvider>
+        <InputContext.Provider
+            value={mockInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+        >
+            <FocusContext.Provider
+                value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+            >
+                <OptionsContext.Provider
+                    value={mockOptionsInfo as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+                >
+                    <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
+                        {children}
+                    </TokenizedInputComponentContextProvider>
+                </OptionsContext.Provider>
+            </FocusContext.Provider>
         </InputContext.Provider>
     );
 
@@ -58,7 +88,9 @@ describe('useTokenList', () => {
         };
 
         const wrapperOnlyNew = ({children}: {children: React.ReactNode}) => (
-            <InputContext.Provider value={inputInfoOnlyNew as any}>
+            <InputContext.Provider
+                value={inputInfoOnlyNew as unknown as TokenizedInputInfo<TokenValueBase>}
+            >
                 <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
                     {children}
                 </TokenizedInputComponentContextProvider>

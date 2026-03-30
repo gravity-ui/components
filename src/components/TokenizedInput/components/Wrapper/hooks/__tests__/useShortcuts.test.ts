@@ -32,8 +32,8 @@ describe('useShortcuts', () => {
             code: 'KeyZ',
         } as KeyboardEvent;
 
-        expect(result.current.isTokenModifier(event as any)).toBe(true);
-        expect(result.current.isUndo(event as any)).toBe(true);
+        expect(result.current.isTokenModifier(event as unknown as React.KeyboardEvent)).toBe(true);
+        expect(result.current.isUndo(event as unknown as React.KeyboardEvent)).toBe(true);
     });
 
     it('should return win shortcuts when userAgent does not contain MAC', () => {
@@ -52,7 +52,7 @@ describe('useShortcuts', () => {
             code: 'KeyZ',
         } as KeyboardEvent;
 
-        expect(result.current.isApplyModifier(event as any)).toBe(true);
-        expect(result.current.isUndo(event as any)).toBe(true);
+        expect(result.current.isApplyModifier(event as unknown as React.KeyboardEvent)).toBe(true);
+        expect(result.current.isUndo(event as unknown as React.KeyboardEvent)).toBe(true);
     });
 });

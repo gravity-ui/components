@@ -8,6 +8,12 @@ import {
     InputContext,
     OptionsContext,
 } from '../../../../../context/TokenizedInputContext';
+import type {
+    TokenValueBase,
+    TokenizedInputFocusInfo,
+    TokenizedInputInfo,
+    TokenizedInputOptionsInfo,
+} from '../../../../../types';
 import {useRegularToken} from '../useRegularToken';
 
 describe('useRegularToken', () => {
@@ -63,9 +69,15 @@ describe('useRegularToken', () => {
     };
 
     const wrapper = ({children}: {children: React.ReactNode}) => (
-        <InputContext.Provider value={mockInputInfo as any}>
-            <FocusContext.Provider value={mockFocusInfo as any}>
-                <OptionsContext.Provider value={mockOptionsInfo as any}>
+        <InputContext.Provider
+            value={mockInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+        >
+            <FocusContext.Provider
+                value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+            >
+                <OptionsContext.Provider
+                    value={mockOptionsInfo as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+                >
                     <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
                         {children}
                     </TokenizedInputComponentContextProvider>
@@ -156,9 +168,17 @@ describe('useRegularToken', () => {
         };
 
         const wrapperWithFnPlaceholder = ({children}: {children: React.ReactNode}) => (
-            <InputContext.Provider value={inputInfoWithFnPlaceholder as any}>
-                <FocusContext.Provider value={mockFocusInfo as any}>
-                    <OptionsContext.Provider value={mockOptionsInfo as any}>
+            <InputContext.Provider
+                value={inputInfoWithFnPlaceholder as unknown as TokenizedInputInfo<TokenValueBase>}
+            >
+                <FocusContext.Provider
+                    value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+                >
+                    <OptionsContext.Provider
+                        value={
+                            mockOptionsInfo as unknown as TokenizedInputOptionsInfo<TokenValueBase>
+                        }
+                    >
                         <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
                             {children}
                         </TokenizedInputComponentContextProvider>

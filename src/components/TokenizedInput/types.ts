@@ -187,6 +187,24 @@ export type TokenizedInputFocusInfo<T extends TokenValueBase> = {
     };
 };
 
+export type TokenizedInputOptionsInfo<T extends TokenValueBase> = {
+    /** Suggestions fetcher */
+    onSuggest: TokenizedInputData<T>['onSuggest'];
+    /** Keydown handler; return true to stop further handling */
+    onKeyDown: TokenizedInputData<T>['onKeyDown'];
+    /** Suggestions debounce delay */
+    debounceDelay: number | Record<keyof T, number>;
+    /** First suggestions call: ensures the first focus triggers a request without debounce */
+    suggestionsInitialCall: {
+        value: React.MutableRefObject<boolean>;
+        setValue: (v: boolean) => void;
+    };
+    /** Render suggestions full width below the input */
+    fullWidthSuggestions: boolean;
+    /** Return true to allow blur, false to prevent it */
+    shouldAllowBlur?: (e: React.FocusEvent) => boolean;
+};
+
 export interface TokenizedInputData<T extends TokenValueBase> {
     /** Token values */
     tokens: T[];

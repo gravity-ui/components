@@ -199,7 +199,7 @@ export const useSuggestions = <T extends TokenValueBase>({
 
     const {popupWidth, popupOffset} = useSuggestionsPopupOptions(inputElement);
 
-    const isLoading = initialLoadingRef.current || isLoadingData;
+    const isLoading = Boolean(onSuggest) && (initialLoadingRef.current || isLoadingData);
     const isPopupOpened =
         isLoading ||
         Boolean(suggestions.items.length) ||

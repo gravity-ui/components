@@ -3,6 +3,7 @@ import * as React from 'react';
 import {renderHook} from '@testing-library/react';
 
 import {OptionsContext} from '../../context/TokenizedInputContext';
+import type {TokenValueBase, TokenizedInputOptionsInfo} from '../../types';
 import {useApplyCallbackOnBlur} from '../useApplyCallbackOnBlur';
 
 describe('useApplyCallbackOnBlur', () => {
@@ -11,7 +12,9 @@ describe('useApplyCallbackOnBlur', () => {
         const shouldAllowBlur = jest.fn().mockReturnValue(true);
 
         const wrapper = ({children}: {children: React.ReactNode}) => (
-            <OptionsContext.Provider value={{shouldAllowBlur} as any}>
+            <OptionsContext.Provider
+                value={{shouldAllowBlur} as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+            >
                 {children}
             </OptionsContext.Provider>
         );
@@ -37,7 +40,9 @@ describe('useApplyCallbackOnBlur', () => {
         const shouldAllowBlur = jest.fn().mockReturnValue(true);
 
         const wrapper = ({children}: {children: React.ReactNode}) => (
-            <OptionsContext.Provider value={{shouldAllowBlur} as any}>
+            <OptionsContext.Provider
+                value={{shouldAllowBlur} as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+            >
                 {children}
             </OptionsContext.Provider>
         );
@@ -63,7 +68,9 @@ describe('useApplyCallbackOnBlur', () => {
         const shouldAllowBlur = jest.fn().mockReturnValue(false);
 
         const wrapper = ({children}: {children: React.ReactNode}) => (
-            <OptionsContext.Provider value={{shouldAllowBlur} as any}>
+            <OptionsContext.Provider
+                value={{shouldAllowBlur} as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+            >
                 {children}
             </OptionsContext.Provider>
         );

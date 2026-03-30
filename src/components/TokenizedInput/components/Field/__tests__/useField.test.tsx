@@ -3,7 +3,13 @@ import * as React from 'react';
 import {act, renderHook} from '@testing-library/react';
 
 import {TokenizedInputComponentContextProvider} from '../../../context/TokenizedInputComponentsContext';
-import {FocusContext, OptionsContext} from '../../../context/TokenizedInputContext';
+import {FocusContext, InputContext, OptionsContext} from '../../../context/TokenizedInputContext';
+import type {
+    TokenValueBase,
+    TokenizedInputFocusInfo,
+    TokenizedInputInfo,
+    TokenizedInputOptionsInfo,
+} from '../../../types';
 import {useField} from '../useField';
 
 describe('useField', () => {
@@ -13,6 +19,17 @@ describe('useField', () => {
     const mockFocusInfo = {
         state: {
             focus: {idx: 0, key: 'key'},
+        },
+    };
+    const mockInputInfo = {
+        callbacks: {onChangeToken: jest.fn()},
+        state: {
+            tokens: [{id: '1', kind: 'regular', value: {key: 'User', value: 'Ivan'}}],
+            fields: [{key: 'key'}, {key: 'value'}],
+            isEditable: true,
+            isClearable: true,
+            className: 'custom-class',
+            wrapperRef: {current: null},
         },
     };
 
@@ -33,13 +50,21 @@ describe('useField', () => {
     };
 
     const wrapper = ({children}: {children: React.ReactNode}) => (
-        <FocusContext.Provider value={mockFocusInfo as any}>
-            <OptionsContext.Provider value={mockOptionsInfo as any}>
-                <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
-                    {children}
-                </TokenizedInputComponentContextProvider>
-            </OptionsContext.Provider>
-        </FocusContext.Provider>
+        <InputContext.Provider
+            value={mockInputInfo as unknown as TokenizedInputInfo<TokenValueBase>}
+        >
+            <FocusContext.Provider
+                value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+            >
+                <OptionsContext.Provider
+                    value={mockOptionsInfo as unknown as TokenizedInputOptionsInfo<TokenValueBase>}
+                >
+                    <TokenizedInputComponentContextProvider {...mockComponentsInfo}>
+                        {children}
+                    </TokenizedInputComponentContextProvider>
+                </OptionsContext.Provider>
+            </FocusContext.Provider>
+        </InputContext.Provider>
     );
 
     beforeEach(() => {
