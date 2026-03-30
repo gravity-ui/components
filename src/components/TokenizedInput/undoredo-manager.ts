@@ -1,5 +1,13 @@
 import isEqual from 'lodash/isEqual';
 
+const cloneValue = <T>(value: T) => {
+    if (typeof structuredClone === 'function') {
+        return structuredClone(value);
+    }
+
+    return JSON.parse(JSON.stringify(value));
+};
+
 type UndoRedoState<T extends unknown> = {
     value: T;
     next: T[];
@@ -11,10 +19,7 @@ export class UndoRedoManager<T extends unknown> {
 
     constructor(value: T) {
         this._state = {
-            value:
-                typeof structuredClone === 'function'
-                    ? structuredClone(value)
-                    : JSON.parse(JSON.stringify(value)),
+            value: cloneValue(value),
             next: [],
             prev: [],
         };
@@ -34,10 +39,7 @@ export class UndoRedoManager<T extends unknown> {
 
     init(value: T) {
         this._state = {
-            value:
-                typeof structuredClone === 'function'
-                    ? structuredClone(value)
-                    : JSON.parse(JSON.stringify(value)),
+            value: cloneValue(value),
             next: [],
             prev: [],
         };
@@ -50,18 +52,10 @@ export class UndoRedoManager<T extends unknown> {
 
         const prev = force
             ? [...this.state.prev]
-            : [
-                  ...this.state.prev,
-                  typeof structuredClone === 'function'
-                      ? structuredClone(this.state.value)
-                      : JSON.parse(JSON.stringify(this.state.value)),
-              ];
+            : [...this.state.prev, cloneValue(this.state.value)];
 
         this._state = {
-            value:
-                typeof structuredClone === 'function'
-                    ? structuredClone(value)
-                    : JSON.parse(JSON.stringify(value)),
+            value: cloneValue(value),
             next: [],
             prev,
         };
@@ -102,17 +96,11 @@ export class UndoRedoManager<T extends unknown> {
             return this.getValue();
         }
 
-        const newPrev =
-            typeof structuredClone === 'function'
-                ? structuredClone(this.state.value)
-                : JSON.parse(JSON.stringify(this.state.value));
+        const newPrev = cloneValue(this.state.value);
 
         this._state = {
             ...this.state,
-            value:
-                typeof structuredClone === 'function'
-                    ? structuredClone(nextState)
-                    : JSON.parse(JSON.stringify(nextState)),
+            value: cloneValue(nextState),
             prev: [...this.state.prev, newPrev],
         };
 
@@ -120,8 +108,6 @@ export class UndoRedoManager<T extends unknown> {
     }
 
     getValue(): T {
-        return typeof structuredClone === 'function'
-            ? structuredClone(this.state.value)
-            : JSON.parse(JSON.stringify(this.state.value));
+        return cloneValue(this.state.value);
     }
 }
