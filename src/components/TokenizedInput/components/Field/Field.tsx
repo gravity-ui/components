@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from 'react';
 
+import i18n from '../../i18n';
+
 import {FieldPopup} from './FieldPopup';
 import {useField} from './useField';
 
@@ -56,6 +58,7 @@ const FieldComponent = (props: FieldProps) => {
                 readOnly={readOnly}
                 tabIndex={hidden ? -1 : 0}
                 formNoValidate
+                aria-label={i18n('field_aria_label', {index: idx, key: fieldKey})}
             />
             {showSuggestions && (
                 <Suggestions

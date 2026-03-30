@@ -1,5 +1,7 @@
 import {Xmark} from '@gravity-ui/icons';
 
+import i18n from '../../../i18n';
+
 import {useRegularToken} from './hooks';
 import type {TokenBaseProps} from './types';
 
@@ -37,6 +39,7 @@ export function RegularToken({idx}: RegularTokenProps) {
                     onClick={onRemove}
                     tabIndex={-1}
                     disabled={!isEditable}
+                    aria-label={i18n('remove_token', {index: idx})}
                 >
                     <Xmark />
                 </button>
