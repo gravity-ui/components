@@ -47,12 +47,19 @@ export const useSuggestions = <T extends TokenValueBase>({
 
     const initialLoadingRef = React.useRef(true);
     const currentFnId = React.useRef('');
-    const cancelledFns = React.useRef<string[]>([]);
+    const cancelledFns = React.useRef<Set<string>>(new Set());
 
     const delay = React.useMemo(
         () => (typeof debounceDelay === 'number' ? debounceDelay : debounceDelay[fieldKey]),
         [debounceDelay, fieldKey],
     );
+    const mountedRef = React.useRef(true);
+    React.useEffect(() => {
+        return () => {
+            mountedRef.current = false;
+        };
+    }, []);
+
     const handleGetSuggestions = React.useMemo(
         () =>
             debounce(
@@ -90,6 +97,10 @@ export const useSuggestions = <T extends TokenValueBase>({
                             }),
                         );
 
+                        if (!mountedRef.current) {
+                            return;
+                        }
+
                         const {
                             items,
                             currentWord = {
@@ -102,10 +113,8 @@ export const useSuggestions = <T extends TokenValueBase>({
                         const searchStr =
                             currentWord.value.slice(0, currentWord.offset).trim() || '';
 
-                        if (cancelledFns.current.includes(args.fnId)) {
-                            cancelledFns.current = cancelledFns.current.filter(
-                                (fn) => fn !== args.fnId,
-                            );
+                        if (cancelledFns.current.has(args.fnId)) {
+                            cancelledFns.current.delete(args.fnId);
                             isCancelled = true;
 
                             return;
@@ -127,7 +136,7 @@ export const useSuggestions = <T extends TokenValueBase>({
                             });
                         }
                     } finally {
-                        if (!isCancelled) {
+                        if (!isCancelled && mountedRef.current) {
                             setIsLoadingData(false);
                             initialLoadingRef.current = false;
                         }
@@ -141,7 +150,7 @@ export const useSuggestions = <T extends TokenValueBase>({
     React.useEffect(() => {
         handleGetSuggestions.cancel();
         if (currentFnId.current) {
-            cancelledFns.current.push(currentFnId.current);
+            cancelledFns.current.add(currentFnId.current);
         }
 
         const fnId = getUniqId();
@@ -167,7 +176,8 @@ export const useSuggestions = <T extends TokenValueBase>({
             handleGetSuggestions.cancel();
         };
         // We only want to fetch suggestions when the input value, cursor offset, or focused field changes.
-        // Including tokens or selection might trigger unnecessary fetches.
+        // Including tokens, selection, or onSuggest might trigger unnecessary fetches and re-renders.
+        // onSuggest is typically a stable reference or intentionally not meant to trigger re-fetches on identity change.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [idx, fieldKey, value, offset]);
 

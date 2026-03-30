@@ -3,7 +3,11 @@ import * as React from 'react';
 import {act, renderHook} from '@testing-library/react';
 
 import {FocusContext} from '../../../../context/TokenizedInputContext';
-import type {TokenizedInputFocusInfo, TokenizedSuggestionsItem} from '../../../../types';
+import type {
+    TokenValueBase,
+    TokenizedInputFocusInfo,
+    TokenizedSuggestionsItem,
+} from '../../../../types';
 import {useSuggestionsNavigation} from '../useSuggestionsNavigation';
 
 describe('useSuggestionsNavigation', () => {
@@ -19,7 +23,9 @@ describe('useSuggestionsNavigation', () => {
     };
 
     const wrapper = ({children}: {children: React.ReactNode}) => (
-        <FocusContext.Provider value={mockFocusInfo as unknown as TokenizedInputFocusInfo<any>}>
+        <FocusContext.Provider
+            value={mockFocusInfo as unknown as TokenizedInputFocusInfo<TokenValueBase>}
+        >
             {children}
         </FocusContext.Provider>
     );
@@ -42,7 +48,7 @@ describe('useSuggestionsNavigation', () => {
                     onSelectNext: mockOnSelectNext,
                     onSelectPrev: mockOnSelectPrev,
                     onApply: mockOnApply,
-                    suggestion: undefined as unknown as TokenizedSuggestionsItem<any>,
+                    suggestion: undefined as unknown as TokenizedSuggestionsItem<TokenValueBase>,
                 }),
             {wrapper},
         );
@@ -70,7 +76,7 @@ describe('useSuggestionsNavigation', () => {
                     onSelectNext: mockOnSelectNext,
                     onSelectPrev: mockOnSelectPrev,
                     onApply: mockOnApply,
-                    suggestion: undefined as unknown as TokenizedSuggestionsItem<any>,
+                    suggestion: undefined as unknown as TokenizedSuggestionsItem<TokenValueBase>,
                 }),
             {wrapper},
         );

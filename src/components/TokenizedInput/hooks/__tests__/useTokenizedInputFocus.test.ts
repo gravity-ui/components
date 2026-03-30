@@ -1,12 +1,12 @@
 import {act, renderHook} from '@testing-library/react';
 
-import type {Token, TokenField, TokenizedInputInfo} from '../../types';
+import type {Token, TokenField, TokenValueBase, TokenizedInputInfo} from '../../types';
 import {useTokenizedInputFocus} from '../useTokenizedInputFocus';
 
 describe('useTokenizedInputFocus', () => {
-    const mockFields: TokenField<any>[] = [{key: 'key'}, {key: 'value'}];
+    const mockFields: TokenField<TokenValueBase>[] = [{key: 'key'}, {key: 'value'}];
 
-    const mockTokens: Token<any>[] = [
+    const mockTokens: Token<TokenValueBase>[] = [
         {id: '1', kind: 'regular', value: {key: 'User', value: 'Ivan'}},
         {id: '2', kind: 'new', value: {key: 'Status', value: ''}},
     ];
@@ -20,7 +20,7 @@ describe('useTokenizedInputFocus', () => {
         callbacks: {
             onApplyChanges: mockOnApplyChanges,
         },
-    } as unknown as TokenizedInputInfo<any>;
+    } as unknown as TokenizedInputInfo<TokenValueBase>;
 
     beforeEach(() => {
         jest.clearAllMocks();
@@ -124,5 +124,65 @@ describe('useTokenizedInputFocus', () => {
         expect(rules.nextField).toEqual({idx: 1, key: 'key', offset: -1});
         expect(rules.prevToken).toEqual({idx: 0, key: 'key', offset: 0});
         expect(rules.nextToken).toEqual({idx: 1, key: 'key', offset: -1}); // Next token is new token, so key is first field
+    });
+
+    it('should return correct focus rules for the first token', () => {
+        const {result} = renderHook(() =>
+            useTokenizedInputFocus({
+                fields: mockFields,
+                inputInfo: mockInputInfo,
+                autoFocus: false,
+            }),
+        );
+
+        const rules = result.current.callbacks.getFocusRules({idx: 0, key: 'key', offset: -1});
+
+        expect(rules.prevField).toEqual({idx: 0, key: 'key', offset: 0});
+        expect(rules.nextField).toEqual({idx: 0, key: 'value', offset: -1});
+        expect(rules.prevToken).toEqual({idx: 0, key: 'key', offset: 0});
+        expect(rules.nextToken).toEqual({idx: 0, key: 'value', offset: -1});
+    });
+
+    it('should return correct focus rules for the last (new) token', () => {
+        const {result} = renderHook(() =>
+            useTokenizedInputFocus({
+                fields: mockFields,
+                inputInfo: mockInputInfo,
+                autoFocus: false,
+            }),
+        );
+
+        const rules = result.current.callbacks.getFocusRules({idx: 1, key: 'value', offset: -1});
+
+        expect(rules.prevField).toEqual({idx: 1, key: 'value', offset: 0});
+        expect(rules.nextField).toEqual({idx: 2, key: 'key', offset: -1});
+        expect(rules.prevToken).toEqual({idx: 1, key: 'key', offset: 0});
+        expect(rules.nextToken).toEqual({idx: 2, key: 'key', offset: -1});
+    });
+
+    it('should handle single field tokens', () => {
+        const singleFieldMockInputInfo = {
+            state: {
+                tokens: mockTokens,
+            },
+            callbacks: {
+                onApplyChanges: mockOnApplyChanges,
+            },
+        } as unknown as TokenizedInputInfo<TokenValueBase>;
+
+        const {result} = renderHook(() =>
+            useTokenizedInputFocus({
+                fields: [{key: 'key'}],
+                inputInfo: singleFieldMockInputInfo,
+                autoFocus: false,
+            }),
+        );
+
+        const rules = result.current.callbacks.getFocusRules({idx: 0, key: 'key', offset: -1});
+
+        expect(rules.prevField).toEqual({idx: 0, key: 'key', offset: 0});
+        expect(rules.nextField).toEqual({idx: 1, key: 'key', offset: -1});
+        expect(rules.prevToken).toEqual({idx: 0, key: 'key', offset: 0});
+        expect(rules.nextToken).toEqual({idx: 1, key: 'key', offset: -1});
     });
 });

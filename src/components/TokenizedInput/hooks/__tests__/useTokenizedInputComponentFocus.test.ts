@@ -1,6 +1,6 @@
 import {renderHook} from '@testing-library/react';
 
-import type {TokenizedInputFocusInfo} from '../../types';
+import type {TokenValueBase, TokenizedInputFocusInfo} from '../../types';
 import {useTokenizedInputComponentFocus} from '../useTokenizedInputComponentFocus';
 
 describe('useTokenizedInputComponentFocus', () => {
@@ -19,7 +19,7 @@ describe('useTokenizedInputComponentFocus', () => {
                 initialProps: {
                     focusInfo: {
                         state: {focus: undefined},
-                    } as unknown as TokenizedInputFocusInfo<any>,
+                    } as unknown as TokenizedInputFocusInfo<TokenValueBase>,
                 },
             },
         );
@@ -30,7 +30,7 @@ describe('useTokenizedInputComponentFocus', () => {
         rerender({
             focusInfo: {
                 state: {focus: {idx: 0, key: 'key'}},
-            } as unknown as TokenizedInputFocusInfo<any>,
+            } as unknown as TokenizedInputFocusInfo<TokenValueBase>,
         });
 
         expect(onFocus).toHaveBeenCalledTimes(1);
@@ -52,7 +52,7 @@ describe('useTokenizedInputComponentFocus', () => {
                 initialProps: {
                     focusInfo: {
                         state: {focus: {idx: 0, key: 'key'}},
-                    } as unknown as TokenizedInputFocusInfo<any>,
+                    } as unknown as TokenizedInputFocusInfo<TokenValueBase>,
                 },
             },
         );
@@ -63,7 +63,7 @@ describe('useTokenizedInputComponentFocus', () => {
         rerender({
             focusInfo: {
                 state: {focus: undefined},
-            } as unknown as TokenizedInputFocusInfo<any>,
+            } as unknown as TokenizedInputFocusInfo<TokenValueBase>,
         });
 
         expect(onFocus).toHaveBeenCalledTimes(1);
@@ -85,7 +85,7 @@ describe('useTokenizedInputComponentFocus', () => {
                 initialProps: {
                     focusInfo: {
                         state: {focus: {idx: 0, key: 'key'}},
-                    } as unknown as TokenizedInputFocusInfo<any>,
+                    } as unknown as TokenizedInputFocusInfo<TokenValueBase>,
                 },
             },
         );
@@ -96,7 +96,7 @@ describe('useTokenizedInputComponentFocus', () => {
         rerender({
             focusInfo: {
                 state: {focus: {idx: 1, key: 'key'}},
-            } as unknown as TokenizedInputFocusInfo<any>,
+            } as unknown as TokenizedInputFocusInfo<TokenValueBase>,
         });
 
         expect(onFocus).toHaveBeenCalledTimes(1); // not called again

@@ -26,6 +26,11 @@ export const useSuggestionsNavigation = <T extends TokenValueBase>({
     const {focus} = focusInfo.state;
 
     React.useEffect(() => {
+        // We use a native DOM event listener here instead of React's synthetic onKeyDown
+        // to ensure we intercept navigation keys (ArrowUp, ArrowDown, Enter) *before*
+        // the main Wrapper's synthetic onKeyDown handler processes them.
+        // This allows suggestions navigation to take precedence over token navigation
+        // when the suggestions popup is open.
         const handleNavigation = (e: KeyboardEvent) => {
             const preventOtherKeys =
                 onKeyDown?.({

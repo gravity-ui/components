@@ -49,18 +49,22 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
         getInitialFocus(tokens, fields, autoFocus),
     );
 
+    const tokensRef = React.useRef(tokens);
+    tokensRef.current = tokens;
+
     const onFocus = React.useCallback(
         (newFocus: TokenFocus<T>) => {
+            const currentTokens = tokensRef.current;
             const {idx, key, offset, ignoreChecks} = newFocus;
 
             const isNewToken =
-                (idx === tokens.length && tokens[idx - 1]?.kind === 'new') ||
-                (idx === tokens.length + 1 && tokens.at(-1)?.kind !== 'new');
+                (idx === currentTokens.length && currentTokens[idx - 1]?.kind === 'new') ||
+                (idx === currentTokens.length + 1 && currentTokens.at(-1)?.kind !== 'new');
 
             // new token is being finalized and not all fields are empty
             if (isNewToken) {
                 const hasNonEmptyFields =
-                    Object.values(tokens.find((t) => t.kind === 'new')?.value ?? {}).some(
+                    Object.values(currentTokens.find((t) => t.kind === 'new')?.value ?? {}).some(
                         Boolean,
                     ) || ignoreChecks;
 
@@ -76,9 +80,9 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
             }
 
             // handle focus past the end of the list
-            if (idx - tokens.length > 0) {
+            if (idx - currentTokens.length > 0) {
                 setFocus({
-                    idx: tokens.length,
+                    idx: currentTokens.length,
                     key: fields[0].key,
                     offset,
                 });
@@ -91,7 +95,7 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
                     return newFocus;
                 }
                 // existing (non-new) tokens: no checks needed
-                if (tokens[cur.idx] && tokens[cur.idx].kind !== 'new') {
+                if (currentTokens[cur.idx] && currentTokens[cur.idx].kind !== 'new') {
                     return newFocus;
                 }
 
@@ -100,9 +104,9 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
                 const keyIndex = fields.findIndex((f) => f.key === key);
                 const curValuesNonEmptyCondition = fields
                     .slice(0, keyIndex)
-                    .some((f) => !tokens[cur.idx]?.value?.[f.key]);
+                    .some((f) => !currentTokens[cur.idx]?.value?.[f.key]);
                 const allValuesNonEmptyCondition = fields.some(
-                    (f) => !tokens[cur.idx]?.value?.[f.key],
+                    (f) => !currentTokens[cur.idx]?.value?.[f.key],
                 );
 
                 const curEmptyFieldCondition =
@@ -120,7 +124,7 @@ export const useTokenizedInputFocus = <T extends TokenValueBase>({
                 return newFocus;
             });
         },
-        [fields, onApplyChanges, tokens],
+        [fields, onApplyChanges],
     );
 
     const onBlur = React.useCallback(() => {

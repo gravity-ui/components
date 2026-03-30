@@ -1,5 +1,11 @@
+// We import the entire FuzzySearch class because its internal implementation
+// relies on complex logic and hash tables for scoring. Extracting just the `isMatch`
+// method is non-trivial and would require copying a significant amount of internal code.
 import FuzzySearch from 'fuzzy-search';
 
+// K_START is a weight multiplier used to penalize matches that start later in the string.
+// A higher value means items where the match starts further from the beginning get a higher (worse) score,
+// pushing them lower in the sorted results.
 const K_START = 8;
 
 export type SearchValue = {
@@ -28,6 +34,8 @@ export const fuzzySearchScore = <T extends SearchValue>(item: T, search: string)
         }
     }
 
+    // We use FuzzySearch.isMatch directly instead of instantiating the class or writing a custom isMatch
+    // because we rely on its specific scoring algorithm to combine it with our custom K_START penalty logic.
     const score = FuzzySearch.isMatch(item.search, search, false);
 
     if (!score) {

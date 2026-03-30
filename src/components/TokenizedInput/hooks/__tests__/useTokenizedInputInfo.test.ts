@@ -1,10 +1,10 @@
 import {act, renderHook} from '@testing-library/react';
 
-import type {TokenField} from '../../types';
+import type {TokenField, TokenValueBase} from '../../types';
 import {useTokenizedInputInfo} from '../useTokenizedInputInfo';
 
 describe('useTokenizedInputInfo', () => {
-    const mockFields: TokenField<any>[] = [{key: 'key'}, {key: 'value'}];
+    const mockFields: TokenField<TokenValueBase>[] = [{key: 'key'}, {key: 'value'}];
 
     const mockOnChange = jest.fn();
 

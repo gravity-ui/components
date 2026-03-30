@@ -33,6 +33,9 @@ export const useField = ({
     const focusOffset = focus?.offset;
 
     const [inputElement, setInputElement] = React.useState<HTMLInputElement | null>(null);
+    // When autoFocus is true, we want to focus the input but keep suggestions hidden initially
+    // until the user interacts with the input (types, clicks, etc.) to avoid popping up
+    // suggestions immediately on mount without explicit user intent.
     const [hideSuggestions, setHideSuggestions] = React.useState(autoFocus);
     const [offset, setOffset] = React.useState<number | undefined>(undefined);
     const [selection, setSelection] = React.useState<[number, number] | undefined>(undefined);
@@ -63,8 +66,9 @@ export const useField = ({
             setOffset(undefined);
             setSelection(undefined);
         }
-        // We only want to trigger this effect when focus changes or the input element mounts,
-        // not when hideSuggestions changes, to prevent unexpected focus resets.
+        // We also intentionally omit `onFocus` from dependencies because `onFocus` might change
+        // on every token update, which would cause this effect to run with a stale closure and
+        // incorrectly reset selection/offset state.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fieldKey, focusOffset, idx, isFocused, inputElement]);
 
