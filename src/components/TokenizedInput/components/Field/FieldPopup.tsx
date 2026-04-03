@@ -15,7 +15,12 @@ export function FieldPopup({children, className, ...props}: React.PropsWithChild
     }
 
     return (
-        <Popup {...props} className={b('field-popup', className)} returnFocus={false}>
+        <Popup
+            {...props}
+            className={b('field-popup', className)}
+            returnFocus={false}
+            strategy="fixed"
+        >
             <div onMouseDown={onMouseDown}>{children}</div>
         </Popup>
     );
