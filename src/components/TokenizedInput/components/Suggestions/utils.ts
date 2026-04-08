@@ -1,16 +1,19 @@
-export type SearchValue = {
-    search: string;
-    sort?: number;
-};
+import type {TokenValueBase, TokenizedSuggestionsItem} from '../../types';
 
-export const sortSuggestions = <T extends SearchValue>(items: T[]) => {
+export const sortSuggestions = <T extends TokenValueBase>(items: TokenizedSuggestionsItem<T>[]) => {
     const itemsWithSort = items.filter((item) => item.sort !== undefined);
     const itemsWithoutSort = items.filter((item) => item.sort === undefined);
 
-    return [...itemsWithSort.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)), ...itemsWithoutSort];
+    return [
+        ...itemsWithSort.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)),
+        ...itemsWithoutSort,
+    ] as TokenizedSuggestionsItem<T>[];
 };
 
-export const simpleFilterSuggestions = <T extends SearchValue>(items: T[], search: string) => {
+export const simpleFilterSuggestions = <T extends TokenValueBase>(
+    items: TokenizedSuggestionsItem<T>[],
+    search: string,
+) => {
     if (!search) {
         return items;
     }

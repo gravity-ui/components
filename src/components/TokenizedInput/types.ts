@@ -187,11 +187,6 @@ export type TokenizedInputFocusInfo<T extends TokenValueBase> = {
     };
 };
 
-type TokenizedSearchValue = {
-    search: string;
-    sort?: number;
-};
-
 export type TokenizedInputOptionsInfo<T extends TokenValueBase> = {
     /** Suggestions getter */
     onSuggest: TokenizedInputData<T>['onSuggest'];
@@ -209,7 +204,10 @@ export type TokenizedInputOptionsInfo<T extends TokenValueBase> = {
     /** Return true to allow blur, false to prevent it */
     shouldAllowBlur?: (e: React.FocusEvent) => boolean;
     /** Function to filter suggestions */
-    filterSuggestions: <S extends TokenizedSearchValue>(items: S[], search: string) => S[];
+    filterSuggestions: (
+        items: TokenizedSuggestionsItem<T>[],
+        search: string,
+    ) => TokenizedSuggestionsItem<T>[];
 };
 
 export interface TokenizedInputData<T extends TokenValueBase> {
@@ -256,7 +254,10 @@ export interface TokenizedInputData<T extends TokenValueBase> {
     /** Return true to allow blur, false to prevent it */
     shouldAllowBlur?: (e: React.FocusEvent) => boolean;
     /** Function to filter suggestions */
-    filterSuggestions?: <S extends TokenizedSearchValue>(items: S[], search: string) => S[];
+    filterSuggestions?: (
+        items: TokenizedSuggestionsItem<T>[],
+        search: string,
+    ) => TokenizedSuggestionsItem<T>[];
 }
 
 export type TokenizedInputComposition = {
