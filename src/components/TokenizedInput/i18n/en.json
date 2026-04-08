@@ -1,0 +1,6 @@
+{
+  "suggestions.items_not_found": "No matches for the search string «{{text}}»",
+  "clear_input": "Clear input",
+  "remove_token": "Remove token {{index}}",
+  "field_aria_label": "Field {{key}} in token {{index}}"
+}

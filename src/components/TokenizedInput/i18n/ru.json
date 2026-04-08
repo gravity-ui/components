@@ -1,0 +1,6 @@
+{
+  "suggestions.items_not_found": "По запросу «{{text}}» ничего не найдено",
+  "clear_input": "Очистить поле",
+  "remove_token": "Удалить токен {{index}}",
+  "field_aria_label": "Поле {{key}} в токене {{index}}"
+}
