@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.19.0](https://github.com/gravity-ui/components/compare/v4.18.0...v4.19.0) (2026-04-08)
+
+
+### Features
+
+* **TokenizedInput:** Added new component TokenizedInput ([#375](https://github.com/gravity-ui/components/issues/375)) ([e861428](https://github.com/gravity-ui/components/commit/e861428a22559a9d90efc4df1e4278da0a3f12b4))
+
+
+### Bug Fixes
+
+* **StoriesLayout:** fix clip-path ([#373](https://github.com/gravity-ui/components/issues/373)) ([0e1fd67](https://github.com/gravity-ui/components/commit/0e1fd6713c57d28d6ab27c8131507b3cd6df7b53))
+
 ## [4.18.0](https://github.com/gravity-ui/components/compare/v4.17.0...v4.18.0) (2026-01-22)
 
 
