@@ -2,15 +2,16 @@ import * as React from 'react';
 
 import {StoryFn} from '@storybook/react';
 
-import {TokenPlaceholderGeneratorFn, tokenizedInputUtils} from '..';
 import {TokenizedInput} from '../TokenizedInput';
 import {
     TokenField,
+    TokenPlaceholderGeneratorFn,
     TokenizedInputData,
     TokenizedSuggestionContext,
     TokenizedSuggestions,
     TokenizedSuggestionsItem,
 } from '../types';
+import {tokenizedInputUtils} from '../utils';
 
 import {TokenizedComponentType} from './types';
 
