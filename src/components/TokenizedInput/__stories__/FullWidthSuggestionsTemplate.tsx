@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {StoryFn} from '@storybook/react';
 
-import {tokenizedInputUtils} from '..';
 import {TokenizedInput} from '../TokenizedInput';
 import {
     TokenField,
@@ -11,6 +10,7 @@ import {
     TokenizedSuggestions,
     TokenizedSuggestionsItem,
 } from '../types';
+import {tokenizedInputUtils} from '../utils';
 
 import {TokenizedComponentType} from './types';
 
