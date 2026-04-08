@@ -2,8 +2,6 @@ import {getUniqId} from '@gravity-ui/uikit';
 
 import {Token, TokenField, TokenFieldKeyAction, TokenValueBase} from './types';
 
-export {fuzzySearch} from './components/Suggestions';
-
 export const getDefaultTokenValue = <T extends TokenValueBase>(fields: TokenField<T>[]): T => {
     return fields.reduce<T>((acc, cur) => ({...acc, [cur.key]: ''}), {} as T);
 };

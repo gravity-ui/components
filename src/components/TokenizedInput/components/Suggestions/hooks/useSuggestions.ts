@@ -12,7 +12,7 @@ import type {
     TokenizedSuggestionsItem,
 } from '../../../types';
 import {SuggestionsData} from '../types';
-import {fuzzySearch, sortSuggestions} from '../utils';
+import {sortSuggestions} from '../utils';
 
 import {useSelectSuggestion} from './useSelectSuggestion';
 import {useSuggestionsPopupOptions} from './useSuggestionsPopupOptions';
@@ -38,7 +38,13 @@ export const useSuggestions = <T extends TokenValueBase>({
     const {onChangeToken, onApplyChanges} = inputInfo.callbacks;
     const {focus} = focusInfo.state;
     const {onFocus} = focusInfo.callbacks;
-    const {onSuggest, debounceDelay, suggestionsInitialCall, fullWidthSuggestions} = options;
+    const {
+        onSuggest,
+        debounceDelay,
+        suggestionsInitialCall,
+        fullWidthSuggestions,
+        filterSuggestions,
+    } = options;
 
     const [suggestions, setSuggestions] = React.useState<TokenizedSuggestions<T>>({
         items: [],
@@ -127,7 +133,7 @@ export const useSuggestions = <T extends TokenValueBase>({
                                 currentWord,
                             });
                         } else {
-                            const filteredItems = fuzzySearch(items, searchStr);
+                            const filteredItems = filterSuggestions(items, searchStr);
 
                             setSuggestions({
                                 ...response,
@@ -144,7 +150,7 @@ export const useSuggestions = <T extends TokenValueBase>({
                 },
                 delay,
             ),
-        [delay],
+        [delay, filterSuggestions],
     );
 
     React.useEffect(() => {

@@ -1,50 +1,6 @@
-// We import the entire FuzzySearch class because its internal implementation
-// relies on complex logic and hash tables for scoring. Extracting just the `isMatch`
-// method is non-trivial and would require copying a significant amount of internal code.
-import FuzzySearch from 'fuzzy-search';
-
-// K_START is a weight multiplier used to penalize matches that start later in the string.
-// A higher value means items where the match starts further from the beginning get a higher (worse) score,
-// pushing them lower in the sorted results.
-const K_START = 8;
-
 export type SearchValue = {
     search: string;
     sort?: number;
-};
-
-export const fuzzySearchScore = <T extends SearchValue>(item: T, search: string) => {
-    let start = item.search.length;
-    let maxSubstr = 1;
-
-    for (let i = search.length; i > 0; i--) {
-        const substr = search.slice(0, i);
-        const idx = item.search.indexOf(substr);
-        const idxLower = item.search.toLowerCase().indexOf(substr.toLowerCase());
-
-        if (idx !== -1) {
-            start = idx;
-            maxSubstr = substr.length;
-            break;
-        }
-        if (idxLower !== -1) {
-            start = idxLower;
-            maxSubstr = substr.length;
-            break;
-        }
-    }
-
-    // We use FuzzySearch.isMatch directly instead of instantiating the class or writing a custom isMatch
-    // because we rely on its specific scoring algorithm to combine it with our custom K_START penalty logic.
-    const score = FuzzySearch.isMatch(item.search, search, false);
-
-    if (!score) {
-        return 0;
-    }
-
-    const tunedScore = Math.round(score + (start / maxSubstr) * K_START);
-
-    return tunedScore || 0.00001;
 };
 
 export const sortSuggestions = <T extends SearchValue>(items: T[]) => {
@@ -54,27 +10,29 @@ export const sortSuggestions = <T extends SearchValue>(items: T[]) => {
     return [...itemsWithSort.sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0)), ...itemsWithoutSort];
 };
 
-export const fuzzySearch = <T extends SearchValue>(items: T[], search: string) => {
+export const simpleFilterSuggestions = <T extends SearchValue>(items: T[], search: string) => {
     if (!search) {
         return items;
     }
 
-    const scoredItems = items.map((item) => ({
-        item,
-        score: fuzzySearchScore(item, search),
-    }));
+    const searchLower = search.toLowerCase();
 
-    const filteredItems = scoredItems
-        .filter(({score}) => score)
+    const filteredItems = items
+        .map((item) => ({
+            ...item,
+            search: item.search.toLowerCase(),
+        }))
+        .filter((item) => item.search.includes(searchLower))
         .sort((a, b) => {
-            const compare = a.score - b.score;
+            const startA = a.search.indexOf(searchLower);
+            const startB = b.search.indexOf(searchLower);
 
-            if (compare === 0) {
-                return a.item.search.localeCompare(b.item.search);
+            if (startA === startB) {
+                return a.search.localeCompare(b.search);
             }
 
-            return compare;
+            return startA - startB;
         });
 
-    return sortSuggestions(filteredItems.map(({item}) => item));
+    return sortSuggestions(filteredItems);
 };

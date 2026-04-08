@@ -187,8 +187,13 @@ export type TokenizedInputFocusInfo<T extends TokenValueBase> = {
     };
 };
 
+type TokenizedSearchValue = {
+    search: string;
+    sort?: number;
+};
+
 export type TokenizedInputOptionsInfo<T extends TokenValueBase> = {
-    /** Suggestions fetcher */
+    /** Suggestions getter */
     onSuggest: TokenizedInputData<T>['onSuggest'];
     /** Keydown handler; return true to stop further handling */
     onKeyDown: TokenizedInputData<T>['onKeyDown'];
@@ -203,6 +208,8 @@ export type TokenizedInputOptionsInfo<T extends TokenValueBase> = {
     fullWidthSuggestions: boolean;
     /** Return true to allow blur, false to prevent it */
     shouldAllowBlur?: (e: React.FocusEvent) => boolean;
+    /** Function to filter suggestions */
+    filterSuggestions: <S extends TokenizedSearchValue>(items: S[], search: string) => S[];
 };
 
 export interface TokenizedInputData<T extends TokenValueBase> {
@@ -236,7 +243,7 @@ export interface TokenizedInputData<T extends TokenValueBase> {
     onKeyDown?: (v: TokenOnKeyDownOptions<T>) => boolean;
     /** Token list change handler */
     onChange: (newTokens: T[]) => void;
-    /** Fetches suggestions */
+    /** Gets suggestions */
     onSuggest?: (
         suggestCtx: TokenizedSuggestionContext<T>,
     ) => TokenizedSuggestions<T> | Promise<TokenizedSuggestions<T>>;
@@ -248,6 +255,8 @@ export interface TokenizedInputData<T extends TokenValueBase> {
     onBlur?: () => void;
     /** Return true to allow blur, false to prevent it */
     shouldAllowBlur?: (e: React.FocusEvent) => boolean;
+    /** Function to filter suggestions */
+    filterSuggestions?: <S extends TokenizedSearchValue>(items: S[], search: string) => S[];
 }
 
 export type TokenizedInputComposition = {

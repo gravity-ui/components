@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import {simpleFilterSuggestions} from '../components/Suggestions';
 import {useSuggestionsInitialCall, useTokenizedInputFocus, useTokenizedInputInfo} from '../hooks';
 import {useTokenizedInputComponentFocus} from '../hooks/useTokenizedInputComponentFocus';
 import type {
@@ -16,49 +17,15 @@ export type TokenizedInputContextOptions<T extends TokenValueBase> = {
     options: TokenizedInputOptionsInfo<T>;
 };
 
-export const InputContext = React.createContext<TokenizedInputInfo<TokenValueBase>>({
-    state: {
-        tokens: [],
-        wrapperRef: {current: null},
-        fields: [],
-        isEditable: true,
-        isClearable: true,
-    },
-    callbacks: {
-        onApplyChanges: () => undefined,
-        onChangeToken: () => [],
-        onChangeTokens: () => [],
-        onRemoveToken: () => [],
-        onClearInput: () => [],
-        onUndo: () => [],
-        onRedo: () => [],
-    },
-});
-
-export const FocusContext = React.createContext<TokenizedInputFocusInfo<TokenValueBase>>({
-    state: {focus: undefined, autoFocus: false},
-    callbacks: {
-        onFocus: () => undefined,
-        onBlur: () => undefined,
-        getFocusRules: () => ({
-            nextField: {idx: 0, key: ''},
-            prevField: {idx: 0, key: ''},
-            nextToken: {idx: 0, key: ''},
-            prevToken: {idx: 0, key: ''},
-        }),
-    },
-});
-
-export const OptionsContext = React.createContext<TokenizedInputOptionsInfo<TokenValueBase>>({
-    onSuggest: () => ({
-        items: [],
-    }),
-    onKeyDown: () => false,
-    debounceDelay: 150,
-    suggestionsInitialCall: {value: {current: true}, setValue: () => undefined},
-    fullWidthSuggestions: false,
-    shouldAllowBlur: () => true,
-});
+export const InputContext = React.createContext<TokenizedInputInfo<TokenValueBase> | undefined>(
+    undefined,
+);
+export const FocusContext = React.createContext<
+    TokenizedInputFocusInfo<TokenValueBase> | undefined
+>(undefined);
+export const OptionsContext = React.createContext<
+    TokenizedInputOptionsInfo<TokenValueBase> | undefined
+>(undefined);
 
 export function TokenizedInputContextProvider<T extends TokenValueBase>({
     debounceDelay = 150,
@@ -81,6 +48,7 @@ export function TokenizedInputContextProvider<T extends TokenValueBase>({
     onFocus,
     onBlur,
     shouldAllowBlur = () => true,
+    filterSuggestions = simpleFilterSuggestions,
     children,
 }: React.PropsWithChildren<TokenizedInputData<T>>) {
     const inputInfo = useTokenizedInputInfo({
@@ -117,6 +85,7 @@ export function TokenizedInputContextProvider<T extends TokenValueBase>({
                 suggestionsInitialCall,
                 fullWidthSuggestions,
                 shouldAllowBlur,
+                filterSuggestions,
             }) as unknown as TokenizedInputOptionsInfo<TokenValueBase>,
         [
             debounceDelay,
@@ -125,6 +94,7 @@ export function TokenizedInputContextProvider<T extends TokenValueBase>({
             onKeyDown,
             onSuggest,
             suggestionsInitialCall,
+            filterSuggestions,
         ],
     );
 
