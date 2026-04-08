@@ -4,28 +4,28 @@ This component is for writing queries/filters and working with them as tokens. H
 
 ### API Reference
 
-| Prop                    | Type                                                                                                  | Default         | Description                                                    |
-| :---------------------- | :---------------------------------------------------------------------------------------------------- | :-------------- | :------------------------------------------------------------- |
-| `tokens`                | `T[]`                                                                                                 | -               | Array of token values.                                         |
-| `fields`                | `TokenField<T>[]`                                                                                     | -               | Field definitions; order matches display order.                |
-| `onChange`              | `(newTokens: T[]) => void`                                                                            | -               | Token list change handler.                                     |
-| `defaultTokens`         | `T[]`                                                                                                 | `[]`            | Defaults applied on full clear.                                |
-| `transformTokens`       | `(tokens: T[]) => Token<T>[]`                                                                         | -               | Maps raw tokens to internal token shape.                       |
-| `validateToken`         | `(token: T) => Partial<Record<keyof T, string>> \| undefined \| false`                                | -               | Validates a token.                                             |
-| `formatToken`           | `(token: T) => T`                                                                                     | -               | Formats a token value before saving.                           |
-| `placeholder`           | `string \| TokenPlaceholderGeneratorFn<T>`                                                            | -               | Placeholder for the new token.                                 |
-| `isEditable`            | `boolean`                                                                                             | `true`          | Whether editing is allowed.                                    |
-| `isClearable`           | `boolean`                                                                                             | `true`          | Whether full clear is allowed.                                 |
-| `debounceDelay`         | `number \| Record<keyof T, number>`                                                                   | `150`           | Suggestions debounce delay; per-field overrides are supported. |
-| `debounceFlushStrategy` | `'focus-input' \| 'focus-field'`                                                                      | `'focus-field'` | When debounce flushes.                                         |
-| `autoFocus`             | `boolean`                                                                                             | `false`         | Autofocus the new token.                                       |
-| `onSuggest`             | `(ctx: TokenizedSuggestionContext<T>) => TokenizedSuggestions<T> \| Promise<TokenizedSuggestions<T>>` | -               | Fetches suggestions.                                           |
-| `filterSuggestions`     | `(items: TokenizedSuggestionsItem<T>[], search: string) => TokenizedSuggestionsItem<T>[]`             | -               | Custom function to filter suggestions based on search string.  |
-| `fullWidthSuggestions`  | `boolean`                                                                                             | `false`         | Render suggestions full width below the input.                 |
-| `onKeyDown`             | `(v: TokenOnKeyDownOptions<T>) => boolean`                                                            | -               | Keydown handler; return true to stop further handling.         |
-| `onFocus`               | `() => void`                                                                                          | -               | onFocus callback.                                              |
-| `onBlur`                | `() => void`                                                                                          | -               | onBlur callback.                                               |
-| `shouldAllowBlur`       | `(e: React.FocusEvent) => boolean`                                                                    | `() => true`    | Return true to allow blur, false to prevent it.                |
+| Prop                    | Type                                                                                                                 | Default         | Description                                                    |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------- | :-------------- | :------------------------------------------------------------- |
+| `tokens`                | `T[]`                                                                                                                | -               | Array of token values.                                         |
+| `fields`                | `TokenizedInputTokenField<T>[]`                                                                                      | -               | Field definitions; order matches display order.                |
+| `onChange`              | `(newTokens: T[]) => void`                                                                                           | -               | Token list change handler.                                     |
+| `defaultTokens`         | `T[]`                                                                                                                | `[]`            | Defaults applied on full clear.                                |
+| `transformTokens`       | `(tokens: T[]) => TokenizedInputToken<T>[]`                                                                          | -               | Maps raw tokens to internal token shape.                       |
+| `validateToken`         | `(token: T) => Partial<Record<keyof T, string>> \| undefined \| false`                                               | -               | Validates a token.                                             |
+| `formatToken`           | `(token: T) => T`                                                                                                    | -               | Formats a token value before saving.                           |
+| `placeholder`           | `string \| TokenizedInputTokenPlaceholderGeneratorFn<T>`                                                             | -               | Placeholder for the new token.                                 |
+| `isEditable`            | `boolean`                                                                                                            | `true`          | Whether editing is allowed.                                    |
+| `isClearable`           | `boolean`                                                                                                            | `true`          | Whether full clear is allowed.                                 |
+| `debounceDelay`         | `number \| Record<keyof T, number>`                                                                                  | `150`           | Suggestions debounce delay; per-field overrides are supported. |
+| `debounceFlushStrategy` | `'focus-input' \| 'focus-field'`                                                                                     | `'focus-field'` | When debounce flushes.                                         |
+| `autoFocus`             | `boolean`                                                                                                            | `false`         | Autofocus the new token.                                       |
+| `onSuggest`             | `(ctx: TokenizedInputSuggestionContext<T>) => TokenizedInputSuggestions<T> \| Promise<TokenizedInputSuggestions<T>>` | -               | Fetches suggestions.                                           |
+| `filterSuggestions`     | `(items: TokenizedInputSuggestionsItem<T>[], search: string) => TokenizedInputSuggestionsItem<T>[]`                  | -               | Custom function to filter suggestions based on search string.  |
+| `fullWidthSuggestions`  | `boolean`                                                                                                            | `false`         | Render suggestions full width below the input.                 |
+| `onKeyDown`             | `(v: TokenizedInputTokenOnKeyDownOptions<T>) => boolean`                                                             | -               | Keydown handler; return true to stop further handling.         |
+| `onFocus`               | `() => void`                                                                                                         | -               | onFocus callback.                                              |
+| `onBlur`                | `() => void`                                                                                                         | -               | onBlur callback.                                               |
+| `shouldAllowBlur`       | `(e: React.FocusEvent) => boolean`                                                                                   | `() => true`    | Return true to allow blur, false to prevent it.                |
 
 ### Usage Examples
 
@@ -89,7 +89,7 @@ You can use `TokenizedInput` as a simple tags input by defining only one field a
 
 ```tsx
 import {getUniqId} from '@gravity-ui/uikit';
-import {TokenizedInput, Token} from '@gravity-ui/components';
+import {TokenizedInput, TokenizedInputToken} from '@gravity-ui/components';
 
 type TagToken = {value: string};
 
@@ -110,7 +110,7 @@ const fields = [
 ];
 
 // Make existing tokens read-only so they act like solid blocks (tags)
-const transformTokens = (tokens: TagToken[]): Token<TagToken>[] => {
+const transformTokens = (tokens: TagToken[]): TokenizedInputToken<TagToken>[] => {
   return tokens.map((t) => ({
     id: getUniqId(),
     value: t,
@@ -215,9 +215,9 @@ function App() {
 
 When building fully custom sub-components, you can use the provided context hooks to access the internal state and callbacks of the `TokenizedInput`:
 
-- `useInputContext()` — Input state and callbacks (`tokens`, `fields`, `onChangeToken`, `onRemoveToken`, etc.)
-- `useFocusContext()` — Focus state and callbacks (`focus`, `onFocus`, `onBlur`, `getFocusRules`, etc.)
-- `useOptionsContext()` — Extra options from props (`onSuggest`, `debounceDelay`, `shouldAllowBlur`, etc.)
+- `useTokenizedInputContext()` — Input state and callbacks (`tokens`, `fields`, `onChangeToken`, `onRemoveToken`, etc.)
+- `useTokenizedInputFocusContext()` — Focus state and callbacks (`focus`, `onFocus`, `onBlur`, `getFocusRules`, etc.)
+- `useTokenizedInputOptionsContext()` — Extra options from props (`onSuggest`, `debounceDelay`, `shouldAllowBlur`, etc.)
 - `useTokenizedInput()` — Returns all three contexts above combined (`inputInfo`, `focusInfo`, `options`).
 - `useTokenizedInputComponents()` — Access to the current sub-components (useful if your custom component needs to render the default `Field` or `Token`).
 

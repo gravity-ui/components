@@ -5,7 +5,11 @@ const cloneValue = <T>(value: T) => {
         return structuredClone(value);
     }
 
-    return JSON.parse(JSON.stringify(value));
+    try {
+        return JSON.parse(JSON.stringify(value));
+    } catch {
+        return value;
+    }
 };
 
 type UndoRedoState<T extends unknown> = {

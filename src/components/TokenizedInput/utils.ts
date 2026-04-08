@@ -144,3 +144,13 @@ export const autoClosingPairsAction = <T extends TokenValueBase>(
         } as Partial<T>);
     },
 });
+
+export const tokenizedInputUtils = {
+    getDefaultTokenValue,
+    getValuesFromTokens,
+    removeEmptyTokens,
+    removeNewTokens,
+    defaultValidateToken,
+    defaultTransformTokens,
+    autoClosingPairsAction,
+};
