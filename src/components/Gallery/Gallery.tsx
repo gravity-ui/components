@@ -9,7 +9,9 @@ import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
 import {BODY_CONTENT_CLASS_NAME, cnGallery} from './constants';
 import {GalleryContextProvider} from './contexts/GalleryContext';
+import {GalleryImageRotationProvider} from './contexts/GalleryImageRotationContext';
 import {useFullScreen} from './hooks/useFullScreen';
+import {ROTATION_STEP} from './hooks/useImageRotation/constants';
 import {useMobileGestures} from './hooks/useMobileGestures/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
 import {useNavigation} from './hooks/useNavigation';
@@ -69,6 +71,14 @@ export const Gallery = ({
     }, [isViewInteracting]);
 
     const {fullScreen, setFullScreen} = useFullScreen();
+
+    const [rotation, setRotation] = React.useState(0);
+    const rotateLeft = React.useCallback(() => setRotation((r) => r - ROTATION_STEP), []);
+    const rotateRight = React.useCallback(() => setRotation((r) => r + ROTATION_STEP), []);
+
+    React.useEffect(() => {
+        setRotation(0);
+    }, [activeItemIndex]);
 
     const handleBackClick = React.useCallback(() => {
         onOpenChange?.(false);
@@ -131,80 +141,91 @@ export const Gallery = ({
                 overflow: mode === 'default' ? 'auto' : 'hidden',
             }}
         >
-            <div
-                className={cnGallery('content')}
-                onTouchStart={isMobile ? handleTouchStart : undefined}
-                onTouchMove={isMobile ? handleTouchMove : undefined}
-                onTouchEnd={isMobile ? handleTouchEnd : undefined}
+            <GalleryImageRotationProvider
+                rotation={rotation}
+                rotateLeft={rotateLeft}
+                rotateRight={rotateRight}
             >
-                <GalleryHeader
-                    itemName={activeItem?.name}
-                    actions={activeItem?.actions}
-                    withNavigation={withNavigation}
-                    activeItemIndex={activeItemIndex}
-                    itemsLength={items.length}
-                    fullScreen={fullScreen}
-                    onBackClick={handleBackClick}
-                    onGoToPrevious={handleGoToPrevious}
-                    onGoToNext={handleGoToNext}
-                    onUpdateFullScreen={setFullScreen}
-                    onClose={handleClose}
-                    hidden={hiddenHeader}
-                    interactive={activeItem?.interactive}
-                />
-                <div key={activeItemIndex} className={cnGallery('body')}>
-                    <div
-                        className={cnGallery(BODY_CONTENT_CLASS_NAME, {
-                            switching: isMobile && isSwitching,
-                        })}
-                    >
-                        {!items.length && (
-                            <GalleryFallbackText>
-                                {emptyMessage ?? t('no-items')}
-                            </GalleryFallbackText>
-                        )}
-                        <GalleryContextProvider
-                            onTap={handleTap}
-                            onViewInteractionChange={setIsViewInteracting}
+                <div
+                    className={cnGallery('content')}
+                    onTouchStart={isMobile ? handleTouchStart : undefined}
+                    onTouchMove={isMobile ? handleTouchMove : undefined}
+                    onTouchEnd={isMobile ? handleTouchEnd : undefined}
+                >
+                    <GalleryHeader
+                        itemName={activeItem?.name}
+                        actions={activeItem?.actions}
+                        withNavigation={withNavigation}
+                        activeItemIndex={activeItemIndex}
+                        itemsLength={items.length}
+                        fullScreen={fullScreen}
+                        onBackClick={handleBackClick}
+                        onGoToPrevious={handleGoToPrevious}
+                        onGoToNext={handleGoToNext}
+                        onUpdateFullScreen={setFullScreen}
+                        onClose={handleClose}
+                        hidden={hiddenHeader}
+                        interactive={activeItem?.interactive}
+                    />
+                    <div key={activeItemIndex} className={cnGallery('body')}>
+                        <div
+                            className={cnGallery(BODY_CONTENT_CLASS_NAME, {
+                                switching: isMobile && isSwitching,
+                            })}
                         >
-                            {activeItem?.view}
-                        </GalleryContextProvider>
-                        {showNavigationButtons && (
-                            <React.Fragment>
-                                <NavigationButton onClick={handleGoToPrevious} position="start" />
-                                <NavigationButton onClick={handleGoToNext} position="end" />
-                            </React.Fragment>
-                        )}
+                            {!items.length && (
+                                <GalleryFallbackText>
+                                    {emptyMessage ?? t('no-items')}
+                                </GalleryFallbackText>
+                            )}
+                            <GalleryContextProvider
+                                onTap={handleTap}
+                                onViewInteractionChange={setIsViewInteracting}
+                            >
+                                {activeItem?.view}
+                            </GalleryContextProvider>
+                            {showNavigationButtons && (
+                                <React.Fragment>
+                                    <NavigationButton
+                                        onClick={handleGoToPrevious}
+                                        position="start"
+                                    />
+                                    <NavigationButton onClick={handleGoToNext} position="end" />
+                                </React.Fragment>
+                            )}
+                        </div>
                     </div>
+                    {showFooter && (
+                        <div className={cnGallery('footer')}>
+                            {withNavigation && (
+                                <div className={cnGallery('preview-list')}>
+                                    {items.map((item, index) => {
+                                        const handleClick = () => {
+                                            setActiveItemIndex(index);
+                                        };
+
+                                        const selected = activeItemIndex === index;
+
+                                        return (
+                                            <button
+                                                ref={itemRefs[index]}
+                                                type="button"
+                                                key={index}
+                                                onClick={handleClick}
+                                                className={cnGallery('preview-list-item', {
+                                                    selected,
+                                                })}
+                                            >
+                                                {item.thumbnail}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
-                {showFooter && (
-                    <div className={cnGallery('footer')}>
-                        {withNavigation && (
-                            <div className={cnGallery('preview-list')}>
-                                {items.map((item, index) => {
-                                    const handleClick = () => {
-                                        setActiveItemIndex(index);
-                                    };
-
-                                    const selected = activeItemIndex === index;
-
-                                    return (
-                                        <button
-                                            ref={itemRefs[index]}
-                                            type="button"
-                                            key={index}
-                                            onClick={handleClick}
-                                            className={cnGallery('preview-list-item', {selected})}
-                                        >
-                                            {item.thumbnail}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+            </GalleryImageRotationProvider>
         </Modal>
     );
 };

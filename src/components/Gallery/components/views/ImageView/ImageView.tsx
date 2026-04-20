@@ -4,6 +4,7 @@ import {Spin, useMobile} from '@gravity-ui/uikit';
 
 import {block} from '../../../../utils/cn';
 import {useGalleryContext} from '../../../contexts/GalleryContext';
+import {useImageRotation} from '../../../hooks/useImageRotation';
 import {useImageZoom} from '../../../hooks/useImageZoom';
 import {GalleryFallbackText} from '../../FallbackText';
 
@@ -27,9 +28,15 @@ export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
     const {imageHandlers, setImageSize, setContainerSize, resetZoom, imageStyles, isZooming} =
         useImageZoom({onTap});
 
+    const {imageRotationStyles, rotation, setContainerDims} = useImageRotation();
+
     React.useEffect(() => {
         onViewInteractionChange(isZooming);
     }, [isZooming, onViewInteractionChange]);
+
+    React.useEffect(() => {
+        resetZoom();
+    }, [src, rotation, resetZoom]);
 
     const handleLoad = React.useCallback(() => {
         setStatus('complete');
@@ -45,7 +52,6 @@ export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
         setStatus('error');
     }, []);
 
-    // Track container dimensions and handle resize
     React.useEffect(() => {
         if (!containerRef.current) return undefined;
 
@@ -56,9 +62,9 @@ export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
                     height: containerRef.current.clientHeight,
                 };
 
-                // Only update if dimensions are valid
                 if (size.width > 0 && size.height > 0) {
                     setContainerSize(size);
+                    setContainerDims(size);
                 }
             }
         };
@@ -80,15 +86,15 @@ export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
             clearTimeout(timeoutId);
             window.removeEventListener('resize', updateSize);
         };
-    }, [setContainerSize]);
-
-    React.useEffect(() => {
-        resetZoom();
-    }, [src, resetZoom]);
+    }, [setContainerSize, setContainerDims]);
 
     if (status === 'error') {
         return <GalleryFallbackText />;
     }
+
+    const mergedTransform = [imageStyles.transform, imageRotationStyles.transform]
+        .filter(Boolean)
+        .join(' ');
 
     return (
         <div ref={containerRef} className={cnImageView({mobile: isMobile}, className)}>
@@ -101,7 +107,11 @@ export const ImageView = ({className, src, alt = ''}: ImageViewProps) => {
                 {...imageHandlers}
                 onLoad={handleLoad}
                 onError={handleError}
-                style={imageStyles}
+                style={{
+                    ...imageStyles,
+                    ...imageRotationStyles,
+                    transform: mergedTransform || undefined,
+                }}
             />
         </div>
     );

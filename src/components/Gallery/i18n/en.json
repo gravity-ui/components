@@ -3,5 +3,7 @@
   "no-items": "No data",
   "back": "Back",
   "copy-link": "Copy link",
-  "download": "Download"
+  "download": "Download",
+  "rotate-left": "Rotate left",
+  "rotate-right": "Rotate right"
 }
