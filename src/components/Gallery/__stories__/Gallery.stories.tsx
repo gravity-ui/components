@@ -23,6 +23,8 @@ import {
     getGalleryItemDocument,
     getGalleryItemDownloadAction,
     getGalleryItemImage,
+    getGalleryItemRotateLeftAction,
+    getGalleryItemRotateRightAction,
     getGalleryItemVideo,
 } from '../';
 import type {GalleryProps} from '../';
@@ -394,11 +396,11 @@ const RotationGalleryTemplate: StoryFn<GalleryProps> = () => {
                 {images.map((image, index) => (
                     <GalleryItem
                         key={index}
-                        {...getGalleryItemImage({
-                            src: image.url,
-                            name: image.name,
-                            rotationControls: true,
-                        })}
+                        {...getGalleryItemImage({src: image.url, name: image.name})}
+                        actions={[
+                            getGalleryItemRotateLeftAction(),
+                            getGalleryItemRotateRightAction(),
+                        ]}
                     />
                 ))}
             </Gallery>
