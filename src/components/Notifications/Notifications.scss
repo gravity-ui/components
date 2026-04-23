@@ -24,12 +24,19 @@ $block: '.#{variables.$ns}notifications';
         line-height: 24px;
 
         color: var(--g-color-text-primary);
+        margin: 0;
     }
 
     &__body {
         height: 100%;
         padding: 4px;
         overflow-y: auto;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 
     &__empty {
@@ -64,7 +71,7 @@ $block: '.#{variables.$ns}notifications';
         height: 28px;
     }
 
-    &__notification-wrapper:not(:first-child)::before {
+    &__item:not(:first-child) &__notification-wrapper::before {
         content: '';
         display: block;
         border-block-start: 1px solid var(--g-color-line-generic);
@@ -72,11 +79,11 @@ $block: '.#{variables.$ns}notifications';
     }
 
     // :hover
-    &__notification-wrapper_active:hover:not(:first-child)::before,
-    &__notification-wrapper_active:hover + &__notification-wrapper::before,
+    &__item:not(:first-child):has(&__notification-wrapper_active:hover) &__notification-wrapper::before,
+    &__item:has(&__notification-wrapper_active:hover) + &__item &__notification-wrapper::before,
     // .unread
-    &__notification-wrapper_unread:not(:first-child)::before,
-    &__notification-wrapper_unread + &__notification-wrapper::before {
+    &__item:not(:first-child):has(&__notification-wrapper_unread) &__notification-wrapper::before,
+    &__item:has(&__notification-wrapper_unread) + &__item &__notification-wrapper::before {
         content: '';
         display: block;
         border-block-start: 1px solid transparent;

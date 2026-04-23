@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import {Text} from '@gravity-ui/uikit';
+
 import {InfiniteScroll} from '../InfiniteScroll';
 import {block} from '../utils/cn';
 
@@ -55,7 +57,11 @@ export const Notifications = React.memo(function Notifications(props: Notificati
         );
     }
 
-    const title = <div className={b('head-title')}>{props.title || t('title')}</div>;
+    const title = (
+        <Text as="h2" className={b('head-title')}>
+            {props.title || t('title')}
+        </Text>
+    );
 
     return (
         <div className={b()} data-qa={props.qa}>
