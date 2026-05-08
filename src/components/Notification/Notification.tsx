@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Flex, Icon, Link, Text, useMobile, useUniqId} from '@gravity-ui/uikit';
+import {Icon, Link, Text, useMobile, useUniqId} from '@gravity-ui/uikit';
 
 import {CnMods, block} from '../utils/cn';
 
@@ -27,12 +27,7 @@ export const Notification = React.memo(function Notification(props: Props) {
         sourcePlacement = 'bottom',
     } = notification;
 
-    const modifiers: CnMods = {
-        unread,
-        theme,
-        mobile,
-        active: Boolean(notification.onClick || notification.href),
-    };
+    const isInteractive = Boolean(notification.onClick || notification.href);
     const titleId = useUniqId();
 
     const sourceIcon = source && renderSourceIcon(source, titleId);
@@ -45,21 +40,27 @@ export const Notification = React.memo(function Notification(props: Props) {
         </div>
     ) : null;
 
-    const renderedSideActions = props.notification.sideActions ? (
-        <div className={b('actions', {'side-actions': true})}>{props.notification.sideActions}</div>
+    const hasSideActions = Boolean(notification.sideActions);
+    const hasBottomActions = Boolean(notification.bottomActions);
+    const hasLeft = Boolean(sourceIcon);
+
+    const renderedSideActions = notification.sideActions ? (
+        <div className={b('actions', {'side-actions': true})}>{notification.sideActions}</div>
     ) : null;
 
-    const renderedBottomActions = props.notification.bottomActions ? (
-        <div className={b('actions', {'bottom-actions': true})}>
-            {props.notification.bottomActions}
+    const renderedBottomActions = notification.bottomActions ? (
+        <div className={b('actions', {'bottom-actions': true})}>{notification.bottomActions}</div>
+    ) : null;
+
+    const renderedContent = (
+        <div className={b('content-wrapper')}>
+            <div className={b('content')}>{content}</div>
         </div>
-    ) : null;
-
-    const renderedContent = <div className={b('content')}>{content}</div>;
+    );
 
     const renderedSourceText =
         source?.title || formattedDate ? (
-            <Flex className={b('source-text')} gap={1}>
+            <span className={b('source-text')}>
                 {source?.title
                     ? renderSourceTitle({
                           title: source.title,
@@ -69,116 +70,90 @@ export const Notification = React.memo(function Notification(props: Props) {
                     : null}
                 {source?.title && formattedDate ? <span>•</span> : null}
                 {formattedDate ? <time className={b('right-date')}>{formattedDate}</time> : null}
-            </Flex>
+            </span>
         ) : null;
 
-    const hasSourceOnTop = renderedSourceText && sourcePlacement === 'top';
-    const hasSourceOnBottom = renderedSourceText && sourcePlacement === 'bottom';
-    const topPart =
-        renderedTitle || hasSourceOnTop
-            ? renderTitleAndSource(renderedTitle, hasSourceOnTop ? renderedSourceText : null)
-            : null;
+    const hasSourceOnTop = Boolean(renderedSourceText && sourcePlacement === 'top');
+    const hasSourceOnBottom = Boolean(renderedSourceText && sourcePlacement === 'bottom');
 
-    const notificationMainContent = (
+    const layoutModifiers: CnMods = {
+        unread,
+        theme,
+        mobile,
+        active: isInteractive,
+        'has-left': hasLeft,
+        'has-side-actions': hasSideActions,
+        'has-bottom-actions': hasBottomActions,
+        'has-source-top': hasSourceOnTop,
+        'has-source-bottom': hasSourceOnBottom,
+    };
+
+    const clickableContent = (
         <React.Fragment>
-            {topPart}
-            {renderedContent}
-            {hasSourceOnBottom ? (
-                <div className={b('bottom-source')}>{renderedSourceText}</div>
-            ) : null}
+            {unread ? <span className={b('visually-hidden')}>{t('unread-label')}</span> : null}
+            <div className={b('main-content')}>
+                {renderedTitle}
+                {renderedContent}
+            </div>
         </React.Fragment>
     );
 
-    const notificationInnerContent = (
-        <React.Fragment>
-            {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
+    const clickableClassName = b('clickable', {
+        active: isInteractive,
+        'has-left': hasLeft,
+        'has-side-actions': hasSideActions,
+        'has-bottom-actions': hasBottomActions,
+        'has-source-top': hasSourceOnTop,
+        'has-source-bottom': hasSourceOnBottom,
+    });
 
-            <Flex className={b('right')} direction="column" overflow="hidden" width="100%">
-                <Flex
-                    className={b('main-content')}
-                    direction="column"
-                    overflow="hidden"
-                    width="100%"
-                >
-                    {notificationMainContent}
-                </Flex>
-
-                {renderedBottomActions}
-            </Flex>
-        </React.Fragment>
-    );
-
-    const hiddenUnreadLabel = unread ? (
-        <span className={b('visually-hidden')}>{t('unread-label')}</span>
-    ) : null;
-
-    const commonProps = {
-        className: b(modifiers, notification.className),
-        onMouseEnter: notification.onMouseEnter,
-        onMouseLeave: notification.onMouseLeave,
-    };
-
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        if (event.target instanceof Element && event.target.closest('button')) {
-            event.preventDefault();
-            event.stopPropagation();
-            return;
-        }
-
-        notification.onClick?.(event);
-    };
-
-    const interactiveContent = notification.href ? (
-        <a
-            {...commonProps}
-            onClick={handleClick as React.MouseEventHandler<HTMLAnchorElement>}
-            href={notification.href}
-            target={notification.target ?? '_blank'}
-            rel="noreferrer"
-        >
-            {hiddenUnreadLabel}
-            {notificationInnerContent}
-        </a>
-    ) : (
-        <div
-            {...commonProps}
-            role={notification.onClick ? 'button' : undefined}
-            tabIndex={notification.onClick ? 0 : undefined}
-            onClick={handleClick as React.MouseEventHandler<HTMLDivElement>}
-            onKeyDown={
-                notification.onClick
-                    ? (event) => {
-                          if (event.key === 'Enter' || event.key === ' ') {
-                              event.preventDefault();
-                              handleClick(event as unknown as React.MouseEvent<HTMLDivElement>);
-                          }
-                      }
-                    : undefined
-            }
-        >
-            {hiddenUnreadLabel}
-            {notificationInnerContent}
-        </div>
-    );
+    let clickableElement: React.ReactNode;
+    if (notification.href) {
+        clickableElement = (
+            <a
+                className={clickableClassName}
+                onClick={notification.onClick as React.MouseEventHandler<HTMLAnchorElement>}
+                href={notification.href}
+                target={notification.target ?? '_blank'}
+                rel="noreferrer"
+            >
+                {clickableContent}
+            </a>
+        );
+    } else if (notification.onClick) {
+        clickableElement = (
+            <button
+                type="button"
+                className={clickableClassName}
+                onClick={notification.onClick as React.MouseEventHandler<HTMLButtonElement>}
+            >
+                {clickableContent}
+            </button>
+        );
+    } else {
+        clickableElement = <div className={clickableClassName}>{clickableContent}</div>;
+    }
 
     return (
-        <div className={b('layout')}>
-            {interactiveContent}
+        <div
+            className={b(layoutModifiers, notification.className)}
+            onMouseEnter={notification.onMouseEnter}
+            onMouseLeave={notification.onMouseLeave}
+        >
+            {clickableElement}
+
+            {sourceIcon ? <div className={b('left')}>{sourceIcon}</div> : null}
+
+            {hasSourceOnTop ? <div className={b('top-source')}>{renderedSourceText}</div> : null}
+            {hasSourceOnBottom ? (
+                <span className={b('bottom-source')}>{renderedSourceText}</span>
+            ) : null}
+
             {renderedSideActions}
+            {renderedBottomActions}
         </div>
     );
 });
-
-function renderTitleAndSource(title: React.ReactNode, source: React.ReactNode) {
-    return title && source ? (
-        <Flex className={b('title-with-source')} direction="column" overflow="hidden">
-            {source}
-            {title}
-        </Flex>
-    ) : (
-        (title ?? source)
-    );
-}
 
 interface RenderSourceTitleOptions {
     title: string;
