@@ -61,6 +61,7 @@ export const useSuggestions = <T extends TokenValueBase>({
     );
     const mountedRef = React.useRef(true);
     React.useEffect(() => {
+        mountedRef.current = true;
         return () => {
             mountedRef.current = false;
         };
