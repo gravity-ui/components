@@ -9,9 +9,8 @@ import {GalleryHeader} from './components/GalleryHeader/GalleryHeader';
 import {NavigationButton} from './components/NavigationButton/NavigationButton';
 import {BODY_CONTENT_CLASS_NAME, cnGallery} from './constants';
 import {GalleryContextProvider} from './contexts/GalleryContext';
-import {GalleryImageRotationProvider} from './contexts/GalleryImageRotationContext';
 import {useFullScreen} from './hooks/useFullScreen';
-import {ROTATION_STEP} from './hooks/useImageRotation/constants';
+import {useImageRotationState} from './hooks/useImageRotationState';
 import {useMobileGestures} from './hooks/useMobileGestures/useMobileGestures';
 import type {UseNavigationProps} from './hooks/useNavigation';
 import {useNavigation} from './hooks/useNavigation';
@@ -72,13 +71,11 @@ export const Gallery = ({
 
     const {fullScreen, setFullScreen} = useFullScreen();
 
-    const [rotation, setRotation] = React.useState(0);
-    const rotateLeft = React.useCallback(() => setRotation((r) => r - ROTATION_STEP), []);
-    const rotateRight = React.useCallback(() => setRotation((r) => r + ROTATION_STEP), []);
+    const {rotation, rotateLeft, rotateRight, resetRotation} = useImageRotationState();
 
     React.useEffect(() => {
-        setRotation(0);
-    }, [activeItemIndex]);
+        resetRotation();
+    }, [activeItemIndex, resetRotation]);
 
     const handleBackClick = React.useCallback(() => {
         onOpenChange?.(false);
@@ -141,7 +138,9 @@ export const Gallery = ({
                 overflow: mode === 'default' ? 'auto' : 'hidden',
             }}
         >
-            <GalleryImageRotationProvider
+            <GalleryContextProvider
+                onTap={handleTap}
+                onViewInteractionChange={setIsViewInteracting}
                 rotation={rotation}
                 rotateLeft={rotateLeft}
                 rotateRight={rotateRight}
@@ -178,12 +177,7 @@ export const Gallery = ({
                                     {emptyMessage ?? t('no-items')}
                                 </GalleryFallbackText>
                             )}
-                            <GalleryContextProvider
-                                onTap={handleTap}
-                                onViewInteractionChange={setIsViewInteracting}
-                            >
-                                {activeItem?.view}
-                            </GalleryContextProvider>
+                            {activeItem?.view}
                             {showNavigationButtons && (
                                 <React.Fragment>
                                     <NavigationButton
@@ -225,7 +219,7 @@ export const Gallery = ({
                         </div>
                     )}
                 </div>
-            </GalleryImageRotationProvider>
+            </GalleryContextProvider>
         </Modal>
     );
 };

@@ -5,7 +5,7 @@ import {ActionTooltip, Button, Icon} from '@gravity-ui/uikit';
 import type {ButtonProps} from '@gravity-ui/uikit';
 
 import type {GalleryItemAction} from '../GalleryItem';
-import {useGalleryImageRotationContext} from '../contexts/GalleryImageRotationContext';
+import {useGalleryContext} from '../contexts/GalleryContext';
 import type {TProps} from '../i18n';
 
 type GetGalleryItemRotateLeftActionArgs = {
@@ -20,7 +20,7 @@ type RotateLeftButtonProps = {
 };
 
 const RotateLeftButton = ({buttonProps, icon, title}: RotateLeftButtonProps) => {
-    const {rotateLeft} = useGalleryImageRotationContext();
+    const {rotateLeft} = useGalleryContext();
     return (
         <ActionTooltip title={title}>
             <Button {...buttonProps} onClick={rotateLeft}>

@@ -10,11 +10,11 @@ export {
     useImageRotation as useGalleryImageRotation,
     type UseImageRotationReturn as UseGalleryImageRotationReturn,
 } from './hooks/useImageRotation';
-export {type GalleryContextValue, useGalleryContext} from './contexts/GalleryContext';
 export {
-    type GalleryImageRotationContextValue,
-    useGalleryImageRotationContext,
-} from './contexts/GalleryImageRotationContext';
+    useImageRotationState as useGalleryImageRotationState,
+    type UseImageRotationStateReturn as UseGalleryImageRotationStateReturn,
+} from './hooks/useImageRotationState';
+export {type GalleryContextValue, useGalleryContext} from './contexts/GalleryContext';
 export {getGalleryItemVideo} from './utils/getGalleryItemVideo';
 export {
     getGalleryItemImage,
