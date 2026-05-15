@@ -23,6 +23,8 @@ import {
     getGalleryItemDocument,
     getGalleryItemDownloadAction,
     getGalleryItemImage,
+    getGalleryItemRotateLeftAction,
+    getGalleryItemRotateRightAction,
     getGalleryItemVideo,
 } from '../';
 import type {GalleryProps} from '../';
@@ -373,3 +375,37 @@ const SmallImagesTemplate: StoryFn<GalleryProps> = () => {
 };
 
 export const SmallImages = SmallImagesTemplate.bind({});
+
+const RotationGalleryTemplate: StoryFn<GalleryProps> = () => {
+    const [open, setOpen] = React.useState(false);
+
+    const handleToggle = React.useCallback(() => {
+        setOpen(false);
+    }, []);
+
+    const handleOpen = React.useCallback(() => {
+        setOpen(true);
+    }, []);
+
+    return (
+        <React.Fragment>
+            <Button onClick={handleOpen} view="action" size="l">
+                Open gallery with rotation
+            </Button>
+            <Gallery open={open} onOpenChange={handleToggle}>
+                {images.map((image, index) => (
+                    <GalleryItem
+                        key={index}
+                        {...getGalleryItemImage({src: image.url, name: image.name})}
+                        actions={[
+                            getGalleryItemRotateLeftAction(),
+                            getGalleryItemRotateRightAction(),
+                        ]}
+                    />
+                ))}
+            </Gallery>
+        </React.Fragment>
+    );
+};
+
+export const RotationGallery = RotationGalleryTemplate.bind({});
