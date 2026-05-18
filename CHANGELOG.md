@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.19.1](https://github.com/gravity-ui/components/compare/v4.19.0...v4.19.1) (2026-05-14)
+
+
+### Bug Fixes
+
+* **TokenizedInput:** handle strict mode double init correctly ([#382](https://github.com/gravity-ui/components/issues/382)) ([9b8cd89](https://github.com/gravity-ui/components/commit/9b8cd8963314fb7b92f25a5c43ef73d4d67adfb9))
+
 ## [4.19.0](https://github.com/gravity-ui/components/compare/v4.18.0...v4.19.0) (2026-04-08)
 
 
