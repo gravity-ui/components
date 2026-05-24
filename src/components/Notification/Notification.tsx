@@ -13,6 +13,12 @@ const b = block('notification');
 
 type Props = {notification: NotificationProps};
 
+interface ClickableElementProps {
+    notification: NotificationProps;
+    className: string;
+    children: React.ReactNode;
+}
+
 export const Notification = React.memo(function Notification(props: Props) {
     const {t} = i18n.useTranslation();
     const mobile = useMobile();
@@ -107,32 +113,11 @@ export const Notification = React.memo(function Notification(props: Props) {
         'has-source-bottom': hasSourceOnBottom,
     });
 
-    let clickableElement: React.ReactNode;
-    if (notification.href) {
-        clickableElement = (
-            <a
-                className={clickableClassName}
-                onClick={notification.onClick as React.MouseEventHandler<HTMLAnchorElement>}
-                href={notification.href}
-                target={notification.target ?? '_blank'}
-                rel="noreferrer"
-            >
-                {clickableContent}
-            </a>
-        );
-    } else if (notification.onClick) {
-        clickableElement = (
-            <button
-                type="button"
-                className={clickableClassName}
-                onClick={notification.onClick as React.MouseEventHandler<HTMLButtonElement>}
-            >
-                {clickableContent}
-            </button>
-        );
-    } else {
-        clickableElement = <div className={clickableClassName}>{clickableContent}</div>;
-    }
+    const clickableElement = renderClickableElement({
+        notification,
+        className: clickableClassName,
+        children: clickableContent,
+    });
 
     return (
         <div
@@ -197,4 +182,38 @@ function getIconElement(source: NotificationSourceProps): React.ReactNode {
     } else {
         return null;
     }
+}
+
+function renderClickableElement({
+    notification,
+    className,
+    children,
+}: ClickableElementProps): React.ReactNode {
+    if (notification.href) {
+        return (
+            <a
+                className={className}
+                onClick={notification.onClick as React.MouseEventHandler<HTMLAnchorElement>}
+                href={notification.href}
+                target={notification.target ?? '_blank'}
+                rel="noreferrer"
+            >
+                {children}
+            </a>
+        );
+    }
+
+    if (notification.onClick) {
+        return (
+            <button
+                type="button"
+                className={className}
+                onClick={notification.onClick as React.MouseEventHandler<HTMLButtonElement>}
+            >
+                {children}
+            </button>
+        );
+    }
+
+    return <div className={className}>{children}</div>;
 }
