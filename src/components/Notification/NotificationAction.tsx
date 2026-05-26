@@ -23,6 +23,7 @@ export const NotificationAction = React.memo(function NotificationAction({action
             href={action.href as any}
             target={action.target}
             onClick={action.onClick}
+            aria-label={action.text}
         >
             {content}
         </Button>

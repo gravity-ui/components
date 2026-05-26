@@ -70,23 +70,25 @@ export const NotificationWrapper = (props: {
     }
 
     return (
-        <div
-            className={b('notification-wrapper', {
-                archived: notification.archived,
-                unread: notification.unread,
-                active: Boolean(notification.onClick),
-            })}
-            ref={ref}
-            style={style}
-        >
-            {mobile && notification.swipeActions ? (
-                <NotificationWithSwipe
-                    notification={notification}
-                    swipeThreshold={swipeThreshold}
-                />
-            ) : (
-                <Notification notification={notification} />
-            )}
-        </div>
+        <li key={notification.id} className={b('item')}>
+            <div
+                className={b('notification-wrapper', {
+                    archived: notification.archived,
+                    unread: notification.unread,
+                    active: Boolean(notification.onClick),
+                })}
+                ref={ref}
+                style={style}
+            >
+                {mobile && notification.swipeActions ? (
+                    <NotificationWithSwipe
+                        notification={notification}
+                        swipeThreshold={swipeThreshold}
+                    />
+                ) : (
+                    <Notification notification={notification} />
+                )}
+            </div>
+        </li>
     );
 };

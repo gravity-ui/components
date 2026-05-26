@@ -3,69 +3,255 @@
 $block: '.#{variables.$ns}notification';
 
 $notificationSourceIconSize: 36px;
+$notificationSourceIconGap: var(--g-spacing-3);
+$notificationLeftOffset: $notificationSourceIconSize + 12px;
+$notificationSourceLineHeight: 18px;
+$notificationSourceGap: var(--g-spacing-1);
+$notificationSourceBlockSize: $notificationSourceLineHeight + 4px;
+$notificationSideActionsWidth: 36px;
+$notificationSideActionsGap: var(--g-spacing-2);
+$notificationSideActionsOffset: $notificationSideActionsWidth + 8px;
 
 #{$block} {
-    display: flex;
-    padding: 12px;
-    gap: 12px;
-    border-radius: 4px;
+    position: relative;
+    display: block;
+    border-radius: var(--g-spacing-1);
     box-sizing: border-box;
     width: 100%;
     font: inherit;
     color: inherit;
-    text-decoration: none;
 
-    &_active:hover {
-        background: var(--g-color-base-simple-hover);
+    background-color: var(--g-color-base-background);
+
+    &__clickable {
+        display: block;
+        width: 100%;
+        padding: var(--g-spacing-3);
+        box-sizing: border-box;
+        color: inherit;
+        text-decoration: none;
+        border-radius: var(--g-spacing-1);
+
+        appearance: none;
+        background: transparent;
+        border: 0;
+        margin: 0;
+        font: inherit;
+        text-align: inherit;
+        outline-offset: var(--g-spacing-half);
+    }
+
+    &__clickable_active {
         cursor: pointer;
     }
 
-    &__right {
-        flex: 1;
+    &_active:hover {
+        background: var(--g-color-base-simple-hover);
+    }
+
+    &__clickable_has-left {
+        padding-inline-start: calc(var(--g-spacing-3) + #{$notificationLeftOffset});
+    }
+
+    &__clickable_has-side-actions {
+        padding-inline-end: calc(var(--g-spacing-3) + #{$notificationSideActionsOffset});
+    }
+
+    &__clickable_has-source-top {
+        padding-block: calc(var(--g-spacing-2) + #{$notificationSourceBlockSize}) var(--g-spacing-4);
+    }
+
+    &__clickable_has-source-bottom {
+        padding-block-end: calc(var(--g-spacing-3) + #{$notificationSourceBlockSize});
+    }
+
+    &__clickable_has-bottom-actions {
+        padding-block-end: calc(var(--g-spacing-3) + 36px + var(--g-spacing-2));
+    }
+
+    &__clickable_has-source-bottom#{&}__clickable_has-bottom-actions {
+        padding-block-end: calc(
+            var(--g-spacing-3) + #{$notificationSourceBlockSize} + 28px + var(--g-spacing-2)
+        );
+    }
+
+    &__clickable_has-source-top#{&}__clickable_has-bottom-actions {
+        padding-block-end: calc(var(--g-spacing-6) + #{$notificationSourceBlockSize});
+    }
+
+    &__main-content {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
     }
 
     &__title-wrapper {
-        flex: 1;
+        display: flex;
+        align-items: center;
         min-width: 0;
-        overflow-x: hidden;
+        height: var(--g-spacing-7);
     }
 
-    &__source-text,
+    &_has-source-top &__title-wrapper {
+        height: auto;
+
+        margin: var(--g-spacing-1) 0 var(--g-spacing-1) 0;
+    }
+
     &__title {
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    &__source-text {
-        color: var(--g-color-text-secondary);
-    }
+    &__content-wrapper {
+        min-height: var(--g-spacing-7);
 
-    &__bottom-source {
-        margin-block-start: 4px;
-    }
-
-    &__title {
-        font-weight: 500;
-        color: var(--g-color-text-primary);
-    }
-
-    &__title-with-source {
-        margin-block-end: 4px;
+        display: flex;
+        align-items: center;
+        min-width: 0;
     }
 
     &__content {
         font-size: 13px;
         line-height: 18px;
-
         color: var(--g-color-text-complementary);
+
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    &__left {
+        position: absolute;
+        inset-block-start: var(--g-spacing-3);
+        inset-inline-start: var(--g-spacing-3);
+        display: flex;
+        align-items: center;
+        min-height: var(--g-spacing-7);
+        z-index: 1;
+    }
+
+    &__top-source,
+    &__bottom-source {
+        position: absolute;
+        inset-inline: var(--g-spacing-3) var(--g-spacing-3);
+        z-index: 1;
+        width: fit-content;
+    }
+
+    &__top-source {
+        inset-block-start: var(--g-spacing-3);
+    }
+
+    &__bottom-source {
+        inset-block-end: var(--g-spacing-3);
+    }
+
+    &__source-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: var(--g-color-text-secondary);
+
+        display: inline-flex;
+        gap: var(--g-spacing-1);
+    }
+
+    &__right-source-title {
+        pointer-events: auto;
+        position: relative;
+    }
+
+    &__actions_side-actions {
+        position: absolute;
+        inset-block-start: var(--g-spacing-2);
+        inset-inline-end: var(--g-spacing-3);
+        z-index: 1;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--g-spacing-1);
+
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+    }
+
+    #{$block}:hover &__actions_side-actions,
+    #{$block}:focus-within &__actions_side-actions,
+    &__actions_side-actions:focus-within {
+        opacity: 1;
+    }
+
+    &__actions_side-actions,
+    &__actions_bottom-actions {
+        background: transparent;
+    }
+
+    &_mobile &__actions_side-actions {
+        opacity: 1;
+    }
+
+    &__actions_bottom-actions {
+        position: absolute;
+        inset-inline: var(--g-spacing-3) var(--g-spacing-3);
+        z-index: 1;
+
+        display: flex;
+        align-items: center;
+        gap: var(--g-spacing-2);
+        flex-wrap: wrap;
+    }
+
+    &_has-left &__top-source,
+    &_has-left &__bottom-source,
+    &_has-left &__actions_bottom-actions {
+        inset-inline-start: calc(var(--g-spacing-3) + #{$notificationLeftOffset});
+    }
+
+    &_has-source-top &__actions_bottom-actions {
+        inset-block-end: var(--g-spacing-3);
+    }
+
+    &_has-side-actions &__top-source {
+        inset-inline-end: calc(var(--g-spacing-3) + #{$notificationSideActionsOffset});
+    }
+
+    &_has-bottom-actions &__bottom-source {
+        inset-block-end: calc(var(--g-spacing-2) + var(--g-spacing-10));
+    }
+
+    &_has-source-bottom &__actions_bottom-actions {
+        inset-block-end: var(--g-spacing-3);
     }
 
     &_unread {
         background: var(--g-color-base-selection);
-        &:hover {
-            background: var(--g-color-base-selection-hover);
-        }
+    }
+
+    &_unread#{&}_active:hover {
+        background: var(--g-color-base-selection-hover);
+    }
+
+    &_theme_success {
+        border-inline-start: var(--g-spacing-1) solid var(--g-color-line-positive);
+    }
+    &_theme_info {
+        border-inline-start: var(--g-spacing-1) solid var(--g-color-line-info);
+    }
+    &_theme_warning {
+        border-inline-start: var(--g-spacing-1) solid var(--g-color-line-warning);
+    }
+    &_theme_danger {
+        border-inline-start: var(--g-spacing-1) solid var(--g-color-line-danger);
+    }
+
+    &__action_icon {
+        color: var(--g-color-text-secondary);
     }
 
     &__actions {
@@ -73,43 +259,21 @@ $notificationSourceIconSize: 36px;
         align-items: center;
     }
 
-    &__actions_bottom-actions {
-        margin-block-start: 8px;
-        gap: 8px;
-        flex-wrap: wrap;
+    &__source-icon {
+        width: 36px;
+        height: 36px;
     }
 
-    &__actions_side-actions {
-        height: 28px;
-        opacity: 0;
-    }
-    &:hover &__actions_side-actions,
-    &__actions_side-actions:focus-within {
-        opacity: 1;
-    }
-    &_mobile &__actions_side-actions {
-        opacity: 1;
-    }
-
-    &__action_icon {
-        color: var(--g-color-text-secondary);
-    }
-
-    &_theme_success {
-        border-inline-start: 4px solid var(--g-color-line-positive);
-    }
-    &_theme_info {
-        border-inline-start: 4px solid var(--g-color-line-info);
-    }
-    &_theme_warning {
-        border-inline-start: 4px solid var(--g-color-line-warning);
-    }
-    &_theme_danger {
-        border-inline-start: 4px solid var(--g-color-line-danger);
-    }
-
-    &_active {
-        cursor: pointer;
+    &__visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
     }
 
     &__swipe-wrap {
@@ -142,7 +306,7 @@ $notificationSourceIconSize: 36px;
 
     &__swipe-action {
         display: flex;
-        gap: 8px;
+        gap: var(--g-spacing-2);
         align-items: center;
         justify-content: center;
         height: 100%;
@@ -180,17 +344,12 @@ $notificationSourceIconSize: 36px;
     }
 
     &__swipe-action-icon {
-        padding: 8px;
+        padding: var(--g-spacing-2);
         border-radius: 100%;
         color: var(--g-color-base-background);
     }
 
     &__swipe-action-text {
         font-size: 16px;
-    }
-
-    &__source-icon {
-        width: 36px;
-        height: 36px;
     }
 }

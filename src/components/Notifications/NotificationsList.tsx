@@ -16,7 +16,7 @@ type Props = {
 
 export const NotificationsList = React.memo(function NotificationsList(props: Props) {
     return (
-        <div className={b('list')}>
+        <ul className={b('list')}>
             {props.notifications.map((notification) => (
                 <NotificationWrapper
                     notification={notification}
@@ -24,6 +24,6 @@ export const NotificationsList = React.memo(function NotificationsList(props: Pr
                     key={notification.id}
                 />
             ))}
-        </div>
+        </ul>
     );
 });
