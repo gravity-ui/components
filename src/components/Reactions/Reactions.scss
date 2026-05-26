@@ -12,18 +12,24 @@ $block: '.#{variables.$ns}reactions';
         padding: 16px;
     }
 
+    &__reaction-button_size_xs {
+        --g-button-padding: var(--g-spacing-2);
+    }
+
     &__reaction-button-content_size_xs {
         font-size: 12px;
+        --g-button-padding: var(--g-spacing-2);
     }
     &__reaction-button-content_size_xs#{&}__reaction-button-content_text {
         font-size: var(--g-text-caption-1-font-size);
+        display: flex;
     }
 
     &__reaction-button-content_size_s {
         font-size: 16px;
     }
     &__reaction-button-content_size_s#{&}__reaction-button-content_text {
-        font-size: var(--g-text-caption-2-font-size);
+        font-size: var(--g-text-body-1-font-size);
     }
 
     &__reaction-button-content_size_m {
