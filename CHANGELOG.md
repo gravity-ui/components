@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.19.2](https://github.com/gravity-ui/components/compare/v4.19.1...v4.19.2) (2026-05-26)
+
+
+### Bug Fixes
+
+* **a11y:** fixed accessibility in notifications ([#380](https://github.com/gravity-ui/components/issues/380)) ([92c021b](https://github.com/gravity-ui/components/commit/92c021b1e1a4fb350f78eed44740fcec247ed85b))
+* **reactions:** fixed reaction sizes ([#381](https://github.com/gravity-ui/components/issues/381)) ([f21e7fe](https://github.com/gravity-ui/components/commit/f21e7feb559be34554925d30b546b8b59a6745d0))
+
 ## [4.19.1](https://github.com/gravity-ui/components/compare/v4.19.0...v4.19.1) (2026-05-14)
 
 
