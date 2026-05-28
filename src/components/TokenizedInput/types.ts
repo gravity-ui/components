@@ -219,6 +219,8 @@ export interface TokenizedInputData<T extends TokenValueBase> {
     transformTokens?: (tokens: T[]) => Token<T>[];
     /** Validates a token */
     validateToken?: ((token: T) => Partial<Record<keyof T, string>> | undefined) | false;
+    /** External token errors — array parallel to tokens. Merged with validateToken errors per-field; on conflict the external error wins. */
+    tokenErrors?: (Partial<Record<keyof T, string>> | undefined)[];
     /** Formats a token value */
     formatToken?: (token: T) => T;
     /** Field definitions; order matches display order */

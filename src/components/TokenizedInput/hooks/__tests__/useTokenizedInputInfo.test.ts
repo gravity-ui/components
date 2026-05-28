@@ -156,6 +156,127 @@ describe('useTokenizedInputInfo', () => {
         expect(mockOnChange).toHaveBeenCalledWith([]);
     });
 
+    describe('tokenErrors', () => {
+        it('should merge external errors with validateToken errors', () => {
+            const externalTokens = [{key: 'User', value: 'Ivan'}];
+            const validateToken = () => ({key: 'internal error'});
+            const tokenErrors = [{value: 'external error'}];
+
+            const {result} = renderHook(() =>
+                useTokenizedInputInfo({
+                    tokens: externalTokens,
+                    fields: mockFields,
+                    onChange: mockOnChange,
+                    validateToken,
+                    tokenErrors,
+                }),
+            );
+
+            expect(result.current.state.tokens[0].errors).toEqual({
+                key: 'internal error',
+                value: 'external error',
+            });
+        });
+
+        it('should give external errors priority over validateToken for the same field', () => {
+            const externalTokens = [{key: 'User', value: 'Ivan'}];
+            const validateToken = () => ({key: 'internal'});
+            const tokenErrors = [{key: 'external'}];
+
+            const {result} = renderHook(() =>
+                useTokenizedInputInfo({
+                    tokens: externalTokens,
+                    fields: mockFields,
+                    onChange: mockOnChange,
+                    validateToken,
+                    tokenErrors,
+                }),
+            );
+
+            expect(result.current.state.tokens[0].errors).toEqual({key: 'external'});
+        });
+
+        it('should not apply external errors to new tokens', () => {
+            const externalTokens = [{key: 'User', value: 'Ivan'}];
+            const tokenErrors = [undefined, {key: 'error'}];
+
+            const {result} = renderHook(() =>
+                useTokenizedInputInfo({
+                    tokens: externalTokens,
+                    fields: mockFields,
+                    onChange: mockOnChange,
+                    validateToken: false,
+                    tokenErrors,
+                }),
+            );
+
+            act(() => {
+                result.current.callbacks.onChangeToken(1, {key: 'Status'});
+            });
+
+            expect(result.current.state.tokens[1].kind).toBe('new');
+            expect(result.current.state.tokens[1].errors).toBeUndefined();
+        });
+
+        it('should skip undefined entries in tokenErrors', () => {
+            const externalTokens = [
+                {key: 'User', value: 'Ivan'},
+                {key: 'Status', value: 'Active'},
+            ];
+            const tokenErrors = [undefined, {key: 'error'}];
+
+            const {result} = renderHook(() =>
+                useTokenizedInputInfo({
+                    tokens: externalTokens,
+                    fields: mockFields,
+                    onChange: mockOnChange,
+                    validateToken: false,
+                    tokenErrors,
+                }),
+            );
+
+            expect(result.current.state.tokens[0].errors).toBeUndefined();
+            expect(result.current.state.tokens[1].errors).toEqual({key: 'error'});
+        });
+
+        it('should update displayed errors when tokenErrors prop changes', () => {
+            const externalTokens = [{key: 'User', value: 'Ivan'}];
+            let tokenErrors: ({key?: string} | undefined)[] = [{key: 'old error'}];
+
+            const {result, rerender} = renderHook(() =>
+                useTokenizedInputInfo({
+                    tokens: externalTokens,
+                    fields: mockFields,
+                    onChange: mockOnChange,
+                    validateToken: false,
+                    tokenErrors,
+                }),
+            );
+
+            expect(result.current.state.tokens[0].errors).toEqual({key: 'old error'});
+
+            tokenErrors = [{key: 'new error'}];
+            rerender();
+
+            expect(result.current.state.tokens[0].errors).toEqual({key: 'new error'});
+        });
+
+        it('should show no errors when tokenErrors is undefined', () => {
+            const externalTokens = [{key: 'User', value: 'Ivan'}];
+
+            const {result} = renderHook(() =>
+                useTokenizedInputInfo({
+                    tokens: externalTokens,
+                    fields: mockFields,
+                    onChange: mockOnChange,
+                    validateToken: false,
+                }),
+            );
+
+            expect(result.current.state.tokens[0].errors).toBeUndefined();
+        });
+    });
+
     it('should handle undo and redo', () => {
         const externalTokens = [{key: 'User', value: 'Ivan'}];
 
