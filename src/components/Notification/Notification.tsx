@@ -11,7 +11,11 @@ import './Notification.scss';
 
 const b = block('notification');
 
-type Props = {notification: NotificationProps};
+type Props = {
+    rootRef?: React.RefObject<HTMLDivElement>;
+    onResize?: () => void;
+    notification: NotificationProps;
+};
 
 interface ClickableElementProps {
     notification: NotificationProps;
@@ -20,9 +24,10 @@ interface ClickableElementProps {
 }
 
 export const Notification = React.memo(function Notification(props: Props) {
+    const ref = React.useRef<HTMLDivElement>(null);
     const {t} = i18n.useTranslation();
     const mobile = useMobile();
-    const {notification} = props;
+    const {rootRef, onResize, notification} = props;
     const {
         title,
         content,
@@ -58,11 +63,20 @@ export const Notification = React.memo(function Notification(props: Props) {
         <div className={b('actions', {'bottom-actions': true})}>{notification.bottomActions}</div>
     ) : null;
 
-    const renderedContent = (
-        <div className={b('content-wrapper')}>
-            <div className={b('content')}>{content}</div>
-        </div>
-    );
+    let renderedContent;
+    if (typeof content === 'function') {
+        renderedContent = (
+            <div className={b('content-wrapper')}>
+                <div className={b('content')}>{content({rootRef})}</div>
+            </div>
+        );
+    } else {
+        renderedContent = (
+            <div className={b('content-wrapper')}>
+                <div className={b('content')}>{content}</div>
+            </div>
+        );
+    }
 
     const renderedSourceText =
         source?.title || formattedDate ? (
@@ -119,8 +133,27 @@ export const Notification = React.memo(function Notification(props: Props) {
         children: clickableContent,
     });
 
+    React.useEffect(() => {
+        const element = ref.current;
+
+        if (!element || !onResize) {
+            return () => {};
+        }
+
+        const resizeObserver = new ResizeObserver(() => {
+            onResize();
+        });
+
+        resizeObserver.observe(element);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [onResize, notification.id]);
+
     return (
         <div
+            ref={ref}
             className={b(layoutModifiers, notification.className)}
             onMouseEnter={notification.onMouseEnter}
             onMouseLeave={notification.onMouseLeave}

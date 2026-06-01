@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
-import {DropdownMenu, Icon, Link} from '@gravity-ui/uikit';
+import {Button, DropdownMenu, Flex, Icon, Link} from '@gravity-ui/uikit';
 
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -89,6 +89,57 @@ export const notificationBottomActions: JSX.Element = (
     </React.Fragment>
 );
 
+export const LongNotificationContent = (props: {
+    rootRef?: React.RefObject<HTMLDivElement>;
+    wrapperRef?: React.RefObject<HTMLDivElement>;
+}) => {
+    const {rootRef} = props;
+    const [expanded, setExpanded] = React.useState(false);
+    const prevExpandedRef = React.useRef(false);
+
+    React.useLayoutEffect(() => {
+        if (prevExpandedRef.current && !expanded) {
+            requestAnimationFrame(() => {
+                rootRef?.current?.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            });
+        }
+
+        prevExpandedRef.current = expanded;
+    }, [expanded, rootRef]);
+
+    const handleExpand = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        setExpanded(true);
+    };
+
+    const handleCollapse = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        setExpanded(false);
+    };
+
+    if (expanded) {
+        return (
+            <Flex direction="column" gap={1}>
+                {Array.from({length: 20}, (_, index) => (
+                    <i key={index}>{'Long expanded content. '}</i>
+                ))}
+                <Button view="flat-secondary" onClick={handleCollapse}>
+                    Collapse
+                </Button>
+            </Flex>
+        );
+    }
+
+    return (
+        <Flex direction="column" gap={1}>
+            <span>Collapsed content</span>
+            <Button view="flat-secondary" onClick={handleExpand}>
+                Expand
+            </Button>
+        </Flex>
+    );
+};
+
 export const mockNotifications: NotificationProps[] = [
     {
         id: 'tracker',
@@ -149,6 +200,13 @@ export const mockNotifications: NotificationProps[] = [
     {
         id: 'link',
         content: <i>Notification with href</i>,
+        formattedDate: '29 seconds ago',
+        swipeActions: notificationsMockSwipeActions,
+        href: 'https://ya.ru',
+    },
+    {
+        id: 'looooong-content',
+        content: (contentProps) => <LongNotificationContent {...contentProps} />,
         formattedDate: '29 seconds ago',
         swipeActions: notificationsMockSwipeActions,
         href: 'https://ya.ru',

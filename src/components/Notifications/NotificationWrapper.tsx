@@ -22,8 +22,23 @@ export const NotificationWrapper = (props: {
     const [wrapperMaxHeight, setWrapperMaxHeight] = React.useState<number | undefined>(undefined);
     const [isRemoved, setIsRemoved] = React.useState(false);
 
+    const measureWrapperHeight = React.useCallback(() => {
+        const element = ref.current;
+
+        if (!element || notification.archived) {
+            return;
+        }
+
+        element.style.transition = 'none';
+        element.style.maxHeight = 'none';
+
+        setWrapperMaxHeight(element.getBoundingClientRect().height);
+    }, [notification.archived]);
+
     React.useEffect(() => {
-        if (!ref.current) {
+        const element = ref.current;
+
+        if (!element) {
             if (!notification.archived && isRemoved) {
                 setIsRemoved(false);
             }
@@ -34,34 +49,28 @@ export const NotificationWrapper = (props: {
             const listener = (event: TransitionEvent) => {
                 if (event.propertyName === 'max-height') {
                     setIsRemoved(true);
-                    ref.current?.removeEventListener('transitionend', listener);
+                    element.removeEventListener('transitionend', listener);
                 }
             };
 
-            ref.current.addEventListener('transitionend', listener);
+            element.addEventListener('transitionend', listener);
 
-            ref.current.style.transition = 'max-height 0.3s';
+            element.style.transition = 'max-height 0.3s';
             setWrapperMaxHeight(0);
 
             return () => {
-                ref.current?.removeEventListener('transitionend', listener);
+                element.removeEventListener('transitionend', listener);
             };
-        } else {
-            setIsRemoved(false);
-
-            setTimeout(() => {
-                if (!ref.current) return;
-
-                ref.current.style.transition = 'none';
-                ref.current.style.maxHeight = 'none';
-
-                const maxHeight = ref.current?.getBoundingClientRect().height ?? 0;
-                setWrapperMaxHeight(maxHeight);
-            }, 0);
-
-            return () => {};
         }
-    }, [ref, notification.archived, isRemoved]);
+
+        setIsRemoved(false);
+
+        const timeoutId = window.setTimeout(measureWrapperHeight, 0);
+
+        return () => {
+            window.clearTimeout(timeoutId);
+        };
+    }, [notification.archived, isRemoved, measureWrapperHeight]);
 
     const style = wrapperMaxHeight === undefined ? {} : {maxHeight: `${wrapperMaxHeight}px`};
 
@@ -84,9 +93,15 @@ export const NotificationWrapper = (props: {
                     <NotificationWithSwipe
                         notification={notification}
                         swipeThreshold={swipeThreshold}
+                        rootRef={ref}
+                        onResize={measureWrapperHeight}
                     />
                 ) : (
-                    <Notification notification={notification} />
+                    <Notification
+                        notification={notification}
+                        rootRef={ref}
+                        onResize={measureWrapperHeight}
+                    />
                 )}
             </div>
         </li>
