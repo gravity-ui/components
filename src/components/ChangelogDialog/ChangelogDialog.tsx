@@ -70,7 +70,6 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
             disableOutsideClick={disableOutsideClick}
             aria-labelledby={dialogCaptionId}
             disableHeightTransition={disableHeightTransition}
-            size="m"
         >
             <Dialog.Header caption={title} id={dialogCaptionId} />
             {fullListLink ? (
