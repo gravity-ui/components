@@ -11,7 +11,10 @@ import './Notification.scss';
 
 const b = block('notification');
 
-type Props = {notification: NotificationProps};
+type Props = {
+    wrapperRef?: React.RefObject<HTMLDivElement>;
+    notification: NotificationProps;
+};
 
 interface ClickableElementProps {
     notification: NotificationProps;
@@ -20,9 +23,10 @@ interface ClickableElementProps {
 }
 
 export const Notification = React.memo(function Notification(props: Props) {
+    const ref = React.useRef<HTMLDivElement>(null);
     const {t} = i18n.useTranslation();
     const mobile = useMobile();
-    const {notification} = props;
+    const {wrapperRef, notification} = props;
     const {
         title,
         content,
@@ -58,11 +62,20 @@ export const Notification = React.memo(function Notification(props: Props) {
         <div className={b('actions', {'bottom-actions': true})}>{notification.bottomActions}</div>
     ) : null;
 
-    const renderedContent = (
-        <div className={b('content-wrapper')}>
-            <div className={b('content')}>{content}</div>
-        </div>
-    );
+    let renderedContent;
+    if (typeof content === 'function') {
+        renderedContent = (
+            <div className={b('content-wrapper')}>
+                <div className={b('content')}>{content({wrapperRef})}</div>
+            </div>
+        );
+    } else {
+        renderedContent = (
+            <div className={b('content-wrapper')}>
+                <div className={b('content')}>{content}</div>
+            </div>
+        );
+    }
 
     const renderedSourceText =
         source?.title || formattedDate ? (
@@ -121,6 +134,7 @@ export const Notification = React.memo(function Notification(props: Props) {
 
     return (
         <div
+            ref={ref}
             className={b(layoutModifiers, notification.className)}
             onMouseEnter={notification.onMouseEnter}
             onMouseLeave={notification.onMouseLeave}
