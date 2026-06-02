@@ -26,6 +26,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
     validateToken = defaultValidateToken,
     formatToken,
     tokens: externalTokens,
+    tokenErrors,
     fields,
     placeholder,
     className,
@@ -186,10 +187,20 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
         [isClearable, externalTokens.length, defaultTokens.length, isEditable],
     );
 
+    const displayedTokens = React.useMemo(() => {
+        if (!tokenErrors) return tokens;
+        return tokens.map((token, i) => {
+            if (token.kind === 'new') return token;
+            const externalError = tokenErrors[i];
+            if (!externalError) return token;
+            return {...token, errors: {...token.errors, ...externalError}};
+        });
+    }, [tokens, tokenErrors]);
+
     return React.useMemo(
         () => ({
             state: {
-                tokens,
+                tokens: displayedTokens,
                 wrapperRef,
                 defaultTokens,
                 fields,
@@ -209,7 +220,6 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             },
         }),
         [
-            tokens,
             defaultTokens,
             fields,
             isEditable,
@@ -223,6 +233,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             onClearInput,
             onUndo,
             onRedo,
+            displayedTokens,
         ],
     );
 };
