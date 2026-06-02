@@ -17,7 +17,7 @@ const swipeActionContainerCls = b('swipe-action-container');
 type Props = {
     notification: NotificationProps;
     swipeThreshold?: number;
-    rootRef?: React.RefObject<HTMLDivElement>;
+    wrapperRef?: React.RefObject<HTMLDivElement>;
 };
 
 export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(props: Props) {
@@ -28,7 +28,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
     }
 
     const ref = React.useRef<HTMLDivElement>(null);
-    const {notification, rootRef} = props;
+    const {notification, wrapperRef} = props;
     const swipeActions = notification.swipeActions;
     const leftAction = swipeActions && 'left' in swipeActions ? swipeActions.left : undefined;
     const rightAction = swipeActions && 'right' in swipeActions ? swipeActions.right : undefined;
@@ -136,7 +136,7 @@ export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(p
             >
                 {leftAction ? renderAction(leftAction) : null}
                 <div className={notificationWrapperCls}>
-                    <Notification notification={notification} rootRef={rootRef} />
+                    <Notification notification={notification} wrapperRef={wrapperRef} />
                 </div>
                 {rightAction ? renderAction(rightAction) : null}
             </div>

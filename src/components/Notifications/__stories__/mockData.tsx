@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
-import {Button, DropdownMenu, Flex, Icon, Link} from '@gravity-ui/uikit';
+import {Disclosure, DropdownMenu, Flex, Icon, Link} from '@gravity-ui/uikit';
 
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -89,54 +89,25 @@ export const notificationBottomActions: JSX.Element = (
     </React.Fragment>
 );
 
-export const LongNotificationContent = (props: {
-    rootRef?: React.RefObject<HTMLDivElement>;
-    wrapperRef?: React.RefObject<HTMLDivElement>;
-}) => {
-    const {rootRef} = props;
-    const [expanded, setExpanded] = React.useState(false);
-    const prevExpandedRef = React.useRef(false);
+export const LongNotificationContent = (props: {wrapperRef?: React.RefObject<HTMLDivElement>}) => {
+    const {wrapperRef} = props;
 
-    React.useLayoutEffect(() => {
-        if (prevExpandedRef.current && !expanded) {
+    const handleUpdate = (expanded: boolean) => {
+        if (!expanded) {
             requestAnimationFrame(() => {
-                rootRef?.current?.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+                wrapperRef?.current?.scrollIntoView({block: 'nearest', behavior: 'smooth'});
             });
         }
-
-        prevExpandedRef.current = expanded;
-    }, [expanded, rootRef]);
-
-    const handleExpand = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        setExpanded(true);
     };
 
-    const handleCollapse = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        setExpanded(false);
-    };
-
-    if (expanded) {
-        return (
+    return (
+        <Disclosure summary="Collapsed content" onUpdate={handleUpdate}>
             <Flex direction="column" gap={1}>
                 {Array.from({length: 20}, (_, index) => (
                     <i key={index}>{'Long expanded content. '}</i>
                 ))}
-                <Button view="flat-secondary" onClick={handleCollapse}>
-                    Collapse
-                </Button>
             </Flex>
-        );
-    }
-
-    return (
-        <Flex direction="column" gap={1}>
-            <span>Collapsed content</span>
-            <Button view="flat-secondary" onClick={handleExpand}>
-                Expand
-            </Button>
-        </Flex>
+        </Disclosure>
     );
 };
 
@@ -209,7 +180,6 @@ export const mockNotifications: NotificationProps[] = [
         content: (contentProps) => <LongNotificationContent {...contentProps} />,
         formattedDate: '29 seconds ago',
         swipeActions: notificationsMockSwipeActions,
-        href: 'https://ya.ru',
     },
     {
         id: 'yandex',
