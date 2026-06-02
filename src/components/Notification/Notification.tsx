@@ -13,7 +13,6 @@ const b = block('notification');
 
 type Props = {
     rootRef?: React.RefObject<HTMLDivElement>;
-    onResize?: () => void;
     notification: NotificationProps;
 };
 
@@ -27,7 +26,7 @@ export const Notification = React.memo(function Notification(props: Props) {
     const ref = React.useRef<HTMLDivElement>(null);
     const {t} = i18n.useTranslation();
     const mobile = useMobile();
-    const {rootRef, onResize, notification} = props;
+    const {rootRef, notification} = props;
     const {
         title,
         content,
@@ -132,24 +131,6 @@ export const Notification = React.memo(function Notification(props: Props) {
         className: clickableClassName,
         children: clickableContent,
     });
-
-    React.useEffect(() => {
-        const element = ref.current;
-
-        if (!element || !onResize) {
-            return () => {};
-        }
-
-        const resizeObserver = new ResizeObserver(() => {
-            onResize();
-        });
-
-        resizeObserver.observe(element);
-
-        return () => {
-            resizeObserver.disconnect();
-        };
-    }, [onResize, notification.id]);
 
     return (
         <div

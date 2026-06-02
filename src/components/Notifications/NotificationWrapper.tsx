@@ -19,21 +19,7 @@ export const NotificationWrapper = (props: {
 
     const {notification, swipeThreshold} = props;
     const mobile = useMobile();
-    const [wrapperMaxHeight, setWrapperMaxHeight] = React.useState<number | undefined>(undefined);
     const [isRemoved, setIsRemoved] = React.useState(false);
-
-    const measureWrapperHeight = React.useCallback(() => {
-        const element = ref.current;
-
-        if (!element || notification.archived) {
-            return;
-        }
-
-        element.style.transition = 'none';
-        element.style.maxHeight = 'none';
-
-        setWrapperMaxHeight(element.getBoundingClientRect().height);
-    }, [notification.archived]);
 
     React.useEffect(() => {
         const element = ref.current;
@@ -55,8 +41,12 @@ export const NotificationWrapper = (props: {
 
             element.addEventListener('transitionend', listener);
 
+            element.style.maxHeight = `${element.scrollHeight}px`;
             element.style.transition = 'max-height 0.3s';
-            setWrapperMaxHeight(0);
+
+            requestAnimationFrame(() => {
+                element.style.maxHeight = '0px';
+            });
 
             return () => {
                 element.removeEventListener('transitionend', listener);
@@ -65,14 +55,8 @@ export const NotificationWrapper = (props: {
 
         setIsRemoved(false);
 
-        const timeoutId = window.setTimeout(measureWrapperHeight, 0);
-
-        return () => {
-            window.clearTimeout(timeoutId);
-        };
-    }, [notification.archived, isRemoved, measureWrapperHeight]);
-
-    const style = wrapperMaxHeight === undefined ? {} : {maxHeight: `${wrapperMaxHeight}px`};
+        return () => {};
+    }, [notification.archived, isRemoved]);
 
     if (isRemoved) {
         return null;
@@ -87,21 +71,15 @@ export const NotificationWrapper = (props: {
                     active: Boolean(notification.onClick),
                 })}
                 ref={ref}
-                style={style}
             >
                 {mobile && notification.swipeActions ? (
                     <NotificationWithSwipe
                         notification={notification}
                         swipeThreshold={swipeThreshold}
                         rootRef={ref}
-                        onResize={measureWrapperHeight}
                     />
                 ) : (
-                    <Notification
-                        notification={notification}
-                        rootRef={ref}
-                        onResize={measureWrapperHeight}
-                    />
+                    <Notification notification={notification} rootRef={ref} />
                 )}
             </div>
         </li>
