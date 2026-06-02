@@ -4,7 +4,9 @@ $block: '.#{variables.$ns}changelog-dialog';
 $maxItemsHeight: 70vh;
 
 #{$block} {
+    --gc-changelog-dialog-width: 732px;
     --gc-changelog-dialog-meta-width: 80px;
+
     --g-dialog-width: var(--gc-changelog-dialog-width, 732px);
 
     &__full-list-link-icon {
