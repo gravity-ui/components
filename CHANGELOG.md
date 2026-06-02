@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.20.0](https://github.com/gravity-ui/components/compare/v4.19.2...v4.20.0) (2026-06-02)
+
+
+### Features
+
+* able to use dynamic notification in notifications ([#389](https://github.com/gravity-ui/components/issues/389)) ([f06e70d](https://github.com/gravity-ui/components/commit/f06e70dc9cacd29a20f6d5eebf1e9af4e63afb61))
+* add external errors prop to TokenizedInput ([#387](https://github.com/gravity-ui/components/issues/387)) ([69b273f](https://github.com/gravity-ui/components/commit/69b273f5d42bab6a82ab54cb199c4a904f1f03e3))
+
 ## [4.19.2](https://github.com/gravity-ui/components/compare/v4.19.1...v4.19.2) (2026-05-26)
 
 
