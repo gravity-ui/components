@@ -45,7 +45,9 @@ export const NotificationWrapper = (props: {
             element.style.transition = 'max-height 0.3s';
 
             requestAnimationFrame(() => {
-                element.style.maxHeight = '0px';
+                requestAnimationFrame(() => {
+                    element.style.maxHeight = '0px';
+                });
             });
 
             return () => {
