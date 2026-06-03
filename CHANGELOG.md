@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.20.1](https://github.com/gravity-ui/components/compare/v4.20.0...v4.20.1) (2026-06-03)
+
+
+### Bug Fixes
+
+* **Notification:** add full width for notification content ([#390](https://github.com/gravity-ui/components/issues/390)) ([3bfb4cc](https://github.com/gravity-ui/components/commit/3bfb4ccb3453552c400bec2af934162d5ca16c41))
+
 ## [4.20.0](https://github.com/gravity-ui/components/compare/v4.19.2...v4.20.0) (2026-06-02)
 
 
