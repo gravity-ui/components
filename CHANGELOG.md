@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.20.2](https://github.com/gravity-ui/components/compare/v4.20.1...v4.20.2) (2026-06-03)
+
+
+### Bug Fixes
+
+* **ChangelogDialog:** fixed styling in ChangelogDialog ([#386](https://github.com/gravity-ui/components/issues/386)) ([c25b1ac](https://github.com/gravity-ui/components/commit/c25b1aca40fffe7e37fed9cb0729927d0771b2c1))
+
 ## [4.20.1](https://github.com/gravity-ui/components/compare/v4.20.0...v4.20.1) (2026-06-03)
 
 
