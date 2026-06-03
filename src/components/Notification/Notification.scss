@@ -117,6 +117,8 @@ $notificationSideActionsOffset: $notificationSideActionsWidth + 8px;
     }
 
     &__content {
+        width: 100%;
+
         font-size: 13px;
         line-height: 18px;
         color: var(--g-color-text-complementary);
