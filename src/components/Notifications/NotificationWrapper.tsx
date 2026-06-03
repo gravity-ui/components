@@ -19,11 +19,12 @@ export const NotificationWrapper = (props: {
 
     const {notification, swipeThreshold} = props;
     const mobile = useMobile();
-    const [wrapperMaxHeight, setWrapperMaxHeight] = React.useState<number | undefined>(undefined);
     const [isRemoved, setIsRemoved] = React.useState(false);
 
     React.useEffect(() => {
-        if (!ref.current) {
+        const element = ref.current;
+
+        if (!element) {
             if (!notification.archived && isRemoved) {
                 setIsRemoved(false);
             }
@@ -34,36 +35,34 @@ export const NotificationWrapper = (props: {
             const listener = (event: TransitionEvent) => {
                 if (event.propertyName === 'max-height') {
                     setIsRemoved(true);
-                    ref.current?.removeEventListener('transitionend', listener);
+                    element.removeEventListener('transitionend', listener);
                 }
             };
 
-            ref.current.addEventListener('transitionend', listener);
+            element.addEventListener('transitionend', listener);
 
-            ref.current.style.transition = 'max-height 0.3s';
-            setWrapperMaxHeight(0);
+            element.style.maxHeight = `${element.scrollHeight}px`;
+            element.style.transition = 'max-height 0.3s';
+
+            // Firefox batches style changes made within a single frame, so setting maxHeight
+            // to scrollHeight and then to 0px in the same frame skips the transition entirely.
+            // Two nested requestAnimationFrame calls guarantee the browser commits the initial
+            // maxHeight in one frame before applying 0px in the next, so the animation runs.
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    element.style.maxHeight = '0px';
+                });
+            });
 
             return () => {
-                ref.current?.removeEventListener('transitionend', listener);
+                element.removeEventListener('transitionend', listener);
             };
-        } else {
-            setIsRemoved(false);
-
-            setTimeout(() => {
-                if (!ref.current) return;
-
-                ref.current.style.transition = 'none';
-                ref.current.style.maxHeight = 'none';
-
-                const maxHeight = ref.current?.getBoundingClientRect().height ?? 0;
-                setWrapperMaxHeight(maxHeight);
-            }, 0);
-
-            return () => {};
         }
-    }, [ref, notification.archived, isRemoved]);
 
-    const style = wrapperMaxHeight === undefined ? {} : {maxHeight: `${wrapperMaxHeight}px`};
+        setIsRemoved(false);
+
+        return () => {};
+    }, [notification.archived, isRemoved]);
 
     if (isRemoved) {
         return null;
@@ -78,15 +77,15 @@ export const NotificationWrapper = (props: {
                     active: Boolean(notification.onClick),
                 })}
                 ref={ref}
-                style={style}
             >
                 {mobile && notification.swipeActions ? (
                     <NotificationWithSwipe
                         notification={notification}
                         swipeThreshold={swipeThreshold}
+                        wrapperRef={ref}
                     />
                 ) : (
-                    <Notification notification={notification} />
+                    <Notification notification={notification} wrapperRef={ref} />
                 )}
             </div>
         </li>

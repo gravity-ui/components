@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
-import {DropdownMenu, Icon, Link} from '@gravity-ui/uikit';
+import {Disclosure, DropdownMenu, Flex, Icon, Link} from '@gravity-ui/uikit';
 
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -89,6 +89,28 @@ export const notificationBottomActions: JSX.Element = (
     </React.Fragment>
 );
 
+export const LongNotificationContent = (props: {wrapperRef?: React.RefObject<HTMLDivElement>}) => {
+    const {wrapperRef} = props;
+
+    const handleUpdate = (expanded: boolean) => {
+        if (!expanded) {
+            requestAnimationFrame(() => {
+                wrapperRef?.current?.scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            });
+        }
+    };
+
+    return (
+        <Disclosure summary="Collapsed content" onUpdate={handleUpdate}>
+            <Flex direction="column" gap={1}>
+                {Array.from({length: 20}, (_, index) => (
+                    <i key={index}>{'Long expanded content. '}</i>
+                ))}
+            </Flex>
+        </Disclosure>
+    );
+};
+
 export const mockNotifications: NotificationProps[] = [
     {
         id: 'tracker',
@@ -152,6 +174,12 @@ export const mockNotifications: NotificationProps[] = [
         formattedDate: '29 seconds ago',
         swipeActions: notificationsMockSwipeActions,
         href: 'https://ya.ru',
+    },
+    {
+        id: 'looooong-content',
+        content: (contentProps) => <LongNotificationContent {...contentProps} />,
+        formattedDate: '29 seconds ago',
+        swipeActions: notificationsMockSwipeActions,
     },
     {
         id: 'yandex',

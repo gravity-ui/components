@@ -182,8 +182,7 @@ $notificationSideActionsOffset: $notificationSideActionsWidth + 8px;
     }
 
     #{$block}:hover &__actions_side-actions,
-    #{$block}:focus-within &__actions_side-actions,
-    &__actions_side-actions:focus-within {
+    #{$block}:has(:focus-visible) &__actions_side-actions {
         opacity: 1;
     }
 
