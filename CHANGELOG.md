@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.21.0](https://github.com/gravity-ui/components/compare/v4.20.2...v4.21.0) (2026-06-05)
+
+
+### Features
+
+* support React 19 in peerDependencies ([#393](https://github.com/gravity-ui/components/issues/393)) ([b3bb63e](https://github.com/gravity-ui/components/commit/b3bb63e9eb223d217b9d494774d685798da6a438))
+
 ## [4.20.2](https://github.com/gravity-ui/components/compare/v4.20.1...v4.20.2) (2026-06-03)
 
 
