@@ -32,7 +32,7 @@ export type ReactionsPaletteProps = Pick<
 
 export interface RenderAddProps<AddReactionRef extends HTMLElement = HTMLButtonElement> {
     paletteOpened: boolean;
-    ref: React.RefObject<AddReactionRef>;
+    ref: React.RefObject<AddReactionRef | null>;
     triggerProps: {
         onClick: () => void;
     } & Pick<

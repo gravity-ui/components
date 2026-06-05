@@ -19,7 +19,7 @@ export function useDelayedValue<TValue = unknown>(
 ) {
     const [currentValue, setCurrentValue] = React.useState<TValue>(value);
 
-    const timeoutRef = React.useRef<number>();
+    const timeoutRef = React.useRef<number | undefined>(undefined);
 
     const delayedOnChange = React.useCallback(
         (nextValue: TValue) => {

@@ -145,7 +145,7 @@ export type TokenizedInputInfo<T extends TokenValueBase> = {
         /** Wrapper className */
         className?: string;
         /** Wrapper ref */
-        wrapperRef: React.RefObject<HTMLDivElement>;
+        wrapperRef: React.RefObject<HTMLDivElement | null>;
     };
     callbacks: {
         /** Applies pending changes */

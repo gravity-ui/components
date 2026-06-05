@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export type UseNavigationProps = {
     initialItemIndex?: number;
-    itemRefs: React.RefObject<HTMLButtonElement>[];
+    itemRefs: React.RefObject<HTMLButtonElement | null>[];
 };
 
 export function useNavigation({initialItemIndex = 0, itemRefs}: UseNavigationProps) {

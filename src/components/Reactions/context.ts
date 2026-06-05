@@ -4,7 +4,7 @@ import type {ReactionState} from './Reaction';
 
 export interface ReactionsContextTooltipProps {
     reaction: ReactionState;
-    ref: React.RefObject<HTMLButtonElement>;
+    ref: React.RefObject<HTMLButtonElement | null>;
     open: boolean;
 }
 

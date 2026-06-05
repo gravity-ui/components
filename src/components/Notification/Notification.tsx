@@ -12,7 +12,7 @@ import './Notification.scss';
 const b = block('notification');
 
 type Props = {
-    wrapperRef?: React.RefObject<HTMLDivElement>;
+    wrapperRef?: React.RefObject<HTMLDivElement | null>;
     notification: NotificationProps;
 };
 

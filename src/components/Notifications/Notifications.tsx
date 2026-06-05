@@ -19,7 +19,7 @@ const b = block('notifications');
 export const Notifications = React.memo(function Notifications(props: NotificationsProps) {
     const {t} = i18n.useTranslation();
 
-    let content: JSX.Element;
+    let content: React.ReactElement;
 
     const visibleNotificationsCount = props.notifications.filter((n) => !n.archived).length;
     const hasUnloadedNotifications =

@@ -11,7 +11,7 @@ const DELAY = {
 
 export function useReactionsPopup(
     reaction: ReactionState,
-    ref: React.RefObject<HTMLButtonElement>,
+    ref: React.RefObject<HTMLButtonElement | null>,
 ) {
     const {value} = reaction;
 

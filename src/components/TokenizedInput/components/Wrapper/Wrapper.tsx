@@ -14,8 +14,12 @@ export function Wrapper({children}: React.PropsWithChildren<unknown>) {
     const {isClearable, classNames, wrapperRef} = wrapperInfo.state;
     const {onBlur, onKeyDown, onClear} = wrapperInfo.callbacks;
 
+    // Narrows RefObject<T | null> back to RefObject<T>
+    // for compatibility with @types/react@18 LegacyRef typing.
+    const divRef = wrapperRef as React.RefObject<HTMLDivElement>;
+
     return (
-        <div className={classNames.wrapper} onBlur={onBlur} onKeyDown={onKeyDown} ref={wrapperRef}>
+        <div className={classNames.wrapper} onBlur={onBlur} onKeyDown={onKeyDown} ref={divRef}>
             {children}
             {isClearable && (
                 <button

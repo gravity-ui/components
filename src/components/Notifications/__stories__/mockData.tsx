@@ -78,7 +78,7 @@ export const notificationSideActions = {
     ),
 };
 
-export const notificationBottomActions: JSX.Element = (
+export const notificationBottomActions: React.ReactElement = (
     <React.Fragment>
         <NotificationAction
             action={{text: 'Confirm', view: 'normal', onClick: () => console.log('CONFIRM')}}
@@ -89,7 +89,9 @@ export const notificationBottomActions: JSX.Element = (
     </React.Fragment>
 );
 
-export const LongNotificationContent = (props: {wrapperRef?: React.RefObject<HTMLDivElement>}) => {
+export const LongNotificationContent = (props: {
+    wrapperRef?: React.RefObject<HTMLDivElement | null>;
+}) => {
     const {wrapperRef} = props;
 
     const handleUpdate = (expanded: boolean) => {

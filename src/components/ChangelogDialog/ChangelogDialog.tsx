@@ -57,7 +57,7 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
         className,
     } = props;
 
-    const idRef = React.useRef<number>();
+    const idRef = React.useRef<number | undefined>(undefined);
     idRef.current = idRef.current || getNextId();
     const dialogCaptionId = `changelog-dialog-title-${idRef.current}`;
 

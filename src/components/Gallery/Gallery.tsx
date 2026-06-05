@@ -42,8 +42,8 @@ export const Gallery = ({
     const items = children ? React.Children.map(children, (child) => child.props) : emptyItems;
     const itemsCount = items.length;
 
-    const [itemRefs, setItemRefs] = React.useState<React.RefObject<HTMLButtonElement>[]>(() =>
-        items.map(() => React.createRef()),
+    const [itemRefs, setItemRefs] = React.useState<React.RefObject<HTMLButtonElement | null>[]>(
+        () => items.map(() => React.createRef()),
     );
 
     const [hiddenHeader, setHiddenHeader] = React.useState(false);
@@ -188,9 +188,15 @@ export const Gallery = ({
 
                                     const selected = activeItemIndex === index;
 
+                                    // Narrows RefObject<T | null> back to RefObject<T>
+                                    // for compatibility with @types/react@18 LegacyRef typing.
+                                    const buttonRef = itemRefs[
+                                        index
+                                    ] as React.RefObject<HTMLButtonElement>;
+
                                     return (
                                         <button
-                                            ref={itemRefs[index]}
+                                            ref={buttonRef}
                                             type="button"
                                             key={index}
                                             onClick={handleClick}

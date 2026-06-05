@@ -31,7 +31,7 @@ export interface RenderReactionProps {
     /** Click handler */
     onClick: () => void;
     /** Button reference needed for popup positioning */
-    ref?: React.RefObject<HTMLButtonElement>;
+    ref?: React.RefObject<HTMLButtonElement | null>;
     /** Counter value */
     counter?: React.ReactNode;
     /** Is reaction selected */
