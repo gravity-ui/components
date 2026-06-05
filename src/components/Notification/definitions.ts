@@ -26,7 +26,7 @@ export type NotificationProps = {
     id: string;
     content:
         | React.ReactNode
-        | ((props: {wrapperRef?: React.RefObject<HTMLDivElement>}) => React.ReactNode);
+        | ((props: {wrapperRef?: React.RefObject<HTMLDivElement | null>}) => React.ReactNode);
 
     title?: React.ReactNode;
     formattedDate?: React.ReactNode;

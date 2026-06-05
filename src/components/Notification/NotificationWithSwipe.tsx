@@ -17,7 +17,7 @@ const swipeActionContainerCls = b('swipe-action-container');
 type Props = {
     notification: NotificationProps;
     swipeThreshold?: number;
-    wrapperRef?: React.RefObject<HTMLDivElement>;
+    wrapperRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export const NotificationWithSwipe = React.memo(function NotificationWithSwipe(props: Props) {
