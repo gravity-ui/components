@@ -24,7 +24,7 @@ export type NotificationSwipeActionsProps =
 
 export type NotificationProps = {
     id: string;
-    content:
+    content?:
         | React.ReactNode
         | ((props: {wrapperRef?: React.RefObject<HTMLDivElement | null>}) => React.ReactNode);
 

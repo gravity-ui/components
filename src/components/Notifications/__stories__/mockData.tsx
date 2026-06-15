@@ -153,6 +153,17 @@ export const mockNotifications: NotificationProps[] = [
         swipeActions: notificationsMockSwipeActions,
     },
     {
+        id: 'only-title',
+        source: {
+            title: 'Yandex',
+            icon: svgYandexStoryIcon,
+            href: LINK,
+        },
+        theme: 'info',
+        formattedDate: '12 seconds ago',
+        swipeActions: notificationsMockSwipeActions,
+    },
+    {
         id: 'minimum',
         content: <i>Bare minimum</i>,
         formattedDate: '13 seconds ago',
