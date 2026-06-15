@@ -63,16 +63,11 @@ export const Notification = React.memo(function Notification(props: Props) {
     ) : null;
 
     let renderedContent;
-    if (typeof content === 'function') {
+    if (content) {
+        const node = typeof content === 'function' ? content({wrapperRef}) : content;
         renderedContent = (
             <div className={b('content-wrapper')}>
-                <div className={b('content')}>{content({wrapperRef})}</div>
-            </div>
-        );
-    } else {
-        renderedContent = (
-            <div className={b('content-wrapper')}>
-                <div className={b('content')}>{content}</div>
+                <div className={b('content')}>{node}</div>
             </div>
         );
     }
