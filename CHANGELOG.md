@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.22.0](https://github.com/gravity-ui/components/compare/v4.21.0...v4.22.0) (2026-06-15)
+
+
+### Features
+
+* **notification:** make notification content as optional ([#395](https://github.com/gravity-ui/components/issues/395)) ([a0965d1](https://github.com/gravity-ui/components/commit/a0965d15e260f1fb8e4714643fa854a7b5516ff7))
+
 ## [4.21.0](https://github.com/gravity-ui/components/compare/v4.20.2...v4.21.0) (2026-06-05)
 
 
