@@ -160,6 +160,7 @@ export const mockNotifications: NotificationProps[] = [
             href: LINK,
         },
         theme: 'info',
+        title: 'You hired!',
         formattedDate: '12 seconds ago',
         swipeActions: notificationsMockSwipeActions,
     },
