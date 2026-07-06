@@ -81,6 +81,22 @@ $verticalGalleryMargin: 28px;
         }
     }
 
+    &_view_inline {
+        width: 100%;
+        height: 100%;
+
+        &,
+        &#{$block}_mode_mobile {
+            #{$block}__content {
+                width: 100%;
+                min-width: 0;
+                max-width: 100%;
+                height: 100%;
+                min-height: 0;
+            }
+        }
+    }
+
     &_mode_full-screen,
     &_mode_mobile {
         --g-modal-border-radius: 0;

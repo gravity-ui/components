@@ -4,14 +4,14 @@ import {ThemeProvider} from '@gravity-ui/uikit';
 import type {ThemeProviderProps} from '@gravity-ui/uikit';
 
 import {GalleryItem} from '../../components';
-import type {GalleryItemProps, GalleryProps} from '../../components';
+import type {GalleryItemProps, GalleryModalProps} from '../../components';
 
 import {AsyncGallery} from './AsyncGallery';
 import {GalleryContext} from './GalleryContext';
 import type {GalleryContextType} from './GalleryContext';
 
 export type GalleryProviderProps = React.PropsWithChildren<
-    Pick<GalleryProps, 'container' | 'className' | 'emptyMessage'>
+    Pick<GalleryModalProps, 'container' | 'className' | 'emptyMessage'>
 > &
     Pick<ThemeProviderProps, 'theme'>;
 

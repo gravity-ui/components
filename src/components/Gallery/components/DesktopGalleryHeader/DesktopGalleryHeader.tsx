@@ -22,8 +22,8 @@ export type DesktopGalleryHeaderProps = {
     fullScreen: boolean;
     onGoToPrevious: () => void;
     onGoToNext: () => void;
-    onUpdateFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-    onClose: () => void;
+    onUpdateFullScreen?: React.Dispatch<React.SetStateAction<boolean>>;
+    onClose?: () => void;
 };
 
 export const DesktopGalleryHeader = ({
@@ -50,13 +50,18 @@ export const DesktopGalleryHeader = ({
             <div className={cnDesktopGalleryHeader('active-item-info')}>{itemName}</div>
             {withNavigation && (
                 <div className={cnDesktopGalleryHeader('navigation')}>
-                    <Button size="l" view="flat" onClick={onGoToPrevious}>
+                    <Button
+                        size="l"
+                        view="flat"
+                        aria-label={t('previous')}
+                        onClick={onGoToPrevious}
+                    >
                         <Icon data={direction === 'rtl' ? ArrowRight : ArrowLeft} />
                     </Button>
                     <Text color="secondary" variant="body-1">
                         {activeItemIndex + 1} / {itemsLength}
                     </Text>
-                    <Button size="l" view="flat" onClick={onGoToNext}>
+                    <Button size="l" view="flat" aria-label={t('next')} onClick={onGoToNext}>
                         <Icon data={direction === 'rtl' ? ArrowLeft : ArrowRight} />
                     </Button>
                 </div>
@@ -103,14 +108,18 @@ export const DesktopGalleryHeader = ({
                         )
                     );
                 })}
-                <FullScreenAction
-                    key="full-screen"
-                    fullScreen={fullScreen}
-                    onUpdateFullScreen={onUpdateFullScreen}
-                />
-                <Button size="l" view="flat" aria-label={t('close')} onClick={onClose}>
-                    <Icon data={Xmark} />
-                </Button>
+                {onUpdateFullScreen && (
+                    <FullScreenAction
+                        key="full-screen"
+                        fullScreen={fullScreen}
+                        onUpdateFullScreen={onUpdateFullScreen}
+                    />
+                )}
+                {onClose && (
+                    <Button size="l" view="flat" aria-label={t('close')} onClick={onClose}>
+                        <Icon data={Xmark} />
+                    </Button>
+                )}
             </div>
         </Flex>
     );

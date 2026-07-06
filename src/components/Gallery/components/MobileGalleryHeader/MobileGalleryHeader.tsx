@@ -19,9 +19,9 @@ export type MobileGalleryHeaderProps = {
     withNavigation: boolean;
     activeItemIndex: number;
     itemsLength: number;
-    onBackClick: () => void;
     hidden?: boolean;
     interactive?: boolean;
+    onBackClick?: () => void;
 };
 
 export const MobileGalleryHeader = ({
@@ -56,15 +56,17 @@ export const MobileGalleryHeader = ({
                     interactive,
                 })}
             >
-                <Button
-                    size="xl"
-                    view="flat"
-                    onClick={onBackClick}
-                    aria-label={t('back')}
-                    color="primary"
-                >
-                    <Icon size={MOBILE_ICON_SIZE} data={ChevronLeft} />
-                </Button>
+                {onBackClick && (
+                    <Button
+                        size="xl"
+                        view="flat"
+                        onClick={onBackClick}
+                        aria-label={t('back')}
+                        color="primary"
+                    >
+                        <Icon size={MOBILE_ICON_SIZE} data={ChevronLeft} />
+                    </Button>
+                )}
 
                 {withNavigation && (
                     <Text color="primary" variant="subheader-2">
