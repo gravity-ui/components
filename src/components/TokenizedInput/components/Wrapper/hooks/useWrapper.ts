@@ -10,7 +10,7 @@ export const useWrapper = () => {
     const focusInfo = useFocusContext();
     const inputInfo = useInputContext();
 
-    const {tokens, fields, isEditable, isClearable, className, wrapperRef} = inputInfo.state;
+    const {tokens, fields, isEditable, isClearable, className, size, wrapperRef} = inputInfo.state;
     const {onApplyChanges, onClearInput} = inputInfo.callbacks;
 
     const {focus} = focusInfo.state;
@@ -33,10 +33,18 @@ export const useWrapper = () => {
 
     const classNames = React.useMemo(
         () => ({
-            wrapper: b('wrapper', {disabled: !isEditable, focused: Boolean(focus)}, className),
+            wrapper: b(
+                'wrapper',
+                {
+                    disabled: !isEditable,
+                    focused: Boolean(focus),
+                    size,
+                },
+                className,
+            ),
             clearButton: b('clear-button'),
         }),
-        [className, focus, isEditable],
+        [className, focus, isEditable, size],
     );
 
     return React.useMemo(

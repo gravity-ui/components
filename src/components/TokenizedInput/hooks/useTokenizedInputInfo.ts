@@ -30,6 +30,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
     fields,
     placeholder,
     className,
+    size = 'm',
     onChange,
 }: UseTokenizedInputInfoOptions<T>): TokenizedInputInfo<T> => {
     const validateTokens = React.useCallback(
@@ -208,6 +209,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
                 isClearable: shouldRenderClearButton,
                 placeholder: isEditable ? placeholder : undefined,
                 className,
+                size,
             },
             callbacks: {
                 onApplyChanges,
@@ -226,6 +228,7 @@ export const useTokenizedInputInfo = <T extends TokenValueBase>({
             shouldRenderClearButton,
             placeholder,
             className,
+            size,
             onApplyChanges,
             onChangeToken,
             onChangeTokens,

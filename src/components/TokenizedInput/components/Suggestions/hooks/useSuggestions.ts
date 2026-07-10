@@ -34,7 +34,7 @@ export const useSuggestions = <T extends TokenValueBase>({
     const focusInfo = useFocusContext<T>();
     const options = useOptionsContext<T>();
 
-    const {tokens} = inputInfo.state;
+    const {tokens, size} = inputInfo.state;
     const {onChangeToken, onApplyChanges} = inputInfo.callbacks;
     const {focus} = focusInfo.state;
     const {onFocus} = focusInfo.callbacks;
@@ -234,6 +234,7 @@ export const useSuggestions = <T extends TokenValueBase>({
                 popupWidth,
                 popupOffset,
                 fullWidthSuggestions,
+                size,
             },
             callbacks: {
                 onApplySuggestion,
@@ -248,6 +249,7 @@ export const useSuggestions = <T extends TokenValueBase>({
             popupOffset,
             popupWidth,
             selected,
+            size,
             suggestions,
         ],
     );

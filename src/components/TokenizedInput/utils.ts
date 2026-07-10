@@ -1,6 +1,6 @@
-import {getUniqId} from '@gravity-ui/uikit';
+import {type ButtonProps, getUniqId} from '@gravity-ui/uikit';
 
-import {Token, TokenField, TokenFieldKeyAction, TokenValueBase} from './types';
+import {Token, TokenField, TokenFieldKeyAction, TokenValueBase, TokenizedInputSize} from './types';
 
 export const getDefaultTokenValue = <T extends TokenValueBase>(fields: TokenField<T>[]): T => {
     return fields.reduce<T>((acc, cur) => ({...acc, [cur.key]: ''}), {} as T);
@@ -48,6 +48,30 @@ export const defaultTransformTokens = <T extends TokenValueBase>(tokens: T[]): T
             value,
         };
     });
+};
+
+const TOKENIZED_INPUT_CLEAR_BUTTON_SIZE: Record<TokenizedInputSize, ButtonProps['size']> = {
+    m: 's',
+    l: 'm',
+    xl: 'l',
+};
+
+const TOKENIZED_INPUT_REMOVE_BUTTON_SIZE: Record<TokenizedInputSize, ButtonProps['size']> = {
+    m: 'm',
+    l: 'm',
+    xl: 'l',
+};
+
+export const getTokenizedInputClearButtonSize = (
+    size: TokenizedInputSize = 'm',
+): ButtonProps['size'] => {
+    return TOKENIZED_INPUT_CLEAR_BUTTON_SIZE[size];
+};
+
+export const getTokenizedInputRemoveButtonSize = (
+    size: TokenizedInputSize = 'm',
+): ButtonProps['size'] => {
+    return TOKENIZED_INPUT_REMOVE_BUTTON_SIZE[size];
 };
 
 const findPairBySymbol = (symbol: string, pairs: Record<string, string>) => {
@@ -153,4 +177,6 @@ export const tokenizedInputUtils = {
     defaultValidateToken,
     defaultTransformTokens,
     autoClosingPairsAction,
+    getTokenizedInputClearButtonSize,
+    getTokenizedInputRemoveButtonSize,
 };
