@@ -8,6 +8,8 @@ import {
 
 export type TokenValueBase = Record<string, string>;
 
+export type TokenizedInputSize = 'm' | 'l' | 'xl';
+
 export type RegularToken<T extends TokenValueBase> = {
     id: string;
     kind: 'regular';
@@ -144,6 +146,8 @@ export type TokenizedInputInfo<T extends TokenValueBase> = {
         placeholder?: string | TokenPlaceholderGeneratorFn<T>;
         /** Wrapper className */
         className?: string;
+        /** Control size */
+        size?: TokenizedInputSize;
         /** Wrapper ref */
         wrapperRef: React.RefObject<HTMLDivElement | null>;
     };
@@ -227,6 +231,8 @@ export interface TokenizedInputData<T extends TokenValueBase> {
     fields: TokenField<T>[];
     /** Wrapper className */
     className?: string;
+    /** Control size */
+    size?: TokenizedInputSize;
     /** Placeholder for the new token */
     placeholder?: string | TokenPlaceholderGeneratorFn<T>;
     /** Whether editing is allowed */

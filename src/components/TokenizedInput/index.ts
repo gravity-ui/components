@@ -46,6 +46,7 @@ export type {
     TokenizedInputOptionsInfo,
     TokenizedInputData,
     TokenizedInputComposition,
+    TokenizedInputSize,
 } from './types';
 
 export {tokenizedInputUtils} from './utils';

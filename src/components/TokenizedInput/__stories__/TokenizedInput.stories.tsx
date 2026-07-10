@@ -15,6 +15,15 @@ import {TokenizedComponentType} from './types';
 const meta: Meta<TokenizedComponentType<Record<string, string>>> = {
     title: 'Components/TokenizedInput',
     component: TokenizedInput,
+    argTypes: {
+        size: {
+            options: ['m', 'l', 'xl'],
+            control: {type: 'radio'},
+        },
+    },
+    args: {
+        size: 'm',
+    },
     parameters: {
         disableStrictMode: true,
     },

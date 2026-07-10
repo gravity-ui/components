@@ -4,13 +4,19 @@ import {List} from '@gravity-ui/uikit';
 
 import {b} from '../../constants';
 import i18n from '../../i18n';
-import type {TokenValueBase, TokenizedSuggestions, TokenizedSuggestionsItem} from '../../types';
+import type {
+    TokenValueBase,
+    TokenizedInputSize,
+    TokenizedSuggestions,
+    TokenizedSuggestionsItem,
+} from '../../types';
 
 export type SuggestionsListProps = {
     selected: number;
     isLoading: boolean;
     suggestions: TokenizedSuggestions<TokenValueBase>;
     fullWidth?: boolean;
+    size?: TokenizedInputSize;
     onApplySuggestion: (v: TokenizedSuggestionsItem<TokenValueBase>) => void;
 };
 
@@ -19,6 +25,7 @@ export function SuggestionsList({
     isLoading,
     suggestions,
     fullWidth,
+    size = 'm',
     onApplySuggestion,
 }: SuggestionsListProps) {
     const {items, options, currentWord} = suggestions;
@@ -48,6 +55,7 @@ export function SuggestionsList({
                 empty: isEmpty && showEmptyState,
                 loading: isLoading,
                 'full-width': fullWidth,
+                size,
             })}
         >
             <List

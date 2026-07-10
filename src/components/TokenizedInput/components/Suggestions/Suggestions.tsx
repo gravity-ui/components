@@ -29,6 +29,7 @@ export function Suggestions({
         popupWidth,
         popupOffset,
         fullWidthSuggestions,
+        size,
     } = suggestionsInfo.state;
     const {onApplySuggestion} = suggestionsInfo.callbacks;
 
@@ -48,6 +49,7 @@ export function Suggestions({
                 onApplySuggestion={onApplySuggestion}
                 selected={selected}
                 fullWidth={fullWidthSuggestions}
+                size={size}
             />
         );
     };

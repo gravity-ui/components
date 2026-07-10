@@ -13,6 +13,8 @@ This component is for writing queries/filters and working with them as tokens. H
 | `transformTokens`       | `(tokens: T[]) => TokenizedInputToken<T>[]`                                                                          | -               | Maps raw tokens to internal token shape.                       |
 | `validateToken`         | `(token: T) => Partial<Record<keyof T, string>> \| undefined \| false`                                               | -               | Validates a token.                                             |
 | `formatToken`           | `(token: T) => T`                                                                                                    | -               | Formats a token value before saving.                           |
+| `className`             | `string`                                                                                                             | -               | Wrapper className.                                             |
+| `size`                  | `'m' \| 'l' \| 'xl'`                                                                                                 | `'m'`           | Control size.                                                  |
 | `placeholder`           | `string \| TokenizedInputTokenPlaceholderGeneratorFn<T>`                                                             | -               | Placeholder for the new token.                                 |
 | `isEditable`            | `boolean`                                                                                                            | `true`          | Whether editing is allowed.                                    |
 | `isClearable`           | `boolean`                                                                                                            | `true`          | Whether full clear is allowed.                                 |
@@ -26,6 +28,10 @@ This component is for writing queries/filters and working with them as tokens. H
 | `onFocus`               | `() => void`                                                                                                         | -               | onFocus callback.                                              |
 | `onBlur`                | `() => void`                                                                                                         | -               | onBlur callback.                                               |
 | `shouldAllowBlur`       | `(e: React.FocusEvent) => boolean`                                                                                   | `() => true`    | Return true to allow blur, false to prevent it.                |
+
+### Sizes
+
+The component supports sizes `m`, `l`, and `xl`. The default size is `m`.
 
 ### Usage Examples
 
