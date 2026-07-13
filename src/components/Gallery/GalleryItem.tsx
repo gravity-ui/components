@@ -19,6 +19,7 @@ export type GalleryItemAction = {
 };
 
 export type GalleryItemProps = {
+    id?: string;
     view: React.ReactNode;
     thumbnail: React.ReactNode;
     name?: React.ReactNode;

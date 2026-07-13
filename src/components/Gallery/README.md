@@ -11,22 +11,28 @@ The children of the Gallery should be an array of [GalleryItem with the required
 - **Swipe Gestures**: Mobile swipe navigation (automatically disabled during zoom interaction)
 - **Fullscreen Mode**: Toggle fullscreen view
 - **Custom Actions**: Add custom action buttons for each gallery item
+- **Inline View**: Render the gallery in place within its parent instead of in a modal overlay
+- **Controlled Index**: Drive the active item index from outside via `activeItemIndex` / `onActiveItemIndexChange`
 
 ### PropTypes
 
-| Property         | Type                      | Required | Values | Default | Description                   |
-| :--------------- | :------------------------ | :------- | :----- | :------ | :---------------------------- |
-| initialItemIndex | `Number`                  |          |        | 0       | The initial active item index |
-| open             | `Boolean`                 |          |        |         | The modal opened state        |
-| onOpenChange     | `(open: boolean) => void` |          |        |         | The modal toggle handler      |
-| className        | `String`                  |          |        |         | The modal class               |
-| container        | `HTMLElement`             |          |        |         | The modal container           |
-| emptyMessage     | `String`                  |          |        | No data | No data message               |
+| Property                | Type                      | Required | Values           | Default | Description                                   |
+| :---------------------- | :------------------------ | :------- | :--------------- | :------ | :-------------------------------------------- |
+| initialItemIndex        | `Number`                  |          |                  | 0       | The initial active item index (uncontrolled)  |
+| activeItemIndex         | `Number`                  |          |                  |         | Controlled active item index.                 |
+| onActiveItemIndexChange | `(index: number) => void` |          |                  |         | Called with the next index navigation happens |
+| view                    | `String`                  |          | `modal` `inline` | modal   | Render in a modal overlay                     |
+| className               | `String`                  |          |                  |         | The root class                                |
+| emptyMessage            | `String`                  |          |                  | No data | No data message                               |
+| open                    | `Boolean`                 |          |                  |         | `modal` only. The modal opened state          |
+| onOpenChange            | `(open: boolean) => void` |          |                  |         | `modal` only. The modal toggle handler        |
+| container               | `HTMLElement`             |          |                  |         | `modal` only. The modal container             |
 
 ### GalleryItem
 
 | Property    | Type          | Required | Values | Default | Description                                                                                      |
 | :---------- | :------------ | :------- | :----- | :------ | :----------------------------------------------------------------------------------------------- |
+| id          | `String`      |          |        |         | Stable identity of the item                                                                      |
 | view        | `ReactNode`   | Yes      |        | 0       | The gallery item body (displayed in the center of the gallery)                                   |
 | thumbnail   | `ReactNode`   | Yes      |        |         | The gallery item thumbnail (displayed as the preview in the footer of the gallery)               |
 | name        | `ReactNode`   |          |        |         | The gallery item name info (displayed in the gallery header left side)                           |
@@ -50,6 +56,44 @@ Gallery includes built-in zoom functionality for images via the [`useImageZoom`]
 - Swipe gestures automatically disabled during zoom interaction
 
 See [`useImageZoom` documentation](./hooks/useImageZoom/README.md) for more details.
+
+### Inline view
+
+Pass `view="inline"` to render the gallery in place instead of a `modal`. It fills its parent
+without imposing any `position`, so give that parent a resolvable size. `open` / `onOpenChange` /
+`container` don't apply and there is no built-in close button — the parent controls visibility by
+unmounting. For an in-header dismiss control, add it as a `GalleryItem` action.
+
+```tsx
+<div style={{width: '100%', maxWidth: 640, aspectRatio: '16 / 10', overflow: 'hidden'}}>
+  <Gallery view="inline">
+    <GalleryItem
+      {...itemProps}
+      actions={[{id: 'close', title: 'Close', icon: <Icon data={Xmark} />, onClick: onClose}]}
+    />
+  </Gallery>
+</div>
+```
+
+### Controlled active item index
+
+The index is uncontrolled by default (seeded by `initialItemIndex`). Pass `activeItemIndex` +
+`onActiveItemIndexChange` to control it — the index is positional, so when items are added/removed
+it's up to the parent to remap `activeItemIndex` to the item it wants to keep active. Giving each
+`GalleryItem` a stable `id` keeps its preview reconciled by identity across such changes.
+
+```tsx
+<Gallery
+  activeItemIndex={index}
+  onActiveItemIndexChange={setIndex}
+  open={open}
+  onOpenChange={setOpen}
+>
+  {items.map((item) => (
+    <GalleryItem key={item.id} id={item.id} {...getGalleryItemImage({src: item.src})} />
+  ))}
+</Gallery>
+```
 
 ### Gallery Context
 
@@ -125,10 +169,6 @@ const ImagesGallery = () => {
 
   const container = usePortalContainer();
 
-  const handleClose = React.useCallback(() => {
-    setOpen(false);
-  }, []);
-
   const handleOpen = React.useCallback(() => {
     setOpen(true);
   }, []);
@@ -138,7 +178,7 @@ const ImagesGallery = () => {
       <Button onClick={handleOpen} view="action" size="l">
         Open gallery
       </Button>
-      <Gallery open={open} onClose={handleClose} container={container || undefined}>
+      <Gallery open={open} onOpenChange={setOpen} container={container || undefined}>
         {images.map((image, index) => (
           <GalleryItem key={index} {...getGalleryItemImage({src: image, name: image})} />
         ))}
@@ -168,10 +208,6 @@ const GalleryTemplate: StoryFn<GalleryProps> = () => {
   const [open, setOpen] = React.useState(false);
 
   const container = usePortalContainer();
-
-  const handleClose = React.useCallback(() => {
-    setOpen(false);
-  }, []);
 
   const handleOpen = React.useCallback(() => {
     setOpen(true);
@@ -218,7 +254,7 @@ const GalleryTemplate: StoryFn<GalleryProps> = () => {
         Open gallery
       </Button>
       <ThemeProvider theme="dark">
-        <Gallery open={open} onClose={handleClose} container={container || undefined}>
+        <Gallery open={open} onOpenChange={setOpen} container={container || undefined}>
           {files.map((file, index) => (
             <GalleryItem
               key={index}

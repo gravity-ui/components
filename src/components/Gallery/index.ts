@@ -2,6 +2,7 @@ export * from './Gallery';
 export * from './GalleryItem';
 export * from './components/FallbackText';
 export * from './components/GalleryItemName';
+export * from './types';
 export {
     useImageZoom as useGalleryImageZoom,
     type UseImageZoomProps as UseGalleryImageZoomProps,

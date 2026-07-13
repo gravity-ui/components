@@ -1,6 +1,8 @@
 {
   "close": "Close",
   "no-items": "No data",
+  "previous": "Previous",
+  "next": "Next",
   "back": "Back",
   "copy-link": "Copy link",
   "download": "Download"

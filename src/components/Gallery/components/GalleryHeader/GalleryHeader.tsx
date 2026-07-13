@@ -13,13 +13,12 @@ export type GalleryHeaderProps = {
     activeItemIndex: number;
     itemsLength: number;
     fullScreen: boolean;
-    onBackClick: () => void;
     onGoToPrevious: () => void;
     onGoToNext: () => void;
-    onUpdateFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-    onClose: () => void;
     hidden?: boolean;
     interactive?: boolean;
+    onClose?: () => void;
+    onUpdateFullScreen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const GalleryHeader = ({
@@ -29,7 +28,6 @@ export const GalleryHeader = ({
     activeItemIndex,
     itemsLength,
     fullScreen,
-    onBackClick,
     onGoToPrevious,
     onGoToNext,
     onUpdateFullScreen,
@@ -47,7 +45,7 @@ export const GalleryHeader = ({
                 withNavigation={withNavigation}
                 activeItemIndex={activeItemIndex}
                 itemsLength={itemsLength}
-                onBackClick={onBackClick}
+                onBackClick={onClose}
                 hidden={hidden}
                 interactive={interactive}
             />

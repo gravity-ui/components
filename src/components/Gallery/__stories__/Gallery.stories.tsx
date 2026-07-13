@@ -373,3 +373,29 @@ const SmallImagesTemplate: StoryFn<GalleryProps> = () => {
 };
 
 export const SmallImages = SmallImagesTemplate.bind({});
+
+const InlineGalleryTemplate: StoryFn<GalleryProps> = () => {
+    return (
+        <div
+            style={{
+                width: '100%',
+                maxWidth: 640,
+                aspectRatio: '16 / 10',
+                border: '1px solid var(--g-color-line-generic)',
+                borderRadius: 'var(--g-border-radius-l)',
+                overflow: 'hidden',
+            }}
+        >
+            <Gallery view="inline">
+                {images.map((image, index) => (
+                    <GalleryItem
+                        key={index}
+                        {...getGalleryItemImage({src: image.url, name: image.name})}
+                    />
+                ))}
+            </Gallery>
+        </div>
+    );
+};
+
+export const InlineGallery = InlineGalleryTemplate.bind({});
