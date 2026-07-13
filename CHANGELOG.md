@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.23.0](https://github.com/gravity-ui/components/compare/v4.22.0...v4.23.0) (2026-07-13)
+
+
+### Features
+
+* **Gallery:** add inline view and controlled active item index ([#397](https://github.com/gravity-ui/components/issues/397)) ([2a04394](https://github.com/gravity-ui/components/commit/2a04394136c0f73f92f8ecaacab0a72d3d3b5a4a))
+* **TokenizedInput:** added prop size for tokenized input ([#398](https://github.com/gravity-ui/components/issues/398)) ([7dc8458](https://github.com/gravity-ui/components/commit/7dc84583210d5b8f3c928106297254b0e0cd8d6e))
+
 ## [4.22.0](https://github.com/gravity-ui/components/compare/v4.21.0...v4.22.0) (2026-06-15)
 
 
