@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.23.1](https://github.com/gravity-ui/components/compare/v4.23.0...v4.23.1) (2026-08-04)
+
+
+### Bug Fixes
+
+* **Notification:** make sources in one vertical line for any themes ([#401](https://github.com/gravity-ui/components/issues/401)) ([536e98e](https://github.com/gravity-ui/components/commit/536e98e5645ea78882f439e18741b39e17250b0b))
+
 ## [4.23.0](https://github.com/gravity-ui/components/compare/v4.22.0...v4.23.0) (2026-07-13)
 
 
