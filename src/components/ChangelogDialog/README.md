@@ -66,3 +66,12 @@ Component for displaying the changelog. It looks like a list of versions in a mo
   ]}
 />
 ```
+
+### CSS API
+
+| Name                               | Description                                           | Default |
+| :--------------------------------- | :---------------------------------------------------- | :------ |
+| `--gc-changelog-dialog-max-width`  | Maximum dialog width                                  | `732px` |
+| `--gc-changelog-dialog-max-height` | Maximum height of the list of versions                | `70vh`  |
+| `--gc-changelog-dialog-meta-width` | Width of the item meta column (date, "New" label)     | `80px`  |
+| ~~`--gc-changelog-dialog-width`~~  | **Deprecated**, use `--gc-changelog-dialog-max-width` | —       |

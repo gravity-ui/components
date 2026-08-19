@@ -4,10 +4,17 @@ $block: '.#{variables.$ns}changelog-dialog';
 $maxItemsHeight: 70vh;
 
 #{$block} {
-    --gc-changelog-dialog-width: 732px;
+    --gc-changelog-dialog-max-height: #{$maxItemsHeight};
     --gc-changelog-dialog-meta-width: 80px;
 
-    --g-dialog-width: var(--gc-changelog-dialog-width, 732px);
+    // `--gc-changelog-dialog-width` is deprecated in favor of `--gc-changelog-dialog-max-width`
+    &__modal {
+        --g-modal-width: 100%;
+        --g-modal-max-width: var(
+            --gc-changelog-dialog-max-width,
+            var(--gc-changelog-dialog-width, 732px)
+        );
+    }
 
     &__full-list-link-icon {
         margin-inline-start: var(--g-spacing-1);
@@ -15,7 +22,7 @@ $maxItemsHeight: 70vh;
     }
 
     &__items-container {
-        max-height: $maxItemsHeight;
+        max-height: var(--gc-changelog-dialog-max-height);
         overflow-y: auto;
         margin-block-end: var(--g-spacing-5);
 
