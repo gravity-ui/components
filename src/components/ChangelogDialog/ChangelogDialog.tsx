@@ -64,6 +64,7 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
     return (
         <Dialog
             className={b(null, className)}
+            modalClassName={b('modal')}
             open={open}
             onClose={onClose}
             disableBodyScrollLock={disableBodyScrollLock}
