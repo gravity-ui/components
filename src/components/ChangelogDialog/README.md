@@ -4,16 +4,22 @@ Component for displaying the changelog. It looks like a list of versions in a mo
 
 ### PropTypes
 
-| Property              | Type                         | Required | Default     | Description                                                     |
-| :-------------------- | :--------------------------- | :------- | :---------- | :-------------------------------------------------------------- |
-| open                  | `Boolean`                    | ✓        |             | Visibility flag                                                 |
-| title                 | `String`                     |          | `Changelog` | Dialog title                                                    |
-| fullListLink          | `String`                     |          |             | Link to documentation with full changelog                       |
-| items                 | `ChangelogItem[]`            | ✓        |             | List of versions to display                                     |
-| disableBodyScrollLock | `Boolean`                    |          | true        | If `true`, window scrolling is disabled when the dialog is open |
-| disableOutsideClick   | `Boolean`                    |          |             | If `true`, do not close dialog on click outside                 |
-| onClose               | `Function`                   | ✓        |             | Action on close                                                 |
-| onStoryClick          | `ChangelogStoryClickHandler` |          |             | Action on click to "View story"                                 |
+| Property                | Type                              | Required | Default     | Description                                                     |
+| :---------------------- | :-------------------------------- | :------- | :---------- | :-------------------------------------------------------------- |
+| open                    | `Boolean`                         | ✓        |             | Visibility flag                                                 |
+| title                   | `String`                          |          | `Changelog` | Dialog title                                                    |
+| fullListLink            | `String`                          |          |             | Link to documentation with full changelog                       |
+| items                   | `ChangelogItem[]`                 | ✓        |             | List of versions to display                                     |
+| disableBodyScrollLock   | `Boolean`                         |          | true        | If `true`, window scrolling is disabled when the dialog is open |
+| disableOutsideClick     | `Boolean`                         |          |             | If `true`, do not close dialog on click outside                 |
+| disableHeightTransition | `Boolean`                         |          | true        | If `true`, do not animate the dialog height                     |
+| loading                 | `Boolean`                         |          |             | If `true`, show loader instead of the list of versions          |
+| error                   | `Boolean \| {title, description}` |          |             | If set, show error instead of the list of versions              |
+| onClose                 | `Function`                        | ✓        |             | Action on close                                                 |
+| onStoryClick            | `ChangelogStoryClickHandler`      |          |             | Action on click to "View story"                                 |
+| onLinkClick             | `Function`                        |          |             | Action on click to "Read more", takes the version link          |
+| onRetryClick            | `Function`                        |          |             | Action on click to "Retry" in the error state                   |
+| className               | `String`                          |          |             | Dialog CSS class                                                |
 
 ### ChangelogItem object
 
