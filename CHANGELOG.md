@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.24.0](https://github.com/gravity-ui/components/compare/v4.23.1...v4.24.0) (2026-08-20)
+
+
+### Features
+
+* **ChangelogDialog:** add modalClassName prop ([#405](https://github.com/gravity-ui/components/issues/405)) ([7c73030](https://github.com/gravity-ui/components/commit/7c730303edc91c7394155098c4708a0f8357c16a))
+* **ChangelogDialog:** make dialog adaptive with max size CSS variables ([#403](https://github.com/gravity-ui/components/issues/403)) ([fecf8bf](https://github.com/gravity-ui/components/commit/fecf8bfd2dfc0b7a4439d2e60baa2719472954de))
+
 ## [4.23.1](https://github.com/gravity-ui/components/compare/v4.23.0...v4.23.1) (2026-08-04)
 
 
