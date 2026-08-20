@@ -20,6 +20,7 @@ Component for displaying the changelog. It looks like a list of versions in a mo
 | onLinkClick             | `Function`                        |          |             | Action on click to "Read more", takes the version link          |
 | onRetryClick            | `Function`                        |          |             | Action on click to "Retry" in the error state                   |
 | className               | `String`                          |          |             | Dialog CSS class                                                |
+| modalClassName          | `String`                          |          |             | Modal CSS class, see [CSS API](#css-api)                        |
 
 ### ChangelogItem object
 
@@ -75,9 +76,10 @@ Component for displaying the changelog. It looks like a list of versions in a mo
 
 ### CSS API
 
-| Name                               | Description                                           | Default |
-| :--------------------------------- | :---------------------------------------------------- | :------ |
-| `--gc-changelog-dialog-max-width`  | Maximum dialog width                                  | `732px` |
-| `--gc-changelog-dialog-max-height` | Maximum height of the list of versions                | `70vh`  |
-| `--gc-changelog-dialog-meta-width` | Width of the item meta column (date, "New" label)     | `80px`  |
-| ~~`--gc-changelog-dialog-width`~~  | **Deprecated**, use `--gc-changelog-dialog-max-width` | —       |
+| Name                               | Description                                       | Default |
+| :--------------------------------- | :------------------------------------------------ | :------ |
+| `--gc-changelog-dialog-max-height` | Maximum height of the list of versions            | `70vh`  |
+| `--gc-changelog-dialog-meta-width` | Width of the item meta column (date, "New" label) | `80px`  |
+| ~~`--gc-changelog-dialog-width`~~  | **Deprecated**, use `--g-modal-max-width`         | —       |
+
+To change the dialog width, set the `Modal` variables — `--g-modal-max-width`, `--g-modal-width` — on the modal itself via the `modalClassName` prop. The component sets `--g-modal-max-width: 732px` there, so the overriding rule has to win the cascade over the component styles.

@@ -124,11 +124,20 @@ test('Calls onStoryClick and onLinkClick', async () => {
     expect(handleLinkClick).toBeCalledWith('https://example.com');
 });
 
-test('Applies className to the element the size CSS variables are set on', () => {
+test('Applies className to the dialog', () => {
     const {baseElement} = render(
         <ChangelogDialog open items={items} className="custom-class" onClose={jest.fn()} />,
     );
 
     // eslint-disable-next-line testing-library/no-node-access
     expect(baseElement.querySelector('.gc-changelog-dialog')).toHaveClass('custom-class');
+});
+
+test('Applies modalClassName to the element the size CSS variables are read on', () => {
+    const {baseElement} = render(
+        <ChangelogDialog open items={items} modalClassName="custom-class" onClose={jest.fn()} />,
+    );
+
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(baseElement.querySelector('.gc-changelog-dialog__modal')).toHaveClass('custom-class');
 });

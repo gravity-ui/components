@@ -7,13 +7,10 @@ $maxItemsHeight: 70vh;
     --gc-changelog-dialog-max-height: #{$maxItemsHeight};
     --gc-changelog-dialog-meta-width: 80px;
 
-    // `--gc-changelog-dialog-width` is deprecated in favor of `--gc-changelog-dialog-max-width`
+    // `--gc-changelog-dialog-width` is deprecated in favor of `--g-modal-max-width`
     &__modal {
         --g-modal-width: 100%;
-        --g-modal-max-width: var(
-            --gc-changelog-dialog-max-width,
-            var(--gc-changelog-dialog-width, 732px)
-        );
+        --g-modal-max-width: var(--gc-changelog-dialog-width, 732px);
     }
 
     &__full-list-link-icon {
