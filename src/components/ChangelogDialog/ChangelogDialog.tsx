@@ -30,6 +30,7 @@ export interface ChangelogDialogProps {
     error?: boolean | {title: string; description: string};
     disableHeightTransition?: boolean;
     className?: string;
+    modalClassName?: string;
 }
 
 let nextId = 1;
@@ -55,6 +56,7 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
         loading,
         error,
         className,
+        modalClassName,
     } = props;
 
     const idRef = React.useRef<number | undefined>(undefined);
@@ -64,7 +66,7 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
     return (
         <Dialog
             className={b(null, className)}
-            modalClassName={b('modal')}
+            modalClassName={b('modal', modalClassName)}
             open={open}
             onClose={onClose}
             disableBodyScrollLock={disableBodyScrollLock}

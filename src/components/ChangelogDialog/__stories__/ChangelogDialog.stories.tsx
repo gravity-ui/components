@@ -138,3 +138,17 @@ Error.args = {
     open: true,
     error: true,
 };
+
+const CUSTOM_MAX_WIDTH_CLASS = 'changelog-dialog-custom-max-width';
+
+const CustomMaxWidthTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogProps) => (
+    <React.Fragment>
+        <style>{`.${CUSTOM_MAX_WIDTH_CLASS} { --gc-changelog-dialog-max-width: 1000px; }`}</style>
+        <DefaultTemplate {...props} modalClassName={CUSTOM_MAX_WIDTH_CLASS} />
+    </React.Fragment>
+);
+
+export const CustomMaxWidth = CustomMaxWidthTemplate.bind({});
+CustomMaxWidth.args = {
+    ...Default.args,
+};

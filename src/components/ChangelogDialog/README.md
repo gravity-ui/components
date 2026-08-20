@@ -20,6 +20,7 @@ Component for displaying the changelog. It looks like a list of versions in a mo
 | onLinkClick             | `Function`                        |          |             | Action on click to "Read more", takes the version link          |
 | onRetryClick            | `Function`                        |          |             | Action on click to "Retry" in the error state                   |
 | className               | `String`                          |          |             | Dialog CSS class                                                |
+| modalClassName          | `String`                          |          |             | Modal CSS class, see [CSS API](#css-api)                        |
 
 ### ChangelogItem object
 
@@ -81,3 +82,5 @@ Component for displaying the changelog. It looks like a list of versions in a mo
 | `--gc-changelog-dialog-max-height` | Maximum height of the list of versions                | `70vh`  |
 | `--gc-changelog-dialog-meta-width` | Width of the item meta column (date, "New" label)     | `80px`  |
 | ~~`--gc-changelog-dialog-width`~~  | **Deprecated**, use `--gc-changelog-dialog-max-width` | —       |
+
+The variables are read by the modal, which is rendered in a portal above the element `className` is applied to. Set them either globally or via the `modalClassName` prop — passing them through `className` has no effect.
