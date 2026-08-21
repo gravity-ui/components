@@ -53,6 +53,8 @@ $block: '.#{variables.$ns}item-selector';
         overflow: hidden;
         text-overflow: ellipsis;
         margin-inline-end: auto;
+        min-width: 0;
+        flex: 1 1 auto;
     }
 
     &__value-item {
@@ -73,9 +75,14 @@ $block: '.#{variables.$ns}item-selector';
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        min-width: 0;
     }
 
     &__value-item-remove {
         display: none;
     }
+}
+
+#{$block}__list-item {
+    --_--item-padding: var(--g-list-item-padding, 0 16px);
 }

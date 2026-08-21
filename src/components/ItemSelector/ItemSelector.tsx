@@ -168,6 +168,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                             </div>
                             <List
                                 items={items}
+                                itemClassName={b('list-item')}
                                 renderItem={renderItem}
                                 filterItem={filterItem}
                                 filterPlaceholder={t('placeholder_search')}
@@ -190,6 +191,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                             </div>
                             <List
                                 items={selected}
+                                itemClassName={b('list-item')}
                                 renderItem={renderValueItem}
                                 filterItem={filterItem}
                                 filterPlaceholder={t('placeholder_search')}
