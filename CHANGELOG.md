@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.24.1](https://github.com/gravity-ui/components/compare/v4.24.0...v4.24.1) (2026-08-21)
+
+
+### Bug Fixes
+
+* **ItemSelector:** preserve item layout during drag and drop ([#406](https://github.com/gravity-ui/components/issues/406)) ([dfbbf73](https://github.com/gravity-ui/components/commit/dfbbf73795d89d3797f3e3fd286b520926c1ee01))
+
 ## [4.24.0](https://github.com/gravity-ui/components/compare/v4.23.1...v4.24.0) (2026-08-20)
 
 
