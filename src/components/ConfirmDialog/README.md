@@ -4,11 +4,11 @@
 
 <!--/GITHUB_BLOCK-->
 
+A utility component that renders a confirmation dialog with apply and cancel buttons.
+
 ```tsx
 import {ConfirmDialog} from '@gravity-ui/components';
 ```
-
-`ConfirmDialog` is a utility component, which renders confirmation dialogs
 
 ## Properties
 

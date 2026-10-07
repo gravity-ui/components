@@ -1,4 +1,4 @@
-## Reactions
+# Reactions
 
 Component for user reactions (e.g. 👍, 😊, 😎 etc) as in GitHub comments for example.
 
@@ -79,7 +79,7 @@ export const YourComponent = () => {
 
 For more code examples go to [Reactions.stories.tsx](https://github.com/gravity-ui/components/blob/main/src/components/Reactions/__stories__/Reactions.stories.tsx).
 
-### Props
+## Properties
 
 **ReactionsProps** (main component props — Reactions' list):
 

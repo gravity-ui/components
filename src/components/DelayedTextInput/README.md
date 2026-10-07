@@ -1,8 +1,8 @@
-## DelayedTextInput
+# DelayedTextInput
 
 Component for delaying user input synchronization with external state.
 
-### PropTypes
+## Properties
 
 Same as [TextInput component](https://github.com/gravity-ui/uikit/blob/main/src/components/controls/TextInput/README.md), with some exceptions:
 

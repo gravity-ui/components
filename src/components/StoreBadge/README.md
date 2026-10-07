@@ -4,13 +4,11 @@
 
 <!--/GITHUB_BLOCK-->
 
+A badge linking to the app in Google Play or the App Store.
+
 ```tsx
 import {StoreBadge} from '@gravity-ui/components';
 ```
-
-## Description
-
-Store Badge can be used to place links to the Google Play and AppStore app stores
 
 ### Platform
 

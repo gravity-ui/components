@@ -1,8 +1,8 @@
-## StoriesGroup
+# StoriesGroup
 
 Component for displaying group of stories. It looks like a carousel in a modal with given places to display text and media.
 
-### PropTypes
+## Properties
 
 | Property            | Type                                      | Required | Default | Description                                                |
 | :------------------ | :---------------------------------------- | :------- | :------ | :--------------------------------------------------------- |

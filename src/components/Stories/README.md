@@ -1,8 +1,8 @@
-## Stories
+# Stories
 
 Component for displaying stories. It looks like a carousel in a modal with given places to display text and media.
 
-### PropTypes
+## Properties
 
 | Property               | Type            | Required | Default | Description                                       |
 | :--------------------- | :-------------- | :------- | :------ | :------------------------------------------------ |

@@ -1,8 +1,8 @@
-## ChangelogDialog
+# ChangelogDialog
 
 Component for displaying the changelog. It looks like a list of versions in a modal. It can display regular versions and versions associated with stories.
 
-### PropTypes
+## Properties
 
 | Property                | Type                              | Required | Default     | Description                                                     |
 | :---------------------- | :-------------------------------- | :------- | :---------- | :-------------------------------------------------------------- |
