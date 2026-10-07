@@ -1,8 +1,8 @@
-## ItemSelector
+# ItemSelector
 
 A component that allows you to form a subset of a list (e.g., a subset of columns).
 
-### PropTypes
+## Properties
 
 | Property        | Type            | Required | Default                                                  |     | Description                                                                                                                          |
 | :-------------- | :-------------- | :------: | :------------------------------------------------------- | :-- | :----------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,5 +1,7 @@
 # CookieConsent
 
+A cookie consent banner and settings popup driven by a `ConsentManager` that stores the user's choices.
+
 ## Usage ConsentMode.Base
 
 ```tsx
@@ -61,7 +63,7 @@ const Analytics = () => {
 };
 ```
 
-## Props
+## Properties
 
 ```ts
 type CookieConsentComponentProps =
