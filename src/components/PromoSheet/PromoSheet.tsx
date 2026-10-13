@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Xmark} from '@gravity-ui/icons';
 import {Button, Icon, Sheet} from '@gravity-ui/uikit';
-import type {ButtonProps, SheetProps} from '@gravity-ui/uikit';
+import type {ButtonProps} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -23,7 +23,7 @@ export type PromoSheetProps = {
     imageContainerClassName?: string;
     imageClassName?: string;
     onActionClick?: ButtonProps['onClick'];
-    onClose?: SheetProps['onTransitionOutComplete'];
+    onClose?: () => void;
 };
 
 type ImageSizes = {
@@ -96,8 +96,10 @@ export function PromoSheet({
             contentClassName={cn('content', contentClassName)}
             open={visible && loaded}
             hideTopBar
-            onOpenChange={setVisible}
-            onTransitionOutComplete={onClose}
+            onOpenChange={(nextOpen) => {
+                setVisible(nextOpen);
+                if (!nextOpen) onClose?.();
+            }}
         >
             <header className={cn('header')}>
                 <h2 className={cn('title')}>{title}</h2>

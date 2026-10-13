@@ -6,8 +6,7 @@ $block: '.#{variables.$ns}share-popover';
 #{$block} {
     position: relative;
 
-    &__tooltip .g-popup__content {
-        max-width: none;
+    &__tooltip {
         padding: 8px;
     }
 
