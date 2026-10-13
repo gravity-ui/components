@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {List} from '@gravity-ui/uikit';
+import {List, Loader} from '@gravity-ui/uikit';
 
 import {b} from '../../constants';
 import i18n from '../../i18n';
@@ -58,16 +58,28 @@ export function SuggestionsList({
                 size,
             })}
         >
-            <List
-                items={items}
-                renderItem={(s) => <div className={b('suggestions-list-item')}>{s.label}</div>}
-                activeItemIndex={selected}
-                filterable={false}
-                loading={isLoading}
-                emptyPlaceholder={EmptyPlaceholder}
-                onItemClick={onApplySuggestion}
-                virtualized={false}
-            />
+            {items.length > 0 && (
+                <List
+                    aria-label={i18n('suggestions.title')}
+                    className={b('suggestions-list')}
+                    items={items.map((item, index) => ({id: String(index), item}))}
+                    getItemContent={({item}) => item.label}
+                    getItemTextValue={({item}) => item.search}
+                    activeItemId={selected < 0 ? null : String(selected)}
+                    activateOnHover={false}
+                    onItemAction={(_id, {item}) => onApplySuggestion(item)}
+                    renderItem={(ctx, helpers) => (
+                        <List.ItemView
+                            {...helpers.getItemProps()}
+                            {...helpers.getItemViewProps()}
+                            className={b('suggestions-list-item')}
+                        >
+                            {ctx.content}
+                        </List.ItemView>
+                    )}
+                />
+            )}
+            {isLoading ? <Loader size="s" /> : isEmpty && EmptyPlaceholder}
         </div>
     );
 }

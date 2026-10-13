@@ -25,12 +25,6 @@ export default {
             config: {
                 rules: [
                     {
-                        id: 'aria-valid-attr-value',
-                        enabled: false,
-                        // the id in aria-controls will resolve on hover
-                        selector: '.gc-share-popover__container[aria-controls]',
-                    },
-                    {
                         id: 'color-contrast',
                         enabled: false,
                     },

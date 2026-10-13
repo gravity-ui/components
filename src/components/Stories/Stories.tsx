@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type {ModalCloseReason} from '@gravity-ui/uikit';
+import type {OpenChangeReason} from '@gravity-ui/uikit';
 import {Modal} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
@@ -17,8 +17,8 @@ export interface StoriesProps {
     open: boolean;
     items: StoriesItem[];
     onClose?: (
-        event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>,
-        reason: ModalCloseReason | 'closeButtonClick',
+        event?: Event | React.MouseEvent<HTMLElement, MouseEvent>,
+        reason?: OpenChangeReason,
     ) => void;
     initialStoryIndex?: number;
     onPreviousClick?: (storyIndex: number) => void;
@@ -64,8 +64,8 @@ export function Stories({
         (event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>) => void
     >(
         (event) => {
-            handleClose(event, 'closeButtonClick');
-            if (syncInTabsKey) closeWithLS(event, 'closeButtonClick');
+            handleClose(event, 'click');
+            if (syncInTabsKey) closeWithLS(event, 'click');
         },
         [handleClose, syncInTabsKey, closeWithLS],
     );
@@ -137,7 +137,9 @@ export function Stories({
     return (
         <Modal
             open={open}
-            onClose={handleClose}
+            onOpenChange={(nextOpen, event, reason) => {
+                if (!nextOpen) handleClose(event, reason);
+            }}
             disableOutsideClick={disableOutsideClick}
             className={b()}
             contentClassName={b('modal-content', className)}

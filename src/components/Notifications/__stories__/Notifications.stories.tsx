@@ -82,7 +82,7 @@ export const Default: StoryFn = () => {
     });
 
     return (
-        <Flex gap={4}>
+        <Flex gap="spacing-4">
             <Wrapper>
                 <Notifications notifications={notifications} actions={actions} />
             </Wrapper>
@@ -119,14 +119,14 @@ export const LoadByScrolling: StoryFn = () => {
 export const InsideAPopup: StoryFn = () => {
     const {notifications, actions} = useNotificationsWithActions();
     const [isOpen, setIsOpen] = React.useState(false);
-    const ref = React.useRef(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
 
     return (
         <React.Fragment>
-            <Button onClick={() => setIsOpen(!isOpen)} ref={ref}>
+            <Button onClick={() => setIsOpen(!isOpen)} ref={setAnchorElement}>
                 <Icon data={Bell} />
             </Button>
-            <Popup open={isOpen} anchorRef={ref}>
+            <Popup open={isOpen} anchorElement={anchorElement}>
                 <NotificationsPopupWrapper>
                     <Notifications notifications={notifications} actions={actions} />
                 </NotificationsPopupWrapper>
@@ -227,7 +227,7 @@ function CustomHeaderComponent({title, activeTab, onTabUpdate}: CustomHeaderComp
                         top: '50%',
                         transform: 'translateY(-50%)',
                     }}
-                    gap={1}
+                    gap="spacing-1"
                 >
                     <NotificationAction action={{icon: Funnel, text: 'Filter'}} />
                     {activeTab === 'second' && (
@@ -250,7 +250,7 @@ function useNotificationsVariationsControl() {
         showNotificationActions,
         sourcePlacement,
         renderControls: () => (
-            <Flex gap={2} direction="column">
+            <Flex gap="spacing-2" direction="column">
                 <Checkbox
                     title=""
                     checked={showNotificationsActions}
@@ -264,7 +264,7 @@ function useNotificationsVariationsControl() {
                 >
                     Notification actions
                 </Checkbox>
-                <Flex direction="column" gap={1}>
+                <Flex direction="column" gap="spacing-1">
                     <Text>Source/date placement</Text>
                     <SegmentedRadioGroup<NotificationSourcePlacement>
                         value={sourcePlacement}

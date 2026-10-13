@@ -4,6 +4,8 @@ Component for displaying group of stories. It looks like a carousel in a modal w
 
 ## Properties
 
+`onClose(event?, reason?)` uses UIKit 8 reasons: `escape-key`, `outside-press`, or `click` for the close button. Assistive-technology dismissal may omit the event or reason.
+
 | Property            | Type                                      | Required | Default | Description                                                |
 | :------------------ | :---------------------------------------- | :------- | :------ | :--------------------------------------------------------- |
 | open                | `Boolean`                                 | ✓        |         | Visibility flag                                            |

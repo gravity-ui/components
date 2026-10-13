@@ -146,7 +146,7 @@ const OnboardingMenuParent = ({
                         </div>
                         <div className={cnOnboardingMenu('buttons')}>
                             <Button
-                                view="normal-contrast"
+                                view="contrast-light"
                                 size="m"
                                 onClick={onCollapseClickCallback}
                                 width="max"
@@ -154,7 +154,8 @@ const OnboardingMenuParent = ({
                                 {collapseButtonText ?? t('collapse')}
                             </Button>
                             <Button
-                                view="outlined-contrast"
+                                view="outlined"
+                                className={cnOnboardingMenu('complete-button')}
                                 onClick={onCompleteClick}
                                 size="m"
                                 width="max"

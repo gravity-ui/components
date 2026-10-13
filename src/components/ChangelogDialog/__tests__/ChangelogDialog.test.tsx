@@ -21,7 +21,7 @@ const items: ChangelogItem[] = [
 ];
 
 test('Renders the list of versions', () => {
-    render(<ChangelogDialog open items={items} onClose={jest.fn()} />);
+    render(<ChangelogDialog open items={items} onOpenChange={jest.fn()} />);
 
     expect(screen.getByRole('dialog', {name: 'Changelog'})).toBeInTheDocument();
     expect(screen.getByRole('heading', {name: 'New navigation'})).toBeInTheDocument();
@@ -31,13 +31,21 @@ test('Renders the list of versions', () => {
 });
 
 test('Renders nothing when closed', () => {
-    render(<ChangelogDialog open={false} items={items} onClose={jest.fn()} />);
+    render(<ChangelogDialog open={false} items={items} onOpenChange={jest.fn()} />);
 
     expect(screen.queryByRole('heading', {name: 'New navigation'})).not.toBeInTheDocument();
 });
 
+test('Reports dismissal through onOpenChange with the UIKit 8 reason', async () => {
+    const onOpenChange = jest.fn();
+    render(<ChangelogDialog open items={items} onOpenChange={onOpenChange} />);
+    const user = userEvent.setup();
+    await user.keyboard('{Escape}');
+    expect(onOpenChange).toHaveBeenCalledWith(false, expect.any(KeyboardEvent), 'escape-key');
+});
+
 test('Renders placeholder when there are no versions', () => {
-    render(<ChangelogDialog open items={[]} onClose={jest.fn()} />);
+    render(<ChangelogDialog open items={[]} onOpenChange={jest.fn()} />);
 
     expect(screen.getByText('No data')).toBeInTheDocument();
 });
@@ -48,7 +56,7 @@ test('Renders link to the full changelog when fullListLink is set', () => {
             open
             items={items}
             fullListLink="https://example.com/changelog"
-            onClose={jest.fn()}
+            onOpenChange={jest.fn()}
         />,
     );
 
@@ -59,7 +67,7 @@ test('Renders link to the full changelog when fullListLink is set', () => {
 });
 
 test('Hides versions while loading', () => {
-    render(<ChangelogDialog open loading items={items} onClose={jest.fn()} />);
+    render(<ChangelogDialog open loading items={items} onOpenChange={jest.fn()} />);
 
     expect(screen.queryByRole('heading', {name: 'New navigation'})).not.toBeInTheDocument();
     expect(screen.queryByText('No data')).not.toBeInTheDocument();
@@ -74,7 +82,7 @@ test('Shows error instead of versions and calls onRetryClick', async () => {
             error
             items={items}
             onRetryClick={handleRetryClick}
-            onClose={jest.fn()}
+            onOpenChange={jest.fn()}
         />,
     );
 
@@ -93,7 +101,7 @@ test('Shows custom error title and description', () => {
             open
             error={{title: 'Error title', description: 'Error description'}}
             items={items}
-            onClose={jest.fn()}
+            onOpenChange={jest.fn()}
         />,
     );
 
@@ -111,7 +119,7 @@ test('Calls onStoryClick and onLinkClick', async () => {
             items={items}
             onStoryClick={handleStoryClick}
             onLinkClick={handleLinkClick}
-            onClose={jest.fn()}
+            onOpenChange={jest.fn()}
         />,
     );
 
@@ -126,7 +134,7 @@ test('Calls onStoryClick and onLinkClick', async () => {
 
 test('Applies className to the dialog', () => {
     const {baseElement} = render(
-        <ChangelogDialog open items={items} className="custom-class" onClose={jest.fn()} />,
+        <ChangelogDialog open items={items} className="custom-class" onOpenChange={jest.fn()} />,
     );
 
     // eslint-disable-next-line testing-library/no-node-access
@@ -135,7 +143,12 @@ test('Applies className to the dialog', () => {
 
 test('Applies modalClassName to the element the size CSS variables are read on', () => {
     const {baseElement} = render(
-        <ChangelogDialog open items={items} modalClassName="custom-class" onClose={jest.fn()} />,
+        <ChangelogDialog
+            open
+            items={items}
+            modalClassName="custom-class"
+            onOpenChange={jest.fn()}
+        />,
     );
 
     // eslint-disable-next-line testing-library/no-node-access

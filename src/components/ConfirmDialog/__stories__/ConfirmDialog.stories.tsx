@@ -29,7 +29,7 @@ const DefaultTemplate: StoryFn<ConfirmDialogProps> = (args) => {
                     alert('Cancelled');
                     setOpen(false);
                 }}
-                onClose={() => setOpen(false)}
+                onOpenChange={setOpen}
                 open={open}
             />
         </React.Fragment>

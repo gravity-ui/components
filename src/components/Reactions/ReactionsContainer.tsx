@@ -13,7 +13,7 @@ export type ReactionsContainerProps = {
 
 export function ReactionsContainer({className, style, qa, children}: ReactionsContainerProps) {
     return (
-        <Flex className={b(null, className)} style={style} gap={1} wrap={true} qa={qa}>
+        <Flex className={b(null, className)} style={style} gap="spacing-1" wrap={true} qa={qa}>
             {children}
         </Flex>
     );

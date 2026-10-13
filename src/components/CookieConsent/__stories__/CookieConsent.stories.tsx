@@ -61,9 +61,6 @@ export default {
         cookieList: {
             control: 'object',
         },
-        disableHeightTransition: {
-            control: 'boolean',
-        },
         defaultFunctionalCookies: {
             control: 'boolean',
         },

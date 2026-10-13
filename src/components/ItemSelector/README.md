@@ -20,8 +20,9 @@ A component that allows you to form a subset of a list (e.g., a subset of column
 
 The item can be a string or an any object (but must be `truly`).
 
-The `getItemId` must be specified if the items in the main list are objects and not strings.
-The `renderItem` and `filterItem` can be specified if custom display and filtering are required.
+The `getItemId` must be specified if the items in the main list are objects and not strings. IDs must be unique and stable.
+The `renderItem(item, active, index)` and `filterItem(query)(item)` callbacks still render row content and filter items; they do not use the new UIKit List callback signatures. `renderValueItem` uses the same signature as `renderItem` for selected rows.
+Selected items can be reordered with the pointer or keyboard (focus a drag handle, press Space, use arrow keys, then press Space again). Sorting is disabled while the selected-items search is active.
 
 ```jsx
 <ItemSelector

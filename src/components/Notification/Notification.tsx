@@ -173,7 +173,7 @@ function renderSourceIcon(source: NotificationSourceProps, titleId: string): Rea
     if (!iconElement) return null;
 
     return source.href ? (
-        <Link href={source.href} target="_blank" extraProps={{'aria-labelledby': titleId}}>
+        <Link href={source.href} target="_blank" aria-labelledby={titleId}>
             {iconElement}
         </Link>
     ) : (

@@ -23,7 +23,7 @@ export type PromoSheetProps = {
     imageContainerClassName?: string;
     imageClassName?: string;
     onActionClick?: ButtonProps['onClick'];
-    onClose?: SheetProps['onClose'];
+    onClose?: SheetProps['onTransitionOutComplete'];
 };
 
 type ImageSizes = {
@@ -62,13 +62,6 @@ export function PromoSheet({
         setVisible(false);
     }, []);
 
-    const closeButtonExtraProps = React.useMemo(
-        () => ({
-            'aria-label': closeText,
-        }),
-        [closeText],
-    );
-
     React.useEffect(() => {
         if (!imageSrc) {
             setLoaded(true);
@@ -101,18 +94,19 @@ export function PromoSheet({
         <Sheet
             className={cn(null, className)}
             contentClassName={cn('content', contentClassName)}
-            visible={visible && loaded}
+            open={visible && loaded}
             hideTopBar
-            onClose={onClose}
+            onOpenChange={setVisible}
+            onTransitionOutComplete={onClose}
         >
             <header className={cn('header')}>
                 <h2 className={cn('title')}>{title}</h2>
                 <Button
                     className={cn('close-button')}
                     size="xl"
-                    view="flat-contrast"
+                    view="flat"
                     onClick={handleCloseClick}
-                    extraProps={closeButtonExtraProps}
+                    aria-label={closeText}
                 >
                     <Icon data={Xmark} size={24} />
                 </Button>
@@ -134,7 +128,7 @@ export function PromoSheet({
                 <Button
                     className={cn('action-button')}
                     size="xl"
-                    view="outlined-contrast"
+                    view="outlined"
                     width="max"
                     href={actionHref as any}
                     onClick={handleActionClick as any}

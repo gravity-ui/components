@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import {ChevronDown} from '@gravity-ui/icons';
 import {Icon, Select, SelectProps} from '@gravity-ui/uikit';
-import difference from 'lodash/difference';
-import throttle from 'lodash/throttle';
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
+import {difference, throttle} from 'es-toolkit';
 
 import {block} from '../utils/cn';
 
@@ -117,7 +117,7 @@ export interface AdaptiveTabsProps<T> {
     /** Allows you not to specify activeTab */
     allowNotSelected?: boolean;
     /** Settings to control popup with hidden tabs list */
-    moreControlProps?: Pick<SelectProps, 'virtualizationThreshold' | 'popupWidth'>;
+    moreControlProps?: Pick<SelectProps, 'popupWidth'>;
 }
 
 interface AdaptiveTabsState {
@@ -888,16 +888,18 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
             }));
 
         return (
-            <Select
-                open={isSelectOpened}
-                onUpdate={this.onChooseTabFromSelect}
-                options={itemsForSelect}
-                value={[]}
-                filterable={false}
-                renderControl={this.renderSwitcherForMoreSelect}
-                onOpenChange={this.handleOpenSelectChange}
-                {...moreControlProps}
-            />
+            <ListVirtualizer>
+                <Select
+                    open={isSelectOpened}
+                    onUpdate={this.onChooseTabFromSelect}
+                    options={itemsForSelect}
+                    value={[]}
+                    filterable={false}
+                    renderControl={this.renderSwitcherForMoreSelect}
+                    onOpenChange={this.handleOpenSelectChange}
+                    {...moreControlProps}
+                />
+            </ListVirtualizer>
         );
     }
 
@@ -923,15 +925,17 @@ export class AdaptiveTabs<T> extends React.Component<AdaptiveTabsProps<T>, Adapt
         }));
 
         return (
-            <Select
-                className={b('tabs-as-select-control')}
-                onUpdate={this.handleTabsAsSelectUpdate}
-                options={itemsForSelect}
-                value={activeTabID === undefined ? [] : [activeTabID]}
-                filterable={false}
-                renderControl={this.renderSwitcherForTabsAsSelect}
-                onOpenChange={this.handleOpenSelectChange}
-            />
+            <ListVirtualizer>
+                <Select
+                    className={b('tabs-as-select-control')}
+                    onUpdate={this.handleTabsAsSelectUpdate}
+                    options={itemsForSelect}
+                    value={activeTabID === undefined ? [] : [activeTabID]}
+                    filterable={false}
+                    renderControl={this.renderSwitcherForTabsAsSelect}
+                    onOpenChange={this.handleOpenSelectChange}
+                />
+            </ListVirtualizer>
         );
     }
 

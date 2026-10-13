@@ -7,12 +7,11 @@ import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
 import type {Preview} from '@storybook/react';
 
 import {withLang} from './decorators/withLang';
-import {withMobile} from './decorators/withMobile';
 import {withStrictMode} from './decorators/withStrictMode';
 import {withTheme} from './decorators/withTheme';
 
 const preview: Preview = {
-    decorators: [withLang, withMobile, withTheme, withStrictMode],
+    decorators: [withLang, withTheme, withStrictMode],
     parameters: {
         jsx: {showFunctions: true},
         viewport: {

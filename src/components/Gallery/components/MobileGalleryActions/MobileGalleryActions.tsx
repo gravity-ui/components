@@ -35,7 +35,7 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
                 children: (
                     <Flex
                         alignItems="center"
-                        gap={3}
+                        gap="spacing-3"
                         className={cnMobileGalleryActions('custom-item')}
                     >
                         {item.icon}
@@ -68,14 +68,25 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
     );
 
     return (
-        <Sheet className={cnMobileGalleryActions()} visible={open} onClose={onClose}>
+        <Sheet
+            className={cnMobileGalleryActions()}
+            open={open}
+            onOpenChange={(nextOpen) => {
+                if (!nextOpen) onClose();
+            }}
+        >
             <List
+                aria-label={t('actions')}
+                role="grid"
                 items={actions}
-                filterable={false}
-                renderItem={renderListItem}
-                itemHeight={44}
-                virtualized={false}
-                onItemClick={onClose}
+                size="xl"
+                getItemTextValue={(item) => (item.__titleT ? item.__titleT({t}) : item.title)}
+                renderItem={(ctx, helpers) => (
+                    <List.ItemView {...helpers.getItemProps()} {...helpers.getItemViewProps()}>
+                        <div {...helpers.getCellProps()}>{renderListItem(ctx.item)}</div>
+                    </List.ItemView>
+                )}
+                onItemAction={onClose}
             />
         </Sheet>
     );

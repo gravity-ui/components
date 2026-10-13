@@ -10,24 +10,37 @@ npm install @gravity-ui/components
 
 ## Usage
 
-`@gravity-ui/uikit` is a peer dependency: install it, import its styles once at the app entry point, and wrap the app in `ThemeProvider`. The components in this package render unstyled without that setup.
+`@gravity-ui/uikit` 8 and React 18/19 are required. Install the current UIKit 8 prerelease with `npm install @gravity-ui/uikit@beta`.
+
+`@gravity-ui/uikit` is a peer dependency: install it, import its styles once at the app entry point, and wrap the app in `Provider`. The components in this package render unstyled without that setup.
 
 ```tsx
-import {ThemeProvider, TextInput} from '@gravity-ui/uikit';
+import {Provider, TextInput} from '@gravity-ui/uikit';
 import {FormRow} from '@gravity-ui/components';
 import '@gravity-ui/uikit/styles/fonts.css';
 import '@gravity-ui/uikit/styles/styles.css';
 
 export function App() {
   return (
-    <ThemeProvider theme="light">
+    <Provider theme="light">
       <FormRow label="Name" fieldId="name">
         <TextInput id="name" name="name" />
       </FormRow>
-    </ThemeProvider>
+    </Provider>
   );
 }
 ```
+
+### Migrating to UIKit 8
+
+- Replace the application-level `ThemeProvider` with `Provider`.
+- Use `onOpenChange` instead of `onClose` in `ConfirmDialog` and `ChangelogDialog`. `ConfirmDialog` accepts the new Dialog props, including `maxWidth` and `fullWidth` instead of `size`.
+- Remove `disableHeightTransition` from `ChangelogDialog` and cookie consent popup settings; UIKit no longer animates content height.
+- `Stories` and `StoriesGroup` keep `onClose`, with optional event/reason arguments and UIKit 8 reasons (`escape-key`, `outside-press`, `click`).
+- Remove `moreControlProps.virtualizationThreshold` from `AdaptiveTabs`; its dropdowns use `ListVirtualizer`.
+- Pass native HTML attributes directly to button/link props, including `StoreBadge`, instead of `extraProps`. Use UIKit 8 Button views in custom story actions.
+
+See the [UIKit 8 migration guide](https://github.com/gravity-ui/uikit/blob/next/docs/migration-to-v8.md) for the underlying API changes. This package uses the new List, Menu, and Popover APIs without the legacy entry point.
 
 ### Confirmation dialog
 
@@ -42,7 +55,7 @@ import {ConfirmDialog} from '@gravity-ui/components';
   textButtonCancel="Cancel"
   onClickButtonApply={handleDelete}
   onClickButtonCancel={() => setOpen(false)}
-  onClose={() => setOpen(false)}
+  onOpenChange={setOpen}
 />;
 ```
 
@@ -97,7 +110,7 @@ The composite-component layer of Gravity UI — ready-made form rows, confirmati
 
 ### Common pitfalls
 
-- **Nothing is styled without uikit setup.** Install `@gravity-ui/uikit`, import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once, and wrap the app in `ThemeProvider` — this package ships no global styles of its own.
+- **Nothing is styled without uikit setup.** Install `@gravity-ui/uikit`, import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once, and wrap the app in `Provider` — this package ships no global styles of its own.
 - **`FormRow` does not render the input.** Pass the control as `children` and link it with `fieldId` matching the control's `id`; the `label` prop is the label text, not a `<label>` element.
 - **`ConfirmDialog` has no `onConfirm` / `onCancel`.** The handlers are `onClickButtonApply` and `onClickButtonCancel`, and `textButtonApply` / `textButtonCancel` are required.
 - **`AdaptiveTabs` takes `items` + `activeTab` + `onSelectTab`,** not uikit `Tabs` children; the `size` values are `m | l | xl`.

@@ -1,10 +1,16 @@
-import {ThemeProvider} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 import type {Decorator} from '@storybook/react';
 
 export const withTheme: Decorator = (Story, context) => {
     return (
-        <ThemeProvider theme={context.globals.theme} direction={context.globals.direction}>
-            <Story {...context} />
-        </ThemeProvider>
+        <Provider
+            theme={context.globals.theme}
+            direction={context.globals.direction}
+            lang={context.globals.lang}
+            mobile={context.globals.platform === 'mobile'}
+            platform={context.globals.platform}
+        >
+            <Story key={context.globals.platform} {...context} />
+        </Provider>
     );
 };

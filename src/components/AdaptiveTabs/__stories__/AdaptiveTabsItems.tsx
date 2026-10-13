@@ -12,7 +12,7 @@ const RenderTitleWithWrap = (props: {title: string | React.ReactNode}) => {
     const {title} = props;
     return (
         <div>
-            <Button size="xs" view="flat" extraProps={{'aria-label': buttonAddLabel}}>
+            <Button size="xs" view="flat" aria-label={buttonAddLabel}>
                 <Icon data={SquarePlus} size="xs" />
             </Button>
 
@@ -28,7 +28,7 @@ const RenderTitleWithWrap = (props: {title: string | React.ReactNode}) => {
             >
                 {title}
             </span>
-            <Button size="xs" extraProps={{'aria-label': buttonRemoveLabel}}>
+            <Button size="xs" aria-label={buttonRemoveLabel}>
                 <Icon data={SquareXmark} size="xs" />
             </Button>
         </div>

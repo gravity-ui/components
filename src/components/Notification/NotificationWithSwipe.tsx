@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import clamp from 'lodash/clamp';
+import {clamp} from 'es-toolkit';
 
 import {block} from '../utils/cn';
 

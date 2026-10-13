@@ -1,4 +1,4 @@
-import pick from 'lodash/pick';
+import {pick} from 'es-toolkit';
 import Cookies from 'universal-cookie';
 import type {CookieSetOptions} from 'universal-cookie';
 

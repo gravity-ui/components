@@ -12,7 +12,7 @@ import {
     PopupPlacement,
     QAProps,
 } from '@gravity-ui/uikit';
-import xor from 'lodash/xor';
+import {xor} from 'es-toolkit';
 
 import {block} from '../utils/cn';
 
@@ -265,14 +265,15 @@ export function Reactions<AddReactionRef extends HTMLElement = HTMLButtonElement
     const addReactionPopup = readOnly ? null : (
         <Popup
             id={popupId}
-            anchorRef={renderAddReaction ? addReactionRef : addReactionButtonRef}
+            anchorElement={
+                renderAddReaction ? addReactionRef.current : addReactionButtonRef.current
+            }
             className={b('add-reaction-popover', popupClassName)}
             open={palettePopupOpened}
             modal
             placement={popupPlacement}
             initialFocus={0}
-            onOutsideClick={onClosePalettePopup}
-            onEscapeKeyDown={onClosePalettePopup}
+            onOpenChange={setPalettePopupOpened}
         >
             {paletteContent}
         </Popup>

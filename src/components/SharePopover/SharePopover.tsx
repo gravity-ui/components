@@ -1,9 +1,8 @@
 import * as React from 'react';
 
 import {NodesRight} from '@gravity-ui/icons';
-import {Icon, useUniqId} from '@gravity-ui/uikit';
-import type {IconData, PopupPlacement} from '@gravity-ui/uikit';
-import {Popover} from '@gravity-ui/uikit/legacy';
+import {Icon, Popover} from '@gravity-ui/uikit';
+import type {IconData, PopoverProps, PopupPlacement} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -106,8 +105,8 @@ export const SharePopover = (props: SharePopoverProps) => {
         buttonAriaLabel,
     } = props;
     const [isOpen, setIsOpen] = React.useState(false);
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const tooltipId = useUniqId();
+    const canWebShare =
+        useWebShareApi && typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 
     const content = React.useMemo(
         () => (
@@ -145,56 +144,55 @@ export const SharePopover = (props: SharePopoverProps) => {
                 onClick(event);
             }
 
-            if (useWebShareApi && navigator && typeof navigator.share === 'function') {
-                await navigator.share({url, title, text});
+            if (canWebShare) {
                 event.preventDefault();
-                return false;
+                await navigator.share({url, title, text});
+            } else if (!autoclosable && openByHover) {
+                setIsOpen((open) => !open);
             }
-            return true;
         },
-        [onClick, text, title, url, useWebShareApi],
+        [onClick, text, title, url, canWebShare, autoclosable, openByHover],
     );
+
+    const handleOpenChange: PopoverProps['onOpenChange'] = (open, _event, reason) => {
+        if (!open && !autoclosable && reason === 'hover') return;
+        setIsOpen(open);
+    };
 
     const shouldOpenByHover = openByHover && !useWebShareApi;
     return (
         <Popover
             placement={placement}
             hasArrow={false}
-            openOnHover={shouldOpenByHover}
-            autoclosable={autoclosable}
-            delayClosing={closeDelay}
+            trigger={shouldOpenByHover ? 'all' : 'click'}
+            openDelay={0}
+            closeDelay={closeDelay}
+            open={isOpen}
+            disabled={canWebShare}
             content={content}
-            className={b(null, className)}
-            tooltipClassName={b('tooltip', tooltipClassName)}
-            onClick={handleClick}
-            tooltipId={tooltipId}
+            className={b('tooltip', tooltipClassName)}
             disablePortal
-            onOpenChange={setIsOpen}
-            focusTrap={!shouldOpenByHover}
-            autoFocus={!shouldOpenByHover}
-            restoreFocusRef={shouldOpenByHover ? undefined : buttonRef}
+            onOpenChange={handleOpenChange}
+            modal={!shouldOpenByHover}
+            initialFocus={shouldOpenByHover ? -1 : 0}
+            returnFocus={!shouldOpenByHover}
         >
-            {({onClick: onClickInner}) => (
-                <button
-                    className={b('container', switcherClassName)}
-                    aria-expanded={openByHover ? undefined : isOpen}
-                    aria-controls={tooltipId}
-                    aria-describedby={tooltipId}
-                    aria-label={buttonAriaLabel}
-                    onClick={onClickInner}
-                    ref={buttonRef}
-                >
-                    <div className={b('icon-container')}>
-                        <Icon
-                            data={customIcon ? customIcon : NodesRight}
-                            size={iconSize}
-                            className={b('icon', iconClass)}
-                        />
-                    </div>
+            <button
+                type="button"
+                className={b('container', [b(null, className), switcherClassName])}
+                aria-label={buttonAriaLabel}
+                onClick={handleClick}
+            >
+                <div className={b('icon-container')}>
+                    <Icon
+                        data={customIcon ? customIcon : NodesRight}
+                        size={iconSize}
+                        className={b('icon', iconClass)}
+                    />
+                </div>
 
-                    {Boolean(buttonTitle) && <div className={b('title')}>{buttonTitle}</div>}
-                </button>
-            )}
+                {Boolean(buttonTitle) && <div className={b('title')}>{buttonTitle}</div>}
+            </button>
         </Popover>
     );
 };

@@ -251,7 +251,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
             },
             secondAction: {
                 children: 'Second button',
-                view: 'normal-contrast',
+                view: 'contrast-light',
             },
             content:
                 'Lorem ipsum odor amet, consectetuer adipiscing elit. Nunc at parturient tristique senectus class duis eget per taciti. Eu rutrum est euismod risus aliquet in. Vehicula habitant nostra enim quis blandit consequat. Blandit ex ut purus; vestibulum accumsan duis? Porttitor accumsan at molestie integer nulla habitant? Egestas urna suscipit eleifend tortor mauris montes vulputate primis?Tempor viverra vitae tempus consectetur egestas? Quam dolor dictumst pellentesque porta; pulvinar conubia placerat risus. Leo at elementum vivamus fermentum erat taciti. Turpis ipsum faucibus primis purus, montes curae eu vel. Lacus metus sagittis dictumst diam libero imperdiet rhoncus neque. Natoque nullam inceptos porttitor integer porttitor nascetur a interdum. Imperdiet scelerisque rutrum congue massa eleifend torquent nisi. Sociosqu libero volutpat nisl orci viverra. Tristique egestas auctor conubia; etiam lectus scelerisque ligula. Magnis ultrices venenatis vivamus hac taciti inceptos leo. Interdum magnis sollicitudin elementum placerat montes. Lacinia platea netus nascetur ornare sociosqu. Inceptos taciti iaculis interdum nisl sodales in eros fermentum. Justo maecenas elementum condimentum feugiat consectetur semper sollicitudin. Primis sodales posuere facilisis donec ipsum efficitur. Faucibus accumsan lectus bibendum rhoncus maecenas, eget aliquam netus. Lectus torquent ut sodales fringilla natoque.',
@@ -288,7 +288,7 @@ const DefaultTemplate: StoryFn<StoriesProps> = () => {
     ];
 
     return (
-        <Flex gap={5} direction="column">
+        <Flex gap="spacing-5" direction="column">
             {[itemsFirst, itemsSecond, itemsThird].map((items, index) => {
                 return (
                     <BaseStory key={index} items={items} description={exampleDescription[index]} />

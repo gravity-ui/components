@@ -71,6 +71,36 @@ describe('useSuggestions', () => {
 
     afterEach(() => {
         jest.useRealTimers();
+        mockOptionsInfo.debounceDelay = 0;
+        mockOptionsInfo.suggestionsInitialCall.value.current = true;
+    });
+
+    it('debounces requests and fetches only the latest input', async () => {
+        mockOptionsInfo.debounceDelay = 300;
+        mockOptionsInfo.suggestionsInitialCall.value.current = false;
+        mockOnSuggest.mockResolvedValue({items: [], options: {isFilterable: false}});
+        const {rerender} = renderHook(
+            ({value}) =>
+                useSuggestions({
+                    idx: 0,
+                    fieldKey: 'key',
+                    value,
+                    offset: value.length,
+                    inputElement: null,
+                }),
+            {wrapper, initialProps: {value: 'a'}},
+        );
+
+        act(() => jest.advanceTimersByTime(200));
+        rerender({value: 'ab'});
+        act(() => jest.advanceTimersByTime(299));
+        expect(mockOnSuggest).not.toHaveBeenCalled();
+
+        await act(async () => {
+            jest.advanceTimersByTime(1);
+        });
+        expect(mockOnSuggest).toHaveBeenCalledTimes(1);
+        expect(mockOnSuggest).toHaveBeenCalledWith(expect.objectContaining({value: 'ab'}));
     });
 
     it('should fetch suggestions and update state', async () => {

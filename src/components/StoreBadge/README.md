@@ -62,19 +62,18 @@ LANDING_BLOCK-->
 
 ## Properties
 
-| Name           | Description                                         | Default |
-| :------------- | :-------------------------------------------------- | :-----: |
-| **platform**   | App store platform: `"android"` or `"ios"`          |    -    |
-| **href**       | The URL                                             |    -    |
-| **title**      | Link title                                          |    -    |
-| **target**     | Link target attribute                               |    -    |
-| **rel**        | Link rel attribute                                  |    -    |
-| **id**         | Id attribute                                        |    -    |
-| **children**   | Child element `React.ReactNode`                     |    -    |
-| **onClick**    | Handler for onclick event `React.MouseEventHandler` |    -    |
-| **onFocus**    | Handler for onfocus event `React.MouseEventHandler` |    -    |
-| **onBlur**     | Handler for onblur event `React.MouseEventHandler`  |    -    |
-| **extraProps** | Extra html attributes                               |    -    |
+| Name         | Description                                         | Default |
+| :----------- | :-------------------------------------------------- | :-----: |
+| **platform** | App store platform: `"android"` or `"ios"`          |    -    |
+| **href**     | The URL                                             |    -    |
+| **title**    | Link title                                          |    -    |
+| **target**   | Link target attribute                               |    -    |
+| **rel**      | Link rel attribute                                  |    -    |
+| **id**       | Id attribute                                        |    -    |
+| **children** | Child element `React.ReactNode`                     |    -    |
+| **onClick**  | Handler for onclick event `React.MouseEventHandler` |    -    |
+| **onFocus**  | Handler for onfocus event `React.MouseEventHandler` |    -    |
+| **onBlur**   | Handler for onblur event `React.MouseEventHandler`  |    -    |
 
 <!--LANDING_BLOCK
 More information about the Link component on the basis of which this component is made can be found [here](https://gravity-ui.com/components/uikit/link)

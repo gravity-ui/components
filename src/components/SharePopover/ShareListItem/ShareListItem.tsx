@@ -44,7 +44,7 @@ export class ShareListItem extends React.PureComponent<ShareListItemProps> {
                     target="_blank"
                     width="max"
                     className={b(null, className)}
-                    extraProps={{'aria-label': i18n('label_share', {name})}}
+                    aria-label={i18n('label_share', {name})}
                 >
                     {icon && (
                         <Icon data={icon} size={16} className={b('icon', {type: typeModifier})} />
@@ -60,7 +60,7 @@ export class ShareListItem extends React.PureComponent<ShareListItemProps> {
                 href={url}
                 target="_blank"
                 className={b(null, className)}
-                extraProps={{'aria-label': i18n('label_share', {name})}}
+                aria-label={i18n('label_share', {name})}
             >
                 {icon && <Icon data={icon} size={24} className={b('icon', {type: typeModifier})} />}
             </Button>

@@ -4,21 +4,21 @@ A component for displaying a promo dialog informing the user about a new feature
 
 ## Properties
 
-| Name                      | Type                     | Default | Description                                   |
-| :------------------------ | :----------------------- | :------ | :-------------------------------------------- |
-| `title`                   | `string`                 | —       | Sheet title                                   |
-| `message`                 | `string`                 | —       | Promo text                                    |
-| `actionText`              | `string`                 | —       | Text of the primary action button             |
-| `closeText`               | `string`                 | —       | Text of the close button                      |
-| `actionHref`              | `string`                 |         | Link opened by the primary action button      |
-| `imageSrc`                | `string`                 |         | Promo image URL                               |
-| `imageAlt`                | `string`                 | `''`    | Promo image `alt` text                        |
-| `onActionClick`           | `ButtonProps['onClick']` |         | Primary action click handler                  |
-| `onClose`                 | `SheetProps['onClose']`  |         | Called when the sheet is closed               |
-| `className`               | `string`                 |         | HTML `class` attribute of the sheet           |
-| `contentClassName`        | `string`                 |         | HTML `class` attribute of the content block   |
-| `imageContainerClassName` | `string`                 |         | HTML `class` attribute of the image container |
-| `imageClassName`          | `string`                 |         | HTML `class` attribute of the image           |
+| Name                      | Type                                    | Default | Description                                   |
+| :------------------------ | :-------------------------------------- | :------ | :-------------------------------------------- |
+| `title`                   | `string`                                | —       | Sheet title                                   |
+| `message`                 | `string`                                | —       | Promo text                                    |
+| `actionText`              | `string`                                | —       | Text of the primary action button             |
+| `closeText`               | `string`                                | —       | Text of the close button                      |
+| `actionHref`              | `string`                                |         | Link opened by the primary action button      |
+| `imageSrc`                | `string`                                |         | Promo image URL                               |
+| `imageAlt`                | `string`                                | `''`    | Promo image `alt` text                        |
+| `onActionClick`           | `ButtonProps['onClick']`                |         | Primary action click handler                  |
+| `onClose`                 | `SheetProps['onTransitionOutComplete']` |         | Called when the sheet is closed               |
+| `className`               | `string`                                |         | HTML `class` attribute of the sheet           |
+| `contentClassName`        | `string`                                |         | HTML `class` attribute of the content block   |
+| `imageContainerClassName` | `string`                                |         | HTML `class` attribute of the image container |
+| `imageClassName`          | `string`                                |         | HTML `class` attribute of the image           |
 
 ## Usage
 
