@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import {useArgs} from '@storybook/preview-api';
 import {Meta, StoryFn} from '@storybook/react';
 
@@ -57,14 +59,27 @@ export default {
     },
 } as Meta;
 
-const DefaultTemplate: StoryFn<ItemSelectorProps<{name: string; type: string}>> = (args) => {
-    const [, setStoryArgs] = useArgs();
+type Item = {name: string; type: string};
+
+// `useArgs` updates asynchronously, and the List needs the new order in the drop render
+function ItemSelectorWithState({onUpdate, ...props}: Omit<ItemSelectorProps<Item>, 'getItemId'>) {
+    const [value, setValue] = React.useState(props.value);
+    React.useEffect(() => setValue(props.value), [props.value]);
     return (
         <ItemSelector
-            {...args}
-            onUpdate={(value) => setStoryArgs({value})}
+            {...props}
+            value={value}
+            onUpdate={(nextValue) => {
+                setValue(nextValue);
+                onUpdate(nextValue);
+            }}
             getItemId={(item) => item.name}
         />
     );
+}
+
+const DefaultTemplate: StoryFn<ItemSelectorProps<Item>> = (args) => {
+    const [, setStoryArgs] = useArgs();
+    return <ItemSelectorWithState {...args} onUpdate={(value) => setStoryArgs({value})} />;
 };
 export const Default = DefaultTemplate.bind({});
