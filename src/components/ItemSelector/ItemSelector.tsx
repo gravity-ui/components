@@ -66,10 +66,12 @@ function ItemSelectorList<T>({
             getItemId={getItemId}
             getItemTextValue={getItemId}
             className={b('items')}
-            renderItem={(ctx, helpers) =>
-                onItemsUpdate ? (
+            renderItem={(ctx, helpers) => {
+                // In List v8 `active` stays on the last hovered row; hover is handled by CSS
+                const active = ctx.state.active && Boolean(ctx.state.cursorVisible);
+                return onItemsUpdate ? (
                     <ListHelloPangeaDnd.Row ctx={ctx} helpers={helpers} className={b('list-item')}>
-                        {renderItem(ctx.item, ctx.state.active, ctx.index)}
+                        {renderItem(ctx.item, active, ctx.index)}
                     </ListHelloPangeaDnd.Row>
                 ) : (
                     <List.ItemView
@@ -78,11 +80,11 @@ function ItemSelectorList<T>({
                         className={b('list-item')}
                     >
                         <div {...helpers.getCellProps()}>
-                            {renderItem(ctx.item, ctx.state.active, ctx.index)}
+                            {renderItem(ctx.item, active, ctx.index)}
                         </div>
                     </List.ItemView>
-                )
-            }
+                );
+            }}
         />
     );
 

@@ -63,3 +63,26 @@ test('Filtering selected items disables dragging without changing the selection'
     ).not.toBeInTheDocument();
     expect(onUpdate).not.toHaveBeenCalled();
 });
+
+test('Passes `active` to renderItem for the keyboard cursor only', async () => {
+    const renderItem = (item: string, active: boolean) => (active ? `${item}: active` : item);
+    render(
+        <ItemSelector
+            selectorTitle="Available"
+            items={['apple', 'pear']}
+            value={[]}
+            getItemId={(item) => item}
+            renderItem={renderItem}
+            onUpdate={jest.fn()}
+        />,
+    );
+    const user = userEvent.setup();
+
+    await user.hover(screen.getByText('apple'));
+    await user.unhover(screen.getByText('apple'));
+    expect(screen.getByText('apple')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('combobox', {name: 'Available: Search'}));
+    await user.keyboard('{ArrowDown}');
+    expect(screen.getByText(/: active$/)).toBeInTheDocument();
+});

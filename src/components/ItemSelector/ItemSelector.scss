@@ -51,21 +51,21 @@ $block: '.#{variables.$ns}item-selector';
         min-width: 0;
     }
 
+    // Without hover (touch) the actions are always visible
+    @media (hover: hover) {
+        &__list-item:not(:hover) {
+            #{$block}__item:not(#{$block}__item_active) #{$block}__item-select,
+            #{$block}__value-item:not(#{$block}__value-item_active) #{$block}__value-item-remove {
+                display: none;
+            }
+        }
+    }
+
     &__item {
         display: flex;
         align-items: center;
         width: 100%;
         height: 100%;
-
-        &_active {
-            #{$block}__item-select {
-                display: block;
-            }
-        }
-    }
-
-    &__item-select {
-        display: none;
     }
 
     &__item-text {
@@ -81,12 +81,6 @@ $block: '.#{variables.$ns}item-selector';
         align-items: center;
         width: 100%;
         overflow: hidden;
-
-        &_active {
-            #{$block}__value-item-remove {
-                display: block;
-            }
-        }
     }
 
     &__value-item-text {
@@ -95,9 +89,5 @@ $block: '.#{variables.$ns}item-selector';
         text-overflow: ellipsis;
         white-space: nowrap;
         min-width: 0;
-    }
-
-    &__value-item-remove {
-        display: none;
     }
 }
