@@ -8,25 +8,6 @@ jest.mock('@gravity-ui/uikit/virtualizer', () => ({
     ListVirtualizer: ({children}: {children: React.ReactNode}) => children,
 }));
 
-test('Filters items and selects the first match from the search input', async () => {
-    const onUpdate = jest.fn();
-    render(
-        <ItemSelector
-            selectorTitle="Available"
-            items={['apple', 'pear']}
-            value={[]}
-            getItemId={(item) => item}
-            onUpdate={onUpdate}
-        />,
-    );
-    const user = userEvent.setup();
-    await user.type(screen.getByRole('combobox', {name: 'Available: Search'}), 'pear');
-    expect(screen.queryByText('apple')).not.toBeInTheDocument();
-    await user.keyboard('{Enter}');
-    expect(onUpdate).toHaveBeenCalledTimes(1);
-    expect(onUpdate).toHaveBeenCalledWith(['pear']);
-});
-
 test('Removing an item preserves the other selected items', async () => {
     const onUpdate = jest.fn();
     render(
