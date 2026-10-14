@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Button, ButtonProps, Flex, List, Sheet} from '@gravity-ui/uikit';
+import {Button, ButtonProps, Flex, List, ListProps, Sheet} from '@gravity-ui/uikit';
 
 import {block} from '../../../utils/cn';
 import type {GalleryItemAction, GalleryItemProps} from '../../GalleryItem';
@@ -18,6 +18,11 @@ export type MobileGalleryActionsProps = {
 
 export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGalleryActionsProps) => {
     const {t} = i18n.useTranslation();
+
+    const getItemTextValue = React.useCallback(
+        (item: GalleryItemAction) => (item.__titleT ? item.__titleT({t}) : item.title),
+        [t],
+    );
 
     const renderListItem = React.useCallback(
         (item: GalleryItemAction) => {
@@ -67,25 +72,33 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
         [t],
     );
 
+    const renderItem = React.useCallback<NonNullable<ListProps<GalleryItemAction>['renderItem']>>(
+        (ctx, helpers) => (
+            <List.ItemView {...helpers.getItemProps()} {...helpers.getItemViewProps()}>
+                <div {...helpers.getCellProps()} className={cnMobileGalleryActions('cell')}>
+                    {renderListItem(ctx.item)}
+                </div>
+            </List.ItemView>
+        ),
+        [renderListItem],
+    );
+
+    const handleOpenChange = React.useCallback(
+        (nextOpen: boolean) => {
+            if (!nextOpen) onClose();
+        },
+        [onClose],
+    );
+
     return (
-        <Sheet
-            className={cnMobileGalleryActions()}
-            open={open}
-            onOpenChange={(nextOpen) => {
-                if (!nextOpen) onClose();
-            }}
-        >
+        <Sheet className={cnMobileGalleryActions()} open={open} onOpenChange={handleOpenChange}>
             <List
                 aria-label={t('actions')}
                 role="grid"
                 items={actions}
                 size="xl"
-                getItemTextValue={(item) => (item.__titleT ? item.__titleT({t}) : item.title)}
-                renderItem={(ctx, helpers) => (
-                    <List.ItemView {...helpers.getItemProps()} {...helpers.getItemViewProps()}>
-                        <div {...helpers.getCellProps()}>{renderListItem(ctx.item)}</div>
-                    </List.ItemView>
-                )}
+                getItemTextValue={getItemTextValue}
+                renderItem={renderItem}
                 onItemAction={onClose}
             />
         </Sheet>
