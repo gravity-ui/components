@@ -54,13 +54,15 @@ export function PromoSheet({
         (event: any) => {
             setVisible(false);
             onActionClick?.(event);
+            onClose?.();
         },
-        [onActionClick],
+        [onActionClick, onClose],
     );
 
     const handleCloseClick = React.useCallback<NonNullable<PromoSheetProps['onClose']>>(() => {
         setVisible(false);
-    }, []);
+        onClose?.();
+    }, [onClose]);
 
     React.useEffect(() => {
         if (!imageSrc) {

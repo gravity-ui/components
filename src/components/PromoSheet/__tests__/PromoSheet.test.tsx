@@ -80,19 +80,28 @@ test('Call onActionClick and onClose by action button', async () => {
     await waitFor(() => expect(handleClose).toHaveBeenCalledTimes(1));
 });
 
-test('Escape closes the sheet and calls onClose after the transition', async () => {
-    const onClose = jest.fn();
-    render(
-        <PromoSheet
-            title="Title"
-            message="Message"
-            actionText="Action"
-            closeText="Close"
-            onClose={onClose}
-        />,
-    );
-    const user = userEvent.setup();
-    await user.keyboard('{Escape}');
-    await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1));
-    expect(screen.queryByRole('heading', {name: 'Title'})).not.toBeInTheDocument();
-});
+test.each(['escape', 'close button'])(
+    '%s closes the sheet and calls onClose once',
+    async (action) => {
+        const onClose = jest.fn();
+        render(
+            <PromoSheet
+                title="Title"
+                message="Message"
+                actionText="Action"
+                closeText="Close"
+                onClose={onClose}
+            />,
+        );
+        const user = userEvent.setup();
+        if (action === 'escape') {
+            await user.keyboard('{Escape}');
+        } else {
+            await user.click(screen.getByRole('button', {name: 'Close'}));
+        }
+        await waitFor(() => {
+            expect(screen.queryByRole('heading', {name: 'Title'})).not.toBeInTheDocument();
+        });
+        expect(onClose).toHaveBeenCalledTimes(1);
+    },
+);
