@@ -37,7 +37,6 @@ export function App() {
 - Use `onOpenChange` instead of `onClose` in `ConfirmDialog` and `ChangelogDialog`. `ConfirmDialog` accepts the new Dialog props, including `maxWidth` and `fullWidth` instead of `size`.
 - Remove `disableHeightTransition` from `ChangelogDialog` and cookie consent popup settings; UIKit no longer animates content height.
 - `Stories` and `StoriesGroup` keep `onClose`, with optional event/reason arguments and UIKit 8 reasons (`escape-key`, `outside-press`, `click`).
-- Remove `moreControlProps.virtualizationThreshold` from `AdaptiveTabs`; its dropdowns use `ListVirtualizer`.
 - Pass native HTML attributes directly to button/link props, including `StoreBadge`, instead of `extraProps`. Use UIKit 8 Button views in custom story actions.
 
 See the [UIKit 8 migration guide](https://github.com/gravity-ui/uikit/blob/next/docs/migration-to-v8.md) for the underlying API changes. This package uses the new List, Menu, and Popover APIs without the legacy entry point.
@@ -90,13 +89,12 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## For AI agents
 
-The composite-component layer of Gravity UI — ready-made form rows, confirmation dialogs, adaptive tabs, notifications, stories, galleries and similar product-level widgets assembled from `@gravity-ui/uikit` primitives, so you do not rebuild them by hand.
+The composite-component layer of Gravity UI — ready-made form rows, confirmation dialogs, notifications, stories, galleries and similar product-level widgets assembled from `@gravity-ui/uikit` primitives, so you do not rebuild them by hand.
 
 ### When to use
 
 - Form layout: `FormRow` (label + field + description) instead of a hand-made label/input wrapper.
 - Confirmation flows: `ConfirmDialog` instead of composing `Dialog` with two buttons yourself.
-- Tabs that must survive narrow containers: `AdaptiveTabs` (overflow collapses into a select).
 - Product widgets: `Notifications`, `Stories` / `StoriesGroup`, `ChangelogDialog`, `OnboardingMenu`, `PromoSheet`, `CookieConsent`, `Reactions`, `SharePopover`, `StoreBadge`.
 - Data helpers: `InfiniteScroll`, `ItemSelector`, `DelayedTextInput`, `TokenizedInput`, `Gallery`.
 
@@ -113,7 +111,6 @@ The composite-component layer of Gravity UI — ready-made form rows, confirmati
 - **Nothing is styled without uikit setup.** Install `@gravity-ui/uikit`, import `@gravity-ui/uikit/styles/styles.css` (plus `fonts.css`) once, and wrap the app in `Provider` — this package ships no global styles of its own.
 - **`FormRow` does not render the input.** Pass the control as `children` and link it with `fieldId` matching the control's `id`; the `label` prop is the label text, not a `<label>` element.
 - **`ConfirmDialog` has no `onConfirm` / `onCancel`.** The handlers are `onClickButtonApply` and `onClickButtonCancel`, and `textButtonApply` / `textButtonCancel` are required.
-- **`AdaptiveTabs` takes `items` + `activeTab` + `onSelectTab`,** not uikit `Tabs` children; the `size` values are `m | l | xl`.
 - **Hallucinated imports.** Everything is exported from the package root: `import {FormRow} from '@gravity-ui/components'`. There are no subpath imports like `@gravity-ui/components/FormRow`.
 
 ## Documentation for AI agents
