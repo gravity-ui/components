@@ -1,4 +1,4 @@
-## Notifications
+# Notifications
 
 Components for displaying notifications ([storybook](https://preview.gravity-ui.com/components/?path=/story/components-notifications--default)).
 Can be used on desktop and touch devices.
@@ -39,7 +39,7 @@ const YourComponent: React.FC = () => {
 
 For more code examples go to [Notifications.stories.tsx](https://github.com/gravity-ui/components/blob/main/src/components/Notifications/__stories__/Notifications.stories.tsx).
 
-### Components
+## Properties
 
 **Notifications** — renders notifications and actions on these notifications.
 

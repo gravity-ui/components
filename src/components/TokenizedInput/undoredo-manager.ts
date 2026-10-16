@@ -1,4 +1,4 @@
-import isEqual from 'lodash/isEqual';
+import {isEqual} from 'es-toolkit';
 
 const cloneValue = <T>(value: T) => {
     if (typeof structuredClone === 'function') {

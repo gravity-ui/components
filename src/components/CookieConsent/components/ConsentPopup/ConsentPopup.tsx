@@ -187,7 +187,6 @@ export const ConsentPopup = (props: ConsentPopupProps) => {
         cookieList,
         onClose,
         consentManager,
-        disableHeightTransition,
         ...buttonsParams
     } = props;
 
@@ -240,8 +239,9 @@ export const ConsentPopup = (props: ConsentPopupProps) => {
             disableEscapeKeyDown
             className={modalClassName}
             contentClassName={b('modal-content', {step: currentStep, mobile})}
-            onClose={onClose}
-            disableHeightTransition={disableHeightTransition}
+            onOpenChange={(open) => {
+                if (!open) onClose();
+            }}
         >
             <div className={b(null, className)}>
                 <div>

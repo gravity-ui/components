@@ -1,8 +1,8 @@
-## SharePopover
+# SharePopover
 
-Sharing component
+A popover with a list of share targets (social networks, copy link) for a given URL.
 
-### PropTypes
+## Properties
 
 | Property         | Type                  | Required | Default          | Description                                                                                                                                                                |
 | :--------------- | :-------------------- | :------- | :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

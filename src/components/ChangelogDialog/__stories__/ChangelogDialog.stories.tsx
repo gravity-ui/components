@@ -77,7 +77,7 @@ const items: ChangelogItem[] = [
     },
 ];
 
-const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogProps) => {
+const ChangelogDialogExample = (props: ChangelogDialogProps) => {
     const [visible, setVisible] = React.useState(props.open);
 
     React.useEffect(() => {
@@ -98,14 +98,18 @@ const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props: ChangelogDialogPr
             <ChangelogDialog
                 {...props}
                 open={visible}
-                onClose={(event, reason) => {
-                    setVisible(false);
-                    props.onClose?.(event, reason);
+                onOpenChange={(nextOpen, event, reason) => {
+                    setVisible(nextOpen);
+                    props.onOpenChange?.(nextOpen, event, reason);
                 }}
             />
         </React.Fragment>
     );
 };
+
+const DefaultTemplate: StoryFn<ChangelogDialogProps> = (props) => (
+    <ChangelogDialogExample {...props} />
+);
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {
@@ -117,7 +121,7 @@ Default.args = {
     onLinkClick: (link) => {
         console.log('link click', link);
     },
-    onClose: () => {
+    onOpenChange: () => {
         console.log('close');
     },
     onRetryClick: () => {
@@ -137,4 +141,18 @@ Error.args = {
     ...Default.args,
     open: true,
     error: true,
+};
+
+const CUSTOM_MAX_WIDTH_CLASS = 'changelog-dialog-custom-max-width';
+
+const CustomMaxWidthTemplate: StoryFn<ChangelogDialogProps> = (props) => (
+    <React.Fragment>
+        <style>{`.${CUSTOM_MAX_WIDTH_CLASS} { --g-modal-max-width: 1000px; }`}</style>
+        <ChangelogDialogExample {...props} modalClassName={CUSTOM_MAX_WIDTH_CLASS} />
+    </React.Fragment>
+);
+
+export const CustomMaxWidth = CustomMaxWidthTemplate.bind({});
+CustomMaxWidth.args = {
+    ...Default.args,
 };

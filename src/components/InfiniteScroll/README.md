@@ -1,8 +1,8 @@
-## InfiniteScroll
+# InfiniteScroll
 
 The component is useful for creating infinite lists like Social Network Feed, or events history. It renders its children. If you scroll it to the bottom, it will show a loader and call an `onActivate` callback. When all the data is loaded and there is no need to load more, pass the `disabled={true}` property.
 
-### InfiniteScroll PropTypes
+## Properties
 
 | Property   | Type                  | Required | Default               | Description                                                                    |
 | :--------- | :-------------------- | :------: | :-------------------- | :----------------------------------------------------------------------------- |

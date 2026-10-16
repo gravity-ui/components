@@ -9,7 +9,7 @@ type TokenValue = {key: string; operator: string; value: string};
 
 export const DebounceShowcaseTemplate: StoryFn<TokenizedComponentType<TokenValue>> = (args) => {
     return (
-        <Flex direction="column" gap={4}>
+        <Flex direction="column" gap="spacing-4">
             <Text variant="subheader-1">
                 Strategy &apos;focus-field&apos;, 500ms debounce, synchronous suggestions
             </Text>

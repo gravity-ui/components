@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Modal} from '@gravity-ui/uikit';
-import type {ModalCloseReason} from '@gravity-ui/uikit';
+import type {OpenChangeReason} from '@gravity-ui/uikit';
 
 import {IndexType, StoriesLayout} from '../Stories/components/StoriesLayout/StoriesLayout';
 import {block} from '../utils/cn';
@@ -22,8 +22,8 @@ export interface StoriesGroupProps {
     disableOutsideClick?: boolean;
     maxSliderItemsCount?: number;
     onClose?: (
-        event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>,
-        reason: ModalCloseReason | 'closeButtonClick',
+        event?: Event | React.MouseEvent<HTMLElement, MouseEvent>,
+        reason?: OpenChangeReason,
     ) => void;
     onItemSelect?: (
         itemIndexes: [groupIndex: number, itemIndex: number],
@@ -54,7 +54,7 @@ export const StoriesGroup = ({
         (event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>) => void
     >(
         (event) => {
-            handleClose(event, 'closeButtonClick');
+            handleClose(event, 'click');
         },
         [handleClose],
     );
@@ -153,7 +153,9 @@ export const StoriesGroup = ({
     return (
         <Modal
             open={open}
-            onClose={handleClose}
+            onOpenChange={(nextOpen, event, reason) => {
+                if (!nextOpen) handleClose(event, reason);
+            }}
             disableOutsideClick={disableOutsideClick}
             className={b()}
             contentClassName={b('modal-content')}

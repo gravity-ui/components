@@ -9,7 +9,7 @@ type TokenValue = {key: string; operator: string; value: string};
 
 export const MultipleInputTemplate: StoryFn<TokenizedComponentType<TokenValue>> = (args) => {
     return (
-        <Flex direction="column" gap={4}>
+        <Flex direction="column" gap="spacing-4">
             <AsyncSuggestsTokenizedInput
                 {...args}
                 placeholder="Enter value A"

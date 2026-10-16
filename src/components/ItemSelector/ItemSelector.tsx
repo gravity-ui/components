@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 import {Xmark} from '@gravity-ui/icons';
-import {Button, Icon, List, ListProps} from '@gravity-ui/uikit';
+import {Button, Icon, List, TextInput, useListFocusOwner} from '@gravity-ui/uikit';
+import {ListHelloPangeaDnd} from '@gravity-ui/uikit/hello-pangea-dnd';
+import {ListVirtualizer} from '@gravity-ui/uikit/virtualizer';
 
 import {block} from '../utils/cn';
 
@@ -27,9 +29,100 @@ export interface ItemSelectorProps<T> {
     getItemId: (item: T) => string;
 
     renderItemValue?: (item: T) => React.ReactNode;
-    renderItem?: ListProps<T>['renderItem'];
-    renderValueItem?: ListProps<T>['renderItem'];
-    filterItem?: ListProps<T>['filterItem'];
+    renderItem?: (item: T, active: boolean, index: number) => React.ReactNode;
+    renderValueItem?: ItemSelectorProps<T>['renderItem'];
+    filterItem?: (filter: string) => (item: T) => boolean;
+}
+
+function ItemSelectorList<T>({
+    items,
+    getItemId,
+    renderItem,
+    filterItem,
+    label,
+    onItemsUpdate,
+}: {
+    items: T[];
+    getItemId: ItemSelectorProps<T>['getItemId'];
+    renderItem: NonNullable<ItemSelectorProps<T>['renderItem']>;
+    filterItem: NonNullable<ItemSelectorProps<T>['filterItem']>;
+    label: string;
+    onItemsUpdate?: (items: T[]) => void;
+}) {
+    const {t} = i18n.useTranslation();
+    const [filter, setFilter] = React.useState('');
+    const [activeItemId, setActiveItemId] = React.useState<string | null>(null);
+    const focusOwner = useListFocusOwner();
+    const {onKeyDown, ...inputProps} = focusOwner.getInputProps();
+    const filteredItems = filter ? items.filter(filterItem(filter)) : items;
+    const list = (
+        <List
+            role="grid"
+            aria-label={label}
+            items={filteredItems}
+            focusOwner={onItemsUpdate ? undefined : focusOwner}
+            activeItemId={activeItemId}
+            onActiveItemUpdate={setActiveItemId}
+            getItemId={getItemId}
+            getItemTextValue={getItemId}
+            className={b('items')}
+            renderItem={(ctx, helpers) => {
+                // In List v8 `active` stays on the last hovered row; hover is handled by CSS
+                const active = ctx.state.active && Boolean(ctx.state.cursorVisible);
+                return onItemsUpdate ? (
+                    <ListHelloPangeaDnd.Row ctx={ctx} helpers={helpers} className={b('list-item')}>
+                        {renderItem(ctx.item, active, ctx.index)}
+                    </ListHelloPangeaDnd.Row>
+                ) : (
+                    <List.ItemView
+                        {...helpers.getItemProps()}
+                        {...helpers.getItemViewProps()}
+                        className={b('list-item')}
+                    >
+                        <div {...helpers.getCellProps()}>
+                            {renderItem(ctx.item, active, ctx.index)}
+                        </div>
+                    </List.ItemView>
+                );
+            }}
+        />
+    );
+
+    return (
+        <React.Fragment>
+            <TextInput
+                className={b('filter')}
+                placeholder={t('placeholder_search')}
+                value={filter}
+                controlProps={{
+                    ...(onItemsUpdate ? {} : inputProps),
+                    'aria-haspopup': onItemsUpdate ? undefined : 'grid',
+                    'aria-label': `${label}: ${t('placeholder_search')}`,
+                }}
+                onKeyDown={onItemsUpdate ? undefined : onKeyDown}
+                onUpdate={(query) => {
+                    setFilter(query);
+                    const firstItem = items.find(filterItem(query));
+                    setActiveItemId(firstItem === undefined ? null : getItemId(firstItem));
+                }}
+                hasClear
+            />
+            <ListVirtualizer estimateItemSize={28}>
+                {onItemsUpdate ? (
+                    <ListHelloPangeaDnd
+                        items={filteredItems}
+                        getItemId={getItemId}
+                        onItemsUpdate={onItemsUpdate}
+                        getItemDragDisabled={() => Boolean(filter)}
+                    >
+                        {list}
+                    </ListHelloPangeaDnd>
+                ) : (
+                    list
+                )}
+            </ListVirtualizer>
+        </React.Fragment>
+    );
 }
 
 export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
@@ -57,7 +150,10 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                     view="flat-secondary"
                     size="s"
                     className={b('item-select')}
-                    onClick={this.onAddItem.bind(this, item)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        this.onAddItem(item);
+                    }}
                 >
                     <i18n.Translation>{({t}) => t('button_select')}</i18n.Translation>
                 </Button>
@@ -80,7 +176,11 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                     view="flat-secondary"
                     size="s"
                     className={b('value-item-remove')}
-                    onClick={() => this.onRemoveItem(item)}
+                    aria-label={typeof title === 'string' ? title : this.props.getItemId(item)}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        this.onRemoveItem(item);
+                    }}
                 >
                     <Icon data={Xmark} size={16} />
                 </Button>
@@ -128,11 +228,8 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
         const value = items.map(getItemId);
         this.onUpdate(value);
     };
-    onMoveItem = ({oldIndex, newIndex}: {oldIndex: number; newIndex: number}) => {
-        if (oldIndex !== newIndex) {
-            const value = this.props.value.slice();
-            this.onUpdate(List.moveListElement(value, oldIndex, newIndex));
-        }
+    onMoveItems = (items: T[]) => {
+        this.onUpdate(items.map(this.props.getItemId));
     };
     onUpdate = (value: string[]) => {
         this.props.onUpdate(value);
@@ -146,6 +243,7 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
             renderValueItem = this.renderValueItem,
             filterItem = this.filterItem,
             hideSelectAllButton,
+            getItemId,
         } = this.props;
         const [items, selected] = this.getActualItems();
         return (
@@ -166,12 +264,12 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                                     </Button>
                                 )}
                             </div>
-                            <List
+                            <ItemSelectorList
                                 items={items}
+                                getItemId={getItemId}
                                 renderItem={renderItem}
                                 filterItem={filterItem}
-                                filterPlaceholder={t('placeholder_search')}
-                                itemsHeight={196}
+                                label={selectorTitle || t('placeholder_search')}
                             />
                         </div>
                         <div className={b('list')}>
@@ -188,14 +286,13 @@ export class ItemSelector<T> extends React.Component<ItemSelectorProps<T>> {
                                     {t('button_deselect-all')}
                                 </Button>
                             </div>
-                            <List
+                            <ItemSelectorList
                                 items={selected}
+                                getItemId={getItemId}
                                 renderItem={renderValueItem}
                                 filterItem={filterItem}
-                                filterPlaceholder={t('placeholder_search')}
-                                sortable={true}
-                                onSortEnd={this.onMoveItem}
-                                itemsHeight={196}
+                                label={t('label_selected')}
+                                onItemsUpdate={this.onMoveItems}
                             />
                         </div>
                     </div>

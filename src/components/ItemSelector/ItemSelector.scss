@@ -4,7 +4,9 @@
 $block: '.#{variables.$ns}item-selector';
 
 #{$block} {
-    --g-list-item-padding: 0 16px;
+    --g-list-item-view-padding-inline: 16px;
+    --g-list-item-view-padding-block: 0;
+    --g-list-item-view-border-radius: 0;
 
     display: flex;
     width: 100%;
@@ -24,7 +26,7 @@ $block: '.#{variables.$ns}item-selector';
         justify-content: space-between;
         align-items: center;
         margin-block-end: 8px;
-        padding: var(--g-list-item-padding);
+        padding: 0 16px;
         min-height: 24px;
     }
 
@@ -32,27 +34,46 @@ $block: '.#{variables.$ns}item-selector';
         @include mixins.text-accent;
     }
 
+    &__filter {
+        box-sizing: border-box;
+        padding-inline: 16px;
+        margin-block-end: 4px;
+    }
+
+    &__items {
+        height: 196px;
+        overflow: auto;
+    }
+
+    &__list-item [role='gridcell'] {
+        display: block;
+        width: 100%;
+        min-width: 0;
+    }
+
+    // Without hover (touch) the actions are always visible
+    @media (hover: hover) {
+        &__list-item:not(:hover) {
+            #{$block}__item:not(#{$block}__item_active) #{$block}__item-select,
+            #{$block}__value-item:not(#{$block}__value-item_active) #{$block}__value-item-remove {
+                display: none;
+            }
+        }
+    }
+
     &__item {
         display: flex;
         align-items: center;
         width: 100%;
         height: 100%;
-
-        &_active {
-            #{$block}__item-select {
-                display: block;
-            }
-        }
-    }
-
-    &__item-select {
-        display: none;
     }
 
     &__item-text {
         overflow: hidden;
         text-overflow: ellipsis;
         margin-inline-end: auto;
+        min-width: 0;
+        flex: 1 1 auto;
     }
 
     &__value-item {
@@ -60,12 +81,6 @@ $block: '.#{variables.$ns}item-selector';
         align-items: center;
         width: 100%;
         overflow: hidden;
-
-        &_active {
-            #{$block}__value-item-remove {
-                display: block;
-            }
-        }
     }
 
     &__value-item-text {
@@ -73,9 +88,6 @@ $block: '.#{variables.$ns}item-selector';
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    }
-
-    &__value-item-remove {
-        display: none;
+        min-width: 0;
     }
 }

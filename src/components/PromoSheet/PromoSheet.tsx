@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Xmark} from '@gravity-ui/icons';
 import {Button, Icon, Sheet} from '@gravity-ui/uikit';
-import type {ButtonProps, SheetProps} from '@gravity-ui/uikit';
+import type {ButtonProps} from '@gravity-ui/uikit';
 
 import {block} from '../utils/cn';
 
@@ -23,7 +23,7 @@ export type PromoSheetProps = {
     imageContainerClassName?: string;
     imageClassName?: string;
     onActionClick?: ButtonProps['onClick'];
-    onClose?: SheetProps['onClose'];
+    onClose?: () => void;
 };
 
 type ImageSizes = {
@@ -54,20 +54,15 @@ export function PromoSheet({
         (event: any) => {
             setVisible(false);
             onActionClick?.(event);
+            onClose?.();
         },
-        [onActionClick],
+        [onActionClick, onClose],
     );
 
     const handleCloseClick = React.useCallback<NonNullable<PromoSheetProps['onClose']>>(() => {
         setVisible(false);
-    }, []);
-
-    const closeButtonExtraProps = React.useMemo(
-        () => ({
-            'aria-label': closeText,
-        }),
-        [closeText],
-    );
+        onClose?.();
+    }, [onClose]);
 
     React.useEffect(() => {
         if (!imageSrc) {
@@ -101,18 +96,21 @@ export function PromoSheet({
         <Sheet
             className={cn(null, className)}
             contentClassName={cn('content', contentClassName)}
-            visible={visible && loaded}
+            open={visible && loaded}
             hideTopBar
-            onClose={onClose}
+            onOpenChange={(nextOpen) => {
+                setVisible(nextOpen);
+                if (!nextOpen) onClose?.();
+            }}
         >
             <header className={cn('header')}>
                 <h2 className={cn('title')}>{title}</h2>
                 <Button
                     className={cn('close-button')}
                     size="xl"
-                    view="flat-contrast"
+                    view="flat"
                     onClick={handleCloseClick}
-                    extraProps={closeButtonExtraProps}
+                    aria-label={closeText}
                 >
                     <Icon data={Xmark} size={24} />
                 </Button>
@@ -134,7 +132,7 @@ export function PromoSheet({
                 <Button
                     className={cn('action-button')}
                     size="xl"
-                    view="outlined-contrast"
+                    view="outlined"
                     width="max"
                     href={actionHref as any}
                     onClick={handleActionClick as any}

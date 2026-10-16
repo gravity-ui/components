@@ -2,6 +2,7 @@
 const path = require('path');
 
 const utils = require('@gravity-ui/gulp-utils');
+const {buildDocs} = require('@gravity-ui/readme-validator');
 const {task, src, dest, series, parallel} = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
@@ -93,6 +94,11 @@ task('styles-components', () => {
         .pipe(dest(path.resolve(BUILD_DIR, 'cjs', 'components')));
 });
 
+task('copy-docs', (done) => {
+    buildDocs();
+    done();
+});
+
 task(
     'build',
     series([
@@ -100,6 +106,7 @@ task(
         parallel(['compile-to-esm', 'compile-to-cjs']),
         'copy-i18n',
         parallel(['styles-components']),
+        'copy-docs',
     ]),
 );
 

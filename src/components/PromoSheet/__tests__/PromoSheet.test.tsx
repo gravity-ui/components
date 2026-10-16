@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 
-import {act, render, screen} from '../../../../test-utils/utils';
+import {act, render, screen, waitFor} from '../../../../test-utils/utils';
 import {PromoSheet} from '../PromoSheet';
 
 test('Renders base content', () => {
@@ -77,4 +77,31 @@ test('Call onActionClick and onClose by action button', async () => {
     await act(() => user.click(actionButton));
 
     expect(handleActionClick).toBeCalled();
+    await waitFor(() => expect(handleClose).toHaveBeenCalledTimes(1));
 });
+
+test.each(['escape', 'close button'])(
+    '%s closes the sheet and calls onClose once',
+    async (action) => {
+        const onClose = jest.fn();
+        render(
+            <PromoSheet
+                title="Title"
+                message="Message"
+                actionText="Action"
+                closeText="Close"
+                onClose={onClose}
+            />,
+        );
+        const user = userEvent.setup();
+        if (action === 'escape') {
+            await user.keyboard('{Escape}');
+        } else {
+            await user.click(screen.getByRole('button', {name: 'Close'}));
+        }
+        await waitFor(() => {
+            expect(screen.queryByRole('heading', {name: 'Title'})).not.toBeInTheDocument();
+        });
+        expect(onClose).toHaveBeenCalledTimes(1);
+    },
+);

@@ -1,18 +1,11 @@
 import * as React from 'react';
 
-import {ThemeContext} from '@gravity-ui/uikit';
-import type {ThemeContextProps} from '@gravity-ui/uikit';
+import {Provider} from '@gravity-ui/uikit';
 import {render} from '@testing-library/react';
 import type {RenderOptions} from '@testing-library/react';
 
-const themeContextValue: ThemeContextProps = {
-    direction: 'ltr',
-    theme: 'light',
-    themeValue: 'light',
-};
-
 function Providers({children}: {children: React.ReactNode}) {
-    return <ThemeContext.Provider value={themeContextValue}>{children}</ThemeContext.Provider>;
+    return <Provider theme="light">{children}</Provider>;
 }
 
 function createWrapper(Component: React.JSXElementConstructor<{children: React.ReactNode}>) {

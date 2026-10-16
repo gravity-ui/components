@@ -106,7 +106,7 @@ export const StoriesLayout = ({
                                     </div>
                                 )}
                                 {Boolean(currentStory.firstAction || currentStory.secondAction) && (
-                                    <Flex gap={4} className={b('action-block')}>
+                                    <Flex gap="spacing-4" className={b('action-block')}>
                                         {currentStory.firstAction && (
                                             <Button
                                                 size="l"

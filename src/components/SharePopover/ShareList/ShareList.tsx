@@ -65,14 +65,6 @@ export class ShareList extends React.PureComponent<ShareListInnerProps, ShareLis
         copied: false,
     };
 
-    private copyLink: HTMLButtonElement | null = null;
-
-    componentDidMount() {
-        if (this.props.withCopyLink && this.copyLink) {
-            this.copyLink.style.width = `${this.copyLink.scrollWidth}px`;
-        }
-    }
-
     render() {
         const {shareOptions, withCopyLink, className, direction, children} = this.props;
         const hasShareOptions = Array.isArray(shareOptions) && shareOptions.length > 0;
@@ -130,7 +122,6 @@ export class ShareList extends React.PureComponent<ShareListInnerProps, ShareLis
                     <CopyToClipboard text={this.props.url} timeout={1500}>
                         {(status) => (
                             <Button
-                                ref={this.copyLinkRef}
                                 view="flat-secondary"
                                 size="l"
                                 disabled={status === 'success'}
@@ -145,8 +136,4 @@ export class ShareList extends React.PureComponent<ShareListInnerProps, ShareLis
             </div>
         );
     }
-
-    private copyLinkRef = (element: unknown) => {
-        this.copyLink = element as HTMLButtonElement;
-    };
 }

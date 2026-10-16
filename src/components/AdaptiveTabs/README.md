@@ -1,4 +1,4 @@
-## AdaptiveTabs
+# AdaptiveTabs
 
 If there is not enough container width to fit all the tabs, the tabs that do not fit will be hidden and accessible via the select
 with the caption `More'. If only one tab fits, the select is displayed instead of the tabs.
@@ -11,7 +11,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | title    | `String`, `React.ReactNode` |          |         | Tab's text                                           |
 | disabled | `Boolean`                   |          |         | Indicates that the user cannot interact with the tab |
 
-### AdaptiveTabs PropTypes
+## Properties
 
 | Property                                | Type                                                                      | Required | Default | Description                                                        |
 | :-------------------------------------- | :------------------------------------------------------------------------ | :------: | :------ | :----------------------------------------------------------------- |
@@ -23,7 +23,7 @@ with the caption `More'. If only one tab fits, the select is displayed instead o
 | wrapTo                                  | `wrapTo?(item: TabItemProps, node: React.ReactNode, index: number): void` |          |         | Allows to wrap TabItem into another component or render custom tab |
 | className                               | `String`                                                                  |          |         | Class name for the tabs container                                  |
 | [breakpointsConfig](#breakpointsConfig) | `Record<string, number>`                                                  |          |         | Breakpoints config which control the thersholds of tab size.       |
-| moreControlProps                        | `{popupWidth?: 'fit' \| number; virtualizationThreshold?: number;}`       |          |         | Settings to control popup with hidden tabs list                    |
+| moreControlProps                        | `{popupWidth?: 'fit' \| number;}`                                         |          |         | Settings to control popup with hidden tabs list                    |
 
 ### breakpointsConfig
 

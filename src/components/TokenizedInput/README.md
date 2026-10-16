@@ -1,8 +1,8 @@
-## TokenizedInput
+# TokenizedInput
 
 This component is for writing queries/filters and working with them as tokens. Here, a token is an expression (for example, for the format `key = value` the token would be `User = Ivan`). A distinguishing feature is full keyboard and mouse support (including clicking suggestions).
 
-### API Reference
+## Properties
 
 | Prop                    | Type                                                                                                                 | Default         | Description                                                    |
 | :---------------------- | :------------------------------------------------------------------------------------------------------------------- | :-------------- | :------------------------------------------------------------- |

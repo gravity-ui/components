@@ -3,8 +3,10 @@ module.exports = {
     moduleFileExtensions: ['js', 'json', 'ts', 'tsx'],
     rootDir: '.',
     transform: {
-        '\\.[jt]sx?$': ['ts-jest', {tsconfig: './tsconfig.test.json'}],
+        '\\.tsx?$': ['ts-jest', {tsconfig: './tsconfig.test.json'}],
+        '\\.jsx?$': ['babel-jest', {presets: ['@babel/preset-env']}],
     },
+    transformIgnorePatterns: ['node_modules/(?!colors-named(?:-hex)?/)'],
     coverageDirectory: './coverage',
     collectCoverageFrom: ['src/**/*.{ts,tsx}', '!**/__stories__/**/*', '!**/*/*.stories.{ts,tsx}'],
     testEnvironment: 'jsdom',

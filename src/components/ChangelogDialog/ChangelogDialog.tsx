@@ -22,14 +22,14 @@ export interface ChangelogDialogProps {
     items: ChangelogItem[];
     disableBodyScrollLock?: boolean;
     disableOutsideClick?: boolean;
-    onClose: DialogProps['onClose'];
+    onOpenChange: DialogProps['onOpenChange'];
     onLinkClick?: (link: string) => void;
     onStoryClick?: (storyId: string) => void;
     onRetryClick?: () => void;
     loading?: boolean;
     error?: boolean | {title: string; description: string};
-    disableHeightTransition?: boolean;
     className?: string;
+    modalClassName?: string;
 }
 
 let nextId = 1;
@@ -46,15 +46,15 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
         fullListLink,
         items,
         disableBodyScrollLock = true,
-        disableHeightTransition = true,
         disableOutsideClick,
-        onClose,
+        onOpenChange,
         onStoryClick,
         onLinkClick,
         onRetryClick,
         loading,
         error,
         className,
+        modalClassName,
     } = props;
 
     const idRef = React.useRef<number | undefined>(undefined);
@@ -64,13 +64,12 @@ export function ChangelogDialog(props: ChangelogDialogProps) {
     return (
         <Dialog
             className={b(null, className)}
-            modalClassName={b('modal')}
+            modalClassName={b('modal', modalClassName)}
             open={open}
-            onClose={onClose}
+            onOpenChange={onOpenChange}
             disableBodyScrollLock={disableBodyScrollLock}
             disableOutsideClick={disableOutsideClick}
             aria-labelledby={dialogCaptionId}
-            disableHeightTransition={disableHeightTransition}
         >
             <Dialog.Header caption={title} id={dialogCaptionId} />
             {fullListLink ? (

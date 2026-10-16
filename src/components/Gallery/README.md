@@ -1,4 +1,4 @@
-## Gallery
+# Gallery
 
 The base component for rendering galleries of any type of data.
 The component is responsible for the gallery navigation (keyboard arrows, body side click and header arrow click).
@@ -14,7 +14,7 @@ The children of the Gallery should be an array of [GalleryItem with the required
 - **Inline View**: Render the gallery in place within its parent instead of in a modal overlay
 - **Controlled Index**: Drive the active item index from outside via `activeItemIndex` / `onActiveItemIndexChange`
 
-### PropTypes
+## Properties
 
 | Property                | Type                      | Required | Values           | Default | Description                                   |
 | :---------------------- | :------------------------ | :------- | :--------------- | :------ | :-------------------------------------------- |

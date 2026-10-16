@@ -1,8 +1,8 @@
-## OnboardingMenu
+# OnboardingMenu
 
 A component for managing [onboarding presets](https://github.com/gravity-ui/onboarding) ([storybook](https://preview.gravity-ui.com/components/?path=/story/components-onboardingmenu--default)).
 
-## Props
+## Properties
 
 ```ts
 type OnboardingMenuProps = {

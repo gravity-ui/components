@@ -77,7 +77,7 @@ export function Reaction(props: ReactionInnerProps) {
             size={size}
             selected={selected}
             view="outlined"
-            extraProps={{value}}
+            value={value}
             pin="circle-circle"
             onClick={onClickCallback}
             className={b('reaction-button', {size})}
@@ -108,7 +108,7 @@ export function Reaction(props: ReactionInnerProps) {
             {currentHoveredReaction && currentHoveredReaction.reaction.value === value ? (
                 <Popup
                     className={b('popup')}
-                    anchorRef={currentHoveredReaction.ref}
+                    anchorElement={currentHoveredReaction.ref.current}
                     placement={popupDefaultPlacement}
                     open={currentHoveredReaction.open}
                     hasArrow

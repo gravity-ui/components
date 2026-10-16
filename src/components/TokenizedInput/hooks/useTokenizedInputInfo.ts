@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {getUniqId} from '@gravity-ui/uikit';
-import isEqual from 'lodash/isEqual';
+import {isEqual} from 'es-toolkit';
 
 import type {Token, TokenValueBase, TokenizedInputData, TokenizedInputInfo} from '../types';
 import {UndoRedoManager} from '../undoredo-manager';

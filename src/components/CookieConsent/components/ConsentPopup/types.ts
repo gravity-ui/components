@@ -41,8 +41,6 @@ export interface ConsentPopupData {
     noSubtitle?: boolean;
     cookieList?: ConsentPopupCookieListItem[];
     onClose: () => void;
-    /* Disable modal animation */
-    disableHeightTransition?: boolean;
 }
 
 export type ConsentPopupProps = ConsentPopupData &

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {getUniqId} from '@gravity-ui/uikit';
-import debounce from 'lodash/debounce';
+import {debounce} from 'es-toolkit';
 
 import {useFocusContext, useInputContext, useOptionsContext} from '../../../context';
 import type {

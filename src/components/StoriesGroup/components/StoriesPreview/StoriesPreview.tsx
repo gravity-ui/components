@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ChevronLeft, ChevronRight} from '@gravity-ui/icons';
 import {Button, Icon} from '@gravity-ui/uikit';
-import type {ButtonButtonProps, ModalCloseReason} from '@gravity-ui/uikit';
+import type {ButtonButtonProps, OpenChangeReason} from '@gravity-ui/uikit';
 
 import {MediaRenderer} from '../../../Stories/components';
 import type {StoriesItemMedia} from '../../../Stories/types';
@@ -172,8 +172,8 @@ export type StoriesPreviewProps = {
     onGroupSelect: (groupIndex: number) => void;
     maxSliderItemsCount: number;
     onClose?: (
-        event: MouseEvent | KeyboardEvent | React.MouseEvent<HTMLElement, MouseEvent>,
-        reason: ModalCloseReason,
+        event?: Event | React.MouseEvent<HTMLElement, MouseEvent>,
+        reason?: OpenChangeReason,
     ) => void;
 };
 
@@ -188,7 +188,7 @@ export const StoriesPreview = ({
 }: StoriesPreviewProps) => {
     const handleClose = React.useCallback<React.MouseEventHandler<HTMLDivElement>>(
         (event) => {
-            onClose?.(event, 'outsideClick');
+            onClose?.(event, 'outside-press');
         },
         [onClose],
     );

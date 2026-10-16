@@ -1,25 +1,25 @@
-## ChangelogDialog
+# ChangelogDialog
 
 Component for displaying the changelog. It looks like a list of versions in a modal. It can display regular versions and versions associated with stories.
 
-### PropTypes
+## Properties
 
-| Property                | Type                              | Required | Default     | Description                                                     |
-| :---------------------- | :-------------------------------- | :------- | :---------- | :-------------------------------------------------------------- |
-| open                    | `Boolean`                         | ✓        |             | Visibility flag                                                 |
-| title                   | `String`                          |          | `Changelog` | Dialog title                                                    |
-| fullListLink            | `String`                          |          |             | Link to documentation with full changelog                       |
-| items                   | `ChangelogItem[]`                 | ✓        |             | List of versions to display                                     |
-| disableBodyScrollLock   | `Boolean`                         |          | true        | If `true`, window scrolling is disabled when the dialog is open |
-| disableOutsideClick     | `Boolean`                         |          |             | If `true`, do not close dialog on click outside                 |
-| disableHeightTransition | `Boolean`                         |          | true        | If `true`, do not animate the dialog height                     |
-| loading                 | `Boolean`                         |          |             | If `true`, show loader instead of the list of versions          |
-| error                   | `Boolean \| {title, description}` |          |             | If set, show error instead of the list of versions              |
-| onClose                 | `Function`                        | ✓        |             | Action on close                                                 |
-| onStoryClick            | `ChangelogStoryClickHandler`      |          |             | Action on click to "View story"                                 |
-| onLinkClick             | `Function`                        |          |             | Action on click to "Read more", takes the version link          |
-| onRetryClick            | `Function`                        |          |             | Action on click to "Retry" in the error state                   |
-| className               | `String`                          |          |             | Dialog CSS class                                                |
+| Property              | Type                              | Required | Default     | Description                                                     |
+| :-------------------- | :-------------------------------- | :------- | :---------- | :-------------------------------------------------------------- |
+| open                  | `Boolean`                         | ✓        |             | Visibility flag                                                 |
+| title                 | `String`                          |          | `Changelog` | Dialog title                                                    |
+| fullListLink          | `String`                          |          |             | Link to documentation with full changelog                       |
+| items                 | `ChangelogItem[]`                 | ✓        |             | List of versions to display                                     |
+| disableBodyScrollLock | `Boolean`                         |          | true        | If `true`, window scrolling is disabled when the dialog is open |
+| disableOutsideClick   | `Boolean`                         |          |             | If `true`, do not close dialog on click outside                 |
+| loading               | `Boolean`                         |          |             | If `true`, show loader instead of the list of versions          |
+| error                 | `Boolean \| {title, description}` |          |             | If set, show error instead of the list of versions              |
+| onOpenChange          | `Function`                        | ✓        |             | Action on close                                                 |
+| onStoryClick          | `ChangelogStoryClickHandler`      |          |             | Action on click to "View story"                                 |
+| onLinkClick           | `Function`                        |          |             | Action on click to "Read more", takes the version link          |
+| onRetryClick          | `Function`                        |          |             | Action on click to "Retry" in the error state                   |
+| className             | `String`                          |          |             | Dialog CSS class                                                |
+| modalClassName        | `String`                          |          |             | Modal CSS class, see [CSS API](#css-api)                        |
 
 ### ChangelogItem object
 
@@ -75,9 +75,10 @@ Component for displaying the changelog. It looks like a list of versions in a mo
 
 ### CSS API
 
-| Name                               | Description                                           | Default |
-| :--------------------------------- | :---------------------------------------------------- | :------ |
-| `--gc-changelog-dialog-max-width`  | Maximum dialog width                                  | `732px` |
-| `--gc-changelog-dialog-max-height` | Maximum height of the list of versions                | `70vh`  |
-| `--gc-changelog-dialog-meta-width` | Width of the item meta column (date, "New" label)     | `80px`  |
-| ~~`--gc-changelog-dialog-width`~~  | **Deprecated**, use `--gc-changelog-dialog-max-width` | —       |
+| Name                               | Description                                       | Default |
+| :--------------------------------- | :------------------------------------------------ | :------ |
+| `--gc-changelog-dialog-max-height` | Maximum height of the list of versions            | `70vh`  |
+| `--gc-changelog-dialog-meta-width` | Width of the item meta column (date, "New" label) | `80px`  |
+| ~~`--gc-changelog-dialog-width`~~  | **Deprecated**, use `--g-modal-max-width`         | —       |
+
+To change the dialog width, set the `Modal` variables — `--g-modal-max-width`, `--g-modal-width` — on the modal itself via the `modalClassName` prop. The component sets `--g-modal-max-width: 732px` there, so the overriding rule has to win the cascade over the component styles.

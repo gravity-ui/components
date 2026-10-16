@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Archive, ArrowRotateLeft, CircleCheck, Funnel, TrashBin} from '@gravity-ui/icons';
-import {Disclosure, DropdownMenu, Flex, Icon, Link} from '@gravity-ui/uikit';
+import {Disclosure, Flex, Icon, Link, Menu} from '@gravity-ui/uikit';
 
 import {NotificationAction} from '../../Notification/NotificationAction';
 import {NotificationSwipeAction} from '../../Notification/NotificationSwipeAction';
@@ -22,19 +22,18 @@ export const notificationsMockActions = {
         <NotificationAction action={{icon: Archive, text: 'Remove all from archive', onClick}} />
     ),
     filter: () => (
-        <DropdownMenu
-            switcher={
-                <NotificationAction
-                    action={{icon: Funnel, text: 'Filter', onClick: () => console.log('FILTER')}}
-                />
+        <Menu
+            trigger={
+                <Menu.Trigger aria-label="Filter" view="flat">
+                    <Icon data={Funnel} />
+                </Menu.Trigger>
             }
-            items={[
-                {text: 'Any', action: () => console.log('any')},
-                {text: 'Tracker', action: () => console.log('tracker')},
-                {text: 'Cloud', action: () => console.log('cloud')},
-                {text: 'You can put any popup here', action: () => console.log('cloud')},
-            ]}
-        />
+        >
+            <Menu.Item onClick={() => console.log('any')}>Any</Menu.Item>
+            <Menu.Item onClick={() => console.log('tracker')}>Tracker</Menu.Item>
+            <Menu.Item onClick={() => console.log('cloud')}>Cloud</Menu.Item>
+            <Menu.Item onClick={() => console.log('cloud')}>You can put any popup here</Menu.Item>
+        </Menu>
     ),
 };
 
@@ -104,7 +103,7 @@ export const LongNotificationContent = (props: {
 
     return (
         <Disclosure summary="Collapsed content" onUpdate={handleUpdate}>
-            <Flex direction="column" gap={1}>
+            <Flex direction="column" gap="spacing-1">
                 {Array.from({length: 20}, (_, index) => (
                     <i key={index}>{'Long expanded content. '}</i>
                 ))}

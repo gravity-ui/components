@@ -35,7 +35,7 @@ const renderUserReacted = ({avatar, name}: ReactionsMockUser) => {
 
 const renderUsersReacted = (users: ReactionsMockUser[]) => {
     return (
-        <Flex direction="column" gap={1}>
+        <Flex direction="column" gap="spacing-1">
             {users.map(renderUserReacted)}
         </Flex>
     );

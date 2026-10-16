@@ -78,11 +78,8 @@ export const StoreBadge = ({
             href={href}
             target="_blank"
             rel="noopener"
+            aria-label={iconLabelData}
             {...restLinkProps}
-            extraProps={{
-                'aria-label': iconLabelData,
-                ...restLinkProps.extraProps,
-            }}
         >
             <Icon data={iconData} />
         </Link>

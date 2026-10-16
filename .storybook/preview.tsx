@@ -6,13 +6,11 @@ import '@gravity-ui/uikit/styles/styles.css';
 import {MINIMAL_VIEWPORTS} from '@storybook/addon-viewport';
 import type {Preview} from '@storybook/react';
 
-import {withLang} from './decorators/withLang';
-import {withMobile} from './decorators/withMobile';
+import {withProvider} from './decorators/withProvider';
 import {withStrictMode} from './decorators/withStrictMode';
-import {withTheme} from './decorators/withTheme';
 
 const preview: Preview = {
-    decorators: [withLang, withMobile, withTheme, withStrictMode],
+    decorators: [withProvider, withStrictMode],
     parameters: {
         jsx: {showFunctions: true},
         viewport: {
