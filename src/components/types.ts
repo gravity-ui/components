@@ -1,4 +1,3 @@
-import type {i18n as AdaptiveTabsKeyset} from './AdaptiveTabs/i18n';
 import type {i18n as ChangelogDialogKeyset} from './ChangelogDialog/i18n';
 import type {i18n as CookieConsentKeyset} from './CookieConsent/i18n';
 import type {i18n as FormRowKeyset} from './FormRow/i18n';
@@ -17,8 +16,7 @@ type DeepPartial<T, N extends number = 9> = N extends 0
     ? T
     : Partial<{[P in keyof T]: DeepPartial<T[P], [never, 0, 1, 2, 3, 4, 5, 6, 7, 8][N]>}>;
 
-export type Keysets = typeof AdaptiveTabsKeyset.keysetData &
-    typeof ChangelogDialogKeyset.keysetData &
+export type Keysets = typeof ChangelogDialogKeyset.keysetData &
     typeof CookieConsentKeyset.keysetData &
     typeof FormRowKeyset.keysetData &
     typeof GalleryKeyset.keysetData &

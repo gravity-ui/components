@@ -1,4 +1,3 @@
-export * from './AdaptiveTabs';
 export * from './CookieConsent';
 export * from './ChangelogDialog';
 export * from './DelayedTextInput';
