@@ -139,7 +139,9 @@ import {
     actions={[
         getGalleryItemCopyLinkAction({
             copyUrl: 'https://example.jpg',
-            onCopy: () => console.log('link copied'),
+            onCopy: (text, success) => {
+                if (success) console.log('Link copied:', text);
+            },
         }),
         getGalleryItemDownloadAction({
             downloadUrl:  'https://example.jpg',
@@ -148,6 +150,8 @@ import {
     ]}
 />
 ```
+
+The copy action shows feedback on success. `onCopy(text, success)` reports the result.
 
 ### Examples
 
