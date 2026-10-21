@@ -1,11 +1,11 @@
 import {Link} from '@gravity-ui/icons';
-import {ActionTooltip, Button, CopyToClipboard, Icon} from '@gravity-ui/uikit';
+import {ClipboardButton, type ClipboardButtonProps, Icon} from '@gravity-ui/uikit';
 
 import {GalleryItemAction} from '../GalleryItem';
 
 export type GetGalleryItemCopyLinkActionArgs = {
     copyUrl: string;
-    onCopy?: () => void;
+    onCopy?: ClipboardButtonProps['onCopy'];
 };
 
 export function getGalleryItemCopyLinkAction({
@@ -17,16 +17,18 @@ export function getGalleryItemCopyLinkAction({
         title: 'copy-url',
         __titleT: ({t}) => t('copy-link'),
         icon: <Icon data={Link} />,
-        __renderT: (props, {t}) => (
-            <CopyToClipboard text={copyUrl} onCopy={onCopy}>
-                {() => (
-                    <div>
-                        <ActionTooltip title={t('copy-link')}>
-                            <Button {...props} />
-                        </ActionTooltip>
-                    </div>
-                )}
-            </CopyToClipboard>
-        ),
+        __renderT: (props, {t}) => {
+            if (props.href !== undefined) return null;
+
+            return (
+                <ClipboardButton
+                    {...props}
+                    text={copyUrl}
+                    tooltipInitialText={t('copy-link')}
+                    onCopy={onCopy}
+                    icon={<Icon data={Link} />}
+                />
+            );
+        },
     };
 }
