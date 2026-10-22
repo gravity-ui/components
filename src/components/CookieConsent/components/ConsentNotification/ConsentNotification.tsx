@@ -20,7 +20,7 @@ export const ConsentNotification = (props: ConsentNotificationProps) => {
         className,
         policyLinkText = t('label_policy'),
         text = t('label_text'),
-        buttonOkText = t('button_OK'),
+        buttonOkText = t('button_accept'),
     } = props;
 
     const mobile = useMobile();
