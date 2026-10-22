@@ -20,7 +20,7 @@ const baseGroups: StoriesGroupItem[] = new Array(12).fill(0).map((_, index) => {
                 title: 'New navigation',
                 textBlockStyle: StoriesTextBlockStyle.Card,
                 mediaBlockStyle: StoriesMediaBlockStyle.FullSize,
-                description:
+                content:
                     'At the top of the panel is the service navigation for each service. ' +
                     'Below are common navigation elements: a component for switching between accounts ' +
                     'and organizations, settings, help center, search, notifications, favorites.',
@@ -34,7 +34,7 @@ const baseGroups: StoriesGroupItem[] = new Array(12).fill(0).map((_, index) => {
                 title: 'New navigation (2)',
                 textBlockStyle: StoriesTextBlockStyle.Transparent,
                 mediaBlockStyle: StoriesMediaBlockStyle.HalfSizeWithMargins,
-                description: 'A little more about the new navigation',
+                content: 'A little more about the new navigation',
                 media: {
                     url: 'https://storage.yandexcloud.net/uikit-storybook-assets/sample_960x400_ocean_with_audio.mp4',
                     type: 'video',
