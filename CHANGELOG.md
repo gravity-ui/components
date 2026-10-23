@@ -1,5 +1,31 @@
 # Changelog
 
+## [5.0.0](https://github.com/gravity-ui/components/compare/v4.24.1...v5.0.0) (2026-10-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove AdaptiveTabs ([#411](https://github.com/gravity-ui/components/issues/411))
+* update uikit
+
+### Features
+
+* remove AdaptiveTabs ([#411](https://github.com/gravity-ui/components/issues/411)) ([c2f69a3](https://github.com/gravity-ui/components/commit/c2f69a3aa0ee86201744b00f426512ea85348837))
+* update beta version ([ae04b99](https://github.com/gravity-ui/components/commit/ae04b9975269a44235f4c84f53c677f65b4bf6b5))
+* update uikit ([7e855e2](https://github.com/gravity-ui/components/commit/7e855e24b7d26e60ce7b2ed2bcf096fda5444bc1))
+
+
+### Bug Fixes
+
+* **ConsentNotification:** fixed default buttonOkText ([#376](https://github.com/gravity-ui/components/issues/376)) ([a53b3fe](https://github.com/gravity-ui/components/commit/a53b3fe226f4f9fbb80903acf68fd04ab197b78d))
+* fix PromoSheet tests ([24879d9](https://github.com/gravity-ui/components/commit/24879d9065e894a472761325a98eefdb6ef53148))
+* **Gallery:** restore mobile action list layout ([68ea1a8](https://github.com/gravity-ui/components/commit/68ea1a810dc6f2b2eec2a1093d19e463ce6eaadd))
+* **Gallery:** show feedback after copying a link ([#413](https://github.com/gravity-ui/components/issues/413)) ([da19cf4](https://github.com/gravity-ui/components/commit/da19cf4a63fcd867f47d027b3eb6843238340801))
+* **ItemSelector:** hide row actions after the pointer leaves the list ([58b2f67](https://github.com/gravity-ui/components/commit/58b2f677fbc94e4c5c73ad17a4eb7d7718d29803))
+* minor issues fixes ([2a96c87](https://github.com/gravity-ui/components/commit/2a96c87f961b033e89b8376e0bdaf49bee2d004d))
+* **Notification:** remove base background color ([#412](https://github.com/gravity-ui/components/issues/412)) ([e5a86ba](https://github.com/gravity-ui/components/commit/e5a86babea798f60773fd3833d4b6c8009e6dd63))
+* **StoriesGroup:** use content in Storybook examples ([#228](https://github.com/gravity-ui/components/issues/228)) ([b2c6bda](https://github.com/gravity-ui/components/commit/b2c6bda47ee8c80b8c102e777955e21cabde1f12))
+
 ## [4.24.1](https://github.com/gravity-ui/components/compare/v4.24.0...v4.24.1) (2026-10-07)
 
 
