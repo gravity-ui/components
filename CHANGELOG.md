@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/gravity-ui/components/compare/v5.0.0...v5.1.0) (2026-10-30)
+
+
+### Features
+
+* **useGallery:** add onOpenChange callback to report gallery open state changes ([#414](https://github.com/gravity-ui/components/issues/414)) ([4567bb8](https://github.com/gravity-ui/components/commit/4567bb836243f89885c3a50b86c8c71fefbc84fe))
+
 ## [5.0.0](https://github.com/gravity-ui/components/compare/v4.24.1...v5.0.0) (2026-10-23)
 
 
