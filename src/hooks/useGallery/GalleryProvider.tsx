@@ -8,7 +8,7 @@ import type {GalleryItemProps, GalleryModalProps} from '../../components';
 
 import {AsyncGallery} from './AsyncGallery';
 import {GalleryContext} from './GalleryContext';
-import type {GalleryContextType} from './GalleryContext';
+import type {GalleryContextType, GalleryOpenOptions} from './GalleryContext';
 
 export type GalleryProviderProps = React.PropsWithChildren<
     Pick<GalleryModalProps, 'container' | 'className' | 'emptyMessage'>
@@ -22,44 +22,73 @@ export const GalleryProvider = ({
     theme,
     className,
 }: GalleryProviderProps) => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [{items, initialItemIndex}, setGalleryProps] = React.useState<{
+    const [gallery, setGallery] = React.useState<{
         items: GalleryItemProps[];
         initialItemIndex: number;
-    }>({items: [], initialItemIndex: 0});
+    } | null>(null);
+    const isOpen = gallery !== null;
+
+    const sessionRef = React.useRef<GalleryOpenOptions | null>(null);
+
+    const closeGallery = React.useCallback(() => {
+        const session = sessionRef.current;
+        if (!session) return;
+
+        sessionRef.current = null;
+        setGallery(null);
+
+        session.onOpenChange?.(false);
+    }, []);
+
+    const handleOpenChange = React.useCallback(
+        (open: boolean) => {
+            if (!open) closeGallery();
+        },
+        [closeGallery],
+    );
 
     const contextValue = React.useMemo<GalleryContextType>(
         () => ({
-            openGallery: (items, initialFileIndex) => {
-                setGalleryProps({
-                    items,
+            openGallery: (galleryItems, initialFileIndex, options) => {
+                const previous = sessionRef.current;
+                const onOpenChange = options?.onOpenChange;
+                const session: GalleryOpenOptions = {};
+                sessionRef.current = session;
+                setGallery({
+                    items: galleryItems,
                     initialItemIndex: initialFileIndex ?? 0,
                 });
-                setIsOpen(true);
+                try {
+                    previous?.onOpenChange?.(false);
+                } finally {
+                    if (sessionRef.current === session) {
+                        // A pending session must not send a close event.
+                        session.onOpenChange = onOpenChange;
+                        onOpenChange?.(true);
+                    }
+                }
             },
-            closeGallery: () => {
-                setIsOpen(false);
-            },
+            closeGallery,
             open: isOpen,
         }),
-        [isOpen],
+        [isOpen, closeGallery],
     );
 
     return (
         <GalleryContext.Provider value={contextValue}>
             {children}
-            {isOpen && (
+            {gallery && (
                 <React.Suspense fallback={null}>
                     <ThemeProvider theme={theme}>
                         <AsyncGallery
                             open={isOpen}
-                            onOpenChange={setIsOpen}
+                            onOpenChange={handleOpenChange}
                             container={container}
                             className={className}
                             emptyMessage={emptyMessage}
-                            initialItemIndex={initialItemIndex}
+                            initialItemIndex={gallery.initialItemIndex}
                         >
-                            {items.map((file, index) => (
+                            {gallery.items.map((file, index) => (
                                 <GalleryItem key={index} {...file} />
                             ))}
                         </AsyncGallery>

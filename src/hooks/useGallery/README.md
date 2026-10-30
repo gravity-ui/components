@@ -29,6 +29,7 @@ const images = [
 openGallery(
   images.map((image) => getGalleryItemImage({src: image, name: image})),
   2,
+  {onOpenChange: (open) => console.log('Gallery open:', open)},
 );
 ```
 
@@ -45,15 +46,26 @@ _GalleryProvider_:
 
 _useGallery hook returns_:
 
-| Property     | Type                                                       | Description                          |
-| :----------- | :--------------------------------------------------------- | :----------------------------------- |
-| openGallery  | `(items: GalleryItem[], initialItemIndex: number) => void` | The function for opening the gallery |
-| closeGallery | `() => void`                                               | The function for closing the gallery |
-| open         | `boolean`                                                  | The boolean value of gallery state   |
+| Property     | Type                                                                                           | Description                          |
+| :----------- | :--------------------------------------------------------------------------------------------- | :----------------------------------- |
+| openGallery  | `(items: GalleryItemProps[], initialItemIndex?: number, options?: GalleryOpenOptions) => void` | The function for opening the gallery |
+| closeGallery | `() => void`                                                                                   | The function for closing the gallery |
+| open         | `boolean`                                                                                      | The boolean value of gallery state   |
 
 _openGallery function args_:
 
-| Property         | Type            | Required | Default | Description            |
-| :--------------- | :-------------- | :------- | :------ | :--------------------- |
-| items            | `GalleryItem[]` | Yes      |         | The gallery items      |
-| initialItemIndex | `number`        |          | 0       | The initial item index |
+| Property         | Type                 | Required | Default | Description                     |
+| :--------------- | :------------------- | :------- | :------ | :------------------------------ |
+| items            | `GalleryItemProps[]` | Yes      |         | The gallery items               |
+| initialItemIndex | `number`             |          | 0       | The initial item index          |
+| options          | `GalleryOpenOptions` |          |         | Options for opening the gallery |
+
+_GalleryOpenOptions_:
+
+| Property     | Type                      | Required | Description                                     |
+| :----------- | :------------------------ | :------- | :---------------------------------------------- |
+| onOpenChange | `(open: boolean) => void` |          | Called with `true` on open and `false` on close |
+
+Opening another gallery calls the previous callback with `false`, then the new
+callback with `true`. Switching files does not call this callback. The gallery
+stays open if the component that opened it unmounts.
