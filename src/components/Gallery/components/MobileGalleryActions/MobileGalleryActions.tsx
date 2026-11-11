@@ -33,7 +33,7 @@ export const MobileGalleryActions = ({open, actions = [], onClose}: MobileGaller
                 view: 'flat',
                 onClick: item.onClick,
                 href: item.href,
-                target: '__blank',
+                target: '_blank',
                 'aria-label': title,
                 className: cnMobileGalleryActions('list-item'),
                 width: 'max',

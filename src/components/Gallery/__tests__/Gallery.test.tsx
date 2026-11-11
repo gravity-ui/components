@@ -1,3 +1,5 @@
+import {MobileProvider} from '@gravity-ui/uikit';
+
 import {fireEvent, render, screen} from '../../../../test-utils/utils';
 import {Gallery} from '../Gallery';
 import {GalleryItem} from '../GalleryItem';
@@ -45,6 +47,40 @@ describe('Gallery', () => {
             fireEvent.click(screen.getByLabelText('Close'));
 
             expect(onOpenChange).toHaveBeenCalledWith(false);
+        });
+
+        it('should open an action link in a new tab without access to the opener', () => {
+            render(
+                <Gallery open onOpenChange={jest.fn()}>
+                    <GalleryItem
+                        view={<div>Item A</div>}
+                        thumbnail={<span>thumb A</span>}
+                        actions={[
+                            {id: 'download', title: 'Download', icon: <span>d</span>, href: '/a'},
+                        ]}
+                    />
+                </Gallery>,
+            );
+
+            const link = screen.getByLabelText('Download');
+            expect(link).toHaveAttribute('target', '_blank');
+            expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+        });
+
+        it('should not render a stray zero in the mobile header for an item without actions', () => {
+            render(
+                <Gallery open onOpenChange={jest.fn()}>
+                    <GalleryItem
+                        view={<div>Item A</div>}
+                        thumbnail={<span>thumb A</span>}
+                        actions={[]}
+                    />
+                </Gallery>,
+                {wrapper: ({children}) => <MobileProvider mobile>{children}</MobileProvider>},
+            );
+
+            expect(screen.getByText('Item A')).toBeInTheDocument();
+            expect(screen.queryByText('0')).not.toBeInTheDocument();
         });
     });
 

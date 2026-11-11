@@ -74,7 +74,7 @@ export const MobileGalleryHeader = ({
                     </Text>
                 )}
 
-                {actions?.length && (
+                {Boolean(actions?.length) && (
                     <Button
                         size="xl"
                         view="flat"
