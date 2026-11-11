@@ -1,6 +1,9 @@
+import {MobileProvider} from '@gravity-ui/uikit';
+
 import {fireEvent, render, screen} from '../../../../test-utils/utils';
 import {Gallery} from '../Gallery';
 import {GalleryItem} from '../GalleryItem';
+import {getGalleryItemDownloadAction} from '../utils/getGalleryItemDownloadAction';
 
 const renderItems = () => [
     <GalleryItem key="a" view={<div>Item A</div>} thumbnail={<span>thumb A</span>} name="A" />,
@@ -46,6 +49,34 @@ describe('Gallery', () => {
 
             expect(onOpenChange).toHaveBeenCalledWith(false);
         });
+    });
+
+    it.each([
+        {device: 'desktop', mobile: false},
+        {device: 'mobile', mobile: true},
+    ])('should isolate the opener for a download link on $device', async ({mobile}) => {
+        const downloadUrl = 'https://example.test/image.png';
+
+        render(
+            <MobileProvider mobile={mobile}>
+                <Gallery view="inline">
+                    <GalleryItem
+                        view={<div>Item A</div>}
+                        thumbnail={<span>thumb A</span>}
+                        actions={[getGalleryItemDownloadAction({downloadUrl})]}
+                    />
+                </Gallery>
+            </MobileProvider>,
+        );
+
+        if (mobile) {
+            fireEvent.click(screen.getByRole('button', {name: 'Close'}));
+        }
+        const link = await screen.findByRole('link', {name: 'Download'});
+
+        expect(link).toHaveAttribute('href', downloadUrl);
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     describe('inline view', () => {
