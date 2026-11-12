@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.1.0](https://github.com/gravity-ui/components/compare/v5.0.0...v5.1.0) (2026-11-12)
+
+
+### Features
+
+* **useGallery:** add onOpenChange callback to report gallery open state changes ([#414](https://github.com/gravity-ui/components/issues/414)) ([4567bb8](https://github.com/gravity-ui/components/commit/4567bb836243f89885c3a50b86c8c71fefbc84fe))
+
+
+### Bug Fixes
+
+* **Gallery:** open action links without an opener ([#417](https://github.com/gravity-ui/components/issues/417)) ([bc74ef3](https://github.com/gravity-ui/components/commit/bc74ef32cd47b0b56ae9cd48abd91869ac9fa7ce))
+
 ## [5.0.0](https://github.com/gravity-ui/components/compare/v4.24.1...v5.0.0) (2026-10-23)
 
 
