@@ -75,7 +75,10 @@ export const DesktopGalleryHeader = ({
                         view: 'flat',
                         onClick: action.onClick,
                         href: action.href,
-                        target: '__blank',
+                        ...(action.href !== undefined && {
+                            target: '_blank',
+                            rel: 'noopener noreferrer',
+                        }),
                         'aria-label': title,
                         children: action.icon,
                     };
