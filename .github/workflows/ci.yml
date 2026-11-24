@@ -47,7 +47,8 @@ jobs:
 
   storybook_tests:
     name: Storybook Tests
-    runs-on: ubuntu-latest
+    # Playwright 1.51 does not support Ubuntu 26.04.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
