@@ -168,3 +168,13 @@ MoreGroups.args = {
     groups,
 };
 MoreGroups.argTypes = {};
+
+export const WithAutoPlay = DefaultTemplate.bind({});
+WithAutoPlay.args = {
+    ...Default.args,
+    autoPlay: true,
+    autoPlayInterval: 5000,
+};
+WithAutoPlay.argTypes = {
+    onItemSelect: {action: 'onItemSelect'},
+};

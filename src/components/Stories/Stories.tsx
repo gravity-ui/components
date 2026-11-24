@@ -7,13 +7,13 @@ import {block} from '../utils/cn';
 
 import {IndexType, StoriesLayout} from './components/StoriesLayout/StoriesLayout';
 import {useSyncWithLS} from './hooks';
-import type {StoriesItem} from './types';
+import type {StoriesAutoPlayProps, StoriesItem} from './types';
 
 import './Stories.scss';
 
 const b = block('stories');
 
-export interface StoriesProps {
+export interface StoriesProps extends StoriesAutoPlayProps {
     open: boolean;
     items: StoriesItem[];
     onClose?: (
@@ -40,6 +40,8 @@ export function Stories({
     className,
     syncInTabsKey,
     resetStoryIndexOnClose,
+    autoPlay,
+    autoPlayInterval,
 }: StoriesProps) {
     const [storyIndex, setStoryIndex] = React.useState(initialStoryIndex);
 
@@ -71,28 +73,18 @@ export function Stories({
     );
 
     const handleGotoPrevious = React.useCallback(() => {
-        setStoryIndex((currentStoryIndex) => {
-            if (currentStoryIndex <= 0) {
-                return 0;
-            }
-
-            const newIndex = currentStoryIndex - 1;
-            onPreviousClick?.(newIndex);
-            return newIndex;
-        });
-    }, [onPreviousClick]);
+        if (storyIndex <= 0) return;
+        const newIndex = storyIndex - 1;
+        setStoryIndex(newIndex);
+        onPreviousClick?.(newIndex);
+    }, [storyIndex, onPreviousClick]);
 
     const handleGotoNext = React.useCallback(() => {
-        setStoryIndex((currentStoryIndex) => {
-            if (currentStoryIndex >= items.length - 1) {
-                return items.length - 1;
-            }
-
-            const newIndex = currentStoryIndex + 1;
-            onNextClick?.(newIndex);
-            return newIndex;
-        });
-    }, [items, onNextClick]);
+        if (storyIndex >= items.length - 1) return;
+        const newIndex = storyIndex + 1;
+        setStoryIndex(newIndex);
+        onNextClick?.(newIndex);
+    }, [storyIndex, items.length, onNextClick]);
 
     React.useEffect(() => {
         if (!open) {
@@ -145,6 +137,9 @@ export function Stories({
             contentClassName={b('modal-content', className)}
         >
             <StoriesLayout
+                open={open}
+                autoPlay={autoPlay}
+                autoPlayInterval={autoPlayInterval}
                 items={items}
                 storyIndex={storyIndex}
                 indexType={indexType}

@@ -1,0 +1,34 @@
+@use '../../../variables';
+
+$block: '.#{variables.$ns}stories-progress';
+
+#{$block} {
+    display: flex;
+    gap: var(--g-spacing-1);
+    color: var(--g-color-line-generic-active);
+    flex-shrink: 0;
+
+    &__segment {
+        --g-progress-empty-background-color: transparent;
+        --g-progress-filled-background-color: currentColor;
+
+        flex: 1;
+        min-width: 1px;
+        height: 2px;
+        border-radius: 2px;
+
+        .g-progress__stack {
+            height: 100%;
+            color: inherit;
+            transition: none;
+        }
+
+        .g-progress__item {
+            transition: none;
+        }
+    }
+
+    &__remaining {
+        opacity: 0.3;
+    }
+}
