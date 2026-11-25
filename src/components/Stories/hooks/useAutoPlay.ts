@@ -2,12 +2,13 @@ import * as React from 'react';
 
 interface UseAutoPlayOptions {
     open: boolean;
+    paused: boolean;
     interval: number;
     onComplete?: () => void;
 }
 
-// Each slide mounts its own timer. Only time spent in an open story on a visible tab counts.
-export function useAutoPlay({open, interval, onComplete}: UseAutoPlayOptions) {
+// Each slide mounts its own timer. Pauses preserve the remaining time.
+export function useAutoPlay({open, paused, interval, onComplete}: UseAutoPlayOptions) {
     const [progress, setProgress] = React.useState(0);
     const [hidden, setHidden] = React.useState(
         () => typeof document !== 'undefined' && document.hidden,
@@ -31,7 +32,7 @@ export function useAutoPlay({open, interval, onComplete}: UseAutoPlayOptions) {
     }, [open, interval]);
 
     React.useEffect(() => {
-        if (!open || hidden || elapsed.current >= interval) {
+        if (!open || paused || hidden || elapsed.current >= interval) {
             return undefined;
         }
 
@@ -56,7 +57,7 @@ export function useAutoPlay({open, interval, onComplete}: UseAutoPlayOptions) {
             clearTimeout(timeout);
             elapsed.current = Math.min(previousElapsed + Date.now() - startedAt, interval);
         };
-    }, [open, hidden, interval]);
+    }, [open, paused, hidden, interval]);
 
     return progress;
 }

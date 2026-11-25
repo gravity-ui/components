@@ -71,11 +71,11 @@ test('uses five seconds per slide by default', () => {
     expect(screen.getByText('Second story')).toBeInTheDocument();
 });
 
-test('resets the timer on both button and keyboard navigation', async () => {
+test('resets the timer on keyboard navigation before focus enters story controls', async () => {
     const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
     render(<Stories open autoPlay autoPlayInterval={1000} items={items} />);
     advance(700);
-    await user.click(screen.getByRole('button', {name: 'Next'}));
+    await user.keyboard('{ArrowRight}');
     advance(700);
     expect(screen.getByText('Second story')).toBeInTheDocument();
     await user.keyboard('{ArrowLeft}');

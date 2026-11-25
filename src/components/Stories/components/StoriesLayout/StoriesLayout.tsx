@@ -52,6 +52,11 @@ export const StoriesLayout = ({
     handleGotoPrevious,
 }: StoriesLayoutProps) => {
     const {t} = i18n.useTranslation();
+    const [pausedByFocus, setPausedByFocus] = React.useState(false);
+
+    React.useEffect(() => {
+        if (!open) setPausedByFocus(false);
+    }, [open]);
 
     const currentStory = items[storyIndex];
     const showProgress = isAutoPlayEnabled(autoPlay, autoPlayInterval);
@@ -65,6 +70,7 @@ export const StoriesLayout = ({
                     count={items.length}
                     index={storyIndex}
                     open={open}
+                    paused={pausedByFocus}
                     interval={autoPlayInterval}
                     color={currentStory.progressColor}
                     onComplete={canAdvance ? handleGotoNext : undefined}
@@ -90,7 +96,7 @@ export const StoriesLayout = ({
     };
 
     return (
-        <div className={b('wrap-outer')}>
+        <div className={b('wrap-outer')} onFocusCapture={() => setPausedByFocus(true)}>
             <div className={b('container')}>
                 <div
                     className={b('left-pane', {

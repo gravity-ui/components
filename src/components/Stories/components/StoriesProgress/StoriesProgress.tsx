@@ -13,6 +13,7 @@ interface StoriesProgressProps {
     count: number;
     index: number;
     open: boolean;
+    paused: boolean;
     interval: number;
     color?: StoriesProgressColor;
     onComplete?: () => void;

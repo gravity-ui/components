@@ -49,7 +49,7 @@ test('advances across groups, skips empty groups, and stops at the last non-empt
     expect(screen.queryByRole('button', {name: 'Next'})).not.toBeInTheDocument();
 });
 
-test('resets the timer when manually switching between groups with the same slide index', async () => {
+test('keeps autoplay stopped after focusing navigation between groups', async () => {
     const user = userEvent.setup({advanceTimers: jest.advanceTimersByTime});
     render(<StoriesGroup open autoPlay autoPlayInterval={1000} groups={groups} />);
     act(() => jest.advanceTimersByTime(700));
@@ -59,5 +59,5 @@ test('resets the timer when manually switching between groups with the same slid
     act(() => jest.advanceTimersByTime(999));
     expect(screen.getByText('Group one')).toBeInTheDocument();
     act(() => jest.advanceTimersByTime(1));
-    expect(screen.getByText('Group two')).toBeInTheDocument();
+    expect(screen.getByText('Group one')).toBeInTheDocument();
 });

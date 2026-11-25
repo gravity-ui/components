@@ -28,8 +28,11 @@ When enabled, the numeric counter is replaced by segmented progress indicators;
 manual navigation remains available. A non-positive or non-finite interval also
 disables autoplay.
 
-Playback pauses while the browser tab is hidden and resumes with the remaining time. Navigating to another slide, changing the interval, or reopening
-the modal starts a full interval. After the last slide's progress fills, the modal
+Playback pauses while the browser tab is hidden and resumes with the remaining time,
+unless playback has stopped because focus entered the story. Navigating to another
+slide or changing the interval resets the timer but does not clear a focus-triggered
+stop. Closing and reopening the modal starts a new playback session.
+After the last slide's progress fills, the modal
 stays open. The same timing applies to images and videos, independently of video length.
 `onNextClick` is called on automatic transitions as well as manual next navigation.
 
@@ -40,12 +43,17 @@ Use a CSS color for both themes, or `{light, dark}` to configure them separately
 (high-contrast themes use the corresponding light/dark color). Unspecified colors
 fall back to `--g-color-line-generic-active`. Unfilled segments use 30% opacity.
 
-**Accessibility:** Autoplay does not pause on hover, keyboard focus, or pointer hold,
-and there is no built-in pause/resume control. A slide can advance before a user
-finishes reading it or interacting with its content, including when using a screen
-reader. If your application enables autoplay, provide an accessible way for users
-to disable it, for example by setting `autoPlay` to `false` through a user-facing
-control. Pausing while the browser tab is hidden does not address this limitation.
+**Accessibility:** When an element inside the story receives focus, autoplay and
+progress stop for the rest of the current opening. This includes action buttons,
+links, custom content, and navigation controls, whether focused by keyboard,
+pointer, or programmatically. Moving focus away, navigating manually, or returning
+to a visible tab does not restart playback. Manual navigation remains available.
+
+There is still no built-in pause/resume control or pause on hover or pointer hold.
+Reading with a screen reader does not necessarily move DOM focus, so focus-triggered
+stopping alone does not cover every reading scenario. If your application enables
+autoplay, provide an accessible way for users to disable it, for example by setting
+`autoPlay` to `false` through a user-facing control.
 
 ```tsx
 <Stories
