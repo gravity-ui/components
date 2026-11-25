@@ -26,6 +26,11 @@ the next non-empty group, resets progress on group changes, and stops after the 
 slide of the last non-empty group without closing the modal. Automatic transitions
 call `onItemSelect(indexes, false)`. Per-item `progressColor` is also supported.
 
+The [autoplay accessibility limitations](../Stories/README.md#automatic-playback)
+also apply to `StoriesGroup`: there is no built-in pause/resume control or pause on
+hover, keyboard focus, or pointer hold. Applications that enable autoplay should
+provide an accessible way for users to disable it.
+
 ### StoriesGroupItem object
 
 | Field          | Type                                                                                                               | Required | Default | Description                                                                                |
