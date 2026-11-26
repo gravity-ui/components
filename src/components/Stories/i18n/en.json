@@ -2,5 +2,7 @@
   "label_back": "Back",
   "label_next": "Next",
   "label_close": "Close",
-  "label_more": "More"
+  "label_more": "More",
+  "label_progress": "Stories progress",
+  "label_story": "Story {{current}} of {{total}}"
 }

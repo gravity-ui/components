@@ -32,10 +32,21 @@ export interface StoriesItemTextColorStyles {
     counterColor?: string;
 }
 
+export type StoriesProgressColor = string | {light?: string; dark?: string};
+
+export interface StoriesAutoPlayProps {
+    /** Automatically advance stories. Disabled by default. */
+    autoPlay?: boolean;
+    /** Time per slide in milliseconds. Defaults to 5000. Non-positive/non-finite values disable autoplay. */
+    autoPlayInterval?: number;
+}
+
 export interface StoriesItem {
     title?: string;
     content?: React.ReactNode;
     textColorStyles?: StoriesItemTextColorStyles;
+    /** Progress color, independent of text colors, optionally configured per theme. */
+    progressColor?: StoriesProgressColor;
     textBlockStyle: StoriesTextBlockStyle;
     mediaBlockStyle: StoriesMediaBlockStyle;
     firstAction?: ButtonProps;

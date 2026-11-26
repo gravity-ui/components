@@ -325,3 +325,40 @@ WithSyncInTabs.args = {
     syncInTabsKey: 'test-story',
     items: [items[0]],
 };
+
+const AutoPlayTemplate: StoryFn<StoriesProps> = (args) => {
+    const [open, setOpen] = React.useState(false);
+
+    return (
+        <React.Fragment>
+            <Button onClick={() => setOpen(true)}>Open</Button>
+            <Stories {...args} open={open} onClose={() => setOpen(false)} />
+        </React.Fragment>
+    );
+};
+
+export const WithAutoPlay = AutoPlayTemplate.bind({});
+WithAutoPlay.args = {
+    items,
+    autoPlay: true,
+    autoPlayInterval: 5000,
+};
+WithAutoPlay.argTypes = {
+    onNextClick: {action: 'onNextClick'},
+    onPreviousClick: {action: 'onPreviousClick'},
+};
+
+export const SingleWithAutoPlay = AutoPlayTemplate.bind({});
+SingleWithAutoPlay.args = {
+    ...WithAutoPlay.args,
+    items: [items[0]],
+};
+
+export const WithAutoPlayColors = AutoPlayTemplate.bind({});
+WithAutoPlayColors.args = {
+    ...WithAutoPlay.args,
+    items: items.map((item) => ({
+        ...item,
+        progressColor: {light: '#252525', dark: '#ffffff'},
+    })),
+};

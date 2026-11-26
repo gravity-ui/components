@@ -4,6 +4,7 @@ import {Modal} from '@gravity-ui/uikit';
 import type {OpenChangeReason} from '@gravity-ui/uikit';
 
 import {IndexType, StoriesLayout} from '../Stories/components/StoriesLayout/StoriesLayout';
+import type {StoriesAutoPlayProps} from '../Stories/types';
 import {block} from '../utils/cn';
 
 import {StoriesPreview} from './components';
@@ -15,7 +16,7 @@ const DEFAULT_MAX_SLIDER_ITEMS_COUNT = 12;
 
 const b = block('stories-group');
 
-export interface StoriesGroupProps {
+export interface StoriesGroupProps extends StoriesAutoPlayProps {
     open: boolean;
     groups: StoriesGroupItem[];
     initialStoryIndex?: [groupIndex: number, itemIndex: number];
@@ -40,6 +41,8 @@ export const StoriesGroup = ({
     initialStoryIndex = [0, 0],
     maxSliderItemsCount = DEFAULT_MAX_SLIDER_ITEMS_COUNT,
     onClose,
+    autoPlay,
+    autoPlayInterval,
 }: StoriesGroupProps) => {
     const [[groupIndex, itemIndex], setStoryIndex] = React.useState(initialStoryIndex);
 
@@ -60,52 +63,40 @@ export const StoriesGroup = ({
     );
 
     const handleGotoPrevious = React.useCallback(() => {
-        setStoryIndex((prevState) => {
-            const [currentGroupIndex, currentItemIndex] = prevState;
-
-            if (currentItemIndex > 0) {
-                const newState: [number, number] = [currentGroupIndex, currentItemIndex - 1];
-
-                onItemSelect?.(newState, false);
-                return newState;
-            }
-
-            // try to find previous valid group
-            for (let i = currentGroupIndex - 1; i >= 0; --i) {
+        let newState: [number, number] | undefined;
+        if (itemIndex > 0) {
+            newState = [groupIndex, itemIndex - 1];
+        } else {
+            for (let i = groupIndex - 1; i >= 0; --i) {
                 if (groups[i].items.length !== 0) {
-                    const newState: [number, number] = [i, groups[i].items.length - 1];
-
-                    onItemSelect?.(newState, false);
-                    return newState;
+                    newState = [i, groups[i].items.length - 1];
+                    break;
                 }
             }
-
-            return prevState;
-        });
-    }, [groups, onItemSelect]);
+        }
+        if (newState) {
+            setStoryIndex(newState);
+            onItemSelect?.(newState, false);
+        }
+    }, [groups, groupIndex, itemIndex, onItemSelect]);
 
     const handleGotoNext = React.useCallback(() => {
-        setStoryIndex((prevState) => {
-            const [currentGroupIndex, currentItemIndex] = prevState;
-
-            if (currentItemIndex < groups[currentGroupIndex]?.items.length - 1) {
-                const newState: [number, number] = [currentGroupIndex, currentItemIndex + 1];
-                onItemSelect?.(newState, false);
-                return newState;
-            }
-
-            // try to find next valid group
-            for (let i = currentGroupIndex + 1; i < groups.length; ++i) {
+        let newState: [number, number] | undefined;
+        if (itemIndex < groups[groupIndex]?.items.length - 1) {
+            newState = [groupIndex, itemIndex + 1];
+        } else {
+            for (let i = groupIndex + 1; i < groups.length; ++i) {
                 if (groups[i].items.length !== 0) {
-                    const newState: [number, number] = [i, 0];
-                    onItemSelect?.(newState, false);
-                    return newState;
+                    newState = [i, 0];
+                    break;
                 }
             }
-
-            return prevState;
-        });
-    }, [groups, onItemSelect]);
+        }
+        if (newState) {
+            setStoryIndex(newState);
+            onItemSelect?.(newState, false);
+        }
+    }, [groups, groupIndex, itemIndex, onItemSelect]);
 
     const onGroupSelect = React.useCallback(
         (newGroupIndex: number) => {
@@ -142,12 +133,15 @@ export const StoriesGroup = ({
         return null;
     }
 
+    const hasPrevious =
+        itemIndex > 0 || groups.slice(0, groupIndex).some((group) => group.items.length);
+    const hasNext =
+        itemIndex < currentItems.length - 1 ||
+        groups.slice(groupIndex + 1).some((group) => group.items.length);
     const indexType =
-        (groups.length === 1 && currentItems.length === 1 && IndexType.Single) ||
-        (groupIndex === 0 && itemIndex === 0 && IndexType.Start) ||
-        (groupIndex === groups.length - 1 &&
-            itemIndex === currentItems.length - 1 &&
-            IndexType.End) ||
+        (!hasPrevious && !hasNext && IndexType.Single) ||
+        (!hasPrevious && IndexType.Start) ||
+        (!hasNext && IndexType.End) ||
         IndexType.InProccess;
 
     return (
@@ -168,6 +162,10 @@ export const StoriesGroup = ({
                 onClose={disableOutsideClick ? undefined : handleClose}
             />
             <StoriesLayout
+                open={open}
+                autoPlay={autoPlay}
+                autoPlayInterval={autoPlayInterval}
+                storyKey={`${groupIndex}:${itemIndex}`}
                 storyIndex={itemIndex}
                 items={currentItems}
                 indexType={indexType}

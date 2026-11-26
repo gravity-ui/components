@@ -10,6 +10,8 @@ Component for displaying stories. It looks like a carousel in a modal with given
 | :--------------------- | :-------------- | :------- | :------ | :------------------------------------------------ |
 | open                   | `Boolean`       | ✓        |         | Visibility flag                                   |
 | items                  | `StoriesItem[]` | ✓        |         | List of stories to display                        |
+| autoPlay               | `Boolean`       |          | false   | Automatically advance and show segmented progress |
+| autoPlayInterval       | `Number`        |          | 5000    | Time per slide in milliseconds                    |
 | initialStoryIndex      | `Number`        |          | 0       | Index of the first story to be displayed          |
 | resetStoryIndexOnClose | `Boolean`       |          | false   | If `true`, reset story index to initialStoryIndex |
 | onClose                | `Function`      |          |         | Action on close                                   |
@@ -18,19 +20,68 @@ Component for displaying stories. It looks like a carousel in a modal with given
 | disableOutsideClick    | `Boolean`       |          | true    | If `true`, do not close stories on click outside  |
 | className              | `string`        |          |         | Stories modal class                               |
 
+## Automatic playback
+
+Set `autoPlay` to show segmented progress indicators and automatically advance every
+`autoPlayInterval` milliseconds (5000 by default). Autoplay is disabled by default.
+When enabled, the numeric counter is replaced by segmented progress indicators;
+manual navigation remains available. A non-positive or non-finite interval also
+disables autoplay.
+
+Playback pauses while the browser tab is hidden and resumes with the remaining time,
+unless playback has stopped because focus entered the story. Navigating to another
+slide or changing the interval resets the timer but does not clear a focus-triggered
+stop. Closing and reopening the modal starts a new playback session.
+After the last slide's progress fills, the modal
+stays open. The same timing applies to images and videos, independently of video length.
+`onNextClick` is called on automatic transitions as well as manual next navigation.
+
+`StoriesItem.progressColor` controls the indicators independently of text colors.
+`textColorStyles.counterColor` only styles the numeric counter and does not affect
+the progress indicators.
+Use a CSS color for both themes, or `{light, dark}` to configure them separately
+(high-contrast themes use the corresponding light/dark color). Unspecified colors
+fall back to `--g-color-line-generic-active`. Unfilled segments use 30% opacity.
+
+**Accessibility:** When an element inside the story receives focus, autoplay and
+progress stop for the rest of the current opening. This includes action buttons,
+links, custom content, and navigation controls, whether focused by keyboard,
+pointer, or programmatically. Moving focus away, navigating manually, or returning
+to a visible tab does not restart playback. Manual navigation remains available.
+
+There is still no built-in pause/resume control or pause on hover or pointer hold.
+Reading with a screen reader does not necessarily move DOM focus, so focus-triggered
+stopping alone does not cover every reading scenario. If your application enables
+autoplay, provide an accessible way for users to disable it, for example by setting
+`autoPlay` to `false` through a user-facing control.
+
+```tsx
+<Stories
+  open={open}
+  onClose={onClose}
+  autoPlay
+  autoPlayInterval={7000}
+  items={items.map((item) => ({
+    ...item,
+    progressColor: {light: '#252525', dark: '#ffffff'},
+  }))}
+/>
+```
+
 ### StoriesItem object
 
-| Field           | Type                     | Required | Default | Description                              |
-| --------------- | ------------------------ | -------- | ------- | ---------------------------------------- |
-| title           | `String`                 |          |         | Title                                    |
-| content         | `React.ReactNode`        |          |         | Main content                             |
-| url             | `String`                 |          |         | Link to display more information         |
-| media           | `StoriesItemMedia`       |          |         | Media content                            |
-| firstAction     | `ButtonProps`            |          |         | Custom action button props               |
-| secondAction    | `ButtonProps`            |          |         | Custom action button props               |
-| textBlockStyle  | `StoriesTextBlockStyle`  | ✓        |         | Props for styling text content in Story  |
-| mediaBlockStyle | `StoriesMediaBlockStyle` | ✓        |         | Props for styling media content in Story |
-| textColorStyles | `StoriesItemTextStyles`  |          |         | Props for styling text color in Story    |
+| Field           | Type                                        | Required | Default | Description                                    |
+| --------------- | ------------------------------------------- | -------- | ------- | ---------------------------------------------- |
+| title           | `String`                                    |          |         | Title                                          |
+| content         | `React.ReactNode`                           |          |         | Main content                                   |
+| url             | `String`                                    |          |         | Link to display more information               |
+| media           | `StoriesItemMedia`                          |          |         | Media content                                  |
+| firstAction     | `ButtonProps`                               |          |         | Custom action button props                     |
+| secondAction    | `ButtonProps`                               |          |         | Custom action button props                     |
+| textBlockStyle  | `StoriesTextBlockStyle`                     | ✓        |         | Props for styling text content in Story        |
+| mediaBlockStyle | `StoriesMediaBlockStyle`                    | ✓        |         | Props for styling media content in Story       |
+| progressColor   | `String \| {light?: string; dark?: string}` |          |         | Progress indicator color, optionally per theme |
+| textColorStyles | `StoriesItemTextStyles`                     |          |         | Props for styling text color in Story          |
 
 ### StoriesItemMedia object
 
